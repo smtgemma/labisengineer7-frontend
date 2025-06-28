@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #CFF8F1;
+  /* Light Primary */
+  --primary: #168B86;
+  /* Dark Primary */
+  --accent: #E5E5FF;
+  /* Accent Color */
+  --surface: #FFEDE2;
+  /* Surface/Background Color */
+  --card-bg: #E5E5FF;
+  /* Card Background */
+  --warning: #EB3C13;
+  /* Warning Color */
+  --success: #10B981;
+  /* Success Color (adjusted for contrast) */
+  --info: #3B82F6;
+  /* Info Color (adjusted for contrast) */
+}
+
+body {
+  font-family: var(--font-open-sans);
+  background: white;
+}
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-sm: ;
+  --breakpoint-md: ;
+  --breakpoint-lg: ;
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-warning: var(--warning);
+  --color-success: var(--success);
+  --color-info: var(--info);
+}
