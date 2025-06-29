@@ -9,14 +9,14 @@ import StepTextBlock, { StepTextBlockProps } from './LeftViewCard';
 
 interface RightViewCardProps extends StepTextBlockProps {
     className?: string;
-      title: string;
-      description: string;
-      stepNumber?: string;
-      buttonText?: string;
-      buttonLink?: string;
-      list?: string[];
-      formats?: string[];
-        workImg: string | StaticImageData;
+    title: string;
+    description: string;
+    stepNumber?: string;
+    buttonText?: string;
+    buttonLink?: string;
+    list?: string[];
+    formats?: string[];
+    workImg: string | StaticImageData;
 }
 
 export default function RightViewCard({
@@ -24,9 +24,9 @@ export default function RightViewCard({
     stepNumber = "1",
     title = "Building IDs made effortless",
     description = "Our AI-powered solution handles HTK creation by scanning your uploaded documents and auto-populating data. Save time and stay compliant without the headache.",
-    buttonText = "Learn More",
-    buttonLink = "#",
-    list,
+    buttonText = "",
+    buttonLink = "",
+    list = [],
     formats,
     workImg
 }: RightViewCardProps) {
@@ -45,7 +45,7 @@ export default function RightViewCard({
                     </div>
 
 
-                        <StepTextBlock
+                    <StepTextBlock
                         stepNumber={String(stepNumber)}
                         title={title}
                         description={description}

@@ -61,12 +61,14 @@ export default function StepTextBlock({
       {/* Optional: Formats */}
       {formats && formats.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-6 justify-center md:justify-start">
+         <span className='font-medium'>Supported formats:</span>
           {formats.map((format, index) => (
             <span
               key={index}
-              className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full"
+              className=""
             >
               {format}
+              {index < formats.length - 1 && ','}
             </span>
           ))}
         </div>
