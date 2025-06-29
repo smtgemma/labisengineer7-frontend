@@ -9,12 +9,12 @@ body {
 }
 
 @theme {
-  --color-primary: #168b86;
+  --color-primary: #017AFF;
   --color-secondary: #e5e5ff;
   --color-accent: #ffede2;
   --color-surface: #e5e5ff;
   --color-card: #eb3c13;
   --color-warning: #168b86;
   --color-success: #10b981;
-  --color-info: #3b82f6;
+  --color-info: #333333;
 }

@@ -1,8 +1,13 @@
+import AboutUs from "@/components/LandingComponents/AboutUs";
+import Banner from "@/components/LandingComponents/Banner";
+import ServicesOverview from "@/components/LandingComponents/ServiceOverview";
 
 const page = () => {
   return (
     <div>
-      Landing Page
+      <Banner/>
+      <AboutUs/>
+      <ServicesOverview/>
     </div>
   );
 };
