@@ -23,9 +23,9 @@ export default function ServiceOverviewCard({ service }: { service: IService }) 
       </div>
 
       {/* Content Section */}
-      <div className="ml-6 flex flex-col justify-center text-center md:text-left">
-        <h3 className="text-2xl font-bold  mb-2">{service.title}</h3>
-        <p className="text-info mb-4">{service.description}</p>
+      <div className="md:ml-6 flex flex-col justify-center text-center md:text-left mt-4 md:mt-0">
+        <h3 className="text-2xl font-bold text-start  mb-2">{service.title}</h3>
+        <p className="text-info mb-4 text-start">{service.description}</p>
         <a
           href={service.link}
           className="text-primary hover:underline text-sm font-medium underline text-end "

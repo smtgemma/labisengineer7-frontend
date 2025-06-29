@@ -32,9 +32,9 @@ export default function RightViewCard({
 }: RightViewCardProps) {
 
     return (
-        <div className="py-16 ">
+        <div className="py-10 md:py-20 ">
             <Container>
-                <div className={`${className} flex  items-center gap-10`}>
+                <div className={`${className} flex   items-center gap-10`}>
 
                     <div className="w-full md:w-1/2">
                         <Image
@@ -53,6 +53,7 @@ export default function RightViewCard({
                         buttonLink={buttonLink}
                         list={list}
                         formats={formats}
+                        
                     />
 
                 </div>
