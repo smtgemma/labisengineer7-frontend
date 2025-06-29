@@ -1,17 +1,17 @@
-import { CiFolderOn, CiLocationOn } from 'react-icons/ci';
-import { GiNewspaper, GiStethoscope } from 'react-icons/gi';
-import { GoPlus } from 'react-icons/go';
-import { GrMapLocation } from 'react-icons/gr';
-import { IoPeopleOutline } from 'react-icons/io5';
-import { LiaCanadianMapleLeaf, LiaClipboardListSolid } from 'react-icons/lia';
-import { MdOutlineAddLocationAlt } from 'react-icons/md';
-import { PiNewspaperThin } from 'react-icons/pi';
-import { RiDashboardFill } from 'react-icons/ri';
+import { CiFolderOn, CiLocationOn } from "react-icons/ci";
+import { GiNewspaper, GiStethoscope } from "react-icons/gi";
+import { GoPlus } from "react-icons/go";
+import { GrMapLocation } from "react-icons/gr";
+import { IoPeopleOutline } from "react-icons/io5";
+import { LiaCanadianMapleLeaf, LiaClipboardListSolid } from "react-icons/lia";
+import { MdOutlineAddLocationAlt } from "react-icons/md";
+import { PiNewspaperThin } from "react-icons/pi";
+import { RiDashboardFill } from "react-icons/ri";
 
 export const navLink = [
   {
-    name: "Dashboard",
-    href: "/dashboard",
+    name: "Overview",
+    href: "/admin",
     icon: RiDashboardFill,
   },
   {
@@ -74,5 +74,54 @@ export const navLink = [
       { name: "Add Blogs", href: "/dashboard/blog/post1", icon: GoPlus },
       { name: "All Blogs", href: "/dashboard/blog/post2", icon: GiNewspaper },
     ],
+  },
+];
+
+export const AdminNavLink = [
+  {
+    name: "Overview",
+    href: "/admin",
+  },
+  {
+    name: "Users & Accounts",
+    href: "/admin/user-and-accounts",
+  },
+  {
+    name: "Document Template",
+    href: "/admin/document-template",
+  },
+  {
+    name: "Submission Logs",
+    href: "/admin/submission-logs",
+  },
+  {
+    name: "AI/API Monitoring ",
+    href: "/admin/monitoring",
+    // icon: GoPlus,
+  },
+];
+
+export const DashBoardLink = [
+  // name is services but will be dashboard
+  {
+    name: "Service",
+    href: "/dashboard",
+  },
+  {
+    name: "Project",
+    href: "/dashboard/project",
+  },
+  {
+    name: "Subscription",
+    href: "/dashboard/subscription",
+  },
+  {
+    name: "Help/Guides",
+    href: "/dashboard/helps-guides",
+  },
+  {
+    name: "Profile ",
+    href: "/dashboard/profile ",
+    // icon: GoPlus,
   },
 ];

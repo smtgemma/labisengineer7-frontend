@@ -66,7 +66,19 @@ export default function MainNavLink({
         >
           {hasSubItems ? (
             <button className="flex items-center gap-3 flex-1 overflow-hidden">
-              {link.icon && <link.icon className="min-w-6 min-h-6" />}
+              {/* <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2"
+                height="13"
+                viewBox="0 0 2 13"
+                fill="none"
+              >
+                <path
+                  d="M1 12.9531V0.453125"
+                  stroke="#333333"
+                  stroke-width="1.5"
+                />
+              </svg> */}
               {isShort && <span className="text-nowrap">{link.name}</span>}
             </button>
           ) : (
@@ -74,7 +86,19 @@ export default function MainNavLink({
               href={link.href}
               className="flex items-center gap-3 flex-1 overflow-hidden"
             >
-              {link.icon && <link.icon className="min-w-6 min-h-6" />}
+              {/* <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2"
+                height="13"
+                viewBox="0 0 2 13"
+                fill="none"
+              >
+                <path
+                  d="M1 12.9531V0.453125"
+                  stroke="#333333"
+                  stroke-width="1.5"
+                />
+              </svg> */}
               {isShort && <span className="text-nowrap">{link.name}</span>}
             </Link>
           )}
@@ -108,7 +132,19 @@ export default function MainNavLink({
                     : "hover:bg-primary/10 hover:text-primary"
                 }`}
               >
-                {subItem.icon && <subItem.icon className="min-w-6 min-h-6" />}
+                {/* <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="2"
+                  height="13"
+                  viewBox="0 0 2 13"
+                  fill="none"
+                >
+                  <path
+                    d="M1 12.9531V0.453125"
+                    stroke="#333333"
+                    stroke-width="1.5"
+                  />
+                </svg> */}
                 {isShort && <span className="text-nowrap">{subItem.name}</span>}
               </Link>
             ))}
@@ -189,7 +225,19 @@ export default function MainNavLink({
                 : "hover:bg-primary/10"
             }`}
           >
-            {link.icon && <link.icon className="min-w-6 min-h-6" />}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="2"
+              height="13"
+              viewBox="0 0 2 13"
+              fill="none"
+            >
+              <path
+                d="M1 12.9531V0.453125"
+                stroke="#333333"
+                stroke-width="1.5"
+              />
+            </svg>
             {link.name}
           </Link>
         ))}

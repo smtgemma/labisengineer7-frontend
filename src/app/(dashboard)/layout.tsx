@@ -1,10 +1,10 @@
 import DashboardLayout from "@/components/layouts/Dashboard";
-import { AdminNavLink } from "@/components/layouts/Navlink";
+import { DashBoardLink } from "@/components/layouts/Navlink";
 
 export default function layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <DashboardLayout navLink={AdminNavLink}>{children}</DashboardLayout>;
+  return <DashboardLayout navLink={DashBoardLink}>{children}</DashboardLayout>;
 }

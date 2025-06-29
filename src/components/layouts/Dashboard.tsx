@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import BreadCrumb from "../Others/BreadCrumb";
 import SideBar from "./navigationBar/SiderBar";
 import TopBar from "./navigationBar/TopBar";
-import { navLink } from "./Navlink";
-import BreadCrumb from "../Others/BreadCrumb";
+import { NavLink } from "./types";
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = ({ children, navLink }: { children: React.ReactNode, navLink: NavLink[] }) => {
   const user = null;
   const [isOpen, setIsOpen] = useState(false);
   const [isShort, setIsShort] = useState(true);
