@@ -18,7 +18,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
     <div className="w-full overflow-auto rounded-lg shadow-sm">
       <table className="w-full">
         {/* Table Header */}
-        <thead className="bg-blue-500 text-white">
+        <thead className="bg-[#017AFF] text-white">
           <tr className="*:text-nowrap">
             <th className="text-left text-sm font-medium px-6 py-3">
               Created On

@@ -74,7 +74,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ className = "" }) => {
                 <div className="flex-1">
                   <div className="bg-gray-100 rounded-lg p-6 h-40 flex items-center justify-center">
                     <div className="text-center">
-                      <div className="w-16 h-20 bg-blue-500 rounded mx-auto mb-2 flex items-center justify-center shadow-sm">
+                      <div className="w-16 h-20 bg-[#017AFF] rounded mx-auto mb-2 flex items-center justify-center shadow-sm">
                         <div className="text-sm text-white font-medium">
                           PDF
                         </div>
@@ -174,7 +174,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ className = "" }) => {
                   Technical Description
                 </div>
                 <div className="flex justify-end">
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors">
+                  <button className="bg-[#017AFF] hover:bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors">
                     Download All Docs
                   </button>
                 </div>
