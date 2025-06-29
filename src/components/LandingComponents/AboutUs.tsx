@@ -5,10 +5,10 @@ import Container from '../shared/Container/Container';
 export default function AboutUs() {
     return (
 
-        <div>
+        <div className='bg-background'>
             <Container>
 
-                <section className="flex flex-col md:flex-row items-center justify-between bg-white px-6 py-16 md:px-20 gap-[86px]">
+                <section className="flex flex-col md:flex-row items-center justify-between  px-6 py-16 md:px-20 gap-[86px]">
                     {/* Left: Image */}
                     <div className="w-full md:w-1/2">
                         <Image
