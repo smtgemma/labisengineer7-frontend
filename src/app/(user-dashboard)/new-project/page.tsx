@@ -1,4 +1,4 @@
-import ProjectCard from "@/components/ProjectCard/ProjectCard";
+import ProjectCard from "@/components/Projects/Card/ProjectCard";
 import Header from "@/components/shared/Header/Header";
 import React from "react";
 
@@ -27,7 +27,7 @@ export default function NewProject() {
   ];
 
   return (
-    <div>
+    <section className="bg-[#F1F5F9] py-8 px-12">
       <Header
         title="Start a New Project"
         subtitle="Select the type of documentation you need to generate."
@@ -41,6 +41,6 @@ export default function NewProject() {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
