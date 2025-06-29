@@ -1,21 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #CFF8F1;
   /* Light Primary */
-  --primary: #168B86;
+  --primary: #168b86;
   /* Dark Primary */
-  --accent: #E5E5FF;
+  --accent: #e5e5ff;
   /* Accent Color */
-  --surface: #FFEDE2;
+  --surface: #ffede2;
   /* Surface/Background Color */
-  --card-bg: #E5E5FF;
+  --card-bg: #e5e5ff;
   /* Card Background */
-  --warning: #EB3C13;
+  --warning: #eb3c13;
   /* Warning Color */
-  --success: #10B981;
+  --success: #10b981;
   /* Success Color (adjusted for contrast) */
-  --info: #3B82F6;
+  --info: #3b82f6;
   /* Info Color (adjusted for contrast) */
 }
 
@@ -25,16 +24,16 @@ body {
 }
 
 @theme {
-  --breakpoint-*: initial;
+  /* --breakpoint-*: initial;
   --breakpoint-sm: ;
   --breakpoint-md: ;
-  --breakpoint-lg: ;
-  --color-primary: var(--primary);
-  --color-secondary: var(--secondary);
-  --color-accent: var(--accent);
-  --color-surface: var(--surface);
-  --color-card: var(--card);
-  --color-warning: var(--warning);
-  --color-success: var(--success);
-  --color-info: var(--info);
+  --breakpoint-lg: ; */
+  --color-primary: #168b86;
+  --color-secondary: #e5e5ff;
+  --color-accent: #ffede2;
+  --color-surface: #e5e5ff;
+  --color-card: #eb3c13;
+  --color-warning: #168b86;
+  --color-success: #10b981;
+  --color-info: #3b82f6;
 }
