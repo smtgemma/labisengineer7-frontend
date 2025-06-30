@@ -56,7 +56,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ className = "" }) => {
               <h2 className="text-xl font-semibold text-black mb-6">
                 Uploaded File-
               </h2>
-              <div className="flex gap-6">
+              <div className="flex flex-col md:flex-row  gap-6">
                 {/* Document 1 - DOC */}
                 <div className="flex-1">
                   <div className="bg-gray-100 rounded-lg p-6 h-40 flex items-center justify-center">

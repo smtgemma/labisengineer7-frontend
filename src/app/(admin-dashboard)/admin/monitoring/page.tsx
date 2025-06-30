@@ -1,7 +1,7 @@
 import React from "react";
 import SimpleAILogTable from "./SimpleAILogTable";
 import AiExtractionChart from "../overview/AiExtractionChart";
-import OverviewCards from "../overview/OverviewCard";
+// import OverviewCards from "../overview/OverviewCard";
 import AiStatsCards from "./MonitorCard";
 
 const page = () => {

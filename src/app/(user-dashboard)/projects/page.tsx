@@ -27,7 +27,7 @@ export default function Projects() {
   ];
 
   return (
-    <section className="bg-[#F1F5F9] min-h-screen py-8 px-12">
+    <section className="bg-[#F1F5F9] min-h-screen py-8 px-4 md:px-12">
       <Header title="Project" />
 
       <div className="w-full my-6">

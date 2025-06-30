@@ -68,7 +68,7 @@ const subscription: React.FC = () => {
   ];
 
   return (
-    <section className="bg-[#F1F5F9] py-8 px-12 min-h-screen">
+    <section className="bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen">
       <div>
         <Header title="Subscription" />
 

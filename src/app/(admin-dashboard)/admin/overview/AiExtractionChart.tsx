@@ -11,7 +11,7 @@ import {
   Legend,
   Tooltip,
   ResponsiveContainer,
-  ReferenceDot
+  // ReferenceDot
 } from 'recharts';
 
 const data = [
