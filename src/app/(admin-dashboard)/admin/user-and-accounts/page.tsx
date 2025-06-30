@@ -1,9 +1,11 @@
 import React from 'react';
+import { UsersAccountsTable } from '../tableLayout/page';
 
 const page = () => {
     return (
         <div>
-            user-and-accounts"
+            
+            <UsersAccountsTable/>
         </div>
     );
 };

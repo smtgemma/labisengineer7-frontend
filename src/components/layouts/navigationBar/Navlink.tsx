@@ -10,6 +10,7 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import type { NavLink } from "../types";
+import Logo from "@/components/shared/Logo";
 
 interface MainNavLinkProps {
   navLink: NavLink[];
@@ -189,17 +190,9 @@ export default function MainNavLink({
         {isShort && (
           <div className="flex items-center gap-2">
             {/* Your SVG Logo here */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="180"
-              height="41"
-              viewBox="0 0 180 41"
-              fill="none"
-              className="fill-primary"
-            >
-              {/* You can keep your original SVG path here */}
-              <circle cx="177.44" cy="2.56" r="2.56" fill="red" />
-            </svg>
+
+            <Logo height={78} width={212}/>
+           
           </div>
         )}
       </Link>
