@@ -106,7 +106,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({ className = "" }) => {
                     </span>
                     <div className="flex-shrink-0">
                       {isExpanded ? (
-                        <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                        <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
                           <Minus size={14} className="text-white" />
                         </div>
                       ) : (

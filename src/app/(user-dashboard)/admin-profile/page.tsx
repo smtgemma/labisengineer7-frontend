@@ -36,7 +36,7 @@ const AdminProfile: React.FC<AdminProfileProps> = ({ className = "" }) => {
   };
 
   return (
-    <div className={`bg-[#F1F5F9] py-8 px-12 min-h-screen ${className}`}>
+    <div className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen ${className}`}>
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column */}
@@ -176,7 +176,7 @@ const AdminProfile: React.FC<AdminProfileProps> = ({ className = "" }) => {
                   <span className="text-sm font-medium text-gray-700">
                     Login Method:
                   </span>
-                  <button className="text-blue-600 hover:text-blue-800 text-sm underline">
+                  <button className="text-primary hover:text-blue-800 text-sm underline">
                     Google Sign-in
                   </button>
                 </div>
@@ -244,7 +244,7 @@ const AdminProfile: React.FC<AdminProfileProps> = ({ className = "" }) => {
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
+                    className="bg-primary hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
                   >
                     Change Password
                   </button>
@@ -260,7 +260,7 @@ const AdminProfile: React.FC<AdminProfileProps> = ({ className = "" }) => {
 
               <div className="flex justify-between items-center">
                 <span className="text-sm font-medium text-gray-700">Plan:</span>
-                <button className="text-blue-600 hover:text-blue-800 text-sm underline">
+                <button className="text-primary hover:text-blue-800 text-sm underline">
                   Professionals
                 </button>
               </div>

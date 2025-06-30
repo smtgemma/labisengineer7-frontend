@@ -11,7 +11,7 @@ import {
   Legend,
   Tooltip,
   ResponsiveContainer,
-  ReferenceDot
+  // ReferenceDot
 } from 'recharts';
 
 const data = [
@@ -111,28 +111,45 @@ export default function AiExtractionChart({ title }: { title: string }) {
   return (
     <div className="w-full h-96 p-6 rounded-lg bg-white mt-6">
 
-      <div className='flex flex-col sm:flex-row justify-between items-center mb-4 gap-4 md:gap-0'>
 
-        {
-          title != "AI usage over time" ? (<select
+      {
+        title != "AI usage over time" ? (<div className='flex flex-col sm:flex-row justify-between items-center mb-4 gap-4 md:gap-0'>
+          <select
             id='activityType'
 
-            className=' rounded-md  md:text-2xl font-semibold focus:outline-none  '
+            className='  md:text-2xl font-semibold focus:outline-none  '
           >
 
-            <option value='User Signups'>      AI Extraction Activity</option>
+            <option value='User Signups'>AI Extraction Activity</option>
             <option value='User Signups'>User Signups</option>
             <option value='Documents by Service Type'>Documents by Service Type</option>
-          </select>) : (<>
-            <h1 className=' rounded-md  md:text-2xl font-semibold focus:outline-none  '>{title}</h1>
-          </>)
-        }
+          </select>
+          <ButtonGlobal title='Last 30 days' />
+        </div>) : (<>
+
+         
+           <div className='flex flex-col sm:flex-row justify-between items-center mb-4 gap-4 md:gap-0'>
+             <h1 className=' rounded-md  md:text-2xl font-semibold focus:outline-none  '>{title}</h1>
+        <select
+          id='activityType'
+
+          className=' font-semibold focus:outline-none  '
+        >
+
+          <option value='User Signups'>Last 7 days</option>
+          <option value='User Signups'>last 30 days</option>
+          <option value='Documents by Service Type'>last 60 days</option>
+        </select>
+
+         </div>
+        </>)
+      }
 
 
 
 
-        <ButtonGlobal title='Last 30 days' />
-      </div>
+
+
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={data}

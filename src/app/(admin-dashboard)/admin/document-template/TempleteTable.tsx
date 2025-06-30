@@ -47,12 +47,12 @@ export default function SimpleTemplatesTable() {
             <div className="min-w-[600px]">
                 <div className="bg-primary px-6 rounded-t-lg">
                     <div className="grid grid-cols-12 gap-4 py-3 text-white text-sm lg:text-xl">
-                        <div className="col-span-2 ">Template </div>
-                        <div className="col-span-2  flex">Service <CgArrowsV className="my-auto" /></div>
-                        <div className="col-span-2  flex">Last Modified <CgArrowsV className="my-auto" /></div>
-                        <div className="col-span-3  flex">Description <CgArrowsV className="my-auto" /></div>
-                        <div className="col-span-2  flex">Created By <CgArrowsV className="my-auto" /></div>
-                        <div className="col-span-1  flex">Action <CgArrowsV className="my-auto" /></div>
+                        <div className="col-span-2 flex items-center">Template </div>
+                        <div className="col-span-2  flex items-center">Service <CgArrowsV className="my-auto" /></div>
+                        <div className="col-span-2  flex items-center">Last Modified <CgArrowsV className="my-auto" /></div>
+                        <div className="col-span-3  flex items-center">Description <CgArrowsV className="my-auto" /></div>
+                        <div className="col-span-2  flex items-center">Created By <CgArrowsV className="my-auto" /></div>
+                        <div className="col-span-1  flex items-center">Action <CgArrowsV className="my-auto" /></div>
                     </div>
                 </div>
 

@@ -201,7 +201,7 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
   };
 
   return (
-    <div className={`bg-[#F1F5F9] py-8 px-12 min-h-screen ${className}`}>
+    <div className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen ${className}`}>
       <Header title="Select Multiple Subcategory" />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
@@ -280,7 +280,7 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
       <div className="flex justify-end mt-8">
         <button
           onClick={handleSave}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm"
+          className="bg-primary hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm"
         >
           Save & Continue
         </button>

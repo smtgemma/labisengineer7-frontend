@@ -5,7 +5,7 @@ import React from "react";
 
 export default function SubscriptionPay() {
   return (
-    <section className="bg-[#F1F5F9] py-8 px-12 min-h-screen">
+    <section className="bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen">
       <Header title="Billing Information" />
 
       <div className="mt-12 flex flex-col xl:flex-row gap-6">

@@ -1,6 +1,12 @@
 import React from 'react'
 import RightViewCard from './WorksCard/RightViewCard'
 import workImg from '@/assets/landing-page/login.png'
+import serviceType from "@/assets/landing-page/service-type.jpg"
+import sucategory from "@/assets/landing-page/subcategory.png"
+import submit from "@/assets/landing-page/submit.jpg"
+import review from "@/assets/landing-page/review.png"
+import aiExtension from "@/assets/landing-page/ai-extension.jpg"
+import document from "@/assets/landing-page/document.jpg"
 
 export default function HowItWorks() {
   return (
@@ -16,7 +22,7 @@ export default function HowItWorks() {
        className='flex-col md:flex-row'
       />
       <RightViewCard
-      workImg={workImg}
+      workImg={serviceType}
         stepNumber="Step- 2"
         title="Select Service Type"
         description="Our platform supports the following formats and guides you step-by-step."
@@ -24,7 +30,7 @@ export default function HowItWorks() {
         className='flex-col md:flex-row-reverse '
       />
       <RightViewCard
-      workImg={workImg}
+      workImg={sucategory}
         stepNumber="Step- 3 "
         title="Choose Subcategory"
         description="Based on your selected service, pick a multiple subcategory "  
@@ -36,14 +42,14 @@ export default function HowItWorks() {
         description="Upload all required documents such as floor plans, contracts, declarations, or permit copies."
         formats={['PDF', 'DOCX', 'JPG', 'PNG']}
         className='flex-col md:flex-row-reverse'
-        workImg={workImg}
+        workImg={document}
       />
       <RightViewCard
         stepNumber="Step- 5"
         title="AI Data Extraction"
         description="Our AI engine automatically reads and extracts critical data fields (like KAEK, usage, coordinates, owner name, permit number)."
           className='flex-col md:flex-row'
-        workImg={workImg}
+        workImg={aiExtension}
      
       />
       <RightViewCard
@@ -52,14 +58,14 @@ export default function HowItWorks() {
         description="Manually verify and edit the extracted data if needed to ensure accuracy and compliance."
         formats={['Json', 'CSV']}
         className='flex-col md:flex-row-reverse'
-        workImg={workImg}
+        workImg={review}
       />
       <RightViewCard
         stepNumber="Step- 7"
         title="Generate & Submit"
         description="Generate professional documents (PDF, DOCX, CSV) and auto-fill online government forms using automation tools."
            className='flex-col md:flex-row'
-         workImg={workImg}
+         workImg={submit}
       />
     
 
