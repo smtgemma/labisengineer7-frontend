@@ -1,7 +1,10 @@
-import React from "react";
+import React from 'react'
+import SimpleTemplatesTable from './TempleteTable'
 
-const page = () => {
-  return <div>document-template</div>;
-};
-
-export default page;
+export default function page() {
+  return (
+    <div>
+        <SimpleTemplatesTable/>
+    </div>
+  )
+}

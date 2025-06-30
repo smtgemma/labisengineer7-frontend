@@ -28,7 +28,7 @@ const DashboardLayout = ({ children, navLink }: { children: React.ReactNode, nav
   }, [navRef]);
 
   return (
-    <div className="flex">
+    <div className="flex bg-[#F1F5F9]">
       <div className="max-h-screen h-full sticky top-0 z-50 ">
         <SideBar
           dark={false}

@@ -1,7 +1,22 @@
-import React from "react";
+import SimpleActivityFeedTable from "./ActivityFeed";
 
-const page = () => {
-  return <div>overview</div>;
-};
+import AiExtractionChart from "./AiExtractionChart";
 
-export default page;
+import OverviewCards from "./OverviewCard";
+
+
+
+export default function DashboardPage() {
+  return (
+    <main className="">
+      <div className="">
+        
+        <OverviewCards />
+        <AiExtractionChart title=""/>
+        
+        
+        <SimpleActivityFeedTable/>
+      </div>
+    </main>
+  );
+}

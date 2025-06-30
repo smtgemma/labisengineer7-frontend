@@ -1,9 +1,12 @@
 'use client';
 
+import logo from "@/assets/landing-page/main-logo.png"
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react'; // Optional icons
+import Logo from "../Logo";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,12 +19,12 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="w-full px-4 py-3 bg-white shadow-md">
+    <nav className="w-full px-4 py-3 bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex-shrink-0">
           <Link href="/">
-            <Image src="/logo.png" alt="Logo" width={119} height={44} />
+            <Logo/>
           </Link>
         </div>
 

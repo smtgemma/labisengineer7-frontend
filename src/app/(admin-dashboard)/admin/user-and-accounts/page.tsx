@@ -1,11 +1,10 @@
-import React from 'react';
+import React from 'react'
+import SimpleUsersTable from './UserAccount'
 
-const page = () => {
-    return (
-        <div>
-            user-and-accounts"
-        </div>
-    );
-};
-
-export default page;
+export default function page() {
+  return (
+    <div>
+        <SimpleUsersTable/>
+    </div>
+  )
+}

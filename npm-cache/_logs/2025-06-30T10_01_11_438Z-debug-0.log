@@ -1,0 +1,845 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.9.2
+2 info using node@v22.16.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Devine Projects\labisengineer7-frontend\.npmrc
+5 silly config load:file:C:\Users\game0\.npmrc
+6 silly config load:file:C:\Users\game0\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install recharts
+8 verbose argv "install" "recharts"
+9 verbose logfile logs-max:10 dir:C:\Devine Projects\labisengineer7-frontend\npm-cache\_logs\2025-06-30T10_01_11_438Z-
+10 verbose logfile C:\Devine Projects\labisengineer7-frontend\npm-cache\_logs\2025-06-30T10_01_11_438Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 silly idealTree buildDeps
+14 silly fetch manifest recharts@*
+15 silly packumentCache full:https://registry.npmjs.org/recharts cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/recharts 386ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/recharts set size:undefined disposed:false
+18 silly fetch manifest react@^19.0.0
+19 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+20 http fetch GET 200 https://registry.npmjs.org/react 41ms (cache revalidated)
+21 silly packumentCache full:https://registry.npmjs.org/react set size:5808624 disposed:false
+22 silly fetch manifest react-dom@^19.0.0
+23 silly packumentCache full:https://registry.npmjs.org/react-dom cache-miss
+24 http fetch GET 200 https://registry.npmjs.org/react-dom 40ms (cache revalidated)
+25 silly packumentCache full:https://registry.npmjs.org/react-dom set size:7426583 disposed:false
+26 silly fetch manifest react-is@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+27 silly packumentCache full:https://registry.npmjs.org/react-is cache-miss
+28 http fetch GET 200 https://registry.npmjs.org/react-is 54ms (cache revalidated)
+29 silly packumentCache full:https://registry.npmjs.org/react-is set size:4724047 disposed:false
+30 silly placeDep ROOT recharts@3.0.2 OK for: frontend-boilerplate@0.1.0 want: *
+31 silly fetch manifest @reduxjs/toolkit@1.x.x || 2.x.x
+32 silly packumentCache full:https://registry.npmjs.org/@reduxjs%2ftoolkit cache-miss
+33 silly fetch manifest clsx@^2.1.1
+34 silly packumentCache full:https://registry.npmjs.org/clsx cache-miss
+35 silly fetch manifest decimal.js-light@^2.5.1
+36 silly packumentCache full:https://registry.npmjs.org/decimal.js-light cache-miss
+37 silly fetch manifest es-toolkit@^1.39.3
+38 silly packumentCache full:https://registry.npmjs.org/es-toolkit cache-miss
+39 silly fetch manifest eventemitter3@^5.0.1
+40 silly packumentCache full:https://registry.npmjs.org/eventemitter3 cache-miss
+41 silly fetch manifest immer@^10.1.1
+42 silly packumentCache full:https://registry.npmjs.org/immer cache-miss
+43 silly fetch manifest react-redux@8.x.x || 9.x.x
+44 silly packumentCache full:https://registry.npmjs.org/react-redux cache-miss
+45 silly fetch manifest reselect@5.1.1
+46 silly packumentCache full:https://registry.npmjs.org/reselect cache-miss
+47 silly fetch manifest tiny-invariant@^1.3.3
+48 silly packumentCache full:https://registry.npmjs.org/tiny-invariant cache-miss
+49 silly fetch manifest use-sync-external-store@^1.2.2
+50 silly packumentCache full:https://registry.npmjs.org/use-sync-external-store cache-miss
+51 silly fetch manifest victory-vendor@^37.0.2
+52 silly packumentCache full:https://registry.npmjs.org/victory-vendor cache-miss
+53 http fetch GET 200 https://registry.npmjs.org/eventemitter3 80ms (cache miss)
+54 silly packumentCache full:https://registry.npmjs.org/eventemitter3 set size:undefined disposed:false
+55 http fetch GET 200 https://registry.npmjs.org/es-toolkit 177ms (cache miss)
+56 silly packumentCache full:https://registry.npmjs.org/es-toolkit set size:undefined disposed:false
+57 http fetch GET 200 https://registry.npmjs.org/decimal.js-light 272ms (cache miss)
+58 silly packumentCache full:https://registry.npmjs.org/decimal.js-light set size:undefined disposed:false
+59 http fetch GET 200 https://registry.npmjs.org/clsx 277ms (cache miss)
+60 silly packumentCache full:https://registry.npmjs.org/clsx set size:undefined disposed:false
+61 http fetch GET 200 https://registry.npmjs.org/tiny-invariant 280ms (cache miss)
+62 silly packumentCache full:https://registry.npmjs.org/tiny-invariant set size:undefined disposed:false
+63 http fetch GET 200 https://registry.npmjs.org/react-redux 284ms (cache miss)
+64 silly packumentCache full:https://registry.npmjs.org/react-redux set size:undefined disposed:false
+65 http fetch GET 200 https://registry.npmjs.org/victory-vendor 288ms (cache miss)
+66 silly packumentCache full:https://registry.npmjs.org/victory-vendor set size:undefined disposed:false
+67 http fetch GET 200 https://registry.npmjs.org/immer 297ms (cache miss)
+68 silly packumentCache full:https://registry.npmjs.org/immer set size:undefined disposed:false
+69 http fetch GET 200 https://registry.npmjs.org/@reduxjs%2ftoolkit 618ms (cache miss)
+70 silly packumentCache full:https://registry.npmjs.org/@reduxjs%2ftoolkit set size:undefined disposed:false
+71 http fetch GET 200 https://registry.npmjs.org/use-sync-external-store 1092ms (cache miss)
+72 silly packumentCache full:https://registry.npmjs.org/use-sync-external-store set size:undefined disposed:false
+73 http fetch GET 200 https://registry.npmjs.org/reselect 1171ms (cache miss)
+74 silly packumentCache full:https://registry.npmjs.org/reselect set size:undefined disposed:false
+75 silly fetch manifest react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+76 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+77 http cache https://registry.npmjs.org/react 12ms (cache hit)
+78 silly packumentCache full:https://registry.npmjs.org/react set size:5808624 disposed:false
+79 silly fetch manifest @types/react@^18.2.25 || ^19
+80 silly packumentCache full:https://registry.npmjs.org/@types%2freact cache-miss
+81 http fetch GET 200 https://registry.npmjs.org/@types%2freact 75ms (cache miss)
+82 silly packumentCache full:https://registry.npmjs.org/@types%2freact set size:undefined disposed:false
+83 silly fetch manifest redux@^5.0.0
+84 silly packumentCache full:https://registry.npmjs.org/redux cache-miss
+85 http fetch GET 200 https://registry.npmjs.org/redux 249ms (cache miss)
+86 silly packumentCache full:https://registry.npmjs.org/redux set size:undefined disposed:false
+87 silly placeDep ROOT @reduxjs/toolkit@2.8.2 OK for: recharts@3.0.2 want: 1.x.x || 2.x.x
+88 silly placeDep ROOT clsx@2.1.1 OK for: recharts@3.0.2 want: ^2.1.1
+89 silly placeDep ROOT decimal.js-light@2.5.1 OK for: recharts@3.0.2 want: ^2.5.1
+90 silly placeDep ROOT es-toolkit@1.39.5 OK for: recharts@3.0.2 want: ^1.39.3
+91 silly placeDep ROOT eventemitter3@5.0.1 OK for: recharts@3.0.2 want: ^5.0.1
+92 silly placeDep ROOT immer@10.1.1 OK for: recharts@3.0.2 want: ^10.1.1
+93 silly placeDep ROOT react-redux@9.2.0 OK for: recharts@3.0.2 want: 8.x.x || 9.x.x
+94 silly placeDep ROOT reselect@5.1.1 OK for: recharts@3.0.2 want: 5.1.1
+95 silly placeDep ROOT tiny-invariant@1.3.3 OK for: recharts@3.0.2 want: ^1.3.3
+96 silly placeDep ROOT use-sync-external-store@1.5.0 OK for: recharts@3.0.2 want: ^1.2.2
+97 silly placeDep ROOT victory-vendor@37.3.6 OK for: recharts@3.0.2 want: ^37.0.2
+98 silly fetch manifest @standard-schema/spec@^1.0.0
+99 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2fspec cache-miss
+100 silly fetch manifest @standard-schema/utils@^0.3.0
+101 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2futils cache-miss
+102 silly fetch manifest immer@^10.0.3
+103 silly packumentCache full:https://registry.npmjs.org/immer cache-miss
+104 silly fetch manifest redux@^5.0.1
+105 silly packumentCache full:https://registry.npmjs.org/redux cache-miss
+106 silly fetch manifest redux-thunk@^3.1.0
+107 silly packumentCache full:https://registry.npmjs.org/redux-thunk cache-miss
+108 silly fetch manifest reselect@^5.1.0
+109 silly packumentCache full:https://registry.npmjs.org/reselect cache-miss
+110 silly fetch manifest @types/use-sync-external-store@^0.0.6
+111 silly packumentCache full:https://registry.npmjs.org/@types%2fuse-sync-external-store cache-miss
+112 silly fetch manifest use-sync-external-store@^1.4.0
+113 silly packumentCache full:https://registry.npmjs.org/use-sync-external-store cache-miss
+114 silly fetch manifest @types/d3-array@^3.0.3
+115 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-array cache-miss
+116 silly fetch manifest @types/d3-ease@^3.0.0
+117 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-ease cache-miss
+118 silly fetch manifest @types/d3-interpolate@^3.0.1
+119 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-interpolate cache-miss
+120 silly fetch manifest @types/d3-scale@^4.0.2
+121 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-scale cache-miss
+122 silly fetch manifest @types/d3-shape@^3.1.0
+123 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-shape cache-miss
+124 silly fetch manifest @types/d3-time@^3.0.0
+125 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-time cache-miss
+126 silly fetch manifest @types/d3-timer@^3.0.0
+127 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-timer cache-miss
+128 http cache https://registry.npmjs.org/immer 11ms (cache hit)
+129 silly packumentCache full:https://registry.npmjs.org/immer set size:812636 disposed:false
+130 silly fetch manifest d3-array@^3.1.6
+131 silly packumentCache full:https://registry.npmjs.org/d3-array cache-miss
+132 http cache https://registry.npmjs.org/use-sync-external-store 33ms (cache hit)
+133 silly packumentCache full:https://registry.npmjs.org/use-sync-external-store set size:3766014 disposed:false
+134 silly fetch manifest d3-ease@^3.0.1
+135 silly packumentCache full:https://registry.npmjs.org/d3-ease cache-miss
+136 http cache https://registry.npmjs.org/reselect 67ms (cache hit)
+137 silly packumentCache full:https://registry.npmjs.org/reselect set size:910470 disposed:false
+138 silly fetch manifest d3-interpolate@^3.0.1
+139 silly packumentCache full:https://registry.npmjs.org/d3-interpolate cache-miss
+140 http cache https://registry.npmjs.org/redux 78ms (cache hit)
+141 silly packumentCache full:https://registry.npmjs.org/redux set size:553833 disposed:false
+142 silly fetch manifest d3-scale@^4.0.2
+143 silly packumentCache full:https://registry.npmjs.org/d3-scale cache-miss
+144 http fetch GET 200 https://registry.npmjs.org/d3-ease 224ms (cache miss)
+145 silly packumentCache full:https://registry.npmjs.org/d3-ease set size:undefined disposed:false
+146 silly fetch manifest d3-shape@^3.1.0
+147 silly packumentCache full:https://registry.npmjs.org/d3-shape cache-miss
+148 http fetch GET 200 https://registry.npmjs.org/d3-interpolate 225ms (cache miss)
+149 silly packumentCache full:https://registry.npmjs.org/d3-interpolate set size:undefined disposed:false
+150 silly fetch manifest d3-time@^3.0.0
+151 silly packumentCache full:https://registry.npmjs.org/d3-time cache-miss
+152 http fetch GET 200 https://registry.npmjs.org/d3-scale 238ms (cache miss)
+153 silly packumentCache full:https://registry.npmjs.org/d3-scale set size:undefined disposed:false
+154 silly fetch manifest d3-timer@^3.0.1
+155 silly packumentCache full:https://registry.npmjs.org/d3-timer cache-miss
+156 http fetch GET 200 https://registry.npmjs.org/@standard-schema%2futils 412ms (cache miss)
+157 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2futils set size:undefined disposed:false
+158 http fetch GET 200 https://registry.npmjs.org/@types%2fd3-timer 415ms (cache miss)
+159 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-timer set size:undefined disposed:false
+160 http fetch GET 200 https://registry.npmjs.org/d3-time 209ms (cache miss)
+161 silly packumentCache full:https://registry.npmjs.org/d3-time set size:undefined disposed:false
+162 http fetch GET 200 https://registry.npmjs.org/@types%2fd3-interpolate 537ms (cache miss)
+163 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-interpolate set size:undefined disposed:false
+164 http fetch GET 200 https://registry.npmjs.org/d3-timer 224ms (cache miss)
+165 silly packumentCache full:https://registry.npmjs.org/d3-timer set size:undefined disposed:false
+166 http fetch GET 200 https://registry.npmjs.org/d3-shape 280ms (cache miss)
+167 silly packumentCache full:https://registry.npmjs.org/d3-shape set size:undefined disposed:false
+168 http fetch GET 200 https://registry.npmjs.org/@standard-schema%2fspec 754ms (cache miss)
+169 silly packumentCache full:https://registry.npmjs.org/@standard-schema%2fspec set size:undefined disposed:false
+170 http fetch GET 200 https://registry.npmjs.org/redux-thunk 880ms (cache miss)
+171 silly packumentCache full:https://registry.npmjs.org/redux-thunk set size:undefined disposed:false
+172 http fetch GET 200 https://registry.npmjs.org/d3-array 935ms (cache miss)
+173 silly packumentCache full:https://registry.npmjs.org/d3-array set size:undefined disposed:false
+174 http fetch GET 200 https://registry.npmjs.org/@types%2fd3-array 1058ms (cache miss)
+175 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-array set size:undefined disposed:false
+176 http fetch GET 200 https://registry.npmjs.org/@types%2fd3-scale 1063ms (cache miss)
+177 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-scale set size:undefined disposed:false
+178 http fetch GET 200 https://registry.npmjs.org/@types%2fd3-ease 1066ms (cache miss)
+179 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-ease set size:undefined disposed:false
+180 http fetch GET 200 https://registry.npmjs.org/@types%2fd3-shape 1071ms (cache miss)
+181 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-shape set size:undefined disposed:false
+182 http fetch GET 200 https://registry.npmjs.org/@types%2fuse-sync-external-store 1079ms (cache miss)
+183 silly packumentCache full:https://registry.npmjs.org/@types%2fuse-sync-external-store set size:undefined disposed:false
+184 http fetch GET 200 https://registry.npmjs.org/@types%2fd3-time 1258ms (cache miss)
+185 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-time set size:undefined disposed:false
+186 silly placeDep ROOT @standard-schema/spec@1.0.0 OK for: @reduxjs/toolkit@2.8.2 want: ^1.0.0
+187 silly placeDep ROOT @standard-schema/utils@0.3.0 OK for: @reduxjs/toolkit@2.8.2 want: ^0.3.0
+188 silly placeDep ROOT redux@5.0.1 OK for: @reduxjs/toolkit@2.8.2 want: ^5.0.1
+189 silly placeDep ROOT redux-thunk@3.1.0 OK for: @reduxjs/toolkit@2.8.2 want: ^3.1.0
+190 silly placeDep ROOT @types/use-sync-external-store@0.0.6 OK for: react-redux@9.2.0 want: ^0.0.6
+191 silly placeDep ROOT @types/d3-array@3.2.1 OK for: victory-vendor@37.3.6 want: ^3.0.3
+192 silly placeDep ROOT @types/d3-ease@3.0.2 OK for: victory-vendor@37.3.6 want: ^3.0.0
+193 silly placeDep ROOT @types/d3-interpolate@3.0.4 OK for: victory-vendor@37.3.6 want: ^3.0.1
+194 silly placeDep ROOT @types/d3-scale@4.0.9 OK for: victory-vendor@37.3.6 want: ^4.0.2
+195 silly placeDep ROOT @types/d3-shape@3.1.7 OK for: victory-vendor@37.3.6 want: ^3.1.0
+196 silly placeDep ROOT @types/d3-time@3.0.4 OK for: victory-vendor@37.3.6 want: ^3.0.0
+197 silly placeDep ROOT @types/d3-timer@3.0.2 OK for: victory-vendor@37.3.6 want: ^3.0.0
+198 silly placeDep ROOT d3-array@3.2.4 OK for: victory-vendor@37.3.6 want: ^3.1.6
+199 silly placeDep ROOT d3-ease@3.0.1 OK for: victory-vendor@37.3.6 want: ^3.0.1
+200 silly placeDep ROOT d3-interpolate@3.0.1 OK for: victory-vendor@37.3.6 want: ^3.0.1
+201 silly placeDep ROOT d3-scale@4.0.2 OK for: victory-vendor@37.3.6 want: ^4.0.2
+202 silly placeDep ROOT d3-shape@3.2.0 OK for: victory-vendor@37.3.6 want: ^3.1.0
+203 silly placeDep ROOT d3-time@3.1.0 OK for: victory-vendor@37.3.6 want: ^3.0.0
+204 silly placeDep ROOT d3-timer@3.0.1 OK for: victory-vendor@37.3.6 want: ^3.0.1
+205 silly fetch manifest @types/d3-color@*
+206 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-color cache-miss
+207 silly fetch manifest @types/d3-time@*
+208 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-time cache-miss
+209 silly fetch manifest @types/d3-path@*
+210 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-path cache-miss
+211 silly fetch manifest internmap@1 - 2
+212 silly packumentCache full:https://registry.npmjs.org/internmap cache-miss
+213 silly fetch manifest d3-color@1 - 3
+214 silly packumentCache full:https://registry.npmjs.org/d3-color cache-miss
+215 silly fetch manifest d3-format@1 - 3
+216 silly packumentCache full:https://registry.npmjs.org/d3-format cache-miss
+217 silly fetch manifest d3-time@2.1.1 - 3
+218 silly packumentCache full:https://registry.npmjs.org/d3-time cache-miss
+219 silly fetch manifest d3-time-format@2 - 4
+220 silly packumentCache full:https://registry.npmjs.org/d3-time-format cache-miss
+221 silly fetch manifest d3-path@^3.1.0
+222 silly packumentCache full:https://registry.npmjs.org/d3-path cache-miss
+223 http cache https://registry.npmjs.org/@types%2fd3-time 14ms (cache hit)
+224 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-time set size:52636 disposed:false
+225 http cache https://registry.npmjs.org/d3-time 16ms (cache hit)
+226 silly packumentCache full:https://registry.npmjs.org/d3-time set size:150406 disposed:false
+227 http fetch GET 200 https://registry.npmjs.org/d3-path 216ms (cache miss)
+228 silly packumentCache full:https://registry.npmjs.org/d3-path set size:undefined disposed:false
+229 http fetch GET 200 https://registry.npmjs.org/d3-format 217ms (cache miss)
+230 silly packumentCache full:https://registry.npmjs.org/d3-format set size:undefined disposed:false
+231 http fetch GET 200 https://registry.npmjs.org/internmap 324ms (cache miss)
+232 silly packumentCache full:https://registry.npmjs.org/internmap set size:undefined disposed:false
+233 http fetch GET 200 https://registry.npmjs.org/d3-color 333ms (cache miss)
+234 silly packumentCache full:https://registry.npmjs.org/d3-color set size:undefined disposed:false
+235 http fetch GET 200 https://registry.npmjs.org/@types%2fd3-color 397ms (cache miss)
+236 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-color set size:undefined disposed:false
+237 http fetch GET 200 https://registry.npmjs.org/d3-time-format 397ms (cache miss)
+238 silly packumentCache full:https://registry.npmjs.org/d3-time-format set size:undefined disposed:false
+239 http fetch GET 200 https://registry.npmjs.org/@types%2fd3-path 446ms (cache miss)
+240 silly packumentCache full:https://registry.npmjs.org/@types%2fd3-path set size:undefined disposed:false
+241 silly placeDep ROOT @types/d3-color@3.1.3 OK for: @types/d3-interpolate@3.0.4 want: *
+242 silly placeDep ROOT @types/d3-path@3.1.1 OK for: @types/d3-shape@3.1.7 want: *
+243 silly placeDep ROOT internmap@2.0.3 OK for: d3-array@3.2.4 want: 1 - 2
+244 silly placeDep ROOT d3-color@3.1.0 OK for: d3-interpolate@3.0.1 want: 1 - 3
+245 silly placeDep ROOT d3-format@3.1.0 OK for: d3-scale@4.0.2 want: 1 - 3
+246 silly placeDep ROOT d3-time-format@4.1.0 OK for: d3-scale@4.0.2 want: 2 - 4
+247 silly placeDep ROOT d3-path@3.1.0 OK for: d3-shape@3.2.0 want: ^3.1.0
+248 silly reify moves {}
+249 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@tailwindcss\oxide-wasm32-wasi
+250 silly reify mark deleted [
+250 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@tailwindcss\\oxide-wasm32-wasi'
+250 silly reify ]
+251 silly audit bulk request {
+251 silly audit   '@alloc/quick-lru': [ '5.2.0' ],
+251 silly audit   '@ant-design/colors': [ '7.2.1' ],
+251 silly audit   '@ant-design/cssinjs': [ '1.23.0' ],
+251 silly audit   '@ant-design/cssinjs-utils': [ '1.1.3' ],
+251 silly audit   '@ant-design/fast-color': [ '2.0.6' ],
+251 silly audit   '@ant-design/icons': [ '5.6.1' ],
+251 silly audit   '@ant-design/icons-svg': [ '4.4.2' ],
+251 silly audit   '@ant-design/react-slick': [ '1.1.2' ],
+251 silly audit   '@babel/runtime': [ '7.27.6' ],
+251 silly audit   '@emnapi/runtime': [ '1.4.3' ],
+251 silly audit   '@emotion/hash': [ '0.8.0' ],
+251 silly audit   '@emotion/unitless': [ '0.7.5' ],
+251 silly audit   '@img/sharp-darwin-arm64': [ '0.34.1' ],
+251 silly audit   '@img/sharp-darwin-x64': [ '0.34.1' ],
+251 silly audit   '@img/sharp-libvips-darwin-arm64': [ '1.1.0' ],
+251 silly audit   '@img/sharp-libvips-darwin-x64': [ '1.1.0' ],
+251 silly audit   '@img/sharp-libvips-linux-arm': [ '1.1.0' ],
+251 silly audit   '@img/sharp-libvips-linux-arm64': [ '1.1.0' ],
+251 silly audit   '@img/sharp-libvips-linux-ppc64': [ '1.1.0' ],
+251 silly audit   '@img/sharp-libvips-linux-s390x': [ '1.1.0' ],
+251 silly audit   '@img/sharp-libvips-linux-x64': [ '1.1.0' ],
+251 silly audit   '@img/sharp-libvips-linuxmusl-arm64': [ '1.1.0' ],
+251 silly audit   '@img/sharp-libvips-linuxmusl-x64': [ '1.1.0' ],
+251 silly audit   '@img/sharp-linux-arm': [ '0.34.1' ],
+251 silly audit   '@img/sharp-linux-arm64': [ '0.34.1' ],
+251 silly audit   '@img/sharp-linux-s390x': [ '0.34.1' ],
+251 silly audit   '@img/sharp-linux-x64': [ '0.34.1' ],
+251 silly audit   '@img/sharp-linuxmusl-arm64': [ '0.34.1' ],
+251 silly audit   '@img/sharp-linuxmusl-x64': [ '0.34.1' ],
+251 silly audit   '@img/sharp-wasm32': [ '0.34.1' ],
+251 silly audit   '@img/sharp-win32-ia32': [ '0.34.1' ],
+251 silly audit   '@img/sharp-win32-x64': [ '0.34.1' ],
+251 silly audit   '@next/env': [ '15.3.1' ],
+251 silly audit   '@next/swc-darwin-arm64': [ '15.3.1' ],
+251 silly audit   '@next/swc-darwin-x64': [ '15.3.1' ],
+251 silly audit   '@next/swc-linux-arm64-gnu': [ '15.3.1' ],
+251 silly audit   '@next/swc-linux-arm64-musl': [ '15.3.1' ],
+251 silly audit   '@next/swc-linux-x64-gnu': [ '15.3.1' ],
+251 silly audit   '@next/swc-linux-x64-musl': [ '15.3.1' ],
+251 silly audit   '@next/swc-win32-arm64-msvc': [ '15.3.1' ],
+251 silly audit   '@next/swc-win32-x64-msvc': [ '15.3.1' ],
+251 silly audit   '@rc-component/async-validator': [ '5.0.4' ],
+251 silly audit   '@rc-component/color-picker': [ '2.0.1' ],
+251 silly audit   '@rc-component/context': [ '1.4.0' ],
+251 silly audit   '@rc-component/mini-decimal': [ '1.1.0' ],
+251 silly audit   '@rc-component/mutate-observer': [ '1.1.0' ],
+251 silly audit   '@rc-component/portal': [ '1.1.2' ],
+251 silly audit   '@rc-component/qrcode': [ '1.0.0' ],
+251 silly audit   '@rc-component/tour': [ '1.15.1' ],
+251 silly audit   '@rc-component/trigger': [ '2.2.7' ],
+251 silly audit   '@swc/counter': [ '0.1.3' ],
+251 silly audit   '@swc/helpers': [ '0.5.15' ],
+251 silly audit   '@tailwindcss/node': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide-android-arm64': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide-darwin-arm64': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide-darwin-x64': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide-freebsd-x64': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide-linux-arm-gnueabihf': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide-linux-arm64-gnu': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide-linux-arm64-musl': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide-linux-x64-gnu': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide-linux-x64-musl': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide-win32-arm64-msvc': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/oxide-win32-x64-msvc': [ '4.1.4' ],
+251 silly audit   '@tailwindcss/postcss': [ '4.1.4' ],
+251 silly audit   '@types/node': [ '20.17.30' ],
+251 silly audit   '@types/react': [ '19.1.2' ],
+251 silly audit   '@types/react-dom': [ '19.1.2' ],
+251 silly audit   antd: [ '5.26.2' ],
+251 silly audit   busboy: [ '1.6.0' ],
+251 silly audit   'caniuse-lite': [ '1.0.30001715' ],
+251 silly audit   classnames: [ '2.5.1' ],
+251 silly audit   'client-only': [ '0.0.1' ],
+251 silly audit   color: [ '4.2.3' ],
+251 silly audit   'color-convert': [ '2.0.1' ],
+251 silly audit   'color-name': [ '1.1.4' ],
+251 silly audit   'color-string': [ '1.9.1' ],
+251 silly audit   'compute-scroll-into-view': [ '3.1.1' ],
+251 silly audit   'copy-to-clipboard': [ '3.3.3' ],
+251 silly audit   csstype: [ '3.1.3' ],
+251 silly audit   dayjs: [ '1.11.13' ],
+251 silly audit   'detect-libc': [ '2.0.4' ],
+251 silly audit   'enhanced-resolve': [ '5.18.1' ],
+251 silly audit   'framer-motion': [ '12.9.1' ],
+251 silly audit   'graceful-fs': [ '4.2.11' ],
+251 silly audit   'is-arrayish': [ '0.3.2' ],
+251 silly audit   jiti: [ '2.4.2' ],
+251 silly audit   json2mq: [ '0.2.0' ],
+251 silly audit   'jwt-decode': [ '4.0.0' ],
+251 silly audit   lightningcss: [ '1.29.2' ],
+251 silly audit   'lightningcss-darwin-arm64': [ '1.29.2' ],
+251 silly audit   'lightningcss-darwin-x64': [ '1.29.2' ],
+251 silly audit   'lightningcss-freebsd-x64': [ '1.29.2' ],
+251 silly audit   'lightningcss-linux-arm-gnueabihf': [ '1.29.2' ],
+251 silly audit   'lightningcss-linux-arm64-gnu': [ '1.29.2' ],
+251 silly audit   'lightningcss-linux-arm64-musl': [ '1.29.2' ],
+251 silly audit   'lightningcss-linux-x64-gnu': [ '1.29.2' ],
+251 silly audit   'lightningcss-linux-x64-musl': [ '1.29.2' ],
+251 silly audit   'lightningcss-win32-arm64-msvc': [ '1.29.2' ],
+251 silly audit   'lightningcss-win32-x64-msvc': [ '1.29.2' ],
+251 silly audit   'lucide-react': [ '0.525.0' ],
+251 silly audit   'motion-dom': [ '12.9.1' ],
+251 silly audit   'motion-utils': [ '12.8.3' ],
+251 silly audit   nanoid: [ '3.3.11' ],
+251 silly audit   next: [ '15.3.1' ],
+251 silly audit   postcss: [ '8.4.31', '8.5.3' ],
+251 silly audit   picocolors: [ '1.1.1' ],
+251 silly audit   'rc-cascader': [ '3.34.0' ],
+251 silly audit   'rc-checkbox': [ '3.5.0' ],
+251 silly audit   'rc-collapse': [ '3.9.0' ],
+251 silly audit   'rc-dialog': [ '9.6.0' ],
+251 silly audit   'rc-drawer': [ '7.3.0' ],
+251 silly audit   'rc-dropdown': [ '4.2.1' ],
+251 silly audit   'rc-field-form': [ '2.7.0' ],
+251 silly audit   'rc-image': [ '7.12.0' ],
+251 silly audit   'rc-input': [ '1.8.0' ],
+251 silly audit   'rc-input-number': [ '9.5.0' ],
+251 silly audit   'rc-mentions': [ '2.20.0' ],
+251 silly audit   'rc-menu': [ '9.16.1' ],
+251 silly audit   'rc-motion': [ '2.9.5' ],
+251 silly audit   'rc-notification': [ '5.6.4' ],
+251 silly audit   'rc-overflow': [ '1.4.1' ],
+251 silly audit   'rc-pagination': [ '5.1.0' ],
+251 silly audit   'rc-picker': [ '4.11.3' ],
+251 silly audit   'rc-progress': [ '4.0.0' ],
+251 silly audit   'rc-rate': [ '2.13.1' ],
+251 silly audit   'rc-resize-observer': [ '1.4.3' ],
+251 silly audit   'rc-segmented': [ '2.7.0' ],
+251 silly audit   'rc-select': [ '14.16.8' ],
+251 silly audit   'rc-slider': [ '11.1.8' ],
+251 silly audit   'rc-steps': [ '6.0.1' ],
+251 silly audit   'rc-switch': [ '4.1.0' ],
+251 silly audit   'rc-table': [ '7.51.1' ],
+251 silly audit   'rc-tabs': [ '15.6.1' ],
+251 silly audit   'rc-textarea': [ '1.10.0' ],
+251 silly audit   'rc-tooltip': [ '6.4.0' ],
+251 silly audit   'rc-tree': [ '5.13.1' ],
+251 silly audit   'rc-tree-select': [ '5.27.0' ],
+251 silly audit   'rc-upload': [ '4.9.2' ],
+251 silly audit   'rc-util': [ '5.44.4' ],
+251 silly audit   'rc-virtual-list': [ '3.19.1' ],
+251 silly audit   react: [ '19.1.0' ],
+251 silly audit   'react-dom': [ '19.1.0' ],
+251 silly audit   'react-icons': [ '5.5.0' ],
+251 silly audit   'react-is': [ '18.3.1' ],
+251 silly audit   'resize-observer-polyfill': [ '1.5.1' ],
+251 silly audit   scheduler: [ '0.26.0' ],
+251 silly audit   'scroll-into-view-if-needed': [ '3.1.0' ],
+251 silly audit   semver: [ '7.7.1' ],
+251 silly audit   sharp: [ '0.34.1' ],
+251 silly audit   'simple-swizzle': [ '0.2.2' ],
+251 silly audit   sonner: [ '2.0.3' ],
+251 silly audit   'source-map-js': [ '1.2.1' ],
+251 silly audit   streamsearch: [ '1.1.0' ],
+251 silly audit   'string-convert': [ '0.2.1' ],
+251 silly audit   'styled-jsx': [ '5.1.6' ],
+251 silly audit   stylis: [ '4.3.6' ],
+251 silly audit   tailwindcss: [ '4.1.4' ],
+251 silly audit   tapable: [ '2.2.1' ],
+251 silly audit   'throttle-debounce': [ '5.0.2' ],
+251 silly audit   'toggle-selection': [ '1.0.6' ],
+251 silly audit   tslib: [ '2.8.1' ],
+251 silly audit   typescript: [ '5.8.3' ],
+251 silly audit   'undici-types': [ '6.19.8' ],
+251 silly audit   recharts: [ '3.0.2' ],
+251 silly audit   '@reduxjs/toolkit': [ '2.8.2' ],
+251 silly audit   clsx: [ '2.1.1' ],
+251 silly audit   'decimal.js-light': [ '2.5.1' ],
+251 silly audit   'es-toolkit': [ '1.39.5' ],
+251 silly audit   eventemitter3: [ '5.0.1' ],
+251 silly audit   immer: [ '10.1.1' ],
+251 silly audit   'react-redux': [ '9.2.0' ],
+251 silly audit   reselect: [ '5.1.1' ],
+251 silly audit   'tiny-invariant': [ '1.3.3' ],
+251 silly audit   'use-sync-external-store': [ '1.5.0' ],
+251 silly audit   'victory-vendor': [ '37.3.6' ],
+251 silly audit   '@standard-schema/spec': [ '1.0.0' ],
+251 silly audit   '@standard-schema/utils': [ '0.3.0' ],
+251 silly audit   redux: [ '5.0.1' ],
+251 silly audit   'redux-thunk': [ '3.1.0' ],
+251 silly audit   '@types/use-sync-external-store': [ '0.0.6' ],
+251 silly audit   '@types/d3-array': [ '3.2.1' ],
+251 silly audit   '@types/d3-ease': [ '3.0.2' ],
+251 silly audit   '@types/d3-interpolate': [ '3.0.4' ],
+251 silly audit   '@types/d3-scale': [ '4.0.9' ],
+251 silly audit   '@types/d3-shape': [ '3.1.7' ],
+251 silly audit   '@types/d3-time': [ '3.0.4' ],
+251 silly audit   '@types/d3-timer': [ '3.0.2' ],
+251 silly audit   'd3-array': [ '3.2.4' ],
+251 silly audit   'd3-ease': [ '3.0.1' ],
+251 silly audit   'd3-interpolate': [ '3.0.1' ],
+251 silly audit   'd3-scale': [ '4.0.2' ],
+251 silly audit   'd3-shape': [ '3.2.0' ],
+251 silly audit   'd3-time': [ '3.1.0' ],
+251 silly audit   'd3-timer': [ '3.0.1' ],
+251 silly audit   '@types/d3-color': [ '3.1.3' ],
+251 silly audit   '@types/d3-path': [ '3.1.1' ],
+251 silly audit   internmap: [ '2.0.3' ],
+251 silly audit   'd3-color': [ '3.1.0' ],
+251 silly audit   'd3-format': [ '3.1.0' ],
+251 silly audit   'd3-time-format': [ '4.1.0' ],
+251 silly audit   'd3-path': [ '3.1.0' ],
+251 silly audit   '@tailwindcss/oxide-wasm32-wasi': [ '4.1.4' ]
+251 silly audit }
+252 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\lightningcss-win32-arm64-msvc
+253 silly reify mark deleted [
+253 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\lightningcss-win32-arm64-msvc'
+253 silly reify ]
+254 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\lightningcss-linux-x64-musl
+255 silly reify mark deleted [
+255 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\lightningcss-linux-x64-musl'
+255 silly reify ]
+256 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\lightningcss-linux-x64-gnu
+257 silly reify mark deleted [
+257 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\lightningcss-linux-x64-gnu'
+257 silly reify ]
+258 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\lightningcss-linux-arm64-musl
+259 silly reify mark deleted [
+259 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\lightningcss-linux-arm64-musl'
+259 silly reify ]
+260 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\lightningcss-linux-arm64-gnu
+261 silly reify mark deleted [
+261 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\lightningcss-linux-arm64-gnu'
+261 silly reify ]
+262 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\lightningcss-linux-arm-gnueabihf
+263 silly reify mark deleted [
+263 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\lightningcss-linux-arm-gnueabihf'
+263 silly reify ]
+264 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\lightningcss-freebsd-x64
+265 silly reify mark deleted [
+265 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\lightningcss-freebsd-x64'
+265 silly reify ]
+266 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\lightningcss-darwin-x64
+267 silly reify mark deleted [
+267 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\lightningcss-darwin-x64'
+267 silly reify ]
+268 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\lightningcss-darwin-arm64
+269 silly reify mark deleted [
+269 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\lightningcss-darwin-arm64'
+269 silly reify ]
+270 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@tailwindcss\oxide-win32-arm64-msvc
+271 silly reify mark deleted [
+271 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@tailwindcss\\oxide-win32-arm64-msvc'
+271 silly reify ]
+272 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@tailwindcss\oxide-linux-x64-musl
+273 silly reify mark deleted [
+273 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@tailwindcss\\oxide-linux-x64-musl'
+273 silly reify ]
+274 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@tailwindcss\oxide-linux-x64-gnu
+275 silly reify mark deleted [
+275 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@tailwindcss\\oxide-linux-x64-gnu'
+275 silly reify ]
+276 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@tailwindcss\oxide-linux-arm64-musl
+277 silly reify mark deleted [
+277 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@tailwindcss\\oxide-linux-arm64-musl'
+277 silly reify ]
+278 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@tailwindcss\oxide-linux-arm64-gnu
+279 silly reify mark deleted [
+279 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@tailwindcss\\oxide-linux-arm64-gnu'
+279 silly reify ]
+280 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@tailwindcss\oxide-linux-arm-gnueabihf
+281 silly reify mark deleted [
+281 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@tailwindcss\\oxide-linux-arm-gnueabihf'
+281 silly reify ]
+282 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@tailwindcss\oxide-freebsd-x64
+283 silly reify mark deleted [
+283 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@tailwindcss\\oxide-freebsd-x64'
+283 silly reify ]
+284 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@tailwindcss\oxide-darwin-x64
+285 silly reify mark deleted [
+285 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@tailwindcss\\oxide-darwin-x64'
+285 silly reify ]
+286 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@tailwindcss\oxide-darwin-arm64
+287 silly reify mark deleted [
+287 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@tailwindcss\\oxide-darwin-arm64'
+287 silly reify ]
+288 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@tailwindcss\oxide-android-arm64
+289 silly reify mark deleted [
+289 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@tailwindcss\\oxide-android-arm64'
+289 silly reify ]
+290 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@next\swc-win32-arm64-msvc
+291 silly reify mark deleted [
+291 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@next\\swc-win32-arm64-msvc'
+291 silly reify ]
+292 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@next\swc-linux-x64-musl
+293 silly reify mark deleted [
+293 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@next\\swc-linux-x64-musl'
+293 silly reify ]
+294 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@next\swc-linux-x64-gnu
+295 silly reify mark deleted [
+295 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@next\\swc-linux-x64-gnu'
+295 silly reify ]
+296 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@next\swc-linux-arm64-musl
+297 silly reify mark deleted [
+297 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@next\\swc-linux-arm64-musl'
+297 silly reify ]
+298 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@next\swc-linux-arm64-gnu
+299 silly reify mark deleted [
+299 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@next\\swc-linux-arm64-gnu'
+299 silly reify ]
+300 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@next\swc-darwin-x64
+301 silly reify mark deleted [
+301 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@next\\swc-darwin-x64'
+301 silly reify ]
+302 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@next\swc-darwin-arm64
+303 silly reify mark deleted [
+303 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@next\\swc-darwin-arm64'
+303 silly reify ]
+304 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-win32-ia32
+305 silly reify mark deleted [
+305 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-win32-ia32'
+305 silly reify ]
+306 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-wasm32
+307 silly reify mark deleted [
+307 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-wasm32'
+307 silly reify ]
+308 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-linuxmusl-x64
+309 silly reify mark deleted [
+309 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-linuxmusl-x64'
+309 silly reify ]
+310 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-linuxmusl-arm64
+311 silly reify mark deleted [
+311 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-linuxmusl-arm64'
+311 silly reify ]
+312 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-linux-x64
+313 silly reify mark deleted [
+313 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-linux-x64'
+313 silly reify ]
+314 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-linux-s390x
+315 silly reify mark deleted [
+315 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-linux-s390x'
+315 silly reify ]
+316 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-linux-arm64
+317 silly reify mark deleted [
+317 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-linux-arm64'
+317 silly reify ]
+318 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-linux-arm
+319 silly reify mark deleted [
+319 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-linux-arm'
+319 silly reify ]
+320 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-libvips-linuxmusl-x64
+321 silly reify mark deleted [
+321 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-libvips-linuxmusl-x64'
+321 silly reify ]
+322 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-libvips-linuxmusl-arm64
+323 silly reify mark deleted [
+323 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-libvips-linuxmusl-arm64'
+323 silly reify ]
+324 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-libvips-linux-x64
+325 silly reify mark deleted [
+325 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-libvips-linux-x64'
+325 silly reify ]
+326 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-libvips-linux-s390x
+327 silly reify mark deleted [
+327 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-libvips-linux-s390x'
+327 silly reify ]
+328 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-libvips-linux-ppc64
+329 silly reify mark deleted [
+329 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-libvips-linux-ppc64'
+329 silly reify ]
+330 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-libvips-linux-arm64
+331 silly reify mark deleted [
+331 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-libvips-linux-arm64'
+331 silly reify ]
+332 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-libvips-linux-arm
+333 silly reify mark deleted [
+333 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-libvips-linux-arm'
+333 silly reify ]
+334 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-libvips-darwin-x64
+335 silly reify mark deleted [
+335 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-libvips-darwin-x64'
+335 silly reify ]
+336 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-libvips-darwin-arm64
+337 silly reify mark deleted [
+337 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-libvips-darwin-arm64'
+337 silly reify ]
+338 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-darwin-x64
+339 silly reify mark deleted [
+339 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-darwin-x64'
+339 silly reify ]
+340 verbose reify failed optional dependency C:\Devine Projects\labisengineer7-frontend\node_modules\@img\sharp-darwin-arm64
+341 silly reify mark deleted [
+341 silly reify   'C:\\Devine Projects\\labisengineer7-frontend\\node_modules\\@img\\sharp-darwin-arm64'
+341 silly reify ]
+342 http cache d3-time-format@https://registry.npmjs.org/d3-time-format/-/d3-time-format-4.1.0.tgz 0ms (cache hit)
+343 http cache d3-format@https://registry.npmjs.org/d3-format/-/d3-format-3.1.0.tgz 0ms (cache hit)
+344 http cache @types/d3-path@https://registry.npmjs.org/@types/d3-path/-/d3-path-3.1.1.tgz 0ms (cache hit)
+345 http cache @types/d3-color@https://registry.npmjs.org/@types/d3-color/-/d3-color-3.1.3.tgz 0ms (cache hit)
+346 http cache internmap@https://registry.npmjs.org/internmap/-/internmap-2.0.3.tgz 0ms (cache hit)
+347 http cache d3-path@https://registry.npmjs.org/d3-path/-/d3-path-3.1.0.tgz 0ms (cache hit)
+348 http cache d3-color@https://registry.npmjs.org/d3-color/-/d3-color-3.1.0.tgz 0ms (cache hit)
+349 http cache d3-timer@https://registry.npmjs.org/d3-timer/-/d3-timer-3.0.1.tgz 0ms (cache hit)
+350 http cache d3-shape@https://registry.npmjs.org/d3-shape/-/d3-shape-3.2.0.tgz 0ms (cache hit)
+351 http cache d3-scale@https://registry.npmjs.org/d3-scale/-/d3-scale-4.0.2.tgz 0ms (cache hit)
+352 http cache @types/d3-timer@https://registry.npmjs.org/@types/d3-timer/-/d3-timer-3.0.2.tgz 0ms (cache hit)
+353 http cache d3-time@https://registry.npmjs.org/d3-time/-/d3-time-3.1.0.tgz 0ms (cache hit)
+354 http cache @types/d3-time@https://registry.npmjs.org/@types/d3-time/-/d3-time-3.0.4.tgz 0ms (cache hit)
+355 http cache d3-interpolate@https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-3.0.1.tgz 0ms (cache hit)
+356 http cache d3-array@https://registry.npmjs.org/d3-array/-/d3-array-3.2.4.tgz 0ms (cache hit)
+357 http cache @types/d3-scale@https://registry.npmjs.org/@types/d3-scale/-/d3-scale-4.0.9.tgz 0ms (cache hit)
+358 http cache d3-ease@https://registry.npmjs.org/d3-ease/-/d3-ease-3.0.1.tgz 0ms (cache hit)
+359 http cache @types/d3-shape@https://registry.npmjs.org/@types/d3-shape/-/d3-shape-3.1.7.tgz 0ms (cache hit)
+360 http cache @types/d3-interpolate@https://registry.npmjs.org/@types/d3-interpolate/-/d3-interpolate-3.0.4.tgz 0ms (cache hit)
+361 http cache redux-thunk@https://registry.npmjs.org/redux-thunk/-/redux-thunk-3.1.0.tgz 0ms (cache hit)
+362 http cache @types/d3-array@https://registry.npmjs.org/@types/d3-array/-/d3-array-3.2.1.tgz 0ms (cache hit)
+363 http cache @types/d3-ease@https://registry.npmjs.org/@types/d3-ease/-/d3-ease-3.0.2.tgz 0ms (cache hit)
+364 http cache @types/use-sync-external-store@https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.6.tgz 0ms (cache hit)
+365 http cache redux@https://registry.npmjs.org/redux/-/redux-5.0.1.tgz 0ms (cache hit)
+366 http cache @standard-schema/utils@https://registry.npmjs.org/@standard-schema/utils/-/utils-0.3.0.tgz 0ms (cache hit)
+367 http cache victory-vendor@https://registry.npmjs.org/victory-vendor/-/victory-vendor-37.3.6.tgz 0ms (cache hit)
+368 http cache @standard-schema/spec@https://registry.npmjs.org/@standard-schema/spec/-/spec-1.0.0.tgz 0ms (cache hit)
+369 http cache use-sync-external-store@https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.5.0.tgz 0ms (cache hit)
+370 http cache tiny-invariant@https://registry.npmjs.org/tiny-invariant/-/tiny-invariant-1.3.3.tgz 0ms (cache hit)
+371 http cache immer@https://registry.npmjs.org/immer/-/immer-10.1.1.tgz 0ms (cache hit)
+372 http cache react-redux@https://registry.npmjs.org/react-redux/-/react-redux-9.2.0.tgz 0ms (cache hit)
+373 http cache eventemitter3@https://registry.npmjs.org/eventemitter3/-/eventemitter3-5.0.1.tgz 0ms (cache hit)
+374 http cache decimal.js-light@https://registry.npmjs.org/decimal.js-light/-/decimal.js-light-2.5.1.tgz 0ms (cache hit)
+375 http cache reselect@https://registry.npmjs.org/reselect/-/reselect-5.1.1.tgz 0ms (cache hit)
+376 http cache @reduxjs/toolkit@https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-2.8.2.tgz 0ms (cache hit)
+377 http cache es-toolkit@https://registry.npmjs.org/es-toolkit/-/es-toolkit-1.39.5.tgz 0ms (cache hit)
+378 silly tarball no local data for d3-time-format@https://registry.npmjs.org/d3-time-format/-/d3-time-format-4.1.0.tgz. Extracting by manifest.
+379 silly tarball no local data for d3-format@https://registry.npmjs.org/d3-format/-/d3-format-3.1.0.tgz. Extracting by manifest.
+380 silly tarball no local data for @types/d3-path@https://registry.npmjs.org/@types/d3-path/-/d3-path-3.1.1.tgz. Extracting by manifest.
+381 silly tarball no local data for @types/d3-color@https://registry.npmjs.org/@types/d3-color/-/d3-color-3.1.3.tgz. Extracting by manifest.
+382 silly tarball no local data for internmap@https://registry.npmjs.org/internmap/-/internmap-2.0.3.tgz. Extracting by manifest.
+383 silly tarball no local data for d3-path@https://registry.npmjs.org/d3-path/-/d3-path-3.1.0.tgz. Extracting by manifest.
+384 http cache clsx@https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz 0ms (cache hit)
+385 silly tarball no local data for d3-color@https://registry.npmjs.org/d3-color/-/d3-color-3.1.0.tgz. Extracting by manifest.
+386 silly tarball no local data for d3-timer@https://registry.npmjs.org/d3-timer/-/d3-timer-3.0.1.tgz. Extracting by manifest.
+387 silly tarball no local data for d3-shape@https://registry.npmjs.org/d3-shape/-/d3-shape-3.2.0.tgz. Extracting by manifest.
+388 silly tarball no local data for d3-scale@https://registry.npmjs.org/d3-scale/-/d3-scale-4.0.2.tgz. Extracting by manifest.
+389 silly tarball no local data for @types/d3-timer@https://registry.npmjs.org/@types/d3-timer/-/d3-timer-3.0.2.tgz. Extracting by manifest.
+390 silly tarball no local data for d3-time@https://registry.npmjs.org/d3-time/-/d3-time-3.1.0.tgz. Extracting by manifest.
+391 silly tarball no local data for @types/d3-time@https://registry.npmjs.org/@types/d3-time/-/d3-time-3.0.4.tgz. Extracting by manifest.
+392 silly tarball no local data for d3-interpolate@https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-3.0.1.tgz. Extracting by manifest.
+393 silly tarball no local data for d3-array@https://registry.npmjs.org/d3-array/-/d3-array-3.2.4.tgz. Extracting by manifest.
+394 silly tarball no local data for @types/d3-scale@https://registry.npmjs.org/@types/d3-scale/-/d3-scale-4.0.9.tgz. Extracting by manifest.
+395 http cache recharts@https://registry.npmjs.org/recharts/-/recharts-3.0.2.tgz 0ms (cache hit)
+396 silly tarball no local data for d3-ease@https://registry.npmjs.org/d3-ease/-/d3-ease-3.0.1.tgz. Extracting by manifest.
+397 silly tarball no local data for @types/d3-shape@https://registry.npmjs.org/@types/d3-shape/-/d3-shape-3.1.7.tgz. Extracting by manifest.
+398 silly tarball no local data for @types/d3-interpolate@https://registry.npmjs.org/@types/d3-interpolate/-/d3-interpolate-3.0.4.tgz. Extracting by manifest.
+399 silly tarball no local data for redux-thunk@https://registry.npmjs.org/redux-thunk/-/redux-thunk-3.1.0.tgz. Extracting by manifest.
+400 silly tarball no local data for @types/d3-array@https://registry.npmjs.org/@types/d3-array/-/d3-array-3.2.1.tgz. Extracting by manifest.
+401 silly tarball no local data for @types/d3-ease@https://registry.npmjs.org/@types/d3-ease/-/d3-ease-3.0.2.tgz. Extracting by manifest.
+402 silly tarball no local data for @types/use-sync-external-store@https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.6.tgz. Extracting by manifest.
+403 silly tarball no local data for redux@https://registry.npmjs.org/redux/-/redux-5.0.1.tgz. Extracting by manifest.
+404 silly tarball no local data for @standard-schema/utils@https://registry.npmjs.org/@standard-schema/utils/-/utils-0.3.0.tgz. Extracting by manifest.
+405 silly tarball no local data for victory-vendor@https://registry.npmjs.org/victory-vendor/-/victory-vendor-37.3.6.tgz. Extracting by manifest.
+406 silly tarball no local data for @standard-schema/spec@https://registry.npmjs.org/@standard-schema/spec/-/spec-1.0.0.tgz. Extracting by manifest.
+407 silly tarball no local data for use-sync-external-store@https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.5.0.tgz. Extracting by manifest.
+408 silly tarball no local data for tiny-invariant@https://registry.npmjs.org/tiny-invariant/-/tiny-invariant-1.3.3.tgz. Extracting by manifest.
+409 silly tarball no local data for immer@https://registry.npmjs.org/immer/-/immer-10.1.1.tgz. Extracting by manifest.
+410 silly tarball no local data for react-redux@https://registry.npmjs.org/react-redux/-/react-redux-9.2.0.tgz. Extracting by manifest.
+411 silly tarball no local data for eventemitter3@https://registry.npmjs.org/eventemitter3/-/eventemitter3-5.0.1.tgz. Extracting by manifest.
+412 silly tarball no local data for decimal.js-light@https://registry.npmjs.org/decimal.js-light/-/decimal.js-light-2.5.1.tgz. Extracting by manifest.
+413 silly tarball no local data for reselect@https://registry.npmjs.org/reselect/-/reselect-5.1.1.tgz. Extracting by manifest.
+414 silly tarball no local data for @reduxjs/toolkit@https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-2.8.2.tgz. Extracting by manifest.
+415 silly tarball no local data for es-toolkit@https://registry.npmjs.org/es-toolkit/-/es-toolkit-1.39.5.tgz. Extracting by manifest.
+416 silly tarball no local data for clsx@https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz. Extracting by manifest.
+417 silly tarball no local data for recharts@https://registry.npmjs.org/recharts/-/recharts-3.0.2.tgz. Extracting by manifest.
+418 http fetch GET 200 https://registry.npmjs.org/d3-color/-/d3-color-3.1.0.tgz 82ms (cache miss)
+419 http fetch GET 200 https://registry.npmjs.org/internmap/-/internmap-2.0.3.tgz 84ms (cache miss)
+420 http fetch GET 200 https://registry.npmjs.org/d3-path/-/d3-path-3.1.0.tgz 89ms (cache miss)
+421 http fetch GET 200 https://registry.npmjs.org/d3-timer/-/d3-timer-3.0.1.tgz 103ms (cache miss)
+422 http fetch GET 200 https://registry.npmjs.org/redux-thunk/-/redux-thunk-3.1.0.tgz 102ms (cache miss)
+423 http fetch GET 200 https://registry.npmjs.org/d3-time/-/d3-time-3.1.0.tgz 191ms (cache miss)
+424 http fetch GET 200 https://registry.npmjs.org/@standard-schema/utils/-/utils-0.3.0.tgz 200ms (cache miss)
+425 http fetch GET 200 https://registry.npmjs.org/d3-ease/-/d3-ease-3.0.1.tgz 203ms (cache miss)
+426 http fetch GET 200 https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.5.0.tgz 202ms (cache miss)
+427 http fetch GET 200 https://registry.npmjs.org/tiny-invariant/-/tiny-invariant-1.3.3.tgz 245ms (cache miss)
+428 http fetch GET 200 https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-3.0.1.tgz 311ms (cache miss)
+429 http fetch GET 200 https://registry.npmjs.org/d3-scale/-/d3-scale-4.0.2.tgz 317ms (cache miss)
+430 http fetch GET 200 https://registry.npmjs.org/@types/d3-time/-/d3-time-3.0.4.tgz 319ms (cache miss)
+431 http fetch GET 200 https://registry.npmjs.org/eventemitter3/-/eventemitter3-5.0.1.tgz 325ms (cache miss)
+432 http fetch GET 200 https://registry.npmjs.org/@types/d3-interpolate/-/d3-interpolate-3.0.4.tgz 332ms (cache miss)
+433 http fetch GET 200 https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.6.tgz 344ms (cache miss)
+434 http fetch GET 200 https://registry.npmjs.org/@types/d3-array/-/d3-array-3.2.1.tgz 383ms (cache miss)
+435 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 410ms
+436 silly audit report {}
+437 http fetch GET 200 https://registry.npmjs.org/@types/d3-scale/-/d3-scale-4.0.9.tgz 396ms (cache miss)
+438 http fetch GET 200 https://registry.npmjs.org/@types/d3-shape/-/d3-shape-3.1.7.tgz 418ms (cache miss)
+439 http fetch GET 200 https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz 412ms (cache miss)
+440 http fetch GET 200 https://registry.npmjs.org/@types/d3-timer/-/d3-timer-3.0.2.tgz 422ms (cache miss)
+441 http fetch GET 200 https://registry.npmjs.org/@types/d3-color/-/d3-color-3.1.3.tgz 427ms (cache miss)
+442 http fetch GET 200 https://registry.npmjs.org/decimal.js-light/-/decimal.js-light-2.5.1.tgz 432ms (cache miss)
+443 http fetch GET 200 https://registry.npmjs.org/d3-time-format/-/d3-time-format-4.1.0.tgz 443ms (cache miss)
+444 http fetch GET 200 https://registry.npmjs.org/redux/-/redux-5.0.1.tgz 487ms (cache miss)
+445 http fetch GET 200 https://registry.npmjs.org/d3-shape/-/d3-shape-3.2.0.tgz 529ms (cache miss)
+446 http fetch GET 200 https://registry.npmjs.org/immer/-/immer-10.1.1.tgz 544ms (cache miss)
+447 http fetch GET 200 https://registry.npmjs.org/d3-array/-/d3-array-3.2.4.tgz 571ms (cache miss)
+448 http fetch GET 200 https://registry.npmjs.org/d3-format/-/d3-format-3.1.0.tgz 590ms (cache miss)
+449 http fetch GET 200 https://registry.npmjs.org/reselect/-/reselect-5.1.1.tgz 586ms (cache miss)
+450 http fetch GET 200 https://registry.npmjs.org/react-redux/-/react-redux-9.2.0.tgz 598ms (cache miss)
+451 http fetch GET 200 https://registry.npmjs.org/@types/d3-ease/-/d3-ease-3.0.2.tgz 607ms (cache miss)
+452 http fetch GET 200 https://registry.npmjs.org/@standard-schema/spec/-/spec-1.0.0.tgz 671ms (cache miss)
+453 http fetch GET 200 https://registry.npmjs.org/victory-vendor/-/victory-vendor-37.3.6.tgz 866ms (cache miss)
+454 http fetch GET 200 https://registry.npmjs.org/@types/d3-path/-/d3-path-3.1.1.tgz 892ms (cache miss)
+455 http fetch GET 200 https://registry.npmjs.org/recharts/-/recharts-3.0.2.tgz 1267ms (cache miss)
+456 http fetch GET 200 https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-2.8.2.tgz 1537ms (cache miss)
+457 http fetch GET 200 https://registry.npmjs.org/es-toolkit/-/es-toolkit-1.39.5.tgz 2376ms (cache miss)
+458 silly ADD node_modules/d3-path
+459 silly ADD node_modules/d3-time-format
+460 silly ADD node_modules/d3-format
+461 silly ADD node_modules/d3-color
+462 silly ADD node_modules/internmap
+463 silly ADD node_modules/@types/d3-path
+464 silly ADD node_modules/@types/d3-color
+465 silly ADD node_modules/d3-timer
+466 silly ADD node_modules/d3-time
+467 silly ADD node_modules/d3-shape
+468 silly ADD node_modules/d3-scale
+469 silly ADD node_modules/d3-interpolate
+470 silly ADD node_modules/d3-ease
+471 silly ADD node_modules/d3-array
+472 silly ADD node_modules/@types/d3-timer
+473 silly ADD node_modules/@types/d3-time
+474 silly ADD node_modules/@types/d3-shape
+475 silly ADD node_modules/@types/d3-scale
+476 silly ADD node_modules/@types/d3-interpolate
+477 silly ADD node_modules/@types/d3-ease
+478 silly ADD node_modules/@types/d3-array
+479 silly ADD node_modules/@types/use-sync-external-store
+480 silly ADD node_modules/redux-thunk
+481 silly ADD node_modules/redux
+482 silly ADD node_modules/@standard-schema/utils
+483 silly ADD node_modules/@standard-schema/spec
+484 silly ADD node_modules/victory-vendor
+485 silly ADD node_modules/use-sync-external-store
+486 silly ADD node_modules/tiny-invariant
+487 silly ADD node_modules/reselect
+488 silly ADD node_modules/react-redux
+489 silly ADD node_modules/immer
+490 silly ADD node_modules/eventemitter3
+491 silly ADD node_modules/es-toolkit
+492 silly ADD node_modules/decimal.js-light
+493 silly ADD node_modules/clsx
+494 silly ADD node_modules/@reduxjs/toolkit
+495 silly ADD node_modules/recharts
+496 silly ADD
+497 silly ADD
+498 silly ADD
+499 silly ADD
+500 silly ADD
+501 silly ADD
+502 silly ADD
+503 silly ADD
+504 silly ADD
+505 silly ADD
+506 silly ADD
+507 silly ADD
+508 silly ADD
+509 silly ADD
+510 silly ADD
+511 silly ADD
+512 silly ADD
+513 silly ADD
+514 silly ADD
+515 silly ADD
+516 silly ADD
+517 silly ADD
+518 silly ADD
+519 silly ADD
+520 silly ADD
+521 silly ADD
+522 silly ADD
+523 silly ADD
+524 silly ADD
+525 silly ADD
+526 silly ADD
+527 silly ADD
+528 silly ADD
+529 silly ADD
+530 silly ADD
+531 silly ADD
+532 silly ADD
+533 silly ADD
+534 silly ADD
+535 silly ADD
+536 silly ADD
+537 silly ADD
+538 silly ADD
+539 silly ADD
+540 silly ADD
+541 silly ADD
+542 verbose cwd C:\Devine Projects\labisengineer7-frontend
+543 verbose os Windows_NT 10.0.26100
+544 verbose node v22.16.0
+545 verbose npm  v10.9.2
+546 verbose exit 0
+547 info ok
