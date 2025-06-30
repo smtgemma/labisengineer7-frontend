@@ -45,10 +45,10 @@ export default function SimpleActivityFeedTable() {
         <div className="min-w-[700px]">
           <div className="bg-primary px-6 rounded-t-lg">
             <div className="grid grid-cols-12 gap-4 py-3 text-white  text-md lg:text-xl ">
-              <div className="col-span-3 flex">Date & Time <CgArrowsV className="my-auto ml-1" /></div>
-              <div className="col-span-2 flex">User Name <CgArrowsV className="my-auto ml-1" /></div>
-              <div className="col-span-4   flex">Email <CgArrowsV className="my-auto ml-1" /></div>
-              <div className="col-span-3 flex">Action <CgArrowsV className="my-auto ml-1" /></div>
+              <div className="col-span-3 flex  items-center md:justify-start ">Date & Time </div>
+              <div className="col-span-3 flex  items-center">User Name <CgArrowsV className="my-auto ml-1" /></div>
+              <div className="col-span-3  flex  items-center">Email <CgArrowsV className="my-auto ml-1" /></div>
+              <div className="col-span-3 flex  items-center">Action <CgArrowsV className="my-auto ml-1" /></div>
             </div>
           </div>
 

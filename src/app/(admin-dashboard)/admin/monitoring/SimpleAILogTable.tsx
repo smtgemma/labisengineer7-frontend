@@ -54,7 +54,7 @@ const ActionButton = () => (
 
 export default function SimpleAILogTable() {
   return (
-    <div className="md:px-12 min-h-screen mt-6">
+    <div className="md:px-12 min-h-screen mt-9">
       {/* Table Title */}
       <div className="py-4 border-gray-200 flex justify-between">
         <h2 className="text-lg md:text-[32px] font-semibold text-gray-900">AI Log Table</h2>
@@ -72,12 +72,12 @@ export default function SimpleAILogTable() {
     {/* Table Header */}
     <div className="bg-primary px-6 rounded-t-lg">
       <div className="grid grid-cols-12 gap-4 py-3 text-white text-md lg:text-xl ">
-        <div className="col-span-2 flex">Timestamp <CgArrowsV className="my-auto ml-1" /></div>
-        <div className="col-span-2 flex">User <CgArrowsV className="my-auto ml-1" /></div>
-        <div className="col-span-2 flex">Project <CgArrowsV className="my-auto ml-1" /></div>
-        <div className="col-span-2 flex">Action <CgArrowsV className="my-auto ml-1" /></div>
-        <div className="col-span-2 flex">Status <CgArrowsV className="my-auto ml-1" /></div>
-        <div className="col-span-2 flex">Notes <CgArrowsV className="my-auto ml-1" /></div>
+        <div className="col-span-2 flex items-center">Timestamp <CgArrowsV className="my-auto ml-1" /></div>
+        <div className="col-span-2 flex items-center">User <CgArrowsV className="my-auto ml-1" /></div>
+        <div className="col-span-2 flex items-center">Project <CgArrowsV className="my-auto ml-1" /></div>
+        <div className="col-span-2 flex items-center">Action <CgArrowsV className="my-auto ml-1" /></div>
+        <div className="col-span-2 flex items-center">Status <CgArrowsV className="my-auto ml-1" /></div>
+        <div className="col-span-2 flex items-center">Notes <CgArrowsV className="my-auto ml-1" /></div>
       </div>
     </div>
 
