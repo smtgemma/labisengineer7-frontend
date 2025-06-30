@@ -29,7 +29,7 @@ export default function StepTextBlock({
 
 
     const [endClass, setEndClass] = useState("");
-    console.log(stepNumber?.split(" ")[1], "Get your number here")
+
     const stepNum = Number(stepNumber?.split(" ")[1]);
 
     useEffect(() => {

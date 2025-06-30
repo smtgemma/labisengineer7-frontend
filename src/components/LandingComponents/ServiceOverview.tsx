@@ -50,7 +50,7 @@ export default function ServicesOverview() {
 
                     <div className="grid gap-6 grid-cols-1 lg:grid-cols-2 ">
                         {services.map((service, i) => (
-                          <ServiceOverviewCard service={service}/>
+                          <ServiceOverviewCard key={service.title} service={service}/>
 
                         ))}
                     </div>
