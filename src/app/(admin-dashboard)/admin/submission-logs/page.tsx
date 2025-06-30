@@ -1,11 +1,14 @@
-import React from 'react';
+import React from 'react'
+import SimpleAILogTable from '../monitoring/SimpleAILogTable'
+import OverviewCards from '../overview/OverviewCard'
+import AiExtractionChart from '../overview/AiExtractionChart'
+import SimpleSubmissionLogsTable from './SimpleSubmissionLogsTable'
 
-const page = () => {
-    return (
-        <div>
-            submission-logs
-        </div>
-    );
-};
+export default function page() {
+  return (
+    <div>
 
-export default page;
+     <SimpleSubmissionLogsTable/>
+    </div>
+  )
+}

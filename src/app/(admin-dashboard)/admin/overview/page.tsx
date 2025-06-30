@@ -1,7 +1,9 @@
-import ActivityFeed from "./ActivityFeed";
+import SimpleActivityFeedTable from "./ActivityFeed";
+
 import AiExtractionChart from "./AiExtractionChart";
 
 import OverviewCards from "./OverviewCard";
+
 
 
 export default function DashboardPage() {
@@ -10,10 +12,10 @@ export default function DashboardPage() {
       <div className="">
         
         <OverviewCards />
-        <AiExtractionChart />
+        <AiExtractionChart title=""/>
         
         
-        <ActivityFeed />
+        <SimpleActivityFeedTable/>
       </div>
     </main>
   );

@@ -87,7 +87,7 @@ const ArrowDot: React.FC<ArrowDotProps> = (props) => {
   return null;
 };
 
-export default function AiExtractionChart() {
+export default function AiExtractionChart({ title }: { title: string }) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -113,15 +113,22 @@ export default function AiExtractionChart() {
 
       <div className='flex flex-col sm:flex-row justify-between items-center mb-4 gap-4 md:gap-0'>
 
-        <select
-          id='activityType'
+        {
+          title != "AI usage over time" ? (<select
+            id='activityType'
 
-          className=' rounded-md  md:text-2xl font-semibold focus:outline-none  '
-        >
-          <option value='User Signups'>      AI Extraction Activity</option>
-          <option value='User Signups'>User Signups</option>
-          <option value='Documents by Service Type'>Documents by Service Type</option>
-        </select>
+            className=' rounded-md  md:text-2xl font-semibold focus:outline-none  '
+          >
+
+            <option value='User Signups'>      AI Extraction Activity</option>
+            <option value='User Signups'>User Signups</option>
+            <option value='Documents by Service Type'>Documents by Service Type</option>
+          </select>) : (<>
+            <h1 className=' rounded-md  md:text-2xl font-semibold focus:outline-none  '>{title}</h1>
+          </>)
+        }
+
+
 
 
         <ButtonGlobal title='Last 30 days' />

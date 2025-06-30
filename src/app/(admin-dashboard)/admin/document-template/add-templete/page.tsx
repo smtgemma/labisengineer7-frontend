@@ -1,10 +1,11 @@
 import React from 'react'
-import SimpleUsersTable from './UserAccount'
+import AddNewTemplateCard from '../NewTemplete'
+
 
 export default function page() {
   return (
     <div>
-        <SimpleUsersTable/>
+        <AddNewTemplateCard/>
     </div>
   )
 }
