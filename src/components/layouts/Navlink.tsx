@@ -105,23 +105,23 @@ export const DashBoardLink = [
   // name is services but will be dashboard
   {
     name: "Service",
-    href: "/dashboard",
+    href: "/new-project",
   },
   {
     name: "Project",
-    href: "/dashboard/project",
+    href: "/projects",
   },
   {
     name: "Subscription",
-    href: "/dashboard/subscription",
+    href: "/subscription",
   },
   {
     name: "Help/Guides",
-    href: "/dashboard/helps-guides",
+    href: "/guidelines",
   },
   {
     name: "Profile ",
-    href: "/dashboard/profile ",
+    href: "/admin-profile ",
     // icon: GoPlus,
   },
 ];

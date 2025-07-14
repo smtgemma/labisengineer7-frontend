@@ -11,6 +11,7 @@ import {
   Sun,
 } from "lucide-react";
 import Header from "@/components/shared/Header/Header";
+import { useRouter } from "next/navigation";
 
 interface SubcategoryOption {
   id: string;
@@ -166,6 +167,8 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
     },
   ]);
 
+  const navigate = useRouter();
+
   const toggleOption = (categoryId: string, optionId: string) => {
     setCategories((prevCategories) =>
       prevCategories.map((category) =>
@@ -185,7 +188,6 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
 
   const handleSave = () => {
     const selectedOptions: { [categoryId: string]: string[] } = {};
-
     categories.forEach((category) => {
       const selected = category.options
         .filter((option) => option.selected)
@@ -198,10 +200,13 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
 
     console.log("Selected options:", selectedOptions);
     onSave?.(selectedOptions);
+    navigate.push("/create-project");
   };
 
   return (
-    <div className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen ${className}`}>
+    <div
+      className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen ${className}`}
+    >
       <Header title="Select Multiple Subcategory" />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">

@@ -1,11 +1,12 @@
-import React from 'react';
+import SigninForm from "@/components/authentcatoin/signinForm";
+import React from "react";
 
 const page = () => {
-    return (
-        <div>
-            SignIn
-        </div>
-    );
+  return (
+    <div>
+      <SigninForm />
+    </div>
+  );
 };
 
-export default page; 
+export default page;

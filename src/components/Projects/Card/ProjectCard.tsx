@@ -1,6 +1,7 @@
 import React from "react";
 import img from "@/assets/project-card/project-card-img.jpg";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProjectCardProps {
   // image: string;
@@ -39,9 +40,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </p>
 
           <div>
-            <button className="bg-[#017AFF] hover:bg-blue-600 text-white px-12 py-5 rounded-2xl font-semibold text-xl transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105">
+            <Link
+              href={"/service/sub-category"}
+              className="bg-[#017AFF] hover:bg-blue-600 text-white px-12 py-5 rounded-2xl font-semibold text-xl transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+            >
               Begin Project
-            </button>
+            </Link>
           </div>
         </div>
       </div>

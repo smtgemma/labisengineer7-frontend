@@ -28,13 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={openSans.variable}
-      >
+      <body className={openSans.variable}>
         <Toaster position="top-center" expand={true} richColors />
-        <Suspense fallback={<Loading />}>
-          {children}
-        </Suspense>
+        <Suspense fallback={<Loading />}>{children}</Suspense>
       </body>
     </html>
   );

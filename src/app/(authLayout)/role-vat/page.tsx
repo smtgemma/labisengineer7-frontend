@@ -1,10 +1,10 @@
-import SignupForm from "@/components/authentcatoin/signUpForm";
+import RoleVATForm from "@/components/authentcatoin/role/RoleVATForm";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <SignupForm />
+      <RoleVATForm />
     </div>
   );
 };
