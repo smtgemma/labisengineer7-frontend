@@ -5,6 +5,7 @@ import { openSans } from "@/fonts/fonts";
 import { Suspense } from "react";
 import Loading from "@/components/Others/Loading";
 import { Toaster } from "sonner";
+import StoreProvider from "./StoreProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +31,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={openSans.variable}>
         <Toaster position="top-center" expand={true} richColors />
-        <Suspense fallback={<Loading />}>{children}</Suspense>
+        <StoreProvider>
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+        </StoreProvider>
       </body>
     </html>
   );

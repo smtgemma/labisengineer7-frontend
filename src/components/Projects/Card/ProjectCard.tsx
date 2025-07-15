@@ -20,29 +20,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {/* Image Section */}
         <div className="flex-shrink-0">
           <Image
-            width={320}
-            height={320}
+            width={220}
+            height={220}
             src={img}
             alt="Modern kitchen interior"
-            className="w-80 h-80 object-cover rounded-2xl"
+            className=" object-cover rounded-2xl"
             style={{ aspectRatio: "1/1" }}
           />
         </div>
 
         {/* Content Section */}
         <div className="flex-1 flex flex-col justify-center">
-          <h1 className="text-5xl font-bold text-black mb-8 leading-tight tracking-tight">
+          <h1 className="text-2xl font-bold text-black mb-5 leading-tight tracking-tight">
             {title}
           </h1>
 
-          <p className="text-gray-700 text-xl leading-relaxed mb-12 font-normal">
+          <p className="text-gray-700 text-xl leading-relaxed mb-8 font-normal">
             {description}
           </p>
 
           <div>
             <Link
               href={"/service/sub-category"}
-              className="bg-[#017AFF] hover:bg-blue-600 text-white px-12 py-5 rounded-2xl font-semibold text-xl transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+              className="bg-[#017AFF] hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold text-base transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
             >
               Begin Project
             </Link>
