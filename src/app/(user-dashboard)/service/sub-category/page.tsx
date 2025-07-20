@@ -28,13 +28,9 @@ interface Category {
 
 interface MultiSelectSubcategoryProps {
   onSave?: (selectedOptions: { [categoryId: string]: string[] }) => void;
-  className?: string;
 }
 
-const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
-  onSave,
-  className = "",
-}) => {
+const MultiSelectSubcategory = () => {
   const [categories, setCategories] = useState<Category[]>([
     {
       id: "building-modifications",
@@ -199,14 +195,12 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
     });
 
     console.log("Selected options:", selectedOptions);
-    onSave?.(selectedOptions);
+
     navigate.push("/create-project");
   };
 
   return (
-    <div
-      className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen ${className}`}
-    >
+    <div className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen`}>
       <Header title="Select Multiple Subcategory" />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">

@@ -1,5 +1,18 @@
 import { baseUrlApi } from "@/redux/api/baseUrlApi";
 
+interface SignUpResponse {
+  message: string;
+  success?: string;
+}
+
+interface SignUpRequest {
+  message?: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 const authApi = baseUrlApi.injectEndpoints({
   endpoints: (build) => ({
     signUp: build.mutation({
@@ -10,38 +23,48 @@ const authApi = baseUrlApi.injectEndpoints({
       }),
     }),
 
+    // role change
+    RoleSetAndUpdate: build.mutation({
+      query: (roleData) => ({
+        url: "/users/update-role",
+        method: "POST",
+        body: roleData,
+      }),
+    }),
+
     // signIn
-    // signIn: build.mutation({
-    //   query: (signInUserData) => ({
-    //     url: "/auth/login",
-    //     method: "POST",
-    //     body: signInUserData,
-    //   }),
-    // }),
+    signIn: build.mutation({
+      query: (signInUserData) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: signInUserData,
+      }),
+    }),
 
     // forgetPassword
-    // forgetPassword: build.mutation({
-    //   query: (email) => ({
-    //     url: "/auth/forgot-password",
-    //     method: "POST",
-    //     body: email,
-    //   }),
-    // }),
+    forgetPassword: build.mutation({
+      query: (email) => ({
+        url: "/auth/forgot-password",
+        method: "POST",
+        body: email,
+      }),
+    }),
 
-    // forgetPassword
-    // resetPassword: build.mutation({
-    //   query: (resetData) => ({
-    //     url: "/auth/reset-password",
-    //     method: "POST",
-    //     body: resetData,
-    //   }),
-    // }),
+    // reset Password
+    resetPassword: build.mutation({
+      query: (resetData) => ({
+        url: "/auth/reset-password",
+        method: "POST",
+        body: resetData,
+      }),
+    }),
   }),
 });
 
 export const {
   useSignUpMutation,
-  // useSignInMutation,
-  // useForgetPasswordMutation,
-  // useResetPasswordMutation,
+  useSignInMutation,
+  useForgetPasswordMutation,
+  useResetPasswordMutation,
+  useRoleSetAndUpdateMutation,
 } = authApi;

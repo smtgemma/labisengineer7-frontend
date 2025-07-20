@@ -1,10 +1,11 @@
-import RoleTeeForm from "@/components/authentcatoin/role/RoleTeeForm";
+import RoleForm from "@/components/authentcatoin/role/RoleForm";
+
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <RoleTeeForm />
+      <RoleForm />
     </div>
   );
 };

@@ -1,10 +1,10 @@
-import RoleVATForm from "@/components/authentcatoin/role/RoleVATForm";
+import ResetPasswordForm from "@/components/authentcatoin/ForgotPasswordForm";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <RoleVATForm />
+      <ResetPasswordForm />
     </div>
   );
 };

@@ -4,6 +4,10 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import logoImg from "../../assets/landing-page/main-logo.png";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { useSignUpMutation } from "@/redux/features/auth/auth";
+import LoadingButton from "../shared/LoadingBtn/LoadingButton";
 
 type FormData = {
   firstName: string;
@@ -13,16 +17,47 @@ type FormData = {
   confirmPassword: string;
 };
 
+interface UserData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 export default function SignupForm() {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
+  const router = useRouter();
+
+  const [signUpUser, { isLoading }] = useSignUpMutation();
+
+  const onSubmit = async (data: FormData) => {
     console.log("Form Submitted", data);
+
+    const userData = {
+      firstName: data?.firstName,
+      lastName: data?.lastName,
+      email: data?.email,
+      password: data?.confirmPassword,
+    };
+    try {
+      const response = await signUpUser(userData).unwrap();
+      console.log(response);
+      if (response?.success) {
+        toast.success(response?.message);
+        router.push("/role");
+        reset();
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
   const password = watch("password");
@@ -134,7 +169,13 @@ export default function SignupForm() {
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition"
           >
-            Sign Up
+            {isLoading ? (
+              <>
+                <LoadingButton />
+              </>
+            ) : (
+              "Sign Up"
+            )}
           </button>
 
           <button
@@ -153,7 +194,7 @@ export default function SignupForm() {
           <p className="text-center text-sm mt-4">
             If you any account please{" "}
             <a
-              href="/login"
+              href="/signIn"
               className="text-blue-600 hover:underline font-medium"
             >
               Login

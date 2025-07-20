@@ -4,6 +4,12 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import logoImg from "../../assets/landing-page/main-logo.png";
+import { useSignInMutation } from "@/redux/features/auth/auth";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import LoadingButton from "../shared/LoadingBtn/LoadingButton";
+import { useState } from "react";
+import ForgotPasswordModal from "./forgotPassword/ForgotPasswordEmailModal";
 
 type FormData = {
   email: string;
@@ -14,12 +20,34 @@ export default function SigninForm() {
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
-    console.log("Form Submitted", data);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+
+  const router = useRouter();
+  const [sigInUser, { isLoading }] = useSignInMutation();
+
+  const onSubmit = async (data: FormData) => {
+    try {
+      const response = await sigInUser(data).unwrap();
+      console.log(response);
+      if (response?.success) {
+        localStorage.setItem("accessToken", response?.data?.accessToken);
+        console.log(response?.data?.user?.role);
+        toast.success(response?.message);
+        if (response?.data?.user?.role === "SUPER_ADMIN") {
+          router.push("/admin");
+        } else {
+          router.push("/new-project");
+        }
+        reset();
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -76,12 +104,25 @@ export default function SigninForm() {
               <p className="error-text">{errors.password.message}</p>
             )}
           </div>
+          <button
+            type="button"
+            className="text-primary text-base underline cursor-pointer mb-3"
+            onClick={() => setModalOpen(true)}
+          >
+            Forget Password
+          </button>
 
           <button
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition"
           >
-            Signin
+            {isLoading ? (
+              <>
+                <LoadingButton />{" "}
+              </>
+            ) : (
+              "Sign In"
+            )}
           </button>
 
           <button
@@ -100,7 +141,7 @@ export default function SigninForm() {
           <p className="text-center text-sm mt-4">
             If you any account please{" "}
             <a
-              href="/login"
+              href="/signUp"
               className="text-blue-600 hover:underline font-medium"
             >
               SignUp
@@ -108,6 +149,10 @@ export default function SigninForm() {
           </p>
         </form>
       </div>
+      <ForgotPasswordModal
+        isModalOpen={isModalOpen}
+        setModalOpen={setModalOpen}
+      />
     </div>
   );
 }

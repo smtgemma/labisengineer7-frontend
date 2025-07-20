@@ -20,7 +20,7 @@ interface AdminProfileProps {
   className?: string;
 }
 
-const AdminProfile: React.FC<AdminProfileProps> = ({ className = "" }) => {
+const AdminProfile = () => {
   const {
     register,
     handleSubmit,
@@ -31,12 +31,12 @@ const AdminProfile: React.FC<AdminProfileProps> = ({ className = "" }) => {
     console.log("Admin profile updated:", data);
   };
 
-  const handleChangePassword = (data: AdminFormData) => {
-    console.log("Password change requested:", data);
-  };
+  // const handleChangePassword = (data: AdminFormData) => {
+  //   console.log("Password change requested:", data);
+  // };
 
   return (
-    <div className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen ${className}`}>
+    <div className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen`}>
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column */}
@@ -201,10 +201,7 @@ const AdminProfile: React.FC<AdminProfileProps> = ({ className = "" }) => {
                 If you wish to update your password, enter a new one below.
               </p>
 
-              <form
-                onSubmit={handleSubmit(handleChangePassword)}
-                className="space-y-4"
-              >
+              <form className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Current Password:

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { IoLogOut } from "react-icons/io5";
 import { LuChevronsLeft, LuChevronsRight } from "react-icons/lu";
 import {
@@ -11,6 +11,9 @@ import {
 } from "react-icons/md";
 import type { NavLink } from "../types";
 import Logo from "@/components/shared/Logo";
+import { toast } from "sonner";
+
+import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
 
 interface MainNavLinkProps {
   navLink: NavLink[];
@@ -29,6 +32,9 @@ export default function MainNavLink({
 }: MainNavLinkProps) {
   const pathname = usePathname();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const isActive = (href: string) => {
     const cleanHref = href.split("?")[0];
@@ -37,9 +43,15 @@ export default function MainNavLink({
   };
 
   const handleLogout = async () => {
-    console.log("Logging out...");
-  };
+    setIsLoading(true);
 
+    setTimeout(() => {
+      localStorage.removeItem("accessToken");
+      toast.success("Logged out successfully");
+      setIsLoading(false);
+      router.push("/signIn"); // optional redirect
+    }, 2000); // 2-second delay
+  };
   const toggleDropdown = (name: string) => {
     setOpenDropdown((prev) => (prev === name ? null : name));
   };
@@ -191,8 +203,7 @@ export default function MainNavLink({
           <div className="flex items-center gap-2">
             {/* Your SVG Logo here */}
 
-            <Logo height={78} width={212}/>
-           
+            <Logo height={78} width={212} />
           </div>
         )}
       </Link>
@@ -248,7 +259,13 @@ export default function MainNavLink({
             <span
               className={`text-nowrap ${dark ? "text-white" : "text-black"}`}
             >
-              Log Out
+              {isLoading ? (
+                <>
+                  <LoadingButton />
+                </>
+              ) : (
+                "Log Out"
+              )}
             </span>
           )}
         </div>

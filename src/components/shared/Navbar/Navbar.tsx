@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import logo from "@/assets/landing-page/main-logo.png"
+import logo from "@/assets/landing-page/main-logo.png";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react'; // Optional icons
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { Menu, X } from "lucide-react"; // Optional icons
 import Logo from "../Logo";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: 'About Us', href: '#about' },
-    { name: 'Service', href: '#service' },
-    { name: 'How it Works', href: '#how-it-works' },
-    { name: 'Testimonials', href: '#testimonials' },
+    { name: "About Us", href: "#about" },
+    { name: "Service", href: "#service" },
+    { name: "How it Works", href: "#works" },
+    { name: "Testimonials", href: "#testimonials" },
   ];
 
   return (
@@ -24,7 +24,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="flex-shrink-0">
           <Link href="/">
-            <Logo/>
+            <Logo />
           </Link>
         </div>
 
@@ -44,13 +44,13 @@ const Navbar = () => {
         {/* Buttons */}
         <div className="hidden lg:flex space-x-4">
           <Link
-            href="/login"
+            href="/signIn"
             className="border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50 transition"
           >
             Login
           </Link>
           <Link
-            href="/register"
+            href="/signUp"
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
           >
             Register
@@ -80,13 +80,13 @@ const Navbar = () => {
           ))}
           <div className="flex flex-col space-y-2 pt-2">
             <Link
-              href="/login"
+              href="/signIn"
               className="border border-blue-600 text-blue-600 px-4 py-2 rounded text-center"
             >
               Login
             </Link>
             <Link
-              href="/register"
+              href="/signUp"
               className="bg-blue-600 text-white px-4 py-2 rounded text-center"
             >
               Register
