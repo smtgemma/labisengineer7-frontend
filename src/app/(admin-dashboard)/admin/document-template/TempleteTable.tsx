@@ -30,6 +30,7 @@ const ActionButton = () => (
 );
 
 export default function SimpleTemplatesTable() {
+  console.log("yes");
   return (
     <div id="testimonials" className="md:px-12 min-h-screen">
       {/* Header */}
