@@ -1,7 +1,15 @@
+"use client";
 import React from "react";
 import { Check } from "lucide-react";
+import { useCreateSubscirptionPlansMutation } from "@/redux/features/subscription/subscripionPlanSlice";
+import { toast } from "sonner";
+import tokenCatch from "@/lib/token";
+import { setSubscriptionData } from "@/redux/features/subscription/subscriptionDataSlice";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 interface PricingCardProps {
+  id: string;
   price: string;
   period: string;
   planName: string;
@@ -14,6 +22,7 @@ interface PricingCardProps {
 }
 
 const PricingCard: React.FC<PricingCardProps> = ({
+  id,
   price,
   period,
   planName,
@@ -24,12 +33,54 @@ const PricingCard: React.FC<PricingCardProps> = ({
   isSelected = false,
   className = "",
 }) => {
-  const getButtonStyles = () => {
-    if (buttonVariant === "primary") {
-      return "bg-[#017AFF] hover:bg-blue-600 text-white";
+  const [createSubscription, { isLoading: btnLoading }] =
+    useCreateSubscirptionPlansMutation();
+
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const accessToken = tokenCatch();
+
+  // create subscription
+  const handlePayment = async () => {
+    const planIdData = { planId: id };
+    try {
+      const response = await createSubscription({
+        planIdData,
+        accessToken,
+      }).unwrap();
+      console.log(response);
+      if (response?.success) {
+        toast.success(response?.message);
+        router.push("/billing-information");
+        dispatch(setSubscriptionData(response.data));
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message);
     }
-    return "bg-green-600 hover:bg-green-700 text-white";
   };
+
+  // const handleSubscriptionCreate = async (subscriptionId: string) => {
+  //   console.log(subscriptionId);
+
+  //   const planId = {
+  //     planId: subscriptionId,
+  //   };
+  //   console.log(planId, token);
+  //   try {
+  //     const response = await createSubscripton({
+  //       planId,
+  //       token,
+  //     }).unwrap();
+  //     console.log(response);
+  //     if (response?.success) {
+  //       toast.success(response?.message);
+  //     }
+  //   } catch (error: any) {
+  //     toast.error(error?.data?.message);
+  //   }
+  // };
 
   return (
     <div
@@ -80,7 +131,8 @@ const PricingCard: React.FC<PricingCardProps> = ({
 
       {/* Button */}
       <button
-        className={`w-full py-3 px-6 rounded-lg font-medium text-base transition-colors ${getButtonStyles()}`}
+        onClick={handlePayment}
+        className={`w-full py-3 cursor-pointer px-6 rounded-lg font-medium text-white text-base transition-colors bg-[#017AFF]`}
       >
         {buttonText}
       </button>

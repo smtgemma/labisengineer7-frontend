@@ -46,7 +46,7 @@ export default function SigninForm() {
       }
     } catch (error: any) {
       console.log(error);
-      toast.error(error.message);
+      toast.error(error.data.message);
     }
   };
 

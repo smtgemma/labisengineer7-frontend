@@ -8,7 +8,8 @@ import { toast } from "sonner";
 import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
 import { useState } from "react";
 import { useRoleSetAndUpdateMutation } from "@/redux/features/auth/auth";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 type RoleForm = {
   userType: string;
@@ -25,6 +26,9 @@ export default function RoleForm() {
 
   const [rolebase, setRolebase] = useState("engineer");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
+  console.log(email);
 
   const [rolePost, { isLoading }] = useRoleSetAndUpdateMutation();
   console.log(rolebase);
@@ -32,9 +36,10 @@ export default function RoleForm() {
   // tee registration
   const onSubmit = async (data: RoleForm) => {
     console.log("User role form data:", data);
+    const roleData = { ...data, email };
 
     try {
-      const response = await rolePost(data).unwrap();
+      const response = await rolePost(roleData).unwrap();
       console.log(response);
       if (response?.success) {
         toast.success(response?.message);

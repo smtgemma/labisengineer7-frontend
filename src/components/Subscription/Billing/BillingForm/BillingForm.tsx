@@ -3,17 +3,23 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { ChevronDown } from "lucide-react";
 
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
+import { useCreateBllingIngfoMutation } from "@/redux/features/subscription/subscripionPlanSlice";
+import tokenCatch from "@/lib/token";
+
 interface BillingFormData {
   firstName: string;
   lastName: string;
   phone: string;
   email: string;
-  countryRegion: string;
-  address: string;
+  country: string;
+  addressLine: string;
   city: string;
   state: string;
   zipCode: string;
-  additionalInformation: string;
+  additionalInfo: string;
 }
 
 interface BillingFormProps {
@@ -31,9 +37,24 @@ const BillingForm: React.FC<BillingFormProps> = ({
     formState: { errors },
   } = useForm<BillingFormData>();
 
-  const handleFormSubmit = (data: BillingFormData) => {
+  const router = useRouter();
+  const accessToken = tokenCatch();
+
+  const [bllingInfoPost, { isLoading }] = useCreateBllingIngfoMutation();
+
+  const handleFormSubmit = async (data: BillingFormData) => {
     console.log("Form submitted:", data);
-    onSubmit?.(data);
+    try {
+      const response = await bllingInfoPost({ data, accessToken }).unwrap();
+      console.log(response);
+      if (response?.success) {
+        toast.success(response?.message);
+        router.push("/subscription-pay");
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
   const countries = [
@@ -153,8 +174,8 @@ const BillingForm: React.FC<BillingFormProps> = ({
           <div className="relative">
             <select
               id="countryRegion"
-              {...register("countryRegion", {
-                required: "Country/Region is required",
+              {...register("country", {
+                required: "Country is required",
               })}
               className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all appearance-none pr-10"
             >
@@ -170,9 +191,9 @@ const BillingForm: React.FC<BillingFormProps> = ({
               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
             />
           </div>
-          {errors.countryRegion && (
+          {errors.country && (
             <p className="mt-1 text-sm text-red-600">
-              {errors.countryRegion.message}
+              {errors.country.message}
             </p>
           )}
         </div>
@@ -188,12 +209,12 @@ const BillingForm: React.FC<BillingFormProps> = ({
           <input
             type="text"
             id="address"
-            {...register("address", { required: "Address is required" })}
+            {...register("addressLine", { required: "Address is required" })}
             className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
           />
-          {errors.address && (
+          {errors.addressLine && (
             <p className="mt-1 text-sm text-red-600">
-              {errors.address.message}
+              {errors.addressLine.message}
             </p>
           )}
         </div>
@@ -255,18 +276,27 @@ const BillingForm: React.FC<BillingFormProps> = ({
             Additional Information
           </label>
           <textarea
-            id="additionalInformation"
-            {...register("additionalInformation")}
+            id="additionalInfo"
+            {...register("additionalInfo")}
             rows={4}
             className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
           />
         </div>
 
         {/* Security Notice */}
-        <div>
+        <div className="flex justify-between items-center">
           <p className="text-gray-600">
             Your billing information is securely stored and encrypted.
           </p>
+          <button className="py-3 cursor-pointer px-14 rounded-lg font-medium text-white text-base transition-colors bg-[#017AFF]">
+            {isLoading ? (
+              <>
+                <LoadingButton />
+              </>
+            ) : (
+              "Save & Continue"
+            )}
+          </button>
         </div>
       </form>
     </div>

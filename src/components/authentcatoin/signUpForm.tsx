@@ -51,7 +51,7 @@ export default function SignupForm() {
       console.log(response);
       if (response?.success) {
         toast.success(response?.message);
-        router.push("/role");
+        router.push(`/role?email=${"demo@gmail.com"}`);
         reset();
       }
     } catch (error: any) {

@@ -7,12 +7,14 @@ interface ProjectCardProps {
   // image: string;
   title: string;
   description: string;
+  id: string;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   // image,
   title,
   description,
+  id,
 }) => {
   return (
     <div className="bg-white rounded-3xl border-2 border-transparent hover:border-[#017AFF] overflow-hidden max-w-5xl mx-auto p-6">
