@@ -7,6 +7,7 @@ import tokenCatch from "@/lib/token";
 import { setSubscriptionData } from "@/redux/features/subscription/subscriptionDataSlice";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
+import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
 
 interface PricingCardProps {
   id: string;
@@ -134,7 +135,13 @@ const PricingCard: React.FC<PricingCardProps> = ({
         onClick={handlePayment}
         className={`w-full py-3 cursor-pointer px-6 rounded-lg font-medium text-white text-base transition-colors bg-[#017AFF]`}
       >
-        {buttonText}
+        {btnLoading ? (
+          <>
+            <LoadingButton />
+          </>
+        ) : (
+          buttonText
+        )}
       </button>
     </div>
   );
