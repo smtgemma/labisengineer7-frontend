@@ -35,8 +35,8 @@ export default function RoleForm() {
 
   // tee registration
   const onSubmit = async (data: RoleForm) => {
-    console.log("User role form data:", data);
     const roleData = { ...data, email };
+    console.log("User role form data:", roleData);
 
     try {
       const response = await rolePost(roleData).unwrap();

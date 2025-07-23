@@ -53,13 +53,15 @@ const BillingForm: React.FC<BillingFormProps> = ({
       }
     } catch (error: any) {
       console.log(error);
-      toast.error(error.message);
+      toast.error(error?.data?.message);
     }
   };
 
   const countries = [
     "United States",
     "Canada",
+    "AFGHANISTAN",
+    "AUSTRIA",
     "United Kingdom",
     "Germany",
     "France",
@@ -163,19 +165,19 @@ const BillingForm: React.FC<BillingFormProps> = ({
           </div>
         </div>
 
-        {/* Country/Region */}
+        {/* country/Region */}
         <div>
           <label
             htmlFor="countryRegion"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Country/Region
+            country/Region
           </label>
           <div className="relative">
             <select
               id="countryRegion"
               {...register("country", {
-                required: "Country is required",
+                required: "country is required",
               })}
               className="w-full px-4 py-3 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all appearance-none pr-10"
             >

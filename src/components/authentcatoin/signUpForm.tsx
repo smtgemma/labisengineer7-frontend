@@ -51,12 +51,12 @@ export default function SignupForm() {
       console.log(response);
       if (response?.success) {
         toast.success(response?.message);
-        router.push(`/role?email=${"demo@gmail.com"}`);
+        router.push(`/role?email=${response?.data?.email}`);
         reset();
       }
     } catch (error: any) {
       console.log(error);
-      toast.error(error.message);
+      toast.error(error?.data?.message);
     }
   };
 

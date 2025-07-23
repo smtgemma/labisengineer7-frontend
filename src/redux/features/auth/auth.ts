@@ -27,7 +27,7 @@ const authApi = baseUrlApi.injectEndpoints({
     RoleSetAndUpdate: build.mutation({
       query: (roleData) => ({
         url: "/users/update-role",
-        method: "POST",
+        method: "PATCH",
         body: roleData,
       }),
     }),

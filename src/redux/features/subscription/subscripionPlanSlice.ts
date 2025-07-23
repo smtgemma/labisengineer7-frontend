@@ -24,10 +24,10 @@ const subscriptionPlanApi = baseUrlApi.injectEndpoints({
     }),
     //  create bulling information Plans
     createBllingIngfo: build.mutation({
-      query: ({ BllingData, accessToken }) => ({
+      query: ({ data, accessToken }) => ({
         url: `/subscriptions/createBilling`,
         method: "POST",
-        body: BllingData,
+        body: data,
         headers: {
           Authorization: `${accessToken}`,
           "Content-Type": "application/json",
