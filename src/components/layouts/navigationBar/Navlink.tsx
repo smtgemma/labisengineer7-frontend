@@ -39,6 +39,10 @@ export default function MainNavLink({
   const isActive = (href: string) => {
     const cleanHref = href.split("?")[0];
     const cleanPathname = pathname.split("?")[0];
+
+    if (cleanHref === "/" || cleanHref === "/admin") {
+      return cleanPathname === cleanHref;
+    }
     return cleanPathname.startsWith(cleanHref);
   };
 
