@@ -17,7 +17,6 @@ const WorkflowStepper: React.FC<WorkflowStepperProps> = ({
   currentStep,
   className = "",
 }) => {
-  console.log(steps);
   return (
     <div className={`bg-white p-8 w-80 min-h-screen ${className}`}>
       <div className="space-y-8">

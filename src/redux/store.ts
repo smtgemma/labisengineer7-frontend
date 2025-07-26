@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { baseUrlApi } from "./api/baseUrlApi";
 import subscriptionDataReducer from "./features/subscription/subscriptionDataSlice";
+import aiExtractDataReducer from "./features/AI-intrigratoin/aiFileDataSlice";
 export const makeStore = () => {
   return configureStore({
     reducer: {
       subscriptionData: subscriptionDataReducer,
+      aiData: aiExtractDataReducer,
       [baseUrlApi.reducerPath]: baseUrlApi.reducer,
     },
 

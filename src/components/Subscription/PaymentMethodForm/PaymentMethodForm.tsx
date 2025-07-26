@@ -5,11 +5,31 @@ import { useForm } from "react-hook-form";
 import { ChevronDown } from "lucide-react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import PaymentForm from "./PaymentsForms";
+// import PaymentForm from "./PaymentsForms";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+// import CheckoutForm from "./PaymentsForms";
 
-export const stripePromise = loadStripe("your-publishable-key-here");
+const stripePromise = loadStripe(
+  "pk_test_51Rjz4GFKPqk0ANQJfDWcoTh1RTSw7n9olBmh4oHjhPzIBWVjDccdlBrnDWZCmo0aDzZbKvmPgciIC6AwWD0UsEKA00rvRugLwb"
+);
+
+interface Options {
+  mode: string;
+  amount: number;
+  currency: string;
+  appearance: {};
+}
+
+const options: Options = {
+  mode: "payment",
+  amount: 1099,
+  currency: "usd",
+  // Fully customizable with appearance API.
+  appearance: {
+    /*...*/
+  },
+};
 
 interface PaymentFormData {
   cardNumber: string;
@@ -61,9 +81,9 @@ const PaymentMethodForm: React.FC<PaymentMethodFormProps> = ({
       <div
         className={`bg-white h-fit rounded-lg border border-gray-200 p-6 max-w-md mx-auto ${className}`}
       >
-        <Elements stripe={stripePromise}>
-          <PaymentForm />
-        </Elements>
+        {/* <Elements stripe={stripePromise} options={options}>
+          <CheckoutForm />
+        </Elements> */}
         <h2 className="text-lg font-semibold text-gray-900 mb-6">
           Payment Method
         </h2>

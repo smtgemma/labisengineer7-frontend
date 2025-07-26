@@ -28,7 +28,7 @@ export default function NewProject() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
         {projects?.map((project: any, idx: number) => (
           <ProjectCard
-            title={project.serviceTitle}
+            title={project.serviceName}
             description={project.serviceDescription}
             id={project.createdById}
             key={idx}

@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Plus, Edit3 } from "lucide-react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { Owner as Owners } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 
 interface Owner {
   id: string;
@@ -24,6 +27,18 @@ const OwnerSelection: React.FC<OwnerSelectionProps> = ({
   const [editingOwner, setEditingOwner] = useState<Owner | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddingOwner, setIsAddingOwner] = useState(false);
+  const [isOwner, setIsOwner] = useState<Owners[] | null>(null);
+
+  const ownerData = useSelector((state: RootState) => state.aiData.aiDataState);
+
+  // useEffect(() => {
+  //   if (ownerData) {
+  //     const owners: Owners = ownerData.formatted_data?.first_owner;
+  //     setIsOwner([owners]);
+  //   }
+  // }, [ownerData]);
+
+  console.log(isOwner);
 
   const openAddOwnerModal = () => {
     const newOwner: Owner = {
@@ -99,8 +114,8 @@ const OwnerSelection: React.FC<OwnerSelectionProps> = ({
 
       {/* Owners Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-        {selectedOwners.map((owner, index) => (
-          <div key={owner.id} className="bg-gray-50 p-6 rounded-lg relative">
+        {isOwner?.map((owner: any, index) => (
+          <div key={index} className="bg-gray-50 p-6 rounded-lg relative">
             <button
               onClick={() => openEditModal(owner)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
@@ -116,14 +131,14 @@ const OwnerSelection: React.FC<OwnerSelectionProps> = ({
               <div className="flex justify-between items-center">
                 <label className="text-gray-700 font-medium">First Name:</label>
                 <span className="text-gray-900 font-medium">
-                  {owner.firstName || "Not set"}
+                  {owner.name || "Not set"}
                 </span>
               </div>
 
               <div className="flex justify-between items-center">
                 <label className="text-gray-700 font-medium">Surname:</label>
                 <span className="text-gray-900 font-medium">
-                  {owner.surname || "Not set"}
+                  {owner.last_name || "Not set"}
                 </span>
               </div>
 
@@ -132,14 +147,14 @@ const OwnerSelection: React.FC<OwnerSelectionProps> = ({
                   Father's Name:
                 </label>
                 <span className="text-gray-900 font-medium">
-                  {owner.fatherName || "Not set"}
+                  {owner.fathers_name || "Not set"}
                 </span>
               </div>
 
               <div className="flex justify-between items-center">
                 <label className="text-gray-700 font-medium">VAT No:</label>
                 <span className="text-gray-900 font-medium">
-                  {owner.vatNo || "Not set"}
+                  {owner.tax_identification_number || "Not set"}
                 </span>
               </div>
             </div>
