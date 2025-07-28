@@ -8,6 +8,7 @@ import pdfTopdfMerge from "../../../assets/advanceTools/pdfToPdfMerge.png";
 import pdfAutoName from "../../../assets/advanceTools/pdfPackagerAndAutoName.png";
 import imgToPdfs from "../../../assets/advanceTools/pdfToImgCovert.png";
 import PDFToImageConverter from "@/components/advanceTools/fileUpload/ToolsFIleComponets";
+import { useRouter } from "next/navigation";
 
 export default function BuildAITools() {
   const [isMobile, setIsMobile] = useState(false);
@@ -29,24 +30,28 @@ export default function BuildAITools() {
       description:
         "Convert PDF pages into .JPG or .PNG images for editing or attachments.",
       image: pdfToImg,
+      id: "PDFtoImageConverter",
     },
     {
       title: "Auto Merge Submission PDF",
       description:
         "Combine PDFs in the order you want with the easiest PDF merger available.",
       image: pdfTopdfMerge,
+      id: "AutoMergeSubmissionPDF",
     },
     {
       title: "PDF Packager & Auto Naming",
       description:
         "Automatically merges documents in correct order and renames files (e.g. Scan_1 → Klimatologio.pdf).",
       image: pdfAutoName,
+      id: "PDFPackager&AutoNaming",
     },
     {
       title: "Image to PDF Converter",
       description:
         "Convert .JPG images to PDF in seconds. Easily adjust orientation and margins.",
       image: imgToPdfs,
+      id: "PDFPackager&ImagetoPDFConverter",
     },
   ];
 
@@ -81,16 +86,22 @@ export default function BuildAITools() {
             <ToolCard key={index} tool={tool} isMobile={isMobile} />
           ))}
         </div>
-
-        <PDFToImageConverter />
       </main>
     </div>
   );
 }
 
 function ToolCard({ tool, isMobile }: any) {
+  const router = useRouter();
+  const handleToolsSelect = (id: any) => {
+    console.log(id);
+    router.push(`/advance-tools/${id}`);
+  };
   return (
-    <div className="bg-[#F8F8F8] rounded-xl shadow-sm hover:shadow-md overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:border-blue-500 active:translate-y-0 h-full flex flex-col border border-gray-100">
+    <div
+      onClick={() => handleToolsSelect(tool.id)}
+      className="bg-[#F8F8F8] rounded-xl shadow-sm hover:shadow-md cursor-pointer overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:border-blue-500 active:translate-y-0 h-full flex flex-col border border-gray-100"
+    >
       <div className="p-6 flex-grow">
         <div className="relative  mb-4">
           <Image

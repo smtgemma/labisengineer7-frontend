@@ -1,6 +1,8 @@
+import { usePdfToImageCoverterMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import { useState, useRef, ChangeEvent, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import useDownloader from "react-use-downloader";
+import { toast } from "sonner";
 
 const PDFToImageConverter = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -12,6 +14,8 @@ const PDFToImageConverter = () => {
 
   const { size, elapsed, percentage, download, cancel, error, isInProgress } =
     useDownloader();
+
+  const [fileUploadPdfToImg, { isLoading }] = usePdfToImageCoverterMutation();
 
   const fileUrl =
     "https://upload.wikimedia.org/wikipedia/commons/4/4d/%D0%93%D0%BE%D0%B2%D0%B5%D1%80%D0%BB%D0%B0_%D1%96_%D0%9F%D0%B5%D1%82%D1%80%D0%BE%D1%81_%D0%B2_%D0%BF%D1%80%D0%BE%D0%BC%D1%96%D0%BD%D1%8F%D1%85_%D0%B2%D1%80%D0%B0%D0%BD%D1%96%D1%88%D0%BD%D1%8C%D0%BE%D0%B3%D0%BE_%D1%81%D0%BE%D0%BD%D1%86%D1%8F.jpg";
@@ -36,8 +40,44 @@ const PDFToImageConverter = () => {
     }
   };
 
-  const handleConvert = () => {
+  const handleConvert = async () => {
     if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("dpi", "200");
+    formData.append("format", "PNG");
+    formData.append("quality", "95");
+    formData.append("first_page", "0");
+    formData.append("last_page", "0");
+
+    try {
+      const res = await fileUploadPdfToImg(formData).unwrap();
+      console.log(res);
+      // if (res?.success) {
+      //   dispatch(setAiExtractCatchData(res.data));
+
+      //   // Simulate AI processing
+      //   const interval = setInterval(() => {
+      //     setProgress((prev) => {
+      //       if (prev >= 100) {
+      //         clearInterval(interval);
+      //         setIsProcessing(false);
+      //         onExtractionComplete({
+      //           entities: ["John Doe", "ABC Corporation", "Contract #12345"],
+      //           dates: ["2024-01-15", "2024-12-31"],
+      //           amounts: ["$50,000", "$2,500"],
+      //           documentType: "Service Agreement",
+      //         });
+      //         return 100;
+      //       }
+      //       return prev + Math.random() * 15;
+      //     });
+      //   }, 200);
+      // }
+    } catch (error: any) {
+      toast.error(error.data.message);
+    }
 
     setIsConverting(true);
     // Conversion logic would go here
@@ -271,19 +311,6 @@ const PDFToImageConverter = () => {
                 <p className="text-sm sm:text-base text-gray-600  mb-4 sm:mb-6">
                   Your PDF has been successfully converted to JPG images.
                 </p>
-
-                {/* <div className="App">
-                  <p>
-                    Download is in {isInProgress ? "in progress" : "stopped"}
-                  </p>
-
-                  <button onClick={() => cancel()}>Cancel the download</button>
-                  <p>Download size in bytes {size}</p>
-                  <label htmlFor="file">Downloading progress:</label>
-                  <progress id="file" value={percentage} max="100" />
-                  <p>Elapsed time in seconds {elapsed}</p>
-                  {error && <p>possible error {JSON.stringify(error)}</p>}
-                </div> */}
 
                 <div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-3 mt-10">
                   <button
