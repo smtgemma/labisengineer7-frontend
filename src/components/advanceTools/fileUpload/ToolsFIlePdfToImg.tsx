@@ -3,6 +3,8 @@ import { useState, useRef, ChangeEvent, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import useDownloader from "react-use-downloader";
 import { toast } from "sonner";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
 
 const PDFToImageConverter = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -11,14 +13,19 @@ const PDFToImageConverter = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [downloadFile, setDownloadFile] = useState([]);
+  const [downloadFormat, setDownloadFormart] = useState(false);
 
   const { size, elapsed, percentage, download, cancel, error, isInProgress } =
     useDownloader();
 
   const [fileUploadPdfToImg, { isLoading }] = usePdfToImageCoverterMutation();
+  const host = "http://172.252.13.69:8019";
 
-  const fileUrl =
-    "https://upload.wikimedia.org/wikipedia/commons/4/4d/%D0%93%D0%BE%D0%B2%D0%B5%D1%80%D0%BB%D0%B0_%D1%96_%D0%9F%D0%B5%D1%82%D1%80%D0%BE%D1%81_%D0%B2_%D0%BF%D1%80%D0%BE%D0%BC%D1%96%D0%BD%D1%8F%D1%85_%D0%B2%D1%80%D0%B0%D0%BD%D1%96%D1%88%D0%BD%D1%8C%D0%BE%D0%B3%D0%BE_%D1%81%D0%BE%D0%BD%D1%86%D1%8F.jpg";
+  const updatedImageUrls = downloadFile.map((url) => host + url);
+  console.log("yes", updatedImageUrls);
+
+  // const fileUrl = `http://172.252.13.69:8019${downloadFile}`;
   const filename = "beautiful-carpathia.jpg";
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -40,6 +47,7 @@ const PDFToImageConverter = () => {
     }
   };
 
+  // file converter
   const handleConvert = async () => {
     if (!file) return;
 
@@ -53,28 +61,8 @@ const PDFToImageConverter = () => {
 
     try {
       const res = await fileUploadPdfToImg(formData).unwrap();
-      console.log(res);
-      // if (res?.success) {
-      //   dispatch(setAiExtractCatchData(res.data));
-
-      //   // Simulate AI processing
-      //   const interval = setInterval(() => {
-      //     setProgress((prev) => {
-      //       if (prev >= 100) {
-      //         clearInterval(interval);
-      //         setIsProcessing(false);
-      //         onExtractionComplete({
-      //           entities: ["John Doe", "ABC Corporation", "Contract #12345"],
-      //           dates: ["2024-01-15", "2024-12-31"],
-      //           amounts: ["$50,000", "$2,500"],
-      //           documentType: "Service Agreement",
-      //         });
-      //         return 100;
-      //       }
-      //       return prev + Math.random() * 15;
-      //     });
-      //   }, 200);
-      // }
+      setDownloadFile(res?.download_urls);
+      console.log(res?.download_urls);
     } catch (error: any) {
       toast.error(error.data.message);
     }
@@ -92,12 +80,42 @@ const PDFToImageConverter = () => {
     }, 2000);
   };
 
-  const handleDownload = () => {
-    console.log("Download initiated");
-    download(fileUrl, filename);
-    // Add your download logic here
+  // Function to download images as ZIP
+  const downloadZip = async (urls: any) => {
+    const zip = new JSZip();
+
+    // Loop through image URLs, fetch and add to ZIP
+    for (const url of urls) {
+      const response = await fetch(url);
+      const blob = await response.blob(); // Get image as blob
+      const filename = url.split("/").pop(); // Extract filename from URL
+      zip.file(filename, blob); // Add the image to the ZIP file
+    }
+
+    // Generate and download the ZIP file
+    zip.generateAsync({ type: "blob" }).then((content) => {
+      saveAs(content, "images.zip"); // Save as 'images.zip'
+    });
   };
 
+  // signle image download
+  const handleDownloadImg = () => {
+    console.log("Download initiated", updatedImageUrls[0]);
+    download(updatedImageUrls[0], filename);
+  };
+
+  // final download funciton funciton
+  const handleDownloadZipAndImg = () => {
+    if (updatedImageUrls.length > 1) {
+      setDownloadFormart(true);
+      downloadZip(updatedImageUrls);
+    } else {
+      setDownloadFormart(false);
+      handleDownloadImg();
+    }
+  };
+
+  // module colse funciotn
   const handleClose = () => {
     setIsOpen(false);
   };
@@ -267,7 +285,7 @@ const PDFToImageConverter = () => {
                   : "bg-blue-700 hover:bg-blue-800"
               } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
             >
-              {isConverting ? "Converting..." : "Convert to image"}
+              {isLoading ? "Converting..." : "Convert to image"}
             </button>
           </div>
         </div>
@@ -320,10 +338,13 @@ const PDFToImageConverter = () => {
                     Close
                   </button>
                   <button
-                    onClick={handleDownload}
+                    onClick={handleDownloadZipAndImg}
                     className="px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-600 rounded-md text-white hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                   >
-                    {isMobile ? "Download" : "Download JPG Images"}
+                    {isMobile
+                      ? "Download"
+                      : `Download File
+                            `}
                   </button>
                 </div>
               </div>
