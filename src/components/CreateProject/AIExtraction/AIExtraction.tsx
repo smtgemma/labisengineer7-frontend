@@ -9,13 +9,12 @@ import { setAiExtractCatchData } from "@/redux/features/AI-intrigratoin/aiFileDa
 
 interface AIExtractionProps {
   files: File[];
-  onExtractionComplete: (data: any) => void;
   extractedData: any;
 }
 
 const AIExtraction: React.FC<AIExtractionProps> = ({
   files,
-  onExtractionComplete,
+
   extractedData,
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -49,12 +48,7 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
             if (prev >= 100) {
               clearInterval(interval);
               setIsProcessing(false);
-              onExtractionComplete({
-                entities: ["John Doe", "ABC Corporation", "Contract #12345"],
-                dates: ["2024-01-15", "2024-12-31"],
-                amounts: ["$50,000", "$2,500"],
-                documentType: "Service Agreement",
-              });
+
               return 100;
             }
             return prev + Math.random() * 15;

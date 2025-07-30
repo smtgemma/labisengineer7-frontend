@@ -1,15 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Plus, Edit3 } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
-import { Owner as Owners } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import {
+  Owner as Owners,
+  setAiExtractCatchWonerData,
+} from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { useForm } from "react-hook-form";
 
 interface Owner {
-  id: string;
-  firstName: string;
-  surname: string;
-  fatherName: string;
-  vatNo: string;
+  address: string;
+  address_code: string;
+  address_municipality_community: string;
+  date_of_birth: string;
+  email: string;
+  fathers_name: string;
+  id_number: string;
+  last_name: string;
+  mobile: string;
+  mothers_name: string;
+  name: string;
+  ownership_percentage: string;
+  place_of_birth: string;
+  tax_identification_number: string;
+}
+
+interface AIDataState {
+  formatted_data?: {
+    owners?: Owner[];
+  };
 }
 
 interface OwnerSelectionProps {
@@ -17,67 +36,145 @@ interface OwnerSelectionProps {
   onOwnersChange: (owners: Owner[]) => void;
 }
 
-const OwnerSelection: React.FC<OwnerSelectionProps> = ({
-  selectedOwners,
-  onOwnersChange,
-}) => {
+type OwnerFormInputs = {
+  firstName: string;
+  surname: string;
+  fatherName: string;
+  vatNo: string;
+};
+
+type EditingOwnerType = {
+  owner: Owner;
+  index: number;
+};
+
+export interface FormattedData {
+  project_description: string;
+  cadastral_code_kaek: string;
+  property_type: string;
+  surface_areas: string;
+  title_deed_area: string;
+  building_floor: string;
+  address: string;
+  building_code: string;
+  neighborhood: string;
+  municipality_community: string;
+  first_owner: Owner;
+  second_owner: Owner;
+  third_owner: Owner;
+  license_number: string;
+  license_number_revision: string;
+  ydom_description: string;
+  horizontal_ownership_description: string;
+  horizontal_property_description: string;
+  establishment_numbers: string;
+  notary: string;
+  plot_square_meters: string;
+  permit_no: string;
+  building_permit_date: string;
+  issuing_authority_details: string;
+  regional_unit: string;
+  pea_issue_date: string;
+  pea_security_number: string;
+  pea_protocol_number: string;
+  pea_energy_category: string;
+  pea_annual_energy_consumption: string;
+  pea_annual_co2_emissions: string;
+  band_value: string;
+  land_use: string;
+  arbitrary_constructions_description: string;
+  document_of_anticipation: string;
+}
+
+const OwnerSelection = () => {
   const [projectDescription, setProjectDescription] = useState(
     "Renovation of residence"
   );
-  const [editingOwner, setEditingOwner] = useState<Owner | null>(null);
+  const [editingOwner, setEditingOwner] = useState<EditingOwnerType | null>(
+    null
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAddingOwner, setIsAddingOwner] = useState(false);
-  const [isOwner, setIsOwner] = useState<Owners[] | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
+  const dispatch = useDispatch();
   const ownerData = useSelector((state: RootState) => state.aiData.aiDataState);
+  // const owners: Owner[] = ownerData?.formatted_data?.owners ?? [];
+  const owners = (ownerData?.formatted_data?.owners ?? []) as Owner[];
 
-  // useEffect(() => {
-  //   if (ownerData) {
-  //     const owners: Owners = ownerData.formatted_data?.first_owner;
-  //     setIsOwner([owners]);
-  //   }
-  // }, [ownerData]);
+  // const owners = Array.isArray(ownerData?.formatted_data?.owners)
+  //   ? (ownerData.formatted_data.owners as Owner[])
+  //   : [];
+  const [isOwner, setIsOwner] = useState<Owner[]>(owners);
 
-  console.log(isOwner);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<OwnerFormInputs>();
+
+  const onSubmit = (data: OwnerFormInputs) => {
+    const emptyOwner: Owner = {
+      address: "",
+      address_code: "",
+      address_municipality_community: "",
+      date_of_birth: "",
+      email: "",
+      fathers_name: data.fatherName,
+      id_number: "",
+      last_name: data.surname,
+      mobile: "",
+      mothers_name: "",
+      name: data.firstName,
+      ownership_percentage: "",
+      place_of_birth: "",
+      tax_identification_number: data.vatNo,
+    };
+
+    const updatedOwners = [...isOwner, emptyOwner];
+    setIsOwner(updatedOwners);
+    setIsModalOpen(false);
+  };
+
+  const onEditSubmit = (data: OwnerFormInputs) => {
+    if (editingOwner !== null) {
+      const updatedOwner: Owner = {
+        address: "",
+        address_code: "",
+        address_municipality_community: "",
+        date_of_birth: "",
+        email: "",
+        fathers_name: data.fatherName,
+        id_number: "",
+        last_name: data.surname,
+        mobile: "",
+        mothers_name: "",
+        name: data.firstName,
+        ownership_percentage: "",
+        place_of_birth: "",
+        tax_identification_number: data.vatNo,
+      };
+
+      const updated = [...isOwner];
+      updated[editingOwner.index] = updatedOwner;
+      setIsOwner(updated);
+      reset();
+      setIsEditModalOpen(false);
+    }
+  };
 
   const openAddOwnerModal = () => {
-    const newOwner: Owner = {
-      id: Date.now().toString(),
-      firstName: "",
-      surname: "",
-      fatherName: "",
-      vatNo: "",
-    };
-    setEditingOwner(newOwner);
-    setIsAddingOwner(true);
     setIsModalOpen(true);
   };
 
-  const openEditModal = (owner: Owner) => {
-    setEditingOwner(owner);
-    setIsAddingOwner(false);
-    setIsModalOpen(true);
+  const openEditModalOwner = (owner: Owner, index: number) => {
+    setEditingOwner({ owner, index });
+    setIsEditModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setEditingOwner(null);
-    setIsAddingOwner(false);
-  };
-
-  const saveEdit = () => {
-    if (editingOwner) {
-      if (isAddingOwner) {
-        onOwnersChange([...selectedOwners, editingOwner]);
-      } else {
-        const updatedOwners = selectedOwners.map((owner) =>
-          owner.id === editingOwner.id ? editingOwner : owner
-        );
-        onOwnersChange(updatedOwners);
-      }
-    }
-    closeModal();
-  };
+  useEffect(() => {
+    dispatch(setAiExtractCatchWonerData(isOwner));
+  }, [isOwner]);
 
   return (
     <div className="space-y-8">
@@ -117,7 +214,7 @@ const OwnerSelection: React.FC<OwnerSelectionProps> = ({
         {isOwner?.map((owner: any, index) => (
           <div key={index} className="bg-gray-50 p-6 rounded-lg relative">
             <button
-              onClick={() => openEditModal(owner)}
+              onClick={() => openEditModalOwner(owner, index)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
             >
               <Edit3 className="w-4 h-4" />
@@ -170,26 +267,20 @@ const OwnerSelection: React.FC<OwnerSelectionProps> = ({
       </div> */}
 
       {/* Add/Edit Modal */}
-      {isModalOpen && editingOwner && (
+      {isModalOpen && (
         <div className="fixed inset-0 bg-[rgba(0,0,0,0.5)] bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 w-full max-w-md mx-4">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Owner{" "}
-                {isAddingOwner
-                  ? selectedOwners.length + 1
-                  : selectedOwners.findIndex((o) => o.id === editingOwner.id) +
-                    1}
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-900">Owner</h3>
               <button
-                onClick={closeModal}
+                onClick={() => setIsModalOpen(false)}
                 className="text-gray-400 hover:text-gray-600"
               >
                 <Edit3 className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
@@ -197,33 +288,28 @@ const OwnerSelection: React.FC<OwnerSelectionProps> = ({
                   </label>
                   <input
                     type="text"
-                    value={editingOwner.firstName}
-                    onChange={(e) =>
-                      setEditingOwner({
-                        ...editingOwner,
-                        firstName: e.target.value,
-                      })
-                    }
+                    {...register("firstName", { required: true })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Giannis"
                   />
+                  {errors.firstName && (
+                    <span className="text-red-500 text-sm">Required</span>
+                  )}
                 </div>
+
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
                     Surname:
                   </label>
                   <input
                     type="text"
-                    value={editingOwner.surname}
-                    onChange={(e) =>
-                      setEditingOwner({
-                        ...editingOwner,
-                        surname: e.target.value,
-                      })
-                    }
+                    {...register("surname", { required: true })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Papadopoulos"
                   />
+                  {errors.surname && (
+                    <span className="text-red-500 text-sm">Required</span>
+                  )}
                 </div>
               </div>
 
@@ -233,16 +319,13 @@ const OwnerSelection: React.FC<OwnerSelectionProps> = ({
                 </label>
                 <input
                   type="text"
-                  value={editingOwner.fatherName}
-                  onChange={(e) =>
-                    setEditingOwner({
-                      ...editingOwner,
-                      fatherName: e.target.value,
-                    })
-                  }
+                  {...register("fatherName", { required: true })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Nikos"
                 />
+                {errors.fatherName && (
+                  <span className="text-red-500 text-sm">Required</span>
+                )}
               </div>
 
               <div>
@@ -251,24 +334,120 @@ const OwnerSelection: React.FC<OwnerSelectionProps> = ({
                 </label>
                 <input
                   type="text"
-                  value={editingOwner.vatNo}
-                  onChange={(e) =>
-                    setEditingOwner({ ...editingOwner, vatNo: e.target.value })
-                  }
+                  {...register("vatNo", { required: true })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="VAT-12213484"
                 />
+                {errors.vatNo && (
+                  <span className="text-red-500 text-sm">Required</span>
+                )}
               </div>
-            </div>
 
-            <div className="flex justify-end mt-8">
+              <div className="flex justify-end mt-8">
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium"
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* openEditModal */}
+      {isEditModalOpen && (
+        <div className="fixed inset-0 bg-[rgba(0,0,0,0.5)] bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 w-full max-w-md mx-4">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-semibold text-gray-900">
+                Owner Edit
+              </h3>
               <button
-                onClick={saveEdit}
-                className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium"
+                onClick={() => setIsEditModalOpen(false)}
+                className="text-gray-400 hover:text-gray-600 text-2xl"
               >
-                Save Edit
+                X
               </button>
             </div>
+
+            <form onSubmit={handleSubmit(onEditSubmit)} className="space-y-6">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    First Name:
+                  </label>
+                  <input
+                    type="text"
+                    defaultValue={editingOwner?.owner?.name}
+                    {...register("firstName", { required: true })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Giannis"
+                  />
+                  {errors.firstName && (
+                    <span className="text-red-500 text-sm">Required</span>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Surname:
+                  </label>
+                  <input
+                    type="text"
+                    defaultValue={editingOwner?.owner?.last_name}
+                    {...register("surname", { required: true })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Papadopoulos"
+                  />
+                  {errors.surname && (
+                    <span className="text-red-500 text-sm">Required</span>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">
+                  Father's Name:
+                </label>
+                <input
+                  type="text"
+                  defaultValue={editingOwner?.owner?.fathers_name}
+                  {...register("fatherName", { required: true })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Nikos"
+                />
+                {errors.fatherName && (
+                  <span className="text-red-500 text-sm">Required</span>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">
+                  VAT No:
+                </label>
+                <input
+                  type="text"
+                  defaultValue={editingOwner?.owner?.tax_identification_number}
+                  {...register("vatNo", { required: true })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="VAT-12213484"
+                />
+                {errors.vatNo && (
+                  <span className="text-red-500 text-sm">Required</span>
+                )}
+              </div>
+
+              <div className="flex justify-end mt-8">
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium"
+                >
+                  Save
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

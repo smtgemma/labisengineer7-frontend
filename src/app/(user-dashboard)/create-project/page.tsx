@@ -134,19 +134,10 @@ const WorkflowDemo: React.FC = () => {
         );
       case 2:
         return (
-          <AIExtraction
-            files={uploadedFiles}
-            onExtractionComplete={setExtractedData}
-            extractedData={extractedData}
-          />
+          <AIExtraction files={uploadedFiles} extractedData={extractedData} />
         );
       case 3:
-        return (
-          <OwnerSelection
-            selectedOwners={selectedOwners}
-            onOwnersChange={setSelectedOwners}
-          />
-        );
+        return <OwnerSelection />;
       case 4:
         return <AIExtractionDataInPut />;
       case 5:

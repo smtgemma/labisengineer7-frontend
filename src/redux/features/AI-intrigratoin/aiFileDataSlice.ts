@@ -62,27 +62,29 @@ interface Data {
   formatted_data: FormattedData;
 }
 
-interface RootObject {
-  data: Data;
-}
-
 interface AiExtractState {
-  aiDataState: FormattedData | null;
+  aiDataState?: FormattedData | null;
+  ownerBaseData?: any;
 }
 
 const initialState: AiExtractState = {
   aiDataState: null,
+  ownerBaseData: [],
 };
 
 const aiExtractDataSlice = createSlice({
   name: "aiExtractData",
   initialState,
   reducers: {
-    setAiExtractCatchData: (state, action: PayloadAction<FormattedData>) => {
+    setAiExtractCatchData: (state, action) => {
       state.aiDataState = action.payload;
+    },
+    setAiExtractCatchWonerData: (state, action) => {
+      state.ownerBaseData = action.payload;
     },
   },
 });
 
-export const { setAiExtractCatchData } = aiExtractDataSlice.actions;
+export const { setAiExtractCatchData, setAiExtractCatchWonerData } =
+  aiExtractDataSlice.actions;
 export default aiExtractDataSlice.reducer;
