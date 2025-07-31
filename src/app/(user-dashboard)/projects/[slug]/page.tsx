@@ -5,9 +5,9 @@ interface ProjectDetailsProps {
   className?: string;
 }
 
-const ProjectDetails: React.FC<ProjectDetailsProps> = ({ className = "" }) => {
+const ProjectDetails = () => {
   return (
-    <div className={`bg-[#F1F5F9] min-h-screen p-8 ${className}`}>
+    <div className={`bg-[#F1F5F9] min-h-screen p-8 `}>
       <div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column */}

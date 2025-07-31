@@ -1,30 +1,23 @@
+"use client";
+import Loading from "@/components/Others/Loading";
 import ProjectCard from "@/components/Projects/Card/ProjectCard";
 import Header from "@/components/shared/Header/Header";
+import tokenCatch from "@/lib/token";
+import { useGetTheServiceQuery } from "@/redux/features/projectService/projectServiceSlice";
 import React from "react";
 
 export default function NewProject() {
-  const projects = [
-    {
-      title: "HTK – Electronic Building ID",
-      description:
-        "Instantly create and manage HTK files for your property. Upload your documents, and the platform does the rest—powered by AI.",
-    },
-    {
-      title: "e-Adeies – Building Permit",
-      description:
-        "Prepare and submit your Building Permit documents faster. All data is auto-filled from your uploads and prepped for e-adeies.tee.gr.",
-    },
-    {
-      title: "Law 4495/17 – Unauthorized Declarations",
-      description:
-        "Automatically generate the required declarations and forms under Law 4495/17. Greatly reduce manual data entry.",
-    },
-    {
-      title: "Engineer Certificate",
-      description:
-        "Quickly produce valid engineer certificates for property sales and transactions. AI checks and fills all necessary details.",
-    },
-  ];
+  const token = tokenCatch();
+  console.log(token);
+
+  const { data, isLoading } = useGetTheServiceQuery(token);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  const projects = data?.data;
+  console.log(projects);
 
   return (
     <section className="bg-[#F1F5F9] py-8 px-12">
@@ -33,10 +26,11 @@ export default function NewProject() {
         subtitle="Select the type of documentation you need to generate."
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
-        {projects.map((project, idx) => (
+        {projects?.map((project: any, idx: number) => (
           <ProjectCard
-            title={project.title}
-            description={project.description}
+            title={project.serviceName}
+            description={project.serviceDescription}
+            id={project.createdById}
             key={idx}
           />
         ))}

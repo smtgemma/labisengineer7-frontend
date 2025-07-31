@@ -12,10 +12,9 @@ export interface DocumentData {
 
 interface DocumentTableProps {
   data: DocumentData[];
-  className?: string;
 }
 
-const documentData: DocumentData[] = [
+const data: DocumentData[] = [
   {
     fileName: "Contract_LandPlot.pdf",
     projectName: "Permit 102",
@@ -42,10 +41,7 @@ const documentData: DocumentData[] = [
   },
 ];
 
-const DocumentTable: React.FC<DocumentTableProps> = ({
-  data = documentData,
-  className = "",
-}) => {
+const DocumentTable = () => {
   const handleDownload = (fileName: string) => {
     console.log("Download clicked for:", fileName);
     // Handle download logic here
@@ -55,7 +51,7 @@ const DocumentTable: React.FC<DocumentTableProps> = ({
     <section className="bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen">
       <Header title="My Documents" />
 
-      <div className={`rounded-lg shadow-sm overflow-auto my-6  ${className}`}>
+      <div className={`rounded-lg shadow-sm overflow-auto my-6 `}>
         <table className="w-full">
           <thead className="bg-[#017AFF]">
             <tr>

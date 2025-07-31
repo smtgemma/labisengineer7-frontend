@@ -14,7 +14,7 @@ interface FAQSectionProps {
   className?: string;
 }
 
-const FAQSection: React.FC<FAQSectionProps> = ({ className = "" }) => {
+const FAQSection = () => {
   const [expandedItems, setExpandedItems] = useState<Set<string>>(
     new Set(["1"])
   );
@@ -88,7 +88,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({ className = "" }) => {
   };
 
   return (
-    <div className={` min-h-screen bg-[#F1F5F9] py-8 px-12 ${className}`}>
+    <div className={` min-h-screen bg-[#F1F5F9] py-8 px-12 `}>
       <div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Left Column */}

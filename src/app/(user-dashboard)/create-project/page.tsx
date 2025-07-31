@@ -9,6 +9,7 @@ import OwnerSelection from "@/components/CreateProject/OwnerSelection/OwnerSelec
 import ActionSelection from "@/components/CreateProject/ActionSelection/ActionSelection";
 import FinalOverview from "@/components/CreateProject/FinalOverview/FinalOverview";
 import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
+import AIExtractionDataInPut from "@/components/CreateProject/aAIExtractionData/AIExtractionData";
 
 const workflowSteps = [
   {
@@ -25,10 +26,14 @@ const workflowSteps = [
   },
   {
     id: 4,
-    title: "Select Actions",
+    title: "AI Extraction Data",
   },
   {
     id: 5,
+    title: "Select Actions",
+  },
+  {
+    id: 6,
     title: "Final Overview",
   },
 ];
@@ -46,6 +51,7 @@ const WorkflowDemo: React.FC = () => {
   const [showExtractionData, setShowExtractionData] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [extractedData, setExtractedData] = useState<any>(null);
+  const [inputExtractedData, setInputExtractedData] = useState<string[]>([]);
   const [selectedOwners, setSelectedOwners] = useState<Owner[]>([
     {
       id: "1",
@@ -77,9 +83,9 @@ const WorkflowDemo: React.FC = () => {
         return extractedData !== null;
       case 3:
         return selectedOwners.length > 0;
-      case 4:
-        return selectedActions.length > 0;
       case 5:
+        return selectedActions.length > 0;
+      case 6:
         return true;
       default:
         return false;
@@ -105,6 +111,7 @@ const WorkflowDemo: React.FC = () => {
       },
     ]);
     setSelectedActions([]);
+    setInputExtractedData([]);
     setIsCompleted(false);
   };
 
@@ -127,27 +134,20 @@ const WorkflowDemo: React.FC = () => {
         );
       case 2:
         return (
-          <AIExtraction
-            files={uploadedFiles}
-            onExtractionComplete={setExtractedData}
-            extractedData={extractedData}
-          />
+          <AIExtraction files={uploadedFiles} extractedData={extractedData} />
         );
       case 3:
-        return (
-          <OwnerSelection
-            selectedOwners={selectedOwners}
-            onOwnersChange={setSelectedOwners}
-          />
-        );
+        return <OwnerSelection />;
       case 4:
+        return <AIExtractionDataInPut />;
+      case 5:
         return (
           <ActionSelection
             selectedActions={selectedActions}
             onActionsChange={setSelectedActions}
           />
         );
-      case 5:
+      case 6:
         return (
           <FinalOverview
             files={uploadedFiles}
@@ -213,11 +213,11 @@ const WorkflowDemo: React.FC = () => {
           <div className="mb-8">{renderStepContent()}</div>
 
           {/* Footer with Next Button - Hide for extraction data page and final overview */}
-          {!(currentStep === 2 && showExtractionData) && currentStep < 5 && (
+          {!(currentStep === 2 && showExtractionData) && currentStep < 6 && (
             <div className="flex justify-end">
               <button
                 onClick={nextStep}
-                disabled={!canProceed()}
+                // disabled={!canProceed()}
                 className="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2 font-medium text-lg"
               >
                 <span>Next</span>

@@ -11,6 +11,9 @@ import {
   Sun,
 } from "lucide-react";
 import Header from "@/components/shared/Header/Header";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setMultipleSubcategory } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 
 interface SubcategoryOption {
   id: string;
@@ -27,13 +30,9 @@ interface Category {
 
 interface MultiSelectSubcategoryProps {
   onSave?: (selectedOptions: { [categoryId: string]: string[] }) => void;
-  className?: string;
 }
 
-const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
-  onSave,
-  className = "",
-}) => {
+const MultiSelectSubcategory = () => {
   const [categories, setCategories] = useState<Category[]>([
     {
       id: "building-modifications",
@@ -41,26 +40,26 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
       icon: <Building2 size={20} className="text-blue-600" />,
       options: [
         {
-          id: "interior-renovations",
+          id: "Εσωτερικές διαρρυθμίσεις",
           label: "Εσωτερικές διαρρυθμίσεις",
           selected: true,
         },
         { id: "other-works", label: "Εργασίες άλλης χρήσης" },
         {
-          id: "color-works",
+          id: "Εργασίες χρωματισμών & επισκευών με χρήση ικριωμάτων",
           label: "Εργασίες χρωματισμών & επισκευών με χρήση ικριωμάτων",
           selected: true,
         },
-        { id: "scaffolding-placement", label: "Τοποθέτηση ικριωμάτων" },
+        { id: "Τοποθέτηση ικριωμάτων", label: "Τοποθέτηση ικριωμάτων" },
         {
-          id: "openings-repairs",
+          id: "Επεμβάσεις στις όψεις και στα ανοίγματα",
           label: "Επεμβάσεις στις όψεις και στα ανοίγματα",
         },
         {
-          id: "roof-maintenance",
+          id: "Συντήρηση, επισκευή στεγών με χρήση ικριωμάτων",
           label: "Συντήρηση, επισκευή στεγών με χρήση ικριωμάτων",
         },
-        { id: "roof-reconstruction", label: "Ανακατασκευή στέγης" },
+        { id: "Ανακατασκευή στέγης", label: "Ανακατασκευή στέγης" },
       ],
     },
     {
@@ -69,10 +68,13 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
       icon: <Zap size={20} className="text-orange-500" />,
       options: [
         {
-          id: "thermal-insulation",
+          id: "Εξωτερική θερμομόνωση & τοποθέτηση ηλιακών συστημάτων",
           label: "Εξωτερική θερμομόνωση & τοποθέτηση ηλιακών συστημάτων",
         },
-        { id: "autonomous-heating", label: "Αυτόνομο Σύστημα Θέρμανσης" },
+        {
+          id: "Αυτόνομο Σύστημα Θέρμανσης",
+          label: "Αυτόνομο Σύστημα Θέρμανσης",
+        },
       ],
     },
     {
@@ -81,7 +83,7 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
       icon: <Hammer size={20} className="text-blue-500" />,
       options: [
         {
-          id: "compact-tank",
+          id: "Κατασκευή ασκεπούς δεξαμενής ή πισίνας COMPACT μέχρι 50 τ.μ.",
           label: "Κατασκευή ασκεπούς δεξαμενής ή πισίνας COMPACT μέχρι 50 τ.μ.",
         },
       ],
@@ -92,12 +94,12 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
       icon: <Trees size={20} className="text-green-600" />,
       options: [
         {
-          id: "tree-cutting-city",
+          id: "Κοπή δέντρων (α. Σε κοινόχρηστο χώρο πόλης ή οικισμού)",
           label: "Κοπή δέντρων (α. Σε κοινόχρηστο χώρο πόλης ή οικισμού)",
           selected: true,
         },
         {
-          id: "tree-cutting-private",
+          id: "Κοπή δέντρων (β. Σε ακάλυπτο ή γήπεδο)",
           label: "Κοπή δέντρων (β. Σε ακάλυπτο ή γήπεδο)",
         },
       ],
@@ -108,11 +110,11 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
       icon: <Trees size={20} className="text-green-600" />,
       options: [
         {
-          id: "tree-cutting-city-2",
+          id: "Κοπή δέντρων (α. Σε κοινόχρηστο χώρο πόλης ή οικισμού)",
           label: "Κοπή δέντρων (α. Σε κοινόχρηστο χώρο πόλης ή οικισμού)",
         },
         {
-          id: "tree-cutting-private-2",
+          id: "Κοπή δέντρων (β. Σε ακάλυπτο ή γήπεδο)",
           label: "Κοπή δέντρων (β. Σε ακάλυπτο ή γήπεδο)",
         },
       ],
@@ -122,7 +124,10 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
       title: "Operational Space Management",
       icon: <Settings size={20} className="text-purple-600" />,
       options: [
-        { id: "functional-space", label: "Λειτουργική συνένωση χώρων" },
+        {
+          id: "Λειτουργική συνένωση χώρων",
+          label: "Λειτουργική συνένωση χώρων",
+        },
       ],
     },
     {
@@ -131,11 +136,11 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
       icon: <Building2 size={20} className="text-teal-600" />,
       options: [
         {
-          id: "fencing-natural",
+          id: "Περίφραξη ή περίφραξη σε εκτός σχεδίου γήπεδα & οικισμούς",
           label: "Περίφραξη ή περίφραξη σε εκτός σχεδίου γήπεδα & οικισμούς",
         },
         {
-          id: "fencing-existing",
+          id: "Περίφραξη με πρόχειρη κατασκευή σε μη ρυμοτομ. εντός σχεδίου",
           label: "Περίφραξη με πρόχειρη κατασκευή σε μη ρυμοτομ. εντός σχεδίου",
         },
       ],
@@ -154,17 +159,20 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
       icon: <Sun size={20} className="text-yellow-500" />,
       options: [
         {
-          id: "pv-installation-a",
+          id: "Εγκατάσταση Φ/Β συστημάτων (α. γήπεδα & κτίρια εκτός σχεδίου)",
           label:
             "Εγκατάσταση Φ/Β συστημάτων (α. γήπεδα & κτίρια εκτός σχεδίου)",
         },
         {
-          id: "pv-installation-b",
+          id: "Εγκατάσταση Φ/Β συστημάτων (β. κτίρια εντός σχεδίου)",
           label: "Εγκατάσταση Φ/Β συστημάτων (β. κτίρια εντός σχεδίου)",
         },
       ],
     },
   ]);
+
+  const navigate = useRouter();
+  const dispatch = useDispatch();
 
   const toggleOption = (categoryId: string, optionId: string) => {
     setCategories((prevCategories) =>
@@ -185,7 +193,6 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
 
   const handleSave = () => {
     const selectedOptions: { [categoryId: string]: string[] } = {};
-
     categories.forEach((category) => {
       const selected = category.options
         .filter((option) => option.selected)
@@ -197,11 +204,13 @@ const MultiSelectSubcategory: React.FC<MultiSelectSubcategoryProps> = ({
     });
 
     console.log("Selected options:", selectedOptions);
-    onSave?.(selectedOptions);
+    dispatch(setMultipleSubcategory(selectedOptions));
+
+    navigate.push("/create-project");
   };
 
   return (
-    <div className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen ${className}`}>
+    <div className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen`}>
       <Header title="Select Multiple Subcategory" />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
