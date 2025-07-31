@@ -65,11 +65,15 @@ interface Data {
 interface AiExtractState {
   aiDataState?: FormattedData | null;
   ownerBaseData?: any;
+  projectId?: {} | undefined;
+  subcategory?: [];
 }
 
 const initialState: AiExtractState = {
   aiDataState: null,
   ownerBaseData: [],
+  projectId: undefined,
+  subcategory: [],
 };
 
 const aiExtractDataSlice = createSlice({
@@ -82,9 +86,20 @@ const aiExtractDataSlice = createSlice({
     setAiExtractCatchWonerData: (state, action) => {
       state.ownerBaseData = action.payload;
     },
+    setTheProjectId: (state, action) => {
+      state.projectId = action.payload;
+    },
+
+    setMultipleSubcategory: (state, action) => {
+      state.subcategory = action.payload;
+    },
   },
 });
 
-export const { setAiExtractCatchData, setAiExtractCatchWonerData } =
-  aiExtractDataSlice.actions;
+export const {
+  setAiExtractCatchData,
+  setAiExtractCatchWonerData,
+  setTheProjectId,
+  setMultipleSubcategory,
+} = aiExtractDataSlice.actions;
 export default aiExtractDataSlice.reducer;

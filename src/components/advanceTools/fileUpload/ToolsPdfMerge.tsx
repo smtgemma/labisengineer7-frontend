@@ -86,7 +86,7 @@ const PdfToPdfMerge = () => {
     setTimeout(() => {
       setIsConverting(false);
       setIsOpen(true);
-    }, 2000);
+    }, 100);
   };
 
   const handleDownloadPdf = () => {

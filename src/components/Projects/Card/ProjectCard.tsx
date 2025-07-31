@@ -2,6 +2,9 @@ import React from "react";
 import img from "@/assets/project-card/project-card-img.jpg";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setTheProjectId } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 
 interface ProjectCardProps {
   // image: string;
@@ -16,6 +19,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   id,
 }) => {
+  const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  // routing and id catch
+  const handleProjectId = (id: string) => {
+    dispatch(
+      setTheProjectId({
+        title,
+        description,
+        id,
+      })
+    );
+    router.push("/service/sub-category");
+  };
   return (
     <div className="bg-white rounded-3xl border-2 border-transparent hover:border-[#017AFF] overflow-hidden max-w-5xl mx-auto p-6">
       <div className="flex justify-between items-center gap-6">
@@ -42,12 +60,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </p>
 
           <div>
-            <Link
-              href={"/service/sub-category"}
+            <button
+              onClick={() => handleProjectId(id)}
               className="bg-[#017AFF] hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold text-base transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
             >
               Begin Project
-            </Link>
+            </button>
           </div>
         </div>
       </div>

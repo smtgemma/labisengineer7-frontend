@@ -113,7 +113,7 @@ const ImageToPdfConverter = () => {
       setIsConverting(false);
       setIsOpen(false);
       setFiles([]);
-    }, 2000);
+    }, 100);
   };
 
   // Remove file from the list

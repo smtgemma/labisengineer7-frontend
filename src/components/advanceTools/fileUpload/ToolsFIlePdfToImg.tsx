@@ -77,7 +77,7 @@ const PDFToImageConverter = () => {
       setIsConverting(false);
       setIsOpen(true);
       // In a real app, you would provide the converted images for download
-    }, 2000);
+    }, 100);
   };
 
   // Function to download images as ZIP

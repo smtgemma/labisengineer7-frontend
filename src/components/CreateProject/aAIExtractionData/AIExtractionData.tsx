@@ -4,6 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { warn } from "console";
 
 type OwnerData = {
   firstName: string;
@@ -29,7 +30,7 @@ type ProjectData = {
   titleArea: string;
   building: string;
   floor: string;
-  address: string;
+  building_permi: string;
   buildingCode: string;
   neighborhood: string;
   municipal: string;
@@ -67,26 +68,34 @@ type OtherOpation = {
   unauthorizedConstructions: string;
 };
 
+interface OthersValue {
+  land_use: string;
+  arbitrary_constructions_description: string;
+  expectation_Document: string;
+}
+
+type DynamicOwnerFields = {
+  [key: `firstName${number}`]: string;
+  [key: `lastName${number}`]: string;
+  [key: `fatherName${number}`]: string;
+  [key: `motherName${number}`]: string;
+  [key: `birthDate${number}`]: string;
+  [key: `birthPlace${number}`]: string;
+  [key: `address${number}`]: string;
+  [key: `postalCode${number}`]: string;
+  [key: `city${number}`]: string;
+  [key: `afm${number}`]: string;
+  [key: `phone${number}`]: string;
+  [key: `email${number}`]: string;
+};
+
 type FormValues = ProjectData &
   OwnerData &
   LicenseLegalFormData &
   EPCFormValues &
-  OtherOpation;
-
-// defaultValues: {
-//     firstName: "Σαϊφούρ",
-//     lastName: "Ραχμάν",
-//     fatherName: "Νίκος",
-//     motherName: "Ελένη",
-//     birthDate: "1980-05-14",
-//     birthPlace: "Ντάκα",
-//     address: "25 Κολοκοτρώνη Street",
-//     postalCode: "10562",
-//     city: "Αθήνα",
-//     afm: "099876543",
-//     phone: "Σαϊφούρ Ραχμάν",
-//     email: "ux.saifur.info@gmail.com",
-//   },
+  OtherOpation &
+  OthersValue &
+  DynamicOwnerFields;
 
 const inputStyle =
   "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
@@ -98,10 +107,16 @@ const AIExtractionDataInPut = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const ownerData: any = useSelector(
-    (state: RootState) => state.aiData.ownerBaseData
-  );
-  console.log(ownerData);
+  const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+  const allExtreactData = stepByStepData.aiDataState;
+  const ownerData = stepByStepData.ownerBaseData;
+  const projectData = stepByStepData.projectId;
+  const subCategoryData = stepByStepData.subcategory;
+  console.log(ownerData, projectData, subCategoryData);
+
+  const dataShowExtreact = allExtreactData.formatted_data;
+  console.log(dataShowExtreact);
+
   // const owners = ownerData?.formatted_data?.owners ?? null;
 
   const onSubmit = (data: any) => {
@@ -139,6 +154,7 @@ const AIExtractionDataInPut = () => {
                   {...register("projectDescription")}
                   className={inputStyle}
                   placeholder="Ανακαίνιση κατοικίας"
+                  defaultValue={dataShowExtreact?.project_description}
                 />
               </div>
 
@@ -150,6 +166,7 @@ const AIExtractionDataInPut = () => {
                   {...register("cadastralCode")}
                   className={inputStyle}
                   placeholder="065-123-000-458"
+                  defaultValue={dataShowExtreact?.cadastral_code_kaek}
                 />
               </div>
 
@@ -159,6 +176,7 @@ const AIExtractionDataInPut = () => {
                   {...register("type")}
                   className={inputStyle}
                   placeholder="Ανακαίνιση οικογενειακού διαμερίσματος"
+                  defaultValue={dataShowExtreact?.property_type}
                 />
               </div>
 
@@ -170,6 +188,9 @@ const AIExtractionDataInPut = () => {
                   {...register("construction")}
                   className={inputStyle}
                   placeholder="Ανακαίνιση οικογενειακού διαμερίσματος"
+                  defaultValue={
+                    dataShowExtreact?.arbitrary_constructions_description
+                  }
                 />
               </div>
 
@@ -181,6 +202,7 @@ const AIExtractionDataInPut = () => {
                   {...register("area")}
                   className={inputStyle}
                   placeholder="120 τ.μ."
+                  defaultValue={dataShowExtreact?.surface_areas}
                 />
               </div>
 
@@ -192,6 +214,7 @@ const AIExtractionDataInPut = () => {
                   {...register("titleArea")}
                   className={inputStyle}
                   placeholder="118 τ.μ."
+                  defaultValue={dataShowExtreact?.title_deed_area}
                 />
               </div>
 
@@ -201,6 +224,7 @@ const AIExtractionDataInPut = () => {
                   {...register("building")}
                   className={inputStyle}
                   placeholder="Αριθμός Διαμερίσματος"
+                  defaultValue={dataShowExtreact?.band_value}
                 />
               </div>
 
@@ -210,6 +234,7 @@ const AIExtractionDataInPut = () => {
                   {...register("floor")}
                   className={inputStyle}
                   placeholder="3rd Floor"
+                  defaultValue={dataShowExtreact?.building_floor}
                 />
               </div>
 
@@ -218,9 +243,10 @@ const AIExtractionDataInPut = () => {
                   Κτίριο Διεύθυνσης
                 </label>
                 <input
-                  {...register("address")}
+                  {...register("building_permi")}
                   className={inputStyle}
                   placeholder="12 Irmou Street"
+                  defaultValue={dataShowExtreact?.building_permit_date}
                 />
               </div>
 
@@ -232,6 +258,7 @@ const AIExtractionDataInPut = () => {
                   {...register("buildingCode")}
                   className={inputStyle}
                   placeholder="BLG-2025-011"
+                  defaultValue={dataShowExtreact?.building_code}
                 />
               </div>
 
@@ -243,6 +270,7 @@ const AIExtractionDataInPut = () => {
                   {...register("neighborhood")}
                   className={inputStyle}
                   placeholder="Νέα Σμύρνη"
+                  defaultValue={dataShowExtreact?.neighborhood}
                 />
               </div>
 
@@ -254,6 +282,7 @@ const AIExtractionDataInPut = () => {
                   {...register("municipal")}
                   className={inputStyle}
                   placeholder="Δήμος Αθηναίων"
+                  defaultValue={dataShowExtreact?.municipality_community}
                 />
               </div>
             </div>
@@ -273,13 +302,10 @@ const AIExtractionDataInPut = () => {
                     Όνομα
                   </label>
                   <input
-                    {...register("firstName", { required: true })}
+                    {...register(`firstName${index + 1}`)}
                     defaultValue={owner.name}
                     className={inputStyle}
                   />
-                  {errors.firstName && (
-                    <span className="text-red-500 text-sm">Required</span>
-                  )}
                 </div>
 
                 {/* Last Name */}
@@ -288,13 +314,10 @@ const AIExtractionDataInPut = () => {
                     Επώνυμο
                   </label>
                   <input
-                    {...register("lastName", { required: true })}
+                    {...register(`lastName${index + 1}`)}
                     className={inputStyle}
                     defaultValue={owner.last_name}
                   />
-                  {errors.lastName && (
-                    <span className="text-red-500 text-sm">Required</span>
-                  )}
                 </div>
 
                 {/* Father's Name */}
@@ -303,7 +326,7 @@ const AIExtractionDataInPut = () => {
                     Όνομα Πατέρα
                   </label>
                   <input
-                    {...register("fatherName")}
+                    {...register(`fatherName${index + 1}`)}
                     className={inputStyle}
                     defaultValue={owner.fathers_name}
                   />
@@ -315,7 +338,7 @@ const AIExtractionDataInPut = () => {
                     Όνομα Μητέρας
                   </label>
                   <input
-                    {...register("motherName")}
+                    {...register(`motherName${index + 1}`)}
                     className={inputStyle}
                     defaultValue={owner.mothers_name}
                   />
@@ -328,7 +351,7 @@ const AIExtractionDataInPut = () => {
                   </label>
                   <input
                     type="date"
-                    {...register("birthDate")}
+                    {...register(`birthDate${index + 1}`)}
                     className={inputStyle}
                     defaultValue={owner.date_of_birth}
                   />
@@ -340,7 +363,7 @@ const AIExtractionDataInPut = () => {
                     Τόπος Γέννησης
                   </label>
                   <input
-                    {...register("birthPlace")}
+                    {...register(`birthPlace${index + 1}`)}
                     className={inputStyle}
                     defaultValue={owner.place_of_birth}
                   />
@@ -352,7 +375,7 @@ const AIExtractionDataInPut = () => {
                     Διεύθυνση
                   </label>
                   <input
-                    {...register("address")}
+                    {...register(`address${index + 1}`)}
                     className={inputStyle}
                     defaultValue={owner.address}
                   />
@@ -364,9 +387,9 @@ const AIExtractionDataInPut = () => {
                     Κωδικός Διεύθυνσης
                   </label>
                   <input
-                    {...register("postalCode")}
+                    {...register(`postalCode${index + 1}`)}
                     className={inputStyle}
-                    defaultValue=""
+                    defaultValue={owner.address_code}
                   />
                 </div>
 
@@ -375,7 +398,11 @@ const AIExtractionDataInPut = () => {
                   <label className="block text-sm font-medium mb-1">
                     Διεύθυνση Δήμος/Κοινότητα
                   </label>
-                  <input {...register("city")} className={inputStyle} />
+                  <input
+                    {...register(`city${index + 1}`)}
+                    className={inputStyle}
+                    defaultValue={dataShowExtreact.municipality_community}
+                  />
                 </div>
 
                 {/* AFM */}
@@ -383,7 +410,11 @@ const AIExtractionDataInPut = () => {
                   <label className="block text-sm font-medium mb-1">
                     Αριθμός Φορολογικού Μητρώου (ΑΦΜ)
                   </label>
-                  <input {...register("afm")} className={inputStyle} />
+                  <input
+                    {...register(`afm${index + 1}`)}
+                    className={inputStyle}
+                    defaultValue={owner.tax_identification_number}
+                  />
                 </div>
 
                 {/* Phone */}
@@ -392,7 +423,7 @@ const AIExtractionDataInPut = () => {
                     Κινητό
                   </label>
                   <input
-                    {...register("phone")}
+                    {...register(`phone${index + 1}`)}
                     className={inputStyle}
                     defaultValue={owner.mobile}
                   />
@@ -405,7 +436,7 @@ const AIExtractionDataInPut = () => {
                   </label>
                   <input
                     type="email"
-                    {...register("email")}
+                    {...register(`email${index + 1}`)}
                     className={inputStyle}
                     defaultValue={owner.email}
                   />
@@ -426,7 +457,11 @@ const AIExtractionDataInPut = () => {
                 <label className="block text-sm font-medium mb-1">
                   Αριθμός Άδειας
                 </label>
-                <input {...register("licenseNumber")} className={inputStyle} />
+                <input
+                  {...register("licenseNumber")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.license_number}
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">
@@ -435,25 +470,42 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("licenseRevision")}
                   className={inputStyle}
+                  defaultValue={dataShowExtreact.license_number_revision}
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-1">ΥΔΟΜ</label>
-                <input {...register("ydom")} className={inputStyle} />
+                <input
+                  {...register("ydom")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.ydom_description}
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Περιγραφή Οριζόντιας Ιδιοκτησίας
                 </label>
-                <input {...register("propertyDesc1")} className={inputStyle} />
+                <input
+                  {...register("propertyDesc1")}
+                  className={inputStyle}
+                  defaultValue={
+                    dataShowExtreact.horizontal_property_description
+                  }
+                />
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Περιγραφή Οριζόντιας Ιδιοκτησίας
                 </label>
-                <input {...register("propertyDesc2")} className={inputStyle} />
+                <input
+                  {...register("propertyDesc2")}
+                  className={inputStyle}
+                  defaultValue={
+                    dataShowExtreact.horizontal_ownership_description
+                  }
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">
@@ -462,6 +514,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("reexamineNumbers")}
                   className={inputStyle}
+                  defaultValue={dataShowExtreact.address}
                 />
               </div>
 
@@ -469,13 +522,21 @@ const AIExtractionDataInPut = () => {
                 <label className="block text-sm font-medium mb-1">
                   Συμβολαιογράφος
                 </label>
-                <input {...register("notary")} className={inputStyle} />
+                <input
+                  {...register("notary")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.notary}
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Τετραγωνικά Μέτρα Οικοπέδου
                 </label>
-                <input {...register("lotSquare")} className={inputStyle} />
+                <input
+                  {...register("lotSquare")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.land_use}
+                />
               </div>
 
               <div>
@@ -485,6 +546,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("licenseIssueNumber")}
                   className={inputStyle}
+                  defaultValue={dataShowExtreact.license_number}
                 />
               </div>
               <div>
@@ -495,6 +557,7 @@ const AIExtractionDataInPut = () => {
                   {...register("issueDate")}
                   type="date"
                   className={inputStyle}
+                  defaultValue={dataShowExtreact.building_permit_date}
                 />
               </div>
 
@@ -502,13 +565,21 @@ const AIExtractionDataInPut = () => {
                 <label className="block text-sm font-medium mb-1">
                   Λεπτομέρειες της Αρμόδιας Αρχής Έκδοσης
                 </label>
-                <input {...register("issueAuthority")} className={inputStyle} />
+                <input
+                  {...register("issueAuthority")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.issuing_authority_details}
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">
                   Περιφερειακή Ενότητα
                 </label>
-                <input {...register("region")} className={inputStyle} />
+                <input
+                  {...register("region")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.regional_unit}
+                />
               </div>
             </div>
           </div>
@@ -529,39 +600,60 @@ const AIExtractionDataInPut = () => {
                   {...register("issueDate")}
                   type="date"
                   className={inputStyle}
+                  defaultValue={dataShowExtreact.pea_issue_date}
                 />
               </div>
               <div>
                 <label className="form-label block mb-1 ">
                   Αριθμός Ασφάλειας PEA
                 </label>
-                <input {...register("epcCode")} className={inputStyle} />
+                <input
+                  {...register("epcCode")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.pea_security_number}
+                />
               </div>
 
               <div>
                 <label className="form-label block mb-1 ">
                   Αριθμός Πρωτοκόλλου PEA
                 </label>
-                <input {...register("protocolNumber")} className={inputStyle} />
+                <input
+                  {...register("protocolNumber")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.pea_protocol_number}
+                />
               </div>
               <div>
                 <label className="form-label block mb-1 ">
                   Κατηγορία Υφιστάμενης Ενέργειας PEA
                 </label>
-                <input {...register("energyCategory")} className={inputStyle} />
+                <input
+                  {...register("energyCategory")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.pea_energy_category}
+                />
               </div>
 
               <div>
                 <label className="form-label block mb-1 ">
                   Εκτιμώμενη Ετήσια Κατανάλωση Πρωτογενούς Ενέργειας [kWh/m²]
                 </label>
-                <input {...register("primaryEnergy")} className={inputStyle} />
+                <input
+                  {...register("primaryEnergy")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.pea_annual_energy_consumption}
+                />
               </div>
               <div>
                 <label className="form-label block mb-1 ">
                   Εκτιμώμενες Ετήσιες Εκπομπές CO₂ [kg/m²]
                 </label>
-                <input {...register("co2Emissions")} className={inputStyle} />
+                <input
+                  {...register("co2Emissions")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.pea_annual_co2_emissions}
+                />
               </div>
 
               <div className="md:col-span-2">
@@ -570,6 +662,7 @@ const AIExtractionDataInPut = () => {
                   {...register("zonePrice")}
                   className={inputStyle}
                   rows={2}
+                  // defaultValue={dataShowExtreact.license_number}
                 />
               </div>
             </div>
@@ -584,24 +677,41 @@ const AIExtractionDataInPut = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="form-label block mb-1 ">Χρήση Γης</label>
-                <input {...register("protocolNumber")} className={inputStyle} />
+                <input
+                  {...register("land_use")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.land_use}
+                />
               </div>
               <div>
                 <label className="form-label block mb-1 ">
                   Περιγραφή Αυθαίρετων Κατασκευών
                 </label>
-                <input {...register("epcCode")} className={inputStyle} />
+                <input
+                  {...register("arbitrary_constructions_description")}
+                  className={inputStyle}
+                  defaultValue={
+                    dataShowExtreact.arbitrary_constructions_description
+                  }
+                />
               </div>
 
               <div>
                 <label className="form-label block mb-1 ">
                   Έγγραφο Προσδοκίας
                 </label>
-                <input {...register("protocolNumber")} className={inputStyle} />
+                <input
+                  {...register("expectation_Document")}
+                  className={inputStyle}
+                  defaultValue={dataShowExtreact.license_number}
+                />
               </div>
             </div>
           </div>
         </div>
+        <button className="bg-blue-500 py-3 px-6 rounded-md text-lg text-white relative top-18">
+          Save all Data
+        </button>
       </form>
     </>
   );

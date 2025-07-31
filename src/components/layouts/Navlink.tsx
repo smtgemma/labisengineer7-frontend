@@ -108,6 +108,10 @@ export const DashBoardLink = [
     href: "/new-project",
   },
   {
+    name: "Advance Tools",
+    href: "/advance-tools",
+  },
+  {
     name: "Project",
     href: "/projects",
   },
@@ -115,6 +119,7 @@ export const DashBoardLink = [
     name: "Subscription",
     href: "/subscription",
   },
+
   {
     name: "Help/Guides",
     href: "/guidelines",

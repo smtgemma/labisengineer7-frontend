@@ -48,44 +48,6 @@ type EditingOwnerType = {
   index: number;
 };
 
-export interface FormattedData {
-  project_description: string;
-  cadastral_code_kaek: string;
-  property_type: string;
-  surface_areas: string;
-  title_deed_area: string;
-  building_floor: string;
-  address: string;
-  building_code: string;
-  neighborhood: string;
-  municipality_community: string;
-  first_owner: Owner;
-  second_owner: Owner;
-  third_owner: Owner;
-  license_number: string;
-  license_number_revision: string;
-  ydom_description: string;
-  horizontal_ownership_description: string;
-  horizontal_property_description: string;
-  establishment_numbers: string;
-  notary: string;
-  plot_square_meters: string;
-  permit_no: string;
-  building_permit_date: string;
-  issuing_authority_details: string;
-  regional_unit: string;
-  pea_issue_date: string;
-  pea_security_number: string;
-  pea_protocol_number: string;
-  pea_energy_category: string;
-  pea_annual_energy_consumption: string;
-  pea_annual_co2_emissions: string;
-  band_value: string;
-  land_use: string;
-  arbitrary_constructions_description: string;
-  document_of_anticipation: string;
-}
-
 const OwnerSelection = () => {
   const [projectDescription, setProjectDescription] = useState(
     "Renovation of residence"
@@ -97,13 +59,10 @@ const OwnerSelection = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const dispatch = useDispatch();
-  const ownerData = useSelector((state: RootState) => state.aiData.aiDataState);
-  // const owners: Owner[] = ownerData?.formatted_data?.owners ?? [];
+  const ownerData = useSelector((state: any) => state.aiData.aiDataState);
+
   const owners = (ownerData?.formatted_data?.owners ?? []) as Owner[];
 
-  // const owners = Array.isArray(ownerData?.formatted_data?.owners)
-  //   ? (ownerData.formatted_data.owners as Owner[])
-  //   : [];
   const [isOwner, setIsOwner] = useState<Owner[]>(owners);
 
   const {

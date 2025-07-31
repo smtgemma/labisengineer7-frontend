@@ -16,7 +16,6 @@ const Navbar = () => {
     { name: "Service", href: "#service" },
     { name: "How it Works", href: "#works" },
     { name: "Testimonials", href: "#testimonials" },
-    { name: "Advanced Tools", href: "/advance-tools" },
   ];
 
   return (
