@@ -67,6 +67,7 @@ interface AiExtractState {
   ownerBaseData?: any;
   projectId?: {} | undefined;
   subcategory?: [];
+  multiFiles?: [];
 }
 
 const initialState: AiExtractState = {
@@ -74,6 +75,7 @@ const initialState: AiExtractState = {
   ownerBaseData: [],
   projectId: undefined,
   subcategory: [],
+  multiFiles: [],
 };
 
 const aiExtractDataSlice = createSlice({
@@ -93,6 +95,9 @@ const aiExtractDataSlice = createSlice({
     setMultipleSubcategory: (state, action) => {
       state.subcategory = action.payload;
     },
+    setImageFile: (state, action) => {
+      state.multiFiles = action.payload;
+    },
   },
 });
 
@@ -101,5 +106,6 @@ export const {
   setAiExtractCatchWonerData,
   setTheProjectId,
   setMultipleSubcategory,
+  setImageFile,
 } = aiExtractDataSlice.actions;
 export default aiExtractDataSlice.reducer;

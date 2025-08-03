@@ -128,7 +128,6 @@ const PDFToImageConverter = () => {
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth < 640); // Tailwind's 'sm' breakpoint
     };
-
     // Initial check
     checkScreenSize();
 

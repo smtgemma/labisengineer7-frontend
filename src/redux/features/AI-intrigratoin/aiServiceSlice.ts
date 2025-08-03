@@ -42,6 +42,14 @@ const aiServiceApi = baseUrlApi.injectEndpoints({
         body: formData,
       }),
     }),
+
+    posAiAllDataSave: build.mutation({
+      query: (formData) => ({
+        url: "/projects/create-with-files",
+        method: "POST",
+        body: formData,
+      }),
+    }),
   }),
 });
 
@@ -51,4 +59,5 @@ export const {
   useImageToPdfCoverterMutation,
   usePdfPackageAutoNameMutation,
   usePfdToFdfMergeMutation,
+  usePosAiAllDataSaveMutation,
 } = aiServiceApi;

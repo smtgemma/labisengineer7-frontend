@@ -5,6 +5,10 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { warn } from "console";
+import { toast } from "sonner";
+import { usePosAiAllDataSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
+import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
+import tokenCatch from "@/lib/token";
 
 type OwnerData = {
   firstName: string;
@@ -112,16 +116,47 @@ const AIExtractionDataInPut = () => {
   const ownerData = stepByStepData.ownerBaseData;
   const projectData = stepByStepData.projectId;
   const subCategoryData = stepByStepData.subcategory;
-  console.log(ownerData, projectData, subCategoryData);
+  const filesData = stepByStepData.multiFiles;
 
-  const dataShowExtreact = allExtreactData.formatted_data;
-  console.log(dataShowExtreact);
+  const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
 
-  // const owners = ownerData?.formatted_data?.owners ?? null;
+  const dataShowExtreact = allExtreactData?.formatted_data;
+  const accessToken = tokenCatch();
 
-  const onSubmit = (data: any) => {
-    console.log("Form Data:", data);
+  const onSubmit = async (data: any) => {
     // Here you can send data to API
+    const DataPost = {
+      serviceId: projectData.id,
+      owners: ownerData,
+      subCategories: subCategoryData,
+      ...data,
+    };
+    console.log("Form Data:", DataPost);
+
+    const formData = new FormData();
+    filesData.forEach((file: any) => {
+      formData.append("files", file); // or "files[]" if backend expects that
+    });
+    formData.append(
+      "data",
+      JSON.stringify({
+        serviceId: projectData.id,
+        owners: ownerData,
+        subCategories: subCategoryData,
+        ...data,
+      })
+    );
+
+    try {
+      const res = await postDataAll(formData).unwrap();
+      console.log("resposive", res);
+      if (res?.success) {
+        toast.success(res?.message);
+      }
+    } catch (error: any) {
+      toast.error(error.data.message);
+      console.log(error);
+    }
   };
 
   return (
@@ -710,7 +745,13 @@ const AIExtractionDataInPut = () => {
           </div>
         </div>
         <button className="bg-blue-500 py-3 px-6 rounded-md text-lg text-white relative top-18">
-          Save all Data
+          {isLoading ? (
+            <>
+              <LoadingButton />
+            </>
+          ) : (
+            " Save all Data"
+          )}
         </button>
       </form>
     </>

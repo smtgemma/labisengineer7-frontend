@@ -5,7 +5,10 @@ import Lottie from "lottie-react";
 import aiLoadingExtract from "../../../../public/aiFIleLoading.json";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
-import { setAiExtractCatchData } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import {
+  setAiExtractCatchData,
+  setImageFile,
+} from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 
 interface AIExtractionProps {
   files: File[];
@@ -30,11 +33,10 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     setIsProcessing(true);
     setProgress(0);
     setIsCompleted(false);
-
+    dispatch(setImageFile(files));
     const formData = new FormData();
     files.forEach((file) => {
       formData.append("files", file);
-      console.log(file);
     });
 
     try {
