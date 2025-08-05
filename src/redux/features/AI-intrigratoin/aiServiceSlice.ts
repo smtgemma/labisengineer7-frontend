@@ -37,7 +37,7 @@ const aiServiceApi = baseUrlApi.injectEndpoints({
     }),
     postFileAiDataExtract: build.mutation({
       query: (formData) => ({
-        url: "http://172.252.13.69:8019/api/v1/process-documents",
+        url: "http://172.252.13.69:8019/api/v1/extract-multiple-documents",
         method: "POST",
         body: formData,
       }),

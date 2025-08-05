@@ -63,7 +63,7 @@ interface Data {
 }
 
 interface AiExtractState {
-  aiDataState?: FormattedData | null;
+  aiDataState?: any;
   ownerBaseData?: any;
   projectId?: {} | undefined;
   subcategory?: [];

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Brain, CheckCircle, Loader } from "lucide-react";
 import { usePostFileAiDataExtractMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import Lottie from "lottie-react";
-import aiLoadingExtract from "../../../../public/aiFIleLoading.json";
+import aiLoadingExtract from "../../../../public/aiFIleLoadingThree.json";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
 import {
@@ -42,8 +42,8 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     try {
       const res = await aiFileUpload(formData).unwrap();
       console.log(res);
-      if (res?.success) {
-        dispatch(setAiExtractCatchData(res.data));
+      if (res?.successful_extractions > 0) {
+        dispatch(setAiExtractCatchData(res.results));
 
         // Simulate AI processing
         const interval = setInterval(() => {
@@ -88,7 +88,9 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
       ) : isProcessing ? (
         <div className="space-y-8 min-h-[450px] flex flex-col justify-center items-center">
           {progress === 0 ? (
-            <Lottie animationData={aiLoadingExtract} loop={true} />
+            <div className="w-[300px]">
+              <Lottie animationData={aiLoadingExtract} loop={true} />
+            </div>
           ) : (
             <>
               <p className="text-gray-600 text-lg mb-6">

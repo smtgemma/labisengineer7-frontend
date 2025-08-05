@@ -40,6 +40,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/file-saver": "^2.0.7",
+    "@types/html-docx-js": "^0.3.4",
     "@types/html-to-docx": "^1.8.0",
     "@types/node": "^20",
     "@types/react": "^19",

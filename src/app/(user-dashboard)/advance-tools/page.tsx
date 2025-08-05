@@ -56,7 +56,7 @@ export default function BuildAITools() {
   ];
 
   return (
-    <div className=" w-[1320px] mx-auto bg-gradient-to-br my-10">
+    <div className=" max-w-[1320px] mx-auto bg-gradient-to-br my-10">
       <Head>
         <title>BuildAI – Advanced Tools</title>
         <meta

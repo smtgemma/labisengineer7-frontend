@@ -2,6 +2,8 @@ import { usePdfToImageCoverterMutation } from "@/redux/features/AI-intrigratoin/
 import { useState, useRef, ChangeEvent, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import useDownloader from "react-use-downloader";
+import Lottie from "lottie-react";
+import aiLoadingTools from "../../../../public/AITools.json";
 import { toast } from "sonner";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
@@ -141,7 +143,7 @@ const PDFToImageConverter = () => {
   }, []);
 
   return (
-    <div className="  py-12 px-4  lg:px-8">
+    <div className=" py-12 px-4  lg:px-8">
       <div className="max-w-md mx-auto  overflow-hidden md:max-w-2xl">
         <div className={" p-2 lg:p-8"}>
           <div className="text-center mb-12">
@@ -153,6 +155,8 @@ const PDFToImageConverter = () => {
               in a PDF.
             </p>
           </div>
+          <div></div>
+
           <div
             className={`border-2 border-dashed rounded-lg p-8 lg:p-16 text-center cursor-pointer transition-colors ${
               isDragActive
@@ -160,51 +164,57 @@ const PDFToImageConverter = () => {
                 : "border-gray-300 hover:border-blue-400"
             }`}
           >
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
-              <div className="flex flex-col items-center justify-center space-y-2">
-                <svg
-                  className="w-12 h-12 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                  ></path>
-                </svg>
-                <p className="text-lg font-medium text-gray-700">
-                  {isDragActive
-                    ? "Drop the PDF file here"
-                    : "Drop file or browse"}
-                </p>
-                <p className="text-sm text-gray-500">
-                  Format: pdf | Max file size: 30 MB
-                </p>
+            {isLoading ? (
+              <div className="w-[200px] mx-auto">
+                <Lottie animationData={aiLoadingTools} loop={true} />
               </div>
-            </div>
+            ) : (
+              <>
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  <div className="flex flex-col items-center justify-center space-y-2">
+                    <svg
+                      className="w-12 h-12 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                      ></path>
+                    </svg>
+                    <p className="text-lg font-medium text-gray-700">
+                      {isDragActive
+                        ? "Drop the PDF file here"
+                        : "Drop file or browse"}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Format: pdf | Max file size: 30 MB
+                    </p>
+                  </div>
+                </div>
 
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              accept=".pdf"
-              className="hidden"
-            />
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  accept=".pdf"
+                  className="hidden"
+                />
 
-            <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
-              <button
-                onClick={triggerFileInput}
-                className="w-full sm:w-auto px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                Browse Files
-              </button>
+                <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4">
+                  <button
+                    onClick={triggerFileInput}
+                    className="w-full sm:w-auto px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  >
+                    Browse Files
+                  </button>
 
-              {/* <div className="w-full sm:w-auto flex items-center gap-2">
+                  {/* <div className="w-full sm:w-auto flex items-center gap-2">
               <label
                 htmlFor="format"
                 className="text-sm font-medium text-gray-700"
@@ -221,7 +231,9 @@ const PDFToImageConverter = () => {
                 <option value="png">PNG</option>
               </select>
             </div> */}
-            </div>
+                </div>
+              </>
+            )}
           </div>
 
           {file && (

@@ -60,6 +60,7 @@ const OwnerSelection = () => {
 
   const dispatch = useDispatch();
   const ownerData = useSelector((state: any) => state.aiData.aiDataState);
+  console.log(ownerData);
 
   const owners = (ownerData?.formatted_data?.owners ?? []) as Owner[];
 

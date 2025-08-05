@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FileSpreadsheet, FileText, AlertCircle } from "lucide-react";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { saveAs } from "file-saver";
@@ -7,6 +7,8 @@ import ReactDOMServer from "react-dom/server";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import TemplateFile from "./Template";
+import TemplateTow from "./TemplateTow";
+import TemplateThree from "./TemplateThree";
 
 interface Owner {
   id: string;
@@ -32,6 +34,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   onComplete,
 }) => {
   const printRef = React.useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const openPreview = () => {
     const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
     const newTab = window.open("", "_blank");
@@ -72,36 +75,37 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   };
 
   // ✅ 3. DOWNLOAD DOCX FILE
-  const downloadDocx = async () => {
-    const doc = new Document({
-      sections: [
-        {
-          children: [
-            new Paragraph({
-              children: [new TextRun("Greek Declaration Form")],
-              heading: "Heading1",
-            }),
-            ...selectedOwners.map(
-              (owner) =>
-                new Paragraph({
-                  children: [
-                    new TextRun(`Name: ${owner.firstName} ${owner.surname}`),
-                    new TextRun(
-                      `\nFather Name: ${owner.fatherName} - VAT: ${owner.vatNo}`
-                    ),
-                  ],
-                  spacing: { after: 200 },
-                })
-            ),
-          ],
-        },
-      ],
-    });
+  // const downloadDocx = async () => {
+  //   const doc = new Document({
+  //     sections: [
+  //       {
+  //         children: [
+  //           new Paragraph({
+  //             children: [new TextRun("Greek Declaration Form")],
+  //             heading: "Heading1",
+  //           }),
+  //           ...selectedOwners.map(
+  //             (owner) =>
+  //               new Paragraph({
+  //                 children: [
+  //                   new TextRun(`Name: ${owner.firstName} ${owner.surname}`),
+  //                   new TextRun(
+  //                     `\nFather Name: ${owner.fatherName} - VAT: ${owner.vatNo}`
+  //                   ),
+  //                 ],
+  //                 spacing: { after: 200 },
+  //               })
+  //           ),
+  //         ],
+  //       },
+  //     ],
+  //   });
 
-    const blob = await Packer.toBlob(doc);
-    saveAs(blob, "document.docx");
-  };
+  //   const blob = await Packer.toBlob(doc);
+  //   saveAs(blob, "document.docx");
+  // };
 
+  // pdf file download
   const handleDownloadPdf = async () => {
     const element = printRef.current;
     if (!element) {
@@ -175,21 +179,24 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* CSV */}
         <div
-          onClick={downloadCSV}
+          onClick={openPreview}
           className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
           <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              <FileSpreadsheet className="w-6 h-6 text-green-600" />
+            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+              <FileText className="w-6 h-6 text-yellow-600" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">CSV File</h3>
-              <p className="text-sm text-gray-500">Structured spreadsheet</p>
+              <h3 className="text-lg font-semibold text-gray-900">
+                Preview file
+              </h3>
+              <p className="text-sm text-gray-500">Open in new tab</p>
             </div>
           </div>
-          <p className="text-gray-600 text-sm">Click to download owners.csv</p>
+          <p className="text-gray-600 text-sm">
+            Click to preview Word-style output
+          </p>
         </div>
 
         {/* fdf */}
@@ -210,8 +217,27 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             Click to download document.docx
           </p>
         </div>
+        {/* CSV */}
+        <div
+          onClick={downloadCSV}
+          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
+        >
+          <div className="flex items-center space-x-4 mb-4">
+            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+              <FileSpreadsheet className="w-6 h-6 text-green-600" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">CSV File</h3>
+              <p className="text-sm text-gray-500">Structured spreadsheet</p>
+            </div>
+          </div>
+          <p className="text-gray-600 text-sm">Click to download owners.csv</p>
+        </div>
         {/* DOCX */}
-        <div className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md">
+        {/* <div
+          onClick={downloadDocx}
+          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
+        >
           <div className="flex items-center space-x-4 mb-4">
             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
               <FileText className="w-6 h-6 text-blue-600" />
@@ -224,26 +250,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           <p className="text-gray-600 text-sm">
             Click to download document.docx
           </p>
-        </div>
-
-        <div
-          onClick={openPreview}
-          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
-        >
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-              <FileText className="w-6 h-6 text-yellow-600" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900">
-                Preview file
-              </h3>
-              <p className="text-sm text-gray-500">Open in new tab</p>
-            </div>
-          </div>
-          <p className="text-gray-600 text-sm">
-            Click to preview Word-style output
-          </p>
+        </div> */}
+        {/* Export content with inline styles */}
+        <div ref={contentRef} style={{ display: "none" }}>
+          <TemplateThree />
         </div>
       </div>
 
