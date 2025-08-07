@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import { toast } from "sonner";
 
 interface FAQItem {
   id: string;
@@ -87,6 +88,17 @@ const FAQSection = () => {
     setExpandedItems(newExpanded);
   };
 
+  const userId = "bihenda-chine-9981 asdfa"; // example hidden user ID
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(userId);
+      toast.success("successfully Id copy !");
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+  };
+
   return (
     <div className={` min-h-screen bg-[#F1F5F9] py-8 px-12 `}>
       <div>
@@ -165,6 +177,13 @@ const FAQSection = () => {
             })}
           </div>
         </div>
+        {/* auto copy file  */}
+        <button
+          onClick={handleCopy}
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        >
+          Copy User ID
+        </button>
       </div>
     </div>
   );
