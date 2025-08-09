@@ -88,8 +88,7 @@ const FAQSection = () => {
     setExpandedItems(newExpanded);
   };
 
-  const userId = "bihenda-chine-9981 asdfa"; // example hidden user ID
-
+  const userId = "bihenda-chine-9981 asdfa";
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(userId);

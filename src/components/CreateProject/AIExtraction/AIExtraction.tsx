@@ -27,6 +27,8 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
 
   const [aiFileUpload, { isLoading }] = usePostFileAiDataExtractMutation();
 
+  console.log(files);
+
   // ai data extract
   const startExtraction = async () => {
     if (files.length === 0) return;
