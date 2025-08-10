@@ -37,9 +37,6 @@ const PricingCard: React.FC<PricingCardProps> = ({
   const [createSubscription, { isLoading: btnLoading }] =
     useCreateSubscirptionPlansMutation();
 
-  const router = useRouter();
-  const dispatch = useDispatch();
-
   const accessToken = tokenCatch();
 
   // create subscription
@@ -53,7 +50,6 @@ const PricingCard: React.FC<PricingCardProps> = ({
       console.log(response);
       if (response?.success) {
         toast.success(response?.message);
-        // router.push(`${response?.data?.paymentUrl}`);
         window.open(`${response?.data?.paymentUrl}`, "_blank");
       }
     } catch (error: any) {
