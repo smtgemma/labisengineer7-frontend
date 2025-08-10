@@ -27,7 +27,10 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
 
   const [aiFileUpload, { isLoading }] = usePostFileAiDataExtractMutation();
 
-  console.log(files);
+  const ktimatologio = files[0];
+  const contract = files[1];
+  const permit = files[2];
+  const Law = files[3];
 
   // ai data extract
   const startExtraction = async () => {
@@ -37,15 +40,23 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     setIsCompleted(false);
     dispatch(setImageFile(files));
     const formData = new FormData();
-    files.forEach((file) => {
-      formData.append("files", file);
-    });
+
+    if (ktimatologio) formData.append("ktimatologio", ktimatologio);
+    if (contract) formData.append("contract", contract);
+    if (permit) formData.append("permit", permit);
+    if (Law) formData.append("law4495", Law);
+
+    formData.append(
+      "project_descriptions",
+      JSON.stringify(["ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ..."])
+    );
+    formData.append("sub_categories", "sdfasdasd");
 
     try {
       const res = await aiFileUpload(formData).unwrap();
       console.log(res);
-      if (res?.successful_extractions > 0) {
-        dispatch(setAiExtractCatchData(res.results));
+      if (res) {
+        dispatch(setAiExtractCatchData(res));
 
         // Simulate AI processing
         const interval = setInterval(() => {

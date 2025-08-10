@@ -119,8 +119,8 @@ const AIExtractionDataInPut = () => {
   const filesData = stepByStepData.multiFiles;
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
+  console.log(allExtreactData);
 
-  const dataShowExtreact = allExtreactData?.formatted_data;
   const accessToken = tokenCatch();
 
   const onSubmit = async (data: any) => {
@@ -189,7 +189,7 @@ const AIExtractionDataInPut = () => {
                   {...register("projectDescription")}
                   className={inputStyle}
                   placeholder="Ανακαίνιση κατοικίας"
-                  defaultValue={dataShowExtreact?.project_description}
+                  // defaultValue={dataShowExtreact?.project_description}
                 />
               </div>
 
@@ -201,7 +201,8 @@ const AIExtractionDataInPut = () => {
                   {...register("cadastralCode")}
                   className={inputStyle}
                   placeholder="065-123-000-458"
-                  defaultValue={dataShowExtreact?.cadastral_code_kaek}
+                  defaultValue={allExtreactData?.kaek_property}
+                  // defaultValue={dataShowExtreact?.cadastral_code_kaek}
                 />
               </div>
 
@@ -211,7 +212,7 @@ const AIExtractionDataInPut = () => {
                   {...register("type")}
                   className={inputStyle}
                   placeholder="Ανακαίνιση οικογενειακού διαμερίσματος"
-                  defaultValue={dataShowExtreact?.property_type}
+                  // defaultValue={dataShowExtreact?.property_type}
                 />
               </div>
 
@@ -223,9 +224,9 @@ const AIExtractionDataInPut = () => {
                   {...register("construction")}
                   className={inputStyle}
                   placeholder="Ανακαίνιση οικογενειακού διαμερίσματος"
-                  defaultValue={
-                    dataShowExtreact?.arbitrary_constructions_description
-                  }
+                  // defaultValue={
+                  //   dataShowExtreact?.arbitrary_constructions_description
+                  // }
                 />
               </div>
 
@@ -237,7 +238,7 @@ const AIExtractionDataInPut = () => {
                   {...register("area")}
                   className={inputStyle}
                   placeholder="120 τ.μ."
-                  defaultValue={dataShowExtreact?.surface_areas}
+                  defaultValue={allExtreactData?.plot_area}
                 />
               </div>
 
@@ -249,7 +250,7 @@ const AIExtractionDataInPut = () => {
                   {...register("titleArea")}
                   className={inputStyle}
                   placeholder="118 τ.μ."
-                  defaultValue={dataShowExtreact?.title_deed_area}
+                  defaultValue={allExtreactData?.title_area}
                 />
               </div>
 
@@ -259,7 +260,7 @@ const AIExtractionDataInPut = () => {
                   {...register("building")}
                   className={inputStyle}
                   placeholder="Αριθμός Διαμερίσματος"
-                  defaultValue={dataShowExtreact?.band_value}
+                  // defaultValue={dataShowExtreact?.band_value}
                 />
               </div>
 
@@ -269,7 +270,7 @@ const AIExtractionDataInPut = () => {
                   {...register("floor")}
                   className={inputStyle}
                   placeholder="3rd Floor"
-                  defaultValue={dataShowExtreact?.building_floor}
+                  defaultValue={allExtreactData?.floor_property}
                 />
               </div>
 
@@ -281,7 +282,8 @@ const AIExtractionDataInPut = () => {
                   {...register("building_permi")}
                   className={inputStyle}
                   placeholder="12 Irmou Street"
-                  defaultValue={dataShowExtreact?.building_permit_date}
+                  defaultValue={allExtreactData?.permit_number}
+                  // defaultValue={dataShowExtreact?.building_permit_date}
                 />
               </div>
 
@@ -293,7 +295,7 @@ const AIExtractionDataInPut = () => {
                   {...register("buildingCode")}
                   className={inputStyle}
                   placeholder="BLG-2025-011"
-                  defaultValue={dataShowExtreact?.building_code}
+                  // defaultValue={dataShowExtreact?.building_code}
                 />
               </div>
 
@@ -305,7 +307,7 @@ const AIExtractionDataInPut = () => {
                   {...register("neighborhood")}
                   className={inputStyle}
                   placeholder="Νέα Σμύρνη"
-                  defaultValue={dataShowExtreact?.neighborhood}
+                  // defaultValue={dataShowExtreact?.neighborhood}
                 />
               </div>
 
@@ -317,7 +319,8 @@ const AIExtractionDataInPut = () => {
                   {...register("municipal")}
                   className={inputStyle}
                   placeholder="Δήμος Αθηναίων"
-                  defaultValue={dataShowExtreact?.municipality_community}
+                  defaultValue={allExtreactData?.municipality_community}
+                  // defaultValue={dataShowExtreact?.municipality_community}
                 />
               </div>
             </div>
@@ -338,7 +341,7 @@ const AIExtractionDataInPut = () => {
                   </label>
                   <input
                     {...register(`firstName${index + 1}`)}
-                    defaultValue={owner.name}
+                    defaultValue={owner.first_name}
                     className={inputStyle}
                   />
                 </div>
@@ -363,7 +366,7 @@ const AIExtractionDataInPut = () => {
                   <input
                     {...register(`fatherName${index + 1}`)}
                     className={inputStyle}
-                    defaultValue={owner.fathers_name}
+                    defaultValue={`${owner.father_first_name} ${owner.father_last_name}`}
                   />
                 </div>
 
@@ -375,7 +378,7 @@ const AIExtractionDataInPut = () => {
                   <input
                     {...register(`motherName${index + 1}`)}
                     className={inputStyle}
-                    defaultValue={owner.mothers_name}
+                    defaultValue={`${owner.mother_first_name} ${owner.mother_last_name}`}
                   />
                 </div>
 
@@ -412,7 +415,7 @@ const AIExtractionDataInPut = () => {
                   <input
                     {...register(`address${index + 1}`)}
                     className={inputStyle}
-                    defaultValue={owner.address}
+                    defaultValue={owner.owner_address}
                   />
                 </div>
 
@@ -436,7 +439,7 @@ const AIExtractionDataInPut = () => {
                   <input
                     {...register(`city${index + 1}`)}
                     className={inputStyle}
-                    defaultValue={dataShowExtreact.municipality_community}
+                    defaultValue={owner.city}
                   />
                 </div>
 
@@ -460,7 +463,7 @@ const AIExtractionDataInPut = () => {
                   <input
                     {...register(`phone${index + 1}`)}
                     className={inputStyle}
-                    defaultValue={owner.mobile}
+                    // defaultValue={owner.mobile}
                   />
                 </div>
 
@@ -473,7 +476,7 @@ const AIExtractionDataInPut = () => {
                     type="email"
                     {...register(`email${index + 1}`)}
                     className={inputStyle}
-                    defaultValue={owner.email}
+                    // defaultValue={owner.email}
                   />
                 </div>
               </div>
@@ -495,7 +498,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("licenseNumber")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.license_number}
+                  // defaultValue={dataShowExtreact.license_number}
                 />
               </div>
               <div>
@@ -505,7 +508,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("licenseRevision")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.license_number_revision}
+                  // defaultValue={dataShowExtreact.license_number_revision}
                 />
               </div>
 
@@ -514,7 +517,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("ydom")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.ydom_description}
+                  // defaultValue={dataShowExtreact.ydom_description}
                 />
               </div>
               <div>
@@ -524,9 +527,10 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("propertyDesc1")}
                   className={inputStyle}
-                  defaultValue={
-                    dataShowExtreact.horizontal_property_description
-                  }
+                  defaultValue={allExtreactData?.issuing_authority}
+                  // defaultValue={
+                  //   dataShowExtreact.horizontal_property_description
+                  // }
                 />
               </div>
 
@@ -537,9 +541,9 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("propertyDesc2")}
                   className={inputStyle}
-                  defaultValue={
-                    dataShowExtreact.horizontal_ownership_description
-                  }
+                  // defaultValue={
+                  //   dataShowExtreact.horizontal_ownership_description
+                  // }
                 />
               </div>
               <div>
@@ -549,7 +553,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("reexamineNumbers")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.address}
+                  // defaultValue={dataShowExtreact.address}
                 />
               </div>
 
@@ -560,7 +564,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("notary")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.notary}
+                  // defaultValue={dataShowExtreact.notary}
                 />
               </div>
               <div>
@@ -570,7 +574,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("lotSquare")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.land_use}
+                  // defaultValue={dataShowExtreact.land_use}
                 />
               </div>
 
@@ -581,7 +585,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("licenseIssueNumber")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.license_number}
+                  // defaultValue={dataShowExtreact.license_number}
                 />
               </div>
               <div>
@@ -592,7 +596,8 @@ const AIExtractionDataInPut = () => {
                   {...register("issueDate")}
                   type="date"
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.building_permit_date}
+                  // defaultValue={allExtreactData?.issuing_authority}
+                  // defaultValue={dataShowExtreact.building_permit_date}
                 />
               </div>
 
@@ -603,7 +608,8 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("issueAuthority")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.issuing_authority_details}
+                  defaultValue={allExtreactData?.issuing_authority}
+                  // defaultValue={dataShowExtreact.issuing_authority_details}
                 />
               </div>
               <div>
@@ -613,7 +619,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("region")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.regional_unit}
+                  // defaultValue={dataShowExtreact.regional_unit}
                 />
               </div>
             </div>
@@ -635,7 +641,7 @@ const AIExtractionDataInPut = () => {
                   {...register("issueDate")}
                   type="date"
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.pea_issue_date}
+                  // defaultValue={dataShowExtreact.pea_issue_date}
                 />
               </div>
               <div>
@@ -645,7 +651,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("epcCode")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.pea_security_number}
+                  // defaultValue={dataShowExtreact.pea_security_number}
                 />
               </div>
 
@@ -656,7 +662,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("protocolNumber")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.pea_protocol_number}
+                  // defaultValue={dataShowExtreact.pea_protocol_number}
                 />
               </div>
               <div>
@@ -666,7 +672,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("energyCategory")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.pea_energy_category}
+                  // defaultValue={dataShowExtreact.pea_energy_category}
                 />
               </div>
 
@@ -677,7 +683,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("primaryEnergy")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.pea_annual_energy_consumption}
+                  // defaultValue={dataShowExtreact.pea_annual_energy_consumption}
                 />
               </div>
               <div>
@@ -687,7 +693,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("co2Emissions")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.pea_annual_co2_emissions}
+                  // defaultValue={dataShowExtreact.pea_annual_co2_emissions}
                 />
               </div>
 
@@ -697,7 +703,7 @@ const AIExtractionDataInPut = () => {
                   {...register("zonePrice")}
                   className={inputStyle}
                   rows={2}
-                  // defaultValue={dataShowExtreact.license_number}
+                  //// defaultValue={dataShowExtreact.license_number}
                 />
               </div>
             </div>
@@ -715,7 +721,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("land_use")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.land_use}
+                  // defaultValue={dataShowExtreact.land_use}
                 />
               </div>
               <div>
@@ -725,9 +731,9 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("arbitrary_constructions_description")}
                   className={inputStyle}
-                  defaultValue={
-                    dataShowExtreact.arbitrary_constructions_description
-                  }
+                  // defaultValue={
+                  //   dataShowExtreact.arbitrary_constructions_description
+                  // }
                 />
               </div>
 
@@ -738,7 +744,7 @@ const AIExtractionDataInPut = () => {
                 <input
                   {...register("expectation_Document")}
                   className={inputStyle}
-                  defaultValue={dataShowExtreact.license_number}
+                  // defaultValue={dataShowExtreact.license_number}
                 />
               </div>
             </div>

@@ -53,8 +53,8 @@ const PricingCard: React.FC<PricingCardProps> = ({
       console.log(response);
       if (response?.success) {
         toast.success(response?.message);
-        router.push("/billing-information");
-        dispatch(setSubscriptionData(response.data));
+        // router.push(`${response?.data?.paymentUrl}`);
+        window.open(`${response?.data?.paymentUrl}`, "_blank");
       }
     } catch (error: any) {
       console.log(error);
