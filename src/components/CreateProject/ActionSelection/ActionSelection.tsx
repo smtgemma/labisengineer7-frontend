@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "sonner";
 
 interface ActionSelectionProps {
   selectedActions: string[];
@@ -14,7 +15,6 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     "Generate Assignment of Responsibility",
     "Create Technical Description",
     "Export CSV File",
-    "Auto-Fill Government Form",
   ];
 
   const toggleAction = (action: string) => {
@@ -22,6 +22,17 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
       onActionsChange(selectedActions.filter((a) => a !== action));
     } else {
       onActionsChange([...selectedActions, action]);
+    }
+  };
+
+  // auto filed funtion
+  const userId = "bihenda-chine-9981 asdfa";
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(userId);
+      toast.success("successfully Id copy !. Use is id your extension.");
+    } catch (err) {
+      console.error("Copy failed:", err);
     }
   };
 
@@ -73,6 +84,22 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
             </div>
           </div>
         ))}
+
+        <div
+          className={` flex gap-5
+          }`}
+        >
+          <div className="p-4 w-1/2 rounded-lg   cursor-pointer transition-all duration-200  border-gray-200 bg-white hover:border-gray-30">
+            <span className={`font-medium `}>Auto-Fill Government Form</span>
+          </div>
+          {/* auto copy file  */}
+          <button
+            onClick={handleCopy}
+            className="bg-blue-400 text-white px-4  rounded hover:bg-blue-700 cursor-pointer"
+          >
+            Copy User ID
+          </button>
+        </div>
       </div>
 
       {/* Next Button */}
