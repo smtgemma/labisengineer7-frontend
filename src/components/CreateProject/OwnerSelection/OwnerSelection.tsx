@@ -60,10 +60,12 @@ const OwnerSelection = () => {
 
   const dispatch = useDispatch();
   const ownerData = useSelector((state: any) => state.aiData.aiDataState);
+  console.log(ownerData.owners);
 
-  const owners = (ownerData?.formatted_data?.owners ?? []) as Owner[];
+  // const owners = (ownerData.owners ?? []) as Owner[];
 
-  const [isOwner, setIsOwner] = useState<Owner[]>(owners);
+  const [isOwner, setIsOwner] = useState<Owner[]>(ownerData.owners);
+  console.log(isOwner);
 
   const {
     register,
@@ -187,7 +189,7 @@ const OwnerSelection = () => {
               <div className="flex justify-between items-center">
                 <label className="text-gray-700 font-medium">First Name:</label>
                 <span className="text-gray-900 font-medium">
-                  {owner.name || "Not set"}
+                  {owner.first_name || "Not set"}
                 </span>
               </div>
 
@@ -203,7 +205,7 @@ const OwnerSelection = () => {
                   Father's Name:
                 </label>
                 <span className="text-gray-900 font-medium">
-                  {owner.fathers_name || "Not set"}
+                  {owner.father_first_name || "Not set"}
                 </span>
               </div>
 

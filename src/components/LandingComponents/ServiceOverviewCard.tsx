@@ -1,6 +1,6 @@
-import Image, { StaticImageData } from 'next/image';
-import React from 'react';
-import serviceImg from '@/assets/landing-page/service.jpg';
+import Image, { StaticImageData } from "next/image";
+import React from "react";
+import serviceImg from "@/assets/landing-page/service.jpg";
 
 export interface IService {
   title: string;
@@ -9,7 +9,11 @@ export interface IService {
   link: string;
 }
 
-export default function ServiceOverviewCard({ service }: { service: IService }) {
+export default function ServiceOverviewCard({
+  service,
+}: {
+  service: IService;
+}) {
   return (
     <section className="bg-white rounded-xl  border border-gray-200 overflow-hidden flex flex-col md:flex-row max-w-[648px] mx-auto p-4">
       {/* Image Section */}
@@ -24,13 +28,15 @@ export default function ServiceOverviewCard({ service }: { service: IService }) 
 
       {/* Content Section */}
       <div className="md:ml-6 flex flex-col justify-center text-center md:text-left mt-4 md:mt-0">
-        <h3 className="text-2xl font-bold text-start  mb-2">{service.title}</h3>
+        <h3 className=" text-xl lg:text-2xl font-bold text-start  mb-2">
+          {service.title}
+        </h3>
         <p className="text-info mb-4 text-start">{service.description}</p>
         <a
           href={service.link}
           className="text-primary hover:underline text-sm font-medium underline text-end "
         >
-          Learn More 
+          Learn More
         </a>
       </div>
     </section>

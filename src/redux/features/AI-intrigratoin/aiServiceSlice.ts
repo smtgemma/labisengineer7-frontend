@@ -37,7 +37,15 @@ const aiServiceApi = baseUrlApi.injectEndpoints({
     }),
     postFileAiDataExtract: build.mutation({
       query: (formData) => ({
-        url: "http://172.252.13.69:8019/api/v1/process-documents",
+        url: "http://172.252.13.69:8019/api/v1/process-documents-advanced",
+        method: "POST",
+        body: formData,
+      }),
+    }),
+
+    posAiAllDataSave: build.mutation({
+      query: (formData) => ({
+        url: "/projects/create-with-files",
         method: "POST",
         body: formData,
       }),
@@ -51,4 +59,5 @@ export const {
   useImageToPdfCoverterMutation,
   usePdfPackageAutoNameMutation,
   usePfdToFdfMergeMutation,
+  usePosAiAllDataSaveMutation,
 } = aiServiceApi;

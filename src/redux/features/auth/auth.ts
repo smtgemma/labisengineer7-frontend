@@ -58,6 +58,14 @@ const authApi = baseUrlApi.injectEndpoints({
         body: resetData,
       }),
     }),
+
+    // user informatin catch
+    userInfo: build.query({
+      query: (id) => ({
+        url: `/auth/${id}`,
+        method: "get",
+      }),
+    }),
   }),
 });
 
@@ -67,4 +75,5 @@ export const {
   useForgetPasswordMutation,
   useResetPasswordMutation,
   useRoleSetAndUpdateMutation,
+  useUserInfoQuery,
 } = authApi;

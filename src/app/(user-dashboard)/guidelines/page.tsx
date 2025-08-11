@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import { toast } from "sonner";
 
 interface FAQItem {
   id: string;

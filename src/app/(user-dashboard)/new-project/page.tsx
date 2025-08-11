@@ -25,7 +25,7 @@ export default function NewProject() {
         title="Start a New Project"
         subtitle="Select the type of documentation you need to generate."
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 my-6">
         {projects?.map((project: any, idx: number) => (
           <ProjectCard
             title={project.serviceName}

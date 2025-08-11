@@ -2,11 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import { baseUrlApi } from "./api/baseUrlApi";
 import subscriptionDataReducer from "./features/subscription/subscriptionDataSlice";
 import aiExtractDataReducer from "./features/AI-intrigratoin/aiFileDataSlice";
+import userDataReducer from "./features/auth/userDataCatchSlice";
 export const makeStore = () => {
   return configureStore({
     reducer: {
+      // data manage
       subscriptionData: subscriptionDataReducer,
       aiData: aiExtractDataReducer,
+      user: userDataReducer,
+      // api call middleware
       [baseUrlApi.reducerPath]: baseUrlApi.reducer,
     },
 

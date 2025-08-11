@@ -41,7 +41,7 @@ export default function ServicesOverview() {
   return (
     <div id="service" className="py-[100px]">
       <Container>
-        <section className="bg-white px-6  ">
+        <section className="bg-white md:px-6  ">
           <h2 className="text-3xl md:text-5xl font-bold text-center  text-primary mb-12">
             Services Overview
           </h2>

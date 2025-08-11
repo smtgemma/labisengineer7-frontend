@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Brain, CheckCircle, Loader } from "lucide-react";
 import { usePostFileAiDataExtractMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import Lottie from "lottie-react";
-import aiLoadingExtract from "../../../../public/aiFIleLoading.json";
+import aiLoadingExtract from "../../../../public/aiFIleLoadingThree.json";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
-import { setAiExtractCatchData } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import {
+  setAiExtractCatchData,
+  setImageFile,
+} from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 
 interface AIExtractionProps {
   files: File[];
@@ -24,24 +27,36 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
 
   const [aiFileUpload, { isLoading }] = usePostFileAiDataExtractMutation();
 
+  const ktimatologio = files[0];
+  const contract = files[1];
+  const permit = files[2];
+  const Law = files[3];
+
   // ai data extract
   const startExtraction = async () => {
     if (files.length === 0) return;
     setIsProcessing(true);
     setProgress(0);
     setIsCompleted(false);
-
+    dispatch(setImageFile(files));
     const formData = new FormData();
-    files.forEach((file) => {
-      formData.append("files", file);
-      console.log(file);
-    });
+
+    if (ktimatologio) formData.append("ktimatologio", ktimatologio);
+    if (contract) formData.append("contract", contract);
+    if (permit) formData.append("permit", permit);
+    if (Law) formData.append("law4495", Law);
+
+    formData.append(
+      "project_descriptions",
+      JSON.stringify(["ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ..."])
+    );
+    formData.append("sub_categories", "sdfasdasd");
 
     try {
       const res = await aiFileUpload(formData).unwrap();
       console.log(res);
-      if (res?.success) {
-        dispatch(setAiExtractCatchData(res.data));
+      if (res) {
+        dispatch(setAiExtractCatchData(res));
 
         // Simulate AI processing
         const interval = setInterval(() => {
@@ -86,7 +101,9 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
       ) : isProcessing ? (
         <div className="space-y-8 min-h-[450px] flex flex-col justify-center items-center">
           {progress === 0 ? (
-            <Lottie animationData={aiLoadingExtract} loop={true} />
+            <div className="w-[300px]">
+              <Lottie animationData={aiLoadingExtract} loop={true} />
+            </div>
           ) : (
             <>
               <p className="text-gray-600 text-lg mb-6">

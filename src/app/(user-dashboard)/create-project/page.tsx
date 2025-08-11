@@ -11,6 +11,8 @@ import FinalOverview from "@/components/CreateProject/FinalOverview/FinalOvervie
 import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
 import AIExtractionDataInPut from "@/components/CreateProject/aAIExtractionData/AIExtractionData";
 
+import { setImageFile } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+
 const workflowSteps = [
   {
     id: 1,

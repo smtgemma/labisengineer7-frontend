@@ -9,7 +9,9 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import LoadingButton from "../shared/LoadingBtn/LoadingButton";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import ForgotPasswordModal from "./forgotPassword/ForgotPasswordEmailModal";
+import { setUserData } from "@/redux/features/auth/userDataCatchSlice";
 
 type FormData = {
   email: string;
@@ -25,9 +27,9 @@ export default function SigninForm() {
   } = useForm<FormData>();
 
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
-
-  const router = useRouter();
   const [sigInUser, { isLoading }] = useSignInMutation();
+  const dispath = useDispatch();
+  const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -36,6 +38,7 @@ export default function SigninForm() {
       if (response?.success) {
         localStorage.setItem("accessToken", response?.data?.accessToken);
         console.log(response?.data?.user?.role);
+        dispath(setUserData(response?.data?.userData));
         toast.success(response?.message);
         if (response?.data?.user?.role === "SUPER_ADMIN") {
           router.push("/admin");
