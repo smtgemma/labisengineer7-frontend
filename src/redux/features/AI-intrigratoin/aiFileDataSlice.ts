@@ -70,6 +70,7 @@ interface AiExtractState {
   multiFiles?: [];
   aiInputData?: any;
   tempateName?:[]
+  projectIdCode?: string | null;
 }
 
 const initialState: AiExtractState = {
@@ -80,6 +81,7 @@ const initialState: AiExtractState = {
   multiFiles: [],
   aiInputData: null,
   tempateName: [],
+  projectIdCode: null,
 };
 
 const aiExtractDataSlice = createSlice({
@@ -97,6 +99,9 @@ const aiExtractDataSlice = createSlice({
     },
     setTempateName: (state, action) => {
       state.tempateName = action.payload;
+    },
+    setTheProjectCode: (state, action) => {
+      state.projectIdCode = action.payload;
     },
 
     setMultipleSubcategory: (state, action) => {
@@ -118,6 +123,7 @@ export const {
   setMultipleSubcategory,
   setImageFile,
   setAiExtreactAndInputData,
-  setTempateName
+  setTempateName,
+  setTheProjectCode,
 } = aiExtractDataSlice.actions;
 export default aiExtractDataSlice.reducer;

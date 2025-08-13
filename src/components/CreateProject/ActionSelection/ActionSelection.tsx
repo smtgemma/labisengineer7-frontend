@@ -163,6 +163,8 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   // , "====================================");
   //   console.log(subCategoryData, "all data ==="
   // , "====================================");
+  const project = stepByStepData.projectIdCode;
+  const allInputData = stepByStepData.aiInputData;
 
   const toggleAction = (action: string) => {
     if (selectedActions.includes(action)) {
@@ -176,11 +178,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     (state: RootState) => state.user.userData as UserData | null
   );
 
-  const projectAndUserHexCode = userData?.hexToken + "-8271";
+  const projectAndUserHexCode = `${userData?.hexToken}-${project?.projectCode}`;
 
   // auto filed funtion
-  // const userId = "bihenda-chine-9981 asdfa";
-
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(projectAndUserHexCode);
