@@ -22,7 +22,8 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
   const subCategoryData = stepByStepData.subcategory;
-  console.log(subCategoryData);
+  const allInputData = stepByStepData.aiInputData;
+  console.log(allInputData);
 
   const toggleAction = (action: string) => {
     if (selectedActions.includes(action)) {

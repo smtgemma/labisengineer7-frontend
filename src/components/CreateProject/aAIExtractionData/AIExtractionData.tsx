@@ -2,13 +2,17 @@
 import { div } from "framer-motion/client";
 import React from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { warn } from "console";
 import { toast } from "sonner";
 import { usePosAiAllDataSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
 import tokenCatch from "@/lib/token";
+import {
+  setAiExtractCatchData,
+  setAiExtreactAndInputData,
+} from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 
 type OwnerData = {
   firstName: string;
@@ -78,28 +82,13 @@ interface OthersValue {
   expectation_Document: string;
 }
 
-type DynamicOwnerFields = {
-  [key: `firstName${number}`]: string;
-  [key: `lastName${number}`]: string;
-  [key: `fatherName${number}`]: string;
-  [key: `motherName${number}`]: string;
-  [key: `birthDate${number}`]: string;
-  [key: `birthPlace${number}`]: string;
-  [key: `address${number}`]: string;
-  [key: `postalCode${number}`]: string;
-  [key: `city${number}`]: string;
-  [key: `afm${number}`]: string;
-  [key: `phone${number}`]: string;
-  [key: `email${number}`]: string;
-};
-
 type FormValues = ProjectData &
-  OwnerData &
   LicenseLegalFormData &
   EPCFormValues &
   OtherOpation &
-  OthersValue &
-  DynamicOwnerFields;
+  OthersValue & {
+    owners: OwnerData[];
+  };
 
 const inputStyle =
   "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
@@ -129,6 +118,8 @@ const AIExtractionDataInPut = () => {
     },
   });
 
+  const dispatch = useDispatch();
+
   const { fields } = useFieldArray({
     control,
     name: "owners",
@@ -141,6 +132,7 @@ const AIExtractionDataInPut = () => {
   const projectData = stepByStepData.projectId;
   const subCategoryData = stepByStepData.subcategory;
   const filesData = stepByStepData.multiFiles;
+  console.log(filesData);
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
   console.log(allExtreactData);
@@ -153,28 +145,30 @@ const AIExtractionDataInPut = () => {
     console.log("wnaer", fields);
     const DataPost = {
       serviceId: projectData.id,
-      owners: ownerData,
+      createdById: "68972468c6c27d509568985f",
       subCategories: subCategoryData,
       ...data,
     };
-    // console.log("Form Data:", DataPost);
+
+    dispatch(setAiExtreactAndInputData(DataPost));
+    console.log("sever send Data:", DataPost);
 
     const formData = new FormData();
     filesData.forEach((file: any) => {
-      formData.append("files", file); // or "files[]" if backend expects that
+      formData.append("files", file);
     });
     formData.append(
       "data",
       JSON.stringify({
         serviceId: projectData.id,
-        owners: ownerData,
+        createdById: "68972468c6c27d509568985f",
         subCategories: subCategoryData,
         ...data,
       })
     );
 
     try {
-      const res = await postDataAll(formData).unwrap();
+      const res = await postDataAll({ formData, accessToken }).unwrap();
       console.log("resposive", res);
       if (res?.success) {
         toast.success(res?.message);
