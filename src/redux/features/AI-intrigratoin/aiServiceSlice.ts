@@ -44,10 +44,13 @@ const aiServiceApi = baseUrlApi.injectEndpoints({
     }),
 
     posAiAllDataSave: build.mutation({
-      query: (formData) => ({
+      query: ({ formData, accessToken }) => ({
         url: "/projects/create-with-files",
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       }),
     }),
   }),
