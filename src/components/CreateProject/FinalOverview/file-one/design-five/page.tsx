@@ -1,6 +1,6 @@
 // import StampComponent from "@/component/shared/dashed/Dashed";
 
-export default function ProjectDescriptionFive() {
+export default function DesignFive() {
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
       {/* Header with coat of arms */}
