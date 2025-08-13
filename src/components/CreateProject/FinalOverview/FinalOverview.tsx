@@ -9,6 +9,7 @@ import jsPDF from "jspdf";
 import TemplateFile from "./Template";
 import TemplateTow from "./TemplateTow";
 import TemplateThree from "./TemplateThree";
+import { downloadZip } from "client-zip";
 
 interface Owner {
   id: string;
@@ -105,6 +106,12 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   //   saveAs(blob, "document.docx");
   // };
 
+  const templates = [
+    { name: "TemplateFile", component: <TemplateFile /> },
+    { name: "TemplateTwo", component: <TemplateTow /> },
+    { name: "TemplateThree", component: <TemplateThree /> },
+  ];
+
   // pdf file download
   const handleDownloadPdf = async () => {
     const element = printRef.current;
@@ -131,6 +138,57 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save("examplepdf.pdf");
   };
+
+  //pdf file dowload zip funciton working
+  const handleZipDownload = async () => {
+    const files: { name: string; lastModified: Date; input: Blob }[] = [];
+
+    for (let t of templates) {
+      const html = ReactDOMServer.renderToStaticMarkup(t.component);
+      const container = document.createElement("div");
+      container.innerHTML = html;
+      container.style.width = "794px";
+      container.style.background = "#fff";
+      document.body.appendChild(container);
+
+      const canvas = await html2canvas(container, { scale: 2 });
+      const imgData = canvas.toDataURL("image/png");
+
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "px",
+        format: "a4",
+      });
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+      const pdfBlob = pdf.output("blob");
+
+      files.push({
+        name: `${t.name}.pdf`,
+        lastModified: new Date(),
+        input: pdfBlob,
+      });
+
+      document.body.removeChild(container);
+    }
+
+    // Create ZIP in browser
+    const zipBlob = await downloadZip(files).blob();
+    saveAs(zipBlob, "templates.zip");
+  };
+
+  const handlePdfDownloadTempate = () => {
+    if (templates.length === 0) {
+      handleDownloadPdf();
+    } else {
+      handleZipDownload();
+    }
+  };
+
   // const handleDownloadPdf = async () => {
   //   const element = printRef.current;
   //   if (!element) return;
@@ -201,7 +259,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
         {/* fdf */}
         <div
-          onClick={handleDownloadPdf}
+          onClick={handlePdfDownloadTempate}
           className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
           <div className="flex items-center space-x-4 mb-4">
