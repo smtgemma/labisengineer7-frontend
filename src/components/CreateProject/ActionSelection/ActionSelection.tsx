@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "sonner";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { UserData } from "@/redux/features/auth/userDataCatchSlice";
 
 interface ActionSelectionProps {
   selectedActions: string[];
@@ -17,6 +20,10 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     "Export CSV File",
   ];
 
+  const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+  const subCategoryData = stepByStepData.subcategory;
+  console.log(subCategoryData);
+
   const toggleAction = (action: string) => {
     if (selectedActions.includes(action)) {
       onActionsChange(selectedActions.filter((a) => a !== action));
@@ -25,11 +32,18 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     }
   };
 
+  const userData = useSelector(
+    (state: RootState) => state.user.userData as UserData | null
+  );
+
+  const projectAndUserHexCode = userData?.hexToken + "-8271";
+
   // auto filed funtion
-  const userId = "bihenda-chine-9981 asdfa";
+  // const userId = "bihenda-chine-9981 asdfa";
+
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(userId);
+      await navigator.clipboard.writeText(projectAndUserHexCode);
       toast.success("successfully Id copy !. Use is id your extension.");
     } catch (err) {
       console.error("Copy failed:", err);

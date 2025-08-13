@@ -1,7 +1,7 @@
 "use client";
 import { div } from "framer-motion/client";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { warn } from "console";
@@ -105,13 +105,37 @@ const inputStyle =
   "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
 
 const AIExtractionDataInPut = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>();
-
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+  const { register, control, handleSubmit } = useForm<FormValues>({
+    defaultValues: {
+      owners: stepByStepData.ownerBaseData.map((owner: any) => ({
+        firstName: owner.first_name || "",
+        lastName: owner.last_name || "",
+        fatherName: `${owner.father_first_name || ""} ${
+          owner.father_last_name || ""
+        }`,
+        motherName: `${owner.mother_first_name || ""} ${
+          owner.mother_last_name || ""
+        }`,
+        birthDate: owner.date_of_birth || "",
+        birthPlace: owner.place_of_birth || "",
+        address: owner.owner_address || "",
+        postalCode: owner.address_code || "",
+        city: owner.city || "",
+        afm: owner.tax_identification_number || "",
+        phone: owner.mobile || "",
+        email: owner.email || "",
+      })),
+    },
+  });
+
+  const { fields } = useFieldArray({
+    control,
+    name: "owners",
+  });
+
+  console.log(fields);
+
   const allExtreactData = stepByStepData.aiDataState;
   const ownerData = stepByStepData.ownerBaseData;
   const projectData = stepByStepData.projectId;
@@ -125,13 +149,15 @@ const AIExtractionDataInPut = () => {
 
   const onSubmit = async (data: any) => {
     // Here you can send data to API
+    console.log("Form Data:", data);
+    console.log("wnaer", fields);
     const DataPost = {
       serviceId: projectData.id,
       owners: ownerData,
       subCategories: subCategoryData,
       ...data,
     };
-    console.log("Form Data:", DataPost);
+    // console.log("Form Data:", DataPost);
 
     const formData = new FormData();
     filesData.forEach((file: any) => {
@@ -326,10 +352,77 @@ const AIExtractionDataInPut = () => {
             </div>
           </div>
         </div>
-        {/* owner part  */}
-        {ownerData.map((owner: any, index: number) => (
-          <div key={index} className="mt-10 ">
-            <div className="p-6 md:p-10  bg-white rounded-xl">
+        {/* {fields.map((field, index) => (
+          <div key={field.id} className="p-6 bg-white rounded-xl mb-6">
+            <h2 className="text-xl font-semibold mb-4">
+              Information of Owner ({index + 1})
+            </h2>
+
+            <input
+              {...register(`owners.${index}.firstName`)}
+              className={inputStyle}
+              placeholder="First Name"
+            />
+            <input
+              {...register(`owners.${index}.lastName`)}
+              className={inputStyle}
+              placeholder="Last Name"
+            />
+            <input
+              {...register(`owners.${index}.fatherName`)}
+              className={inputStyle}
+              placeholder="Father Name"
+            />
+            <input
+              {...register(`owners.${index}.motherName`)}
+              className={inputStyle}
+              placeholder="Mother Name"
+            />
+            <input
+              type="date"
+              {...register(`owners.${index}.birthDate`)}
+              className={inputStyle}
+            />
+            <input
+              {...register(`owners.${index}.birthPlace`)}
+              className={inputStyle}
+              placeholder="Birth Place"
+            />
+            <input
+              {...register(`owners.${index}.address`)}
+              className={inputStyle}
+              placeholder="Address"
+            />
+            <input
+              {...register(`owners.${index}.postalCode`)}
+              className={inputStyle}
+              placeholder="Postal Code"
+            />
+            <input
+              {...register(`owners.${index}.city`)}
+              className={inputStyle}
+              placeholder="City"
+            />
+            <input
+              {...register(`owners.${index}.afm`)}
+              className={inputStyle}
+              placeholder="AFM"
+            />
+            <input
+              {...register(`owners.${index}.phone`)}
+              className={inputStyle}
+              placeholder="Phone"
+            />
+            <input
+              {...register(`owners.${index}.email`)}
+              className={inputStyle}
+              placeholder="Email"
+            />
+          </div>
+        ))} */}
+        {fields.map((field, index) => (
+          <div key={field.id} className="mt-10">
+            <div className="p-6 md:p-10 bg-white rounded-xl">
               <h2 className="text-2xl font-semibold mb-6">
                 Information of Owner ({index + 1})
               </h2>
@@ -340,8 +433,8 @@ const AIExtractionDataInPut = () => {
                     Όνομα
                   </label>
                   <input
-                    {...register(`firstName${index + 1}`)}
-                    defaultValue={owner.first_name}
+                    {...register(`owners.${index}.firstName`)}
+                    defaultValue={field.firstName}
                     className={inputStyle}
                   />
                 </div>
@@ -352,9 +445,9 @@ const AIExtractionDataInPut = () => {
                     Επώνυμο
                   </label>
                   <input
-                    {...register(`lastName${index + 1}`)}
+                    {...register(`owners.${index}.lastName`)}
+                    defaultValue={field.lastName}
                     className={inputStyle}
-                    defaultValue={owner.last_name}
                   />
                 </div>
 
@@ -364,9 +457,9 @@ const AIExtractionDataInPut = () => {
                     Όνομα Πατέρα
                   </label>
                   <input
-                    {...register(`fatherName${index + 1}`)}
+                    {...register(`owners.${index}.fatherName`)}
+                    defaultValue={field.fatherName}
                     className={inputStyle}
-                    defaultValue={`${owner.father_first_name} ${owner.father_last_name}`}
                   />
                 </div>
 
@@ -376,9 +469,9 @@ const AIExtractionDataInPut = () => {
                     Όνομα Μητέρας
                   </label>
                   <input
-                    {...register(`motherName${index + 1}`)}
+                    {...register(`owners.${index}.motherName`)}
+                    defaultValue={field.motherName}
                     className={inputStyle}
-                    defaultValue={`${owner.mother_first_name} ${owner.mother_last_name}`}
                   />
                 </div>
 
@@ -389,9 +482,9 @@ const AIExtractionDataInPut = () => {
                   </label>
                   <input
                     type="date"
-                    {...register(`birthDate${index + 1}`)}
+                    {...register(`owners.${index}.birthDate`)}
+                    defaultValue={field.birthDate}
                     className={inputStyle}
-                    defaultValue={owner.date_of_birth}
                   />
                 </div>
 
@@ -401,9 +494,9 @@ const AIExtractionDataInPut = () => {
                     Τόπος Γέννησης
                   </label>
                   <input
-                    {...register(`birthPlace${index + 1}`)}
+                    {...register(`owners.${index}.birthPlace`)}
+                    defaultValue={field.birthPlace}
                     className={inputStyle}
-                    defaultValue={owner.place_of_birth}
                   />
                 </div>
 
@@ -413,9 +506,9 @@ const AIExtractionDataInPut = () => {
                     Διεύθυνση
                   </label>
                   <input
-                    {...register(`address${index + 1}`)}
+                    {...register(`owners.${index}.address`)}
+                    defaultValue={field.address}
                     className={inputStyle}
-                    defaultValue={owner.owner_address}
                   />
                 </div>
 
@@ -425,21 +518,21 @@ const AIExtractionDataInPut = () => {
                     Κωδικός Διεύθυνσης
                   </label>
                   <input
-                    {...register(`postalCode${index + 1}`)}
+                    {...register(`owners.${index}.postalCode`)}
+                    defaultValue={field.postalCode}
                     className={inputStyle}
-                    defaultValue={owner.address_code}
                   />
                 </div>
 
-                {/* City/Community */}
+                {/* City */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Διεύθυνση Δήμος/Κοινότητα
                   </label>
                   <input
-                    {...register(`city${index + 1}`)}
+                    {...register(`owners.${index}.city`)}
+                    defaultValue={field.city}
                     className={inputStyle}
-                    defaultValue={owner.city}
                   />
                 </div>
 
@@ -449,9 +542,9 @@ const AIExtractionDataInPut = () => {
                     Αριθμός Φορολογικού Μητρώου (ΑΦΜ)
                   </label>
                   <input
-                    {...register(`afm${index + 1}`)}
+                    {...register(`owners.${index}.afm`)}
+                    defaultValue={field.afm}
                     className={inputStyle}
-                    defaultValue={owner.tax_identification_number}
                   />
                 </div>
 
@@ -461,9 +554,9 @@ const AIExtractionDataInPut = () => {
                     Κινητό
                   </label>
                   <input
-                    {...register(`phone${index + 1}`)}
+                    {...register(`owners.${index}.phone`)}
+                    defaultValue={field.phone}
                     className={inputStyle}
-                    // defaultValue={owner.mobile}
                   />
                 </div>
 
@@ -474,15 +567,18 @@ const AIExtractionDataInPut = () => {
                   </label>
                   <input
                     type="email"
-                    {...register(`email${index + 1}`)}
+                    {...register(`owners.${index}.email`)}
+                    defaultValue={field.email}
                     className={inputStyle}
-                    // defaultValue={owner.email}
                   />
                 </div>
               </div>
             </div>
           </div>
         ))}
+
+        {/* owner part  */}
+
         {/* License & Legal Data  */}
         <div className="mt-10">
           <div className="bg-white p-6 rounded-xl shadow-md w-full">
@@ -756,7 +852,7 @@ const AIExtractionDataInPut = () => {
               <LoadingButton />
             </>
           ) : (
-            " Save all Data"
+            "Save all Data"
           )}
         </button>
       </form>
