@@ -12,6 +12,7 @@ import tokenCatch from "@/lib/token";
 import {
   setAiExtractCatchData,
   setAiExtreactAndInputData,
+  setTheProjectCode,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 
 type OwnerData = {
@@ -172,6 +173,7 @@ const AIExtractionDataInPut = () => {
       console.log("resposive", res);
       if (res?.success) {
         toast.success(res?.message);
+        dispatch(setTheProjectCode(res?.data));
       }
     } catch (error: any) {
       toast.error(error.data.message);

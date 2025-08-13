@@ -21,9 +21,8 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   ];
 
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
-  const subCategoryData = stepByStepData.subcategory;
+  const project = stepByStepData.projectIdCode;
   const allInputData = stepByStepData.aiInputData;
-  console.log(allInputData);
 
   const toggleAction = (action: string) => {
     if (selectedActions.includes(action)) {
@@ -37,11 +36,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     (state: RootState) => state.user.userData as UserData | null
   );
 
-  const projectAndUserHexCode = userData?.hexToken + "-8271";
+  const projectAndUserHexCode = `${userData?.hexToken}-${project?.projectCode}`;
 
   // auto filed funtion
-  // const userId = "bihenda-chine-9981 asdfa";
-
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(projectAndUserHexCode);
