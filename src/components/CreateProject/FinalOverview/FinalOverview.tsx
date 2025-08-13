@@ -9,6 +9,13 @@ import jsPDF from "jspdf";
 import TemplateFile from "./Template";
 import TemplateTow from "./TemplateTow";
 import TemplateThree from "./TemplateThree";
+import {useSelector} from "react-redux";
+import { RootState } from "@/redux/store";
+import { downloadZip } from "client-zip";
+import DesignTwo from "./file-one/design-two/page";
+import DesignThree from "./file-one/design-three/page";
+import DesignFour from "./file-one/design-four/page";
+import DesignFive from "./file-one/design-five/page";
 
 interface Owner {
   id: string;

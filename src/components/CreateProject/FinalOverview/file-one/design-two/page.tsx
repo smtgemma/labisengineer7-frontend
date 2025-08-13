@@ -13,7 +13,7 @@ interface ProjectDescriptionTwoProps {
   key: number;
 }
 
-export default function ProjectDescriptionTwo({firstName, lastName,motherName,email,postalCode,fatherName, address,city,phone,birthPlace,birthDate, key} : ProjectDescriptionTwoProps) : React.JSX.Element {
+export default function DesignTwo({firstName, lastName,motherName,email,postalCode,fatherName, address,city,phone,birthPlace,birthDate, key} : ProjectDescriptionTwoProps) : React.JSX.Element {
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
       {/* Header with coat of arms */}

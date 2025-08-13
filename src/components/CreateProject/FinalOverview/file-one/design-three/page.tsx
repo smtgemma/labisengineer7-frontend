@@ -1,7 +1,7 @@
 // import StampComponent from "@/component/shared/dashed/Dashed";
 
 
-export default function ProjectDescriptionThree() {
+export default function DesignThree() {
     return (
         <div className="max-w-[794px] mx-auto p-4 bg-white">
             {/* Header with coat of arms */}
