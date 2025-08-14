@@ -150,7 +150,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
     { name: "ProjectDescriptionSix", component: <ProjectDescriptionSix /> },
-    { name: "DesignThree", component: <DesignThree /> },
   ];
 
   // pdf file download
