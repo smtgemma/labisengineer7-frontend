@@ -337,7 +337,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       <div ref={printRef} className="space-y-30">
         {/* <TemplateFIle /> */}
 
-        <div>
+        {/* <div>
           {
             allTempate?.map((item: string, index: number) => {
               if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
@@ -348,7 +348,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               } // Renders other items as text
             })
           }
-        </div>
+        </div> */}
 
         
         <div>
@@ -365,7 +365,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         </div>
 
         
-        <div>
+        {/* <div>
           {
             allTempate?.map((item: string, index: number) => {
               if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
@@ -376,10 +376,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               } // Renders other items as text
             })
           }
-        </div>
+        </div> */}
 
         
-        <div>
+        {/* <div>
           {
             allTempate?.map((item: string, index: number) => {
               if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
@@ -390,7 +390,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               } // Renders other items as text
             })
           }
-        </div>
+        </div> */}
 
 
       </div>

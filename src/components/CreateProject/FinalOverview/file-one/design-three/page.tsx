@@ -1,7 +1,18 @@
 // import StampComponent from "@/component/shared/dashed/Dashed";
 
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
+
 
 export default function DesignThree() {
+    const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+    const dataAllFIled = stepByStepData.aiInputData;
+    console.log("dataAllFIled------------------------------>", dataAllFIled);
+    const { arbitrary_constructions_description, area, building, buildingCode, building_permi, cadastralCode, co2Emissions, construction, createdById, energyCategory, epcCode, expectation_Document,
+        floor, issueAuthority, issueDate, land_use, licenseIssueNumber, licenseNumber, licenseRevision, lotSquare, municipal, neighborhood, notary, owners, primaryEnergy,
+        projectDescription, propertyDesc1, propertyDesc2, protocolNumber, reexamineNumbers, region, serviceId, subCategories, titleArea, type, ydom, zonePrice,
+    } = dataAllFIled;
+    const {address, afm, birthDate, birthPlace, city, email, fatherName, firstName, lastName, motherName, phone, postalCode} = owners[0]
     return (
         <div className="max-w-[794px] mx-auto p-4 bg-white">
             {/* Header with coat of arms */}
@@ -48,7 +59,7 @@ export default function DesignThree() {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-50 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                        <div className="flex-1 p-2 font-bold">Fathers name and surname Engineer</div>
+                        <div className="flex-1 p-2 font-bold">Fathers name and surname Engineer{fatherName || "N/A"}</div>
                     </div>
                 </div>
 
@@ -56,7 +67,7 @@ export default function DesignThree() {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-50 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                        <div className="flex-1 p-2 font-bold">Mothers name and surname Engineer</div>
+                        <div className="flex-1 p-2 font-bold">Mothers name and surname Engineer{motherName || "N/A"}</div>
                     </div>
                 </div>
 
@@ -64,7 +75,7 @@ export default function DesignThree() {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-50 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                        <div className="flex-1 p-2 font-bold">Born date Engineer</div>
+                        <div className="flex-1 p-2 font-bold">Born date Engineer {birthDate || "N/A"}</div>
                     </div>
                 </div>
 
@@ -72,7 +83,7 @@ export default function DesignThree() {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-50 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-                        <div className="flex-1 p-2 font-bold">Born Town Engineer</div>
+                        <div className="flex-1 p-2 font-bold">Born Town Engineer {birthPlace || "N/A"}</div>
                     </div>
                 </div>
 
@@ -82,7 +93,7 @@ export default function DesignThree() {
                         <div className="w-50 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
                         <div className="w-30 p-2 border-r border-gray-400 font-bold">ID</div>
                         <div className="w-24 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-                        <div className="flex-1 p-2 font-bold">mobile</div>
+                        <div className="flex-1 p-2 font-bold">mobile {phone || "N/A"}</div>
                     </div>
                 </div>
 
@@ -96,7 +107,7 @@ export default function DesignThree() {
                         <div className="w-16 p-1 border-r border-gray-400 text-sm">Αριθ</div>
                         <div className="w-22 p-1 border-r border-gray-400 font-bold ">Number</div>
                         <div className="w-12 p-1 border-r border-gray-400 text-sm">ΤΚ</div>
-                        <div className="flex-1 p-1 font-bold">postal code</div>
+                        <div className="flex-1 p-1 font-bold">postal code {postalCode || "N/A"}</div>
                     </div>
                 </div>
 
