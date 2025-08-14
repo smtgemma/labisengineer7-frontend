@@ -9,13 +9,16 @@ import jsPDF from "jspdf";
 import TemplateFile from "./Template";
 import TemplateTow from "./TemplateTow";
 import TemplateThree from "./TemplateThree";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { downloadZip } from "client-zip";
 import DesignTwo from "./file-one/design-two/page";
 import DesignThree from "./file-one/design-three/page";
 import DesignFour from "./file-one/design-four/page";
 import DesignFive from "./file-one/design-five/page";
+import ProjectDescriptionSix from "./file-one/design-six/page";
+import { Provider } from "react-redux";
+import { makeStore } from "@/redux/store";
 
 interface Owner {
   id: string;
@@ -46,14 +49,64 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allTempate = stepByStepData.tempateName;
   const dataAllFIled = stepByStepData.aiInputData;
 
+  const store = makeStore();
+
   console.log(dataAllFIled, "stepByStepData");
-  const {arbitrary_constructions_description, area, building, buildingCode, building_permi, cadastralCode, co2Emissions, construction, createdById, energyCategory, epcCode, expectation_Document, 
-    floor, issueAuthority, issueDate, land_use, licenseIssueNumber, licenseNumber, licenseRevision, lotSquare, municipal, neighborhood, notary, owners, primaryEnergy,
-    projectDescription, propertyDesc1, propertyDesc2, protocolNumber, reexamineNumbers, region, serviceId, subCategories, titleArea, type, ydom, zonePrice, 
+  const {
+    arbitrary_constructions_description,
+    area,
+    building,
+    buildingCode,
+    building_permi,
+    cadastralCode,
+    co2Emissions,
+    construction,
+    createdById,
+    energyCategory,
+    epcCode,
+    expectation_Document,
+    floor,
+    issueAuthority,
+    issueDate,
+    land_use,
+    licenseIssueNumber,
+    licenseNumber,
+    licenseRevision,
+    lotSquare,
+    municipal,
+    neighborhood,
+    notary,
+    owners,
+    primaryEnergy,
+    projectDescription,
+    propertyDesc1,
+    propertyDesc2,
+    protocolNumber,
+    reexamineNumbers,
+    region,
+    serviceId,
+    subCategories,
+    titleArea,
+    type,
+    ydom,
+    zonePrice,
   } = dataAllFIled;
 
-  const {address, afm, birthDate, birthPlace, city, email, fatherName, firstName, lastName, motherName, phone, postalCode} = owners[0]
-  console.log(address)
+  const {
+    address,
+    afm,
+    birthDate,
+    birthPlace,
+    city,
+    email,
+    fatherName,
+    firstName,
+    lastName,
+    motherName,
+    phone,
+    postalCode,
+  } = owners[0];
+  console.log(address);
   // const {} = subCategories
   const openPreview = () => {
     const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
@@ -94,41 +147,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     saveAs(blob, "owners.csv");
   };
 
-  // ✅ 3. DOWNLOAD DOCX FILE
-  // const downloadDocx = async () => {
-  //   const doc = new Document({
-  //     sections: [
-  //       {
-  //         children: [
-  //           new Paragraph({
-  //             children: [new TextRun("Greek Declaration Form")],
-  //             heading: "Heading1",
-  //           }),
-  //           ...selectedOwners.map(
-  //             (owner) =>
-  //               new Paragraph({
-  //                 children: [
-  //                   new TextRun(`Name: ${owner.firstName} ${owner.surname}`),
-  //                   new TextRun(
-  //                     `\nFather Name: ${owner.fatherName} - VAT: ${owner.vatNo}`
-  //                   ),
-  //                 ],
-  //                 spacing: { after: 200 },
-  //               })
-  //           ),
-  //         ],
-  //       },
-  //     ],
-  //   });
-
-  //   const blob = await Packer.toBlob(doc);
-  //   saveAs(blob, "document.docx");
-  // };
-
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
-    { name: "TemplateTwo", component: <TemplateTow /> },
-    { name: "TemplateThree", component: <TemplateThree /> },
+    { name: "ProjectDescriptionSix", component: <ProjectDescriptionSix /> },
+    { name: "DesignThree", component: <DesignThree /> },
   ];
 
   // pdf file download
@@ -163,7 +185,12 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     const files: { name: string; lastModified: Date; input: Blob }[] = [];
 
     for (let t of templates) {
-      const html = ReactDOMServer.renderToStaticMarkup(t.component);
+      // const html = ReactDOMServer.renderToStaticMarkup(t.component);
+
+      // Wrap the component in Provider
+      const html = ReactDOMServer.renderToStaticMarkup(
+        <Provider store={store}>{t.component}</Provider>
+      );
       const container = document.createElement("div");
       container.innerHTML = html;
       container.style.width = "794px";
@@ -350,21 +377,17 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           }
         </div> */}
 
-        
         <div>
-          {
-            allTempate?.map((item: string, index: number) => {
-              if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
-                return <DesignThree key={index} />;
-              }
-              if (item === "ProjectDescriptionEight") {
-                return null; // Skips rendering for this item
-              } // Renders other items as text
-            })
-          }
+          {allTempate?.map((item: string, index: number) => {
+            if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
+              return <DesignThree key={index} />;
+            }
+            if (item === "ProjectDescriptionEight") {
+              return null; // Skips rendering for this item
+            } // Renders other items as text
+          })}
         </div>
 
-        
         {/* <div>
           {
             allTempate?.map((item: string, index: number) => {
@@ -378,7 +401,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           }
         </div> */}
 
-        
         {/* <div>
           {
             allTempate?.map((item: string, index: number) => {
@@ -391,8 +413,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             })
           }
         </div> */}
-
-
       </div>
 
       <div className="flex justify-end">
@@ -408,6 +428,3 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 };
 
 export default FinalOverview;
-
-
-
