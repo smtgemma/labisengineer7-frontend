@@ -3,7 +3,7 @@
 
 // import StampComponent from "@/component/shared/dashed/Dashed"
 
-export default function ProjectDescriptionTen() {
+export default function DesignTen() {
     const descriptions = [
         {
             "id": 1,

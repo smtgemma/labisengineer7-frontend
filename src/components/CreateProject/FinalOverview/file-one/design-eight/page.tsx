@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-function ProjectDescriptionEight() {
+function DesignEight() {
     return (
         <div className='max-w-[632px] mx-auto'>
             {/* Title */}
@@ -79,4 +79,4 @@ function ProjectDescriptionEight() {
     )
 }
 
-export default ProjectDescriptionEight
+export default DesignEight

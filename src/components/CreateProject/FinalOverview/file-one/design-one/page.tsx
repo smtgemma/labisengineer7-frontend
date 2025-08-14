@@ -1,7 +1,7 @@
 
-function ProjectDescriptionOne() {
+function DesignOne() {
     return (
-        <div className="max-w-[794px] mx-auto">
+        <div className="max-w-[794px] mx-auto bg-white p-6">
             <div className=" bg-white">
                 {/* Title */}
                 <h2 className="text-center font-semibold text-sm mb-6 underline">
@@ -74,4 +74,4 @@ function ProjectDescriptionOne() {
     )
 }
 
-export default ProjectDescriptionOne
+export default DesignOne

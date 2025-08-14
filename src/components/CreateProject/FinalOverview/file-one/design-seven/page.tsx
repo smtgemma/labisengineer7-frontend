@@ -1,5 +1,5 @@
 
-export default function ProjectDescriptionSeven() {
+export default function DesignSeven() {
     return (
         <div className="max-w-[794px] mx-auto p-4 bg-white">
             {/* Header with coat of arms */}

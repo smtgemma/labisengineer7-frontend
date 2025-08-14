@@ -18,7 +18,7 @@ interface BudgetCategory {
   subtotal: number
 }
 
-export default function Component() {
+export default function DesignEleven() {
   const [formData, setFormData] = useState({
     employer: "",
     project: "",

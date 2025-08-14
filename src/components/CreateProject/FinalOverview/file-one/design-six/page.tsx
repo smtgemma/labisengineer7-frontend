@@ -1,6 +1,6 @@
 
 
-export default function ProjectDescriptionSix() {
+export default function DesignSix() {
     return (
         <div className="max-w-[794px] mx-auto p-4 bg-white">
             {/* Header with coat of arms */}
