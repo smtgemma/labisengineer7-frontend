@@ -33,7 +33,7 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   const Law = files[3];
 
   // ai data extract
-  dispatch(setImageFile(files));
+  dispatch(setImageFile(files) || []);
   const startExtraction = async () => {
     if (files.length === 0) return;
     setIsProcessing(true);

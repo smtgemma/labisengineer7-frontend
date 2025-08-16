@@ -5,7 +5,7 @@ import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceS
 export default function FileOneDesignEleven() {
   const { data, isLoading } = useGetTemplateDataQuery("un");
   const ydomName = data?.data;
-  console.log("ydomName", ydomName);
+  console.log("ydomName?", ydomName);
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
       {/* Header with coat of arms */}
@@ -37,7 +37,7 @@ export default function FileOneDesignEleven() {
               ΠΡΟΣ(1):
             </div>
             <div className="flex-1 p-2  font-bold">
-              {ydomName.ydom_name || "N/A"}
+              {ydomName?.ydom_name || "N/A"}
             </div>
           </div>
         </div>
@@ -49,13 +49,13 @@ export default function FileOneDesignEleven() {
               Ο-Η Όνομα
             </div>
             <div className="w-40 p-2 border-r border-gray-400  font-bold">
-              {ydomName.ydom_name || "N/A"}
+              {ydomName?.ydom_name || "N/A"}
             </div>
             <div className="w-20 p-2 border-r border-gray-400 text-sm">
               Επώνυμο
             </div>
             <div className="flex-1 p-2  font-bold">
-              {ydomName.owner_surname || "N/A"}
+              {ydomName?.owner_surname || "N/A"}
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function FileOneDesignEleven() {
               Όνομα και Επώνυμο Πατρός
             </div>
             <div className="flex-1 p-2 font-bold">
-              {ydomName.owner_father_name || "N/A"}
+              {ydomName?.owner_father_name || "N/A"}
             </div>
           </div>
         </div>
@@ -79,7 +79,7 @@ export default function FileOneDesignEleven() {
               Όνομα και Επώνυμο Μητρός
             </div>
             <div className="flex-1 p-2 font-bold">
-              {ydomName.owner_mother_name || "N/A"}
+              {ydomName?.owner_mother_name || "N/A"}
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function FileOneDesignEleven() {
               Ημερομηνία γέννησης(2):
             </div>
             <div className="flex-1 p-2 font-bold">
-              {ydomName.owner_birth_date || "N/A"}
+              {ydomName?.owner_birth_date || "N/A"}
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@ export default function FileOneDesignEleven() {
               Τόπος Γέννησης
             </div>
             <div className="flex-1 p-2 font-bold">
-              {ydomName.owner_birth_place || "N/A"}
+              {ydomName?.owner_birth_place || "N/A"}
             </div>
           </div>
         </div>
@@ -121,7 +121,7 @@ export default function FileOneDesignEleven() {
               Τηλ.:
             </div>
             <div className="flex-1 p-2 font-bold">
-              {ydomName.owner_phone || "N/A"}
+              {ydomName?.owner_phone || "N/A"}
             </div>
           </div>
         </div>
@@ -133,13 +133,13 @@ export default function FileOneDesignEleven() {
               Τόπος κατοικίας
             </div>
             <div className="w-20 p-2 border-r border-gray-400 font-bold ">
-              {ydomName.owner_city || "N/A"}
+              {ydomName?.owner_city || "N/A"}
             </div>
             <div className="w-16 p-2 border-r border-gray-400 text-sm">
               Οδός
             </div>
             <div className="w-24 p-2 border-r border-gray-400 font-bold ">
-              {ydomName.owner_address || "N/A"}
+              {ydomName?.owner_address || "N/A"}
             </div>
             <div className="w-16 p-2 border-r border-gray-400 text-sm">
               Αριθ
@@ -149,7 +149,7 @@ export default function FileOneDesignEleven() {
             </div>
             <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
             <div className="flex-1 p-2 font-bold">
-              {ydomName.owner_postal_code}
+              {ydomName?.owner_postal_code}
             </div>
           </div>
         </div>
@@ -169,7 +169,7 @@ export default function FileOneDesignEleven() {
               </div>
             </div>
             <div className="p-2 underline ">
-              {ydomName.owner_email || "N/A"}
+              {ydomName?.owner_email || "N/A"}
             </div>
           </div>
         </div>
