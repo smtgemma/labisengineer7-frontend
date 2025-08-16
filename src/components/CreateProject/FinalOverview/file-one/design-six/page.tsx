@@ -1,205 +1,76 @@
-"use client";
+"use client"
+// import StampComponent from "@/component/shared/dashed/Dashed"
 
-import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
+export default function FileOneDesingSix() {
 
-export default function ProjectDescriptionSix() {
-  const name = "tomi ami";
+    return (
+        <div className="max-w-[794px] mx-auto p-6 bg-white">
+            {/* Title */}
+            <h2 className="text-center font-semibold underline text-sm mb-2">
+                ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ - ΒΕΒΑΙΩΣΗ ΜΗΧΑΝΙΚΟΥ
+            </h2>
 
-  const { data, isLoading } = useGetTemplateDataQuery("un");
-  const ydomName = data?.data?.ydom_name;
-  console.log(ydomName);
-  return (
-    <div className="max-w-[794px] mx-auto p-4 bg-white">
-      {/* Header with coat of arms */}
-      <div className="text-center mb-6">
-        <div className="w-16 h-16 mx-auto mb-4  rounded-full flex items-center justify-center">
-          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-            <div className="w-8 h-8 bg-white rounded-sm"></div>
-          </div>
-        </div>
-        <h1 className="text-xl font-bold mb-2">{name} ami </h1>
-        <p className="text-sm">(άρθρο 8 Ν.1599/1986) {ydomName}</p>
-      </div>
+            {/* Project Information */}
+            <div className="mb-8 space-y-4">
+                <div className="flex items-start justify-between max-w-[450px]">
+                    <span className=" min-w-[80px] text-sm">Έργο:</span>
+                    <h3 className=" text-sm">PROJECT DESCRIPTION</h3>
+                </div>
 
-      {/* Subtitle */}
-      <div className="text-center mb-6 text-sm">
-        <p>
-          Η ακρίβεια των στοιχείων που υποβάλλονται με αυτή τη δήλωση μπορεί να
-          ελεγχθεί με βάση το αρχείο άλλων υπηρεσιών
-        </p>
-        <p>(άρθρο 8 παρ. 4 Ν.1599/1986)</p>
-      </div>
+                <div className="flex items-start justify-between gap-4 max-w-xl">
+                    <span className=" text-sm">Θέση:</span>
+                    <h3 className=" text-sm">ADDRESS, TOWN/AREA , POSTAL CODE ( FOR BUILDING)</h3>
+                </div>
 
-      {/* Form table */}
-      <div className="border ">
-        {/* ΠΡΟΣ row */}
-        <div className="border-b">
-          <div className="flex">
-            <div className="w-20 p-2 border-r  font-bold text-sm">ΠΡΟΣ(1):</div>
-            <div className="flex-1 p-2  font-bold">YDOM</div>
-          </div>
-        </div>
-
-        {/* Name Owner row */}
-        <div className="border-b ">
-          <div className="flex">
-            <div className="w-32 p-2 border-r  text-sm">Ο-Η Όνομα</div>
-            <div className="w-40 p-2 border-r   font-bold">Name Owner</div>
-            <div className="w-20 p-2 border-r  text-sm">Επώνυμο</div>
-            <div className="flex-1 p-2  font-bold">Surname Owner</div>
-          </div>
-        </div>
-
-        {/* Father's name row */}
-        <div className="border-b ">
-          <div className="flex">
-            <div className="w-32 p-2 border-r  text-sm">
-              Όνομα και Επώνυμο Πατρός
+                <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
+                    <span className="">Ιδιοκτήτης:</span>
+                    <h3 className=" text-sm">OWNER/OWNERS</h3>
+                </div>
             </div>
-            <div className="flex-1 p-2 font-bold">
-              Fathers name and surname Owner
+
+            {/* Main Description */}
+            <div className="text-sm mb-4 ml-10">
+                <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property</span> επί της οδού <br /> <span className="font-semibold">Address,Town/Area , postal code ( FOR BUILDING),</span>
+                    πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
-          </div>
-        </div>
 
-        {/* Mother's name row */}
-        <div className="border-b ">
-          <div className="flex">
-            <div className="w-32 p-2 border-r  text-sm">
-              Όνομα και Επώνυμο Μητρός
+            {/* one  */}
+            <div className="space-y-6 ml-10">
+                <div>
+                    <h1 className="text-xl font-semibold">●Τοποθέτηση ικριωμάτων επί των όψεων του κτιρίου</h1>
+                    <p className="text-sm mb-6">
+                       Περιλαμβάνεται η εγκατάσταση μεταλλικών ικριωμάτων κατά μήκος των όψεων του κτιρίου, σύμφωνα με την ισχύουσα νομοθεσία περί μέτρων ασφαλείας. Η τοποθέτηση διασφαλίζει ασφαλή και πλήρη πρόσβαση στα σημεία επέμβασης για τις εργασίες αποκατάστασης και χρωματισμού των εξωτερικών επιφανειών.
+                    </p>
+                    
             </div>
-            <div className="flex-1 p-2 font-bold">
-              Mothers name and surname Owner
+            
+            {/* {/* Signature Section */}
+            <div className="mt-6 text-right flex items-center justify-center p-5">
+                <div className="max-w-[300px]">
+
+                    <div className="text-center">
+                        <p>Ημερομηνία :</p>
+                        <p>25/06/2025</p>
+                    </div>
+                    <div className="">
+                        <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
+                        {/* Dashed Border Box = common component*/}
+                        {/* <StampComponent
+                            title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
+                            instructions={[
+                                "Με δεξί κλικ",
+                                "Αλλαγή εικόνας",
+                                " Βάζετε την σφραγίδα σας",
+                            ]}
+                        /> */}
+                    </div>
+                </div>
             </div>
-          </div>
+
         </div>
-
-        {/* Birth date row */}
-        <div className="border-b ">
-          <div className="flex">
-            <div className="w-32 p-2 border-r  text-sm">
-              Ημερομηνία γέννησης(2):
-            </div>
-            <div className="flex-1 p-2 font-bold">Born date</div>
-          </div>
         </div>
-
-        {/* Birth town row */}
-        <div className="border-b ">
-          <div className="flex">
-            <div className="w-32 p-2 border-r  text-sm">Τόπος Γέννησης</div>
-            <div className="flex-1 p-2 font-bold">Born Town</div>
-          </div>
-        </div>
-
-        {/* ID and mobile row */}
-        <div className="border-b ">
-          <div className="flex">
-            <div className="w-32 p-2 border-r  text-sm">
-              Αριθμός Δελτίου Ταυτότητας
-            </div>
-            <div className="w-20 p-2 border-r  font-bold">ID</div>
-            <div className="w-16 p-2 border-r  text-sm">Τηλ.:</div>
-            <div className="flex-1 p-2 font-bold">mobile</div>
-          </div>
-        </div>
-
-        {/* Address row */}
-        <div className="border-b ">
-          <div className="flex">
-            <div className="w-32 p-2 border-r  text-sm">Τόπος κατοικίας</div>
-            <div className="w-20 p-2 border-r  font-bold ">Town</div>
-            <div className="w-16 p-2 border-r  text-sm">Οδός</div>
-            <div className="w-24 p-2 border-r  font-bold ">Address</div>
-            <div className="w-16 p-2 border-r  text-sm">Αριθ</div>
-            <div className="w-20 p-2 border-r  font-bold ">Number</div>
-            <div className="w-12 p-2 border-r  text-sm">ΤΚ</div>
-            <div className="flex-1 p-2 font-bold">postal code</div>
-          </div>
-        </div>
-
-        {/* Contact details row */}
-        <div className="border-b ">
-          <div className="flex">
-            <div className="w-32 p-2 border-r  text-sm">
-              Αρ. Τηλεομοιότυπου (Fax):
-            </div>
-            <div className="flex-1 p-2">
-              <div className="text-sm">
-                <div>Δ/νση</div>
-                <div>Ηλεκτρ.</div>
-                <div>Ταχυδρομ</div>
-                <div>ίου (Email):</div>
-              </div>
-            </div>
-            <div className="w-32 p-2 underline">email owner</div>
-          </div>
-        </div>
-
-        {/* VAT row */}
-        <div className="border-b ">
-          <div className="flex">
-            <div className="w-32 p-2 border-r  text-sm">Α.Φ.Μ.:</div>
-            <div className="flex-1 p-2 font-bold">VAT Owner</div>
-            <div className="w-32 p-2 border-l  text-sm">Δ.Ο.Υ.:</div>
-          </div>
-        </div>
-
-        {/* Declaration text */}
-        <div className="p-4 text-sm">
-          <p className="mb-4">
-            Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που
-            προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του
-            Ν.1599/1986, δηλώνω ότι:
-          </p>
-
-          <p className="my-4">
-            ως κύριος/ιδιοκτήτης του ακινήτου που βρίσκεται επί της οδού
-            {/* ([Address, Number, Town, Postal code],{" "} */}
-            <span className="font-bold">αναθέτω</span> στον/στην Διπλωματούχο
-            Μηχανικό{" "}
-            <span className="font-bold">
-              {/* ( Engineers Surname , Engineer's Name, Specialty Engineer AM TEE) */}
-            </span>
-          </p>
-
-          <p className=" font-bold">για το έργο με τίτλο :</p>
-          <p className=" mb-6">PROJECT DESCRIPTION</p>
-        </div>
-
-        {/* Additional disclaimer text */}
-        <div className="p-4 text-sm space-y-3">
-          <p>
-            τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ -
-            eadeies που αφορά:
-          </p>
-          <p>
-            ●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών,
-            αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.
-          </p>
-          <p>
-            ●Την κατάρτιση και υποβολή του φακέλου στην αρμόδια υπηρεσία
-            (e-Άδειες / ΥΔΟΜ )
-          </p>
-          <p>●Τη συνεργασία με άλλους ειδικούς/μελετητές, όπου απαιτείται</p>
-        </div>
-
-        {/* Signature section */}
-        <div className="flex items-center justify-center">
-          <div className="flex justify-end p-4">
-            <div className="text-right space-y-2">
-              <div className="flex items-center gap-4">
-                <span className="text-sm">Ημερομηνία :</span>
-                <span className="text-sm font-medium">8/5/2025</span>
-              </div>
-              <div className="text-sm mt-8 text-center">
-                <div>( Υπογραφή )</div>
-                <div className="mt-4">Ο/Η Δηλώνουσα</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    )
 }
+
+
+

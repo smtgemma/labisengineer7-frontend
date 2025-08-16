@@ -374,14 +374,16 @@ import TemplateThree from "./TemplateThree";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { downloadZip } from "client-zip";
-import DesignOne from "./file-one/design-one/page";
-import DesignTwo from "./file-one/design-two/page";
-import DesignThree from "./file-one/design-three/page";
-import DesignFour from "./file-one/design-four/page";
-import DesignFive from "./file-one/design-five/page";
 import ProjectDescriptionSix from "./file-one/design-six/page";
 import { Provider } from "react-redux";
 import { makeStore } from "@/redux/store";
+import DesignEight from "@/components/CreateProject/FinalOverview/file-one/design-eight/page";
+import FileOneDesignFive from "./file-one/design-five/page";
+import FileOneDesignSeven from "./file-one/design-seven/page";
+import FileOneDesignEleven from "./file-one/design-eleven/page";
+import FileOneDesignThirteen from "./file-one/design-thirteen/page";
+import FileOneDesignFour from "./file-one/design-four/page";
+import FileOneDesignSix from "./file-one/design-six/page";
 
 interface Owner {
   id: string;
@@ -677,23 +679,74 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
       <div ref={printRef} className="space-y-30">
         {/* building-modifications  */}
-        {
+        {/* {
           buildingMods.map((item: string, index: number) => {
             if (
               item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
               allTempate.includes("Generate Engineer Declaration (YA)")
             ) {
-              console.log(item, allTempate[0], "000000000000000000000000000000000");
-              return <DesignOne key={index} />;
+              return <FileOneDesignFive key={index} />;
               // return 'Generate Engineer Declaration (YA)';
 
             }
             return null;
           })
+        } */}
+
+        {
+          buildingMods.map((item: string, index: number) => {
+            const elements: React.ReactElement[] = [];
+
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              elements.push(<FileOneDesignEleven key={`five-${index}`} />);
+            }
+
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" &&
+              allTempate.includes("Generate Assignment of Responsibility")
+            ) {
+              elements.push(<FileOneDesignThirteen key={`seven-${index}`} />);
+            }
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5" &&
+              allTempate.includes("Create Technical Description")
+            ) {
+              elements.push(<FileOneDesignFour key={`four-${index}`} />);
+            }
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΤΟΠΟΘΕΤΗΣΗ_ΙΚΡΙΩΜΑΤΩΝ_15" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              elements.push(<FileOneDesignSeven key={`seven-${index}`} />);
+            }
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              elements.push(<FileOneDesignSeven key={`seven-${index}`} />);
+            }
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              elements.push(<FileOneDesignSeven key={`seven-${index}`} />);
+            }
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2" &&
+              allTempate.includes("Create Technical Description")
+            ) {
+              elements.push(<FileOneDesignSix key={`seven-${index}`} />);
+            }
+
+            return elements.length > 0 ? elements : null;
+          })
         }
 
         {/* energy-systems  */}
-        {
+        {/* {
           energy.map((item: string, index: number) => {
             if (
               item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
@@ -706,10 +759,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             }
             return null;
           })
-        }
+        } */}
 
         {/* fencing  */}
-        {
+        {/* {
           fencing.map((item: string, index: number) => {
             if (
               item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
@@ -722,10 +775,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             }
             return null;
           })
-        }
+        } */}
 
         {/* landscaping-2  */}
-        {
+        {/* {
           landscaping.map((item: string, index: number) => {
             if (
               item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
@@ -738,10 +791,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             }
             return null;
           })
-        }
+        } */}
 
         {/* operational-space  */}
-        {
+        {/* {
           operational.map((item: string, index: number) => {
             if (
               item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
@@ -754,10 +807,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             }
             return null;
           })
-        }
+        } */}
 
         {/* property-documentation  */}
-        {
+        {/* {
           property.map((item: string, index: number) => {
             if (
               item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
@@ -770,10 +823,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             }
             return null;
           })
-        }
+        } */}
 
         {/* small-construction  */}
-        {
+        {/* {
           small.map((item: string, index: number) => {
             if (
               item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΙΣΙΝΑ_COMPACT_ΕΩΣ_50_Τ.Μ._13" &&
@@ -782,16 +835,16 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               console.log(item, allTempate[0], "000000000000000000000000000000000");
               return (
                 <div className="space-y-12">
-                  <div> <DesignOne key={index} /></div>
-                  <div> <DesignOne key={index} /></div>
-              </div>
+                  <div> <DesignEight key={index} /></div>
+                  <div> <DesignEight key={index} /></div>
+                </div>
               );
               // return 'Generate Engineer Declaration (YA)';
 
             }
             return null;
           })
-        }
+        } */}
 
       </div>
 

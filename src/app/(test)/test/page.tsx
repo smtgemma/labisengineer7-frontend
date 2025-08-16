@@ -1,32 +1,31 @@
 "use client"
 
-import React from 'react'
-import DesignOne from "@/components/CreateProject/FinalOverview/file-one/design-one/page";
-import DesignTwo from '@/components/CreateProject/FinalOverview/file-one/design-two/page';
-import DesignThree from '@/components/CreateProject/FinalOverview/file-one/design-three/page';
-import DesignFour from '@/components/CreateProject/FinalOverview/file-one/design-four/page';
-import DesignFive from '@/components/CreateProject/FinalOverview/file-one/design-five/page';
-import DesignSix from '@/components/CreateProject/FinalOverview/file-one/design-six/page';
-import DesignSeven from '@/components/CreateProject/FinalOverview/file-one/design-seven/page';
-import DesignEight from '@/components/CreateProject/FinalOverview/file-one/design-eight/page';
-import DesignNine from '@/components/CreateProject/FinalOverview/file-one/design-nine/page';
-import DesignTen from '@/components/CreateProject/FinalOverview/file-one/design-ten/page';
-import DesignEleven from '@/components/CreateProject/FinalOverview/file-one/design-eleven/page';
+import FileOneDesignEight from "@/components/CreateProject/FinalOverview/file-one/design-eight/page"
+import FileOneDesignEleven from "@/components/CreateProject/FinalOverview/file-one/design-eleven/page"
+import FileOneDesignFive from "@/components/CreateProject/FinalOverview/file-one/design-five/page"
+import FileOneDesignFour from "@/components/CreateProject/FinalOverview/file-one/design-four/page"
+import FileOneDesignThirteen from "@/components/CreateProject/FinalOverview/file-one/design-thirteen/page"
+import FileOneDesignTweleve from "@/components/CreateProject/FinalOverview/file-one/design-tweleve/page"
+import FileOneDesignSeven from "@/components/CreateProject/FinalOverview/file-one/design-seven/page"
+import FileOneDesignSix from "@/components/CreateProject/FinalOverview/file-one/design-six/page"
+import FileOneDesignThree from "@/components/CreateProject/FinalOverview/file-one/design-three/page"
+import FileOneDesignNine from "@/components/CreateProject/FinalOverview/file-one/design-nine/page"
+import FileOneDesignTen from "@/components/CreateProject/FinalOverview/file-one/design-ten/page"
 
 function test() {
   return (
     <div>
-        <DesignOne/>
-        <DesignTwo/>
-        <DesignThree/>
-        <DesignFour/>
-        <DesignFive/>
-        <DesignSix/>
-        <DesignSeven/>
-        <DesignEight/>
-        <DesignNine/>
-        <DesignTen/>
-        <DesignEleven/>
+      {/* <FileOneDesignThree/> */}
+      <FileOneDesignFour/>
+      {/* <FileOneDesignFive/> */}
+      {/* <FileOneDesignSix/> */}
+      {/* <FileOneDesignSeven/> */}
+      {/* <FileOneDesignEight/> */}
+      {/* <FileOneDesignNine/> */}
+      {/* <FileOneDesignTen/> */}
+      {/* <FileOneDesignEleven/> */}
+      {/* <FileOneDesignTweleve /> */}
+      {/* <FileOneDesignThirteen/> */}
     </div>
   )
 }

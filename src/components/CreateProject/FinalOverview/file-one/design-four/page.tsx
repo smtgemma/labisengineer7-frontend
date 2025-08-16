@@ -1,201 +1,504 @@
-// import StampComponent from "@/component/shared/dashed/Dashed";
 
-export default function DesignFour() {
-  return (
-    <div className="max-w-[794px] mx-auto p-4 bg-white">
-      {/* Header with coat of arms */}
-      <div className="text-center mb-6">
-        <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
-          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-            <div className="w-8 h-8 bg-white rounded-sm"></div>
-          </div>
-        </div>
-        <h1 className="text-xl font-bold mb-2">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ</h1>
-        <p className="text-sm">(άρθρο 8 Ν.1599/1986)</p>
-      </div>
 
-      {/* Subtitle */}
-      <div className="text-center mb-6 text-sm">
-        <p>
-          Η ακρίβεια των στοιχείων που υποβάλλονται με αυτή τη δήλωση μπορεί να ελεγχθεί με βάση το αρχείο άλλων
-          υπηρεσιών
-        </p>
-        <p>(άρθρο 8 παρ. 4 Ν.1599/1986)</p>
-      </div>
+"use client"
 
-      {/* Form table */}
-      <div className="border border-gray-400">
-        {/* ΠΡΟΣ row */}
-        <div className="border-b border-gray-400 bg-gray-50">
-          <div className="flex">
-            <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-            <div className="flex-1 p-2  font-bold">YDOM</div>
-          </div>
-        </div>
+// import StampComponent from "@/component/shared/dashed/Dashed"
 
-        {/* Name Engineer row */}
-        <div className="border-b border-gray-400">
-          <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-            <div className="w-40 p-2 border-r border-gray-400  font-bold">Name Engineer</div>
-            <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-            <div className="flex-1 p-2  font-bold">Surname Engineer</div>
-          </div>
-        </div>
+export default function FileOneDesignFour() {
+    const descriptions = [
+        {
+            "id": 1,
+            "description": "Technical Description 1 of the project"
+        },
+        {
+            "id": 2,
+            "description": "Technical Description 2 of the project"
+        },
+        {
+            "id": 3,
+            "description": "Technical Description 3 of the project"
+        },
+        {
+            "id": 4,
+            "description": "Technical Description 4 of the project"
+        },
+        {
+            "id": 5,
+            "description": "Technical Description 5 of the project"
+        },
+        {
+            "id": 6,
+            "description": "Technical Description 6 of the project"
+        },
+        {
+            "id": 7,
+            "description": "Technical Description 7 of the project"
+        },
+        {
+            "id": 8,
+            "description": "Technical Description 8 of the project"
+        },
+        {
+            "id": 9,
+            "description": "Technical Description 9 of the project"
+        },
+        {
+            "id": 10,
+            "description": "Technical Description 10 of the project"
+        },
+        {
+            "id": 11,
+            "description": "Technical Description 11 of the project"
+        },
+        {
+            "id": 12,
+            "description": "Technical Description 12 of the project"
+        },
+        {
+            "id": 13,
+            "description": "Technical Description 13 of the project"
+        },
+        {
+            "id": 14,
+            "description": "Technical Description 14 of the project"
+        },
+        {
+            "id": 15,
+            "description": "Technical Description 15 of the project"
+        },
+        {
+            "id": 16,
+            "description": "Technical Description 16 of the project"
+        },
+        {
+            "id": 17,
+            "description": "Technical Description 17 of the project"
+        },
+        {
+            "id": 18,
+            "description": "Technical Description 18 of the project"
+        },
+        {
+            "id": 19,
+            "description": "Technical Description 19 of the project"
+        },
+        {
+            "id": 20,
+            "description": "Technical Description 20 of the project"
+        },
+        {
+            "id": 21,
+            "description": "Technical Description 21 of the project"
+        },
+        {
+            "id": 22,
+            "description": "Technical Description 22 of the project"
+        }
+    ]
+    const descriptions2 = [
+        {
+            "id": 1,
+            "description": "Technical Description 1 of the project"
+        },
+        {
+            "id": 2,
+            "description": "Technical Description 2 of the project"
+        },
+        {
+            "id": 3,
+            "description": "Technical Description 3 of the project"
+        },
+        {
+            "id": 4,
+            "description": "Technical Description 4 of the project"
+        },
+        {
+            "id": 5,
+            "description": "Technical Description 5 of the project"
+        },
+        {
+            "id": 6,
+            "description": "Technical Description 6 of the project"
+        },
+        {
+            "id": 7,
+            "description": "Technical Description 7 of the project"
+        },
+        {
+            "id": 8,
+            "description": "Technical Description 8 of the project"
+        },
+        {
+            "id": 9,
+            "description": "Technical Description 9 of the project"
+        },
+        {
+            "id": 10,
+            "description": "Technical Description 10 of the project"
+        },
+        {
+            "id": 11,
+            "description": "Technical Description 11 of the project"
+        },
+        {
+            "id": 12,
+            "description": "Technical Description 12 of the project"
+        },
+        {
+            "id": 13,
+            "description": "Technical Description 13 of the project"
+        },
+    ]
 
-        {/* Father's name row */}
-        <div className="border-b border-gray-400">
-          <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-            <div className="flex-1 p-2 font-bold">Fathers name and surname Engineer</div>
-          </div>
-        </div>
+    return (
+        <div className="max-w-[794px] mx-auto p-4 bg-white space-y-8">
+            {/* ΦΑΚΕΛΟΣ ΑΣΦΑΛΕΙΑΣ ΚΑΙ ΥΓΕΙΑΣ first stp=========================*/}
+            <div className="border border-gray-400">
+                {/* Header */}
+                <div className="text-center p-4">
+                    <h1 className="text-xl font-bold mb-2">ΦΑΚΕΛΟΣ ΑΣΦΑΛΕΙΑΣ ΚΑΙ ΥΓΕΙΑΣ </h1>
+                    <p className="text-xl font-bold">(Φ.Α.Υ.)</p>
+                    <p className="text-lg font-bold">(Π.Δ. 305/96, άρθρο 3 - παρ. 3, 7, 8, 9, 10, 11)</p>
+                </div>
 
-        {/* Mother's name row */}
-        <div className="border-b border-gray-400">
-          <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-            <div className="flex-1 p-2 font-bold">Mothers name and surname Engineer</div>
-          </div>
-        </div>
+                {/* Α. ΓΕΝΙΚΑ */}
+                <div className="p-4 border-b border-gray-400">
+                    <h2 className="font-bold mb-4">Α. ΓΕΝΙΚΑ</h2>
 
-        {/* Birth date row */}
-        <div className="border-b border-gray-400">
-          <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-            <div className="flex-1 p-2 font-bold">Born date</div>
-          </div>
-        </div>
+                    <div className="space-y-3">
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">ΕΡΓΟ :</span>
+                            <span className="flex-1  font-bold">PROJECT DESCRIPTION</span>
+                        </div>
 
-        {/* Birth town row */}
-        <div className="border-b border-gray-400">
-          <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-            <div className="flex-1 p-2 font-bold">Born Town</div>
-          </div>
-        </div>
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">ΔΙΕΥΘΥΝΣΗ :</span>
+                            <span className=" font-bold">ADDRESS</span>
+                            <span className=" font-bold">, CITY</span>
+                            <span className=" font-bold">, TOWN</span>
+                            <span className=" font-bold">, POSTAL CODE</span>
+                            <span className=" font-bold">FOR BUILDING</span>
+                        </div>
 
-        {/* ID and mobile row */}
-        <div className="border-b border-gray-400">
-          <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-            <div className="w-20 p-2 border-r border-gray-400 font-bold">ID</div>
-            <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-            <div className="flex-1 p-2 font-bold">mobile</div>
-          </div>
-        </div>
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">ΙΔΙΟΚΤΗΤΗΣ :</span>
+                            <span className="flex-1  font-bold">OWNER/OWNERS</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
+                            <div className="flex flex-col items-center justify-center">
+                                <span className="flex-1  font-bold">NAME AND SURNAME ENGINEER</span>
+                                <span className="flex-1  font-bold">SPECIALTY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        {/* Address row */}
-        <div className="border-b border-gray-400">
-          <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-            <div className="w-20 p-2 border-r border-gray-400 font-bold ">Town</div>
-            <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
-            <div className="w-24 p-2 border-r border-gray-400 font-bold ">Address</div>
-            <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
-            <div className="w-20 p-2 border-r border-gray-400 font-bold ">Number</div>
-            <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-            <div className="flex-1 p-2 font-bold">postal code</div>
-          </div>
-        </div>
+                {/* Β. ΜΗΤΡΩΟ ΕΡΓΟΥ */}
+                <div className="p-4">
+                    <h2 className="font-bold mb-4">Β. ΜΗΤΡΩΟ ΕΡΓΟΥ</h2>
 
-        {/* Contact details row */}
-        <div className="border-b border-gray-400">
-          <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">Αρ. Τηλεομοιότυπου (Fax):</div>
-            <div className="flex-1 p-2">
-              <div className="text-sm">
-                <div>Δ/νση</div>
-                <div>Ηλεκτρ.</div>
-                <div>Ταχυδρομ</div>
-                <div>ίου (Email):</div>
-              </div>
+                    <div className="mb-4">
+                        <h3 className="font-medium mb-2 underline">1. TECHNICAL DESCRIPTION OF PROJECT</h3>
+                        <div className="mb-2">
+                            {/* Mapping over the fetched data */}
+                            {descriptions.map((description, i) => (
+                                <div key={i} className="flex items-center gap-2">
+                                    <span className="">{i + 1}</span>
+                                    <span className=" "></span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="mb-4">
+                        <h3 className="font-medium mb-2">3. ΣΧΕΔΙΑ</h3>
+                        <p className="mb-2">Για την κατασκευή του κτιρίου χρειάστηκε να γίνουν οι παρακάτω μελέτες:</p>
+                        <div className="space-y-1 text-sm">
+                            <div className="">1. Αρχιτεκτονικά</div>
+                            <div className="">2. Στατικά</div>
+                            <div className="">3. Παθητική Πυροπροστασία</div>
+                            <div className="">4. Θερμομόνωση</div>
+                            <div className="">5. Ύδρευση</div>
+                            <div className="">6. Αποχέτευση</div>
+                            <div className="">7. Ηλεκτρικές Εγκαταστάσεις</div>
+                            <div className="">8. Κλιματισμός</div>
+                            <div className="">9. Μελέτη Ενεργειακής Απόδοσης</div>
+                            <div className="">10. Τοπογραφικό</div>
+                        </div>
+                        <p className="mt-2 text-sm">
+                            Θα προσαρτηθούν στο Φ.Α.Υ. με τη μορφή παραρτήματος τα "ως κατασκευάστηκε" σχέδια του έργου, μετά την
+                            ολοκλήρωση της εκτέλεσής του.
+                        </p>
+                    </div>
+                </div>
+
+                {/* Γ. ΕΠΙΣΗΜΑΝΣΕΙΣ */}
+                <div className="p-4">
+                    <h2 className="font-bold mb-4">Γ. ΕΠΙΣΗΜΑΝΣΕΙΣ</h2>
+                    <div className="space-y-2 text-sm">
+                        <p>Δεν υπάρχουν ζώνες ιδιαίτερου κινδύνου στο εργοτάξιο της οικοδομής.</p>
+                        <p>Δεν υπάρχουν ιδιαιτερότητες στη στατική δομή, ευστάθεια και αντοχή του έργου.</p>
+                        <p>Θέσεις δικτύων κεντρικών παροχών και κεντρικών διακοπτών θα σημανθούν.</p>
+                        <p>Θέσεις εξόδων κινδύνου και πυροσβεστικές φωλεές θα επισημανθούν.</p>
+                    </div>
+
+                    <div className="mt-4 text-sm">
+                        <div className="grid grid-cols-4">
+                            <p className="grid-cols-1">Οδοί διαφυγής:</p>
+                            <p className="grid-cols-1">Δημοτική οδός</p>
+                        </div>
+                        <div className="grid grid-cols-4">
+                            <p className="grid-cols-1">Έξοδοι κινδύνου:</p>
+                            <p className="grid-cols-1">Εξωτερικός Χώρος</p>
+                        </div>
+                        <div className="grid grid-cols-4">
+                            <p className="grid-cols-1">Ιδιαίτερες στατικές μελέτες:</p>
+                            <p className="grid-cols-1">Όχι</p>
+                        </div>
+                        <div className="grid grid-cols-4">
+                            <p className="grid-cols-1">Δίκτυα προστασίας:</p>
+                            <p className="grid-cols-1">Όχι</p>
+                        </div>
+                        <div className="grid grid-cols-4">
+                            <p className="grid-cols-1">Θέση υλικών:</p>
+                            <p className="grid-cols-1">Εκτός Κτιρίου</p>
+                        </div>
+                        <div className="grid grid-cols-4">
+                            <p className="grid-cols-1">Ζώνες κινδύνου:</p>
+                            <p className="grid-cols-1">Οπές - Περίμετρος Κτιρίου</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Δ. ΟΔΗΓΙΕΣ ΚΑΙ ΧΡΗΣΙΜΑ ΣΤΟΙΧΕΙΑ */}
+                <div className="p-4">
+                    <h2 className="font-bold mb-4">Δ. ΟΔΗΓΙΕΣ ΚΑΙ ΧΡΗΣΙΜΑ ΣΤΟΙΧΕΙΑ</h2>
+                    <div className="space-y-2 text-sm">
+                        <p>
+                            Οι εργασίες συντήρησης και καθαρισμού των εξωτερικών τμημάτων της οικοδομής και τυχόν φωταγωγών που
+                            απαιτούν τη χρήση ικριωμάτων θα γίνουν από εξειδικευμένα συνεργεία με λήψη των αναγκαίων μέτρων προστασίας
+                            βάσει των ισχυουσών διατάξεων.
+                        </p>
+                        <p>
+                            Η συντήρηση των δικτύων διανομής ηλεκτρικού ρεύματος θα γίνεται σε τακτά χρονικά διαστήματα μόνο από
+                            εξειδικευμένους τεχνίτες, σύμφωνα με τις ισχύουσες διατάξεις.
+                        </p>
+                    </div>
+
+                    <div className="mt-12 text-right">
+                        <div className="flex justify-start items-start gap-30">
+                            <div className="">
+                                <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
+                                {/* Dashed Border Box = common component*/}
+                                {/* <StampComponent
+                                    title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
+                                    instructions={[
+                                        "Με δεξί κλικ",
+                                        "Αλλαγή εικόνας",
+                                        " Βάζετε την σφραγίδα σας",
+                                    ]}
+                                /> */}
+                            </div>
+                            <div className="flex items-center justify-center gap-2">
+                                <span className=" ">Ημερομηνία :</span>
+                                <span className=" ">2/8/2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                {/* second step====================== */}
+                {/* Header */}
+                <div className="text-center p-4 mt-6">
+                    <h1 className="text-xl font-bold mb-2">ΣΧΕΔΙΟ ΑΣΦΑΛΕΙΑΣ ΚΑΙ ΥΓΕΙΑΣ</h1>
+                    <p className="text-xl font-bold">(Σ.Α.Υ.)</p>
+                    <p className="text-lg font-bold">(Π.Δ. 305/96, άρθρο 3 - παρ. 3, 7, 8, 9, 10, 11)</p>
+                </div>
+
+                {/* Α. ΓΕΝΙΚΑ */}
+                <div className="p-4 border-b border-gray-400">
+                    <h2 className="font-bold mb-4">Α. ΓΕΝΙΚΑ</h2>
+
+                    <div className="space-y-3">
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">ΕΡΓΟ :</span>
+                            <span className="flex-1 font-bold">PROJECT DESCRIPTION</span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">ΔΙΕΥΘΥΝΣΗ :</span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                            <span className="font-medium">ΙΔΙΟΚΤΗΤΗΣ :</span>
+                        </div>
+                        <div className="flex justify-start gap-12">
+                            <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
+                            <div className="flex flex-col items-start justify-center">
+                                <span className="flex-1 font-bold">NAME AND SURNAME ENGINEER</span>
+                                <span className="flex-1 font-bold">SPECIALTY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Β. ΜΗΤΡΩΟ ΕΡΓΟΥ */}
+                <div className="p-4">
+                    <div className="mb-4">
+                        <h3 className="font-medium mb-2">PROJECT WORKS FOR TECHNICAL DESCRIPTION</h3>
+                        <div className="mb-2">
+                            {/* Mapping over the fetched data */}
+                            {descriptions2.map((description, i) => (
+                                <div key={i} className="flex items-center gap-2">
+                                    <span className="w-6">{i + 1}</span>
+                                    <span className=" "></span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+
+                {/* Β. ΚΙΝΔΥΝΟΙ ΠΟΥ ΕΝΔΕΧΕΤΑΙ ΝΑ ΠΑΡΟΥΣΙΑΣΤΟΥΝ */}
+                <div>
+                    <div className="p-2 font-bold">
+                        Β. ΚΙΝΔΥΝΟΙ ΠΟΥ ΕΝΔΕΧΕΤΑΙ ΝΑ ΠΑΡΟΥΣΙΑΣΤΟΥΝ
+                    </div>
+
+                    <div className="px-2 border-b border-gray-400 text-sm">
+                        Η συγκεκριμένη κατασκευή δεν μπορεί να θεωρηθεί ιδιαίτερα επικίνδυνη κατά την εκτέλεση των διάφορων φάσεων
+                        των έργων. Οι πιθανότεροι κίνδυνοι είναι:
+                    </div>
+
+                    <div className="border-b border-gray-400">
+                        <div className="grid grid-cols-12">
+                            <div className="col-span-1 border-r border-gray-400 p-2 text-center font-bold">#REF!</div>
+                            <div className="col-span-11 p-2 text-sm">
+                                Πιθανός κίνδυνος πτώσεως εργαζομένων από ύψος στις εργασίες κατασκευής ξυλοτύπων, σκυροδέτησης,
+                                τοποθέτησης σιδηροπλισμών, κατασκευής τοιχοδομών και επιχρισμάτων, χρωματισμών κτλ.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="border-b border-gray-400">
+                        <div className="grid grid-cols-12">
+                            <div className="col-span-1 border-r border-gray-400 p-2 text-center font-bold">#REF!</div>
+                            <div className="col-span-11 p-2 text-sm">Πιθανός κίνδυνος πτώσεως αντικειμένων και υλικών. </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Γ. ΜΕΤΡΑ ΓΙΑ ΤΗΝ ΠΡΟΛΗΨΗ ΚΑΙ ΑΠΟΤΡΟΠΗ ΤΩΝ ΚΙΝΔΥΝΩΝ */}
+
+
+                <div>
+                    <div className="p-2 font-bold mt-20">
+                        Γ. ΜΕΤΡΑ ΓΙΑ ΤΗΝ ΠΡΟΛΗΨΗ ΚΑΙ ΑΠΟΤΡΟΠΗ ΤΩΝ ΚΙΝΔΥΝΩΝ
+                    </div>
+
+                    <div className="border-y border-gray-400">
+                        <div className="grid grid-cols-12">
+                            <div className="col-span-1 border-r border-gray-400 p-2 text-center font-bold">#REF!</div>
+                            <div className="col-span-11 p-2 text-sm">
+                                • Για να προλαμβάνονται οι πτώσεις εργαζομένων ή αντικειμένων πρέπει σε όλες τις εργασίες η κατασκευή των
+                                ικριωμάτων πρέπει να είναι η σωστή και να πληρεί τις προδιαγραφές της κείμενης νομοθεσίας (ΠΔ 778/80 και
+                                1073/81), να τοποθετούνται κιγκλιδώματα και κατάλληλες περιφράξεις στους διαδρόμους των ικριωμάτων, του
+                                κτιρίου κλπ. στις σκάλες και φρεάτια ασανσέρ, στα πρανή των εκσκαφών και στις οπές του κτιρίου.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="border-b border-gray-400">
+                        <div className="grid grid-cols-12">
+                            <div className="col-span-1 border-r border-gray-400 p-2 text-center font-bold">#REF!</div>
+                            <div className="col-span-11 p-2 text-sm">
+                                • Οι εργαζόμενοι πρέπει να φορούν τα προβλεπόμενα από τη νομοθεσία κράνη, να διαθέτουν την κατάλληλη
+                                ένδυση και υπόδηση προς αποφυγή ολισθήσεων και ηλεκτροπληξιών. Σε ορισμένες εργασίες να διατίθενται ζώνες
+                                ασφαλείας και να προσδένονται οι εργαζόμενοι.
+                            </div>
+                        </div>
+                    </div>
+                    <div className="border-b border-gray-400">
+                        <div className="grid grid-cols-12">
+                            <div className="col-span-1 border-r border-gray-400 p-2 text-center font-bold">#REF!</div>
+                            <div className="col-span-11 p-2 text-sm">Ειδικοί κίνδυνοι του παραρτ. ΙΙΙ του ΠΔ 305/96 (πλην &1) δεν υπάρχουν. </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-6">
+                    <h1 className="p-2 font-bold mt-20">
+                        Δ. ΠΡΟΣΘΕΤΑ ΣΤΟΙΧΕΙΑ
+                    </h1>
+
+                    <div className="space-y-6 text-sm">
+                        <ul className="p-2 space-y-4">
+                            <li className="flex items-center gap-2">
+                                <div>
+                                    <p>1. Προσπέλαση στο εργοτάξιο, πρόσβαση στις θέσεις εργασίας:</p>
+                                    <p className="ml-4">Δεν απαιτείται ιδιαίτερη μέριμνα πέραν των συνθηκών.</p>
+                                </div>
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <div>
+                                    <p>2. Κυκλοφορία οχημάτων και πεζών εντός του εργοταξίου:</p>
+                                    <p className="ml-4">Δεν απαιτείται ιδιαίτερη μέριμνα πέραν των συνθηκών.</p>
+                                </div>
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <div>
+                                    <p>3. Χώροι αποθήκευσης υλικών και τρόπος αποκομιδής αχρήστων:</p>
+                                    <p className="ml-4">Αποθήκευση στον ακάλυπτο χώρο της οικοδομής και αποκομιδή αχρήστων με μηχανικά μέσα.</p>
+                                </div>
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <div>
+                                    <p>4. Διευθέτηση αποκομιδής επικίνδυνων υλικών:</p>
+                                    <p className="ml-4">Συγκέντρωση επικίνδυνων υλικών για αποκομιδή και σωστή διάθεση.</p>
+                                </div>
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <div>
+                                    <p>5. Χώροι υγιεινής, εστίασης και πρώτων βοηθειών:</p>
+                                    <p className="ml-4">Θα δημιουργηθεί προχείρο W.C. και φραγμένο από το ισόγειο.</p>
+                                </div>
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <div>
+                                    <p>6. Κατασκευή ικριωμάτων:</p>
+                                    <p className="ml-4">Συνήθης μορφή ικριωμάτων χρησιμοποιώντας κανονιστικά πρότυπα.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div className="mt-12 text-right ml-6">
+                    <div className="flex justify-start items-start gap-30">
+                        <div className="">
+                            <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
+                            {/* Dashed Border Box = common component*/}
+                            {/* <StampComponent
+                                title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
+                                instructions={[
+                                    "Με δεξί κλικ",
+                                    "Αλλαγή εικόνας",
+                                    " Βάζετε την σφραγίδα σας",
+                                ]}
+                            /> */}
+                        </div>
+                        <div className="flex items-center justify-center gap-2">
+                            <span className=" ">Ημερομηνία :</span>
+                            <span className=" ">2/8/2025</span>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
-            <div className="w-32 p-2 underline">email engineer</div>
-          </div>
         </div>
-
-        {/* VAT row */}
-        <div className="border-b border-gray-400">
-          <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-            <div className="flex-1 p-2 font-bold">VAT Engineer</div>
-            <div className="w-32 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
-          </div>
-        </div>
-
-        {/* Declaration text */}
-        <div className="p-4 text-sm">
-          <p className="mb-4">
-            Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
-          </p>
-
-          <p className="my-4">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις <span className="font-bold">αναλαμβάνω</span> για το έργο</p>
-
-          <p className=" mb-6">PROJECT DESCRIPTION</p>
-        </div>
-
-        {/* Additional disclaimer text */}
-        <div className="p-4 text-sm space-y-3">
-          <p >
-            τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:
-          </p>
-          <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>
-          <p>
-            ●Την κατάρτιση και υποβολή του φακέλου στην αρμόδια υπηρεσία (e-Άδειες / ΥΔΟΜ )</p>
-          <p>
-            ●Τη συνεργασία με άλλους ειδικούς/μελετητές, όπου απαιτείται</p>
-        </div>
-
-        {/* Signature section */}
-        <div className="flex items-center justify-center">
-          <div className="flex justify-end p-4">
-            <div className="text-right space-y-2">
-              <div className="flex items-center gap-4">
-                <span className="text-sm">Ημερομηνία :</span>
-                <span className="text-sm font-medium">8/5/2025</span>
-              </div>
-              <div className="text-sm mt-8 text-center">
-                <div>( Υπογραφή )</div>
-                <div className="mt-4">Ο/Η Δηλώνουσα</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* common component  */}
-        {/* <div className="flex items-center justify-center mt-6">
-          <StampComponent />
-        </div> */}
-      </div>
-    </div>
-  )
+    )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
