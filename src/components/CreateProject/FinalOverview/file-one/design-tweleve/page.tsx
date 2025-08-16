@@ -1,7 +1,6 @@
-// import StampComponent from '@/component/shared/dashed/Dashed';
 import React from 'react';
 
-function FileOneDesignTen() {
+function FileOneDesignTweleve() {
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white">
       {/* Header with coat of arms */}
@@ -34,13 +33,13 @@ function FileOneDesignTen() {
           </div>
         </div>
 
-        {/* Name Engineer row */}
+        {/* Name Owner row */}
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-            <div className="w-40 p-2 border-r border-gray-400  font-bold">Name Engineer</div>
+            <div className="w-40 p-2 border-r border-gray-400  font-bold">Name Owner</div>
             <div className="w-32 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-            <div className="flex-1 p-2 0 font-bold">Surname Engineer</div>
+            <div className="flex-1 p-2 0 font-bold">Surname Owner</div>
           </div>
         </div>
 
@@ -48,7 +47,7 @@ function FileOneDesignTen() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-            <div className="flex-1 p-2 font-bold">Fathers name and surname Engineer</div>
+            <div className="flex-1 p-2 font-bold">Fathers name and surname Owner</div>
           </div>
         </div>
 
@@ -56,7 +55,7 @@ function FileOneDesignTen() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-            <div className="flex-1 p-2 font-bold">Mothers name and surname Engineer</div>
+            <div className="flex-1 p-2 font-bold">Mothers name and surname Owner</div>
           </div>
         </div>
 
@@ -64,7 +63,7 @@ function FileOneDesignTen() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-            <div className="flex-1 p-2 font-bold">Born date Engineer</div>
+            <div className="flex-1 p-2 font-bold">Born date Owner</div>
           </div>
         </div>
 
@@ -72,7 +71,7 @@ function FileOneDesignTen() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-            <div className="flex-1 p-2 font-bold">Born Town Engineer</div>
+            <div className="flex-1 p-2 font-bold">Born Town owner</div>
           </div>
         </div>
 
@@ -112,7 +111,7 @@ function FileOneDesignTen() {
                 <div>ίου (Email):</div>
               </div>
             </div>
-            <div className="w-32 p-2 ">email Engineer</div>
+            <div className="w-32 p-2 ">email owner</div>
           </div>
         </div>
 
@@ -120,7 +119,7 @@ function FileOneDesignTen() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-            <div className="flex-1 p-2 font-bold">VAT Engineer</div>
+            <div className="flex-1 p-2 font-bold">VAT owner</div>
             <div className="w-40 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
           </div>
         </div>
@@ -133,27 +132,18 @@ function FileOneDesignTen() {
           </p>
 
           <p className="mb-4">
-           ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις <span className='font-bold'>αναλαμβάνω</span> για το έργο
-           
+           ως κύριος/ιδιοκτήτης του ακινήτου που βρίσκεται επί της οδού ([Address, Number, Town, Postal code],<span className='font-bold'>συναινώ ρητά και ανεπιφύλακτα</span> στην έκδοση Έγκρισης Εργασιών Μικρής Κλίμακας για την εκτέλεση των  εργασιών,
+            
           </p>
 
-        
+          <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
           <p className=" font-bold mb-10 text-xl">PROJECT DESCRIPTION</p>
         </div>
 
         {/* Additional disclaimer text */}
         <div className="p-4 text-sm ">
           <p className="">
-          τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       
-          </p>
-          <p>
-            ●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.
-          </p>
-          <p>
-            ●Την κατάρτιση και υποβολή του φακέλου στην αρμόδια υπηρεσία (e-Άδειες / ΥΔΟΜ )
-          </p>
-          <p>
-            ●Τη συνεργασία με άλλους ειδικούς/μελετητές, όπου απαιτείται
+          Η παρούσα δήλωση παρέχεται αποκλειστικά για την κάλυψη των απαιτήσεων του άρθρου 29 του Ν.4495/2017 και των σχετικών κανονιστικών πράξεων.       
           </p>
         </div>
 
@@ -172,13 +162,9 @@ function FileOneDesignTen() {
             </div>
           </div>
         </div>
-        {/* common component  */}
-          {/* <div className="flex justify-end items-center mt-6">
-            <StampComponent />
-          </div> */}
       </div>
     </div>
   );
 }
 
-export default FileOneDesignTen;
+export default FileOneDesignTweleve;
