@@ -12,7 +12,14 @@ const serviceApi = baseUrlApi.injectEndpoints({
         },
       }),
     }),
+    getTemplateData: build.query({
+      query: () => ({
+        url: "/projects/689c3040b3aacee891a60175/templete-two",
+        method: "get",
+      }),
+    }),
   }),
 });
 
-export const { useCreateServicePostMutation } = serviceApi;
+export const { useCreateServicePostMutation, useGetTemplateDataQuery } =
+  serviceApi;
