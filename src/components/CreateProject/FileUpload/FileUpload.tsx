@@ -105,13 +105,13 @@ const FileUpload: React.FC<FileUploadProps> = ({
   };
 
   return (
-    <div className="space-y-6 mt-[-40px]">
-      <div className="grid grid-cols-2 gap-10">
+    <div className="space-y-6 ">
+      <div className="">
         {/* ktimatologio   */}
         <div>
           <div
             className={`
-          border-2 border-dashed rounded-xl p-16 text-center transition-all duration-200
+          border-2 border-dashed rounded-xl p-16 text-center transition-all h-[600px] flex justify-center items-center flex-col duration-200
           ${
             isDragOver
               ? "border-blue-400 bg-blue-50"
@@ -126,127 +126,6 @@ const FileUpload: React.FC<FileUploadProps> = ({
             <p className="text-xl text-gray-600 mb-2 font-medium">
               ktimatologio File
             </p>
-            <p className="text-gray-500 mb-6">
-              Format: PDF & Max file size: 25 MB
-            </p>
-
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 font-medium"
-            >
-              Browse Files
-            </button>
-
-            <input
-              ref={fileInputRef}
-              type="file"
-              multiple
-              accept=".pdf,.doc,.docx,image/*"
-              onChange={handleFileSelect}
-              className="hidden"
-            />
-          </div>
-        </div>
-        {/* contract */}
-
-        <div>
-          <div
-            className={`
-          border-2 border-dashed rounded-xl p-16 text-center transition-all duration-200
-          ${
-            isDragOver
-              ? "border-blue-400 bg-blue-50"
-              : "border-gray-300 hover:border-gray-400 bg-gray-50"
-          }
-        `}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-          >
-            <Upload className="w-16 h-16 text-gray-400 mx-auto mb-6" />
-            <p className="text-xl text-gray-600 mb-2 font-medium">
-              contract File
-            </p>
-            <p className="text-gray-500 mb-6">
-              Format: PDF & Max file size: 25 MB
-            </p>
-
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 font-medium"
-            >
-              Browse Files
-            </button>
-
-            <input
-              ref={fileInputRef}
-              type="file"
-              multiple
-              accept=".pdf,.doc,.docx,image/*"
-              onChange={handleFileSelect}
-              className="hidden"
-            />
-          </div>
-        </div>
-        {/* permit  */}
-
-        <div>
-          <div
-            className={`
-          border-2 border-dashed rounded-xl p-16 text-center transition-all duration-200
-          ${
-            isDragOver
-              ? "border-blue-400 bg-blue-50"
-              : "border-gray-300 hover:border-gray-400 bg-gray-50"
-          }
-        `}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-          >
-            <Upload className="w-16 h-16 text-gray-400 mx-auto mb-6" />
-            <p className="text-xl text-gray-600 mb-2 font-medium">
-              permit file
-            </p>
-            <p className="text-gray-500 mb-6">
-              Format: PDF & Max file size: 25 MB
-            </p>
-
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              className="bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 font-medium"
-            >
-              Browse Files
-            </button>
-
-            <input
-              ref={fileInputRef}
-              type="file"
-              multiple
-              accept=".pdf,.doc,.docx,image/*"
-              onChange={handleFileSelect}
-              className="hidden"
-            />
-          </div>
-        </div>
-        {/* law4495 */}
-
-        <div>
-          <div
-            className={`
-          border-2 border-dashed rounded-xl p-16 text-center transition-all duration-200
-          ${
-            isDragOver
-              ? "border-blue-400 bg-blue-50"
-              : "border-gray-300 hover:border-gray-400 bg-gray-50"
-          }
-        `}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-          >
-            <Upload className="w-16 h-16 text-gray-400 mx-auto mb-6" />
-            <p className="text-xl text-gray-600 mb-2 font-medium">Law File</p>
             <p className="text-gray-500 mb-6">
               Format: PDF & Max file size: 25 MB
             </p>
