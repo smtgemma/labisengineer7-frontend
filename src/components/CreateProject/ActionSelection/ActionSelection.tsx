@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { toast } from "sonner";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
 import { UserData } from "@/redux/features/auth/userDataCatchSlice";
+import { setActionSelectName } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 
 interface ActionSelectionProps {
   selectedActions: string[];
@@ -19,22 +20,31 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     "Create Technical Description",
     "Export CSV File",
   ];
+  const [selectedActionsValue, setSelectedActionsValue] = useState<string[]>(
+    []
+  );
 
+  const dispatch = useDispatch();
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
   const subCategoryData = stepByStepData.subcategory;
-  console.log(subCategoryData);
 
   const toggleAction = (action: string) => {
     if (selectedActions.includes(action)) {
       onActionsChange(selectedActions.filter((a) => a !== action));
+      setSelectedActionsValue(selectedActions.filter((a) => a !== action));
     } else {
       onActionsChange([...selectedActions, action]);
+      setSelectedActionsValue([...selectedActions, action]);
     }
   };
+
+  console.log(selectedActionsValue);
 
   const userData = useSelector(
     (state: RootState) => state.user.userData as UserData | null
   );
+
+  dispatch(setActionSelectName(selectedActionsValue));
 
   const projectAndUserHexCode = userData?.hexToken + "-8271";
 
@@ -128,7 +138,6 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
 export default ActionSelection;
 
-
 // "use client"
 
 // import React, { useState } from "react";
@@ -153,7 +162,6 @@ export default ActionSelection;
 //     "Create Technical Description",
 //     "Export CSV File",
 //   ];
-  
 //   const dispatch = useDispatch();
 //   const [allCategories, setAllCategories] = useState<string[]>([])
 
@@ -199,12 +207,10 @@ export default ActionSelection;
 //         return [...prev, cat];
 //       }
 //     });
-    
+
 //   }
 
 //   dispatch(setTempateName(allCategories));
-  
-  
 
 //   return (
 //     <div className="space-y-6">
@@ -315,4 +321,3 @@ export default ActionSelection;
 // };
 
 // export default ActionSelection;
-

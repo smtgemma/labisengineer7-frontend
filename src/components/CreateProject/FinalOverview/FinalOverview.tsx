@@ -379,6 +379,9 @@ import DesignTwo from "./file-one/design-two/page";
 import DesignThree from "./file-one/design-three/page";
 import DesignFour from "./file-one/design-four/page";
 import DesignFive from "./file-one/design-five/page";
+import ProjectDescriptionSix from "./file-one/design-six/page";
+import { Provider } from "react-redux";
+import { makeStore } from "@/redux/store";
 
 interface Owner {
   id: string;
@@ -406,7 +409,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const printRef = React.useRef(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
-  const allTempate = stepByStepData.tempateName;
+  const allTempate = stepByStepData.actionSelection;
   const dataAllFIled = stepByStepData.aiInputData;
   const subCategoryData = stepByStepData.subcategory;
   console.log(subCategoryData, "==================");
@@ -414,14 +417,64 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const buildingMods = subCategoryData["building-modifications"] || [];
   const aboutEngineeringInformation = false;
 
-  console.log(dataAllFIled, "stepByStepData");
-  const { arbitrary_constructions_description, area, building, buildingCode, building_permi, cadastralCode, co2Emissions, construction, createdById, energyCategory, epcCode, expectation_Document,
-    floor, issueAuthority, issueDate, land_use, licenseIssueNumber, licenseNumber, licenseRevision, lotSquare, municipal, neighborhood, notary, owners, primaryEnergy,
-    projectDescription, propertyDesc1, propertyDesc2, protocolNumber, reexamineNumbers, region, serviceId, subCategories, titleArea, type, ydom, zonePrice,
+  const store = makeStore();
+
+  console.log(allTempate, "stepByStepData");
+  const {
+    arbitrary_constructions_description,
+    area,
+    building,
+    buildingCode,
+    building_permi,
+    cadastralCode,
+    co2Emissions,
+    construction,
+    createdById,
+    energyCategory,
+    epcCode,
+    expectation_Document,
+    floor,
+    issueAuthority,
+    issueDate,
+    land_use,
+    licenseIssueNumber,
+    licenseNumber,
+    licenseRevision,
+    lotSquare,
+    municipal,
+    neighborhood,
+    notary,
+    owners,
+    primaryEnergy,
+    projectDescription,
+    propertyDesc1,
+    propertyDesc2,
+    protocolNumber,
+    reexamineNumbers,
+    region,
+    serviceId,
+    subCategories,
+    titleArea,
+    type,
+    ydom,
+    zonePrice,
   } = dataAllFIled;
 
-  const { address, afm, birthDate, birthPlace, city, email, fatherName, firstName, lastName, motherName, phone, postalCode } = owners[0]
-  console.log(address)
+  const {
+    address,
+    afm,
+    birthDate,
+    birthPlace,
+    city,
+    email,
+    fatherName,
+    firstName,
+    lastName,
+    motherName,
+    phone,
+    postalCode,
+  } = owners[0];
+  console.log(address);
   // const {} = subCategories
   const openPreview = () => {
     const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
@@ -463,8 +516,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   };
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
-    { name: "TemplateTwo", component: <TemplateTow /> },
-    { name: "TemplateThree", component: <TemplateThree /> },
+    { name: "ProjectDescriptionSix", component: <ProjectDescriptionSix /> },
   ];
 
   // pdf file download
@@ -499,7 +551,12 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     const files: { name: string; lastModified: Date; input: Blob }[] = [];
 
     for (let t of templates) {
-      const html = ReactDOMServer.renderToStaticMarkup(t.component);
+      // const html = ReactDOMServer.renderToStaticMarkup(t.component);
+
+      // Wrap the component in Provider
+      const html = ReactDOMServer.renderToStaticMarkup(
+        <Provider store={store}>{t.component}</Provider>
+      );
       const container = document.createElement("div");
       container.innerHTML = html;
       container.style.width = "794px";
@@ -632,6 +689,60 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             return null;
           })
         }
+        <ProjectDescriptionSix />
+        <TemplateFIle />
+        <DesignFive />
+        <DesignFour />
+
+        {/* <div>
+          {
+            allTempate?.map((item: string, index: number) => {
+              if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
+                return <DesignTwo address={address} birthDate={birthDate} birthPlace={birthPlace} city={city} phone={phone} firstName={firstName} lastName={lastName} motherName={motherName} email={email} postalCode={postalCode} fatherName={fatherName}  key={index} />;
+              }
+              if (item === "ProjectDescriptionEight") {
+                return null; // Skips rendering for this item
+              } // Renders other items as text
+            })
+          }
+        </div> */}
+
+        <div>
+          {allTempate?.map((item: string, index: number) => {
+            if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
+              return <DesignThree key={index} />;
+            }
+            if (item === "ProjectDescriptionEight") {
+              return null; // Skips rendering for this item
+            } // Renders other items as text
+          })}
+        </div>
+
+        {/* <div>
+          {
+            allTempate?.map((item: string, index: number) => {
+              if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
+                return <DesignFour key={index} />;
+              }
+              if (item === "ProjectDescriptionEight") {
+                return null; // Skips rendering for this item
+              } // Renders other items as text
+            })
+          }
+        </div> */}
+
+        {/* <div>
+          {
+            allTempate?.map((item: string, index: number) => {
+              if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
+                return <DesignFive key={index} />;
+              }
+              if (item === "ProjectDescriptionEight") {
+                return null; // Skips rendering for this item
+              } // Renders other items as text
+            })
+          }
+        </div> */}
       </div>
 
       <div className="flex justify-end">
