@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Plus, Edit3 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
+import { MdDeleteOutline } from "react-icons/md";
 import {
   Owner as Owners,
   setAiExtractCatchWonerData,
@@ -61,6 +62,7 @@ const OwnerSelection = () => {
   const dispatch = useDispatch();
   const ownerData = useSelector((state: any) => state.aiData.aiDataState);
   console.log(ownerData.owners);
+  console.log(ownerData?.project_description);
 
   // const owners = (ownerData.owners ?? []) as Owner[];
 
@@ -97,6 +99,7 @@ const OwnerSelection = () => {
     setIsModalOpen(false);
   };
 
+  // edit page owner
   const onEditSubmit = (data: OwnerFormInputs) => {
     if (editingOwner !== null) {
       const updatedOwner: Owner = {
@@ -122,6 +125,11 @@ const OwnerSelection = () => {
       reset();
       setIsEditModalOpen(false);
     }
+  };
+
+  const handleDeleteOwner = (index: number) => {
+    const deleteowner = isOwner.filter((item, i) => i !== index);
+    setIsOwner(deleteowner);
   };
 
   const openAddOwnerModal = () => {
@@ -163,7 +171,7 @@ const OwnerSelection = () => {
         </label>
         <input
           type="text"
-          value={projectDescription}
+          value={ownerData?.project_description}
           onChange={(e) => setProjectDescription(e.target.value)}
           className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           placeholder="Enter project description"
@@ -171,15 +179,34 @@ const OwnerSelection = () => {
       </div>
 
       {/* Owners Grid */}
+
+      {isOwner.length === 0 && (
+        <div className="flex justify-center w-full mt-20">
+          <div className="border border-dashed p-20 border-blue-500 rounded-xl">
+            <h2 className="text-xl">
+              Owner is no select. please your owner selecting.
+            </h2>
+          </div>
+        </div>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         {isOwner?.map((owner: any, index) => (
           <div key={index} className="bg-gray-50 p-6 rounded-lg relative">
-            <button
-              onClick={() => openEditModalOwner(owner, index)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-            >
-              <Edit3 className="w-4 h-4" />
-            </button>
+            <div className="flex gap-2 absolute top-4 right-4 text-gray-400  ">
+              <button
+                onClick={() => openEditModalOwner(owner, index)}
+                className="block hover:text-gray-600 cursor-pointer"
+              >
+                <Edit3 className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={() => handleDeleteOwner(index)}
+                className=" text-red-500 cursor-pointer  block hover:text-red-700"
+              >
+                <MdDeleteOutline />
+              </button>
+            </div>
 
             <h3 className="text-lg font-semibold text-gray-900 mb-6">
               Owner {index + 1}

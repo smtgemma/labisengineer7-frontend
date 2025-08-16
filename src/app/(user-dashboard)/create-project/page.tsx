@@ -141,7 +141,7 @@ const WorkflowDemo: React.FC = () => {
       case 3:
         return <OwnerSelection />;
       case 4:
-        return <AIExtractionDataInPut />;
+        return <AIExtractionDataInPut currentStep={currentStep} />;
       case 5:
         return (
           <ActionSelection
