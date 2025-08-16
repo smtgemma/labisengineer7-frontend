@@ -201,15 +201,6 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
     }
   }, [currentStep, filesData, handleSubmit, onSubmitAiDataSend]);
 
-  // useEffect(() => {
-  //   if (!filesData?.length) return;
-  //   // e.g., submit when currentStep === 'review' (adjust to your flow)
-  //   if (currentStep === 4) {
-  //     // triggers onSubmitAiDataSend with current form values
-  //     handleSubmit(onSubmitAiDataSend)();
-  //   }
-  // }, []);
-
   return (
     <>
       <div className="mt-[-40]">

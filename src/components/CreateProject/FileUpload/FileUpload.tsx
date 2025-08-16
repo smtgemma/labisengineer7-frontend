@@ -111,7 +111,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
         <div>
           <div
             className={`
-          border-2 border-dashed rounded-xl p-16 text-center transition-all h-[600px] flex justify-center items-center flex-col duration-200
+          border-2 border-dashed rounded-xl p-16 text-center transition-all h-[500px] flex justify-center items-center flex-col duration-200
           ${
             isDragOver
               ? "border-blue-400 bg-blue-50"

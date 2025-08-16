@@ -7,7 +7,7 @@ export default function ProjectDescriptionSix() {
 
   const { data, isLoading } = useGetTemplateDataQuery("un");
   const ydomName = data?.data?.ydom_name;
-  console.log(ydomName);
+
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
       {/* Header with coat of arms */}
