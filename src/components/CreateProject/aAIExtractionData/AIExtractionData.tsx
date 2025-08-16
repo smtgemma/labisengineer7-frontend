@@ -199,7 +199,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
       hasSubmittedRef.current = true; // lock it
       handleSubmit(onSubmitAiDataSend)();
     }
-  }, [currentStep, filesData, handleSubmit, onSubmitAiDataSend]);
+  }, [currentStep]);
 
   return (
     <>

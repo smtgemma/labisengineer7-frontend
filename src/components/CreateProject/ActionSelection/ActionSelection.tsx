@@ -162,7 +162,6 @@ export default ActionSelection;
 //     "Create Technical Description",
 //     "Export CSV File",
 //   ];
-
 //   const dispatch = useDispatch();
 //   const [allCategories, setAllCategories] = useState<string[]>([])
 
