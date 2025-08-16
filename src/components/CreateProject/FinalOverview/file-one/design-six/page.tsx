@@ -4,7 +4,7 @@
 export default function FileOneDesingSix() {
 
     return (
-        <div className="max-w-[794px] mx-auto p-6 bg-white">
+        <div className="max-w-[794px] mx-auto px-12 py-18 bg-white">
             {/* Title */}
             <h2 className="text-center font-semibold underline text-sm mb-2">
                 ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ - ΒΕΒΑΙΩΣΗ ΜΗΧΑΝΙΚΟΥ

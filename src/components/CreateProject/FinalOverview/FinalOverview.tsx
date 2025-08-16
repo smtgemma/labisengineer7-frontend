@@ -720,20 +720,20 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΤΟΠΟΘΕΤΗΣΗ_ΙΚΡΙΩΜΑΤΩΝ_15" &&
               allTempate.includes("Generate Engineer Declaration (YA)")
             ) {
-              elements.push(<FileOneDesignSeven key={`seven-${index}`} />);
+              elements.push(<FileOneDesignEleven key={`seven-${index}`} />);
             }
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" &&
-              allTempate.includes("Generate Engineer Declaration (YA)")
-            ) {
-              elements.push(<FileOneDesignSeven key={`seven-${index}`} />);
-            }
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" &&
-              allTempate.includes("Generate Engineer Declaration (YA)")
-            ) {
-              elements.push(<FileOneDesignSeven key={`seven-${index}`} />);
-            }
+            // if (
+            //   item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" &&
+            //   allTempate.includes("Generate Engineer Declaration (YA)")
+            // ) {
+            //   elements.push(<FileOneDesignEleven key={`seven-${index}`} />);
+            // }
+            // if (
+            //   item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" &&
+            //   allTempate.includes("Generate Engineer Declaration (YA)")
+            // ) {
+            //   elements.push(<FileOneDesignSeven key={`seven-${index}`} />);
+            // }
             if (
               item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2" &&
               allTempate.includes("Create Technical Description")

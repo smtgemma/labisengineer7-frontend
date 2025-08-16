@@ -1,6 +1,6 @@
 function FileOneDesignThirteen() {
         return (
-            <div className="max-w-[796px] mx-auto">
+            <div className="max-w-[796px] mx-auto px-12 pt-18 pb-2 bg-white">
                 <div className=" bg-white">
                     {/* Title */}
                     <h2 className="text-center font-semibold text-sm mb-6 underline">

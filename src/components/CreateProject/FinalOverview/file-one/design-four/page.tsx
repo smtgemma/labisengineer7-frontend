@@ -151,7 +151,7 @@ export default function FileOneDesignFour() {
     ]
 
     return (
-        <div className="max-w-[794px] mx-auto p-4 bg-white space-y-8">
+        <div className="max-w-[794px] mx-auto px-12 py-18 bg-white space-y-8">
             {/* ΦΑΚΕΛΟΣ ΑΣΦΑΛΕΙΑΣ ΚΑΙ ΥΓΕΙΑΣ first stp=========================*/}
             <div className="border border-gray-400">
                 {/* Header */}

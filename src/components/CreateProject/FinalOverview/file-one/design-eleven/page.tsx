@@ -1,8 +1,13 @@
 import StampComponent from "../../shared/signture/signture";
+import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
 
 
 
 export default function FileOneDesignEleven() {
+
+  const { data, isLoading } = useGetTemplateDataQuery("un");
+  const ydomName = data?.data
+  console.log("ydomName", ydomName);
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
       {/* Header with coat of arms */}
@@ -31,7 +36,7 @@ export default function FileOneDesignEleven() {
         <div className="border-b border-gray-400 bg-gray-50">
           <div className="flex">
             <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-            <div className="flex-1 p-2  font-bold">YDOM</div>
+            <div className="flex-1 p-2  font-bold">{ydomName.ydom_name || "N/A"}</div>
           </div>
         </div>
 
@@ -39,9 +44,9 @@ export default function FileOneDesignEleven() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-            <div className="w-40 p-2 border-r border-gray-400  font-bold">Name Engineer</div>
+            <div className="w-40 p-2 border-r border-gray-400  font-bold">{ydomName.ydom_name || "N/A"}</div>
             <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-            <div className="flex-1 p-2  font-bold">Surname Engineer</div>
+            <div className="flex-1 p-2  font-bold">{ydomName.owner_surname|| "N/A"}</div>
           </div>
         </div>
 
@@ -49,7 +54,7 @@ export default function FileOneDesignEleven() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-            <div className="flex-1 p-2 font-bold">Fathers name and surname Engineer</div>
+            <div className="flex-1 p-2 font-bold">{ydomName.owner_father_name || "N/A"}</div>
           </div>
         </div>
 
@@ -57,7 +62,7 @@ export default function FileOneDesignEleven() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-            <div className="flex-1 p-2 font-bold">Mothers name and surname Engineer</div>
+            <div className="flex-1 p-2 font-bold">{ydomName.owner_mother_name || "N/A"}</div>
           </div>
         </div>
 
@@ -65,7 +70,7 @@ export default function FileOneDesignEleven() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-            <div className="flex-1 p-2 font-bold">Born date Engineer</div>
+            <div className="flex-1 p-2 font-bold">{ydomName.owner_birth_date || "N/A"}</div>
           </div>
         </div>
 
@@ -73,7 +78,7 @@ export default function FileOneDesignEleven() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-            <div className="flex-1 p-2 font-bold">Born Town Engineer</div>
+            <div className="flex-1 p-2 font-bold">{ydomName.owner_birth_place || "N/A"}</div>
           </div>
         </div>
 
@@ -83,7 +88,7 @@ export default function FileOneDesignEleven() {
             <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
             <div className="w-20 p-2 border-r border-gray-400 font-bold">ID</div>
             <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-            <div className="flex-1 p-2 font-bold">mobile</div>
+            <div className="flex-1 p-2 font-bold">{ydomName.owner_phone || "N/A"}</div>
           </div>
         </div>
 
@@ -91,13 +96,13 @@ export default function FileOneDesignEleven() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-            <div className="w-20 p-2 border-r border-gray-400 font-bold ">Town</div>
+            <div className="w-20 p-2 border-r border-gray-400 font-bold ">{ydomName.owner_city || "N/A"}</div>
             <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
-            <div className="w-24 p-2 border-r border-gray-400 font-bold ">Address</div>
+            <div className="w-24 p-2 border-r border-gray-400 font-bold ">{ydomName.owner_address || "N/A"}</div>
             <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
             <div className="w-20 p-2 border-r border-gray-400 font-bold ">Number</div>
             <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-            <div className="flex-1 p-2 font-bold">postal code</div>
+            <div className="flex-1 p-2 font-bold">{ydomName.owner_postal_code}</div>
           </div>
         </div>
 
@@ -113,7 +118,7 @@ export default function FileOneDesignEleven() {
                 <div>ίου (Email):</div>
               </div>
             </div>
-            <div className="w-32 p-2 underline ">email Engineer</div>
+            <div className="p-2 underline ">{ydomName.owner_email || "N/A"}</div>
           </div>
         </div>
 
