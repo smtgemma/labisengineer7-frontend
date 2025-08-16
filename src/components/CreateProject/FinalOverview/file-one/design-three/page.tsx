@@ -1,13 +1,10 @@
-<<<<<<< HEAD
-=======
 // import StampComponent from "@/component/shared/dashed/Dashed";
 "use client";
->>>>>>> b1765152e776377e94b2892a6c5edd52eab30e86
 
 // // import StampComponent from "@/component/shared/dashed/Dashed";
 
-// import { RootState } from "@/redux/store";
-// import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 
 
 // export default function DesignThree() {
@@ -202,19 +199,6 @@
 
 
 export default function DesignThree() {
-<<<<<<< HEAD
-    return (
-        <div className="max-w-[794px] mx-auto p-4 bg-white">
-            {/* Header with coat of arms */}
-            <div className="text-center mb-6">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
-                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-                        <div className="w-8 h-8 bg-white rounded-sm"></div>
-                    </div>
-                </div>
-                <h1 className="text-xl font-bold mb-2">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ</h1>
-                <p className="text-sm">(άρθρο 8 Ν.1599/1986)</p>
-=======
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
   console.log(stepByStepData);
   const dataAllFIled = stepByStepData?.aiInputData;
@@ -282,7 +266,6 @@ export default function DesignThree() {
           <div className="flex">
             <div className="w-50 p-2 border-r  text-sm">
               Όνομα και Επώνυμο Πατρός
->>>>>>> b1765152e776377e94b2892a6c5edd52eab30e86
             </div>
             <div className="flex-1 p-2 font-bold">
               Fathers name and surname Engineer{`${fatherName}` || "N/A"}
@@ -314,63 +297,6 @@ export default function DesignThree() {
           </div>
         </div>
 
-<<<<<<< HEAD
-                {/* Father's name row */}
-                <div className="border-b border-gray-400">
-                    <div className="flex">
-                        <div className="w-50 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                        <div className="flex-1 p-2 font-bold">Fathers name and surname Engineer</div>
-                    </div>
-                </div>
-
-                {/* Mother's name row */}
-                <div className="border-b border-gray-400">
-                    <div className="flex">
-                        <div className="w-50 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                        <div className="flex-1 p-2 font-bold">Mothers name and surname Engineer</div>
-                    </div>
-                </div>
-
-                {/* Birth date row */}
-                <div className="border-b border-gray-400">
-                    <div className="flex">
-                        <div className="w-50 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                        <div className="flex-1 p-2 font-bold">Born date Engineer</div>
-                    </div>
-                </div>
-
-                {/* Birth town row */}
-                <div className="border-b border-gray-400">
-                    <div className="flex">
-                        <div className="w-50 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-                        <div className="flex-1 p-2 font-bold">Born Town Engineer</div>
-                    </div>
-                </div>
-
-                {/* ID and mobile row */}
-                <div className="border-b border-gray-400">
-                    <div className="flex">
-                        <div className="w-50 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                        <div className="w-30 p-2 border-r border-gray-400 font-bold">ID</div>
-                        <div className="w-24 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-                        <div className="flex-1 p-2 font-bold">mobile</div>
-                    </div>
-                </div>
-
-                {/* Address row */}
-                <div className="border-b border-gray-400">
-                    <div className="flex">
-                        <div className="w-29 p-1 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                        <div className="w-26 p-1 border-r border-gray-400 font-bold ">Town</div>
-                        <div className="p-2 border-r border-gray-400 text-sm">Οδός</div>
-                        <div className="w-28 p-1 border-r border-gray-400 font-bold ">Address</div>
-                        <div className="w-16 p-1 border-r border-gray-400 text-sm">Αριθ</div>
-                        <div className="w-22 p-1 border-r border-gray-400 font-bold ">Number</div>
-                        <div className="w-12 p-1 border-r border-gray-400 text-sm">ΤΚ</div>
-                        <div className="flex-1 p-1 font-bold">postal code </div>
-                    </div>
-                </div>
-=======
         {/* Birth town row */}
         <div className="border-b ">
           <div className="flex">
@@ -449,7 +375,6 @@ export default function DesignThree() {
             προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του
             Ν.1599/1986, δηλώνω ότι:
           </p>
->>>>>>> b1765152e776377e94b2892a6c5edd52eab30e86
 
           <p className="mb-4">
             ως κύριος/ιδιοκτήτης του ακινήτου που βρίσκεται επί της οδού
@@ -497,58 +422,3 @@ export default function DesignThree() {
     </div>
   );
 }
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> b1765152e776377e94b2892a6c5edd52eab30e86

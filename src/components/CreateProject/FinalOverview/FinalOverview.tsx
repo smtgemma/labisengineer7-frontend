@@ -412,14 +412,21 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allTempate = stepByStepData.actionSelection;
   const dataAllFIled = stepByStepData.aiInputData;
   const subCategoryData = stepByStepData.subcategory;
-  console.log(subCategoryData, "==================");
+  console.log(subCategoryData, "==================------------------");
 
   const buildingMods = subCategoryData["building-modifications"] || [];
-  const aboutEngineeringInformation = false;
+  const energy = subCategoryData["energy-systems"] || [];
+  const fencing = subCategoryData["fencing"] || [];
+  const landscaping = subCategoryData["landscaping-2"] || [];
+  const operational = subCategoryData["operational-space"] || [];
+  const property = subCategoryData["property-documentation"] || [];
+  const small = subCategoryData["small-construction"] || [];
 
   const store = makeStore();
 
-  console.log(allTempate, "stepByStepData");
+  console.log(allTempate, "stepByStepData>>>>>>");
+
+
   const {
     arbitrary_constructions_description,
     area,
@@ -666,83 +673,126 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           </div>
           <p className="text-gray-600 text-sm">Click to download owners.csv</p>
         </div>
-        {/* Export content with inline styles */}
-        <div ref={contentRef} style={{ display: "none" }}>
-          {/* <TemplateThree /> */}
-        </div>
       </div>
 
       <div ref={printRef} className="space-y-30">
-        {/* <TemplateFIle />
-        <DesignOne/>
-        <DesignFour/>
-        <DesignThree/>
-        <DesignFive/> */}
-
+        {/* building-modifications  */}
         {
           buildingMods.map((item: string, index: number) => {
-            if (item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&  aboutEngineeringInformation) {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
               return <DesignOne key={index} />;
-            } else if (item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5") {
-              return <DesignTwo key={index} />;
+              // return 'Generate Engineer Declaration (YA)';
+
             }
             return null;
           })
         }
-        <ProjectDescriptionSix />
-        <TemplateFIle />
-        <DesignFive />
-        <DesignFour />
 
-        {/* <div>
-          {
-            allTempate?.map((item: string, index: number) => {
-              if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
-                return <DesignTwo address={address} birthDate={birthDate} birthPlace={birthPlace} city={city} phone={phone} firstName={firstName} lastName={lastName} motherName={motherName} email={email} postalCode={postalCode} fatherName={fatherName}  key={index} />;
-              }
-              if (item === "ProjectDescriptionEight") {
-                return null; // Skips rendering for this item
-              } // Renders other items as text
-            })
-          }
-        </div> */}
+        {/* energy-systems  */}
+        {
+          energy.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              // return <DesignOne key={index} />;
+              return 'Generate Engineer Declaration (YA)';
 
-        <div>
-          {allTempate?.map((item: string, index: number) => {
-            if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
-              return <DesignThree key={index} />;
             }
-            if (item === "ProjectDescriptionEight") {
-              return null; // Skips rendering for this item
-            } // Renders other items as text
-          })}
-        </div>
+            return null;
+          })
+        }
 
-        {/* <div>
-          {
-            allTempate?.map((item: string, index: number) => {
-              if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
-                return <DesignFour key={index} />;
-              }
-              if (item === "ProjectDescriptionEight") {
-                return null; // Skips rendering for this item
-              } // Renders other items as text
-            })
-          }
-        </div> */}
+        {/* fencing  */}
+        {
+          fencing.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              // return <DesignOne key={index} />;
+              return 'Generate Engineer Declaration (YA)';
 
-        {/* <div>
-          {
-            allTempate?.map((item: string, index: number) => {
-              if (item === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ") {
-                return <DesignFive key={index} />;
-              }
-              if (item === "ProjectDescriptionEight") {
-                return null; // Skips rendering for this item
-              } // Renders other items as text
-            })
-          }
-        </div> */}
+            }
+            return null;
+          })
+        }
+
+        {/* landscaping-2  */}
+        {
+          landscaping.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              // return <DesignOne key={index} />;
+              return 'Generate Engineer Declaration (YA)';
+
+            }
+            return null;
+          })
+        }
+
+        {/* operational-space  */}
+        {
+          operational.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              // return <DesignOne key={index} />;
+              return 'Generate Engineer Declaration (YA)';
+
+            }
+            return null;
+          })
+        }
+
+        {/* property-documentation  */}
+        {
+          property.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              // return <DesignOne key={index} />;
+              return 'Generate Engineer Declaration (YA)';
+
+            }
+            return null;
+          })
+        }
+
+        {/* small-construction  */}
+        {
+          small.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΙΣΙΝΑ_COMPACT_ΕΩΣ_50_Τ.Μ._13" &&
+              allTempate.includes("Create Technical Description")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              return (
+                <div className="space-y-12">
+                  <div> <DesignOne key={index} /></div>
+                  <div> <DesignOne key={index} /></div>
+              </div>
+              );
+              // return 'Generate Engineer Declaration (YA)';
+
+            }
+            return null;
+          })
+        }
+
       </div>
 
       <div className="flex justify-end">

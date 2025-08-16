@@ -2,24 +2,8 @@
 
 import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
 
-<<<<<<< HEAD
-export default function DesignSix() {
-    return (
-        <div className="max-w-[794px] mx-auto p-4 bg-white">
-            {/* Header with coat of arms */}
-            <div className="text-center mb-6">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
-                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-                        <div className="w-8 h-8 bg-white rounded-sm"></div>
-                    </div>
-                </div>
-                <h1 className="text-xl font-bold mb-2">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ</h1>
-                <p className="text-sm">(άρθρο 8 Ν.1599/1986)</p>
-            </div>    
-=======
 export default function ProjectDescriptionSix() {
   const name = "tomi ami";
->>>>>>> b1765152e776377e94b2892a6c5edd52eab30e86
 
   const { data, isLoading } = useGetTemplateDataQuery("un");
   const ydomName = data?.data?.ydom_name;
