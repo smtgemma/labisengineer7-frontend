@@ -1,4 +1,5 @@
-import React from 'react';
+"use client";
+import React from "react";
 
 function FileOneDesignTweleve() {
   return (
@@ -17,8 +18,8 @@ function FileOneDesignTweleve() {
       {/* Subtitle */}
       <div className="text-center mb-6 text-sm">
         <p>
-          Η ακρίβεια των στοιχείων που υποβάλλονται με αυτή τη δήλωση μπορεί να ελεγχθεί με βάση το αρχείο άλλων
-          υπηρεσιών
+          Η ακρίβεια των στοιχείων που υποβάλλονται με αυτή τη δήλωση μπορεί να
+          ελεγχθεί με βάση το αρχείο άλλων υπηρεσιών
         </p>
         <p>(άρθρο 8 παρ. 4 Ν.1599/1986)</p>
       </div>
@@ -28,7 +29,9 @@ function FileOneDesignTweleve() {
         {/* ΠΡΟΣ row */}
         <div className="border-b border-gray-400 bg-gray-50">
           <div className="flex">
-            <div className="w-24 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
+            <div className="w-24 p-2 border-r border-gray-400 font-bold text-sm">
+              ΠΡΟΣ(1):
+            </div>
             <div className="flex-1 p-2  font-bold">YDOM</div>
           </div>
         </div>
@@ -36,9 +39,15 @@ function FileOneDesignTweleve() {
         {/* Name Owner row */}
         <div className="border-b border-gray-400">
           <div className="flex">
-            <div className="w-40 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-            <div className="w-40 p-2 border-r border-gray-400  font-bold">Name Owner</div>
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">
+              Ο-Η Όνομα
+            </div>
+            <div className="w-40 p-2 border-r border-gray-400  font-bold">
+              Name Owner
+            </div>
+            <div className="w-32 p-2 border-r border-gray-400 text-sm">
+              Επώνυμο
+            </div>
             <div className="flex-1 p-2 0 font-bold">Surname Owner</div>
           </div>
         </div>
@@ -46,23 +55,33 @@ function FileOneDesignTweleve() {
         {/* Father's name row */}
         <div className="border-b border-gray-400">
           <div className="flex">
-            <div className="w-40 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-            <div className="flex-1 p-2 font-bold">Fathers name and surname Owner</div>
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">
+              Όνομα και Επώνυμο Πατρός
+            </div>
+            <div className="flex-1 p-2 font-bold">
+              Fathers name and surname Owner
+            </div>
           </div>
         </div>
 
         {/* Mother's name row */}
         <div className="border-b border-gray-400">
           <div className="flex">
-            <div className="w-40 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-            <div className="flex-1 p-2 font-bold">Mothers name and surname Owner</div>
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">
+              Όνομα και Επώνυμο Μητρός
+            </div>
+            <div className="flex-1 p-2 font-bold">
+              Mothers name and surname Owner
+            </div>
           </div>
         </div>
 
         {/* Birth date row */}
         <div className="border-b border-gray-400">
           <div className="flex">
-            <div className="w-40 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">
+              Ημερομηνία γέννησης(2):
+            </div>
             <div className="flex-1 p-2 font-bold">Born date Owner</div>
           </div>
         </div>
@@ -70,7 +89,9 @@ function FileOneDesignTweleve() {
         {/* Birth town row */}
         <div className="border-b border-gray-400">
           <div className="flex">
-            <div className="w-40 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">
+              Τόπος Γέννησης
+            </div>
             <div className="flex-1 p-2 font-bold">Born Town owner</div>
           </div>
         </div>
@@ -78,9 +99,15 @@ function FileOneDesignTweleve() {
         {/* ID and mobile row */}
         <div className="border-b border-gray-400">
           <div className="flex">
-            <div className="w-40 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-            <div className="w-32 p-2 border-r border-gray-400 font-bold">ID</div>
-            <div className="w-24 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">
+              Αριθμός Δελτίου Ταυτότητας
+            </div>
+            <div className="w-32 p-2 border-r border-gray-400 font-bold">
+              ID
+            </div>
+            <div className="w-24 p-2 border-r border-gray-400 text-sm">
+              Τηλ.:
+            </div>
             <div className="flex-1 p-2 font-bold">mobile</div>
           </div>
         </div>
@@ -88,12 +115,24 @@ function FileOneDesignTweleve() {
         {/* Address row */}
         <div className="border-b border-gray-400">
           <div className="flex">
-            <div className="w-40 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-            <div className="w-32 p-2 border-r border-gray-400 font-bold">Town</div>
-            <div className="w-24 p-2 border-r border-gray-400 text-sm">Οδός</div>
-            <div className="w-40 p-2 border-r border-gray-400 font-bold">Address</div>
-            <div className="w-24 p-2 border-r border-gray-400 text-sm">Αριθ</div>
-            <div className="w-28 p-2 border-r border-gray-400 font-bold">Number</div>
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">
+              Τόπος κατοικίας
+            </div>
+            <div className="w-32 p-2 border-r border-gray-400 font-bold">
+              Town
+            </div>
+            <div className="w-24 p-2 border-r border-gray-400 text-sm">
+              Οδός
+            </div>
+            <div className="w-40 p-2 border-r border-gray-400 font-bold">
+              Address
+            </div>
+            <div className="w-24 p-2 border-r border-gray-400 text-sm">
+              Αριθ
+            </div>
+            <div className="w-28 p-2 border-r border-gray-400 font-bold">
+              Number
+            </div>
             <div className="w-16 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
             <div className="flex-1 p-2 font-bold">postal code</div>
           </div>
@@ -102,7 +141,9 @@ function FileOneDesignTweleve() {
         {/* Contact details row */}
         <div className="border-b border-gray-400">
           <div className="flex">
-            <div className="w-40 p-2 border-r border-gray-400 text-sm">Αρ. Τηλεομοιότυπου (Fax):</div>
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">
+              Αρ. Τηλεομοιότυπου (Fax):
+            </div>
             <div className="flex-1 p-2">
               <div className="text-sm">
                 <div>Δ/νση</div>
@@ -118,22 +159,30 @@ function FileOneDesignTweleve() {
         {/* VAT row */}
         <div className="border-b border-gray-400">
           <div className="flex">
-            <div className="w-40 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">
+              Α.Φ.Μ.:
+            </div>
             <div className="flex-1 p-2 font-bold">VAT owner</div>
-            <div className="w-40 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
+            <div className="w-40 p-2 border-l border-gray-400 text-sm">
+              Δ.Ο.Υ.:
+            </div>
           </div>
         </div>
 
         {/* Declaration text */}
         <div className="p-4 text-sm">
           <p className="mb-4">
-            Με στοιχεία μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του
-            άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
+            Με στοιχεία μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που
+            προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του
+            Ν.1599/1986, δηλώνω ότι:
           </p>
 
           <p className="mb-4">
-           ως κύριος/ιδιοκτήτης του ακινήτου που βρίσκεται επί της οδού ([Address, Number, Town, Postal code],<span className='font-bold'>συναινώ ρητά και ανεπιφύλακτα</span> στην έκδοση Έγκρισης Εργασιών Μικρής Κλίμακας για την εκτέλεση των  εργασιών,
-            
+            ως κύριος/ιδιοκτήτης του ακινήτου που βρίσκεται επί της οδού
+            ([Address, Number, Town, Postal code],
+            <span className="font-bold">συναινώ ρητά και ανεπιφύλακτα</span>{" "}
+            στην έκδοση Έγκρισης Εργασιών Μικρής Κλίμακας για την εκτέλεση των
+            εργασιών,
           </p>
 
           <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
@@ -143,7 +192,9 @@ function FileOneDesignTweleve() {
         {/* Additional disclaimer text */}
         <div className="p-4 text-sm ">
           <p className="">
-          Η παρούσα δήλωση παρέχεται αποκλειστικά για την κάλυψη των απαιτήσεων του άρθρου 29 του Ν.4495/2017 και των σχετικών κανονιστικών πράξεων.       
+            Η παρούσα δήλωση παρέχεται αποκλειστικά για την κάλυψη των
+            απαιτήσεων του άρθρου 29 του Ν.4495/2017 και των σχετικών
+            κανονιστικών πράξεων.
           </p>
         </div>
 

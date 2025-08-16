@@ -357,9 +357,6 @@
 
 // export default FinalOverview;
 
-
-
-
 import React, { useRef } from "react";
 import { FileSpreadsheet, FileText, AlertCircle } from "lucide-react";
 import { Document, Packer, Paragraph, TextRun } from "docx";
@@ -428,46 +425,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   console.log(allTempate, "stepByStepData>>>>>>");
 
-
-  const {
-    arbitrary_constructions_description,
-    area,
-    building,
-    buildingCode,
-    building_permi,
-    cadastralCode,
-    co2Emissions,
-    construction,
-    createdById,
-    energyCategory,
-    epcCode,
-    expectation_Document,
-    floor,
-    issueAuthority,
-    issueDate,
-    land_use,
-    licenseIssueNumber,
-    licenseNumber,
-    licenseRevision,
-    lotSquare,
-    municipal,
-    neighborhood,
-    notary,
-    owners,
-    primaryEnergy,
-    projectDescription,
-    propertyDesc1,
-    propertyDesc2,
-    protocolNumber,
-    reexamineNumbers,
-    region,
-    serviceId,
-    subCategories,
-    titleArea,
-    type,
-    ydom,
-    zonePrice,
-  } = dataAllFIled;
+  const { owners } = dataAllFIled;
 
   const {
     address,
@@ -693,57 +651,56 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           })
         } */}
 
-        {
-          buildingMods.map((item: string, index: number) => {
-            const elements: React.ReactElement[] = [];
+        {buildingMods?.map((item: string, index: number) => {
+          const elements: React.ReactElement[] = [];
 
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
-              allTempate.includes("Generate Engineer Declaration (YA)")
-            ) {
-              elements.push(<FileOneDesignEleven key={`five-${index}`} />);
-            }
+          if (
+            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+            allTempate.includes("Generate Engineer Declaration (YA)")
+          ) {
+            elements.push(<FileOneDesignEleven key={`five-${index}`} />);
+          }
 
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" &&
-              allTempate.includes("Generate Assignment of Responsibility")
-            ) {
-              elements.push(<FileOneDesignThirteen key={`seven-${index}`} />);
-            }
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5" &&
-              allTempate.includes("Create Technical Description")
-            ) {
-              elements.push(<FileOneDesignFour key={`four-${index}`} />);
-            }
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΤΟΠΟΘΕΤΗΣΗ_ΙΚΡΙΩΜΑΤΩΝ_15" &&
-              allTempate.includes("Generate Engineer Declaration (YA)")
-            ) {
-              elements.push(<FileOneDesignEleven key={`seven-${index}`} />);
-            }
-            // if (
-            //   item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" &&
-            //   allTempate.includes("Generate Engineer Declaration (YA)")
-            // ) {
-            //   elements.push(<FileOneDesignEleven key={`seven-${index}`} />);
-            // }
-            // if (
-            //   item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" &&
-            //   allTempate.includes("Generate Engineer Declaration (YA)")
-            // ) {
-            //   elements.push(<FileOneDesignSeven key={`seven-${index}`} />);
-            // }
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2" &&
-              allTempate.includes("Create Technical Description")
-            ) {
-              elements.push(<FileOneDesignSix key={`seven-${index}`} />);
-            }
+          if (
+            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" &&
+            allTempate.includes("Generate Assignment of Responsibility")
+          ) {
+            elements.push(<FileOneDesignThirteen key={`seven-${index}`} />);
+          }
+          if (
+            item ===
+              "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5" &&
+            allTempate.includes("Create Technical Description")
+          ) {
+            elements.push(<FileOneDesignFour key={`four-${index}`} />);
+          }
+          if (
+            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΤΟΠΟΘΕΤΗΣΗ_ΙΚΡΙΩΜΑΤΩΝ_15" &&
+            allTempate.includes("Generate Engineer Declaration (YA)")
+          ) {
+            elements.push(<FileOneDesignEleven key={`seven-${index}`} />);
+          }
+          // if (
+          //   item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" &&
+          //   allTempate.includes("Generate Engineer Declaration (YA)")
+          // ) {
+          //   elements.push(<FileOneDesignEleven key={`seven-${index}`} />);
+          // }
+          // if (
+          //   item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" &&
+          //   allTempate.includes("Generate Engineer Declaration (YA)")
+          // ) {
+          //   elements.push(<FileOneDesignSeven key={`seven-${index}`} />);
+          // }
+          if (
+            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2" &&
+            allTempate.includes("Create Technical Description")
+          ) {
+            elements.push(<FileOneDesignSix key={`seven-${index}`} />);
+          }
 
-            return elements.length > 0 ? elements : null;
-          })
-        }
+          return elements.length > 0 ? elements : null;
+        })}
 
         {/* energy-systems  */}
         {/* {
@@ -845,7 +802,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             return null;
           })
         } */}
-
       </div>
 
       <div className="flex justify-end">
@@ -861,7 +817,3 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 };
 
 export default FinalOverview;
-
-
-
-

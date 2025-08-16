@@ -33,12 +33,13 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   const Law = files[3];
 
   // ai data extract
+  dispatch(setImageFile(files) || []);
   const startExtraction = async () => {
     if (files.length === 0) return;
     setIsProcessing(true);
     setProgress(0);
     setIsCompleted(false);
-    dispatch(setImageFile(files));
+
     const formData = new FormData();
 
     if (ktimatologio) formData.append("ktimatologio", ktimatologio);

@@ -67,7 +67,7 @@ interface AiExtractState {
   ownerBaseData?: any;
   projectId?: {} | undefined;
   subcategory?: [];
-  multiFiles?: [];
+  multiFiles?: [] | { name: string; size: number; type: string }[];
   aiInputData?: any;
   actionSelection?: [];
   projectIdCode?: string | null;
@@ -107,7 +107,13 @@ const aiExtractDataSlice = createSlice({
     setMultipleSubcategory: (state, action) => {
       state.subcategory = action.payload;
     },
-    setImageFile: (state, action) => {
+    // setImageFile: (state, action) => {
+    //   state.multiFiles = action.payload;
+    // },
+    setImageFile: (
+      state,
+      action: PayloadAction<{ name: string; size: number; type: string }[]>
+    ) => {
       state.multiFiles = action.payload;
     },
     setAiExtreactAndInputData: (state, action) => {
