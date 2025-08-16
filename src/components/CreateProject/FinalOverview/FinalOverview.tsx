@@ -46,12 +46,12 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const printRef = React.useRef(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
-  const allTempate = stepByStepData.tempateName;
+  const allTempate = stepByStepData.actionSelection;
   const dataAllFIled = stepByStepData.aiInputData;
 
   const store = makeStore();
 
-  console.log(dataAllFIled, "stepByStepData");
+  console.log(allTempate, "stepByStepData");
   const {
     arbitrary_constructions_description,
     area,
@@ -361,7 +361,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
 
       <div ref={printRef} className="space-y-30">
-        {/* <TemplateFIle /> */}
+        <ProjectDescriptionSix />
+        <TemplateFIle />
+        <DesignFive />
+        <DesignFour />
 
         {/* <div>
           {

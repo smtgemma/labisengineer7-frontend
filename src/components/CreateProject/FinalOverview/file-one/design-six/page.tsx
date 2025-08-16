@@ -1,6 +1,13 @@
 "use client";
+
+import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
+
 export default function ProjectDescriptionSix() {
   const name = "tomi ami";
+
+  const { data, isLoading } = useGetTemplateDataQuery("un");
+  const ydomName = data?.data?.ydom_name;
+  console.log(ydomName);
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
       {/* Header with coat of arms */}
@@ -11,7 +18,7 @@ export default function ProjectDescriptionSix() {
           </div>
         </div>
         <h1 className="text-xl font-bold mb-2">{name} ami </h1>
-        <p className="text-sm">(άρθρο 8 Ν.1599/1986)</p>
+        <p className="text-sm">(άρθρο 8 Ν.1599/1986) {ydomName}</p>
       </div>
 
       {/* Subtitle */}
