@@ -24,6 +24,7 @@ interface Owner {
   ownership_percentage: string;
   place_of_birth: string;
   tax_identification_number: string;
+  selected?: boolean;
 }
 
 interface AIDataState {
@@ -58,6 +59,7 @@ const OwnerSelection = () => {
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedOwners, setSelectedOwners] = useState<Owner[]>([]);
 
   const dispatch = useDispatch();
   const ownerData = useSelector((state: any) => state.aiData.aiDataState);
@@ -67,7 +69,6 @@ const OwnerSelection = () => {
   // const owners = (ownerData.owners ?? []) as Owner[];
 
   const [isOwner, setIsOwner] = useState<Owner[]>(ownerData.owners);
-  console.log(isOwner);
 
   const {
     register,
@@ -140,10 +141,42 @@ const OwnerSelection = () => {
     setEditingOwner({ owner, index });
     setIsEditModalOpen(true);
   };
+  // toggle owner selection
+  // const toggleOwnerSelection = (index: number) => {
+  //   const updatedOwners = [...isOwner];
+  //   updatedOwners[index] = {
+  //     ...updatedOwners[index],
+  //     selected: !updatedOwners[index].selected,
+  //   };
+  //   setIsOwner(updatedOwners);
+  // };
+
+  const toggleOwnerSelection = (index: number) => {
+    const owner = isOwner[index];
+
+    // check if already selected
+    const alreadySelected = selectedOwners.some(
+      (o) => o.tax_identification_number === owner.tax_identification_number
+    );
+
+    if (alreadySelected) {
+      // if already selected → remove it
+      setSelectedOwners(
+        selectedOwners.filter(
+          (o) => o.tax_identification_number !== owner.tax_identification_number
+        )
+      );
+    } else {
+      // otherwise add it
+      setSelectedOwners([...selectedOwners, { ...owner, selected: true }]);
+    }
+  };
+
+  console.log("new", selectedOwners);
 
   useEffect(() => {
-    dispatch(setAiExtractCatchWonerData(isOwner));
-  }, [isOwner]);
+    dispatch(setAiExtractCatchWonerData(selectedOwners));
+  }, [selectedOwners]);
 
   return (
     <div className="space-y-8">
@@ -191,7 +224,18 @@ const OwnerSelection = () => {
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         {isOwner?.map((owner: any, index) => (
-          <div key={index} className="bg-gray-50 p-6 rounded-lg relative">
+          <div
+            onClick={() => toggleOwnerSelection(index)}
+            key={index}
+            className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
+    ${
+      selectedOwners.some(
+        (o) => o.tax_identification_number === owner.tax_identification_number
+      )
+        ? "border-blue-600 bg-blue-50 shadow-md"
+        : "border-gray-200 bg-white hover:border-blue-300"
+    }`}
+          >
             <div className="flex gap-2 absolute top-4 right-4 text-gray-400  ">
               <button
                 onClick={() => openEditModalOwner(owner, index)}
