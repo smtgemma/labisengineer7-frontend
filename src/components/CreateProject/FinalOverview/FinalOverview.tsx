@@ -357,7 +357,7 @@
 
 // export default FinalOverview;
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FileSpreadsheet, FileText, AlertCircle } from "lucide-react";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { saveAs } from "file-saver";
@@ -443,6 +443,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   console.log(allTempate, "stepByStepData>>>>>>");
   const [selected, setSelected] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // modal close click outside 
+  const modalContentRef = useRef<HTMLDivElement>(null);
   // const {} = subCategories
   const openPreview = () => {
     const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
@@ -568,6 +571,27 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       handleZipDownload();
     }
   };
+  // 🔹 Click outside handler
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalContentRef.current &&
+        !modalContentRef.current.contains(event.target as Node)
+      ) {
+        setIsModalOpen(false);
+      }
+    };
+
+    if (isModalOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isModalOpen]);
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -636,52 +660,76 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         </div>
       </div>
 
-      <div ref={printRef} className="space-y-30">
+      <div ref={printRef} className="space-y-12">
+
+        {/* building-modifications */}
         {buildingMods?.map((item: string, index: number) => (
           <div>
             {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" && (
               <div className="flex flex-wrap gap-4">
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017")}
+                  onClick={() => {
+                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017")
+                    setIsModalOpen(true);
+                  }}
                 >
                   ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017
                 </button>
 
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ")}
+                  onClick={() => {
+                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ")
+                    setIsModalOpen(true);
+                  }}
                 >
                   ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ
                 </button>
 
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                  onClick={() => {
+                    setSelected("ΣΑΥ_ΦΑΥ")
+                    setIsModalOpen(true);
+                  }}
                 >
                   ΣΑΥ_ΦΑΥ
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΣΔΑ ΕΡΓΟΥ")}
+                  onClick={() => {
+                    setSelected("ΣΔΑ ΕΡΓΟΥ")
+                    setIsModalOpen(true);
+                  }}
                 >
                   ΣΔΑ ΕΡΓΟΥ
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ")}
+                  onClick={() => {
+                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ")
+                    setIsModalOpen(true);
+                  }}
                 >
                   ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ")}
+                  onClick={() => {
+                    setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ")
+                    setIsModalOpen(true);
+                  }}
                 >
                   ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
+                  // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
+                  onClick={() => {
+                    setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ");
+                    setIsModalOpen(true);
+                  }}
                 >
                   ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ
                 </button>
@@ -690,15 +738,112 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             )}
           </div>
         ))}
-        {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && <F1D1 />}
-        {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && <F1D2 />}
-        {selected === "ΣΑΥ_ΦΑΥ" && <F1D3 />}
-        {selected === "ΣΔΑ ΕΡΓΟΥ" && <F1D4 />}
-        {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && <F1D5 />}
-        {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <F1D6 />}
-        {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <F1D7 />}
-        {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <F1D8 />}
-        {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <F1D9 />}
+
+        <div>
+          <h3 className="mb-4">Εργασίες άλλης χρήσης_1</h3>
+          {buildingMods?.map((item: string, index: number) => (
+            <div>
+              {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" && (
+                <div className="flex flex-wrap gap-4">
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017")
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017
+                  </button>
+
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ")
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ
+                  </button>
+
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΣΑΥ_ΦΑΥ")
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΣΑΥ_ΦΑΥ
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΣΔΑ ΕΡΓΟΥ")
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΣΔΑ ΕΡΓΟΥ
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ")
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ")
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
+                    onClick={() => {
+                      setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ
+                  </button>
+                  {/* add more buttons the same way */}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Modal */}
+        {isModalOpen && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+            <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-4xl max-h-[80vh] overflow-y-auto relative" ref={modalContentRef}>
+              {/* Close Button */}
+              <button
+                className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
+                onClick={() => setIsModalOpen(false)}
+              >
+                ✕
+              </button>
+
+              {/* building-modifications */}
+              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && <F1D1 />}
+              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && <F1D2 />}
+              {selected === "ΣΑΥ_ΦΑΥ" && <F1D3 />}
+              {selected === "ΣΔΑ ΕΡΓΟΥ" && <F1D4 />}
+              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && <F1D5 />}
+              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <F1D6 />}
+              {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <F1D7 />}
+              {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <F1D8 />}
+              {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <F1D9 />}
+            </div>
+          </div>
+
+        )}
       </div>
 
 
