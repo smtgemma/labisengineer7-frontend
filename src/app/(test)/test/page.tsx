@@ -8,24 +8,42 @@ import FileOneDesignThirteen from "@/components/CreateProject/FinalOverview/file
 import FileOneDesignTweleve from "@/components/CreateProject/FinalOverview/file-one/design-tweleve/page"
 import FileOneDesignSeven from "@/components/CreateProject/FinalOverview/file-one/design-seven/page"
 import FileOneDesignSix from "@/components/CreateProject/FinalOverview/file-one/design-six/page"
-import FileOneDesignThree from "@/components/CreateProject/FinalOverview/file-one/design-three/page"
 import FileOneDesignNine from "@/components/CreateProject/FinalOverview/file-one/design-nine/page"
 import FileOneDesignTen from "@/components/CreateProject/FinalOverview/file-one/design-ten/page"
-
+import F1D1 from "@/components/CreateProject/FinalOverview/f-01/f1d1/page"
+import F1D2 from "@/components/CreateProject/FinalOverview/f-01/f1d2/page"
+import F1D3 from "@/components/CreateProject/FinalOverview/f-01/f1d3/page"
+import F1D4 from "@/components/CreateProject/FinalOverview/f-01/f1D4/page"
+import F1D5 from "@/components/CreateProject/FinalOverview/f-01/f1D5/page"
+import F1D6 from "@/components/CreateProject/FinalOverview/f-01/f1D6/page"
+import F1D7 from "@/components/CreateProject/FinalOverview/f-01/f1D7/page"
+import F1D8 from "@/components/CreateProject/FinalOverview/f1D8/page"
+import F1D9 from "@/components/CreateProject/FinalOverview/f-01/f1D9/page"
 function test() {
   return (
     <div>
       {/* <FileOneDesignThree/> */}
-      <FileOneDesignFour/>
-      {/* <FileOneDesignFive/> */}
-      {/* <FileOneDesignSix/> */}
-      {/* <FileOneDesignSeven/> */}
-      {/* <FileOneDesignEight/> */}
-      {/* <FileOneDesignNine/> */}
-      {/* <FileOneDesignTen/> */}
-      {/* <FileOneDesignEleven/> */}
-      {/* <FileOneDesignTweleve /> */}
-      {/* <FileOneDesignThirteen/> */}
+      {/* <FileOneDesignFour/>
+      <FileOneDesignFive/>
+      <FileOneDesignSix/>
+      <FileOneDesignSeven/>
+      <FileOneDesignEight/>
+      <FileOneDesignNine/>
+      <FileOneDesignTen/>
+      <FileOneDesignEleven/>
+      <FileOneDesignTweleve />
+      <FileOneDesignThirteen/> */}
+
+      {/* file one  */}
+      <F1D1/>
+      <F1D2/>
+      <F1D3/>
+      <F1D4/>
+      <F1D5/>
+      <F1D6/>
+      <F1D7/>
+      <F1D8/>
+      <F1D9/>
     </div>
   )
 }

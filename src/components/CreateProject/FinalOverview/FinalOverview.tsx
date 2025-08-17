@@ -357,7 +357,7 @@
 
 // export default FinalOverview;
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { FileSpreadsheet, FileText, AlertCircle } from "lucide-react";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { saveAs } from "file-saver";
@@ -381,6 +381,7 @@ import FileOneDesignEleven from "./file-one/design-eleven/page";
 import FileOneDesignThirteen from "./file-one/design-thirteen/page";
 import FileOneDesignFour from "./file-one/design-four/page";
 import FileOneDesignSix from "./file-one/design-six/page";
+import FileOneDesignEight from "@/components/CreateProject/FinalOverview/file-one/design-eight/page";
 
 interface Owner {
   id: string;
@@ -421,27 +422,18 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const property = subCategoryData["property-documentation"] || [];
   const small = subCategoryData["small-construction"] || [];
 
+  console.log(buildingMods, "buildingMods");
+  console.log(energy, "energy");
+  console.log(fencing, "fencing");
+  console.log(landscaping, "landscaping");
+  console.log(operational, "operational");
+  console.log(property, "property");
+  console.log(small, "small");
+
   const store = makeStore();
 
   console.log(allTempate, "stepByStepData>>>>>>");
-
-  const { owners } = dataAllFIled;
-
-  const {
-    address,
-    afm,
-    birthDate,
-    birthPlace,
-    city,
-    email,
-    fatherName,
-    firstName,
-    lastName,
-    motherName,
-    phone,
-    postalCode,
-  } = owners[0];
-  console.log(address);
+  const [selected, setSelected] = useState<string | null>(null);
   // const {} = subCategories
   const openPreview = () => {
     const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
@@ -636,173 +628,70 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
 
       <div ref={printRef} className="space-y-30">
-        {/* building-modifications  */}
-        {/* {
-          buildingMods.map((item: string, index: number) => {
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
-              allTempate.includes("Generate Engineer Declaration (YA)")
-            ) {
-              return <FileOneDesignFive key={index} />;
-              // return 'Generate Engineer Declaration (YA)';
+        {buildingMods?.map((item: string, index: number) => (
+          <div>
+            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" && (
+              <div className="flex flex-wrap gap-4">
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017")}
+                >
+                  ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017
+                </button>
 
-            }
-            return null;
-          })
-        } */}
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ")}
+                >
+                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ
+                </button>
 
-        {buildingMods?.map((item: string, index: number) => {
-          const elements: React.ReactElement[] = [];
-
-          if (
-            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
-            allTempate.includes("Generate Engineer Declaration (YA)")
-          ) {
-            elements.push(<FileOneDesignEleven key={`five-${index}`} />);
-          }
-
-          if (
-            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" &&
-            allTempate.includes("Generate Assignment of Responsibility")
-          ) {
-            elements.push(<FileOneDesignThirteen key={`seven-${index}`} />);
-          }
-          if (
-            item ===
-              "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5" &&
-            allTempate.includes("Create Technical Description")
-          ) {
-            elements.push(<FileOneDesignFour key={`four-${index}`} />);
-          }
-          if (
-            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΤΟΠΟΘΕΤΗΣΗ_ΙΚΡΙΩΜΑΤΩΝ_15" &&
-            allTempate.includes("Generate Engineer Declaration (YA)")
-          ) {
-            elements.push(<FileOneDesignEleven key={`seven-${index}`} />);
-          }
-          // if (
-          //   item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" &&
-          //   allTempate.includes("Generate Engineer Declaration (YA)")
-          // ) {
-          //   elements.push(<FileOneDesignEleven key={`seven-${index}`} />);
-          // }
-          // if (
-          //   item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" &&
-          //   allTempate.includes("Generate Engineer Declaration (YA)")
-          // ) {
-          //   elements.push(<FileOneDesignSeven key={`seven-${index}`} />);
-          // }
-          if (
-            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2" &&
-            allTempate.includes("Create Technical Description")
-          ) {
-            elements.push(<FileOneDesignSix key={`seven-${index}`} />);
-          }
-
-          return elements.length > 0 ? elements : null;
-        })}
-
-        {/* energy-systems  */}
-        {/* {
-          energy.map((item: string, index: number) => {
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
-              allTempate.includes("Generate Engineer Declaration (YA)")
-            ) {
-              console.log(item, allTempate[0], "000000000000000000000000000000000");
-              // return <DesignOne key={index} />;
-              return 'Generate Engineer Declaration (YA)';
-
-            }
-            return null;
-          })
-        } */}
-
-        {/* fencing  */}
-        {/* {
-          fencing.map((item: string, index: number) => {
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
-              allTempate.includes("Generate Engineer Declaration (YA)")
-            ) {
-              console.log(item, allTempate[0], "000000000000000000000000000000000");
-              // return <DesignOne key={index} />;
-              return 'Generate Engineer Declaration (YA)';
-
-            }
-            return null;
-          })
-        } */}
-
-        {/* landscaping-2  */}
-        {/* {
-          landscaping.map((item: string, index: number) => {
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
-              allTempate.includes("Generate Engineer Declaration (YA)")
-            ) {
-              console.log(item, allTempate[0], "000000000000000000000000000000000");
-              // return <DesignOne key={index} />;
-              return 'Generate Engineer Declaration (YA)';
-
-            }
-            return null;
-          })
-        } */}
-
-        {/* operational-space  */}
-        {/* {
-          operational.map((item: string, index: number) => {
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
-              allTempate.includes("Generate Engineer Declaration (YA)")
-            ) {
-              console.log(item, allTempate[0], "000000000000000000000000000000000");
-              // return <DesignOne key={index} />;
-              return 'Generate Engineer Declaration (YA)';
-
-            }
-            return null;
-          })
-        } */}
-
-        {/* property-documentation  */}
-        {/* {
-          property.map((item: string, index: number) => {
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
-              allTempate.includes("Generate Engineer Declaration (YA)")
-            ) {
-              console.log(item, allTempate[0], "000000000000000000000000000000000");
-              // return <DesignOne key={index} />;
-              return 'Generate Engineer Declaration (YA)';
-
-            }
-            return null;
-          })
-        } */}
-
-        {/* small-construction  */}
-        {/* {
-          small.map((item: string, index: number) => {
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΙΣΙΝΑ_COMPACT_ΕΩΣ_50_Τ.Μ._13" &&
-              allTempate.includes("Create Technical Description")
-            ) {
-              console.log(item, allTempate[0], "000000000000000000000000000000000");
-              return (
-                <div className="space-y-12">
-                  <div> <DesignEight key={index} /></div>
-                  <div> <DesignEight key={index} /></div>
-                </div>
-              );
-              // return 'Generate Engineer Declaration (YA)';
-
-            }
-            return null;
-          })
-        } */}
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                >
+                  ΣΑΥ_ΦΑΥ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                >
+                  ΣΔΑ ΕΡΓΟΥ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                >
+                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                >
+                  ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                >
+                  ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ
+                </button>
+                {/* add more buttons the same way */}
+              </div>
+            )}
+          </div>
+        ))}
+        {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && <FileOneDesignEleven />}
+        {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && <FileOneDesignSeven />}
+        {selected === "ΣΑΥ_ΦΑΥ" && <FileOneDesignEight />}
+        {selected === "ΣΔΑ ΕΡΓΟΥ" && <FileOneDesignEight />}
+        {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && <FileOneDesignEight />}
+        {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <FileOneDesignEight />}
+        {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <FileOneDesignEight />}
+        {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <FileOneDesignEight />}
+        {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <FileOneDesignEight />}
       </div>
+
 
       <div className="flex justify-end">
         <button
@@ -817,3 +706,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 };
 
 export default FinalOverview;
+
+
+
+
