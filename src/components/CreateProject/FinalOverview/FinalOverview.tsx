@@ -382,6 +382,15 @@ import FileOneDesignThirteen from "./file-one/design-thirteen/page";
 import FileOneDesignFour from "./file-one/design-four/page";
 import FileOneDesignSix from "./file-one/design-six/page";
 import FileOneDesignEight from "@/components/CreateProject/FinalOverview/file-one/design-eight/page";
+import F1D1 from "@/components/CreateProject/FinalOverview/f-01/f1D1/page"
+import F1D2 from "@/components/CreateProject/FinalOverview/f-01/f1D2/page"
+import F1D3 from "@/components/CreateProject/FinalOverview/f-01/f1D3/page"
+import F1D4 from "@/components/CreateProject/FinalOverview/f-01/f1D4/page"
+import F1D5 from "@/components/CreateProject/FinalOverview/f-01/f1D5/page"
+import F1D6 from "@/components/CreateProject/FinalOverview/f-01/f1D6/page"
+import F1D7 from "@/components/CreateProject/FinalOverview/f-01/f1D7/page"
+import F1D8 from "@/components/CreateProject/FinalOverview/f-01/f1D8/page"
+import F1D9 from "@/components/CreateProject/FinalOverview/f-01/f1D9/page"
 
 interface Owner {
   id: string;
@@ -654,25 +663,25 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                  onClick={() => setSelected("ΣΔΑ ΕΡΓΟΥ")}
                 >
                   ΣΔΑ ΕΡΓΟΥ
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                  onClick={() => setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ")}
                 >
                   ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                  onClick={() => setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ")}
                 >
                   ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                  onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
                 >
                   ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ
                 </button>
@@ -681,15 +690,15 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             )}
           </div>
         ))}
-        {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && <FileOneDesignEleven />}
-        {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && <FileOneDesignSeven />}
-        {selected === "ΣΑΥ_ΦΑΥ" && <FileOneDesignEight />}
-        {selected === "ΣΔΑ ΕΡΓΟΥ" && <FileOneDesignEight />}
-        {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && <FileOneDesignEight />}
-        {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <FileOneDesignEight />}
-        {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <FileOneDesignEight />}
-        {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <FileOneDesignEight />}
-        {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <FileOneDesignEight />}
+        {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && <F1D1 />}
+        {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && <F1D2 />}
+        {selected === "ΣΑΥ_ΦΑΥ" && <F1D3 />}
+        {selected === "ΣΔΑ ΕΡΓΟΥ" && <F1D4 />}
+        {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && <F1D5 />}
+        {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <F1D6 />}
+        {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <F1D7 />}
+        {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <F1D8 />}
+        {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <F1D9 />}
       </div>
 
 

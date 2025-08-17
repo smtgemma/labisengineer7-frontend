@@ -10,14 +10,14 @@ import FileOneDesignSeven from "@/components/CreateProject/FinalOverview/file-on
 import FileOneDesignSix from "@/components/CreateProject/FinalOverview/file-one/design-six/page"
 import FileOneDesignNine from "@/components/CreateProject/FinalOverview/file-one/design-nine/page"
 import FileOneDesignTen from "@/components/CreateProject/FinalOverview/file-one/design-ten/page"
-import F1D1 from "@/components/CreateProject/FinalOverview/f-01/f1d1/page"
-import F1D2 from "@/components/CreateProject/FinalOverview/f-01/f1d2/page"
-import F1D3 from "@/components/CreateProject/FinalOverview/f-01/f1d3/page"
+import F1D1 from "@/components/CreateProject/FinalOverview/f-01/f1D1/page"
+import F1D2 from "@/components/CreateProject/FinalOverview/f-01/f1D2/page"
+import F1D3 from "@/components/CreateProject/FinalOverview/f-01/f1D3/page"
 import F1D4 from "@/components/CreateProject/FinalOverview/f-01/f1D4/page"
 import F1D5 from "@/components/CreateProject/FinalOverview/f-01/f1D5/page"
 import F1D6 from "@/components/CreateProject/FinalOverview/f-01/f1D6/page"
 import F1D7 from "@/components/CreateProject/FinalOverview/f-01/f1D7/page"
-import F1D8 from "@/components/CreateProject/FinalOverview/f1D8/page"
+import F1D8 from "@/components/CreateProject/FinalOverview/f-01/f1D8/page"
 import F1D9 from "@/components/CreateProject/FinalOverview/f-01/f1D9/page"
 function test() {
   return (
