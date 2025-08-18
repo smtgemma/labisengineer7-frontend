@@ -1,4 +1,5 @@
-// import StampComponent from "@/component/shared/dashed/Dashed";
+import StampComponent from "../../shared/signture/signture";
+
 
 
 export default function F1D8() {
@@ -163,9 +164,9 @@ export default function F1D8() {
           </div>
         </div>
         {/* common component  */}
-          {/* <div className="flex justify-end items-center mt-6">
+          <div className="flex justify-end items-center mt-6 p-4">
             <StampComponent />
-          </div> */}
+          </div>
       </div>
     </div>
   )

@@ -2,7 +2,8 @@
 
 "use client"
 
-// import StampComponent from "@/component/shared/dashed/Dashed"
+import StampComponent from "../../shared/signture/signture"
+
 
 export default function F1D3() {
     const descriptions = [
@@ -291,14 +292,14 @@ export default function F1D3() {
                             <div className="">
                                 <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
                                 {/* Dashed Border Box = common component*/}
-                                {/* <StampComponent
+                                <StampComponent
                                     title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
                                     instructions={[
                                         "Με δεξί κλικ",
                                         "Αλλαγή εικόνας",
                                         " Βάζετε την σφραγίδα σας",
                                     ]}
-                                /> */}
+                                />
                             </div>
                             <div className="flex items-center justify-center gap-2">
                                 <span className=" ">Ημερομηνία :</span>
@@ -481,14 +482,14 @@ export default function F1D3() {
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
                             {/* Dashed Border Box = common component*/}
-                            {/* <StampComponent
+                            <StampComponent
                                 title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
                                 instructions={[
                                     "Με δεξί κλικ",
                                     "Αλλαγή εικόνας",
                                     " Βάζετε την σφραγίδα σας",
                                 ]}
-                            /> */}
+                            />
                         </div>
                         <div className="flex items-center justify-center gap-2">
                             <span className=" ">Ημερομηνία :</span>

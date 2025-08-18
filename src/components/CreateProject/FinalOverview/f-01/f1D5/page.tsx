@@ -1,5 +1,6 @@
 "use client"
-// import StampComponent from "@/component/shared/dashed/Dashed"
+
+import StampComponent from "../../shared/signture/signture"
 
 export default function F1D5() {
 
@@ -203,19 +204,19 @@ export default function F1D5() {
 
                         <div className="text-center">
                             <p>Ημερομηνία :</p>
-                            <p>25/06/2025</p>
+                            <p>06/25/2025</p>
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
                             {/* Dashed Border Box = common component*/}
-                            {/* <StampComponent
+                            <StampComponent
                             title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
                             instructions={[
                                 "Με δεξί κλικ",
                                 "Αλλαγή εικόνας",
                                 " Βάζετε την σφραγίδα σας",
                             ]}
-                        /> */}
+                        />
                         </div>
                     </div>
                 </div>

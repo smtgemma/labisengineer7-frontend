@@ -2,7 +2,7 @@ import StampComponent from "../../shared/signture/signture";
 
 
 
-export default function F1D9() {
+export default function F3D5() {
     return (
         <div className="max-w-[794px] mx-auto p-4 bg-white">
             {/* Header with coat of arms */}
@@ -133,22 +133,19 @@ export default function F1D9() {
                     </p>
 
                     <p className="mb-4">
-
-
-
+                        ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις <span className="text-sm font-bold">αναλαμβάνω</span> για το έργο
                     </p>
-
-                    <p className="mb-4 font-bold">για το οικοδομικό έργο με τίτλο :</p>
                     <p className=" mb-6">PROJECT DESCRIPTION</p>
                 </div>
 
                 {/* Additional disclaimer text */}
                 <div className="p-4 text-sm ">
-
-
-                    από την ανάλυση του συνόλου των προβλεπόμενων εργασιών προκύπτει <span className="text-sm font-semibold">ότι δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία του οργανισμού του κτιρίου.</span>
-                    Οι εργασίες περιορίζονται αποκλειστικά σε μη φέροντα στοιχεία και δεν επηρεάζουν καθ’ οποιονδήποτε τρόπο την ευστάθεια, φέρουσα ικανότητα ή δομική λειτουργία του κτιρίου.
-                    Η παρούσα δήλωση τεκμηριώνεται σύμφωνα με τις διατάξεις του άρθρου 29 του Ν.4495/2017.
+                    <p>την επίβλεψη των προβλεπόμενων εργασιών που πρόκειται να εκτελεστούν στο ανωτέρω ακίνητο, στο πλαίσιο της διαδικασίας έκδοσης Έγκρισης Εργασιών Μικρής Κλίμακας, σύμφωνα με τις ισχύουσες πολεοδομικές διατάξεις και ειδικότερα τις προβλέψεις του άρθρου 29 του Ν.4495/2017.
+                    </p>
+                </div>
+                <div className="p-4 text-sm ">
+                    <p>Η παρούσα ανάθεση αφορά την τεχνική καθοδήγηση και εποπτεία των εργασιών κατά την υλοποίησή τους, την τήρηση των σχετικών κανονισμών ασφαλείας, καθώς και την ευθύνη για την πιστή εφαρμογή του εγκεκριμένου περιεχομένου της άδειας.
+                    </p>
                 </div>
 
                 {/* Signature section */}
@@ -161,15 +158,15 @@ export default function F1D9() {
                             </div>
                             <div className="text-sm mt-8 text-center">
                                 <div>( Υπογραφή )</div>
-                                <div className="mt-4">Ο/Η Δηλώνουσα</div>
+                                <div className="mt-4">Ο Δηλών</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 {/* common component  */}
                 <div className="flex justify-end items-center mt-6 p-4">
-            <StampComponent />
-          </div>
+                    <StampComponent />
+                </div>
             </div>
         </div>
     )
