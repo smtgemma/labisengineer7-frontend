@@ -101,7 +101,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
       <div className="mb-8">
         <div className="text-sm font-medium text-black mb-4">Permissions:</div>
         <div className="space-y-3">
-          {permissions.map((permission, index) => (
+          {permissions?.map((permission, index) => (
             <div key={index} className="flex items-center gap-3">
               <svg
                 width="16"

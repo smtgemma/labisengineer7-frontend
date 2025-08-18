@@ -1,16 +1,25 @@
 "use client";
-import StampComponent from "../../shared/signture/signture";
-import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
 
-export default function FileOneDesignEleven() {
-  const { data, isLoading } = useGetTemplateDataQuery("un");
-  const ydomName = data?.data;
-  console.log("ydomName?", ydomName);
+export default function FileOneDesignEleven({ ydomName }: any) {
+  const {
+    owner_email,
+    owner_postal_code,
+    owner_address,
+    owner_city,
+    owner_phone,
+    owner_birth_place,
+    owner_birth_date,
+    owner_father_name,
+    owner_surname,
+    ydom_name,
+    owner_mother_name,
+  } = ydomName || {};
+
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
       {/* Header with coat of arms */}
       <div className="text-center mb-6">
-        <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
+        <div className="w-16 h-16 mx-auto mb-4 bg-black rounded-full flex items-center justify-center">
           <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
             <div className="w-8 h-8 bg-white rounded-sm"></div>
           </div>
@@ -29,135 +38,121 @@ export default function FileOneDesignEleven() {
       </div>
 
       {/* Form table */}
-      <div className="border border-gray-400">
+      <div className="border border-black">
         {/* ΠΡΟΣ row */}
-        <div className="border-b border-gray-400 bg-gray-50">
+        <div className="border-b border-black bg-black">
           <div className="flex">
-            <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">
+            <div className="w-20 p-2 border-r border-black font-bold text-sm">
               ΠΡΟΣ(1):
             </div>
-            <div className="flex-1 p-2  font-bold">
-              {ydomName?.ydom_name || "N/A"}
-            </div>
+            <div className="flex-1 p-2  font-bold">{ydom_name || "N/A"}</div>
           </div>
         </div>
 
         {/* Name Engineer row */}
-        <div className="border-b border-gray-400">
+        <div className="border-b border-black">
           <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">
+            <div className="w-32 p-2 border-r border-black text-sm">
               Ο-Η Όνομα
             </div>
-            <div className="w-40 p-2 border-r border-gray-400  font-bold">
-              {ydomName?.ydom_name || "N/A"}
+            <div className="w-40 p-2 border-r border-black  font-bold">
+              {ydom_name || "N/A"}
             </div>
-            <div className="w-20 p-2 border-r border-gray-400 text-sm">
+            <div className="w-20 p-2 border-r border-black text-sm">
               Επώνυμο
             </div>
             <div className="flex-1 p-2  font-bold">
-              {ydomName?.owner_surname || "N/A"}
+              {owner_surname || "N/A"}
             </div>
           </div>
         </div>
 
         {/* Father's name row */}
-        <div className="border-b border-gray-400">
+        <div className="border-b border-black">
           <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">
+            <div className="w-32 p-2 border-r border-black text-sm">
               Όνομα και Επώνυμο Πατρός
             </div>
             <div className="flex-1 p-2 font-bold">
-              {ydomName?.owner_father_name || "N/A"}
+              {owner_father_name || "N/A"}
             </div>
           </div>
         </div>
 
         {/* Mother's name row */}
-        <div className="border-b border-gray-400">
+        <div className="border-b border-black">
           <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">
+            <div className="w-32 p-2 border-r border-black text-sm">
               Όνομα και Επώνυμο Μητρός
             </div>
             <div className="flex-1 p-2 font-bold">
-              {ydomName?.owner_mother_name || "N/A"}
+              {owner_mother_name || "N/A"}
             </div>
           </div>
         </div>
 
         {/* Birth date row */}
-        <div className="border-b border-gray-400">
+        <div className="border-b border-black">
           <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">
+            <div className="w-32 p-2 border-r border-black text-sm">
               Ημερομηνία γέννησης(2):
             </div>
             <div className="flex-1 p-2 font-bold">
-              {ydomName?.owner_birth_date || "N/A"}
+              {owner_birth_date || "N/A"}
             </div>
           </div>
         </div>
 
         {/* Birth town row */}
-        <div className="border-b border-gray-400">
+        <div className="border-b border-black">
           <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">
+            <div className="w-32 p-2 border-r border-black text-sm">
               Τόπος Γέννησης
             </div>
             <div className="flex-1 p-2 font-bold">
-              {ydomName?.owner_birth_place || "N/A"}
+              {owner_birth_place || "N/A"}
             </div>
           </div>
         </div>
 
         {/* ID and mobile row */}
-        <div className="border-b border-gray-400">
+        <div className="border-b border-black">
           <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">
+            <div className="w-32 p-2 border-r border-black text-sm">
               Αριθμός Δελτίου Ταυτότητας
             </div>
-            <div className="w-20 p-2 border-r border-gray-400 font-bold">
-              ID
-            </div>
-            <div className="w-16 p-2 border-r border-gray-400 text-sm">
-              Τηλ.:
-            </div>
-            <div className="flex-1 p-2 font-bold">
-              {ydomName?.owner_phone || "N/A"}
-            </div>
+            <div className="w-20 p-2 border-r border-black font-bold">ID</div>
+            <div className="w-16 p-2 border-r border-black text-sm">Τηλ.:</div>
+            <div className="flex-1 p-2 font-bold">{owner_phone || "N/A"}</div>
           </div>
         </div>
 
         {/* Address row */}
-        <div className="border-b border-gray-400">
+        <div className="border-b border-black">
           <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">
+            <div className="w-32 p-2 border-r border-black text-sm">
               Τόπος κατοικίας
             </div>
-            <div className="w-20 p-2 border-r border-gray-400 font-bold ">
-              {ydomName?.owner_city || "N/A"}
+            <div className="w-20 p-2 border-r border-black font-bold ">
+              {owner_city || "N/A"}
             </div>
-            <div className="w-16 p-2 border-r border-gray-400 text-sm">
-              Οδός
+            <div className="w-16 p-2 border-r border-black text-sm">Οδός</div>
+            <div className="w-24 p-2 border-r border-black font-bold ">
+              {owner_address || "N/A"}
             </div>
-            <div className="w-24 p-2 border-r border-gray-400 font-bold ">
-              {ydomName?.owner_address || "N/A"}
-            </div>
-            <div className="w-16 p-2 border-r border-gray-400 text-sm">
-              Αριθ
-            </div>
-            <div className="w-20 p-2 border-r border-gray-400 font-bold ">
+            <div className="w-16 p-2 border-r border-black text-sm">Αριθ</div>
+            <div className="w-20 p-2 border-r border-black font-bold ">
               Number
             </div>
-            <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-            <div className="flex-1 p-2 font-bold">
-              {ydomName?.owner_postal_code}
-            </div>
+            <div className="w-12 p-2 border-r border-black text-sm">ΤΚ</div>
+            <div className="flex-1 p-2 font-bold">{owner_postal_code}</div>
           </div>
         </div>
 
         {/* Contact details row */}
-        <div className="border-b border-gray-400">
+        <div className="border-b border-black">
           <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">
+            <div className="w-32 p-2 border-r border-black text-sm">
               Αρ. Τηλεομοιότυπου (Fax):
             </div>
             <div className="flex-1 p-2">
@@ -168,20 +163,18 @@ export default function FileOneDesignEleven() {
                 <div>ίου (Email):</div>
               </div>
             </div>
-            <div className="p-2 underline ">
-              {ydomName?.owner_email || "N/A"}
-            </div>
+            <div className="p-2 underline ">{owner_email || "N/A"}</div>
           </div>
         </div>
 
         {/* VAT row */}
-        <div className="border-b border-gray-400">
+        <div className="border-b border-black">
           <div className="flex">
-            <div className="w-32 p-2 border-r border-gray-400 text-sm">
+            <div className="w-32 p-2 border-r border-black text-sm">
               Α.Φ.Μ.:
             </div>
             <div className="flex-1 p-2 font-bold">VAT Engineer</div>
-            <div className="w-32 p-2 border-l border-gray-400 text-sm">
+            <div className="w-32 p-2 border-l border-black text-sm">
               Δ.Ο.Υ.:
             </div>
           </div>
@@ -225,10 +218,6 @@ export default function FileOneDesignEleven() {
               </div>
             </div>
           </div>
-        </div>
-        {/* common component  */}
-        <div className="flex justify-end items-center mt-6 px-4">
-          <StampComponent />
         </div>
       </div>
     </div>

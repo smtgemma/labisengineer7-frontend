@@ -381,6 +381,8 @@ import FileOneDesignEleven from "./file-one/design-eleven/page";
 import FileOneDesignThirteen from "./file-one/design-thirteen/page";
 import FileOneDesignFour from "./file-one/design-four/page";
 import FileOneDesignSix from "./file-one/design-six/page";
+import { createRoot } from "react-dom/client";
+import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
 
 interface Owner {
   id: string;
@@ -424,6 +426,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const store = makeStore();
 
   console.log(allTempate, "stepByStepData>>>>>>");
+  const { data, isLoading } = useGetTemplateDataQuery("un");
+  const ydomName = data?.data;
+  console.log("ydomName?", ydomName);
 
   const { owners } = dataAllFIled;
 
@@ -443,32 +448,32 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   } = owners[0];
   console.log(address);
   // const {} = subCategories
-  const openPreview = () => {
-    const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
-    const newTab = window.open("", "_blank");
-    if (newTab) {
-      newTab.document.write(`
-        <html>
-          <head>
-            <title>DOCX Preview</title>
-             <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-          <style>
-            <style>
-              body { font-family: Arial, sans-serif; padding: 2rem; }
-              h1, h2, h3 { color: #2563eb; }
-              p { line-height: 1.6; }
-            </style>
-          </head>
-          <body>
-            <div class="word-container">
-              ${htmlContent}
-            </div>
-          </body>
-        </html>
-      `);
-      newTab.document.close();
-    }
-  };
+  // const openPreview = () => {
+  //   const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
+  //   const newTab = window.open("", "_blank");
+  //   if (newTab) {
+  //     newTab.document.write(`
+  //       <html>
+  //         <head>
+  //           <title>DOCX Preview</title>
+  //            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  //         <style>
+  //           <style>
+  //             body { font-family: Arial, sans-serif; padding: 2rem; }
+  //             h1, h2, h3 { color: #2563eb; }
+  //             p { line-height: 1.6; }
+  //           </style>
+  //         </head>
+  //         <body>
+  //           <div class="word-container">
+  //             ${htmlContent}
+  //           </div>
+  //         </body>
+  //       </html>
+  //     `);
+  //     newTab.document.close();
+  //   }
+  // };
 
   // ✅ 2. DOWNLOAD CSV FILE
   const downloadCSV = () => {
@@ -483,7 +488,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   };
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
-    { name: "ProjectDescriptionSix", component: <ProjectDescriptionSix /> },
+    {
+      name: "ProjectDescriptionSix",
+      component: <FileOneDesignEleven ydomName={ydomName} />,
+    },
   ];
 
   // pdf file download
@@ -514,48 +522,93 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   };
 
   //pdf file dowload zip funciton working
+  // const handleZipDownload = async () => {
+  //   const files: { name: string; lastModified: Date; input: Blob }[] = [];
+
+  //   for (let t of templates) {
+  //     // const html = ReactDOMServer.renderToStaticMarkup(t.component);
+
+  //     // Wrap the component in Provider
+  //     const html = ReactDOMServer.renderToStaticMarkup(
+  //       <Provider store={store}>{t.component}</Provider>
+  //     );
+  //     const container = document.createElement("div");
+  //     container.innerHTML = html;
+  //     container.style.width = "794px";
+  //     container.style.background = "#fff";
+  //     document.body.appendChild(container);
+
+  //     const canvas = await html2canvas(container, { scale: 2 });
+  //     const imgData = canvas.toDataURL("image/png");
+
+  //     const pdf = new jsPDF({
+  //       orientation: "portrait",
+  //       unit: "px",
+  //       format: "a4",
+  //     });
+  //     const imgProps = pdf.getImageProperties(imgData);
+  //     const pdfWidth = pdf.internal.pageSize.getWidth();
+  //     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+  //     pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+  //     const pdfBlob = pdf.output("blob");
+
+  //     files.push({
+  //       name: `${t.name}.pdf`,
+  //       lastModified: new Date(),
+  //       input: pdfBlob,
+  //     });
+
+  //     document.body.removeChild(container);
+  //   }
+
+  //   // Create ZIP in browser
+  //   const zipBlob = await downloadZip(files).blob();
+  //   saveAs(zipBlob, "templates.zip");
+  // };
+
   const handleZipDownload = async () => {
-    const files: { name: string; lastModified: Date; input: Blob }[] = [];
+    const files = await Promise.all(
+      templates.map(async (t) => {
+        const html = ReactDOMServer.renderToStaticMarkup(
+          <Provider store={store}>{t.component}</Provider>
+        );
 
-    for (let t of templates) {
-      // const html = ReactDOMServer.renderToStaticMarkup(t.component);
+        const container = document.createElement("div");
+        container.innerHTML = html;
+        container.style.width = "794px";
+        container.style.background = "#fff";
+        document.body.appendChild(container);
 
-      // Wrap the component in Provider
-      const html = ReactDOMServer.renderToStaticMarkup(
-        <Provider store={store}>{t.component}</Provider>
-      );
-      const container = document.createElement("div");
-      container.innerHTML = html;
-      container.style.width = "794px";
-      container.style.background = "#fff";
-      document.body.appendChild(container);
+        const canvas = await html2canvas(container, {
+          scale: 3,
+          useCORS: true,
+        });
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF({
+          unit: "px",
+          format: [imgWidth, imgHeight],
+        });
 
-      const canvas = await html2canvas(container, { scale: 2 });
-      const imgData = canvas.toDataURL("image/png");
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
 
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "px",
-        format: "a4",
-      });
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        const pdfBlob = pdf.output("blob");
+        document.body.removeChild(container);
 
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        return {
+          name: `${t.name}.pdf`,
+          lastModified: new Date(),
+          input: pdfBlob,
+        };
+      })
+    );
 
-      const pdfBlob = pdf.output("blob");
-
-      files.push({
-        name: `${t.name}.pdf`,
-        lastModified: new Date(),
-        input: pdfBlob,
-      });
-
-      document.body.removeChild(container);
-    }
-
-    // Create ZIP in browser
     const zipBlob = await downloadZip(files).blob();
     saveAs(zipBlob, "templates.zip");
   };
@@ -580,7 +633,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div
-          onClick={openPreview}
+          // onClick={openPreview}
           className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
           <div className="flex items-center space-x-4 mb-4">
@@ -658,7 +711,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
             allTempate.includes("Generate Engineer Declaration (YA)")
           ) {
-            elements.push(<FileOneDesignEleven key={`five-${index}`} />);
+            elements.push(
+              <FileOneDesignEleven ydomName={ydomName} key={`five-${index}`} />
+            );
           }
 
           if (
