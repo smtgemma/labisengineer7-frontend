@@ -889,7 +889,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
         </div>
 
         {/* "others option  */}
-        <div className="mt-10">
+        {/* <div className="mt-10">
           <div className="bg-gray-50 rounded-xl p-6 shadow-sm w-full">
             <div className="flex justify-between items-center ">
               <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
@@ -953,7 +953,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
               </div>
             )}
           </div>
-        </div>
+        </div> */}
       </form>
     </>
   );
