@@ -154,7 +154,7 @@ export default function F1D3() {
     return (
         <div className="max-w-[794px] mx-auto p-4 bg-white space-y-8">
             {/* ΦΑΚΕΛΟΣ ΑΣΦΑΛΕΙΑΣ ΚΑΙ ΥΓΕΙΑΣ first stp=========================*/}
-            <div className="border border-gray-400">
+            <div className="border border-black">
                 {/* Header */}
                 <div className="text-center p-4">
                     <h1 className="text-xl font-bold mb-2">ΦΑΚΕΛΟΣ ΑΣΦΑΛΕΙΑΣ ΚΑΙ ΥΓΕΙΑΣ </h1>
@@ -163,7 +163,7 @@ export default function F1D3() {
                 </div>
 
                 {/* Α. ΓΕΝΙΚΑ */}
-                <div className="p-4 border-b border-gray-400">
+                <div className="p-4 border-b border-black">
                     <h2 className="font-bold mb-4">Α. ΓΕΝΙΚΑ</h2>
 
                     <div className="space-y-3">
@@ -320,7 +320,7 @@ export default function F1D3() {
                 </div>
 
                 {/* Α. ΓΕΝΙΚΑ */}
-                <div className="p-4 border-b border-gray-400">
+                <div className="p-4 border-b border-black">
                     <h2 className="font-bold mb-4">Α. ΓΕΝΙΚΑ</h2>
 
                     <div className="space-y-3">
@@ -369,14 +369,14 @@ export default function F1D3() {
                         Β. ΚΙΝΔΥΝΟΙ ΠΟΥ ΕΝΔΕΧΕΤΑΙ ΝΑ ΠΑΡΟΥΣΙΑΣΤΟΥΝ
                     </div>
 
-                    <div className="px-2 border-b border-gray-400 text-sm">
+                    <div className="px-2 border-b border-black text-sm">
                         Η συγκεκριμένη κατασκευή δεν μπορεί να θεωρηθεί ιδιαίτερα επικίνδυνη κατά την εκτέλεση των διάφορων φάσεων
                         των έργων. Οι πιθανότεροι κίνδυνοι είναι:
                     </div>
 
-                    <div className="border-b border-gray-400">
+                    <div className="border-b border-black">
                         <div className="grid grid-cols-12">
-                            <div className="col-span-1 border-r border-gray-400 p-2 text-center font-bold">#REF!</div>
+                            <div className="col-span-1 border-r border-black p-2 text-center font-bold">#REF!</div>
                             <div className="col-span-11 p-2 text-sm">
                                 Πιθανός κίνδυνος πτώσεως εργαζομένων από ύψος στις εργασίες κατασκευής ξυλοτύπων, σκυροδέτησης,
                                 τοποθέτησης σιδηροπλισμών, κατασκευής τοιχοδομών και επιχρισμάτων, χρωματισμών κτλ.
@@ -384,9 +384,9 @@ export default function F1D3() {
                         </div>
                     </div>
 
-                    <div className="border-b border-gray-400">
+                    <div className="border-b border-black">
                         <div className="grid grid-cols-12">
-                            <div className="col-span-1 border-r border-gray-400 p-2 text-center font-bold">#REF!</div>
+                            <div className="col-span-1 border-r border-black p-2 text-center font-bold">#REF!</div>
                             <div className="col-span-11 p-2 text-sm">Πιθανός κίνδυνος πτώσεως αντικειμένων και υλικών. </div>
                         </div>
                     </div>
@@ -400,9 +400,9 @@ export default function F1D3() {
                         Γ. ΜΕΤΡΑ ΓΙΑ ΤΗΝ ΠΡΟΛΗΨΗ ΚΑΙ ΑΠΟΤΡΟΠΗ ΤΩΝ ΚΙΝΔΥΝΩΝ
                     </div>
 
-                    <div className="border-y border-gray-400">
+                    <div className="border-y border-black">
                         <div className="grid grid-cols-12">
-                            <div className="col-span-1 border-r border-gray-400 p-2 text-center font-bold">#REF!</div>
+                            <div className="col-span-1 border-r border-black p-2 text-center font-bold">#REF!</div>
                             <div className="col-span-11 p-2 text-sm">
                                 • Για να προλαμβάνονται οι πτώσεις εργαζομένων ή αντικειμένων πρέπει σε όλες τις εργασίες η κατασκευή των
                                 ικριωμάτων πρέπει να είναι η σωστή και να πληρεί τις προδιαγραφές της κείμενης νομοθεσίας (ΠΔ 778/80 και
@@ -412,9 +412,9 @@ export default function F1D3() {
                         </div>
                     </div>
 
-                    <div className="border-b border-gray-400">
+                    <div className="border-b border-black">
                         <div className="grid grid-cols-12">
-                            <div className="col-span-1 border-r border-gray-400 p-2 text-center font-bold">#REF!</div>
+                            <div className="col-span-1 border-r border-black p-2 text-center font-bold">#REF!</div>
                             <div className="col-span-11 p-2 text-sm">
                                 • Οι εργαζόμενοι πρέπει να φορούν τα προβλεπόμενα από τη νομοθεσία κράνη, να διαθέτουν την κατάλληλη
                                 ένδυση και υπόδηση προς αποφυγή ολισθήσεων και ηλεκτροπληξιών. Σε ορισμένες εργασίες να διατίθενται ζώνες
@@ -422,9 +422,9 @@ export default function F1D3() {
                             </div>
                         </div>
                     </div>
-                    <div className="border-b border-gray-400">
+                    <div className="border-b border-black">
                         <div className="grid grid-cols-12">
-                            <div className="col-span-1 border-r border-gray-400 p-2 text-center font-bold">#REF!</div>
+                            <div className="col-span-1 border-r border-black p-2 text-center font-bold">#REF!</div>
                             <div className="col-span-11 p-2 text-sm">Ειδικοί κίνδυνοι του παραρτ. ΙΙΙ του ΠΔ 305/96 (πλην &1) δεν υπάρχουν. </div>
                         </div>
                     </div>

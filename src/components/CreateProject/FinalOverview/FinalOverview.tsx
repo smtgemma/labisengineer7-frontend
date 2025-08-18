@@ -558,12 +558,17 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
-    { name: "F1D1", component: <F1D1 /> },
+
+    { name: "F1D2", component: <F1D2 /> },
+    { name: "F1D3", component: <F1D3 /> },
+    { name: "F1D4", component: <F1D4 /> },
     {
       name: "ProjectDescriptionSix",
       component: <FileOneDesignEleven ydomName={ydomName} />,
     },
   ];
+
+  console.log(selected);
 
   // pdf file download
   const handleDownloadPdf = async () => {
