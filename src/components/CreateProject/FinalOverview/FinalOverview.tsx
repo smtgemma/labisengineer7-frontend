@@ -357,7 +357,6 @@
 
 // export default FinalOverview;
 
-
 import React, { useEffect, useRef, useState } from "react";
 import { FileSpreadsheet, FileText, AlertCircle } from "lucide-react";
 import { Document, Packer, Paragraph, TextRun } from "docx";
@@ -383,15 +382,15 @@ import FileOneDesignThirteen from "./file-one/design-thirteen/page";
 import FileOneDesignFour from "./file-one/design-four/page";
 import FileOneDesignSix from "./file-one/design-six/page";
 import FileOneDesignEight from "@/components/CreateProject/FinalOverview/file-one/design-eight/page";
-import F1D1 from "@/components/CreateProject/FinalOverview/f-01/f1D1/page"
-import F1D2 from "@/components/CreateProject/FinalOverview/f-01/f1D2/page"
-import F1D3 from "@/components/CreateProject/FinalOverview/f-01/f1D3/page"
-import F1D4 from "@/components/CreateProject/FinalOverview/f-01/f1D4/page"
-import F1D5 from "@/components/CreateProject/FinalOverview/f-01/f1D5/page"
-import F1D6 from "@/components/CreateProject/FinalOverview/f-01/f1D6/page"
-import F1D7 from "@/components/CreateProject/FinalOverview/f-01/f1D7/page"
-import F1D8 from "@/components/CreateProject/FinalOverview/f-01/f1D8/page"
-import F1D9 from "@/components/CreateProject/FinalOverview/f-01/f1D9/page"
+import F1D1 from "@/components/CreateProject/FinalOverview/f-01/f1D1/page";
+import F1D2 from "@/components/CreateProject/FinalOverview/f-01/f1D2/page";
+import F1D3 from "@/components/CreateProject/FinalOverview/f-01/f1D3/page";
+import F1D4 from "@/components/CreateProject/FinalOverview/f-01/f1D4/page";
+import F1D5 from "@/components/CreateProject/FinalOverview/f-01/f1D5/page";
+import F1D6 from "@/components/CreateProject/FinalOverview/f-01/f1D6/page";
+import F1D7 from "@/components/CreateProject/FinalOverview/f-01/f1D7/page";
+import F1D8 from "@/components/CreateProject/FinalOverview/f-01/f1D8/page";
+import F1D9 from "@/components/CreateProject/FinalOverview/f-01/f1D9/page";
 import F2D1 from "./f-02/f2D1/page";
 import F2D2 from "./f-02/f2D2/page";
 import F2D3 from "./f-02/f2D3/page";
@@ -403,6 +402,7 @@ import F3D5 from "./f-03/f3D5/page";
 import F3D6 from "./f-03/f3D6/page";
 import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
 import { createRoot } from "react-dom/client";
+import * as XLSX from "xlsx";
 
 interface Owner {
   id: string;
@@ -424,7 +424,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   files,
   extractedData,
   selectedOwners,
-  selectedActions,  
+  selectedActions,
   onComplete,
 }) => {
   const printRef = React.useRef(null);
@@ -469,7 +469,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   console.log(address);
   const [selected, setSelected] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // modal close click outside 
+  // modal close click outside
   const modalContentRef = useRef<HTMLDivElement>(null);
   // const {} = subCategories
   // const openPreview = () => {
@@ -501,32 +501,74 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   // ✅ 2. DOWNLOAD CSV FILE
   const downloadCSV = () => {
-    const headers = ["First Name", "Surname", "Father Name", "VAT No"];
-    const rows = selectedOwners.map((owner) =>
-      [owner.firstName, owner.surname, owner.fatherName, owner.vatNo].join(",")
-    );
+    // const headers = ["First Name", "Surname", "Father Name", "VAT No"];
+    // const rows = selectedOwners.map((owner) =>
+    //   [owner.firstName, owner.surname, owner.fatherName, owner.vatNo].join(",")
+    // );
 
-    const csvContent = [headers.join(","), ...rows].join("\n");
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    saveAs(blob, "owners.csv");
+    // const csvContent = [headers.join(","), ...rows].join("\n");
+    // const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    // saveAs(blob, "owners.csv");
+    const data = [
+      ["ΣΥΝΤΑΞΗ ΑΝΑΛΥΤΙΚΟΥ ΠΡΟΫΠΟΛΟΓΙΣΜΟΥ ΕΡΓΟΥ"],
+      [],
+      ["Εργοδότης", "OWNER/OWNERS"],
+      ["Έργο", "PROJECT DESCRIPTION"],
+      ["Διεύθυνση Έργου", "ADDRESS, TOWN/AREA , POSTAL CODE"],
+      [],
+      [
+        "Κωδικός",
+        "Εργασία",
+        "Μονάδα Μέτρησης",
+        "Τιμή €",
+        "Ποσότητα",
+        "Σύνολο €",
+      ],
+      ["1.01", "Γενικές εκσκαφές γαιώδεις", "κ.μ.", 3.22, "", ""],
+      ["1.02", "Γενικές εκσκαφές ημιβραχώδεις", "κ.μ.", 3.22, "", ""],
+      ["1.03", "Γενικές εκσκαφές βραχώδεις", "κ.μ.", 11.74, "", ""],
+      ["1.04", "Εκσκαφές Θεμελίων γαιώδεις", "κ.μ.", 5.28, "", ""],
+    ];
+
+    // Convert data to worksheet
+    const ws = XLSX.utils.aoa_to_sheet(data);
+
+    // Merge first row (A1:F1)
+    ws["!merges"] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: 5 } }];
+
+    // Set column widths
+    ws["!cols"] = [
+      { wch: 10 }, // Κωδικός
+      { wch: 40 }, // Εργασία
+      { wch: 20 }, // Μονάδα Μέτρησης
+      { wch: 10 }, // Τιμή €
+      { wch: 12 }, // Ποσότητα
+      { wch: 12 }, // Σύνολο €
+    ];
+
+    // Workbook
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Προϋπολογισμός");
+
+    // Save file
+    const buf = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+    const blob = new Blob([buf], { type: "application/octet-stream" });
+    saveAs(blob, "budget.xlsx");
   };
 
-  
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
-   
+
     { name: "F1D2", component: <F1D2 /> },
     { name: "F1D3", component: <F1D3 /> },
-    { name: "F1D4", component: <F1D4 /> },
+
     {
       name: "ProjectDescriptionSix",
       component: <FileOneDesignEleven ydomName={ydomName} />,
     },
-
-    
   ];
 
-  console.log(selected)
+  console.log(selected);
 
   // pdf file download
   const handleDownloadPdf = async () => {
@@ -743,196 +785,198 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
 
       <div ref={printRef} className="space-y-3">
-
         {/* building-modifications */}
         {/* file-1  */}
-          {buildingMods?.map((item: string, index: number) => (
-            <div>
-              {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" && (
-                <div className="flex flex-wrap gap-4">
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017
-                  </button>
+        {buildingMods?.map((item: string, index: number) => (
+          <div>
+            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" && (
+              <div className="flex flex-wrap gap-4">
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017
+                </button>
 
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ
-                  </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ
+                </button>
 
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΣΑΥ_ΦΑΥ")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΣΑΥ_ΦΑΥ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΣΔΑ ΕΡΓΟΥ")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΣΔΑ ΕΡΓΟΥ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
-                    onClick={() => {
-                      setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ
-                  </button>
-                  {/* add more buttons the same way */}
-                </div>
-              )}
-            </div>
-          ))}
-          {/* file-2  */}
-          {buildingMods?.map((item: string, index: number) => (
-            <div>
-              {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2" && (
-                <div className="flex flex-wrap gap-4">
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020
-                  </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΣΑΥ_ΦΑΥ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΣΑΥ_ΦΑΥ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΣΔΑ ΕΡΓΟΥ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΣΔΑ ΕΡΓΟΥ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
+                  onClick={() => {
+                    setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ
+                </button>
+                {/* add more buttons the same way */}
+              </div>
+            )}
+          </div>
+        ))}
+        {/* file-2  */}
+        {buildingMods?.map((item: string, index: number) => (
+          <div>
+            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2" && (
+              <div className="flex flex-wrap gap-4">
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020
+                </button>
 
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ
-                  </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ
+                </button>
 
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
-                  </button>
-                  {/* add more buttons the same way */}
-                </div>
-              )}
-            </div>
-          ))}
-          {/* energy-systems  */}
-          {/* file 3  */}
-          {energy?.map((item: string, index: number) => (
-            <div>
-              {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΥΤΟΝΟΜΟ_ΣΥΣΤΗΜΑ_ΕΡΓΑΣΙΑΣ_3" && (
-                <div className="flex flex-wrap gap-4">
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020
-                  </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
+                </button>
+                {/* add more buttons the same way */}
+              </div>
+            )}
+          </div>
+        ))}
+        {/* energy-systems  */}
+        {/* file 3  */}
+        {energy?.map((item: string, index: number) => (
+          <div>
+            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΥΤΟΝΟΜΟ_ΣΥΣΤΗΜΑ_ΕΡΓΑΣΙΑΣ_3" && (
+              <div className="flex flex-wrap gap-4">
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020
+                </button>
 
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("άρθρο 4 της ΥΑ ΦΕ")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    _άρθρο 4 της ΥΑ ΦΕ
-                  </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("άρθρο 4 της ΥΑ ΦΕ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  _άρθρο 4 της ΥΑ ΦΕ
+                </button>
 
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΛΕΒΗΤΑΣ Φ.Α")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΛΕΒΗΤΑΣ Φ.Α
-                  </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΛΕΒΗΤΑΣ Φ.Α");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΛΕΒΗΤΑΣ Φ.Α
+                </button>
 
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΠΙΒΛΕΨΗΣ ΕΡΓΟΥ")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΥΔ ΑΝΑΛΗΨΗΣ ΕΠΙΒΛΕΨΗΣ ΕΡΓΟΥ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ")
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
-                  </button>
-                  {/* add more buttons the same way */}
-                </div>
-              )}
-            </div>
-          ))}
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΠΙΒΛΕΨΗΣ ΕΡΓΟΥ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΥΔ ΑΝΑΛΗΨΗΣ ΕΠΙΒΛΕΨΗΣ ΕΡΓΟΥ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
+                </button>
+                {/* add more buttons the same way */}
+              </div>
+            )}
+          </div>
+        ))}
 
         {/* Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-            <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-4xl max-h-[80vh] overflow-y-auto relative" ref={modalContentRef}>
+            <div
+              className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-4xl max-h-[80vh] overflow-y-auto relative"
+              ref={modalContentRef}
+            >
               {/* Close Button */}
               <button
                 className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
@@ -966,7 +1010,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && <F3D6 />}
             </div>
           </div>
-
         )}
       </div>
 
