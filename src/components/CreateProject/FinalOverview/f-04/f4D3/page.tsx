@@ -37,67 +37,99 @@ export default function F4D3() {
 
       <div className="space-y-6 ml-10">
         <div>
-          <h3 className="text-sm font-bold">● Διαχωρισμός υφιστάμενης Οριζόντιας Ιδιοκτησίας σε δύο νέες Οριζόντιες Ιδιοκτησίες Κ1 και Κ2</h3>
+          <h3 className="text-sm font-bold"></h3>
           <p className="text-sm mb-6">
-            Διαχωρισμός υφιστάμενης ενιαίας Οριζόντιας Ιδιοκτησίας (π.χ. διαμερίσματος, ορόφου ή άλλου λειτουργικού χώρου) σε δύο αυτοτελείς Οριζόντιες Ιδιοκτησίες, οι οποίες θα φέρουν τους νέους χαρακτηρισμούς:
+            
           </p>
-          <p className="text-sm mb-6">Ιδιοκτησία Κ1 με Εμβαδόν Εκ1 = …… τ.μ.</p>
-          <p className="text-sm mb-6">Ιδιοκτησία Κ2 με Εμβαδόν Εκ2 = …… τ.μ.</p>
-          <p className="text-sm mb-6">Η τροποποίηση της σύστασης οριζόντιας ιδιοκτησίας γίνεται με στόχο την καθαρή οριοθέτηση και νομική διακριτότητα των δύο νέων ιδιοκτησιών, χωρίς να επέρχεται καμία μεταβολή στα κοινόχρηστα ή στον φέροντα οργανισμό του κτιρίου.</p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
+        </div>
+        <div>
+          <h3 className="text-sm font-bold"></h3>
+          <p className="text-sm mb-6">
+            
+          </p>
         </div>
 
-        <div>
-          <h3 className="text-sm font-bold">● Καθαίρεση εσωτερικών τοιχοποιιών και απομάκρυνση μπαζών</h3>
-          <p className="text-sm mb-6">
-            Θα τοποθετηθούν σωληνώσεις προσαγωγής και επιστροφής ζεστού νερού θέρμανσης, χρησιμοποιώντας σωλήνες πολυστρωματικού τύπου (PEX/AL/PEX ή ισοδύναμου πολυπροπυλενικού υλικού), κατάλληλα θερμομονωμένες σύμφωνα με τις απαιτήσεις του Κανονισμού Ενεργειακής Απόδοσης Κτιρίων (KENAK).
-          </p>
-        </div>
 
-        <div>
-          <h3 className="text-sm font-bold">●  Αποξηλώσεις υφιστάμενων εσωτερικών κουφωμάτων/πορτών, ντουλαπιών κουζίνας και ντουλαπών</h3>
-          <p className="text-sm mb-6">
-            Αφαίρεση με προσοχή για ελαχιστοποίηση φθορών, απομάκρυνση από τον χώρο και καθαρισμός υπολειμμάτων.
-          </p>
-        </div>
 
-        <div>
-          <h3 className="text-sm font-bold">● Αποξηλώσεις πλακιδίων σε δάπεδα/τοιχούς λουτρού-WC</h3>
-          <p className="text-sm mb-6">
-            Χρήση εργαλείων αποκόλλησης, προστασία σωληνώσεων και κατασκευών, καθαρισμός και απόρριψη υλικών
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-bold">● Αποξηλώσεις παλαιών ειδών υγιεινής</h3>
-          <p className="text-sm mb-6">
-            Αποσύνδεση και απομάκρυνση λεκάνης, νιπτήρα, μπανιέρας ή καμπίνας, με ασφαλή τρόπο, χωρίς πρόκληση φθοράς σε δίκτυα ύδρευσης/αποχέτευσης
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-sm font-bold">● Μικρές οικοδομικές εργασίες – Σοβατίσματα – Στοκαρίσματα τοιχοποιιών</h3>
-          <p className="text-sm mb-6">
-            Επιδιορθώσεις τοίχων, εφαρμογή σοβά για ευθυγράμμιση επιφανειών, στοκάρισμα αρμών και ατελειών με υλικά κατάλληλα για βάψιμο ή επικάλυψη
-          </p>
-        </div>
-        <div>
-          <h3 className="text-sm font-bold">●  Ηλεκτρολογικές εργασίες</h3>
-          <p className="text-sm mb-6">
-            Νέες καλωδιώσεις σε υπάρχουσες ή νέες οδεύσεις, τοποθέτηση πριζών, διακοπτών, παροχών ρεύματος και πίνακα, βάσει προδιαγραφών ασφαλείας.
-          </p>
-        </div>
-        <div>
-          <h3 className="text-sm font-bold">● Υδραυλικές εργασίες</h3>
-          <p className="text-sm mb-6">
-            Νέες σωληνώσεις παροχής και αποχέτευσης σε χώρο λουτρού/WC και κουζίνας, σύνδεση με υπάρχον δίκτυο, τοποθέτηση νέων ειδών υγιεινής, σιφώνια, νιπτήρες, καζανάκια κ.ά
-          </p>
-        </div>
-        <div>
-          <h3 className="text-sm font-bold">● Γεμίσματα δαπέδων</h3>
-          <p className="text-sm mb-6">
-            Στρώση γεμισμάτων για εξισορρόπηση υψομετρικών διαφορών ή απόκρυψη εγκαταστάσεων. Εφαρμογή με ελαφρομπετόν ή τσιμεντοκονία, επιπέδωση και φινίρισμα.
-          </p>
-        </div>
+        
         <div>
           <h3 className="text-sm font-bold">● Τρίψιμο και γυάλισμα ξύλινου παρκέ</h3>
           <p className="text-sm mb-6">
