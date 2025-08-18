@@ -1535,19 +1535,6 @@ export default function F1D1() {
       <div className="mb-6 space-y-4">
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Εργοδότες *:</span>
-<<<<<<< HEAD
-          <h3 className="flex-1 text-white">OWNER/OWNERS</h3>
-        </div>
-        <div className="flex items-center gap-4">
-          <span className="font-medium w-1/4">Έργο *:</span>
-          <h3 className="flex-1 text-white">PROJECT DESCRIPTION</h3>
-        </div>
-        <div className="flex items-center gap-4">
-          <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className="flex-1 text-white">
-            ADDRESS, TOWN/AREA, POSTAL CODE (FOR BUILDING)
-          </h3>
-=======
           <h3 className="flex-1 text-black">OWNER/OWNERS</h3>
         </div>
         <div className="flex items-center gap-4">
@@ -1556,19 +1543,16 @@ export default function F1D1() {
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className="flex-1 text-black">ADDRESS, TOWN/AREA, POSTAL CODE (FOR BUILDING)</h3>
->>>>>>> 4fb9de4a0ddd498da1f48c20ab1c1d40d57d8a30
+          <h3 className="flex-1 text-black">
+            ADDRESS, TOWN/AREA, POSTAL CODE (FOR BUILDING)
+          </h3>
         </div>
       </div>
       {/* Budget Title */}
       <div className="text-center bg-white p-2 border border-black border-b-0">
-<<<<<<< HEAD
         <h2 className="text-lg font-bold ">
           ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ ΒΑΣΕΙ ΠΑΡΑΡΤΗΜΑΤΟΣ Β' Ν.4495/17)
         </h2>
-=======
-        <h2 className="text-lg font-bold ">ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ ΒΑΣΕΙ ΠΑΡΑΡΤΗΜΑΤΟΣ Β' Ν.4495/17)</h2>
->>>>>>> 4fb9de4a0ddd498da1f48c20ab1c1d40d57d8a30
       </div>
 
       {/* Budget Table */}
@@ -1577,17 +1561,12 @@ export default function F1D1() {
         <div className="grid grid-cols-12 bg-white border-b border-black font-bold text-sm">
           <div className="col-span-1 p-2 border-r border-black">Κωδικός</div>
           <div className="col-span-5 p-2 border-r border-black">Εργασία</div>
-<<<<<<< HEAD
           <div className="col-span-1 p-2 border-r border-black">
             Μονάδα Μέτρησης
           </div>
           <div className="col-span-1 p-2 border-r border-black">
             Τιμή Μονάδος €
           </div>
-=======
-          <div className="col-span-1 p-2 border-r border-black">Μονάδα Μέτρησης</div>
-          <div className="col-span-1 p-2 border-r border-black">Τιμή Μονάδος €</div>
->>>>>>> 4fb9de4a0ddd498da1f48c20ab1c1d40d57d8a30
           <div className="col-span-2 p-2 border-r border-black">Ποσότητα</div>
           <div className="col-span-2 p-2">Σύνολο €</div>
         </div>
@@ -1597,23 +1576,17 @@ export default function F1D1() {
           <div key={category.id}>
             {/* Category Header */}
             <div className="grid grid-cols-12 bg-white border-b border-black">
-<<<<<<< HEAD
-              <div className="col-span-1 p-2 border-r border-black font-bold ">
+              <div className="col-span-1 p-2 border-r border-gray-black font-bold ">
                 {category.id}
               </div>
-              <div className="col-span-9 p-2 border-r border-black font-bold ">
+              <div className="col-span-9 p-2 border-r border-gray-black font-bold ">
                 {category.title}
               </div>
-=======
-              <div className="col-span-1 p-2 border-r border-gray-black font-bold ">{category.id}</div>
-              <div className="col-span-9 p-2 border-r border-gray-black font-bold ">{category.title}</div>
->>>>>>> 4fb9de4a0ddd498da1f48c20ab1c1d40d57d8a30
               {/* <div className="col-span-2 p-2 font-bold text-right ">{category.subtotal.toFixed(2)}</div> */}
             </div>
 
             {/* Category Items */}
             {category.items.map((item) => (
-<<<<<<< HEAD
               <div
                 key={item.code}
                 className="grid grid-cols-12 border-b border-black text-sm"
@@ -1627,12 +1600,6 @@ export default function F1D1() {
                 <div className="col-span-1 p-2 border-r border-black text-center ">
                   {item.unit}
                 </div>
-=======
-              <div key={item.code} className="grid grid-cols-12 border-b border-black text-sm">
-                <div className="col-span-1 p-2 border-r border-black ">{item.code}</div>
-                <div className="col-span-5 p-2 border-r border-black ">{item.description}</div>
-                <div className="col-span-1 p-2 border-r border-black text-center ">{item.unit}</div>
->>>>>>> 4fb9de4a0ddd498da1f48c20ab1c1d40d57d8a30
                 <div className="col-span-1 p-2 border-r border-black text-right ">
                   {item.unitPrice.toFixed(2)}
                 </div>
@@ -1647,17 +1614,12 @@ export default function F1D1() {
 
             {/* Category Subtotal */}
             <div className="grid grid-cols-12 bg-white border-b border-black">
-<<<<<<< HEAD
               <div className="col-span-10 p-2 text-right font-bold">
                 Μερικό Σύνολο =
               </div>
               <div className="col-span-2 p-2 text-right font-bold ">
                 {category.subtotal.toFixed(2)}
               </div>
-=======
-              <div className="col-span-10 p-2 text-right font-bold">Μερικό Σύνολο =</div>
-              <div className="col-span-2 p-2 text-right font-bold ">{category.subtotal.toFixed(2)}</div>
->>>>>>> 4fb9de4a0ddd498da1f48c20ab1c1d40d57d8a30
             </div>
           </div>
         ))}
@@ -1665,7 +1627,6 @@ export default function F1D1() {
         {/* Grand Totals */}
         <div className="">
           <div className="grid grid-cols-12 border-b border-black bg-white">
-<<<<<<< HEAD
             <div className="col-span-10 p-2 text-right font-bold">
               Γενικό Σύνολο Αναλυτικού Προϋπολογισμού*. =
             </div>
@@ -1681,28 +1642,12 @@ export default function F1D1() {
             <div className="col-span-2 p-2 text-right font-bold ">
               {formData.unforeseen.toFixed(2)} €
             </div>
-=======
-            <div className="col-span-10 p-2 text-right font-bold">Γενικό Σύνολο Αναλυτικού Προϋπολογισμού*. =</div>
-            <div className="col-span-2 p-2 text-right font-bold ">{grandTotal.toFixed(2)} €</div>
-          </div>
-
-          <div className="grid grid-cols-12 border-b border-black">
-            <div className="col-span-10 p-2 text-right font-bold">Απρόβλεπτα*. =</div>
-            <div className="col-span-2 p-2 text-right font-bold ">{formData.unforeseen.toFixed(2)} €</div>
->>>>>>> 4fb9de4a0ddd498da1f48c20ab1c1d40d57d8a30
           </div>
 
           <div className="grid grid-cols-12 bg-white">
             <div className="col-span-10 p-2 text-right font-bold ">
-<<<<<<< HEAD
               Σύνολο Αναλυτικού Προϋπολογισμού βάσει Παραρτήματος Β'
               Ν.4495/17)*. =
-            </div>
-            <div className="col-span-2 p-2 text-right font-bold text-lg">
-              {finalTotal.toFixed(2)} €
-=======
-              Σύνολο Αναλυτικού Προϋπολογισμού βάσει Παραρτήματος Β' Ν.4495/17)*. =
->>>>>>> 4fb9de4a0ddd498da1f48c20ab1c1d40d57d8a30
             </div>
           </div>
         </div>
