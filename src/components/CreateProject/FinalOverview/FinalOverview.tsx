@@ -361,13 +361,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { FileSpreadsheet, FileText, AlertCircle } from "lucide-react";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { saveAs } from "file-saver";
-import TemplateFIle from "./Template";
+
 import ReactDOMServer from "react-dom/server";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import TemplateFile from "./Template";
-import TemplateTow from "./TemplateTow";
-import TemplateThree from "./TemplateThree";
+
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { downloadZip } from "client-zip";
@@ -375,22 +374,21 @@ import ProjectDescriptionSix from "./file-one/design-six/page";
 import { Provider } from "react-redux";
 import { makeStore } from "@/redux/store";
 import DesignEight from "@/components/CreateProject/FinalOverview/file-one/design-eight/page";
-import FileOneDesignFive from "./file-one/design-five/page";
-import FileOneDesignSeven from "./file-one/design-seven/page";
+
 import FileOneDesignEleven from "./file-one/design-eleven/page";
-import FileOneDesignThirteen from "./file-one/design-thirteen/page";
-import FileOneDesignFour from "./file-one/design-four/page";
-import FileOneDesignSix from "./file-one/design-six/page";
-import FileOneDesignEight from "@/components/CreateProject/FinalOverview/file-one/design-eight/page";
-import F1D1 from "@/components/CreateProject/FinalOverview/f-01/f1D1/page";
-import F1D2 from "@/components/CreateProject/FinalOverview/f-01/f1D2/page";
-import F1D3 from "@/components/CreateProject/FinalOverview/f-01/f1D3/page";
-import F1D4 from "@/components/CreateProject/FinalOverview/f-01/f1D4/page";
-import F1D5 from "@/components/CreateProject/FinalOverview/f-01/f1D5/page";
-import F1D6 from "@/components/CreateProject/FinalOverview/f-01/f1D6/page";
-import F1D7 from "@/components/CreateProject/FinalOverview/f-01/f1D7/page";
-import F1D8 from "@/components/CreateProject/FinalOverview/f-01/f1D8/page";
-import F1D9 from "@/components/CreateProject/FinalOverview/f-01/f1D9/page";
+
+import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
+import { createRoot } from "react-dom/client";
+import * as XLSX from "xlsx";
+import F1D2 from "./f-01/f1d2/page";
+import F1D3 from "./f-01/f1d3/page";
+import F1D1 from "./f-01/f1d1/page";
+import F1D4 from "./f-01/f1D4/page";
+import F1D5 from "./f-01/f1D5/page";
+import F1D6 from "./f-01/f1D6/page";
+import F1D7 from "./f-01/f1D7/page";
+import F1D8 from "./f-01/f1D8/page";
+import F1D9 from "./f-01/f1D9/page";
 import F2D1 from "./f-02/f2D1/page";
 import F2D2 from "./f-02/f2D2/page";
 import F2D3 from "./f-02/f2D3/page";
@@ -400,9 +398,6 @@ import F3D3 from "./f-03/f3D3/page";
 import F3D4 from "./f-03/f3D4/page";
 import F3D5 from "./f-03/f3D5/page";
 import F3D6 from "./f-03/f3D6/page";
-import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
-import { createRoot } from "react-dom/client";
-import * as XLSX from "xlsx";
 
 interface Owner {
   id: string;
