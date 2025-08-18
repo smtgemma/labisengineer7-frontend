@@ -7,6 +7,11 @@ import { LiaCanadianMapleLeaf, LiaClipboardListSolid } from "react-icons/lia";
 import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { PiNewspaperThin } from "react-icons/pi";
 import { RiDashboardFill } from "react-icons/ri";
+import { VscServerProcess } from "react-icons/vsc";
+import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
+import { FaSackDollar } from "react-icons/fa6";
+import { FaHeadset } from "react-icons/fa6";
+import { IoSettingsOutline } from "react-icons/io5";
 
 export const navLink = [
   {
@@ -106,10 +111,12 @@ export const DashBoardLink = [
   {
     name: "Service",
     href: "/new-project",
+    // icon: VscServerProcess,
   },
   {
     name: "Advance Tools",
     href: "/advance-tools",
+    // icon: HiOutlineClipboardDocumentList,
   },
   {
     name: "Project",
@@ -118,15 +125,17 @@ export const DashBoardLink = [
   {
     name: "Subscription",
     href: "/subscription",
+    // icon: FaSackDollar,
   },
 
   {
     name: "Help/Guides",
     href: "/guidelines",
+    // icon: FaHeadset,
   },
   {
     name: "Profile ",
     href: "/admin-profile ",
-    // icon: GoPlus,
+    // icon: IoSettingsOutline,
   },
 ];

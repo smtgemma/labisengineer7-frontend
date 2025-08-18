@@ -382,6 +382,8 @@ import FileOneDesignThirteen from "./file-one/design-thirteen/page";
 import FileOneDesignFour from "./file-one/design-four/page";
 import FileOneDesignSix from "./file-one/design-six/page";
 import FileOneDesignEight from "@/components/CreateProject/FinalOverview/file-one/design-eight/page";
+import { createRoot } from "react-dom/client";
+import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
 
 interface Owner {
   id: string;
@@ -422,45 +424,58 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const property = subCategoryData["property-documentation"] || [];
   const small = subCategoryData["small-construction"] || [];
 
-  console.log(buildingMods, "buildingMods");
-  console.log(energy, "energy");
-  console.log(fencing, "fencing");
-  console.log(landscaping, "landscaping");
-  console.log(operational, "operational");
-  console.log(property, "property");
-  console.log(small, "small");
-
   const store = makeStore();
 
   console.log(allTempate, "stepByStepData>>>>>>");
+  const { data, isLoading } = useGetTemplateDataQuery("un");
+  const ydomName = data?.data;
+  console.log("ydomName?", ydomName);
+
+  const { owners } = dataAllFIled;
+
+  const {
+    address,
+    afm,
+    birthDate,
+    birthPlace,
+    city,
+    email,
+    fatherName,
+    firstName,
+    lastName,
+    motherName,
+    phone,
+    postalCode,
+  } = owners[0];
+  console.log(address);
   const [selected, setSelected] = useState<string | null>(null);
   // const {} = subCategories
-  const openPreview = () => {
-    const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
-    const newTab = window.open("", "_blank");
-    if (newTab) {
-      newTab.document.write(`
-        <html>
-          <head>
-            <title>DOCX Preview</title>
-             <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-          <style>
-            <style>
-              body { font-family: Arial, sans-serif; padding: 2rem; }
-              h1, h2, h3 { color: #2563eb; }
-              p { line-height: 1.6; }
-            </style>
-          </head>
-          <body>
-            <div class="word-container">
-              ${htmlContent}
-            </div>
-          </body>
-        </html>
-      `);
-      newTab.document.close();
-    }
-  };
+  // const openPreview = () => {
+  //   const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
+  //   const newTab = window.open("", "_blank");
+  //   if (newTab) {
+  //     newTab.document.write(`
+  //       <html>
+  //         <head>
+  //           <title>DOCX Preview</title>
+  //            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  //         <style>
+  //           <style>
+  //             body { font-family: Arial, sans-serif; padding: 2rem; }
+  //             h1, h2, h3 { color: #2563eb; }
+  //             p { line-height: 1.6; }
+  //           </style>
+  //         </head>
+  //         <body>
+  //           <div class="word-container">
+  //             ${htmlContent}
+  //           </div>
+  //         </body>
+  //       </html>
+  //     `);
+  //     newTab.document.close();
+  //   }
+  // };
 
   // ✅ 2. DOWNLOAD CSV FILE
   const downloadCSV = () => {
@@ -475,7 +490,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   };
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
-    { name: "ProjectDescriptionSix", component: <ProjectDescriptionSix /> },
+    {
+      name: "ProjectDescriptionSix",
+      component: <FileOneDesignEleven ydomName={ydomName} />,
+    },
   ];
 
   // pdf file download
@@ -506,48 +524,92 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   };
 
   //pdf file dowload zip funciton working
+  // const handleZipDownload = async () => {
+  //   const files: { name: string; lastModified: Date; input: Blob }[] = [];
+
+  //   for (let t of templates) {
+  //     // const html = ReactDOMServer.renderToStaticMarkup(t.component);
+
+  //     // Wrap the component in Provider
+  //     const html = ReactDOMServer.renderToStaticMarkup(
+  //       <Provider store={store}>{t.component}</Provider>
+  //     );
+  //     const container = document.createElement("div");
+  //     container.innerHTML = html;
+  //     container.style.width = "794px";
+  //     container.style.background = "#fff";
+  //     document.body.appendChild(container);
+
+  //     const canvas = await html2canvas(container, { scale: 2 });
+  //     const imgData = canvas.toDataURL("image/png");
+
+  //     const pdf = new jsPDF({
+  //       orientation: "portrait",
+  //       unit: "px",
+  //       format: "a4",
+  //     });
+  //     const imgProps = pdf.getImageProperties(imgData);
+  //     const pdfWidth = pdf.internal.pageSize.getWidth();
+  //     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+  //     pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+  //     const pdfBlob = pdf.output("blob");
+
+  //     files.push({
+  //       name: `${t.name}.pdf`,
+  //       lastModified: new Date(),
+  //       input: pdfBlob,
+  //     });
+
+  //     document.body.removeChild(container);
+  //   }
+
+  //   // Create ZIP in browser
+  //   const zipBlob = await downloadZip(files).blob();
+  //   saveAs(zipBlob, "templates.zip");
+  // };
+
   const handleZipDownload = async () => {
-    const files: { name: string; lastModified: Date; input: Blob }[] = [];
+    const files = await Promise.all(
+      templates.map(async (t) => {
+        const html = ReactDOMServer.renderToStaticMarkup(
+          <Provider store={store}>{t.component}</Provider>
+        );
 
-    for (let t of templates) {
-      // const html = ReactDOMServer.renderToStaticMarkup(t.component);
+        const container = document.createElement("div");
+        container.innerHTML = html;
+        container.style.width = "794px";
+        container.style.background = "#fff";
+        document.body.appendChild(container);
 
-      // Wrap the component in Provider
-      const html = ReactDOMServer.renderToStaticMarkup(
-        <Provider store={store}>{t.component}</Provider>
-      );
-      const container = document.createElement("div");
-      container.innerHTML = html;
-      container.style.width = "794px";
-      container.style.background = "#fff";
-      document.body.appendChild(container);
+        const canvas = await html2canvas(container, {
+          scale: 3,
+          useCORS: true,
+        });
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF({
+          unit: "px",
+          format: [imgWidth, imgHeight],
+        });
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
 
-      const canvas = await html2canvas(container, { scale: 2 });
-      const imgData = canvas.toDataURL("image/png");
+        const pdfBlob = pdf.output("blob");
+        document.body.removeChild(container);
 
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "px",
-        format: "a4",
-      });
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        return {
+          name: `${t.name}.pdf`,
+          lastModified: new Date(),
+          input: pdfBlob,
+        };
+      })
+    );
 
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-      const pdfBlob = pdf.output("blob");
-
-      files.push({
-        name: `${t.name}.pdf`,
-        lastModified: new Date(),
-        input: pdfBlob,
-      });
-
-      document.body.removeChild(container);
-    }
-
-    // Create ZIP in browser
     const zipBlob = await downloadZip(files).blob();
     saveAs(zipBlob, "templates.zip");
   };
@@ -572,7 +634,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div
-          onClick={openPreview}
+          // onClick={openPreview}
           className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
           <div className="flex items-center space-x-4 mb-4">
@@ -628,20 +690,192 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
 
       <div ref={printRef} className="space-y-30">
+        {/* building-modifications  */}
+        {/* {
+          buildingMods.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              return <FileOneDesignFive key={index} />;
+              // return 'Generate Engineer Declaration (YA)';
+
+            }
+            return null;
+          })
+        } */}
+
+        {buildingMods?.map((item: string, index: number) => {
+          const elements: React.ReactElement[] = [];
+
+          if (
+            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+            allTempate.includes("Generate Engineer Declaration (YA)")
+          ) {
+            elements.push(
+              <FileOneDesignEleven ydomName={ydomName} key={`five-${index}`} />
+            );
+          }
+
+          if (
+            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" &&
+            allTempate.includes("Generate Assignment of Responsibility")
+          ) {
+            elements.push(<FileOneDesignThirteen key={`seven-${index}`} />);
+          }
+          if (
+            item ===
+              "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5" &&
+            allTempate.includes("Create Technical Description")
+          ) {
+            elements.push(<FileOneDesignFour key={`four-${index}`} />);
+          }
+          if (
+            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΤΟΠΟΘΕΤΗΣΗ_ΙΚΡΙΩΜΑΤΩΝ_15" &&
+            allTempate.includes("Generate Engineer Declaration (YA)")
+          ) {
+            elements.push(<FileOneDesignEleven key={`seven-${index}`} />);
+          }
+          // if (
+          //   item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" &&
+          //   allTempate.includes("Generate Engineer Declaration (YA)")
+          // ) {
+          //   elements.push(<FileOneDesignEleven key={`seven-${index}`} />);
+          // }
+          // if (
+          //   item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" &&
+          //   allTempate.includes("Generate Engineer Declaration (YA)")
+          // ) {
+          //   elements.push(<FileOneDesignSeven key={`seven-${index}`} />);
+          // }
+          if (
+            item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2" &&
+            allTempate.includes("Create Technical Description")
+          ) {
+            elements.push(<FileOneDesignSix key={`seven-${index}`} />);
+          }
+
+          return elements.length > 0 ? elements : null;
+        })}
+
+        {/* energy-systems  */}
+        {/* {
+          energy.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              // return <DesignOne key={index} />;
+              return 'Generate Engineer Declaration (YA)';
+
+            }
+            return null;
+          })
+        } */}
+
+        {/* fencing  */}
+        {/* {
+          fencing.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              // return <DesignOne key={index} />;
+              return 'Generate Engineer Declaration (YA)';
+
+            }
+            return null;
+          })
+        } */}
+
+        {/* landscaping-2  */}
+        {/* {
+          landscaping.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              // return <DesignOne key={index} />;
+              return 'Generate Engineer Declaration (YA)';
+
+            }
+            return null;
+          })
+        } */}
+
+        {/* operational-space  */}
+        {/* {
+          operational.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              // return <DesignOne key={index} />;
+              return 'Generate Engineer Declaration (YA)';
+
+            }
+            return null;
+          })
+        } */}
+
+        {/* property-documentation  */}
+        {/* {
+          property.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
+              allTempate.includes("Generate Engineer Declaration (YA)")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              // return <DesignOne key={index} />;
+              return 'Generate Engineer Declaration (YA)';
+
+            }
+            return null;
+          })
+        } */}
+
+        {/* small-construction  */}
+        {/* {
+          small.map((item: string, index: number) => {
+            if (
+              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΙΣΙΝΑ_COMPACT_ΕΩΣ_50_Τ.Μ._13" &&
+              allTempate.includes("Create Technical Description")
+            ) {
+              console.log(item, allTempate[0], "000000000000000000000000000000000");
+              return (
+                <div className="space-y-12">
+                  <div> <DesignEight key={index} /></div>
+                  <div> <DesignEight key={index} /></div>
+                </div>
+              );
+              // return 'Generate Engineer Declaration (YA)';
+
+            }
+            return null;
+          })
+        } */}
         {buildingMods?.map((item: string, index: number) => (
           <div>
             {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" && (
               <div className="flex flex-wrap gap-4">
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017")}
+                  onClick={() =>
+                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017")
+                  }
                 >
                   ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017
                 </button>
 
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ")}
+                  onClick={() =>
+                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ")
+                  }
                 >
                   ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ
                 </button>
@@ -681,17 +915,22 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             )}
           </div>
         ))}
-        {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && <FileOneDesignEleven />}
-        {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && <FileOneDesignSeven />}
+        {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && (
+          <FileOneDesignEleven />
+        )}
+        {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && (
+          <FileOneDesignSeven />
+        )}
         {selected === "ΣΑΥ_ΦΑΥ" && <FileOneDesignEight />}
         {selected === "ΣΔΑ ΕΡΓΟΥ" && <FileOneDesignEight />}
-        {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && <FileOneDesignEight />}
+        {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && (
+          <FileOneDesignEight />
+        )}
         {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <FileOneDesignEight />}
         {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <FileOneDesignEight />}
         {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <FileOneDesignEight />}
         {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <FileOneDesignEight />}
       </div>
-
 
       <div className="flex justify-end">
         <button
@@ -706,7 +945,3 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 };
 
 export default FinalOverview;
-
-
-
-
