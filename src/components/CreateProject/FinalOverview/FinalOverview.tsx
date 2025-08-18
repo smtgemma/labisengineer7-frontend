@@ -357,6 +357,7 @@
 
 // export default FinalOverview;
 
+
 import React, { useEffect, useRef, useState } from "react";
 import { FileSpreadsheet, FileText, AlertCircle } from "lucide-react";
 import { Document, Packer, Paragraph, TextRun } from "docx";
@@ -423,7 +424,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   files,
   extractedData,
   selectedOwners,
-  selectedActions,
+  selectedActions,  
   onComplete,
 }) => {
   const printRef = React.useRef(null);
@@ -513,11 +514,19 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
+   
+    { name: "F1D2", component: <F1D2 /> },
+    { name: "F1D3", component: <F1D3 /> },
+    { name: "F1D4", component: <F1D4 /> },
     {
       name: "ProjectDescriptionSix",
       component: <FileOneDesignEleven ydomName={ydomName} />,
     },
+
+    
   ];
+
+  console.log(selected)
 
   // pdf file download
   const handleDownloadPdf = async () => {
