@@ -357,7 +357,7 @@
 
 // export default FinalOverview;
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { FileSpreadsheet, FileText, AlertCircle } from "lucide-react";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { saveAs } from "file-saver";
@@ -381,8 +381,12 @@ import FileOneDesignEleven from "./file-one/design-eleven/page";
 import FileOneDesignThirteen from "./file-one/design-thirteen/page";
 import FileOneDesignFour from "./file-one/design-four/page";
 import FileOneDesignSix from "./file-one/design-six/page";
+<<<<<<< HEAD
 import { createRoot } from "react-dom/client";
 import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
+=======
+import FileOneDesignEight from "@/components/CreateProject/FinalOverview/file-one/design-eight/page";
+>>>>>>> 54f8ad9e6d3b1bf9bb477d01eea7b9f083f077ef
 
 interface Owner {
   id: string;
@@ -423,9 +427,18 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const property = subCategoryData["property-documentation"] || [];
   const small = subCategoryData["small-construction"] || [];
 
+  console.log(buildingMods, "buildingMods");
+  console.log(energy, "energy");
+  console.log(fencing, "fencing");
+  console.log(landscaping, "landscaping");
+  console.log(operational, "operational");
+  console.log(property, "property");
+  console.log(small, "small");
+
   const store = makeStore();
 
   console.log(allTempate, "stepByStepData>>>>>>");
+<<<<<<< HEAD
   const { data, isLoading } = useGetTemplateDataQuery("un");
   const ydomName = data?.data;
   console.log("ydomName?", ydomName);
@@ -447,6 +460,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     postalCode,
   } = owners[0];
   console.log(address);
+=======
+  const [selected, setSelected] = useState<string | null>(null);
+>>>>>>> 54f8ad9e6d3b1bf9bb477d01eea7b9f083f077ef
   // const {} = subCategories
   // const openPreview = () => {
   //   const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
@@ -689,21 +705,25 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
 
       <div ref={printRef} className="space-y-30">
-        {/* building-modifications  */}
-        {/* {
-          buildingMods.map((item: string, index: number) => {
-            if (
-              item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" &&
-              allTempate.includes("Generate Engineer Declaration (YA)")
-            ) {
-              return <FileOneDesignFive key={index} />;
-              // return 'Generate Engineer Declaration (YA)';
+        {buildingMods?.map((item: string, index: number) => (
+          <div>
+            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" && (
+              <div className="flex flex-wrap gap-4">
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017")}
+                >
+                  ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017
+                </button>
 
-            }
-            return null;
-          })
-        } */}
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ")}
+                >
+                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ
+                </button>
 
+<<<<<<< HEAD
         {buildingMods?.map((item: string, index: number) => {
           const elements: React.ReactElement[] = [];
 
@@ -857,7 +877,54 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
             return null;
           })
         } */}
+=======
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                >
+                  ΣΑΥ_ΦΑΥ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                >
+                  ΣΔΑ ΕΡΓΟΥ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                >
+                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                >
+                  ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => setSelected("ΣΑΥ_ΦΑΥ")}
+                >
+                  ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ
+                </button>
+                {/* add more buttons the same way */}
+              </div>
+            )}
+          </div>
+        ))}
+        {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && <FileOneDesignEleven />}
+        {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && <FileOneDesignSeven />}
+        {selected === "ΣΑΥ_ΦΑΥ" && <FileOneDesignEight />}
+        {selected === "ΣΔΑ ΕΡΓΟΥ" && <FileOneDesignEight />}
+        {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && <FileOneDesignEight />}
+        {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <FileOneDesignEight />}
+        {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <FileOneDesignEight />}
+        {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <FileOneDesignEight />}
+        {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <FileOneDesignEight />}
+>>>>>>> 54f8ad9e6d3b1bf9bb477d01eea7b9f083f077ef
       </div>
+
 
       <div className="flex justify-end">
         <button
@@ -872,3 +939,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 };
 
 export default FinalOverview;
+
+
+
+
