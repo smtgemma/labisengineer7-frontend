@@ -2,49 +2,63 @@
 import React from "react";
 import { Download } from "lucide-react";
 import Header from "@/components/shared/Header/Header";
+import { useGetMyDocumentsQuery } from "@/redux/features/myDocument/DocumentSlice";
+import Loading from "@/components/Others/Loading";
+import tokenCatch from "@/lib/token";
+import { saveAs } from "file-saver";
 
 export interface DocumentData {
   fileName: string;
+  invoiceUrl: string;
+  projectId: string;
   projectName: string;
-  type: string;
-  uploadedOn: string;
+  type: "PDF" | "DOCX" | "XLSX" | string; // extendable if other file types possible
+  uploadedOn: string; // ISO date string (e.g., "2025-08-20")
 }
 
 interface DocumentTableProps {
   data: DocumentData[];
 }
 
-const data: DocumentData[] = [
-  {
-    fileName: "Contract_LandPlot.pdf",
-    projectName: "Permit 102",
-    type: "PDF",
-    uploadedOn: "July 1, 2025",
-  },
-  {
-    fileName: "FloorPlan_A1.jpg",
-    projectName: "House Cert",
-    type: "Image",
-    uploadedOn: "July 1, 2025",
-  },
-  {
-    fileName: "Declaration_YD.docx",
-    projectName: "My Apartment ID",
-    type: "Generated Document",
-    uploadedOn: "July 1, 2025",
-  },
-  {
-    fileName: "Technical_Description.docx",
-    projectName: "Residential Renovation",
-    type: "Generated Document",
-    uploadedOn: "July 1, 2025",
-  },
-];
+// const data: DocumentData[] = [
+//   {
+//     fileName: "Contract_LandPlot.pdf",
+//     projectName: "Permit 102",
+//     type: "PDF",
+//     uploadedOn: "July 1, 2025",
+//   },
+//   {
+//     fileName: "FloorPlan_A1.jpg",
+//     projectName: "House Cert",
+//     type: "Image",
+//     uploadedOn: "July 1, 2025",
+//   },
+//   {
+//     fileName: "Declaration_YD.docx",
+//     projectName: "My Apartment ID",
+//     type: "Generated Document",
+//     uploadedOn: "July 1, 2025",
+//   },
+//   {
+//     fileName: "Technical_Description.docx",
+//     projectName: "Residential Renovation",
+//     type: "Generated Document",
+//     uploadedOn: "July 1, 2025",
+//   },
+// ];
 
 const DocumentTable = () => {
-  const handleDownload = (fileName: string) => {
-    console.log("Download clicked for:", fileName);
-    // Handle download logic here
+  const token = tokenCatch();
+  const { data: document, isLoading } = useGetMyDocumentsQuery(token);
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
+  const allDocument = document?.data?.documents;
+
+  const handleDownload = (fileUrl: string, fileName: string) => {
+    console.log(fileUrl);
+    saveAs(fileUrl, fileName);
   };
 
   return (
@@ -73,7 +87,7 @@ const DocumentTable = () => {
             </tr>
           </thead>
           <tbody className="bg-white">
-            {data.map((row, index) => (
+            {allDocument.map((row: any, index: number) => (
               <tr
                 key={index}
                 className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
@@ -90,7 +104,7 @@ const DocumentTable = () => {
                 </td>
                 <td className="px-4 py-4">
                   <button
-                    onClick={() => handleDownload(row.fileName)}
+                    onClick={() => handleDownload(row.invoiceUrl, row.fileName)}
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-green-700 bg-green-50 border border-green-200 rounded hover:bg-green-100 transition-colors"
                   >
                     <Download size={12} />

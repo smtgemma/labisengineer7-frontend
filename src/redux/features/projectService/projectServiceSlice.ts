@@ -13,16 +13,36 @@ const projectServiceApi = baseUrlApi.injectEndpoints({
     }),
 
     // update status and account spent
-    // userStatusChange: build.mutation({
-    //   query: ({ id, token }) => ({
-    //     url: `/users/suspend/${id}`,
-    //     method: "PATCH",
-    //     headers: {
-    //       Authorization: `${token}`,
-    //     },
-    //   }),
-    // }),
+    userStatusChange: build.mutation({
+      query: ({ id, token }) => ({
+        url: `/users/suspend/${id}`,
+        method: "PATCH",
+        headers: {
+          Authorization: `${token}`,
+        },
+      }),
+    }),
+
+    // all project
+    getAllProject: build.query({
+      query: () => ({
+        url: `/projects/all`,
+        method: "get",
+      }),
+    }),
+
+    // signle project
+    getSignleProject: build.query({
+      query: (projectId) => ({
+        url: `/projects/public/${projectId}`,
+        method: "get",
+      }),
+    }),
   }),
 });
 
-export const { useGetTheServiceQuery } = projectServiceApi;
+export const {
+  useGetTheServiceQuery,
+  useGetAllProjectQuery,
+  useGetSignleProjectQuery,
+} = projectServiceApi;

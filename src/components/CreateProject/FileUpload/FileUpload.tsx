@@ -73,17 +73,17 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
   const onSubmit = async (data: FormValues) => {
     setLoading(true);
+    const description: string =
+      "ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ ΟΡΓΑΝΙΣΜΟΥ  ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ A-4 ΤΟΥ Α ΟΡΟΦΟΥ";
     try {
       const formData = new FormData();
-
+      formData.append("project_descriptions", JSON.stringify(description));
       formData.append("ktimatologio", data.ktimatologio[0]);
       formData.append("contract", data.contract[0]);
       formData.append("permit", data.permit[0]);
       if (data.law4495?.length) {
         formData.append("law4495", data.law4495[0]);
       }
-      formData.append("project_descriptions", data.project_descriptions);
-      formData.append("sub_categories", data.sub_categories);
 
       const res = await fetch(
         "http://172.252.13.69:8019/api/v1/process-documents-advanced",

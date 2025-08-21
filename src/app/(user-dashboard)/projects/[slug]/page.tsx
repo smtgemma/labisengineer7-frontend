@@ -1,11 +1,28 @@
+"use client";
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Cloud, Download, FileText } from "lucide-react";
+import { useParams } from "next/navigation";
+import { RootState } from "@/redux/store";
+import { useGetSignleProjectQuery } from "@/redux/features/projectService/projectServiceSlice";
+import tokenCatch from "@/lib/token";
+import Loading from "@/components/Others/Loading";
 
 interface ProjectDetailsProps {
   className?: string;
 }
 
 const ProjectDetails = () => {
+  const path = useParams();
+  const projectId = path.slug;
+
+  const { data, isLoading } = useGetSignleProjectQuery(projectId);
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  const signleData = data.data;
+  console.log(signleData);
   return (
     <div className={`bg-[#F1F5F9] min-h-screen p-8 `}>
       <div>

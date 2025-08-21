@@ -428,7 +428,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allTempate = stepByStepData.actionSelection;
   const dataAllFIled = stepByStepData.aiInputData;
   const subCategoryData = stepByStepData.subcategory;
-  console.log(subCategoryData, "==================------------------");
+  const projectId = stepByStepData?.projectIdCode;
+
+  console.log(projectId, "==================------------------");
 
   const buildingMods = subCategoryData["building-modifications"] || [];
   const energy = subCategoryData["energy-systems"] || [];
@@ -592,7 +594,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     pdf.save("examplepdf.pdf");
   };
 
-  //pdf file dowload zip funciton working
   // const handleZipDownload = async () => {
   //   const files: { name: string; lastModified: Date; input: Blob }[] = [];
 

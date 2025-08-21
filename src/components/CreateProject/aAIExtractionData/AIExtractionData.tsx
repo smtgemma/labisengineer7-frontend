@@ -23,18 +23,19 @@ type OwnerData = {
   lastName: string;
   fatherName: string;
   motherName: string;
-  birthDate: string;
+  date_of_birth: string;
   birthPlace: string;
-  address: string;
+  address_number: string;
   postalCode: string;
   city: string;
   afm: string;
   phone: string;
   email: string;
+  id_number: string;
 };
 
 type ProjectData = {
-  projectDescription: string;
+  project_description: string;
   cadastralCode: string;
   type: string;
   construction: string;
@@ -46,14 +47,15 @@ type ProjectData = {
   buildingCode: string;
   neighborhood: string;
   municipal: string;
+  permit_number: string;
 };
 
 interface LicenseLegalFormData {
   licenseNumber: string;
   licenseRevision: string;
   ydom: string;
-  propertyDesc1: string;
-  propertyDesc2: string;
+  horizontal_property_name_two: string;
+  horizontal_property_name: string;
   reexamineNumbers: string;
   notary: string;
   lotSquare: string;
@@ -61,6 +63,13 @@ interface LicenseLegalFormData {
   issueDate: string;
   issueAuthority: string;
   region: string;
+  legalization_statement_number: string;
+  within_outside_city_plan: string;
+  inclusion_date_legalization: string;
+  tee_registration_number: string;
+  specialty: string;
+  engineer_full_name: string;
+  electronic_code: string;
 }
 
 interface EPCFormValues {
@@ -142,10 +151,9 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const projectData = stepByStepData.projectId;
   const subCategoryData = stepByStepData.subcategory;
   const filesData = stepByStepData.multiFiles;
-  console.log(filesData);
+  console.log(allExtreactData);
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
-  console.log(allExtreactData);
 
   const accessToken = tokenCatch();
 
@@ -248,12 +256,11 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Περιγραφή Έργου
                   </label>
                   <input
-                    {...register("projectDescription")}
+                    {...register("project_description")}
                     className={inputStyle}
                     readOnly
                     placeholder="Ανακαίνιση κατοικίας"
-
-                    // defaultValue={dataShowExtreact?.project_description}
+                    defaultValue={allExtreactData?.project_description}
                   />
                 </div>
 
@@ -322,6 +329,19 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     readOnly
                     placeholder="118 τ.μ."
                     defaultValue={allExtreactData?.title_area}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    Αριθμός Οικοδομικής Άδειας
+                  </label>
+                  <input
+                    {...register("permit_number")}
+                    className={inputStyle}
+                    readOnly
+                    placeholder="118 τ.μ."
+                    defaultValue={allExtreactData?.permit_number}
                   />
                 </div>
 
@@ -495,8 +515,8 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     </label>
                     <input
                       type="date"
-                      {...register(`owners.${index}.birthDate`)}
-                      defaultValue={field.birthDate}
+                      {...register(`owners.${index}.date_of_birth`)}
+                      defaultValue={field.date_of_birth}
                       className={inputStyle}
                       readOnly
                     />
@@ -509,7 +529,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     </label>
                     <input
                       {...register(`owners.${index}.birthPlace`)}
-                      defaultValue={field.birthPlace}
+                      defaultValue={field.date_of_birth}
                       className={inputStyle}
                       readOnly
                     />
@@ -521,8 +541,21 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                       Διεύθυνση
                     </label>
                     <input
-                      {...register(`owners.${index}.address`)}
-                      defaultValue={field.address}
+                      {...register(`owners.${index}.address_number`)}
+                      defaultValue={field.address_number}
+                      className={inputStyle}
+                      readOnly
+                    />
+                  </div>
+
+                  {/* Id_number → Α.Δ.Τ */}
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Α.Δ.Τ
+                    </label>
+                    <input
+                      {...register(`owners.${index}.id_number`)}
+                      defaultValue={field.id_number}
                       className={inputStyle}
                       readOnly
                     />
@@ -661,15 +694,99 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     // defaultValue={dataShowExtreact.ydom_description}
                   />
                 </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    Αριθμός Δήλωσης Νομιμοποίησης
+                  </label>
+                  <input
+                    {...register("legalization_statement_number")}
+                    className={inputStyle}
+                    readOnly
+                    defaultValue={allExtreactData.legalization_statement_number}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    Ηλεκτρονικός Κωδικός Δήλωσης
+                  </label>
+                  <input
+                    {...register("electronic_code")}
+                    className={inputStyle}
+                    readOnly
+                    defaultValue={allExtreactData.electronic_code}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    Στοιχεία Μηχανικού
+                  </label>
+                  <input
+                    {...register("engineer_full_name")}
+                    className={inputStyle}
+                    readOnly
+                    defaultValue={allExtreactData.engineer_full_name}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    Ειδικότητα Μηχανικού
+                  </label>
+                  <input
+                    {...register("specialty")}
+                    className={inputStyle}
+                    readOnly
+                    defaultValue={allExtreactData.specialty}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    → Αριθμός Μητρώου
+                  </label>
+                  <input
+                    {...register("tee_registration_number")}
+                    className={inputStyle}
+                    readOnly
+                    defaultValue={allExtreactData.tee_registration_number}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    Ημερομηνία Ένταξης Νομιμοποίησης
+                  </label>
+                  <input
+                    {...register("inclusion_date_legalization")}
+                    className={inputStyle}
+                    readOnly
+                    defaultValue={allExtreactData.inclusion_date_legalization}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    Εντός/Εκτός Σχεδίου Πόλης
+                  </label>
+                  <input
+                    {...register("within_outside_city_plan")}
+                    className={inputStyle}
+                    readOnly
+                    defaultValue={allExtreactData.within_outside_city_plan}
+                  />
+                </div>
+
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Περιγραφή Οριζόντιας Ιδιοκτησίας
                   </label>
                   <input
-                    {...register("propertyDesc1")}
+                    {...register("horizontal_property_name")}
                     className={inputStyle}
                     readOnly
-                    defaultValue={allExtreactData?.issuing_authority}
+                    defaultValue={allExtreactData?.horizontal_property_name}
                     // defaultValue={
                     //   dataShowExtreact.horizontal_property_description
                     // }
@@ -681,14 +798,13 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Περιγραφή Οριζόντιας Ιδιοκτησίας
                   </label>
                   <input
-                    {...register("propertyDesc2")}
+                    {...register("horizontal_property_name_two")}
                     className={inputStyle}
                     readOnly
-                    // defaultValue={
-                    //   dataShowExtreact.horizontal_ownership_description
-                    // }
+                    defaultValue={allExtreactData?.horizontal_property_name_two}
                   />
                 </div>
+
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Αριθμός Ιδρύματος/Αριθμοί Επανεξέτασης
@@ -835,7 +951,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     {...register("protocolNumber")}
                     className={inputStyle}
                     readOnly
-                    // defaultValue={dataShowExtreact.pea_protocol_number}
+                    defaultValue={allExtreactData.property_postal_code}
                   />
                 </div>
                 <div>
