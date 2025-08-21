@@ -1,6 +1,14 @@
-import React from 'react';
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useGetOwnerTemplateQuery } from "@/redux/features/templates/allTemplateSlice";
 
 function F1D6() {
+  const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+  const projectId = stepByStepData?.projectIdCode;
+  console.log(projectId, "=====================")
+
+  const { data, isLoading } = useGetOwnerTemplateQuery(projectId)
+  console.log(data)
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white">
       {/* Header with coat of arms */}
@@ -133,7 +141,7 @@ function F1D6() {
 
           <p className="mb-4">
             ως κύριος/ιδιοκτήτης του ακινήτου που βρίσκεται επί της οδού ([Address, Number, Town, Postal code], αναθέτω στον/στην Διπλωματούχο Μηχανικό <span className='font-bold'>
-                ( Engineers Surname  ,  Engineer's Name, Specialty Engineer AM TEE)
+              ( Engineers Surname  ,  Engineer's Name, Specialty Engineer AM TEE)
             </span>
           </p>
 
@@ -144,7 +152,7 @@ function F1D6() {
         {/* Additional disclaimer text */}
         <div className="p-4 text-sm ">
           <p className="">
-          τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       
+            τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:
           </p>
           <p>
             ●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.

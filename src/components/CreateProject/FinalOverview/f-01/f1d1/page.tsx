@@ -1576,10 +1576,10 @@ export default function F1D1() {
           <div key={category.id}>
             {/* Category Header */}
             <div className="grid grid-cols-12 bg-white border-b border-black">
-              <div className="col-span-1 p-2 border-r border-gray-black font-bold ">
+              <div className="col-span-1 p-2 border-r border-black font-bold ">
                 {category.id}
               </div>
-              <div className="col-span-9 p-2 border-r border-gray-black font-bold ">
+              <div className="col-span-9 p-2 border-r border-black font-bold ">
                 {category.title}
               </div>
               {/* <div className="col-span-2 p-2 font-bold text-right ">{category.subtotal.toFixed(2)}</div> */}

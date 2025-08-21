@@ -464,6 +464,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const printRef = React.useRef(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+  const projectId = stepByStepData?.projectIdCode;
+  console.log(projectId, "=====================id")
   const allTempate = stepByStepData.actionSelection;
   const dataAllFIled = stepByStepData.aiInputData;
   const subCategoryData = stepByStepData.subcategory;
@@ -835,7 +837,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <button
                     className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                     onClick={() => {
-                      setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ")
+                      setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_23")
                       setIsModalOpen(true);
                     }}
                   >
@@ -1025,7 +1027,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <button
                     className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                     onClick={() => {
-                      setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_")
+                      setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53")
                       setIsModalOpen(true);
                     }}
                   >
@@ -1496,7 +1498,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {/* file 2======= */}
               {selected === "Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020" && <F2D1 />}
               {selected === "ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ" && <F2D2 />}
-              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && <F2D3 />}
+              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_23" && <F2D3 />}
               {/* energy-systems  */}
               {/* file 3======== */}
               {selected === "ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ" && <F3D1 />}
@@ -1517,7 +1519,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {/* file 5======== */}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && <F5D1 />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ" && <F5D2 />}
-              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && <F5D3 />}
+              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53" && <F5D3 />}
               {/* file 6======== */}
               {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ" && <F6D1 />}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ" && <F6D2 />}

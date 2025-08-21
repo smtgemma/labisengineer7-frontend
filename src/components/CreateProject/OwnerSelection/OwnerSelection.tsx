@@ -213,7 +213,7 @@ const OwnerSelection = () => {
 
       {/* Owners Grid */}
 
-      {isOwner.length === 0 && (
+      {isOwner?.length === 0 && (
         <div className="flex justify-center w-full mt-20">
           <div className="border border-dashed p-20 border-blue-500 rounded-xl">
             <h2 className="text-xl">
@@ -229,7 +229,7 @@ const OwnerSelection = () => {
             key={index}
             className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
     ${
-      selectedOwners.some(
+      selectedOwners?.some(
         (o) => o.tax_identification_number === owner.tax_identification_number
       )
         ? "border-blue-600 bg-blue-50 shadow-md"
