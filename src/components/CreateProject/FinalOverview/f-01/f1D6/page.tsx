@@ -1,6 +1,35 @@
-import React from 'react';
+interface allDataProps {
+  owner_address : string;
+  owner_afm : string;
+  owner_birth_date : string;
+  owner_birth_place : string;
+  owner_city : string;
+  owner_email : string;
+  owner_father_name : string;
+  owner_mother_name : string;
+  owner_name : string;
+  owner_phone : string;
+  owner_postal_code : string;
+  owner_surname : string;
+  ydom_name : string;
+}
 
-function F1D6() {
+function F1D6({ allData }: any) {
+  console.log(allData?.owner_name)
+  const { owner_address,
+    owner_afm,
+    owner_birth_date,
+    owner_birth_place,
+    owner_city,
+    owner_email,
+    owner_father_name,
+    owner_mother_name,
+    owner_name,
+    owner_phone,
+    owner_postal_code,
+    owner_surname,
+    ydom_name
+  } : allDataProps = allData
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white">
       {/* Header with coat of arms */}
@@ -29,7 +58,7 @@ function F1D6() {
         <div className="border-b border-gray-400 bg-gray-50">
           <div className="flex">
             <div className="w-24 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-            <div className="flex-1 p-2  font-bold">YDOM</div>
+            <div className="flex-1 p-2  font-bold">{ydom_name || "N/A"}</div>
           </div>
         </div>
 
@@ -37,9 +66,9 @@ function F1D6() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-            <div className="w-40 p-2 border-r border-gray-400  font-bold">Name Owner</div>
+            <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner_name || "N/A"}</div>
             <div className="w-32 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-            <div className="flex-1 p-2 0 font-bold">Surname Owner</div>
+            <div className="flex-1 p-2 0 font-bold">{owner_surname || "N/A"}</div>
           </div>
         </div>
 
@@ -47,7 +76,7 @@ function F1D6() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-            <div className="flex-1 p-2 font-bold">Fathers name and surname Owner</div>
+            <div className="flex-1 p-2 font-bold">{owner_father_name || "N/A"}</div>
           </div>
         </div>
 
@@ -55,7 +84,7 @@ function F1D6() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-            <div className="flex-1 p-2 font-bold">Mothers name and surname Owner</div>
+            <div className="flex-1 p-2 font-bold">{owner_mother_name || "N/A"}</div>
           </div>
         </div>
 
@@ -63,7 +92,7 @@ function F1D6() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-            <div className="flex-1 p-2 font-bold">Born date Owner</div>
+            <div className="flex-1 p-2 font-bold">{owner_birth_date || "N/A"}</div>
           </div>
         </div>
 
@@ -71,7 +100,7 @@ function F1D6() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-            <div className="flex-1 p-2 font-bold">Born Town owner</div>
+            <div className="flex-1 p-2 font-bold">{owner_birth_place || "N/A"}</div>
           </div>
         </div>
 
@@ -81,7 +110,7 @@ function F1D6() {
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
             <div className="w-32 p-2 border-r border-gray-400 font-bold">ID</div>
             <div className="w-24 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-            <div className="flex-1 p-2 font-bold">mobile</div>
+            <div className="flex-1 p-2 font-bold">{owner_phone || "N/A"}</div>
           </div>
         </div>
 
@@ -89,13 +118,13 @@ function F1D6() {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-            <div className="w-32 p-2 border-r border-gray-400 font-bold">Town</div>
+            <div className="w-32 p-2 border-r border-gray-400 font-bold">{owner_city || "N/A"}</div>
             <div className="w-24 p-2 border-r border-gray-400 text-sm">Οδός</div>
-            <div className="w-40 p-2 border-r border-gray-400 font-bold">Address</div>
+            <div className="w-40 p-2 border-r border-gray-400 font-bold">{owner_address || "N/A"}</div>
             <div className="w-24 p-2 border-r border-gray-400 text-sm">Αριθ</div>
             <div className="w-28 p-2 border-r border-gray-400 font-bold">Number</div>
             <div className="w-16 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-            <div className="flex-1 p-2 font-bold">postal code</div>
+            <div className="flex-1 p-2 font-bold">{owner_postal_code || "N/A"}</div>
           </div>
         </div>
 
@@ -111,7 +140,7 @@ function F1D6() {
                 <div>ίου (Email):</div>
               </div>
             </div>
-            <div className="w-32 p-2 ">email owner</div>
+            <div className=" p-2 underline">{owner_email || "N/A"}</div>
           </div>
         </div>
 
@@ -133,7 +162,7 @@ function F1D6() {
 
           <p className="mb-4">
             ως κύριος/ιδιοκτήτης του ακινήτου που βρίσκεται επί της οδού ([Address, Number, Town, Postal code], αναθέτω στον/στην Διπλωματούχο Μηχανικό <span className='font-bold'>
-                ( Engineers Surname  ,  Engineer's Name, Specialty Engineer AM TEE)
+              ( Engineers Surname  ,  Engineer's Name, Specialty Engineer AM TEE)
             </span>
           </p>
 
@@ -144,7 +173,7 @@ function F1D6() {
         {/* Additional disclaimer text */}
         <div className="p-4 text-sm ">
           <p className="">
-          τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       
+            τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:
           </p>
           <p>
             ●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.

@@ -388,7 +388,7 @@ import F3D3 from "./f-03/f3D3/page";
 import F3D4 from "./f-03/f3D4/page";
 import F3D5 from "./f-03/f3D5/page";
 import F3D6 from "./f-03/f3D6/page";
-import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
+// import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
 import F4D1 from "./f-04/f4D1/page";
 import F4D2 from "./f-04/f4D2/page";
 import F4D3 from "./f-04/f4D3/page";
@@ -437,7 +437,12 @@ import F14D2 from "./f-14/f14D2/page";
 import F14D3 from "./f-14/f14D3/page";
 import F15D1 from "./f-15/f15D1/page";
 
-// import F1D1 from "./f-01/f1d1/page";
+import { useGetOwnerTemplateQuery } from "@/redux/features/templates/allTemplateSlice";
+import F1D1 from "./f-01/f1d1/page";
+import F1D2 from "./f-01/f1d2/page";
+import F1D3 from "./f-01/f1d3/page";
+// import F1D2 from "./f-01/f1D2/page";
+// import F1D3 from "./f-01/f1D3/page";
 
 interface Owner {
   id: string;
@@ -468,9 +473,17 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allTempate = stepByStepData.actionSelection;
   const dataAllFIled = stepByStepData.aiInputData;
   const subCategoryData = stepByStepData.subcategory;
-  const projectId = stepByStepData?.projectIdCode;
+  const id = stepByStepData?.projectIdCode;
+  const ownerId = id?.result?.project?.id;
 
-  console.log(projectId, "==================------------------");
+  const { data: ownerData } = useGetOwnerTemplateQuery(ownerId);
+  console.log(ownerData?.data, "===============================");
+  const allData = ownerData?.data;
+
+  console.log(ownerId, "projectId");
+  // const { owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city, owner_email, owner_father_name, owner_mother_name, owner_name, owner_phone, owner_postal_code, owner_surname, ydom_name,
+  // } = ownerData?.data
+  // console.log(owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city)
 
   const buildingMods = subCategoryData["building-modifications"] || [];
   const energy = subCategoryData["energy-systems"] || [];
@@ -481,11 +494,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const small = subCategoryData["small-construction"] || [];
 
   const store = makeStore();
-
-  console.log(allTempate, "stepByStepData>>>>>>");
-  const { data, isLoading } = useGetTemplateDataQuery("un");
-  const ydomName = data?.data;
-  console.log("ydomName?", ydomName);
 
   const { owners } = dataAllFIled;
 
@@ -508,33 +516,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   // modal close click outside
   const modalContentRef = useRef<HTMLDivElement>(null);
-  // const {} = subCategories
-  // const openPreview = () => {
-  //   const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
-  //   const newTab = window.open("", "_blank");
-  //   if (newTab) {
-  //     newTab.document.write(`
-  //       <html>
-  //         <head>
-  //           <title>DOCX Preview</title>
-  //            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  //         <style>
-  //           <style>
-  //             body { font-family: Arial, sans-serif; padding: 2rem; }
-  //             h1, h2, h3 { color: #2563eb; }
-  //             p { line-height: 1.6; }
-  //           </style>
-  //         </head>
-  //         <body>
-  //           <div class="word-container">
-  //             ${htmlContent}
-  //           </div>
-  //         </body>
-  //       </html>
-  //     `);
-  //     newTab.document.close();
-  //   }
-  // };
 
   // ✅ 2. DOWNLOAD CSV FILE
   const downloadCSV = () => {
@@ -550,10 +531,12 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
+    { name: "F1D2", component: <F1D2 /> },
+    { name: "F1D3", component: <F1D3 /> },
 
     {
       name: "ProjectDescriptionSix",
-      component: <FileOneDesignEleven ydomName={ydomName} />,
+      component: <FileOneDesignEleven />,
     },
   ];
 
@@ -585,53 +568,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save("examplepdf.pdf");
   };
-
-  //pdf file dowload zip funciton working
-  // const handleZipDownload = async () => {
-  //   const files: { name: string; lastModified: Date; input: Blob }[] = [];
-
-  //   for (let t of templates) {
-  //     // const html = ReactDOMServer.renderToStaticMarkup(t.component);
-
-  //     // Wrap the component in Provider
-  //     const html = ReactDOMServer.renderToStaticMarkup(
-  //       <Provider store={store}>{t.component}</Provider>
-  //     );
-  //     const container = document.createElement("div");
-  //     container.innerHTML = html;
-  //     container.style.width = "794px";
-  //     container.style.background = "#fff";
-  //     document.body.appendChild(container);
-
-  //     const canvas = await html2canvas(container, { scale: 2 });
-  //     const imgData = canvas.toDataURL("image/png");
-
-  //     const pdf = new jsPDF({
-  //       orientation: "portrait",
-  //       unit: "px",
-  //       format: "a4",
-  //     });
-  //     const imgProps = pdf.getImageProperties(imgData);
-  //     const pdfWidth = pdf.internal.pageSize.getWidth();
-  //     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-  //     pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-  //     const pdfBlob = pdf.output("blob");
-
-  //     files.push({
-  //       name: `${t.name}.pdf`,
-  //       lastModified: new Date(),
-  //       input: pdfBlob,
-  //     });
-
-  //     document.body.removeChild(container);
-  //   }
-
-  //   // Create ZIP in browser
-  //   const zipBlob = await downloadZip(files).blob();
-  //   saveAs(zipBlob, "templates.zip");
-  // };
 
   const handleZipDownload = async () => {
     const files = await Promise.all(
@@ -809,6 +745,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 >
                   ΣΑΥ_ΦΑΥ
                 </button>
+
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
@@ -827,8 +764,31 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 >
                   ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ
                 </button>
+
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_16");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ
+                </button>
+
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
+                  onClick={() => {
+                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ
+                </button>
+
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
                   onClick={() => {
                     setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ");
                     setIsModalOpen(true);
@@ -836,6 +796,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 >
                   ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ
                 </button>
+
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
@@ -879,7 +840,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ");
+                    setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_23");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1076,7 +1037,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_");
+                    setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1556,14 +1517,16 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΣΑΥ_ΦΑΥ" && <F1D3 />}
               {selected === "ΣΔΑ ΕΡΓΟΥ" && <F1D4 />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && <F1D5 />}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <F1D6 />}
+              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_16" && (
+                <F1D6 allData={allData} />
+              )}
               {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <F1D7 />}
               {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <F1D8 />}
               {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <F1D9 />}
               {/* file 2======= */}
               {selected === "Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020" && <F2D1 />}
               {selected === "ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ" && <F2D2 />}
-              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && <F2D3 />}
+              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_23" && <F2D3 />}
               {/* energy-systems  */}
               {/* file 3======== */}
               {selected === "ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ" && <F3D1 />}
@@ -1593,7 +1556,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {/* file 5======== */}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && <F5D1 />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ" && <F5D2 />}
-              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && <F5D3 />}
+              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53" && (
+                <F5D3 />
+              )}
               {/* file 6======== */}
               {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ" && <F6D1 />}
               {selected ===

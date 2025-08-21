@@ -41,7 +41,7 @@ export default function F1D4() {
                 onChange={(e) =>
                   handleInputChange("projectDescription", e.target.value)
                 }
-                className="w-full p-3 border-1 border-black bg-gray-100 text-black text-base"
+                className="w-full p-3 border-1 border-black bg-white text-black text-base"
                 style={{ minHeight: "48px" }}
               />
             </div>
@@ -77,7 +77,7 @@ export default function F1D4() {
                 onChange={(e) =>
                   handleInputChange("submissionDate", e.target.value)
                 }
-                className="w-full p-3 border-1 border-black bg-gray-100 text-black text-base"
+                className="w-full p-3 border-1 border-black bg-white text-black text-base"
                 style={{ minHeight: "48px" }}
               />
             </div>
