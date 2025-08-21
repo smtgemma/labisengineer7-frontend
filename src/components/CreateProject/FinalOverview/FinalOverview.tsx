@@ -436,16 +436,10 @@ import F14D1 from "./f-14/f14D1/page";
 import F14D2 from "./f-14/f14D2/page";
 import F14D3 from "./f-14/f14D3/page";
 import F15D1 from "./f-15/f15D1/page";
-<<<<<<< HEAD
 import F1D2 from "./f-01/f1D2/page";
 import F1D3 from "./f-01/f1D3/page";
 import F1D1 from "./f-01/f1D1/page";
 import { useGetOwnerTemplateQuery } from "@/redux/features/templates/allTemplateSlice";
-=======
-import F1D2 from "./f-01/f1d2/page";
-import F1D3 from "./f-01/f1d3/page";
-import F1D1 from "./f-01/f1d1/page";
->>>>>>> 86e7bd473b4be467baa9dc7d73adc8a82df93261
 
 interface Owner {
   id: string;
