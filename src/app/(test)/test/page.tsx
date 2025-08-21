@@ -4,7 +4,7 @@ import F1D2 from "@/components/CreateProject/FinalOverview/f-01/f1D2/page"
 import F1D3 from "@/components/CreateProject/FinalOverview/f-01/f1D3/page"
 import F1D4 from "@/components/CreateProject/FinalOverview/f-01/f1D4/page"
 import F1D5 from "@/components/CreateProject/FinalOverview/f-01/f1D5/page"
-import F1D6 from "@/components/CreateProject/FinalOverview/f-01/f1D6/page"
+// import F1D6 from "@/components/CreateProject/FinalOverview/f-01/f1D6/page"
 import F1D7 from "@/components/CreateProject/FinalOverview/f-01/f1D7/page"
 import F1D8 from "@/components/CreateProject/FinalOverview/f-01/f1D8/page"
 import F1D9 from "@/components/CreateProject/FinalOverview/f-01/f1D9/page"
@@ -79,10 +79,10 @@ function test() {
       {/* <F1D3/> */}
       {/* <F1D4/> */}
       {/* <F1D5/> */}
-      <F1D6/>
-      <F1D7/>
-      <F1D8/>
-      <F1D9/>
+      {/* <F1D6/> */}
+      {/* <F1D7/> */}
+      {/* <F1D8/> */}
+      {/* <F1D9/> */}
 
       {/* file two===  */}
       {/* <F2D1/> */}
