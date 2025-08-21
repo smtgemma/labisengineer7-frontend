@@ -33,7 +33,7 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   const Law = files[3];
 
   // ai data extract
-  dispatch(setImageFile(files) || []);
+  dispatch(setImageFile(files || []));
   const startExtraction = async () => {
     if (files.length === 0) return;
     setIsProcessing(true);
@@ -49,7 +49,9 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
 
     formData.append(
       "project_descriptions",
-      JSON.stringify(["ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ..."])
+      JSON.stringify(
+        "ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ A-4 ΤΟΥ Α' ΟΡΟΦΟΥ"
+      )
     );
     formData.append("sub_categories", "sdfasdasd");
 

@@ -14,7 +14,6 @@ export default function FileOneDesignEleven({ ydomName }: any) {
     ydom_name,
     owner_mother_name,
   } = ydomName || {};
-
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
       {/* Header with coat of arms */}

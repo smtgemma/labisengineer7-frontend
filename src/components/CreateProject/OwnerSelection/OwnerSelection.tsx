@@ -213,7 +213,7 @@ const OwnerSelection = () => {
 
       {/* Owners Grid */}
 
-      {isOwner.length === 0 && (
+      {isOwner?.length === 0 && (
         <div className="flex justify-center w-full mt-20">
           <div className="border border-dashed p-20 border-blue-500 rounded-xl">
             <h2 className="text-xl">

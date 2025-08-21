@@ -37,10 +37,11 @@ export default function SigninForm() {
       console.log(response);
       if (response?.success) {
         localStorage.setItem("accessToken", response?.data?.accessToken);
-        console.log(response?.data?.user?.role);
+        console.log(response?.data?.userData?.role);
         dispath(setUserData(response?.data?.userData));
+
         toast.success(response?.message);
-        if (response?.data?.user?.role === "SUPER_ADMIN") {
+        if (response?.data?.userData?.role === "SUPER_ADMIN") {
           router.push("/admin");
         } else {
           router.push("/new-project");

@@ -32,6 +32,48 @@ const adminUserApi = baseUrlApi.injectEndpoints({
         },
       }),
     }),
+
+    // delete account
+    getAllUserDashboard: build.query({
+      query: (token) => ({
+        url: `/ai/dashboard`,
+        method: "get",
+        headers: {
+          Authorization: `${token}`,
+        },
+      }),
+    }),
+
+    // submit logs account
+    getAllsubmissionLogs: build.query({
+      query: (token) => ({
+        url: `/ai/logs`,
+        method: "get",
+        headers: {
+          Authorization: `${token}`,
+        },
+      }),
+    }),
+
+    getMyDocumentPoint: build.query({
+      query: (token) => ({
+        url: `/services/`,
+        method: "get",
+        headers: {
+          Authorization: `${token}`,
+        },
+      }),
+    }),
+
+    getMetricsData: build.query({
+      query: (token) => ({
+        url: `/ai/usage-graph`,
+        method: "get",
+        headers: {
+          Authorization: `${token}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -39,4 +81,8 @@ export const {
   useGetAllUserStatusQuery,
   useUserStatusChangeMutation,
   useUserDeleteMutation,
+  useGetAllUserDashboardQuery,
+  useGetMyDocumentPointQuery,
+  useGetAllsubmissionLogsQuery,
+  useGetMetricsDataQuery,
 } = adminUserApi;

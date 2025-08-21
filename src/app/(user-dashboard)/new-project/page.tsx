@@ -8,10 +8,8 @@ import React from "react";
 
 export default function NewProject() {
   const token = tokenCatch();
-  console.log(token);
 
   const { data, isLoading } = useGetTheServiceQuery(token);
-
   if (isLoading) {
     return <Loading />;
   }
@@ -30,7 +28,7 @@ export default function NewProject() {
           <ProjectCard
             title={project.serviceName}
             description={project.serviceDescription}
-            id={project.createdById}
+            id={project.id}
             key={idx}
           />
         ))}
