@@ -21,5 +21,5 @@ const serviceApi = baseUrlApi.injectEndpoints({
   }),
 });
 
-export const { useCreateServicePostMutation, useGetTemplateDataQuery } =
+export const { useCreateServicePostMutation } =
   serviceApi;

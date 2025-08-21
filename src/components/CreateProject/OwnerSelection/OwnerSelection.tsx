@@ -229,7 +229,7 @@ const OwnerSelection = () => {
             key={index}
             className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
     ${
-      selectedOwners.some(
+      selectedOwners?.some(
         (o) => o.tax_identification_number === owner.tax_identification_number
       )
         ? "border-blue-600 bg-blue-50 shadow-md"
