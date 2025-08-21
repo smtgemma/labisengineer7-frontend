@@ -474,7 +474,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const ownerId = id?.result?.project?.id
   const { data: ownerData } = useGetOwnerTemplateQuery(ownerId)
   const { owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city, owner_email, owner_father_name, owner_mother_name, owner_name, owner_phone, owner_postal_code, owner_surname, ydom_name,
-  } = ownerData.data
+  } = ownerData?.data
   console.log(owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city)
 
   const buildingMods = subCategoryData["building-modifications"] || [];
