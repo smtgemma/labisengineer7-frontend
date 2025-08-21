@@ -7,6 +7,7 @@ import { RootState } from "@/redux/store";
 import { useGetSignleProjectQuery } from "@/redux/features/projectService/projectServiceSlice";
 import tokenCatch from "@/lib/token";
 import Loading from "@/components/Others/Loading";
+import moment from "moment";
 
 interface ProjectDetailsProps {
   className?: string;
@@ -40,7 +41,7 @@ const ProjectDetails = () => {
                     Project Title:
                   </span>
                   <span className="text-base text-gray-700">
-                    Residential Renovation Permit
+                    {signleData?.service?.serviceName}
                   </span>
                 </div>
                 <div className="space-x-3">
@@ -48,21 +49,23 @@ const ProjectDetails = () => {
                     Type:
                   </span>
                   <span className="text-base text-gray-700">
-                    e-Aubas - Building Permit
+                    {signleData?.type || "N/A"}
                   </span>
                 </div>
                 <div className="space-x-3">
                   <span className="text-base font-semibold text-black">
                     Created On:
                   </span>
-                  <span className="text-base text-gray-700">2025-05-12</span>
+                  <span className="text-base text-gray-700">
+                    {signleData?.updatedAt}
+                  </span>
                 </div>
                 <div className="space-x-3">
                   <span className="text-base font-semibold text-black">
                     Status:
                   </span>
-                  <span className="text-base text-orange-500 font-medium">
-                    In Progress
+                  <span className="text-base text-green-500 font-medium">
+                    success
                   </span>
                 </div>
               </div>
@@ -125,27 +128,34 @@ const ProjectDetails = () => {
                   <span className="text-base font-semibold text-black">
                     Owner Name:
                   </span>
-                  <span className="text-base text-gray-700">Softur Rohman</span>
+                  <span className="text-base text-gray-700">
+                    {signleData?.owners[0].firstName}{" "}
+                    {signleData?.owners[0].lastName}
+                  </span>
                 </div>
                 <div className="space-x-3">
                   <span className="text-base font-semibold text-black">
                     KAEK:
                   </span>
                   <span className="text-base text-gray-700">
-                    050-023-000-678
+                    {signleData?.owners[0].cadastralCode}
                   </span>
                 </div>
                 <div className="space-x-3">
                   <span className="text-base font-semibold text-black">
                     Property Usage:
                   </span>
-                  <span className="text-base text-gray-700">Residential</span>
+                  <span className="text-base text-gray-700">
+                    {signleData?.type || "N/A"}
+                  </span>
                 </div>
                 <div className="space-x-3">
                   <span className="text-base font-semibold text-black">
                     Permit Number:
                   </span>
-                  <span className="text-base text-gray-700">A-5406</span>
+                  <span className="text-base text-gray-700">
+                    {signleData?.protocolNumber}
+                  </span>
                 </div>
                 <div className="space-x-3">
                   <span className="text-base font-semibold text-black">
@@ -157,14 +167,16 @@ const ProjectDetails = () => {
                   <span className="text-base font-semibold text-black">
                     Municipality:
                   </span>
-                  <span className="text-base text-gray-700">Thessaloniki</span>
+                  <span className="text-base text-gray-700">
+                    {signleData?.municipal}
+                  </span>
                 </div>
                 <div className="space-x-3">
                   <span className="text-base font-semibold text-black">
                     Region:
                   </span>
                   <span className="text-base text-gray-700">
-                    Central Macedonia
+                    {signleData?.region}
                   </span>
                 </div>
               </div>
@@ -208,32 +220,41 @@ const ProjectDetails = () => {
                   <span className="text-base font-semibold text-black">
                     Project created:
                   </span>
-                  <span className="text-base text-gray-700">2025-05-12</span>
+                  <span className="text-base text-gray-700">
+                    {moment(signleData?.updatedAt).format("ll")}
+                  </span>
                 </div>
                 <div className="space-x-3">
                   <span className="text-base font-semibold text-black">
                     Files uploaded:
                   </span>
-                  <span className="text-base text-gray-700">2025-05-13</span>
+                  <span className="text-base text-gray-700">
+                    {" "}
+                    {moment(signleData?.updatedAt).format("ll")}
+                  </span>
                 </div>
                 <div className="space-x-3">
                   <span className="text-base font-semibold text-black">
                     Data extracted:
                   </span>
-                  <span className="text-base text-gray-700">2025-05-14</span>
+                  <span className="text-base text-gray-700">
+                    {moment(signleData?.updatedAt).format("ll")}
+                  </span>
                 </div>
                 <div className="space-x-3">
                   <span className="text-base font-semibold text-black">
                     Documents generated:
                   </span>
-                  <span className="text-base text-gray-700">2025-05-15</span>
+                  <span className="text-base text-gray-700">
+                    {moment(signleData?.updatedAt).format("ll")}
+                  </span>
                 </div>
-                <div className="space-x-3">
+                {/* <div className="space-x-3">
                   <span className="text-base font-semibold text-black">
                     CSV exported:
                   </span>
                   <span className="text-base text-gray-700">2025-05-16</span>
-                </div>
+                </div> */}
               </div>
             </div>
 
