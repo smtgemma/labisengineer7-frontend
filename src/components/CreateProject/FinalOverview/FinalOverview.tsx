@@ -388,7 +388,7 @@ import F3D3 from "./f-03/f3D3/page";
 import F3D4 from "./f-03/f3D4/page";
 import F3D5 from "./f-03/f3D5/page";
 import F3D6 from "./f-03/f3D6/page";
-import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
+// import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
 import F4D1 from "./f-04/f4D1/page";
 import F4D2 from "./f-04/f4D2/page";
 import F4D3 from "./f-04/f4D3/page";
@@ -472,10 +472,15 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const subCategoryData = stepByStepData.subcategory;
   const id = stepByStepData?.projectIdCode;
   const ownerId = id?.result?.project?.id
+
   const { data: ownerData } = useGetOwnerTemplateQuery(ownerId)
-  const { owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city, owner_email, owner_father_name, owner_mother_name, owner_name, owner_phone, owner_postal_code, owner_surname, ydom_name,
-  } = ownerData?.data
-  console.log(owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city)
+  console.log(ownerData?.data, "===============================")
+  const allData = ownerData?.data
+
+  console.log(ownerId, "projectId")
+  // const { owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city, owner_email, owner_father_name, owner_mother_name, owner_name, owner_phone, owner_postal_code, owner_surname, ydom_name,
+  // } = ownerData?.data
+  // console.log(owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city)
 
   const buildingMods = subCategoryData["building-modifications"] || [];
   const energy = subCategoryData["energy-systems"] || [];
@@ -487,10 +492,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const store = makeStore();
 
-  console.log(allTempate, "stepByStepData>>>>>>");
-  const { data, isLoading } = useGetTemplateDataQuery("un");
-  const ydomName = data?.data;
-  console.log("ydomName?", ydomName);
+  // console.log(allTempate, "stepByStepData>>>>>>");
+  // const { data, isLoading } = useGetTemplateDataQuery("un");
+  // const ydomName = data?.data;
+  // console.log("ydomName?", ydomName);
 
   const { owners } = dataAllFIled;
 
@@ -533,7 +538,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     { name: "F1D3", component: <F1D3 /> },
     {
       name: "ProjectDescriptionSix",
-      component: <FileOneDesignEleven ydomName={ydomName} />,
+      component: <FileOneDesignEleven />,
     },
   ];
 
@@ -742,6 +747,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 >
                   ΣΑΥ_ΦΑΥ
                 </button>
+
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
@@ -760,8 +766,31 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 >
                   ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ
                 </button>
+
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_16");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ
+                </button>
+
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
+                  onClick={() => {
+                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ
+                </button>
+
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
                   onClick={() => {
                     setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ");
                     setIsModalOpen(true);
@@ -769,6 +798,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 >
                   ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ
                 </button>
+
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
@@ -1473,8 +1503,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΣΑΥ_ΦΑΥ" && <F1D3 />}
               {selected === "ΣΔΑ ΕΡΓΟΥ" && <F1D4 />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && <F1D5 />}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <F1D6 />}
-              {/* {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (<F1D6 owner_address={owner_address || "N/A"} owner_afm={owner_afm || "N/A"} owner_birth_date={owner_birth_date || "N/A"} owner_birth_place={owner_birth_place || "N/A"} owner_city={owner_city || "N/A"} owner_email={owner_email} owner_father_name={owner_father_name || "N/A"} owner_mother_name={owner_mother_name || "N/A"} owner_name={owner_name || "N/A"} owner_phone={owner_phone || "N/A"} owner_postal_code={owner_postal_code || "N/A"} owner_surname={owner_surname || "N/A"} ydom_name={ydom_name || "N/A"}/>)} */}
+              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_16" && <F1D6 allData={allData} />}
               {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <F1D7 />}
               {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <F1D8 />}
               {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <F1D9 />}

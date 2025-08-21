@@ -2,9 +2,9 @@ import { baseUrlApi } from "@/redux/api/baseUrlApi";
 
 const allTemplatesApi = baseUrlApi.injectEndpoints({
   endpoints: (build) => ({
-    getOwnerTemplate: build.query<any, string>({   
-      query: (id) => ({
-        url: `/projects/${id}/templete-two`,    
+    getOwnerTemplate: build.query({
+      query: (ownerId) => ({
+        url: `/projects/${ownerId}/templete-two`,
         method: "GET",
       }),
     }),
@@ -12,3 +12,4 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
 });
 
 export const { useGetOwnerTemplateQuery } = allTemplatesApi;
+
