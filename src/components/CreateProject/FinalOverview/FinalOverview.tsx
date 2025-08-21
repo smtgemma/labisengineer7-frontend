@@ -474,7 +474,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const ownerId = id?.result?.project?.id
   const { data: ownerData } = useGetOwnerTemplateQuery(ownerId)
   const { owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city, owner_email, owner_father_name, owner_mother_name, owner_name, owner_phone, owner_postal_code, owner_surname, ydom_name,
-  } = ownerData
+  } = ownerData.data
+  console.log(owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city)
 
   const buildingMods = subCategoryData["building-modifications"] || [];
   const energy = subCategoryData["energy-systems"] || [];
@@ -1473,7 +1474,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΣΑΥ_ΦΑΥ" && <F1D3 />}
               {selected === "ΣΔΑ ΕΡΓΟΥ" && <F1D4 />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && <F1D5 />}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (<F1D6 owner_address={owner_address || "N/A"} owner_afm={owner_afm || "N/A"} owner_birth_date={owner_birth_date || "N/A"} owner_birth_place={owner_birth_place || "N/A"} owner_city={owner_city || "N/A"} owner_email={owner_email} owner_father_name={owner_father_name || "N/A"} owner_mother_name={owner_mother_name || "N/A"} owner_name={owner_name || "N/A"} owner_phone={owner_phone || "N/A"} owner_postal_code={owner_postal_code || "N/A"} owner_surname={owner_surname || "N/A"} ydom_name={ydom_name || "N/A"}/>)}
+              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <F1D6 />}
+              {/* {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (<F1D6 owner_address={owner_address || "N/A"} owner_afm={owner_afm || "N/A"} owner_birth_date={owner_birth_date || "N/A"} owner_birth_place={owner_birth_place || "N/A"} owner_city={owner_city || "N/A"} owner_email={owner_email} owner_father_name={owner_father_name || "N/A"} owner_mother_name={owner_mother_name || "N/A"} owner_name={owner_name || "N/A"} owner_phone={owner_phone || "N/A"} owner_postal_code={owner_postal_code || "N/A"} owner_surname={owner_surname || "N/A"} ydom_name={ydom_name || "N/A"}/>)} */}
               {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <F1D7 />}
               {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <F1D8 />}
               {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <F1D9 />}

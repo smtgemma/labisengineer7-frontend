@@ -1,37 +1,9 @@
-type F1D6Props = {
-  owner_address: string;
-  owner_afm: string;
-  owner_birth_date: string;
-  owner_birth_place: string;
-  owner_city: string;
-  owner_email: string;
-  owner_father_name: string;
-  owner_mother_name: string;
-  owner_name: string;
-  owner_phone: string;
-  owner_postal_code: string;
-  owner_surname: string;
-  ydom_name: string;
-};
+import React from 'react';
 
-function F1D6({
-  owner_address,
-  owner_afm,
-  owner_birth_date,
-  owner_birth_place,
-  owner_city,
-  owner_email,
-  owner_father_name,
-  owner_mother_name,
-  owner_name,
-  owner_phone,
-  owner_postal_code,
-  owner_surname,
-  ydom_name,
-}: F1D6Props) {
+function F1D6() {
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white">
-      {/* Header */}
+      {/* Header with coat of arms */}
       <div className="text-center mb-6">
         <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
           <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
@@ -57,17 +29,17 @@ function F1D6({
         <div className="border-b border-gray-400 bg-gray-50">
           <div className="flex">
             <div className="w-24 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-            <div className="flex-1 p-2 font-bold">{ydom_name}</div>
+            <div className="flex-1 p-2  font-bold">YDOM</div>
           </div>
         </div>
 
-        {/* Name row */}
+        {/* Name Owner row */}
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-            <div className="w-40 p-2 border-r border-gray-400 font-bold">{owner_name}</div>
+            <div className="w-40 p-2 border-r border-gray-400  font-bold">Name Owner</div>
             <div className="w-32 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-            <div className="flex-1 p-2 font-bold">{owner_surname}</div>
+            <div className="flex-1 p-2 0 font-bold">Surname Owner</div>
           </div>
         </div>
 
@@ -75,7 +47,7 @@ function F1D6({
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-            <div className="flex-1 p-2 font-bold">{owner_father_name}</div>
+            <div className="flex-1 p-2 font-bold">Fathers name and surname Owner</div>
           </div>
         </div>
 
@@ -83,7 +55,7 @@ function F1D6({
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-            <div className="flex-1 p-2 font-bold">{owner_mother_name}</div>
+            <div className="flex-1 p-2 font-bold">Mothers name and surname Owner</div>
           </div>
         </div>
 
@@ -91,15 +63,25 @@ function F1D6({
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-            <div className="flex-1 p-2 font-bold">{owner_birth_date}</div>
+            <div className="flex-1 p-2 font-bold">Born date Owner</div>
           </div>
         </div>
 
-        {/* Birth place row */}
+        {/* Birth town row */}
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-            <div className="flex-1 p-2 font-bold">{owner_birth_place}</div>
+            <div className="flex-1 p-2 font-bold">Born Town owner</div>
+          </div>
+        </div>
+
+        {/* ID and mobile row */}
+        <div className="border-b border-gray-400">
+          <div className="flex">
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
+            <div className="w-32 p-2 border-r border-gray-400 font-bold">ID</div>
+            <div className="w-24 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
+            <div className="flex-1 p-2 font-bold">mobile</div>
           </div>
         </div>
 
@@ -107,24 +89,88 @@ function F1D6({
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-            <div className="flex-1 p-2 font-bold">{owner_address}</div>
+            <div className="w-32 p-2 border-r border-gray-400 font-bold">Town</div>
+            <div className="w-24 p-2 border-r border-gray-400 text-sm">Οδός</div>
+            <div className="w-40 p-2 border-r border-gray-400 font-bold">Address</div>
+            <div className="w-24 p-2 border-r border-gray-400 text-sm">Αριθ</div>
+            <div className="w-28 p-2 border-r border-gray-400 font-bold">Number</div>
+            <div className="w-16 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
+            <div className="flex-1 p-2 font-bold">postal code</div>
           </div>
         </div>
 
-        {/* Email & phone row */}
-        <div className="border-b border-gray-400 flex">
-          <div className="w-40 p-2 border-r border-gray-400 text-sm">Email</div>
-          <div className="flex-1 p-2 font-bold">{owner_email}</div>
-          <div className="w-32 p-2 border-l border-gray-400 text-sm">Τηλ.</div>
-          <div className="flex-1 p-2 font-bold">{owner_phone}</div>
+        {/* Contact details row */}
+        <div className="border-b border-gray-400">
+          <div className="flex">
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">Αρ. Τηλεομοιότυπου (Fax):</div>
+            <div className="flex-1 p-2">
+              <div className="text-sm">
+                <div>Δ/νση</div>
+                <div>Ηλεκτρ.</div>
+                <div>Ταχυδρομ</div>
+                <div>ίου (Email):</div>
+              </div>
+            </div>
+            <div className="w-32 p-2 ">email owner</div>
+          </div>
         </div>
 
         {/* VAT row */}
-        <div className="border-b border-gray-400 flex">
-          <div className="w-40 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.</div>
-          <div className="flex-1 p-2 font-bold">{owner_afm}</div>
-          <div className="w-40 p-2 border-l border-gray-400 text-sm">ΤΚ</div>
-          <div className="flex-1 p-2 font-bold">{owner_postal_code}</div>
+        <div className="border-b border-gray-400">
+          <div className="flex">
+            <div className="w-40 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
+            <div className="flex-1 p-2 font-bold">VAT owner</div>
+            <div className="w-40 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
+          </div>
+        </div>
+
+        {/* Declaration text */}
+        <div className="p-4 text-sm">
+          <p className="mb-4">
+            Με στοιχεία μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του
+            άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
+          </p>
+
+          <p className="mb-4">
+            ως κύριος/ιδιοκτήτης του ακινήτου που βρίσκεται επί της οδού ([Address, Number, Town, Postal code], αναθέτω στον/στην Διπλωματούχο Μηχανικό <span className='font-bold'>
+                ( Engineers Surname  ,  Engineer's Name, Specialty Engineer AM TEE)
+            </span>
+          </p>
+
+          <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
+          <p className=" font-bold mb-10 text-xl">PROJECT DESCRIPTION</p>
+        </div>
+
+        {/* Additional disclaimer text */}
+        <div className="p-4 text-sm ">
+          <p className="">
+          τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       
+          </p>
+          <p>
+            ●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.
+          </p>
+          <p>
+            ●Την κατάρτιση και υποβολή του φακέλου στην αρμόδια υπηρεσία (e-Άδειες / ΥΔΟΜ )
+          </p>
+          <p>
+            ●Τη συνεργασία με άλλους ειδικούς/μελετητές, όπου απαιτείται
+          </p>
+        </div>
+
+        {/* Signature section */}
+        <div className="">
+          <div className="flex justify-end p-4">
+            <div className="text-right space-y-2">
+              <div className="flex items-center gap-4">
+                <span className="text-sm">Ημερομηνία :</span>
+                <span className="text-sm font-medium">8/2/2025</span>
+              </div>
+              <div className="text-sm mt-8 text-center">
+                <div>( Υπογραφή )</div>
+                <div className="mt-4">Ο/Η Δηλώνουσα</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
