@@ -9,6 +9,7 @@ import {
   setAiExtractCatchData,
   setImageFile,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { div } from "framer-motion/client";
 
 interface AIExtractionProps {
   files: File[];
@@ -31,6 +32,21 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   const contract = files[1];
   const permit = files[2];
   const Law = files[3];
+
+  const [time, setTime] = useState(0); // start at 0
+
+  useEffect(() => {
+    if (time >= 120) return; // stop at 2 minutes
+
+    const timer = setInterval(() => {
+      setTime((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [time]);
+
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
 
   // ai data extract
   dispatch(setImageFile(files || []));
@@ -104,8 +120,18 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
       ) : isProcessing ? (
         <div className="space-y-8 min-h-[450px] flex flex-col justify-center items-center">
           {progress === 0 ? (
-            <div className="w-[300px]">
-              <Lottie animationData={aiLoadingExtract} loop={true} />
+            <div>
+              <div className="w-[300px]">
+                <Lottie animationData={aiLoadingExtract} loop={true} />
+              </div>
+              {/* timeer  */}
+              <div className="flex items-center justify-center text-black mt-10">
+                <div className="text-center">
+                  <p className="text-6xl mt-4 font-mono">
+                    {minutes}:{seconds.toString().padStart(2, "0")}
+                  </p>
+                </div>
+              </div>
             </div>
           ) : (
             <>

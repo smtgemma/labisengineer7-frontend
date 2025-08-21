@@ -10,17 +10,25 @@ import document from "@/assets/landing-page/document.jpg";
 
 export default function HowItWorks() {
   return (
-    <div id="works" className="bg-background pb-[100px]">
+    <div
+      data-aos="fade-up"
+      data-aos-anchor-placement="top-bottom"
+      id="works"
+      className="bg-background pb-[100px]"
+    >
       <h2 className="text-3xl md:text-5xl font-bold text-center  text-primary mb-12 pt-[100px]">
         How It Works
       </h2>
-      <RightViewCard
-        workImg={workImg}
-        stepNumber="Step 1"
-        title="Register or Log In"
-        description="Create a free account or log in to your existing one to access your personalized dashboard."
-        className="flex-col md:flex-row"
-      />
+      <div>
+        <RightViewCard
+          workImg={workImg}
+          stepNumber="Step 1"
+          title="Register or Log In"
+          description="Create a free account or log in to your existing one to access your personalized dashboard."
+          className="flex-col md:flex-row"
+        />
+      </div>
+
       <RightViewCard
         workImg={serviceType}
         stepNumber="Step- 2"

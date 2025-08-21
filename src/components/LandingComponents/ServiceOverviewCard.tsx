@@ -15,7 +15,11 @@ export default function ServiceOverviewCard({
   service: IService;
 }) {
   return (
-    <section className="bg-white rounded-xl  border border-gray-200 overflow-hidden flex flex-col md:flex-row max-w-[648px] mx-auto p-4">
+    <section
+      data-aos="fade-up"
+      data-aos-anchor-placement="top-bottom"
+      className="bg-white rounded-xl  border border-gray-200 overflow-hidden flex flex-col md:flex-row max-w-[648px] mx-auto p-4"
+    >
       {/* Image Section */}
       <div className="relative h-[210px] w-full md:w-[210px] md:h-auto flex-shrink-0">
         <Image

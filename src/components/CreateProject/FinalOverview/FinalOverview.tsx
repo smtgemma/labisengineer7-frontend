@@ -436,9 +436,8 @@ import F14D1 from "./f-14/f14D1/page";
 import F14D2 from "./f-14/f14D2/page";
 import F14D3 from "./f-14/f14D3/page";
 import F15D1 from "./f-15/f15D1/page";
-import F1D2 from "./f-01/f1d2/page";
-import F1D3 from "./f-01/f1d3/page";
-import F1D1 from "./f-01/f1d1/page";
+
+// import F1D1 from "./f-01/f1d1/page";
 
 interface Owner {
   id: string;
@@ -552,8 +551,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
 
-    { name: "F1D2", component: <F1D2 /> },
-    { name: "F1D3", component: <F1D3 /> },
     {
       name: "ProjectDescriptionSix",
       component: <FileOneDesignEleven ydomName={ydomName} />,

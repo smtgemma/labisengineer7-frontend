@@ -82,7 +82,7 @@ export default function SimpleTemplatesTable() {
 
           {/* Table Body */}
           <div className="divide-y divide-gray-200">
-            {allService.map((row: any) => (
+            {allService?.map((row: any) => (
               <div
                 key={row.id}
                 className="px-6 py-4 hover:bg-gray-50 transition-colors"
