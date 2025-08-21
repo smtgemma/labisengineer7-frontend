@@ -436,10 +436,13 @@ import F14D1 from "./f-14/f14D1/page";
 import F14D2 from "./f-14/f14D2/page";
 import F14D3 from "./f-14/f14D3/page";
 import F15D1 from "./f-15/f15D1/page";
-import F1D2 from "./f-01/f1D2/page";
-import F1D3 from "./f-01/f1D3/page";
-import F1D1 from "./f-01/f1D1/page";
+
 import { useGetOwnerTemplateQuery } from "@/redux/features/templates/allTemplateSlice";
+import F1D1 from "./f-01/f1d1/page";
+import F1D2 from "./f-01/f1d2/page";
+import F1D3 from "./f-01/f1d3/page";
+// import F1D2 from "./f-01/f1D2/page";
+// import F1D3 from "./f-01/f1D3/page";
 
 interface Owner {
   id: string;
@@ -471,13 +474,13 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const dataAllFIled = stepByStepData.aiInputData;
   const subCategoryData = stepByStepData.subcategory;
   const id = stepByStepData?.projectIdCode;
-  const ownerId = id?.result?.project?.id
+  const ownerId = id?.result?.project?.id;
 
-  const { data: ownerData } = useGetOwnerTemplateQuery(ownerId)
-  console.log(ownerData?.data, "===============================")
-  const allData = ownerData?.data
+  const { data: ownerData } = useGetOwnerTemplateQuery(ownerId);
+  console.log(ownerData?.data, "===============================");
+  const allData = ownerData?.data;
 
-  console.log(ownerId, "projectId")
+  console.log(ownerId, "projectId");
   // const { owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city, owner_email, owner_father_name, owner_mother_name, owner_name, owner_phone, owner_postal_code, owner_surname, ydom_name,
   // } = ownerData?.data
   // console.log(owner_address, owner_afm, owner_birth_date, owner_birth_place, owner_city)
@@ -491,11 +494,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const small = subCategoryData["small-construction"] || [];
 
   const store = makeStore();
-
-  // console.log(allTempate, "stepByStepData>>>>>>");
-  // const { data, isLoading } = useGetTemplateDataQuery("un");
-  // const ydomName = data?.data;
-  // console.log("ydomName?", ydomName);
 
   const { owners } = dataAllFIled;
 
@@ -533,9 +531,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
-
     { name: "F1D2", component: <F1D2 /> },
     { name: "F1D3", component: <F1D3 /> },
+
     {
       name: "ProjectDescriptionSix",
       component: <FileOneDesignEleven />,
@@ -842,7 +840,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_23")
+                    setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_23");
                     setIsModalOpen(true);
                   }}
                 >
@@ -862,7 +860,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ")
+                    setSelected("ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -871,7 +869,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020")
+                    setSelected("άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020");
                     setIsModalOpen(true);
                   }}
                 >
@@ -972,7 +970,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ")
+                    setSelected(
+                      "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ"
+                    );
                     setIsModalOpen(true);
                   }}
                 >
@@ -981,7 +981,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ")
+                    setSelected("_ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -990,7 +990,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ")
+                    setSelected("_ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -999,7 +999,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ")
+                    setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1013,12 +1013,13 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         {/* file 5  */}
         {buildingMods?.map((item: string, index: number) => (
           <div>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5" && (
+            {item ===
+              "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5" && (
               <div className="flex flex-wrap gap-4">
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ")
+                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1027,7 +1028,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ")
+                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1036,7 +1037,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53")
+                    setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1055,7 +1056,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ")
+                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1064,25 +1065,31 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ")
+                    setSelected(
+                      "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ"
+                    );
                     setIsModalOpen(true);
                   }}
                 >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ
+                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ
+                  ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_")
+                    setSelected(
+                      "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_"
+                    );
                     setIsModalOpen(true);
                   }}
                 >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_
+                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ
+                  ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ Α")
+                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ Α");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1091,7 +1098,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_")
+                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1100,7 +1107,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ")
+                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1109,7 +1116,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙ")
+                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1118,7 +1125,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_")
+                    setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1127,7 +1134,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")
+                    setSelected("_ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1146,16 +1153,21 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ ΔΙΑΤΑΞΕΩΝ")
+                    setSelected(
+                      "ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ ΔΙΑΤΑΞΕΩΝ"
+                    );
                     setIsModalOpen(true);
                   }}
                 >
-                  ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ ΔΙΑΤΑΞΕΩΝ
+                  ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ
+                  ΔΙΑΤΑΞΕΩΝ
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_")
+                    setSelected(
+                      "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_"
+                    );
                     setIsModalOpen(true);
                   }}
                 >
@@ -1164,7 +1176,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_")
+                    setSelected("_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1173,7 +1185,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_")
+                    setSelected("_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1182,7 +1194,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_")
+                    setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1201,7 +1213,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΚΟΠΗ ΠΕΥΚΩΝ")
+                    setSelected("_ΚΟΠΗ ΠΕΥΚΩΝ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1210,7 +1222,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ_")
+                    setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ_");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1219,7 +1231,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_")
+                    setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1238,7 +1250,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜ")
+                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1247,7 +1259,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣ")
+                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1256,7 +1268,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("Ιδιωτική Σύμβαση ")
+                    setSelected("Ιδιωτική Σύμβαση ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1270,12 +1282,13 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         {/* file 10 */}
         {buildingMods?.map((item: string, index: number) => (
           <div>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" && (
+            {item ===
+              "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" && (
               <div className="flex flex-wrap gap-4">
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_")
+                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1284,7 +1297,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102")
+                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1293,7 +1306,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ")
+                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1312,7 +1325,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΠΕΡΙΤΟΙΧΗΣΗΣ Π")
+                    setSelected("ΠΕΡΙΤΟΙΧΗΣΗΣ Π");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1321,7 +1334,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΑΠΟΣΤΑΣΗ ΑΝΩ ΤΩΝ")
+                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΑΠΟΣΤΑΣΗ ΑΝΩ ΤΩΝ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1340,7 +1353,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_121")
+                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_121");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1349,7 +1362,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΣΤΕΓΕΣ")
+                    setSelected("ΣΤΕΓΕΣ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1368,7 +1381,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΠΙΣΙΝΑ COMPACT ΕΩΣ")
+                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΠΙΣΙΝΑ COMPACT ΕΩΣ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1377,7 +1390,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_132")
+                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_132");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1386,7 +1399,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ_133")
+                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ_133");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1395,7 +1408,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ Η_Μ ΑΣΦΑΛΕΙΑ")
+                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ Η_Μ ΑΣΦΑΛΕΙΑ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1404,7 +1417,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΣΤΑΤΙΚΗ ΑΣΦΑΛΕΙΑ")
+                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΣΤΑΤΙΚΗ ΑΣΦΑΛΕΙΑ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1413,7 +1426,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_άρθρου 4 ΥΑ ΦΕΚ Β")
+                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_άρθρου 4 ΥΑ ΦΕΚ Β");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1427,12 +1440,13 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         {/* file 14  */}
         {buildingMods?.map((item: string, index: number) => (
           <div>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" && (
+            {item ===
+              "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" && (
               <div className="flex flex-wrap gap-4">
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_141")
+                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_141");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1441,7 +1455,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_142")
+                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_142");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1450,7 +1464,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ")
+                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1469,7 +1483,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΙΚΡΙΩΜΑΤΑ")
+                    setSelected("ΙΚΡΙΩΜΑΤΑ");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1503,7 +1517,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΣΑΥ_ΦΑΥ" && <F1D3 />}
               {selected === "ΣΔΑ ΕΡΓΟΥ" && <F1D4 />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ" && <F1D5 />}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_16" && <F1D6 allData={allData} />}
+              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_16" && (
+                <F1D6 allData={allData} />
+              )}
               {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <F1D7 />}
               {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <F1D8 />}
               {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <F1D9 />}
@@ -1524,33 +1540,35 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ" && <F4D2 />}
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && (
-                  <F4D3 />
-                )}
+                <F4D3 />
+              )}
               {selected ===
                 "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ" && (
-                  <F4D6 />
-                )}
+                <F4D6 />
+              )}
               {selected ===
                 "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ" && (
-                  <F4D7 />
-                )}
+                <F4D7 />
+              )}
               {selected === "_ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <F4D8 />}
               {selected === "_ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <F4D9 />}
               {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && <F4D11 />}
               {/* file 5======== */}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && <F5D1 />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ" && <F5D2 />}
-              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53" && <F5D3 />}
+              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53" && (
+                <F5D3 />
+              )}
               {/* file 6======== */}
               {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ" && <F6D1 />}
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ" && (
-                  <F6D2 />
-                )}
+                <F6D2 />
+              )}
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_" && (
-                  <F6D3 />
-                )}
+                <F6D3 />
+              )}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ Α" && <F6D4 />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_" && <F6D7 />}
               {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙ" && <F6D8 />}
@@ -1559,12 +1577,12 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {/* file 7======== */}
               {selected ===
                 "ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ ΔΙΑΤΑΞΕΩΝ" && (
-                  <F7D1 />
-                )}
+                <F7D1 />
+              )}
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
-                  <F7D2 />
-                )}
+                <F7D2 />
+              )}
               {selected === "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_" && <F7D3 />}
               {selected === "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_" && <F7D4 />}
               {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && <F7D5 />}

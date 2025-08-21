@@ -35,7 +35,7 @@ export default function MainNavLink({
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();
-
+  console.log(navLink);
   const isActive = (href: string) => {
     const cleanHref = href.split("?")[0];
     const cleanPathname = pathname.split("?")[0];
@@ -68,6 +68,8 @@ export default function MainNavLink({
   ) => {
     const hasSubItems = link.subItems && link.subItems.length > 0;
 
+    console.log(link);
+
     return (
       <div key={link.name}>
         <div
@@ -96,6 +98,7 @@ export default function MainNavLink({
                   stroke-width="1.5"
                 />
               </svg> */}
+
               {isShort && <span className="text-nowrap">{link.name}</span>}
             </button>
           ) : (
@@ -116,6 +119,8 @@ export default function MainNavLink({
                   stroke-width="1.5"
                 />
               </svg> */}
+
+              {link.icon && <link.icon className="min-w-6 min-h-6" />}
               {isShort && <span className="text-nowrap">{link.name}</span>}
             </Link>
           )}
@@ -149,19 +154,6 @@ export default function MainNavLink({
                     : "hover:bg-primary/10 hover:text-primary"
                 }`}
               >
-                {/* <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="2"
-                  height="13"
-                  viewBox="0 0 2 13"
-                  fill="none"
-                >
-                  <path
-                    d="M1 12.9531V0.453125"
-                    stroke="#333333"
-                    stroke-width="1.5"
-                  />
-                </svg> */}
                 {isShort && <span className="text-nowrap">{subItem.name}</span>}
               </Link>
             ))}

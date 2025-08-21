@@ -12,6 +12,7 @@
     "@stripe/react-stripe-js": "^3.8.0",
     "@stripe/stripe-js": "^7.6.1",
     "antd": "^5.26.2",
+    "aos": "^2.3.4",
     "axios": "^1.11.0",
     "client-zip": "^2.5.0",
     "docx": "^9.5.1",
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/aos": "^3.0.7",
     "@types/file-saver": "^2.0.7",
     "@types/html-docx-js": "^0.3.4",
     "@types/html-to-docx": "^1.8.0",

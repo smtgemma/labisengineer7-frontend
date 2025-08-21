@@ -6,7 +6,13 @@ import SideBar from "./navigationBar/SiderBar";
 import TopBar from "./navigationBar/TopBar";
 import { NavLink } from "./types";
 
-const DashboardLayout = ({ children, navLink }: { children: React.ReactNode, navLink: NavLink[] }) => {
+const DashboardLayout = ({
+  children,
+  navLink,
+}: {
+  children: React.ReactNode;
+  navLink: NavLink[];
+}) => {
   const user = null;
   const [isOpen, setIsOpen] = useState(false);
   const [isShort, setIsShort] = useState(true);
