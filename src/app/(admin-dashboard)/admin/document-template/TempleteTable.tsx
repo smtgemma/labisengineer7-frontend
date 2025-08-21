@@ -3,6 +3,9 @@ import React from "react";
 import { MoreHorizontal } from "lucide-react";
 import { CgArrowsV } from "react-icons/cg";
 import Link from "next/link";
+import { useGetMyDocumentPointQuery } from "@/redux/features/adminOverView/adminUserSlice";
+import tokenCatch from "@/lib/token";
+import moment from "moment";
 
 const templatesData = [
   {
@@ -31,6 +34,11 @@ const ActionButton = () => (
 
 export default function SimpleTemplatesTable() {
   console.log("yes");
+  const token = tokenCatch();
+  const { data, isLoading } = useGetMyDocumentPointQuery(token);
+
+  console.log(data);
+  const allService = data?.data;
   return (
     <div id="testimonials" className="md:px-12 min-h-screen">
       {/* Header */}
@@ -74,17 +82,19 @@ export default function SimpleTemplatesTable() {
 
           {/* Table Body */}
           <div className="divide-y divide-gray-200">
-            {templatesData.map((row) => (
+            {allService.map((row: any) => (
               <div
                 key={row.id}
                 className="px-6 py-4 hover:bg-gray-50 transition-colors"
               >
                 <div className="grid grid-cols-12 gap-4 items-center text-sm md:text-[16px] text-info">
-                  <div className="col-span-2">{row.templateName}</div>
+                  <div className="col-span-2">{row.serviceName}</div>
                   <div className="col-span-2">{row.serviceType}</div>
-                  <div className="col-span-2">{row.lastModified}</div>
-                  <div className="col-span-3">{row.description}</div>
-                  <div className="col-span-2">{row.createdBy}</div>
+                  <div className="col-span-2">
+                    {moment(row.updatedAt).format("LL")}
+                  </div>
+                  <div className="col-span-3">{row.serviceDescription}</div>
+                  <div className="col-span-2">Admin</div>
                   <div className="col-span-1">
                     <ActionButton />
                   </div>

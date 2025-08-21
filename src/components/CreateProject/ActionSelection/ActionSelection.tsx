@@ -18,7 +18,6 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     "Generate Engineer Declaration (YA)",
     "Generate Assignment of Responsibility",
     "Create Technical Description",
-    "Export CSV File",
   ];
   const [selectedActionsValue, setSelectedActionsValue] = useState<string[]>(
     []

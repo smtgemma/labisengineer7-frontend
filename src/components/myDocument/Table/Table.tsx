@@ -16,7 +16,7 @@ interface TableProps {
   data: TableData[];
 }
 
-const Table: React.FC<TableProps> = ({ data }) => {
+const DocTable: React.FC<TableProps> = () => {
   const { data: projects, isLoading } = useGetAllProjectQuery("project");
   console.log(projects?.data);
 
@@ -55,4 +55,4 @@ const Table: React.FC<TableProps> = ({ data }) => {
   );
 };
 
-export default Table;
+export default DocTable;

@@ -129,6 +129,12 @@ export const DashBoardLink = [
   },
 
   {
+    name: "My Documents",
+    href: "/document",
+    // icon: FaSackDollar,
+  },
+
+  {
     name: "Help/Guides",
     href: "/guidelines",
     // icon: FaHeadset,
