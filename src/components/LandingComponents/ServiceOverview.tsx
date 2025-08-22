@@ -39,12 +39,7 @@ const services = [
 
 export default function ServicesOverview() {
   return (
-    <div
-      data-aos="fade-up"
-      data-aos-anchor-placement="top-bottom"
-      id="service"
-      className="py-[100px]"
-    >
+    <div id="service" className="py-[100px]">
       <Container>
         <section
           data-aos="fade-up"

@@ -31,11 +31,7 @@ export default function RightViewCard({
   workImg,
 }: RightViewCardProps) {
   return (
-    <div
-      data-aos="fade-up"
-      data-aos-anchor-placement="top-bottom"
-      className="py-10 md:py-20 "
-    >
+    <div className="py-10 md:py-20 ">
       <Container>
         <div className={`${className} flex   items-center gap-10`}>
           <div className="w-full md:w-1/2">

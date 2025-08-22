@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import ForgotPasswordModal from "./forgotPassword/ForgotPasswordEmailModal";
 import { setUserData } from "@/redux/features/auth/userDataCatchSlice";
+import axios from "axios";
 
 type FormData = {
   email: string;
@@ -52,6 +53,36 @@ export default function SigninForm() {
       console.log(error);
       toast.error(error?.data.message);
     }
+  };
+
+  const handleSuccess = async (credentialResponse: any) => {
+    console.log("yesTonek= ", credentialResponse.credential);
+
+    try {
+      // Send the credential to your server
+      const response = await axios.post(
+        `http://172.252.13.71:5005/api/v1/auth/google-login`,
+        {
+          googleToken: credentialResponse.credential,
+        }
+      );
+
+      if (response?.data?.success) {
+        // localStorage.setItem("accessToken", response?.data?.data?.accessToken);
+        localStorage.set("accessToken", response?.data?.accessToken);
+        router.push("/");
+        toast.success("Login successful");
+      }
+
+      console.log("Login successful", response.data);
+      // Handle successful login (store tokens, redirect, etc.)
+    } catch (error) {
+      console.error("Login failed", error);
+    }
+  };
+
+  const handleError = () => {
+    console.log("Login Failed");
   };
 
   return (

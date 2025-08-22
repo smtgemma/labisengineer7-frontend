@@ -48,12 +48,15 @@ type ProjectData = {
   neighborhood: string;
   municipal: string;
   permit_number: string;
+  id_numbers: string;
 };
 
 interface LicenseLegalFormData {
   licenseNumber: string;
   licenseRevision: string;
   ydom: string;
+  propertyDesc1: string;
+  propertyDesc2: string;
   horizontal_property_name_two: string;
   horizontal_property_name: string;
   reexamineNumbers: string;
@@ -196,7 +199,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
       console.log(error);
     }
   };
-  console.log(currentStep);
+  console.log(ownerData[0].id_number);
 
   useEffect(() => {
     if (
@@ -422,6 +425,18 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     placeholder="Δήμος Αθηναίων"
                     defaultValue={allExtreactData?.municipality_community}
                     // defaultValue={dataShowExtreact?.municipality_community}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    Α.Δ.Τ
+                  </label>
+                  <input
+                    {...register(`id_numbers`)}
+                    defaultValue={ownerData[0].id_number}
+                    className={inputStyle}
+                    readOnly
                   />
                 </div>
               </div>
