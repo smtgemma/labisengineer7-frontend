@@ -12,10 +12,13 @@ interface allDataProps {
   owner_postal_code : string;
   owner_surname : string;
   ydom_name : string;
+  project_description?: string;
+  owner_id?: string;
+  owner_address_number?: string;
+  date?: string;
 }
 
 function F1D6({ allData }: any) {
-  console.log(allData?.owner_name)
   const { owner_address,
     owner_afm,
     owner_birth_date,
@@ -28,7 +31,10 @@ function F1D6({ allData }: any) {
     owner_phone,
     owner_postal_code,
     owner_surname,
-    ydom_name
+    ydom_name,
+    project_description,
+    owner_id,
+    owner_address_number,
   } : allDataProps = allData
   return (
     <div className="max-w-4xl mx-auto p-4 bg-white">
@@ -108,7 +114,7 @@ function F1D6({ allData }: any) {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-            <div className="w-32 p-2 border-r border-gray-400 font-bold">ID</div>
+            <div className="w-32 p-2 border-r border-gray-400 font-bold">{owner_id || "N/A"}</div>
             <div className="w-24 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
             <div className="flex-1 p-2 font-bold">{owner_phone || "N/A"}</div>
           </div>
@@ -122,7 +128,7 @@ function F1D6({ allData }: any) {
             <div className="w-24 p-2 border-r border-gray-400 text-sm">Οδός</div>
             <div className="w-40 p-2 border-r border-gray-400 font-bold">{owner_address || "N/A"}</div>
             <div className="w-24 p-2 border-r border-gray-400 text-sm">Αριθ</div>
-            <div className="w-28 p-2 border-r border-gray-400 font-bold">Number</div>
+            <div className="w-28 p-2 border-r border-gray-400 font-bold">{owner_address_number || "N/A"}</div>
             <div className="w-16 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
             <div className="flex-1 p-2 font-bold">{owner_postal_code || "N/A"}</div>
           </div>
@@ -148,7 +154,7 @@ function F1D6({ allData }: any) {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-            <div className="flex-1 p-2 font-bold">VAT owner</div>
+            <div className="flex-1 p-2 font-bold">{owner_afm || "N/A"}</div>
             <div className="w-40 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
           </div>
         </div>
@@ -166,8 +172,8 @@ function F1D6({ allData }: any) {
             </span>
           </p>
 
-          <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
-          <p className=" font-bold mb-10 text-xl">PROJECT DESCRIPTION</p>
+          <p className="mb-1 font-bold">για το έργο με τίτλο :</p>
+          <p className="mb-10 text-sm">{project_description || "N/A"}</p>
         </div>
 
         {/* Additional disclaimer text */}
