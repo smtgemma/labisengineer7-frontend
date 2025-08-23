@@ -114,8 +114,8 @@ function F1D6({ allData }: any) {
         <div className="border-b border-gray-400">
           <div className="flex">
             <div className="w-40 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-            <div className="w-32 p-2 border-r border-gray-400 font-bold">{owner_id || "N/A"}</div>
-            <div className="w-24 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
+            <div className=" p-2 border-r border-gray-400 font-bold">{owner_id || "N/A"}</div>
+            <div className=" p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
             <div className="flex-1 p-2 font-bold">{owner_phone || "N/A"}</div>
           </div>
         </div>
