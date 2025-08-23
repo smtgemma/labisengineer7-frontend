@@ -41,7 +41,7 @@ const AdminProfile = () => {
 
   const token = tokenCatch();
   const [preview, setPreview] = useState<string | null>(null);
-  const [image, setImage] = useState<File | null>(null);
+  const [image, setImage] = useState<File | null>();
   console.log(image);
 
   // const user = useSelector((state: any) => state.user.userData);
@@ -87,6 +87,7 @@ const AdminProfile = () => {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
+      phone: data.phone,
     };
 
     const formData = new FormData();
@@ -136,13 +137,28 @@ const AdminProfile = () => {
 
                     <div className="relative inline-block">
                       {/* Profile Image */}
-                      <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
-                        <img
-                          src={user?.sprofilePic || preview}
-                          alt="Profile"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+
+                      {preview ? (
+                        <>
+                          <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+                            <img
+                              src={preview}
+                              alt="Profile"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+                            <img
+                              src={user?.profilePic}
+                              alt="Profile"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </>
+                      )}
 
                       {/* File Input Trigger */}
                       <label
@@ -215,6 +231,7 @@ const AdminProfile = () => {
                     <input
                       type="tel"
                       {...register("phone")}
+                      defaultValue={user?.phone}
                       className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                     />
                   </div>
