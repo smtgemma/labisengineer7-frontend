@@ -3,11 +3,7 @@ import { TableData } from "@/components/Projects/Table/Table";
 import moment from "moment";
 import Link from "next/link";
 
-interface TableRowProps {
-  data: any;
-}
-
-const TableRow: React.FC<TableRowProps> = ({ data }) => {
+const TableRow = ({ data, handleUserDelete }: any) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "In Progress":
@@ -52,7 +48,10 @@ const TableRow: React.FC<TableRowProps> = ({ data }) => {
           {/* <button className="px-3 py-1 text-xs font-medium text-blue-600 bg-blue-50 border border-blue-200 rounded hover:bg-blue-100 transition-colors">
             Edit
           </button> */}
-          <button className="px-3 py-1 text-xs font-medium text-red-600 bg-red-50 border border-red-200 rounded hover:bg-red-100 transition-colors">
+          <button
+            onClick={() => handleUserDelete(data.id)}
+            className="px-3 py-1 text-xs font-medium text-red-600 bg-red-50 border border-red-200 rounded hover:bg-red-100 transition-colors"
+          >
             Delete
           </button>
         </div>

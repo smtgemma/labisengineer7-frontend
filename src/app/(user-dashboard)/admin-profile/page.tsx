@@ -9,7 +9,13 @@ import { useSelector } from "react-redux";
 import Loading from "@/components/Others/Loading";
 import tokenCatch from "@/lib/token";
 import { jwtDecode } from "jwt-decode";
-import { useProfileUpdateMutation } from "@/redux/features/profile/profileSlice";
+import {
+  useProfileUpdateMutation,
+  useUpdatePasswordMutation,
+} from "@/redux/features/profile/profileSlice";
+import { toast } from "sonner";
+import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
+import moment from "moment";
 
 interface AdminFormData {
   firstName: string;
@@ -23,6 +29,12 @@ interface AdminFormData {
   tesRegistration: string;
   profile: FileList;
 }
+
+type PasswordForm = {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+};
 
 interface AdminProfileProps {
   className?: string;
@@ -39,9 +51,18 @@ const AdminProfile = () => {
     formState: { errors },
   } = useForm<AdminFormData>();
 
+  // form 2: password update
+  const {
+    register: registerPassword,
+    handleSubmit: upPasswordSubmit,
+    formState: { errors: passwordErrors },
+    watch,
+  } = useForm<PasswordForm>();
+  const newPassword = watch("newPassword");
+
   const token = tokenCatch();
   const [preview, setPreview] = useState<string | null>(null);
-  const [image, setImage] = useState<File | null>();
+  const [image, setImage] = useState<File | null>(null);
   console.log(image);
 
   // const user = useSelector((state: any) => state.user.userData);
@@ -49,40 +70,29 @@ const AdminProfile = () => {
 
   if (token) {
     const decoded: string | null = jwtDecode(token || " ");
-
     console.log(decoded);
   }
 
   const decoded: any = jwtDecode(token || " ");
-
   const id = decoded.id;
 
-  const [userUpdate] = useProfileUpdateMutation();
+  const [userUpdate, { isLoading: profileLoading }] =
+    useProfileUpdateMutation();
 
-  const handleSaveChanges = (data: AdminFormData) => {
-    console.log("Admin profile updated:", data);
-  };
+  const [updatePasswordCatch, { isLoading: upPasswordLoading }] =
+    useUpdatePasswordMutation();
 
-  // const onSubmit = async (data: FormData) => {
-  //   const file = data.profile[0]; // this is the uploaded file
-  //   const user = {
-  //     firstName: data.firstName,
-  //     lastName: data.lastName,
-  //     email: data.email,
-  //   };
-  //   console.log(user, "user");
-  //   const formData = new FormData();
-  //   formData.append("data", JSON.stringify(user));
-  //   formData.append("file", image);
+  const { data, isLoading, refetch } = useUserInfoQuery({ id, token });
+  if (isLoading) {
+    return <Loading />;
+  }
+  const user = data?.data;
 
-  //   const res = await userUpdate({ formData, token }).unwrap();
-
-  //   console.log(res);
-  // };
+  console.log(user);
 
   const onSubmit = async (data: AdminFormData) => {
-    const file = image[0];
-    console.log(file, "file");
+    // const file = image[0];
+    // console.log(file, "file");
     const user = {
       firstName: data.firstName,
       lastName: data.lastName,
@@ -94,22 +104,62 @@ const AdminProfile = () => {
     formData.append("data", JSON.stringify(user));
 
     // append file safely
-    if (file) {
-      formData.append("file", file);
+    if (image) {
+      formData.append("file", image);
     }
 
     const res = await userUpdate({ formData, token }).unwrap();
+    if (res?.success) {
+      toast.success(res?.message);
+      refetch();
+    }
     console.log(res);
   };
 
-  const { data, isLoading } = useUserInfoQuery({ id, token });
+  // change password
 
-  if (isLoading) {
-    return <Loading />;
-  }
-  const user = data?.data;
+  // const handlePasswordUpdate = async (data: AdminFormData) => {
+  //   console.log(data, "formData");
+  //   const UpdatePasswoardData = {
+  //     currentPassword: data.currentPassword,
+  //     newPassword: data.newPassword,
+  //     confirmPassword: data.confirmPassword,
+  //   };
 
-  console.log(user);
+  //   console.log("password", UpdatePasswoardData);
+  //   const res = await updatePasswordCatch({
+  //     UpdatePasswoardData,
+  //     token,
+  //   }).unwrap();
+  //   if (res?.success) {
+  //     toast.success(res?.message);
+  //     refetch();
+  //   }
+  //   console.log(res);
+  // };
+
+  const handlePasswordUpdate = async (data: PasswordForm) => {
+    try {
+      const payload = {
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+        confirmPassword: data.confirmPassword,
+      };
+
+      const res = await updatePasswordCatch({
+        body: payload,
+        token,
+      }).unwrap();
+
+      if (res?.success) {
+        toast.success(res?.message);
+        refetch();
+      }
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Password update failed");
+      console.error("Password update error:", error);
+    }
+  };
 
   // const handleChangePassword = (data: AdminFormData) => {
   //   console.log("Password change requested:", data);
@@ -124,7 +174,7 @@ const AdminProfile = () => {
             {/* Admin Information */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <h2 className="text-lg font-semibold text-gray-900 mb-6">
-                Admin Information
+                {user?.role} Information
               </h2>
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -177,7 +227,10 @@ const AdminProfile = () => {
                         {...register("profile")}
                         onChange={(e: any) => {
                           if (e.target.files && e.target.files[0]) {
-                            setImage(e.target.files);
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              setImage(file);
+                            }
                             setPreview(URL.createObjectURL(e.target.files[0]));
                           }
                         }}
@@ -237,12 +290,25 @@ const AdminProfile = () => {
                   </div>
                 </div>
 
-                <button
-                  type="submit"
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
-                >
-                  Save Changes
-                </button>
+                {profileLoading ? (
+                  <>
+                    <button
+                      type="submit"
+                      className="bg-blue-500 cursor-p hover:bg-blue-600 text-white px-10 py-2 rounded-md font-medium transition-colors"
+                    >
+                      <LoadingButton />{" "}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      type="submit"
+                      className="bg-blue-500 cursor-p hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
+                    >
+                      Save Changes
+                    </button>
+                  </>
+                )}
               </form>
             </div>
 
@@ -260,7 +326,7 @@ const AdminProfile = () => {
                   <input
                     type="text"
                     {...register("userType")}
-                    defaultValue="Engineer"
+                    defaultValue={user?.role}
                     className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                   />
                 </div>
@@ -272,7 +338,7 @@ const AdminProfile = () => {
                   <input
                     type="text"
                     {...register("tesRegistration")}
-                    defaultValue="TES-123764"
+                    defaultValue={user?.teeRegistration || "N/A"}
                     className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                   />
                 </div>
@@ -303,7 +369,8 @@ const AdminProfile = () => {
                     Last Login:
                   </span>
                   <span className="text-sm text-gray-600">
-                    2025-06-18 14:34
+                    {moment(user?.updatedAt).format("L")} |{" "}
+                    {moment(user?.updatedAt).format("LT")}
                   </span>
                 </div>
               </div>
@@ -318,49 +385,104 @@ const AdminProfile = () => {
                 If you wish to update your password, enter a new one below.
               </p>
 
-              <form className="space-y-4">
+              <form
+                onSubmit={upPasswordSubmit(handlePasswordUpdate)}
+                className="space-y-4"
+              >
+                {/* Current Password */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Current Password:
                   </label>
                   <input
                     type="password"
-                    {...register("currentPassword")}
+                    {...registerPassword("currentPassword", {
+                      required: "Current password is required",
+                    })}
                     placeholder="Password123456"
-                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all placeholder-gray-400"
+                    className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:border-transparent outline-none transition-all placeholder-gray-400
+            ${
+              passwordErrors.currentPassword
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-blue-500"
+            }`}
                   />
+                  {passwordErrors.currentPassword && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {passwordErrors.currentPassword.message}
+                    </p>
+                  )}
                 </div>
 
+                {/* New Password */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     New Password:
                   </label>
                   <input
                     type="password"
-                    {...register("newPassword")}
+                    {...registerPassword("newPassword", {
+                      required: "New password is required",
+                      minLength: {
+                        value: 6,
+                        message: "Password must be at least 6 characters",
+                      },
+                    })}
                     placeholder="Password123456789"
-                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all placeholder-gray-400"
+                    className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:border-transparent outline-none transition-all placeholder-gray-400
+            ${
+              passwordErrors.newPassword
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-blue-500"
+            }`}
                   />
+                  {passwordErrors.newPassword && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {passwordErrors.newPassword.message}
+                    </p>
+                  )}
                 </div>
 
+                {/* Confirm Password */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Confirm Password:
                   </label>
                   <input
                     type="password"
-                    {...register("confirmPassword")}
+                    {...registerPassword("confirmPassword", {
+                      required: "Please confirm your password",
+                      validate: (value) =>
+                        value === newPassword || "Passwords do not match",
+                    })}
                     placeholder="Password123456789"
-                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all placeholder-gray-400"
+                    className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:border-transparent outline-none transition-all placeholder-gray-400
+            ${
+              passwordErrors.confirmPassword
+                ? "border-red-500 focus:ring-red-500"
+                : "border-gray-300 focus:ring-blue-500"
+            }`}
                   />
+                  {passwordErrors.confirmPassword && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {passwordErrors.confirmPassword.message}
+                    </p>
+                  )}
                 </div>
 
+                {/* Submit */}
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="bg-primary hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
+                    className="bg-blue-500 cursor-p hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
                   >
-                    Change Password
+                    {upPasswordLoading ? (
+                      <>
+                        <LoadingButton />
+                      </>
+                    ) : (
+                      " Change Password"
+                    )}
                   </button>
                 </div>
               </form>

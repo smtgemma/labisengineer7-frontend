@@ -38,6 +38,17 @@ const projectServiceApi = baseUrlApi.injectEndpoints({
         method: "get",
       }),
     }),
+
+    // update status and account spent
+    projectDelete: build.mutation({
+      query: ({ id, token }) => ({
+        url: `/projects/${id}`,
+        method: "delete",
+        headers: {
+          Authorization: `${token}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -45,4 +56,5 @@ export const {
   useGetTheServiceQuery,
   useGetAllProjectQuery,
   useGetSignleProjectQuery,
+  useProjectDeleteMutation,
 } = projectServiceApi;

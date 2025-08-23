@@ -40,7 +40,14 @@ const authApi = baseUrlApi.injectEndpoints({
         body: signInUserData,
       }),
     }),
-
+    // google  signIn
+    googleLogin: build.mutation({
+      query: (tokon) => ({
+        url: "/auth/google-login",
+        method: "POST",
+        body: tokon,
+      }),
+    }),
     // forgetPassword
     forgetPassword: build.mutation({
       query: (email) => ({
@@ -79,4 +86,5 @@ export const {
   useResetPasswordMutation,
   useRoleSetAndUpdateMutation,
   useUserInfoQuery,
+  useGoogleLoginMutation,
 } = authApi;

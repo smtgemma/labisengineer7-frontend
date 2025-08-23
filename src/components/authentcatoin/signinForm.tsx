@@ -4,7 +4,10 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import logoImg from "../../assets/landing-page/main-logo.png";
-import { useSignInMutation } from "@/redux/features/auth/auth";
+import {
+  useGoogleLoginMutation,
+  useSignInMutation,
+} from "@/redux/features/auth/auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import LoadingButton from "../shared/LoadingBtn/LoadingButton";
@@ -13,6 +16,7 @@ import { useDispatch } from "react-redux";
 import ForgotPasswordModal from "./forgotPassword/ForgotPasswordEmailModal";
 import { setUserData } from "@/redux/features/auth/userDataCatchSlice";
 import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
 
 type FormData = {
   email: string;
@@ -31,6 +35,8 @@ export default function SigninForm() {
   const [sigInUser, { isLoading }] = useSignInMutation();
   const dispath = useDispatch();
   const router = useRouter();
+
+  const [googleSignIn, { isLoading: googleLoading }] = useGoogleLoginMutation();
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -55,22 +61,31 @@ export default function SigninForm() {
     }
   };
 
+  // google login working for functonalti
   const handleSuccess = async (credentialResponse: any) => {
     console.log("yesTonek= ", credentialResponse.credential);
 
     try {
       // Send the credential to your server
-      const response = await axios.post(
-        `http://172.252.13.71:5005/api/v1/auth/google-login`,
-        {
-          googleToken: credentialResponse.credential,
-        }
-      );
+      // const response = await axios.post(
+      //   `https://api.buildai.gr/api/v1/auth/google-login`,
+      //   {
+      //     googleToken: credentialResponse.credential,
+      //   }
+      // );
 
-      if (response?.data?.success) {
+      const googleToken = {
+        googleToken: credentialResponse.credential,
+      };
+      const response = await googleSignIn(googleToken).unwrap();
+      console.log("response", response);
+      // const response = await googleSignIn().unwrap()
+
+      if (response?.success) {
         // localStorage.setItem("accessToken", response?.data?.data?.accessToken);
-        localStorage.set("accessToken", response?.data?.accessToken);
-        router.push("/");
+        console.log("accessToken", response?.data?.accessToken);
+        localStorage.setItem("accessToken", response?.data?.accessToken);
+        router.push("/new-project");
         toast.success("Login successful");
       }
 
@@ -166,6 +181,13 @@ export default function SigninForm() {
           >
             <FcGoogle size={20} /> Continue with Google
           </button>
+          <div className="">
+            <GoogleLogin
+              size="large"
+              onSuccess={handleSuccess}
+              onError={handleError}
+            />
+          </div>
 
           <div className="flex items-center my-4">
             <div className="flex-grow h-px bg-gray-300"></div>
