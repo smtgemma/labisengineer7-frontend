@@ -56,7 +56,6 @@ const AdminProfile = () => {
   const decoded: any = jwtDecode(token || " ");
 
   const id = decoded.id;
-  console.log(id);
 
   const [userUpdate] = useProfileUpdateMutation();
 
@@ -139,10 +138,7 @@ const AdminProfile = () => {
                       {/* Profile Image */}
                       <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
                         <img
-                          src={
-                            preview ||
-                            "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop"
-                          }
+                          src={user?.sprofilePic || preview}
                           alt="Profile"
                           className="w-full h-full object-cover"
                         />
