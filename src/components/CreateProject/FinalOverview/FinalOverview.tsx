@@ -1,362 +1,3 @@
-// import React, { useRef } from "react";
-// import { FileSpreadsheet, FileText, AlertCircle } from "lucide-react";
-// import { Document, Packer, Paragraph, TextRun } from "docx";
-// import { saveAs } from "file-saver";
-// import TemplateFIle from "./Template";
-// import ReactDOMServer from "react-dom/server";
-// import html2canvas from "html2canvas";
-// import jsPDF from "jspdf";
-// import TemplateFile from "./Template";
-// import TemplateTow from "./TemplateTow";
-// import TemplateThree from "./TemplateThree";
-// import { useSelector } from "react-redux";
-// import { RootState } from "@/redux/store";
-// import { downloadZip } from "client-zip";
-// import DesignOne from "./file-one/design-one/page";
-// import DesignTwo from "./file-one/design-two/page";
-// import DesignThree from "./file-one/design-three/page";
-// import DesignFour from "./file-one/design-four/page";
-// import DesignFive from "./file-one/design-five/page";
-
-// interface Owner {
-//   id: string;
-//   firstName: string;
-//   surname: string;
-//   fatherName: string;
-//   vatNo: string;
-// }
-
-// interface FinalOverviewProps {
-//   files: File[];
-//   extractedData: any;
-//   selectedOwners: Owner[];
-//   selectedActions: string[];
-//   onComplete: () => void;
-// }
-
-// const FinalOverview: React.FC<FinalOverviewProps> = ({
-//   files,
-//   extractedData,
-//   selectedOwners,
-//   selectedActions,
-//   onComplete,
-// }) => {
-//   const printRef = React.useRef(null);
-//   const contentRef = useRef<HTMLDivElement>(null);
-//   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
-//   const allTempate = stepByStepData.tempateName;
-//   const dataAllFIled = stepByStepData.aiInputData;
-
-//   console.log(dataAllFIled, "stepByStepData");
-//   const { arbitrary_constructions_description, area, building, buildingCode, building_permi, cadastralCode, co2Emissions, construction, createdById, energyCategory, epcCode, expectation_Document,
-//     floor, issueAuthority, issueDate, land_use, licenseIssueNumber, licenseNumber, licenseRevision, lotSquare, municipal, neighborhood, notary, owners, primaryEnergy,
-//     projectDescription, propertyDesc1, propertyDesc2, protocolNumber, reexamineNumbers, region, serviceId, subCategories, titleArea, type, ydom, zonePrice,
-//   } = dataAllFIled;
-
-//   const { address, afm, birthDate, birthPlace, city, email, fatherName, firstName, lastName, motherName, phone, postalCode } = owners[0]
-//   console.log(address)
-//   // const {} = subCategories
-//   const openPreview = () => {
-//     const htmlContent = ReactDOMServer.renderToStaticMarkup(<TemplateFIle />);
-//     const newTab = window.open("", "_blank");
-//     if (newTab) {
-//       newTab.document.write(`
-//         <html>
-//           <head>
-//             <title>DOCX Preview</title>
-//              <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-//           <style>
-//             <style>
-//               body { font-family: Arial, sans-serif; padding: 2rem; }
-//               h1, h2, h3 { color: #2563eb; }
-//               p { line-height: 1.6; }
-//             </style>
-//           </head>
-//           <body>
-//             <div class="word-container">
-//               ${htmlContent}
-//             </div>
-//           </body>
-//         </html>
-//       `);
-//       newTab.document.close();
-//     }
-//   };
-
-//   // ✅ 2. DOWNLOAD CSV FILE
-//   const downloadCSV = () => {
-//     const headers = ["First Name", "Surname", "Father Name", "VAT No"];
-//     const rows = selectedOwners.map((owner) =>
-//       [owner.firstName, owner.surname, owner.fatherName, owner.vatNo].join(",")
-//     );
-
-//     const csvContent = [headers.join(","), ...rows].join("\n");
-//     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-//     saveAs(blob, "owners.csv");
-//   };
-
-//   // ✅ 3. DOWNLOAD DOCX FILE
-//   // const downloadDocx = async () => {
-//   //   const doc = new Document({
-//   //     sections: [
-//   //       {
-//   //         children: [
-//   //           new Paragraph({
-//   //             children: [new TextRun("Greek Declaration Form")],
-//   //             heading: "Heading1",
-//   //           }),
-//   //           ...selectedOwners.map(
-//   //             (owner) =>
-//   //               new Paragraph({
-//   //                 children: [
-//   //                   new TextRun(`Name: ${owner.firstName} ${owner.surname}`),
-//   //                   new TextRun(
-//   //                     `\nFather Name: ${owner.fatherName} - VAT: ${owner.vatNo}`
-//   //                   ),
-//   //                 ],
-//   //                 spacing: { after: 200 },
-//   //               })
-//   //           ),
-//   //         ],
-//   //       },
-//   //     ],
-//   //   });
-
-//   //   const blob = await Packer.toBlob(doc);
-//   //   saveAs(blob, "document.docx");
-//   // };
-
-//   const templates = [
-//     { name: "TemplateFile", component: <TemplateFile /> },
-//     { name: "TemplateTwo", component: <TemplateTow /> },
-//     { name: "TemplateThree", component: <TemplateThree /> },
-//   ];
-
-//   // pdf file download
-//   const handleDownloadPdf = async () => {
-//     const element = printRef.current;
-//     if (!element) {
-//       return;
-//     }
-
-//     const canvas = await html2canvas(element, {
-//       scale: 2,
-//     });
-//     const data = canvas.toDataURL("image/png");
-
-//     const pdf = new jsPDF({
-//       orientation: "portrait",
-//       unit: "px",
-//       format: "a4",
-//     });
-
-//     const imgProperties = pdf.getImageProperties(data);
-//     const pdfWidth = pdf.internal.pageSize.getWidth();
-
-//     const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-
-//     pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
-//     pdf.save("examplepdf.pdf");
-//   };
-
-//   //pdf file dowload zip funciton working
-//   const handleZipDownload = async () => {
-//     const files: { name: string; lastModified: Date; input: Blob }[] = [];
-
-//     for (let t of templates) {
-//       const html = ReactDOMServer.renderToStaticMarkup(t.component);
-//       const container = document.createElement("div");
-//       container.innerHTML = html;
-//       container.style.width = "794px";
-//       container.style.background = "#fff";
-//       document.body.appendChild(container);
-
-//       const canvas = await html2canvas(container, { scale: 2 });
-//       const imgData = canvas.toDataURL("image/png");
-
-//       const pdf = new jsPDF({
-//         orientation: "portrait",
-//         unit: "px",
-//         format: "a4",
-//       });
-//       const imgProps = pdf.getImageProperties(imgData);
-//       const pdfWidth = pdf.internal.pageSize.getWidth();
-//       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-//       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-//       const pdfBlob = pdf.output("blob");
-
-//       files.push({
-//         name: `${t.name}.pdf`,
-//         lastModified: new Date(),
-//         input: pdfBlob,
-//       });
-
-//       document.body.removeChild(container);
-//     }
-
-//     // Create ZIP in browser
-//     const zipBlob = await downloadZip(files).blob();
-//     saveAs(zipBlob, "templates.zip");
-//   };
-
-//   const handlePdfDownloadTempate = () => {
-//     if (templates.length === 0) {
-//       handleDownloadPdf();
-//     } else {
-//       handleZipDownload();
-//     }
-//   };
-
-//   // const handleDownloadPdf = async () => {
-//   //   const element = printRef.current;
-//   //   if (!element) return;
-
-//   //   // Clone the element to avoid modifying the original DOM
-//   //   const clone = element.cloneNode(true);
-//   //   document.body.appendChild(clone);
-
-//   //   // Convert LAB colors to RGB (inline styles)
-//   //   const elementsWithLabColors = clone.querySelectorAll("*");
-//   //   elementsWithLabColors.forEach((el) => {
-//   //     const styles = window.getComputedStyle(el);
-//   //     if (styles.color.includes("lab(")) {
-//   //       el.style.color = "#000000"; // Fallback to black
-//   //     }
-//   //   });
-
-//   //   // Generate PDF
-//   //   const canvas = await html2canvas(clone, { scale: 2 });
-//   //   const data = canvas.toDataURL("image/png");
-
-//   //   const pdf = new jsPDF({
-//   //     orientation: "portrait",
-//   //     unit: "px",
-//   //     format: "a4",
-//   //   });
-//   //   const imgProperties = pdf.getImageProperties(data);
-//   //   const pdfWidth = pdf.internal.pageSize.getWidth();
-//   //   const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-
-//   //   pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
-//   //   pdf.save("document.pdf");
-
-//   //   // Clean up
-//   //   document.body.removeChild(clone);
-//   // };
-//   return (
-//     <div className="space-y-8">
-//       {/* Header */}
-//       <div>
-//         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-//           Final Overview
-//         </h1>
-//         <p className="text-gray-600 text-lg">Preview & download your files</p>
-//       </div>
-
-//       {/* Cards */}
-//       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//         <div
-//           onClick={openPreview}
-//           className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
-//         >
-//           <div className="flex items-center space-x-4 mb-4">
-//             <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-//               <FileText className="w-6 h-6 text-yellow-600" />
-//             </div>
-//             <div>
-//               <h3 className="text-lg font-semibold text-gray-900">
-//                 Preview file
-//               </h3>
-//               <p className="text-sm text-gray-500">Open in new tab</p>
-//             </div>
-//           </div>
-//           <p className="text-gray-600 text-sm">
-//             Click to preview Word-style output
-//           </p>
-//         </div>
-
-//         {/* fdf */}
-//         <div
-//           onClick={handlePdfDownloadTempate}
-//           className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
-//         >
-//           <div className="flex items-center space-x-4 mb-4">
-//             <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-//               <FileText className="w-6 h-6 text-red-600" />
-//             </div>
-//             <div>
-//               <h3 className="text-lg font-semibold text-gray-900">Pdf File</h3>
-//               <p className="text-sm text-gray-500">Download pdf</p>
-//             </div>
-//           </div>
-//           <p className="text-gray-600 text-sm">
-//             Click to download document.docx
-//           </p>
-//         </div>
-//         {/* CSV */}
-//         <div
-//           onClick={downloadCSV}
-//           className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
-//         >
-//           <div className="flex items-center space-x-4 mb-4">
-//             <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-//               <FileSpreadsheet className="w-6 h-6 text-green-600" />
-//             </div>
-//             <div>
-//               <h3 className="text-lg font-semibold text-gray-900">CSV File</h3>
-//               <p className="text-sm text-gray-500">Structured spreadsheet</p>
-//             </div>
-//           </div>
-//           <p className="text-gray-600 text-sm">Click to download owners.csv</p>
-//         </div>
-//         {/* DOCX */}
-//         {/* <div
-//           onClick={downloadDocx}
-//           className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
-//         >
-//           <div className="flex items-center space-x-4 mb-4">
-//             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-//               <FileText className="w-6 h-6 text-blue-600" />
-//             </div>
-//             <div>
-//               <h3 className="text-lg font-semibold text-gray-900">DOCX File</h3>
-//               <p className="text-sm text-gray-500">Download Word Document</p>
-//             </div>
-//           </div>
-//           <p className="text-gray-600 text-sm">
-//             Click to download document.docx
-//           </p>
-//         </div> */}
-//         {/* Export content with inline styles */}
-//         <div ref={contentRef} style={{ display: "none" }}>
-//           {/* <TemplateThree /> */}
-//         </div>
-//       </div>
-
-//       <div ref={printRef} className="space-y-30">
-//         <TemplateFIle />
-//         <DesignOne/>
-//         <DesignFour/>
-//         <DesignThree/>
-//         <DesignFive/>
-//       </div>
-
-//       <div className="flex justify-end">
-//         <button
-//           onClick={onComplete}
-//           className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
-//         >
-//           Save & Continue
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default FinalOverview;
-
 import React, { useEffect, useRef, useState } from "react";
 import { FileSpreadsheet, FileText } from "lucide-react";
 import { saveAs } from "file-saver";
@@ -435,11 +76,9 @@ import F14D3 from "./f-14/f14D3/page";
 import F15D1 from "./f-15/f15D1/page";
 
 import { useGetOwnerTemplateQuery } from "@/redux/features/templates/allTemplateSlice";
-import F1D2 from "./f-01/f1D2/page";
-import F1D3 from "./f-01/f1D3/page";
-import F1D1 from "./f-01/f1D1/page";
-// import F1D2 from "./f-01/f1D2/page";
-// import F1D3 from "./f-01/f1D3/page";
+import F1D1 from "./f-01/f1d1/page";
+import F1D2 from "./f-01/f1d2/page";
+import F1D3 from "./f-01/f1d3/page";
 
 interface Owner {
   id: string;
@@ -528,8 +167,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const templates = [
     { name: "TemplateFile", component: <TemplateFile /> },
-    { name: "F1D2", component: <F1D2 /> },
-    { name: "F1D3", component: <F1D3 /> },
 
     {
       name: "ProjectDescriptionSix",
@@ -1053,7 +690,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61")
+                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1062,7 +699,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_62")
+                    setSelected(
+                      "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_62"
+                    );
                     setIsModalOpen(true);
                   }}
                 >
@@ -1072,16 +711,19 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_63")
+                    setSelected(
+                      "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_63"
+                    );
                     setIsModalOpen(true);
                   }}
                 >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ
+                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ
+                  ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ
                 </button>
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ Α_64")
+                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ Α_64");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1090,7 +732,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_65")
+                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_65");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1099,7 +741,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_66")
+                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_66");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1108,7 +750,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_67")
+                    setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_67");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1117,7 +759,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_68")
+                    setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_68");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1159,7 +801,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_73")
+                    setSelected("_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_73");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1168,7 +810,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_74")
+                    setSelected("_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_74");
                     setIsModalOpen(true);
                   }}
                 >
@@ -1499,11 +1141,21 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && <F1D2 />}
               {selected === "ΣΑΥ_ΦΑΥ" && <F1D3 />}
               {selected === "ΣΔΑ ΕΡΓΟΥ" && <F1D4 />}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ_15" && <F1D5 />}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_16" && <F1D6 allData={allData} />}
-              {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <F1D7 allData={allData} />}
-              {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && <F1D8 allData={allData} />}
-              {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && <F1D9 allData={allData} />}
+              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ_15" && (
+                <F1D5 />
+              )}
+              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_16" && (
+                <F1D6 allData={allData} />
+              )}
+              {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
+                <F1D7 allData={allData} />
+              )}
+              {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && (
+                <F1D8 allData={allData} />
+              )}
+              {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && (
+                <F1D9 allData={allData} />
+              )}
 
               {/* file 2======= */}
               {selected === "Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020" && <F2D1 />}
@@ -1516,7 +1168,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020" && <F3D2 />}
               {selected === "άρθρο 4 της ΥΑ ΦΕ" && <F3D3 />}
               {selected === "ΛΕΒΗΤΑΣ Φ.Α" && <F3D4 />}
-              {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΠΙΒΛΕΨΗΣ ΕΡΓΟΥ" && <F3D5 allData={allData} />}
+              {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΠΙΒΛΕΨΗΣ ΕΡΓΟΥ" && (
+                <F3D5 allData={allData} />
+              )}
               {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && <F3D6 />}
 
               {/* file 4======== */}
@@ -1532,49 +1186,63 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected ===
                 "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ" && (
-                  <F4D7 />
-                )}
-              {selected === "_ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && <F4D8 allData={allData} />}
-              {selected === "_ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && <F4D9 allData={allData} />}
+                <F4D7 />
+              )}
+              {selected === "_ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
+                <F4D8 allData={allData} />
+              )}
+              {selected === "_ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
+                <F4D9 allData={allData} />
+              )}
               {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && <F4D11 />}
 
               {/* file 5======== */}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && <F5D1 />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ" && <F5D2 />}
-              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53" && <F5D3 />}
+              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53" && (
+                <F5D3 />
+              )}
 
               {/* file 6======== */}
               {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61" && <F6D1 />}
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_62" && (
-                  <F6D2 />
-                )}
+                <F6D2 />
+              )}
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_63" && (
-                  <F6D3 />
-                )}
+                <F6D3 />
+              )}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ Α_64" && <F6D4 />}
               {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_65" && <F6D7 />}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_66" && <F6D8 allData={allData} />}
-              {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_67" && <F6D9 allData={allData} />}
-              {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_68" && <F6D10 allData={allData} />}
-              
+              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_66" && (
+                <F6D8 allData={allData} />
+              )}
+              {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_67" && (
+                <F6D9 allData={allData} />
+              )}
+              {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_68" && (
+                <F6D10 allData={allData} />
+              )}
+
               {/* file 7======== */}
               {selected ===
                 "ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ ΔΙΑΤΑΞΕΩΝ" && (
-                  <F7D1 allData={allData} />
-                )}
+                <F7D1 allData={allData} />
+              )}
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
-                  <F7D2 />
-                )}
+                <F7D2 />
+              )}
               {selected === "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_73" && <F7D3 />}
               {selected === "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_74" && <F7D4 />}
               {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && <F7D5 />}
 
               {/* file 8======== */}
               {selected === "_ΚΟΠΗ ΠΕΥΚΩΝ" && <F8D1 />}
-              {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ_" && <F8D2 allData={allData} />}
+              {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ_" && (
+                <F8D2 allData={allData} />
+              )}
               {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && <F8D3 />}
 
               {/* file 9======== */}
@@ -1585,11 +1253,15 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {/* file 10=== */}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_" && <F10D1 />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102" && <F10D2 />}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ" && <F10D3 allData={allData} />}
+              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ" && (
+                <F10D3 allData={allData} />
+              )}
 
               {/* file 11  */}
               {selected === "ΠΕΡΙΤΟΙΧΗΣΗΣ Π" && <F11D1 />}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΑΠΟΣΤΑΣΗ ΑΝΩ ΤΩΝ" && <F11D2 allData={allData} />}
+              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΑΠΟΣΤΑΣΗ ΑΝΩ ΤΩΝ" && (
+                <F11D2 allData={allData} />
+              )}
 
               {/* file 12  */}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_121" && <F12D1 />}
@@ -1599,16 +1271,28 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΠΙΣΙΝΑ COMPACT ΕΩΣ" && (
                 <F13D1 />
               )}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_132" && <F13D2 allData={allData} />}
-              {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ_133" && <F13D3 allData={allData} />}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ Η_Μ ΑΣΦΑΛΕΙΑ" && <F13D4 allData={allData} />}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΣΤΑΤΙΚΗ ΑΣΦΑΛΕΙΑ" && <F13D5 allData={allData} />}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_άρθρου 4 ΥΑ ΦΕΚ Β" && <F13D6 allData={allData} />}
+              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_132" && (
+                <F13D2 allData={allData} />
+              )}
+              {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ_133" && (
+                <F13D3 allData={allData} />
+              )}
+              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ Η_Μ ΑΣΦΑΛΕΙΑ" && (
+                <F13D4 allData={allData} />
+              )}
+              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΣΤΑΤΙΚΗ ΑΣΦΑΛΕΙΑ" && (
+                <F13D5 allData={allData} />
+              )}
+              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_άρθρου 4 ΥΑ ΦΕΚ Β" && (
+                <F13D6 allData={allData} />
+              )}
 
               {/* file 14  */}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_141" && <F14D1 />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_142" && <F14D2 />}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ" && <F14D3 allData={allData} />}
+              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ" && (
+                <F14D3 allData={allData} />
+              )}
 
               {/* file 15  */}
               {selected === "ΙΚΡΙΩΜΑΤΑ" && <F15D1 />}
