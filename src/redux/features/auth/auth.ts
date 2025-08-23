@@ -59,11 +59,14 @@ const authApi = baseUrlApi.injectEndpoints({
       }),
     }),
 
-    // user informatin catch
+    // user catch
     userInfo: build.query({
-      query: (id) => ({
+      query: ({ id, token }) => ({
         url: `/auth/${id}`,
         method: "get",
+        headers: {
+          Authorization: token,
+        },
       }),
     }),
   }),

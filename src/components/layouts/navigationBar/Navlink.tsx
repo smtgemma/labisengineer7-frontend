@@ -68,8 +68,6 @@ export default function MainNavLink({
   ) => {
     const hasSubItems = link.subItems && link.subItems.length > 0;
 
-    console.log(link);
-
     return (
       <div key={link.name}>
         <div
