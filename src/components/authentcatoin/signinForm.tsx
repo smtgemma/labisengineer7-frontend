@@ -175,12 +175,6 @@ export default function SigninForm() {
             )}
           </button>
 
-          <button
-            type="button"
-            className="w-full border border-gray-300 flex items-center justify-center gap-2 py-2 rounded-md mt-2"
-          >
-            <FcGoogle size={20} /> Continue with Google
-          </button>
           <div className="">
             <GoogleLogin
               size="large"
