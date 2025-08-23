@@ -13,11 +13,14 @@ const userProfileApi = baseUrlApi.injectEndpoints({
       }),
     }),
 
-    resetPassword: build.mutation({
-      query: (resetData) => ({
-        url: "/auth/reset-password",
-        method: "POST",
-        body: resetData,
+    updatePassword: build.mutation({
+      query: ({ body, token }) => ({
+        url: "/auth/change-password",
+        method: "PUT",
+        body,
+        headers: {
+          Authorization: `${token}`,
+        },
       }),
     }),
 
@@ -31,4 +34,5 @@ const userProfileApi = baseUrlApi.injectEndpoints({
   }),
 });
 
-export const { useProfileUpdateMutation } = userProfileApi;
+export const { useProfileUpdateMutation, useUpdatePasswordMutation } =
+  userProfileApi;

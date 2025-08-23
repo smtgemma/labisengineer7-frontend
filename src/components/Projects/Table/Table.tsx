@@ -1,8 +1,14 @@
 "use client";
 import React from "react";
 import TableRow from "@/components/Projects/Table/TableRow/TableRow";
-import { useGetAllProjectQuery } from "@/redux/features/projectService/projectServiceSlice";
+import {
+  useGetAllProjectQuery,
+  useProjectDeleteMutation,
+} from "@/redux/features/projectService/projectServiceSlice";
 import Loading from "@/components/Others/Loading";
+import Swal from "sweetalert2";
+import { toast } from "sonner";
+import tokenCatch from "@/lib/token";
 
 export interface TableData {
   createdOn: string;
@@ -17,12 +23,51 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ data }) => {
-  const { data: projects, isLoading } = useGetAllProjectQuery("project");
-  console.log(projects?.data);
+  const {
+    data: projects,
+    isLoading,
+    refetch,
+  } = useGetAllProjectQuery("project");
+
+  const token = tokenCatch();
+
+  const [projectDeleteData] = useProjectDeleteMutation();
 
   if (isLoading) {
     return <Loading />;
   }
+
+  // project delete function
+  const handleUserDelete = async (id: any) => {
+    console.log();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#017AFF",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await projectDeleteData({ id, token }).unwrap();
+          console.log(response);
+          if (response?.success) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+              confirmButtonColor: "#017AFF",
+            });
+            refetch();
+          }
+        } catch (error: any) {
+          toast.error(error?.data?.message);
+        }
+      }
+    });
+  };
   return (
     <div className="w-full overflow-auto rounded-lg shadow-sm">
       <table className="w-full">
@@ -46,8 +91,12 @@ const Table: React.FC<TableProps> = ({ data }) => {
 
         {/* Table Body */}
         <tbody className="bg-white">
-          {projects?.data?.map((row: any, index: number) => (
-            <TableRow key={index} data={row} />
+          {projects?.data?.projects.map((row: any, index: number) => (
+            <TableRow
+              key={index}
+              data={row}
+              handleUserDelete={handleUserDelete}
+            />
           ))}
         </tbody>
       </table>

@@ -32,11 +32,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={openSans.variable}>
         <Toaster position="top-center" expand={true} richColors />
-        <GoogleOAuthProvider clientId="959795390198-ijbhg4ob84kgulhod8iauk56iu9s779h.apps.googleusercontent.com">
-          <StoreProvider>
+        <StoreProvider>
+          <GoogleOAuthProvider clientId="152063447217-4avt3vgeievkml9pcuv15a4oi90843he.apps.googleusercontent.com">
             <Suspense fallback={<Loading />}>{children}</Suspense>
-          </StoreProvider>
-        </GoogleOAuthProvider>
+          </GoogleOAuthProvider>
+        </StoreProvider>
       </body>
     </html>
   );
