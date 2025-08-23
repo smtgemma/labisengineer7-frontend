@@ -1,8 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Camera } from "lucide-react";
+import { useUserInfoQuery } from "@/redux/features/auth/auth";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
+import Loading from "@/components/Others/Loading";
+import tokenCatch from "@/lib/token";
+import { jwtDecode } from "jwt-decode";
+import { useProfileUpdateMutation } from "@/redux/features/profile/profileSlice";
 
 interface AdminFormData {
   firstName: string;
@@ -14,11 +21,16 @@ interface AdminFormData {
   confirmPassword: string;
   userType: string;
   tesRegistration: string;
+  profile: FileList;
 }
 
 interface AdminProfileProps {
   className?: string;
 }
+
+type FormData = {
+  profile: FileList;
+};
 
 const AdminProfile = () => {
   const {
@@ -27,9 +39,77 @@ const AdminProfile = () => {
     formState: { errors },
   } = useForm<AdminFormData>();
 
+  const token = tokenCatch();
+  const [preview, setPreview] = useState<string | null>(null);
+  const [image, setImage] = useState<File | null>();
+  console.log(image);
+
+  // const user = useSelector((state: any) => state.user.userData);
+  // const [user, setUser] = useState<string | null>(null);
+
+  if (token) {
+    const decoded: string | null = jwtDecode(token || " ");
+
+    console.log(decoded);
+  }
+
+  const decoded: any = jwtDecode(token || " ");
+
+  const id = decoded.id;
+
+  const [userUpdate] = useProfileUpdateMutation();
+
   const handleSaveChanges = (data: AdminFormData) => {
     console.log("Admin profile updated:", data);
   };
+
+  // const onSubmit = async (data: FormData) => {
+  //   const file = data.profile[0]; // this is the uploaded file
+  //   const user = {
+  //     firstName: data.firstName,
+  //     lastName: data.lastName,
+  //     email: data.email,
+  //   };
+  //   console.log(user, "user");
+  //   const formData = new FormData();
+  //   formData.append("data", JSON.stringify(user));
+  //   formData.append("file", image);
+
+  //   const res = await userUpdate({ formData, token }).unwrap();
+
+  //   console.log(res);
+  // };
+
+  const onSubmit = async (data: AdminFormData) => {
+    const file = image[0];
+    console.log(file, "file");
+    const user = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: data.phone,
+    };
+
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(user));
+
+    // append file safely
+    if (file) {
+      formData.append("file", file);
+    }
+
+    const res = await userUpdate({ formData, token }).unwrap();
+    console.log(res);
+  };
+
+  const { data, isLoading } = useUserInfoQuery({ id, token });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  const user = data?.data;
+
+  console.log(user);
 
   // const handleChangePassword = (data: AdminFormData) => {
   //   console.log("Password change requested:", data);
@@ -47,31 +127,64 @@ const AdminProfile = () => {
                 Admin Information
               </h2>
 
-              {/* Profile Picture */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Profile Picture:
-                </label>
-                <div className="relative inline-block">
-                  <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
-                    <img
-                      src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop"
-                      alt="Profile"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="flex justify-end">
-                    <button className="absolute -bottom-1 -right-1 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors shadow-md border-2 border-white">
-                      <Camera size={14} className="text-white" />
-                    </button>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                {/* Profile Picture */}
+                <div className="mb-6">
+                  <div>
+                    {/* <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Profile Picture:
+                  </label> */}
+
+                    <div className="relative inline-block">
+                      {/* Profile Image */}
+
+                      {preview ? (
+                        <>
+                          <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+                            <img
+                              src={preview}
+                              alt="Profile"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+                            <img
+                              src={user?.profilePic}
+                              alt="Profile"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </>
+                      )}
+
+                      {/* File Input Trigger */}
+                      <label
+                        htmlFor="profile-upload"
+                        className="absolute -bottom-1 -right-1 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors shadow-md border-2 border-white cursor-pointer"
+                      >
+                        <Camera size={14} className="text-white" />
+                      </label>
+
+                      {/* Hidden File Input (Hook Form) */}
+                      <input
+                        id="profile-upload"
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        {...register("profile")}
+                        onChange={(e: any) => {
+                          if (e.target.files && e.target.files[0]) {
+                            setImage(e.target.files);
+                            setPreview(URL.createObjectURL(e.target.files[0]));
+                          }
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <form
-                onSubmit={handleSubmit(handleSaveChanges)}
-                className="space-y-4"
-              >
                 {/* First Name and Last Name */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -81,6 +194,7 @@ const AdminProfile = () => {
                     <input
                       type="text"
                       {...register("firstName")}
+                      defaultValue={user?.firstName}
                       className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                     />
                   </div>
@@ -91,6 +205,7 @@ const AdminProfile = () => {
                     <input
                       type="text"
                       {...register("lastName")}
+                      defaultValue={user?.lastName}
                       className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                     />
                   </div>
@@ -105,6 +220,7 @@ const AdminProfile = () => {
                     <input
                       type="email"
                       {...register("email")}
+                      defaultValue={user?.email}
                       className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                     />
                   </div>
@@ -115,6 +231,7 @@ const AdminProfile = () => {
                     <input
                       type="tel"
                       {...register("phone")}
+                      defaultValue={user?.phone}
                       className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                     />
                   </div>

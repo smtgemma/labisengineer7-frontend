@@ -6,7 +6,11 @@ export default function AboutUs() {
   return (
     <div id="about" className="bg-background">
       <Container>
-        <section className="flex flex-col md:flex-row items-center justify-between  px-6 py-16 md:px-20 gap-[86px]">
+        <section
+          data-aos="fade-up"
+          data-aos-anchor-placement="top-bottom"
+          className="flex flex-col md:flex-row items-center justify-between  px-6 py-16 md:px-20 gap-[86px]"
+        >
           {/* Left: Image */}
           <div className="w-full md:w-1/2">
             <Image

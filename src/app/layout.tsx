@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import Loading from "@/components/Others/Loading";
 import { Toaster } from "sonner";
 import StoreProvider from "./StoreProvider";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,9 +32,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={openSans.variable}>
         <Toaster position="top-center" expand={true} richColors />
-        <StoreProvider>
-          <Suspense fallback={<Loading />}>{children}</Suspense>
-        </StoreProvider>
+        <GoogleOAuthProvider clientId="959795390198-ijbhg4ob84kgulhod8iauk56iu9s779h.apps.googleusercontent.com">
+          <StoreProvider>
+            <Suspense fallback={<Loading />}>{children}</Suspense>
+          </StoreProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );
