@@ -63,26 +63,15 @@ export default function SigninForm() {
 
   // google login working for functonalti
   const handleSuccess = async (credentialResponse: any) => {
-    console.log("yesTonek= ", credentialResponse.credential);
-
+    // console.log("yesTonek= ", credentialResponse.credential);
     try {
-      // Send the credential to your server
-      // const response = await axios.post(
-      //   `https://api.buildai.gr/api/v1/auth/google-login`,
-      //   {
-      //     googleToken: credentialResponse.credential,
-      //   }
-      // );
-
       const googleToken = {
         googleToken: credentialResponse.credential,
       };
       const response = await googleSignIn(googleToken).unwrap();
       console.log("response", response);
-      // const response = await googleSignIn().unwrap()
 
       if (response?.success) {
-        // localStorage.setItem("accessToken", response?.data?.data?.accessToken);
         console.log("accessToken", response?.data?.accessToken);
         localStorage.setItem("accessToken", response?.data?.accessToken);
         router.push("/new-project");

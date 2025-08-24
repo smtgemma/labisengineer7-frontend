@@ -9,7 +9,6 @@ const subscriptionPlanApi = baseUrlApi.injectEndpoints({
       }),
     }),
 
-    // create subscription
     //  create Subscirption Plans
     createSubscirptionPlans: build.mutation({
       query: ({ planIdData, accessToken }) => ({
@@ -34,6 +33,14 @@ const subscriptionPlanApi = baseUrlApi.injectEndpoints({
         },
       }),
     }),
+
+    // get builing history
+    getBuilingHistory: build.query({
+      query: () => ({
+        url: "/subscriptions/billing-info",
+        method: "get",
+      }),
+    }),
   }),
 });
 
@@ -41,4 +48,5 @@ export const {
   useGetThePlanQuery,
   useCreateSubscirptionPlansMutation,
   useCreateBllingIngfoMutation,
+  useGetBuilingHistoryQuery,
 } = subscriptionPlanApi;

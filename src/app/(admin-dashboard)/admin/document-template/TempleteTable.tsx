@@ -6,6 +6,12 @@ import Link from "next/link";
 import { useGetMyDocumentPointQuery } from "@/redux/features/adminOverView/adminUserSlice";
 import tokenCatch from "@/lib/token";
 import moment from "moment";
+import ActionButtonOption from "./Action";
+import Swal from "sweetalert2";
+import { toast } from "sonner";
+import { useDeleteServiceMutation } from "@/redux/features/createService/serviceSlice";
+import Loading from "@/components/Others/Loading";
+import { useRouter } from "next/navigation";
 
 const templatesData = [
   {
@@ -26,19 +32,54 @@ const templatesData = [
   },
 ];
 
-const ActionButton = () => (
-  <button className="p-1 hover:bg-gray-100 rounded transition-colors">
-    <MoreHorizontal size={16} className="text-gray-500" />
-  </button>
-);
-
 export default function SimpleTemplatesTable() {
   console.log("yes");
   const token = tokenCatch();
-  const { data, isLoading } = useGetMyDocumentPointQuery(token);
+  const router = useRouter();
+  const { data, isLoading, refetch } = useGetMyDocumentPointQuery(token);
+  const [deleteService] = useDeleteServiceMutation();
 
-  console.log(data);
+  if (isLoading) {
+    return <Loading />;
+  }
+
   const allService = data?.data;
+
+  const handleProjectEdit = (id: string) => {
+    console.log(id);
+    router.push(`/admin/document-template/edit-template?id=${id}`);
+  };
+
+  const handleProjectDelete = async (id: string) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#017AFF",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await deleteService({ id, token }).unwrap();
+          console.log(response);
+          if (response?.success) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+              confirmButtonColor: "#017AFF",
+            });
+            refetch();
+          }
+        } catch (error: any) {
+          toast.error(error?.data?.message);
+        }
+      }
+    });
+  };
   return (
     <div id="testimonials" className="md:px-12 min-h-screen">
       {/* Header */}
@@ -94,9 +135,13 @@ export default function SimpleTemplatesTable() {
                     {moment(row.updatedAt).format("LL")}
                   </div>
                   <div className="col-span-3">{row.serviceDescription}</div>
-                  <div className="col-span-2">Admin</div>
-                  <div className="col-span-1">
-                    <ActionButton />
+                  <div className="col-span-2 text-center">Admin</div>
+                  <div className="col-span-1 text-center">
+                    {/* <ActionButton /> */}
+                    <ActionButtonOption
+                      onEdit={() => handleProjectEdit(row.id)}
+                      onDelete={() => handleProjectDelete(row.id)}
+                    />
                   </div>
                 </div>
               </div>
