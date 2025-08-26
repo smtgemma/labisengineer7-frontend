@@ -12,6 +12,7 @@ import {
 import type { NavLink } from "../types";
 import Logo from "@/components/shared/Logo";
 import { toast } from "sonner";
+import Cookies from "js-cookie";
 
 import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
 
@@ -35,7 +36,7 @@ export default function MainNavLink({
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();
-  console.log(navLink);
+
   const isActive = (href: string) => {
     const cleanHref = href.split("?")[0];
     const cleanPathname = pathname.split("?")[0];
@@ -51,6 +52,7 @@ export default function MainNavLink({
 
     setTimeout(() => {
       localStorage.removeItem("accessToken");
+      // Cookies.remove("accessToken");
       toast.success("Logged out successfully");
       setIsLoading(false);
       router.push("/signIn"); // optional redirect

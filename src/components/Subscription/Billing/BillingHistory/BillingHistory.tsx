@@ -1,48 +1,19 @@
+"use client";
 import React from "react";
-import BillingTableBody, {
-  BillingData,
-} from "@/components/Subscription/Billing/BillingTableBody/BillingTableBody";
+import BillingTableBody from "@/components/Subscription/Billing/BillingTableBody/BillingTableBody";
+import { useGetBuilingHistoryQuery } from "@/redux/features/subscription/subscripionPlanSlice";
+import tokenCatch from "@/lib/token";
 
 interface BillingHistoryProps {
   className?: string;
 }
 
 const BillingHistory: React.FC<BillingHistoryProps> = ({ className = "" }) => {
-  const billingData: BillingData[] = [
-    {
-      id: "1",
-      date: "July 1, 2024",
-      plan: "Professional Plan",
-      amount: "€29.00",
-      status: "Paid",
-      renewalDate: "July 1, 2025",
-    },
-    {
-      id: "2",
-      date: "June 1, 2024",
-      plan: "Professional Plan",
-      amount: "€29.00",
-      status: "Paid",
-      renewalDate: "June 1, 2025",
-    },
-    {
-      id: "3",
-      date: "May 1, 2024",
-      plan: "Starter Plan",
-      amount: "€0.00",
-      status: "Paid",
-      renewalDate: "May 1, 2025",
-    },
-    {
-      id: "4",
-      date: "April 1, 2024",
-      plan: "Professional Plan",
-      amount: "€29.00",
-      status: "Pending",
-      renewalDate: "April 1, 2025",
-    },
-  ];
+  const token = tokenCatch();
+  console.log(token);
 
+  const { data } = useGetBuilingHistoryQuery(token);
+  console.log(data);
   return (
     <section className="overflow-auto rounded-lg border border-gray-200 mt-6">
       <table className="w-full">
@@ -64,11 +35,11 @@ const BillingHistory: React.FC<BillingHistoryProps> = ({ className = "" }) => {
               Renewal Date
             </th>
             <th className="px-6 py-3 text-left text-sm font-medium text-white">
-              Invoice
+              Dredits
             </th>
           </tr>
         </thead>
-        <BillingTableBody data={billingData} />
+        <BillingTableBody data={data?.data} />
       </table>
     </section>
   );

@@ -116,6 +116,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const [ownerInfoShow4, setOwnerInfoShow4] = useState<boolean>(true);
   const [ownerInfoShow5, setOwnerInfoShow5] = useState<boolean>(true);
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+  console.log("courrentData", currentStep);
   const { register, control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       owners: stepByStepData.ownerBaseData.map((owner: any) => ({
@@ -159,11 +160,10 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
 
   const accessToken = tokenCatch();
-
+  console.log("use");
   const onSubmitAiDataSend = async (data: any) => {
     // Here you can send data to API
     console.log("Form Data:", data);
-    console.log("wnaer", fields);
     const DataPost = {
       serviceId: projectData.id,
       createdById: "68972468c6c27d509568985f",
@@ -200,17 +200,26 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
     }
   };
   console.log(ownerData[0].id_number);
+  console.log(currentStep);
 
   useEffect(() => {
-    if (
-      currentStep === 4 && // ✅ only when step = 4
-      filesData?.length && // ✅ only if files exist
-      !hasSubmittedRef.current // ✅ only if not already submitted
-    ) {
+    if (currentStep === 4 && filesData?.length && !hasSubmittedRef.current) {
       hasSubmittedRef.current = true; // lock it
       handleSubmit(onSubmitAiDataSend)();
     }
   }, [currentStep]);
+  // useEffect(() => {
+  //   console.log("Effect ran", {
+  //     currentStep,
+  //     filesData,
+  //     hasSubmitted: hasSubmittedRef.current,
+  //   });
+
+  //   if (currentStep === 4 && filesData?.length && !hasSubmittedRef.current) {
+  //     hasSubmittedRef.current = true;
+  //     handleSubmit(onSubmitAiDataSend)();
+  //   }
+  // }, [currentStep, filesData]);
 
   return (
     <>

@@ -103,15 +103,15 @@ const WorkflowDemo: React.FC = () => {
     setShowExtractionData(false);
     setUploadedFiles([]);
     setExtractedData(null);
-    setSelectedOwners([
-      {
-        id: "1",
-        firstName: "Giannis",
-        surname: "Papadopoulos",
-        fatherName: "Nikos",
-        vatNo: "VAT-12213484",
-      },
-    ]);
+    // setSelectedOwners([
+    //   {
+    //     id: "1",
+    //     firstName: "Giannis",
+    //     surname: "Papadopoulos",
+    //     fatherName: "Nikos",
+    //     vatNo: "VAT-12213484",
+    //   },
+    // ]);
     setSelectedActions([]);
     setInputExtractedData([]);
     setIsCompleted(false);
