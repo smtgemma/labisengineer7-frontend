@@ -25,7 +25,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
   const dispatch = useDispatch();
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
-  const subCategoryData = stepByStepData.subcategory;
+  const projectCodeId = stepByStepData.projectIdCode;
 
   const toggleAction = (action: string) => {
     if (selectedActions.includes(action)) {
@@ -45,7 +45,8 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
   dispatch(setActionSelectName(selectedActionsValue));
 
-  const projectAndUserHexCode = userData?.hexToken + "-8271";
+  const projectAndUserHexCode =
+    userData?.hexToken + `-${projectCodeId?.projectCode}`;
 
   // auto filed funtion
   // const userId = "bihenda-chine-9981 asdfa";

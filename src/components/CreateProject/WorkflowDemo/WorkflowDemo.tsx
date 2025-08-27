@@ -110,46 +110,46 @@ const WorkflowDemo: React.FC = () => {
     setShowExtractionData(false);
   };
 
-  const renderStepContent = () => {
-    if (currentStep === 2 && showExtractionData) {
-      return <AIExtractionData onContinue={handleExtractionDataContinue} />;
-    }
+  // const renderStepContent = () => {
+  //   if (currentStep === 2 && showExtractionData) {
+  //     return <AIExtractionData onContinue={handleExtractionDataContinue} />;
+  //   }
 
-    switch (currentStep) {
-      case 1:
-        return (
-          <FileUpload
-            onFilesChange={setUploadedFiles}
-            uploadedFiles={uploadedFiles}
-          />
-        );
-      case 2:
-        return (
-          <AIExtraction files={uploadedFiles} extractedData={extractedData} />
-        );
-      case 3:
-        return <OwnerSelection />;
-      case 4:
-        return (
-          <ActionSelection
-            selectedActions={selectedActions}
-            onActionsChange={setSelectedActions}
-          />
-        );
-      case 5:
-        return (
-          <FinalOverview
-            files={uploadedFiles}
-            extractedData={extractedData}
-            selectedOwners={selectedOwners}
-            selectedActions={selectedActions}
-            onComplete={handleComplete}
-          />
-        );
-      default:
-        return null;
-    }
-  };
+  //   switch (currentStep) {
+  //     case 1:
+  //       return (
+  //         <FileUpload
+  //           onFilesChange={setUploadedFiles}
+  //           uploadedFiles={uploadedFiles}
+  //         />
+  //       );
+  //     case 2:
+  //       return (
+  //         <AIExtraction files={uploadedFiles} extractedData={extractedData} />
+  //       );
+  //     case 3:
+  //       return <OwnerSelection />;
+  //     case 4:
+  //       return (
+  //         <ActionSelection
+  //           selectedActions={selectedActions}
+  //           onActionsChange={setSelectedActions}
+  //         />
+  //       );
+  //     case 5:
+  //       return (
+  //         <FinalOverview
+  //           files={uploadedFiles}
+  //           extractedData={extractedData}
+  //           selectedOwners={selectedOwners}
+  //           selectedActions={selectedActions}
+  //           onComplete={handleComplete}
+  //         />
+  //       );
+  //     default:
+  //       return null;
+  //   }
+  // };
 
   if (isCompleted) {
     return (
@@ -199,7 +199,7 @@ const WorkflowDemo: React.FC = () => {
       <div className="flex-1 p-12">
         <div className="max-w-6xl">
           {/* Step Content */}
-          <div className="mb-8">{renderStepContent()}</div>
+          <div className="mb-8">{}</div>
 
           {/* Footer with Next Button - Hide for extraction data page and final overview */}
           {!(currentStep === 2 && showExtractionData) && currentStep < 5 && (

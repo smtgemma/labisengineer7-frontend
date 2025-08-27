@@ -11,8 +11,6 @@ import FinalOverview from "@/components/CreateProject/FinalOverview/FinalOvervie
 import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
 import AIExtractionDataInPut from "@/components/CreateProject/aAIExtractionData/AIExtractionData";
 
-import { setImageFile } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-
 const workflowSteps = [
   {
     id: 1,
@@ -53,7 +51,9 @@ const WorkflowDemo: React.FC = () => {
   const [showExtractionData, setShowExtractionData] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [extractedData, setExtractedData] = useState<any>(null);
+  const [ownerNumber, setOwnerNumber] = useState<any>(null);
   const [inputExtractedData, setInputExtractedData] = useState<string[]>([]);
+  // const [isAi, set] = useState<string[]>([]);
   const [selectedOwners, setSelectedOwners] = useState<Owner[]>([
     {
       id: "1",
@@ -77,16 +77,19 @@ const WorkflowDemo: React.FC = () => {
     }
   };
 
+  console.log(ownerNumber);
+  console.log("currentStep", currentStep);
+
   const canProceed = () => {
     switch (currentStep) {
       case 1:
         return uploadedFiles.length > 0;
       case 2:
-        return extractedData !== null;
+        return currentStep < extractedData;
       case 3:
-        return selectedOwners.length > 0;
+        return true;
       case 5:
-        return selectedActions.length > 0;
+        return true;
       case 6:
         return true;
       default:
@@ -136,7 +139,11 @@ const WorkflowDemo: React.FC = () => {
         );
       case 2:
         return (
-          <AIExtraction files={uploadedFiles} extractedData={extractedData} />
+          <AIExtraction
+            files={uploadedFiles}
+            extractedData={extractedData}
+            setExtractedData={setExtractedData}
+          />
         );
       case 3:
         return <OwnerSelection />;
@@ -219,7 +226,7 @@ const WorkflowDemo: React.FC = () => {
             <div className="flex justify-end">
               <button
                 onClick={nextStep}
-                // disabled={!canProceed()}
+                disabled={!canProceed()}
                 className="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2 font-medium text-lg"
               >
                 <span>Next</span>

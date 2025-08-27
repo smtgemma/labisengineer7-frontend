@@ -14,11 +14,13 @@ import { div } from "framer-motion/client";
 interface AIExtractionProps {
   files: File[];
   extractedData: any;
+  setExtractedData: any;
 }
 
 const AIExtraction: React.FC<AIExtractionProps> = ({
   files,
   extractedData,
+  setExtractedData,
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isCompleted, setIsCompleted] = useState<boolean>(false); // ✅ NEW
@@ -33,37 +35,30 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   const permit = files[2];
   const Law = files[3];
 
-  // const [time, setTime] = useState(0); // start at 0
+  const [time, setTime] = useState(0); // start at 0
 
-  // useEffect(() => {
-  //   if (time >= 120) return; // stop at 2 minutes
+  useEffect(() => {
+    if (time >= 120) return; // stop at 2 minutes
 
-  //   const timer = setInterval(() => {
-  //     setTime((prev) => prev + 1);
-  //   }, 1000);
+    const timer = setInterval(() => {
+      setTime((prev) => prev + 1);
+    }, 1000);
 
-  //   return () => clearInterval(timer);
-  // }, [time]);
+    return () => clearInterval(timer);
+  }, [time]);
 
-  // const minutes = Math.floor(time / 60);
-  // const seconds = time % 60;
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
 
   // ai data extract
-  dispatch(setImageFile(files || []));
+  dispatch(setImageFile(files));
+
+  // );
   const startExtraction = async () => {
     if (files.length === 0) return;
     setIsProcessing(true);
     setProgress(0);
     setIsCompleted(false);
-    // dispatch(
-    //   setImageFile(
-    //     files.map((file) => ({
-    //       name: file.name,
-    //       size: file.size,
-    //       type: file.type,
-    //     }))
-    //   )
-    // );
 
     const formData = new FormData();
 
@@ -97,6 +92,7 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
             }
             return prev + Math.random() * 15;
           });
+          setExtractedData(3);
         }, 200);
       }
     } catch (error: any) {
@@ -134,13 +130,13 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
                 <Lottie animationData={aiLoadingExtract} loop={true} />
               </div>
               {/* timeer  */}
-              {/* <div className="flex items-center justify-center text-black mt-10">
+              <div className="flex items-center justify-center text-black mt-10">
                 <div className="text-center">
                   <p className="text-6xl mt-4 font-mono">
                     {minutes}:{seconds.toString().padStart(2, "0")}
                   </p>
                 </div>
-              </div> */}
+              </div>
             </div>
           ) : (
             <>

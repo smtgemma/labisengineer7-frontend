@@ -34,7 +34,7 @@ interface AIDataState {
 }
 
 interface OwnerSelectionProps {
-  selectedOwners: Owner[];
+  allselectedOwners: Owner[];
   onOwnersChange: (owners: Owner[]) => void;
 }
 
@@ -169,6 +169,8 @@ const OwnerSelection = () => {
     } else {
       // otherwise add it
       setSelectedOwners([...selectedOwners, { ...owner, selected: true }]);
+
+      // setOwnerNumber(4);
     }
   };
 

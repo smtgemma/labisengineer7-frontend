@@ -55,6 +55,13 @@ export interface FormattedData {
   document_of_anticipation: string;
 }
 
+interface FileMeta {
+  name: string;
+  type: string;
+  size: number;
+  preview: string;
+}
+
 interface Data {
   total_files: number;
   successful_extractions: number;
@@ -67,7 +74,7 @@ interface AiExtractState {
   ownerBaseData?: any;
   projectId?: {} | undefined;
   subcategory?: [];
-  multiFiles?: [] | { name: string; size: number; type: string }[];
+  multiFiles?: File[];
   aiInputData?: any;
   actionSelection?: [];
   projectIdCode?: string | null;
@@ -107,15 +114,14 @@ const aiExtractDataSlice = createSlice({
     setMultipleSubcategory: (state, action) => {
       state.subcategory = action.payload;
     },
-    // setImageFile: (state, action) => {
-    //   state.multiFiles = action.payload;
-    // },
-    setImageFile: (
-      state,
-      action: PayloadAction<{ name: string; size: number; type: string }[]>
-    ) => {
+    setImageFile: (state, action) => {
       state.multiFiles = action.payload;
     },
+    // setImageFile: (state, action: PayloadAction<FileMeta[]>) => {
+    //   console.log(action.payload);
+    //   state.multiFiles = action.payload;
+    // },
+
     setAiExtreactAndInputData: (state, action) => {
       state.aiInputData = action.payload;
     },
