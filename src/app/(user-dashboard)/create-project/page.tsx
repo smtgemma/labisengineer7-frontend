@@ -88,6 +88,8 @@ const WorkflowDemo: React.FC = () => {
         return currentStep < extractedData;
       case 3:
         return true;
+      case 4:
+        return true;
       case 5:
         return true;
       case 6:

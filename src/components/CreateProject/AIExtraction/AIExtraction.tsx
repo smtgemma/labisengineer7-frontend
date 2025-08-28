@@ -4,12 +4,13 @@ import { usePostFileAiDataExtractMutation } from "@/redux/features/AI-intrigrato
 import Lottie from "lottie-react";
 import aiLoadingExtract from "../../../../public/aiFIleLoadingThree.json";
 import { toast } from "sonner";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setAiExtractCatchData,
   setImageFile,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { div } from "framer-motion/client";
+import { RootState } from "@/redux/store";
 
 interface AIExtractionProps {
   files: File[];
@@ -17,48 +18,127 @@ interface AIExtractionProps {
   setExtractedData: any;
 }
 
+const projectDescriptionAll = [
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6:
+      "+ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ 'Α-4' ΤΟΥ Α’ ΟΡΟΦΟΥ ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΚΤΙΡΙΟΥ/ΑΚΙΝΗΤΟΥ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1:
+      "ΑΛΛΑΓΗ ΧΡΗΣΗΣ ΑΠΟ ΚΑΤΑΣΤΗΜΑ ΣΕ ΚΑΤΟΙΚΙΑ ΣΤΟ Κ-1 ΚΑΤΑΣΤΗΜΑ ΤΟΥ ΙΣΟΓΕΙΟΥ ΟΡΟΦΟΥ ΑΛΛΑΓΗ ΧΡΗΣΗΣ ΑΠΟ ΓΡΑΦΕΙΟ ΣΕ ΚΑΤΟΙΚΙΑ ΣΤΟ Ε-2 ΓΡΑΦΕΙΟ ΤΟΥ Ε’ ΟΡΟΦΟΥΑΛΛΑΓΗ ΧΡΗΣΗΣ ΚΤΙΡΙΟΥ ΑΠΟ ....... ΣΕ .......",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5:
+      "ΕΡΓΑΣΙΕΣ ΕΠΙΣΚΕΥΗΣ & ΧΡΩΜΑΤΙΣΜΩΝ ΟΨΕΩΝ ΚΤΙΡΙΟΥ ΜΕ ΧΡΗΣΗ ΙΚΡΙΩΜΑΤΩΝΕΡΓΑΣΙΕΣ ΕΠΙΣΚΕΥΗΣ & ΧΡΩΜΑΤΙΣΜΩΝ ΟΨΕΩΝ ΣΕ ΠΟΛΥΩΡΟΦΗ ΟΙΚΟΔΟΜΗ ΜΕ ΧΡΗΣΗ ΙΚΡΙΩΜΑΤΩΝ",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΤΟΠΟΘΕΤΗΣΗ_ΙΚΡΙΩΜΑΤΩΝ_15:
+      "- ΤΟΠΟΘΕΤΗΣΗ ΙΚΡΙΩΜΑΤΩΝ ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ “1-4” ΤΟΥ ΙΣΟΓΕΙΟΥ ΟΡΟΦΟΥ - ΤΟΠΟΘΕΤΗΣΗ ΙΚΡΙΩΜΑΤΩΝ ΣΕ ΟΙΚΟΔΟΜΗ",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10:
+      " ΕΠΕΜΒΑΣΕΙΣ ΣΤΙΣ ΟΨΕΙΣ & ΝΕΑ ΑΝΟΙΓΜΑΤΑ ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ “Α-4” ΤΟΥ Α’ ΟΡΟΦΟΥ ΕΠΕΜΒΑΣΕΙΣ ΣΤΙΣ ΟΨΕΙΣ ΚΤΙΡΙΟΥ & ΝΕΑ ΑΝΟΙΓΜΑΤΑ",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14: "",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2:
+      "- ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ ΚΤΙΡΙΟΥ - ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ ΑΚΙΝΗΤΟΥ",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΡΜΟΠΡΟΖΩΗΣ_7:
+      "ΤΟΠΟΘΕΤΗΣΗ ΕΞΩΤΕΡΙΚΗΣ ΘΕΡΜΟΜΟΝΩΣΗΣ ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ “Α-4” ΤΟΥ Α’ ΟΡΟΦΟΥ -ΤΟΠΟΘΕΤΗΣΗ ΕΞΩΤΕΡΙΚΗΣ ΘΕΡΜΟΜΟΝΩΣΗΣ ΣΕ ΚΤΙΡΙΟ/ΟΙΚΟΔΟΜΗ",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΥΤΟΝΟΜΟ_ΣΥΣΤΗΜΑ_ΕΡΓΑΣΙΑΣ_3:
+      "- ΤΟΠΟΘΕΤΗΣΗ ΑΥΤΟΝΟΜΟΥ ΣΥΣΤΗΜΑΤΟΣ ΘΕΡΜΑΝΣΗΣ (ΦΥΣΙΚΟ ΑΕΡΙΟ) ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ “Ι-4” ΤΟΥ ΙΣΟΓΕΙΟΥ ΟΡΟΦΟΥ - ΤΟΠΟΘΕΤΗΣΗ ΑΥΤΟΝΟΜΟΥ ΣΥΣΤΗΜΑΤΟΣ ΘΕΡΜΑΝΣΗΣ (ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ) ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ “Ι-4” ΤΟΥ ΙΣΟΓΕΙΟΥ ΟΡΟΦΟΥ- ΤΟΠΟΘΕΤΗΣΗ ΑΥΤΟΝΟΜΟΥ ΣΥΣΤΗΜΑΤΟΣ ΘΕΡΜΑΝΣΗΣ ΣΕ ΟΙΚΟΔΟΜΗ/ΚΤΙΡΙΟ",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΙΣΙΝΑ_COMPACT_ΕΩΣ_50_Τ_Μ_13:
+      " ΚΑΤΑΣΚΕΥΗ ΑΣΚΕΠΟΥΣ ΔΕΞΑΜΕΝΗΣ Ή ΠΙΣΙΝΑΣ COMPACT ΜΕΧΡΙ 50 Τ.Μ.",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΚΟΙΝΗ_ΔΡΑΣΗ_ΕΝΤΟΣ_ΟΙΚΟΠΕΔΟΥ_8:
+      "ΕΡΓΑΣΙΕΣ ΚΟΠΗΣ ΔΕΝΤΡΩΝ ΣΕ ΑΚΑΛΥΠΤΟ ΧΩΡΟ ΕΝΤΟΣ ΟΙΚΟΠΕΔΟΥ/ΓΗΠΕΔΟΥ",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΕΙΤΟΥΡΓΙΚΗ_ΣΥΝΕΧΗΣ_ΧΡΟΝΟΣ_9:
+      "- ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ “1-4” ΤΟΥ ΙΣΟΓΕΙΟΥ ΟΡΟΦΟΥ ΣΕ ΔΥΟ (2) ΝΕΕΣ ΙΔΙΟΚΤΗΣΙΕΣ - ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ ΣΤΟ ΚΑΤΑΣΤΗΜΑ “Κ-1” ΤΟΥ ΙΣΟΓΕΙΟΥ ΟΡΟΦΟΥ ΣΕ ΔΥΟ (2) ΝΕΕΣ ΙΔΙΟΚΤΗΣΙΕΣ - ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ ΣΤΟ ΓΡΑΦΕΙΟ “Δ-1” ΤΟΥ Δ’ ΟΡΟΦΟΥ ΣΕ ΔΥΟ (2) ΝΕΕΣ ΙΔΙΟΚΤΗΣΙΕΣ",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΕΡΙΦΡΑΞΗ_ΕΚΤΟΣ_ΞΕΛΟΥ_11:
+      "- ΠΕΡΙΦΡΑΞΗ ΟΙΚΟΠΕΔΟΥ/ΓΗΠΕΔΟΥ ΜΕ ΛΙΘΟΔΟΜΗ & ΕΛΑΦΡΙΑ ΚΑΤΑΣΚΕΥΗ - ΠΕΡΙΦΡΑΞΗ ΟΙΚΟΠΕΔΟΥ/ΓΗΠΕΔΟΥ ΜΕ ΠΡΟΧΕΙΡΗ ΚΑΤΑΣΚΕΥΗ/ΣΥΡΜΑΤΟΠΛΕΓΜΑ",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΕΡΙΦΡΑΞΗ_ΕΝΤΟΣ_ΞΕΛΟΥ_12:
+      " ΠΕΡΙΦΡΑΞΗ ΟΙΚΟΠΕΔΟΥ/ΓΗΠΕΔΟΥ ΜΕ ΠΡΟΧΕΙΡΗ ΚΑΤΑΣΚΕΥΗ/ΣΥΡΜΑΤΟΠΛΕΓΜΑ",
+  },
+  {
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟ_4: "ΛΕΙΤΟΥΡΓΙΚΗ ΣΥΝΕΝΩΣΗ ΧΩΡΩΝ",
+  },
+];
+
 const AIExtraction: React.FC<AIExtractionProps> = ({
   files,
   extractedData,
   setExtractedData,
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [isCompleted, setIsCompleted] = useState<boolean>(false); // ✅ NEW
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [progress, setProgress] = useState(0);
-
+  const [time, setTime] = useState(0);
   const dispatch = useDispatch();
 
   const [aiFileUpload, { isLoading }] = usePostFileAiDataExtractMutation();
+
+  const input = useSelector((state: any) => state.aiData.subcategory);
+
+  // --- Matching process ---
+  const allDescriptions = Object.values(input)
+    .flat()
+    .map((v: any) => v.toString().trim());
+
+  // const filteredValues = projectDescriptionAll
+  //   .filter((obj) =>
+  //     Object.keys(obj).some((key) => allDescriptions.includes(key))
+  //   )
+  //   .map((obj) => {
+  //     const key = Object.keys(obj).find((k) => allDescriptions.includes(k));
+  //     return obj[key];
+  //   });
+
+  const description: string = projectDescriptionAll
+    .filter((obj) => allDescriptions.includes(Object.keys(obj)[0]))
+    .map((obj) => Object.values(obj)[0])
+    .join(" ");
 
   const ktimatologio = files[0];
   const contract = files[1];
   const permit = files[2];
   const Law = files[3];
 
-  const [time, setTime] = useState(0); // start at 0
-
-  useEffect(() => {
-    if (time >= 120) return; // stop at 2 minutes
-
+  // timer function
+  const timerControling = () => {
+    if (time >= 120) return;
     const timer = setInterval(() => {
       setTime((prev) => prev + 1);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [time]);
+  };
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
-  // ai data extract
-  dispatch(setImageFile(files));
-
-  // );
   const startExtraction = async () => {
+    dispatch(setImageFile(files));
+
     if (files.length === 0) return;
     setIsProcessing(true);
     setProgress(0);
     setIsCompleted(false);
+    timerControling();
 
     const formData = new FormData();
 
@@ -67,13 +147,7 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     if (permit) formData.append("permit", permit);
     if (Law) formData.append("law4495", Law);
 
-    formData.append(
-      "project_descriptions",
-      JSON.stringify(
-        "ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ A-4 ΤΟΥ Α' ΟΡΟΦΟΥ"
-      )
-    );
-    formData.append("sub_categories", "sdfasdasd");
+    formData.append("project_descriptions", JSON.stringify(description));
 
     try {
       const res = await aiFileUpload(formData).unwrap();
