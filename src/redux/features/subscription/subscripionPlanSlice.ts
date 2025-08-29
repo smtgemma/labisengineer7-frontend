@@ -9,7 +9,6 @@ const subscriptionPlanApi = baseUrlApi.injectEndpoints({
       }),
     }),
 
-    // create subscription
     //  create Subscirption Plans
     createSubscirptionPlans: build.mutation({
       query: ({ planIdData, accessToken }) => ({
@@ -34,6 +33,36 @@ const subscriptionPlanApi = baseUrlApi.injectEndpoints({
         },
       }),
     }),
+
+    // get builing history
+    getBuilingHistory: build.query({
+      query: (accessToken) => ({
+        url: "/subscriptions/billing-info",
+        method: "get",
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+      }),
+    }),
+
+    // // get builing history
+    // getBuilingHistory: build.query({
+    //   query: () => ({
+    //     url: "/subscriptions/billing-info",
+    //     method: "get",
+    //   }),
+    // }),
+
+    // package by user
+    getPlan: build.query({
+      query: (accessToken) => ({
+        url: "/subscriptions/my-subscription",
+        method: "get",
+        headers: {
+          Authorization: `${accessToken}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -41,4 +70,6 @@ export const {
   useGetThePlanQuery,
   useCreateSubscirptionPlansMutation,
   useCreateBllingIngfoMutation,
+  useGetBuilingHistoryQuery,
+  useGetPlanQuery,
 } = subscriptionPlanApi;

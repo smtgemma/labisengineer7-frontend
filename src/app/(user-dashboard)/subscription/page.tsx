@@ -95,6 +95,7 @@ const subscription: React.FC = () => {
               planName={plan.planName}
               planType={plan.planType}
               permissions={plan.features}
+              description={plan.description}
               buttonText={"Upgrade"}
               buttonVariant={plan.buttonVariant}
               isSelected={plan.isSelected}

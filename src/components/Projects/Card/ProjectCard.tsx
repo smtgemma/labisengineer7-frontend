@@ -32,7 +32,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         id,
       })
     );
-    router.push("/service/sub-category");
+    if (id === "6880d91b519cab74df7b09b2") {
+      router.push("/service/sub-category");
+    } else if (id === "6880dbb7519cab74df7b09b4") {
+      router.push("/create-project-two");
+    }
   };
   return (
     <div className="bg-white rounded-lg border-2 border-transparent hover:border-[#017AFF] overflow-hidden max-w-5xl mx-auto p-6">

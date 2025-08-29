@@ -20,15 +20,15 @@ const TableRow = ({ data, handleUserDelete }: any) => {
   return (
     <tr className="border-b border-gray-100 hover:bg-gray-50 transition-colors *:text-nowrap">
       <td className="text-sm text-gray-900 px-6 py-4">
-        {moment(data.createdAt).format("l")}
+        {moment(data?.createdAt).format("l")}
       </td>
       <td className="text-sm text-gray-900 px-6 py-4">
-        {data.service.serviceName}
+        {data?.service?.serviceName}
       </td>
-      <td className="text-sm text-gray-600 px-6 py-4">{data.type}</td>
+      <td className="text-sm text-gray-600 px-6 py-4">{data?.type}</td>
       <td className="text-sm px-6 py-4">
         <Link
-          href={`/projects/${data.id}`}
+          href={`/projects/${data?.id}`}
           className="text-blue-600 hover:text-blue-800 underline"
         >
           View Document
@@ -37,10 +37,10 @@ const TableRow = ({ data, handleUserDelete }: any) => {
       <td className="text-sm px-6 py-4">
         <span
           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(
-            data.status
+            data?.status
           )}`}
         >
-          {data.status}
+          {data?.status}
         </span>
       </td>
       <td className="px-6 py-4">
@@ -49,7 +49,7 @@ const TableRow = ({ data, handleUserDelete }: any) => {
             Edit
           </button> */}
           <button
-            onClick={() => handleUserDelete(data.id)}
+            onClick={() => handleUserDelete(data?.id)}
             className="px-3 py-1 text-xs font-medium text-red-600 bg-red-50 border border-red-200 rounded hover:bg-red-100 transition-colors"
           >
             Delete

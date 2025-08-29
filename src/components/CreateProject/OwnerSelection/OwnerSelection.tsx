@@ -8,24 +8,40 @@ import {
   setAiExtractCatchWonerData,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { useForm } from "react-hook-form";
-
-interface Owner {
-  address: string;
-  address_code: string;
-  address_municipality_community: string;
-  date_of_birth: string;
-  email: string;
-  fathers_name: string;
-  id_number: string;
-  last_name: string;
-  mobile: string;
-  mothers_name: string;
-  name: string;
-  ownership_percentage: string;
-  place_of_birth: string;
-  tax_identification_number: string;
+type Owner = {
+  first_name: string; // Όνομα
+  last_name: string; // Επώνυμο
+  father_first_last_name: string; // Όνοματεπώνυμο Πατρός
+  mothers_first_last_name: string; // Όνοματεπώνυμο Μητρός
+  date_of_birth: string; // Ημερομηνία Γέννησης
+  place_of_birth: string; // Τόπος Γέννησης
+  owner_address: string; // Διεύθυνση Ιδιοκτήτη
+  address_number: string; // Αριθμός Διεύθυνσης Ιδιοκτήτη
+  city: string; // Πόλη
+  postal_code: string; // Ταχυδρομικός Κώδικας
+  id_number: string; // Α.Δ.Τ
+  tax_identification_number: string; // Αριθμός Φορολογικού Μητρώου (ΑΦΜ)
+  email: string; // Email
+  mobile: string; // Τηλέφωνο
   selected?: boolean;
-}
+};
+// interface Owner {
+//   address: string;
+//   address_code: string;
+//   address_municipality_community: string;
+//   date_of_birth: string;
+//   email: string;
+//   fathers_name: string;
+//   id_number: string;
+//   last_name: string;
+//   mobile: string;
+//   mothers_name: string;
+//   name: string;
+//   ownership_percentage: string;
+//   place_of_birth: string;
+//   tax_identification_number: string;
+//   selected?: boolean;
+// }
 
 interface AIDataState {
   formatted_data?: {
@@ -34,7 +50,7 @@ interface AIDataState {
 }
 
 interface OwnerSelectionProps {
-  selectedOwners: Owner[];
+  allselectedOwners: Owner[];
   onOwnersChange: (owners: Owner[]) => void;
 }
 
@@ -79,20 +95,20 @@ const OwnerSelection = () => {
 
   const onSubmit = (data: OwnerFormInputs) => {
     const emptyOwner: Owner = {
-      address: "",
-      address_code: "",
-      address_municipality_community: "",
-      date_of_birth: "",
-      email: "",
-      fathers_name: data.fatherName,
-      id_number: "",
-      last_name: data.surname,
-      mobile: "",
-      mothers_name: "",
-      name: data.firstName,
-      ownership_percentage: "",
-      place_of_birth: "",
-      tax_identification_number: data.vatNo,
+      first_name: data.firstName || "", // Όνομα
+      last_name: data.surname || "", // Επώνυμο
+      father_first_last_name: data.fatherName || "", // Πατέρας
+      mothers_first_last_name: "", // Μητέρα
+      date_of_birth: "", // Ημερομηνία Γέννησης
+      place_of_birth: "", // Τόπος Γέννησης
+      owner_address: "", // Διεύθυνση Ιδιοκτήτη
+      address_number: "", // Αριθμός Διεύθυνσης
+      city: "", // Πόλη
+      postal_code: "", // Ταχυδρομικός Κώδικας
+      id_number: "", // Α.Δ.Τ
+      tax_identification_number: data.vatNo || "", // ΑΦΜ
+      email: "", // Email
+      mobile: "", // Τηλέφωνο
     };
 
     const updatedOwners = [...isOwner, emptyOwner];
@@ -104,20 +120,20 @@ const OwnerSelection = () => {
   const onEditSubmit = (data: OwnerFormInputs) => {
     if (editingOwner !== null) {
       const updatedOwner: Owner = {
-        address: "",
-        address_code: "",
-        address_municipality_community: "",
-        date_of_birth: "",
-        email: "",
-        fathers_name: data.fatherName,
-        id_number: "",
-        last_name: data.surname,
-        mobile: "",
-        mothers_name: "",
-        name: data.firstName,
-        ownership_percentage: "",
-        place_of_birth: "",
-        tax_identification_number: data.vatNo,
+        first_name: data.firstName || "", // Όνομα
+        last_name: data.surname || "", // Επώνυμο
+        father_first_last_name: data.fatherName || "", // Πατέρας
+        mothers_first_last_name: "", // Μητέρα
+        date_of_birth: "", // Ημερομηνία Γέννησης
+        place_of_birth: "", // Τόπος Γέννησης
+        owner_address: "", // Διεύθυνση Ιδιοκτήτη
+        address_number: "", // Αριθμός Διεύθυνσης
+        city: "", // Πόλη
+        postal_code: "", // Ταχυδρομικός Κώδικας
+        id_number: "", // Α.Δ.Τ
+        tax_identification_number: data.vatNo || "", // ΑΦΜ
+        email: "", // Email
+        mobile: "", // Τηλέφωνο
       };
 
       const updated = [...isOwner];
@@ -169,6 +185,8 @@ const OwnerSelection = () => {
     } else {
       // otherwise add it
       setSelectedOwners([...selectedOwners, { ...owner, selected: true }]);
+
+      // setOwnerNumber(4);
     }
   };
 
@@ -205,7 +223,7 @@ const OwnerSelection = () => {
         <textarea
           value={ownerData?.project_description}
           onChange={(e) => setProjectDescription(e.target.value)}
-          className="w-full max-w-md px-4 py-2 border h-[200px] border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full  px-4 py-2 border  h-[200px] border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           placeholder="Enter project description"
         />
       </div>
@@ -411,7 +429,7 @@ const OwnerSelection = () => {
                   </label>
                   <input
                     type="text"
-                    defaultValue={editingOwner?.owner?.name}
+                    defaultValue={editingOwner?.owner?.first_name}
                     {...register("firstName", { required: true })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Giannis"
@@ -444,7 +462,7 @@ const OwnerSelection = () => {
                 </label>
                 <input
                   type="text"
-                  defaultValue={editingOwner?.owner?.fathers_name}
+                  defaultValue={editingOwner?.owner?.first_name}
                   {...register("fatherName", { required: true })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Nikos"

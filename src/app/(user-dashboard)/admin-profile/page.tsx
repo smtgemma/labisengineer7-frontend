@@ -16,6 +16,7 @@ import {
 import { toast } from "sonner";
 import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
 import moment from "moment";
+import { useGetPlanQuery } from "@/redux/features/subscription/subscripionPlanSlice";
 
 interface AdminFormData {
   firstName: string;
@@ -34,6 +35,25 @@ type PasswordForm = {
   currentPassword: string;
   newPassword: string;
   confirmPassword: string;
+};
+
+type EngineerFormData = {
+  engineerName: string;
+  engineerSurnName: string;
+  fatherName: string;
+  motherName: string;
+  bornDate: string;
+  bornTown: string;
+  id: string;
+  mobilePhone: string;
+  officePhone: string;
+  emailAddress: string;
+  town: string;
+  streetAddress: string;
+  streetNumber: string;
+  postalCode: string;
+  vatNumber: string;
+  signature: FileList;
 };
 
 interface AdminProfileProps {
@@ -63,7 +83,29 @@ const AdminProfile = () => {
   const token = tokenCatch();
   const [preview, setPreview] = useState<string | null>(null);
   const [image, setImage] = useState<File | null>(null);
+  const [signaturePreview, setSignaturePreview] = useState<string | null>(null);
   console.log(image);
+  const {
+    register: infoRegister,
+    handleSubmit: handleUserInfo,
+    watch: infoWatch,
+  } = useForm<EngineerFormData>();
+
+  const signatureFile = infoWatch("signature");
+
+  React.useEffect(() => {
+    if (signatureFile && signatureFile.length > 0) {
+      const file = signatureFile[0];
+      const reader = new FileReader();
+      reader.onloadend = () => setSignaturePreview(reader.result as string);
+      reader.readAsDataURL(file);
+    } else {
+      setSignaturePreview(null);
+    }
+  }, [signatureFile]);
+  const handleEngineerFormSubmit = (formData: EngineerFormData) => {
+    console.log("Engineer Form Data:", formData);
+  };
 
   // const user = useSelector((state: any) => state.user.userData);
   // const [user, setUser] = useState<string | null>(null);
@@ -83,6 +125,10 @@ const AdminProfile = () => {
     useUpdatePasswordMutation();
 
   const { data, isLoading, refetch } = useUserInfoQuery({ id, token });
+
+  const { data: planGet } = useGetPlanQuery(token);
+
+  console.log("Palan", planGet);
   if (isLoading) {
     return <Loading />;
   }
@@ -318,31 +364,191 @@ const AdminProfile = () => {
                 User Information
               </h2>
 
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    User Type:
-                  </label>
-                  <input
-                    type="text"
-                    {...register("userType")}
-                    defaultValue={user?.role}
-                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                  />
+              <form
+                onSubmit={handleUserInfo(handleEngineerFormSubmit)}
+                className=""
+              >
+                {/* Row 1: First / Last Name */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Engineer Name
+                    </label>
+                    <input
+                      {...infoRegister("engineerName")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                      placeholder="First Name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Engineer SurnName
+                    </label>
+                    <input
+                      {...infoRegister("engineerSurnName")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                      placeholder="Last Name"
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    TES Registration Number:
+                {/* Row 2: Father's / Mother's Name */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Father's Name
+                    </label>
+                    <input
+                      {...infoRegister("fatherName")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                      placeholder="Father's Name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Mother's Name
+                    </label>
+                    <input
+                      {...infoRegister("motherName")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                      placeholder="Mother's Name"
+                    />
+                  </div>
+                </div>
+
+                {/* Row 3: Birth Date / Birth Town */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Bonr Date
+                    </label>
+                    <input
+                      type="date"
+                      {...infoRegister("bornDate")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Born Town
+                    </label>
+                    <input
+                      {...infoRegister("bornTown")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                      placeholder=" Born Town"
+                    />
+                  </div>
+                </div>
+
+                {/* Row 4: Identity Number / License Number */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">ID</label>
+                    <input
+                      {...infoRegister("id")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                      placeholder="ID Number"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Mobile
+                    </label>
+                    <input
+                      type="tel"
+                      {...infoRegister("mobilePhone")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                      placeholder="+30 69..."
+                    />
+                  </div>
+                </div>
+
+                {/* Row 8: Address */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Town
+                    </label>
+                    <input
+                      {...infoRegister("town")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Street Address
+                    </label>
+                    <input
+                      {...infoRegister("streetAddress")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Street Number
+                    </label>
+                    <input
+                      {...infoRegister("streetNumber")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                    />
+                  </div>
+                </div>
+
+                {/* Row 9: Postal Code / VAT Number */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Postal Code
+                    </label>
+                    <input
+                      {...infoRegister("postalCode")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      VAT Number
+                    </label>
+                    <input
+                      {...infoRegister("vatNumber")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                    />
+                  </div>
+                </div>
+
+                {/* Signature Upload */}
+                <div className="md:col-span-2">
+                  <label className="block mb-1 font-medium">
+                    Upload Signature
                   </label>
                   <input
-                    type="text"
-                    {...register("tesRegistration")}
-                    defaultValue={user?.teeRegistration || "N/A"}
-                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                    type="file"
+                    accept="image/*"
+                    {...infoRegister("signature")}
+                    className="w-full border rounded-lg px-3 py-2"
                   />
+                  {signaturePreview && (
+                    <div className="mt-3">
+                      <p className="text-sm text-gray-600 mb-1">Preview:</p>
+                      <img
+                        src={signaturePreview}
+                        alt="Signature Preview"
+                        className="h-20 object-contain border rounded-lg"
+                      />
+                    </div>
+                  )}
                 </div>
-              </div>
+
+                {/* Submit */}
+                <div className="text-end">
+                  <button
+                    type="submit"
+                    className="px-6 py-2 bg-blue-600 text-white rounded-sm hover:bg-blue-700"
+                  >
+                    Save user Information
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
 
@@ -497,7 +703,7 @@ const AdminProfile = () => {
               <div className="flex justify-between items-center">
                 <span className="text-sm font-medium text-gray-700">Plan:</span>
                 <button className="text-primary hover:text-blue-800 text-sm underline">
-                  Professionals
+                  {planGet?.data?.planName}
                 </button>
               </div>
             </div>

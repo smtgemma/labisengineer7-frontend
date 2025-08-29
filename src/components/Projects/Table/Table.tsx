@@ -31,6 +31,8 @@ const Table: React.FC<TableProps> = ({ data }) => {
 
   const token = tokenCatch();
 
+  console.log("token", token);
+
   const [projectDeleteData] = useProjectDeleteMutation();
 
   if (isLoading) {

@@ -15,8 +15,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import ForgotPasswordModal from "./forgotPassword/ForgotPasswordEmailModal";
 import { setUserData } from "@/redux/features/auth/userDataCatchSlice";
-import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
+import Cookies from "js-cookie";
 
 type FormData = {
   email: string;
@@ -44,6 +44,7 @@ export default function SigninForm() {
       console.log(response);
       if (response?.success) {
         localStorage.setItem("accessToken", response?.data?.accessToken);
+        // Cookies.set("accessToken", response?.data?.accessToken);
         console.log(response?.data?.userData?.role);
         dispath(setUserData(response?.data?.userData));
 
@@ -63,26 +64,15 @@ export default function SigninForm() {
 
   // google login working for functonalti
   const handleSuccess = async (credentialResponse: any) => {
-    console.log("yesTonek= ", credentialResponse.credential);
-
+    // console.log("yesTonek= ", credentialResponse.credential);
     try {
-      // Send the credential to your server
-      // const response = await axios.post(
-      //   `https://api.buildai.gr/api/v1/auth/google-login`,
-      //   {
-      //     googleToken: credentialResponse.credential,
-      //   }
-      // );
-
       const googleToken = {
         googleToken: credentialResponse.credential,
       };
       const response = await googleSignIn(googleToken).unwrap();
       console.log("response", response);
-      // const response = await googleSignIn().unwrap()
 
       if (response?.success) {
-        // localStorage.setItem("accessToken", response?.data?.data?.accessToken);
         console.log("accessToken", response?.data?.accessToken);
         localStorage.setItem("accessToken", response?.data?.accessToken);
         router.push("/new-project");
