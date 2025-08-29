@@ -76,9 +76,12 @@ import F14D3 from "./f-14/f14D3/page";
 import F15D1 from "./f-15/f15D1/page";
 
 import { useGetOwnerTemplateQuery } from "@/redux/features/templates/allTemplateSlice";
-import F1D1 from "./f-01/f1D1/page";
-import F1D2 from "./f-01/f1D2/page";
-import F1D3 from "./f-01/f1D3/page";
+import F1D1 from "./f-01/f1d1/page";
+import F1D2 from "./f-01/f1d2/page";
+import F1D3 from "./f-01/f1d3/page";
+// import F1D1 from "./f-01/f1D1/page";
+// import F1D2 from "./f-01/f1D2/page";
+// import F1D3 from "./f-01/f1D3/page";
 
 interface Owner {
   id: string;
@@ -117,7 +120,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allData = ownerData?.data;
 
   console.log(ownerId, "projectId");
-  console.log(dataAllFIled, "======================dataAllFiled")
+  console.log(dataAllFIled, "======================dataAllFiled");
 
   const buildingMods = subCategoryData["building-modifications"] || [];
   const energy = subCategoryData["energy-systems"] || [];
@@ -1117,8 +1120,12 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
               {/* building-modifications */}
               {/* file 1======== */}
-              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && <F1D1 allData={allData} />}
-              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && <F1D2 allData={allData} />}
+              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && (
+                <F1D1 allData={allData} />
+              )}
+              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && (
+                <F1D2 allData={allData} />
+              )}
               {selected === "ΣΑΥ_ΦΑΥ" && <F1D3 allData={allData} />}
               {selected === "ΣΔΑ ΕΡΓΟΥ" && <F1D4 allData={allData} />}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ_15" && (
@@ -1138,24 +1145,36 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
 
               {/* file 2======= */}
-              {selected === "Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020" && <F2D1 allData={allData} />}
+              {selected === "Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020" && (
+                <F2D1 allData={allData} />
+              )}
               {selected === "ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ" && <F2D2 allData={allData} />}
-              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_23" && <F2D3 allData={allData} />}
+              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_23" && (
+                <F2D3 allData={allData} />
+              )}
 
               {/* energy-systems  */}
               {/* file 3======== */}
               {selected === "ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ" && <F3D1 allData={allData} />}
-              {selected === "άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020" && <F3D2 allData={allData} />}
+              {selected === "άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020" && (
+                <F3D2 allData={allData} />
+              )}
               {selected === "άρθρο 4 της ΥΑ ΦΕ" && <F3D3 allData={allData} />}
               {selected === "ΛΕΒΗΤΑΣ Φ.Α" && <F3D4 allData={allData} />}
               {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΠΙΒΛΕΨΗΣ ΕΡΓΟΥ" && (
                 <F3D5 allData={allData} />
               )}
-              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && <F3D6 allData={allData} />}
+              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && (
+                <F3D6 allData={allData} />
+              )}
 
               {/* file 4======== */}
-              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ" && <F4D1 allData={allData} />}
-              {selected === "_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ" && <F4D2 allData={allData} />}
+              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ" && (
+                <F4D1 allData={allData} />
+              )}
+              {selected === "_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ" && (
+                <F4D2 allData={allData} />
+              )}
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && (
                 <F4D3 allData={allData} />
@@ -1174,17 +1193,25 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "_ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
                 <F4D9 allData={allData} />
               )}
-              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && <F4D11 allData={allData} />}
+              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && (
+                <F4D11 allData={allData} />
+              )}
 
               {/* file 5======== */}
-              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && <F5D1 allData={allData} />}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ" && <F5D2 allData={allData} />}
+              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && (
+                <F5D1 allData={allData} />
+              )}
+              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ" && (
+                <F5D2 allData={allData} />
+              )}
               {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53" && (
                 <F5D3 allData={allData} />
               )}
 
               {/* file 6======== */}
-              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61" && <F6D1 allData={allData} />}
+              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61" && (
+                <F6D1 allData={allData} />
+              )}
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_62" && (
                 <F6D2 allData={allData} />
@@ -1193,8 +1220,12 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_63" && (
                 <F6D3 allData={allData} />
               )}
-              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ Α_64" && <F6D4 allData={allData} />}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_65" && <F6D7 allData={allData} />}
+              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ Α_64" && (
+                <F6D4 allData={allData} />
+              )}
+              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_65" && (
+                <F6D7 allData={allData} />
+              )}
               {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_66" && (
                 <F6D8 allData={allData} />
               )}
@@ -1214,25 +1245,41 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
                 <F7D2 allData={allData} />
               )}
-              {selected === "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_73" && <F7D3 allData={allData} />}
-              {selected === "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_74" && <F7D4 allData={allData} />}
-              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && <F7D5 allData={allData} />}
+              {selected === "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_73" && (
+                <F7D3 allData={allData} />
+              )}
+              {selected === "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_74" && (
+                <F7D4 allData={allData} />
+              )}
+              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
+                <F7D5 allData={allData} />
+              )}
 
               {/* file 8======== */}
               {selected === "_ΚΟΠΗ ΠΕΥΚΩΝ" && <F8D1 allData={allData} />}
               {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ_" && (
                 <F8D2 allData={allData} />
               )}
-              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && <F8D3 allData={allData} />}
+              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
+                <F8D3 allData={allData} />
+              )}
 
               {/* file 9======== */}
-              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜ" && <F9D1 allData={allData} />}
-              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣ" && <F9D2 allData={allData} />}
-              {selected === "Ιδιωτική Σύμβαση " && <F9D3 />} 
+              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜ" && (
+                <F9D1 allData={allData} />
+              )}
+              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣ" && (
+                <F9D2 allData={allData} />
+              )}
+              {selected === "Ιδιωτική Σύμβαση " && <F9D3 />}
 
               {/* file 10=== */}
-              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_" && <F10D1 allData={allData} />}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102" && <F10D2 allData={allData} />}
+              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_" && (
+                <F10D1 allData={allData} />
+              )}
+              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102" && (
+                <F10D2 allData={allData} />
+              )}
               {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ" && (
                 <F10D3 allData={allData} />
               )}
@@ -1244,7 +1291,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
 
               {/* file 12  */}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_121" && <F12D1 allData={allData} />}
+              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_121" && (
+                <F12D1 allData={allData} />
+              )}
               {selected === "ΣΤΕΓΕΣ" && <F12D2 allData={allData} />}
 
               {/* file 13  */}
@@ -1268,8 +1317,12 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
 
               {/* file 14  */}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_141" && <F14D1 allData={allData} />}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_142" && <F14D2 allData={allData} />}
+              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_141" && (
+                <F14D1 allData={allData} />
+              )}
+              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_142" && (
+                <F14D2 allData={allData} />
+              )}
               {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ" && (
                 <F14D3 allData={allData} />
               )}
