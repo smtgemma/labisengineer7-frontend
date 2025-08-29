@@ -1,5 +1,20 @@
 
-function F2D3() {
+interface allDataProps {
+  owner_address: string;
+  owner_city: string;
+  owner_postal_code: string;
+  project_description?: string;
+}
+
+function F2D3({ allData }: { allData: allDataProps }) {
+    
+  const {
+            owner_address,
+            owner_city,
+            owner_postal_code,
+            project_description,
+        } = allData;
+
     return (
         <div className="max-w-[794px] mx-auto">
             <div className=" bg-white">
@@ -10,9 +25,9 @@ function F2D3() {
 
                 {/* Project Row */}
                 <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
-                    <label className="col-span-4">Έργο:</label>
-                    <div className="col-span-8">
-                        PROJECT DESCRIPTION
+                    <label className="col-span-2">Έργο:</label>
+                    <div className="col-span-10">
+                        {project_description || "N/A"}
                     </div>
                 </div>
 
@@ -20,7 +35,7 @@ function F2D3() {
                 <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
                     <label className="col-span-2 ">Θέση:</label>
                     <div className="col-span-10">
-                        ADDRESS, TOWN/AREA , POSTAL CODE (FOR BUILDING)
+                        {owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} (FOR BUILDING)
                     </div>
                 </div>
 
@@ -30,7 +45,7 @@ function F2D3() {
                         Εμείς οι κάτωθι υπογεγραμμένοι, συνιδιοκτήτες της πολυκατοικίας επί της οδού
                     </p>
                     <h3>
-                        <span className="text-sm font-semibold">ADDRESS, TOWN/AREA , POSTAL CODE (FOR BUILDING)</span>
+                        <span className="text-sm font-semibold">{owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} (FOR BUILDING)</span>
                     </h3>
                     <p>
                         δηλώνουμε υπεύθυνα και ρητά συναινούμε στην εκτέλεση των παρακάτω εργασιών:</p>

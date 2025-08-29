@@ -1,10 +1,21 @@
 "use client";
 
 import React, { useState } from "react";
+interface allDataProps {
+  owner_address: string;
+  owner_city: string;
+  owner_name: string;
+  owner_postal_code: string;
+  project_description?: string;
+}
 
-export default function F1D4() {
+export default function F1D4({ allData }: { allData: allDataProps }) {
+  const {
+    project_description,
+  } = allData;
+
   const [formData, setFormData] = useState({
-    projectDescription: "PROJECT DISCRIPISON",
+    projectDescription: project_description || "PROJECT DESCRIPTION",
     responsibleAuthority: "YDOM",
     submissionDate: "DATE OF PROJECT",
     protocolNumber: "",
@@ -43,6 +54,7 @@ export default function F1D4() {
                 }
                 className="w-full p-3 border-1 border-black bg-white text-black text-base"
                 style={{ minHeight: "48px" }}
+                placeholder={project_description || "Enter project description"}
               />
             </div>
           </div>
@@ -61,6 +73,7 @@ export default function F1D4() {
                 }
                 className="w-full p-3 border-1 border-black bg-white text-black text-base"
                 style={{ minHeight: "48px" }}
+                placeholder="Enter responsible authority"
               />
             </div>
           </div>
@@ -79,6 +92,7 @@ export default function F1D4() {
                 }
                 className="w-full p-3 border-1 border-black bg-white text-black text-base"
                 style={{ minHeight: "48px" }}
+                placeholder="Enter submission date"
               />
             </div>
           </div>
@@ -96,7 +110,7 @@ export default function F1D4() {
                   handleInputChange("protocolNumber", e.target.value)
                 }
                 className="w-full p-3 border-1 border-black bg-white text-black text-base"
-                placeholder="-"
+                placeholder="Enter protocol number"
                 style={{ minHeight: "48px" }}
               />
             </div>
