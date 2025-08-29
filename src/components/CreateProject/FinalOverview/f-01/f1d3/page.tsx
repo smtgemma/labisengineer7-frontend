@@ -3,9 +3,25 @@
 "use client"
 
 import StampComponent from "../../shared/signture/signture"
+interface allDataProps {
+  owner_address: string;
+  owner_city: string;
+  owner_name: string;
+  owner_postal_code: string;
+  project_description?: string;
+}
 
 
-export default function F1D3() {
+export default function F1D3({ allData }: { allData: allDataProps }) {
+    
+  const {
+            owner_address,
+            owner_city,
+            owner_name,
+            owner_postal_code,
+            project_description,
+        } = allData;
+
     const descriptions = [
         {
             "id": 1,
@@ -169,21 +185,21 @@ export default function F1D3() {
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΕΡΓΟ :</span>
-                            <span className="flex-1  font-bold">PROJECT DESCRIPTION</span>
+                            <span className="flex-1  font-bold">{project_description || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΔΙΕΥΘΥΝΣΗ :</span>
-                            <span className=" font-bold">ADDRESS</span>
-                            <span className=" font-bold">, CITY</span>
-                            <span className=" font-bold">, TOWN</span>
-                            <span className=" font-bold">, POSTAL CODE</span>
+                            <span className=" font-bold">{owner_address || "N/A"}</span>
+                            <span className=" font-bold">, {owner_city || "N/a"}</span>
+                            {/* <span className=" font-bold">, TOWN</span> */}
+                            <span className=" font-bold">, {owner_postal_code || "N/A"}</span>
                             <span className=" font-bold">FOR BUILDING</span>
                         </div>
 
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΙΔΙΟΚΤΗΤΗΣ :</span>
-                            <span className="flex-1  font-bold">OWNER/OWNERS</span>
+                            <span className="flex-1  font-bold">{owner_name || "N/A"}</span>
                         </div>
                         <div className="flex justify-between">
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>

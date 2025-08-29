@@ -1,7 +1,22 @@
 import StampComponent from "../../shared/signture/signture"
 
+interface allDataProps {
+  owner_address: string;
+  owner_city: string;
+  owner_name: string;
+  owner_postal_code: string;
+  project_description?: string;
+}
 
-function F15D1() {
+function F15D1({ allData }: { allData: allDataProps }) {  
+  const {
+    owner_address,
+    owner_city,
+    owner_name,
+    owner_postal_code,
+    project_description,
+  } = allData;
+
     return (
         <div className='max-w-[632px] mx-auto'>
             {/* Title */}
@@ -13,7 +28,7 @@ function F15D1() {
             <div className="grid grid-cols-12 gap-2">
                 <label className="col-span-2 font-medium">Έργο:</label>
                 <div className="col-span-10">
-                    PROJECT DESCRIPTION
+                    {project_description || "N/A"}
                 </div>
             </div>
 
@@ -21,7 +36,7 @@ function F15D1() {
             <div className="grid grid-cols-12 gap-2 mb-4 mt-20">
                 <label className="col-span-2 font-medium">Θέση:</label>
                 <div className="col-span-10">
-                    ADDRESS, TOWN/AREA , POSTAL CODE (FOR BUILDING)
+                    {owner_address || "N/a"}, {owner_city || "N/A"} , {owner_postal_code || "N/A"} (FOR BUILDING)
                 </div>
             </div>
 
@@ -30,7 +45,7 @@ function F15D1() {
                 <div className="grid grid-cols-12 gap-2">
                     <label className="col-span-2 font-medium">Ιδιοκτήτης:</label>
                     <div className="col-span-10">
-                        OWNER / OWNERS
+                        {owner_name || "N/A"}
                     </div>
                 </div>
 
