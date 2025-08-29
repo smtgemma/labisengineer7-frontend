@@ -3,8 +3,24 @@
 
 import StampComponent from "../../shared/signture/signture"
 
+interface allDataProps {
+  owner_address: string;
+  owner_city: string;
+  owner_name: string;
+  owner_postal_code: string;
+  project_description?: string;
+}
 
-export default function F10D1() {
+
+export default function F10D1({ allData }: { allData: allDataProps }) {
+  
+  const {
+    owner_address,
+    owner_city,
+    owner_name,
+    owner_postal_code,
+    project_description,
+  } = allData;
 
   return (
     <div className="max-w-[794px] mx-auto p-6 bg-white">
@@ -15,27 +31,27 @@ export default function F10D1() {
 
       {/* Project Information */}
       <div className="mb-8 space-y-4">
-        <div className="flex items-start justify-between max-w-[450px]">
+        <div className="flex items-start justify-between">
           <span className=" min-w-[80px] text-sm">Έργο:</span>
-          <h3 className=" text-sm">PROJECT DESCRIPTION</h3>
+          <h3 className=" text-sm">{project_description || "N/A"}</h3>
         </div>
 
         <div className="flex items-start justify-between gap-4 max-w-xl">
           <span className=" text-sm">Θέση:</span>
-          <h3 className=" text-sm">ADDRESS, TOWN/AREA , POSTAL CODE ( FOR BUILDING)</h3>
+          <h3 className=" text-sm">{owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} ( FOR BUILDING)</h3>
         </div>
 
         <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
           <span className="">Ιδιοκτήτης:</span>
-          <h3 className=" text-sm">OWNER/OWNERS</h3>
+          <h3 className=" text-sm">{owner_name || "N/A"}</h3>
         </div>
       </div>
 
       {/* Main Description */}
       <div className="text-sm mb-4 ml-10">
         <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property
-        </span> επί της οδού <br /> <span className="font-semibold">Address,Town/Area , postal code ( FOR BUILDING),</span>
-          πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
+        </span> επί της οδού <br /> <span className="font-semibold">{owner_address || "N/A"}, {owner_city || "N/A"} , {owner_postal_code || "N/A"} ( FOR BUILDING),</span>
+          πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p> 
       </div>
 
       {/* one  */}
