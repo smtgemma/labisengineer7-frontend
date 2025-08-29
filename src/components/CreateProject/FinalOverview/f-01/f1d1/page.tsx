@@ -2,6 +2,14 @@
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
 
+interface allDataProps {
+  owner_address: string;
+  owner_city: string;
+  owner_name: string;
+  owner_postal_code: string;
+  project_description?: string;
+}
+
 interface BudgetItem {
   code: string;
   description: string;
@@ -18,7 +26,16 @@ interface BudgetCategory {
   subtotal: number;
 }
 
-export default function F1D1() {
+export default function F1D1({ allData }: { allData: allDataProps }) {
+  
+  const {
+    owner_address,
+    owner_city,
+    owner_name,
+    owner_postal_code,
+    project_description,
+  } = allData;
+
   const [formData, setFormData] = useState({
     employer: "",
     project: "",
@@ -1535,16 +1552,16 @@ export default function F1D1() {
       <div className="mb-6 space-y-4">
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Εργοδότες *:</span>
-          <h3 className="flex-1 text-black">OWNER/OWNERS</h3>
+          <h3 className="flex-1 text-black">{owner_name || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>
-          <h3 className="flex-1 text-black">PROJECT DESCRIPTION</h3>
+          <h3 className="flex-1 text-black">{project_description || "N/a"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
           <h3 className="flex-1 text-black">
-            ADDRESS, TOWN/AREA, POSTAL CODE (FOR BUILDING)
+            {owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} (FOR BUILDING)
           </h3>
         </div>
       </div>
@@ -1695,3 +1712,357 @@ export default function F1D1() {
     </div>
   );
 }
+
+
+
+
+// "use client";
+// import { useState } from "react";
+// import StampComponent from "../../shared/signture/signture";
+
+// interface allDataProps {
+//   owner_address: string;
+//   owner_city: string;
+//   owner_name: string;
+//   owner_postal_code: string;
+//   project_description?: string;
+// }
+
+// export default function F1D1({ allData }: { allData: allDataProps }) {
+
+//   const {
+//     owner_address,
+//     owner_city,
+//     owner_name,
+//     owner_postal_code,
+//     project_description,
+//   } = allData;
+
+//   const [quantities, setQuantities] = useState<Record<string, string>>({
+//     '1.01': '',
+//     '1.02': '',
+//     '1.03': '',
+//     '1.04': '',
+//     '1.05': '',
+//     '1.06': '',
+//     '1.07': '',
+//     '1.08': ''
+//   });
+
+//   const handleQuantityChange = (code: string, value: string) => {
+//     setQuantities(prev => ({
+//       ...prev,
+//       [code]: value
+//     }));
+//   };
+
+//   console.log(quantities, "=================================sdldslfk")
+
+//   const calculateTotal = (price: string, quantity: string): string => {
+//     const numPrice = parseFloat(price.replace(',', '.'));
+//     const numQuantity = parseFloat(quantity) || 0;
+//     return (numPrice * numQuantity).toFixed(2).replace('.', ',');
+//   };
+
+//   const calculateGrandTotal = (): string => {
+//     const prices: Record<string, number> = {
+//       '1.01': 3.22,
+//       '1.02': 3.22,
+//       '1.03': 11.74,
+//       '1.04': 5.26,
+//       '1.05': 5.26,
+//       '1.06': 5.26,
+//       '1.07': 1.19,
+//       '1.08': 5.86
+//     };
+
+//     let total = 0;
+//     Object.keys(quantities).forEach(code => {
+//       const quantity = parseFloat(quantities[code]) || 0;
+//       const price = prices[code];
+//       if (price) {
+//         total += price * quantity;
+//       }
+//     });
+
+//     return total.toFixed(2).replace('.', ',');
+//   };
+
+//   return (
+//     <div className="max-w-[794px] mx-auto p-4 bg-white">
+//       {/* Header */}
+//       <div className="text-center mb-6">
+//         <h1 className="text-xl font-bold mb-2">
+//           ΣΥΝΤΑΞΗ ΑΝΑΛΥΤΙΚΟΥ ΠΡΟΫΠΟΛΟΓΙΣΜΟΥ ΕΡΓΟΥ
+//         </h1>
+//         <p className="text-sm ">(σύμφωνα με το Παράρτημα Β' του Ν.4495/17)</p>
+//       </div>
+
+//       {/* Project Info */}
+//       <div className="mb-6 space-y-4">
+//         <div className="flex items-center gap-4">
+//           <span className="font-medium w-1/4">Εργοδότες *:</span>
+//           <h3 className="flex-1 text-black text-sm">{owner_name || "N/A"}</h3>
+//         </div>
+//         <div className="flex items-center gap-4">
+//           <span className="font-medium w-1/4">Έργο *:</span>
+//           <h3 className="flex-1 text-black text-sm">{project_description || "N/A"}</h3>
+//         </div>
+//         <div className="flex items-center gap-4">
+//           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
+//           <h3 className="flex-1 text-black text-sm">
+//             {owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} (FOR BUILDING)
+//           </h3>
+//         </div>
+//       </div>
+
+//       {/* Budget Title */}
+//       <div className="text-center bg-white p-2 border border-black border-b-0">
+//         <h2 className="text-lg font-bold ">
+//           ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ ΒΑΣΕΙ ΠΑΡΑΡΤΗΜΑΤΟΣ Β' Ν.4495/17)
+//         </h2>
+//       </div>
+
+//       <div className="w-full max-w-6xl mx-auto bg-white">
+//         {/* Budget Table Header */}
+//         <div className="border border-black">
+//           <div className="flex bg-white font-bold text-sm">
+//             <div className="w-16 p-2 border-r border-black text-center">Κωδικός</div>
+//             <div className="flex-1 p-2 border-r border-black">Εργασία</div>
+//             <div className="w-16 p-2 border-r border-black text-center">Μονάδα Μέτρησης</div>
+//             <div className="w-20 p-2 border-r border-black text-center">Τιμή Μονάδος €</div>
+//             <div className="w-24 p-2 border-r border-black text-center">Ποσότητα</div>
+//             <div className="w-24 p-2 text-center">Σύνολο €</div>
+//           </div>
+//         </div>
+
+//         {/* Category Header one */}
+//         <div className="bg-white border border-black">
+//           <div className="flex">
+//             <div className="w-16 border-r border-black p-2 text-center font-bold">
+//               1
+//             </div>
+//             <div className="flex-1 p-2 font-bold">
+//               ΧΩΜΑΤΟΥΡΓΙΚΑ
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Table rows one*/}
+//         <div className="border-l border-r border-black">
+//           {/* Row 1.01 */}
+//           <div className="flex border-b border-black">
+//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.01</div>
+//             <div className="flex-1 border-r border-black p-2 text-sm">Γενικές εκσκαφές γαιώδεις</div>
+//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
+//             <div className="w-20 border-r border-black p-2 text-center text-sm">3,22</div>
+//             <div className="w-24 border-r border-black p-1">
+//               <input
+//                 type="text"
+//                 step="0.01"
+//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
+//                 value={quantities['1.01']}
+//                 onChange={(e) => handleQuantityChange('1.01', e.target.value)}
+//               />
+//             </div>
+//             <div className="w-24 p-2 text-center text-sm font-medium">
+//               {quantities['1.01'] ? calculateTotal('3,22', quantities['1.01']) : ''}
+//             </div>
+//           </div>
+
+//           {/* Row 1.02 */}
+//           <div className="flex border-b border-black">
+//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.02</div>
+//             <div className="flex-1 border-r border-black p-2 text-sm">Γενικές εκσκαφές ημιβραχώδεις</div>
+//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
+//             <div className="w-20 border-r border-black p-2 text-center text-sm">3,22</div>
+//             <div className="w-24 border-r border-black p-1">
+//               <input
+//                 type="text"
+//                 step="0.01"
+//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
+//                 value={quantities['1.02']}
+//                 onChange={(e) => handleQuantityChange('1.02', e.target.value)}
+//               />
+//             </div>
+//             <div className="w-24 p-2 text-center text-sm font-medium">
+//               {quantities['1.02'] ? calculateTotal('3,22', quantities['1.02']) : ''}
+//             </div>
+//           </div>
+
+//           {/* Row 1.03 */}
+//           <div className="flex border-b border-black">
+//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.03</div>
+//             <div className="flex-1 border-r border-black p-2 text-sm">Γενικές εκσκαφές βραχώδεις</div>
+//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
+//             <div className="w-20 border-r border-black p-2 text-center text-sm">11,74</div>
+//             <div className="w-24 border-r border-black p-1">
+//               <input
+//                 type="text"
+//                 step="0.01"
+//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
+//                 value={quantities['1.03']}
+//                 onChange={(e) => handleQuantityChange('1.03', e.target.value)}
+//               />
+//             </div>
+//             <div className="w-24 p-2 text-center text-sm font-medium">
+//               {quantities['1.03'] ? calculateTotal('11,74', quantities['1.03']) : ''}
+//             </div>
+//           </div>
+
+//           {/* Row 1.04 */}
+//           <div className="flex border-b border-black">
+//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.04</div>
+//             <div className="flex-1 border-r border-black p-2 text-sm">Εκσκαφές θεμελίων γαιώδεις</div>
+//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
+//             <div className="w-20 border-r border-black p-2 text-center text-sm">5,26</div>
+//             <div className="w-24 border-r border-black p-1">
+//               <input
+//                 type="text"
+//                 step="0.01"
+//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
+//                 value={quantities['1.04']}
+//                 onChange={(e) => handleQuantityChange('1.04', e.target.value)}
+//               />
+//             </div>
+//             <div className="w-24 p-2 text-center text-sm font-medium">
+//               {quantities['1.04'] ? calculateTotal('5,26', quantities['1.04']) : ''}
+//             </div>
+//           </div>
+
+//           {/* Row 1.05 */}
+//           <div className="flex border-b border-black">
+//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.05</div>
+//             <div className="flex-1 border-r border-black p-2 text-sm">Εκσκαφές θεμελίων ημιβραχώδεις</div>
+//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
+//             <div className="w-20 border-r border-black p-2 text-center text-sm">5,26</div>
+//             <div className="w-24 border-r border-black p-1">
+//               <input
+//                 type="text"
+//                 step="0.01"
+//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
+//                 value={quantities['1.05']}
+//                 onChange={(e) => handleQuantityChange('1.05', e.target.value)}
+//               />
+//             </div>
+//             <div className="w-24 p-2 text-center text-sm font-medium">
+//               {quantities['1.05'] ? calculateTotal('5,26', quantities['1.05']) : ''}
+//             </div>
+//           </div>
+
+//           {/* Row 1.06 */}
+//           <div className="flex border-b border-black">
+//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.06</div>
+//             <div className="flex-1 border-r border-black p-2 text-sm">Εκσκαφές θεμελίων βραχώδεις</div>
+//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
+//             <div className="w-20 border-r border-black p-2 text-center text-sm">5,26</div>
+//             <div className="w-24 border-r border-black p-1">
+//               <input
+//                 type="text"
+//                 step="0.01"
+//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
+//                 value={quantities['1.06']}
+//                 onChange={(e) => handleQuantityChange('1.06', e.target.value)}
+//               />
+//             </div>
+//             <div className="w-24 p-2 text-center text-sm font-medium">
+//               {quantities['1.06'] ? calculateTotal('5,26', quantities['1.06']) : ''}
+//             </div>
+//           </div>
+
+//           {/* Row 1.07 */}
+//           <div className="flex border-b border-black">
+//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.07</div>
+//             <div className="flex-1 border-r border-black p-2 text-sm">Επίχωσης με προϊόντα εκσκαφής</div>
+//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
+//             <div className="w-20 border-r border-black p-2 text-center text-sm">1,19</div>
+//             <div className="w-24 border-r border-black p-1">
+//               <input
+//                 type="text"
+//                 step="0.01"
+//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
+//                 value={quantities['1.07']}
+//                 onChange={(e) => handleQuantityChange('1.07', e.target.value)}
+//               />
+//             </div>
+//             <div className="w-24 p-2 text-center text-sm font-medium">
+//               {quantities['1.07'] ? calculateTotal('1,19', quantities['1.07']) : ''}
+//             </div>
+//           </div>
+
+//           {/* Row 1.08 */}
+//           <div className="flex border-b border-black">
+//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.08</div>
+//             <div className="flex-1 border-r border-black p-2 text-sm">Ειδικές επιχώσεις (σκύρα κ.λπ.)</div>
+//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
+//             <div className="w-20 border-r border-black p-2 text-center text-sm">5,86</div>
+//             <div className="w-24 border-r border-black p-1">
+//               <input
+//                 type="text"
+//                 step="0.01"
+//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
+//                 value={quantities['1.08']}
+//                 onChange={(e) => handleQuantityChange('1.08', e.target.value)}
+//               />
+//             </div>
+//             <div className="w-24 p-2 text-center text-sm font-medium">
+//               {quantities['1.08'] ? calculateTotal('5,86', quantities['1.08']) : ''}
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Footer - Total */}
+//         <div className="border border-t-0 border-black bg-white">
+//           <div className="flex">
+//             <div className="flex-1 p-2 text-center font-bold">
+//               Μερικό Σύνολο =
+//             </div>
+//             <div className="w-24 border-l border-black p-2 text-center text-red-600 font-bold">
+//               {calculateGrandTotal()}
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+      
+//       {/* Signature Section */}
+//       <div className="grid grid-cols-3 mb-2 mt-12">
+//         <div className="col-span-1"></div>
+//         <div className="col-span-2 flex justify-center gap-6">
+//           <p className="w-1/2">
+//             Here, the date the engineer starts the project should automatically
+//             appear.
+//           </p>
+//           <p className="w-1/2">
+//             stamp and signature of an engineer, he should save it in his profile
+//             and display it there or if he doesn't want it for personal data
+//             reasons, we put a picture and he changes it
+//           </p>
+//         </div>
+//       </div>
+//       <div className="mt-4 text-right p-5">
+//         <div className="flex justify-between items-start">
+//           <div className="flex items-center justify-between gap-2">
+//             <span className="">Ημερομηνία :</span>
+//             <span className="ml-30">6/25/2025</span>
+//           </div>
+//           <div className="">
+//             <h3 className="text-center mb-4">Ο Συντάξας Μηχανικός</h3>
+//             <h3 className="text-center mb-4">SIGN ENGINEER</h3>
+//           </div>
+//         </div>
+//       </div>
+
+//       <div className="flex flex-col items-end">
+//         {/* Dashed Border Box = common component */}
+//         <StampComponent
+//           title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
+//           instructions={[
+//             "Με δεξί κλικ",
+//             "Αλλαγή εικόνας",
+//             " Βάζετε την σφραγίδα σας",
+//           ]}
+//         />
+//       </div>
+//     </div>
+//   );
+// }

@@ -3,6 +3,14 @@
 import { useState } from "react"
 import StampComponent from "../../shared/signture/signture"
 
+interface allDataProps {
+  owner_address: string;
+  owner_city: string;
+  owner_name: string;
+  owner_postal_code: string;
+  project_description?: string;
+}
+
 interface BudgetItem {
   code: string
   description: string
@@ -19,7 +27,7 @@ interface BudgetCategory {
   subtotal: number
 }
 
-export default function F4D1() {
+export default function F4D1({ allData }: { allData: allDataProps }) {
   const [formData, setFormData] = useState({
     employer: "",
     project: "",
@@ -27,6 +35,14 @@ export default function F4D1() {
     date: "6/25/2025",
     unforeseen: 0,
   })
+
+  const {
+            owner_address,
+            owner_city,
+            owner_name,
+            owner_postal_code,
+            project_description,
+        } = allData;
 
   const categories: BudgetCategory[] = [
     {
@@ -1011,15 +1027,17 @@ export default function F4D1() {
       <div className="mb-6 space-y-4">
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Εργοδότες *:</span>
-          <h3 className="flex-1 text-gray-700">OWNER/OWNERS</h3>
+          <h3 className="flex-1 text-black">{owner_name || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>
-          <h3 className="flex-1 text-gray-700">PROJECT DESCRIPTION</h3>
+          <h3 className="flex-1 text-black">{project_description || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className="flex-1 text-gray-700">ADDRESS, TOWN/AREA, POSTAL CODE (FOR BUILDING)</h3>
+          <h3 className="flex-1 text-black">
+            {owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} (FOR BUILDING)
+          </h3>
         </div>
       </div>
       {/* Budget Title */}
