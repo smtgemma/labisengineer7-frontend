@@ -17,6 +17,8 @@ const TableRow = ({ data, handleUserDelete }: any) => {
     }
   };
 
+  console.log(data);
+
   return (
     <tr className="border-b border-gray-100 hover:bg-gray-50 transition-colors *:text-nowrap">
       <td className="text-sm text-gray-900 px-6 py-4">
