@@ -48,6 +48,13 @@ const options: DropdownOption[] = [
   },
 ];
 
+type RecordingSheet = {
+  id: string;
+  field1: string;
+  field2: string;
+  field3: string;
+};
+
 const ActionSelection: React.FC<ActionSelectionProps> = ({
   selectedActions,
   onActionsChange,
@@ -57,18 +64,14 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     "Generate Assignment of Responsibility",
     "Create Technical Description",
   ];
-  const [selectedActionsValue, setSelectedActionsValue] = useState<string[]>(
-    []
-  );
-  const [selectedOption, setSelectedOption] = useState("");
 
   const [selectedViolations, setSelectedViolations] = useState<
     ViolationOption[]
   >([]);
-  const [searchText, setSearchText] = useState<string>(""); // Search input for filtering violations
+  const [searchText, setSearchText] = useState<string>("");
   const [filteredViolations, setFilteredViolations] =
-    useState<ViolationOption[]>(violations); // Filtered violations based on search text
-  const [isInputEnabled, setIsInputEnabled] = useState<boolean>(false); //
+    useState<ViolationOption[]>(violations);
+  const [isInputEnabled, setIsInputEnabled] = useState<boolean>(false);
 
   const [selectedValue, setSelectedValue] = useState<string>(options[0].value);
 
@@ -81,6 +84,29 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   const projectCodeId = stepByStepData.projectIdCode;
 
   const categories: CategoryValue[] = [1, 2, 3, 4, 5];
+
+  // Initial state with one recording sheet (A1)
+  const [recordingSheets, setRecordingSheets] = useState<RecordingSheet[]>([
+    { id: "A1", field1: "", field2: "", field3: "" },
+  ]);
+
+  // Function to add a new recording sheet
+  const addRecordingSheet = () => {
+    const newSheetId = `A${recordingSheets.length + 1}`;
+    setRecordingSheets([
+      ...recordingSheets,
+      { id: newSheetId, field1: "", field2: "", field3: "" },
+    ]);
+  };
+
+  // Function to handle input change for each field
+  const handleFieldChange = (id: string, field: string, value: string) => {
+    setRecordingSheets((prevSheets) =>
+      prevSheets.map((sheet) =>
+        sheet.id === id ? { ...sheet, [field]: value } : sheet
+      )
+    );
+  };
 
   // Handle input change for search text
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -244,6 +270,58 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         </select>
       </div>
       {/* Actions List */}
+      <div className=" space-y-6">
+        {/* Recording Sheets Section */}
+        <div className="space-y-4">
+          {recordingSheets.map((sheet) => (
+            <div
+              key={sheet.id}
+              className="flex flex-col space-y-2 bg-gray-100  rounded-md"
+            >
+              <h3 className="text-xl font-semibold">
+                Recording Sheet {sheet.id}
+              </h3>
+              <div className="space-x-2 space-y-2">
+                <input
+                  type="text"
+                  className="p-2 border border-gray-300 rounded-md w-1/3"
+                  placeholder="Field 1"
+                  value={sheet.field1}
+                  onChange={(e) =>
+                    handleFieldChange(sheet.id, "field1", e.target.value)
+                  }
+                />
+                <input
+                  type="text"
+                  className="p-2 border border-gray-300 rounded-md w-1/3"
+                  placeholder="Field 2"
+                  value={sheet.field2}
+                  onChange={(e) =>
+                    handleFieldChange(sheet.id, "field2", e.target.value)
+                  }
+                />
+                <input
+                  type="text"
+                  className="p-2 border border-gray-300 rounded-md w-1/3"
+                  placeholder="Field 3"
+                  value={sheet.field3}
+                  onChange={(e) =>
+                    handleFieldChange(sheet.id, "field3", e.target.value)
+                  }
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Add Recording Sheet Button */}
+        <button
+          onClick={addRecordingSheet}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        >
+          + Add Recording Sheet
+        </button>
+      </div>
     </div>
   );
 };
