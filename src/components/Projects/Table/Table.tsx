@@ -23,15 +23,10 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ data }) => {
-  const {
-    data: projects,
-    isLoading,
-    refetch,
-  } = useGetAllProjectQuery("project");
-
   const token = tokenCatch();
+  const { data: projects, isLoading, refetch } = useGetAllProjectQuery(token);
 
-  console.log("token", token);
+  console.log("token", projects);
 
   const [projectDeleteData] = useProjectDeleteMutation();
 
