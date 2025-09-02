@@ -410,7 +410,6 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.Horizontal_property_name_two}
-                    // defaultValue={dataShowExtreact?.building_permit_date}
                   />
                 </div>
               </div>
