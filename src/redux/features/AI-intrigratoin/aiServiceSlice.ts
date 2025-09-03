@@ -37,7 +37,7 @@ const aiServiceApi = baseUrlApi.injectEndpoints({
     }),
     postFileAiDataExtract: build.mutation({
       query: (formData) => ({
-        url: "http://172.252.13.69:8019/api/v1/process-documents-advanced",
+        url: "http://31.97.37.168:8019/api/v1/process-documents-advanced",
         method: "POST",
         body: formData,
       }),

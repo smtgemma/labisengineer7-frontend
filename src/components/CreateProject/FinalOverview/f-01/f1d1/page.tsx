@@ -1,6 +1,7 @@
-"use client";
-import { useState } from "react";
-import StampComponent from "../../shared/signture/signture";
+
+"use client"
+import { useState } from "react"
+import StampComponent from "../../shared/signture/signture"
 
 interface allDataProps {
   owner_address: string;
@@ -11,23 +12,30 @@ interface allDataProps {
 }
 
 interface BudgetItem {
-  code: string;
-  description: string;
-  unit: string;
-  unitPrice: number;
-  quantity: number;
-  total: number;
+  code: string
+  description: string
+  unit: string
+  unitPrice: number
+  quantity: number
+  total: number
 }
 
 interface BudgetCategory {
-  id: number;
-  title: string;
-  items: BudgetItem[];
-  subtotal: number;
+  id: number
+  title: string
+  items: BudgetItem[]
+  subtotal: number
 }
 
-export default function F1D1({ allData }: { allData: allDataProps }) {
-  
+export default function F4D1({ allData }: { allData: allDataProps }) {
+  const [formData, setFormData] = useState({
+    employer: "",
+    project: "",
+    address: "",
+    date: "6/25/2025",
+    unforeseen: 0,
+  })
+
   const {
     owner_address,
     owner_city,
@@ -35,14 +43,6 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
     owner_postal_code,
     project_description,
   } = allData;
-
-  const [formData, setFormData] = useState({
-    employer: "",
-    project: "",
-    address: "",
-    date: "6/25/2025",
-    unforeseen: 0,
-  });
 
   const categories: BudgetCategory[] = [
     {
@@ -153,14 +153,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "2.05",
-          description: "Καθαίρεση επιχρισμάτων",
-          unit: "τ.μ.",
-          unitPrice: 4.1,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "2.05", description: "Καθαίρεση επιχρισμάτων", unit: "τ.μ.", unitPrice: 4.1, quantity: 0, total: 0 },
         {
           code: "2.06",
           description: "Καθαίρεση τοίχων δια τη διαμόρφωση θυρών",
@@ -187,21 +180,13 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
         },
         {
           code: "2.09",
-          description:
-            "Αποξήλωση υλικών επικάλυψης στέγης (κεραμίδια, πάνελς κ.λπ.)",
+          description: "Αποξήλωση υλικών επικάλυψης στέγης (κεραμίδια, πάνελς κ.λπ.)",
           unit: "τ.μ.",
           unitPrice: 0.8,
           quantity: 0,
           total: 0,
         },
-        {
-          code: "2.10",
-          description: "Αποξήλωση κιγκλιδωμάτων",
-          unit: "τ.μ.",
-          unitPrice: 0.8,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "2.10", description: "Αποξήλωση κιγκλιδωμάτων", unit: "τ.μ.", unitPrice: 0.8, quantity: 0, total: 0 },
       ],
     },
     {
@@ -209,14 +194,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΣΚΥΡΟΔΕΜΑΤΑ",
       subtotal: 0,
       items: [
-        {
-          code: "3.01",
-          description: "Οπλισμένο σκυρόδεμα",
-          unit: "κ.μ.",
-          unitPrice: 146.74,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "3.01", description: "Οπλισμένο σκυρόδεμα", unit: "κ.μ.", unitPrice: 146.74, quantity: 0, total: 0 },
         {
           code: "3.02",
           description: "Ελαφρά οπλισμένο σκυρόδεμα (με πλέγμα)",
@@ -225,30 +203,9 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "3.03",
-          description: "Ελαφρό Μπετόν",
-          unit: "κ.μ.",
-          unitPrice: 70.44,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "3.04",
-          description: "Άοπλο σκυρόδεμα δαπέδων",
-          unit: "τ.μ.",
-          unitPrice: 5.86,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "3.05",
-          description: "Εξισωτικές στρώσεις",
-          unit: "τ.μ.",
-          unitPrice: 4.1,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "3.03", description: "Ελαφρό Μπετόν", unit: "κ.μ.", unitPrice: 70.44, quantity: 0, total: 0 },
+        { code: "3.04", description: "Άοπλο σκυρόδεμα δαπέδων", unit: "τ.μ.", unitPrice: 5.86, quantity: 0, total: 0 },
+        { code: "3.05", description: "Εξισωτικές στρώσεις", unit: "τ.μ.", unitPrice: 4.1, quantity: 0, total: 0 },
         {
           code: "3.06",
           description: "Επιφάνειες εμφανούς σκυροδέματος",
@@ -257,22 +214,8 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "3.07",
-          description: "Σενάζ δρομικά",
-          unit: "μ.",
-          unitPrice: 7.04,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "3.08",
-          description: "Σενάζ μπατικά",
-          unit: "μ.",
-          unitPrice: 11.74,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "3.07", description: "Σενάζ δρομικά", unit: "μ.", unitPrice: 7.04, quantity: 0, total: 0 },
+        { code: "3.08", description: "Σενάζ μπατικά", unit: "μ.", unitPrice: 11.74, quantity: 0, total: 0 },
         {
           code: "3.09",
           description: "Μανδύες χυτού σκυροδέματος",
@@ -291,8 +234,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
         },
         {
           code: "3.11",
-          description:
-            "Σιδηροδοκοί (IPE, IPN, HEB, Κοίλοι κ.λπ.) ως φέρων οργανισμός",
+          description: "Σιδηροδοκοί (IPE, IPN, HEB, Κοίλοι κ.λπ.) ως φέρων οργανισμός",
           unit: "κιλό",
           unitPrice: 1.8,
           quantity: 0,
@@ -321,38 +263,10 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "4.03",
-          description: "Πλινθοδομές δρομικές",
-          unit: "τ.μ.",
-          unitPrice: 8.22,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "4.04",
-          description: "Πλινθοδομές μπατικές",
-          unit: "τ.μ.",
-          unitPrice: 15.26,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "4.05",
-          description: "Τσιμεντολιθοδομές",
-          unit: "τ.μ.",
-          unitPrice: 7.64,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "4.06",
-          description: "Κισσηρολιθομές",
-          unit: "τ.μ.",
-          unitPrice: 8.8,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "4.03", description: "Πλινθοδομές δρομικές", unit: "τ.μ.", unitPrice: 8.22, quantity: 0, total: 0 },
+        { code: "4.04", description: "Πλινθοδομές μπατικές", unit: "τ.μ.", unitPrice: 15.26, quantity: 0, total: 0 },
+        { code: "4.05", description: "Τσιμεντολιθοδομές", unit: "τ.μ.", unitPrice: 7.64, quantity: 0, total: 0 },
+        { code: "4.06", description: "Κισσηρολιθομές", unit: "τ.μ.", unitPrice: 8.8, quantity: 0, total: 0 },
         {
           code: "4.07",
           description: "Τοίχοι γυψοσανιδών απλοί",
@@ -369,31 +283,16 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "4.09",
-          description: "Τσιμεντοσανίδες",
-          unit: "τ.μ.",
-          unitPrice: 36.0,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "4.09", description: "Τσιμεντοσανίδες", unit: "τ.μ.", unitPrice: 36.0, quantity: 0, total: 0 },
         {
           code: "4.10",
-          description:
-            "Από ελαφρά δομικά στοιχεία τύπου YTONG, ALFA BLOCK κ.λπ.",
+          description: "Από ελαφρά δομικά στοιχεία τύπου YTONG, ALFA BLOCK κ.λπ.",
           unit: "τ.μ.",
           unitPrice: 12.0,
           quantity: 0,
           total: 0,
         },
-        {
-          code: "4.11",
-          description: "Διαχωριστικοί υαλότοιχοι",
-          unit: "τ.μ.",
-          unitPrice: 40.0,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "4.11", description: "Διαχωριστικοί υαλότοιχοι", unit: "τ.μ.", unitPrice: 40.0, quantity: 0, total: 0 },
         {
           code: "4.12",
           description:
@@ -420,8 +319,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
         },
         {
           code: "5.02",
-          description:
-            "Τσιμεντοκονιάματα τριπτά με διογκωμένο περλίτη στη 2η στρώση",
+          description: "Τσιμεντοκονιάματα τριπτά με διογκωμένο περλίτη στη 2η στρώση",
           unit: "τ.μ.",
           unitPrice: 6.46,
           quantity: 0,
@@ -435,14 +333,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "5.04",
-          description: "Αρτιφισιέλ τριπτά",
-          unit: "τ.μ.",
-          unitPrice: 8.8,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "5.04", description: "Αρτιφισιέλ τριπτά", unit: "τ.μ.", unitPrice: 8.8, quantity: 0, total: 0 },
         {
           code: "5.05",
           description: "Επιχρίσματα χωριάτικου τύπου",
@@ -451,14 +342,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "5.06",
-          description: "Επιχρίσματα τραβηχτά",
-          unit: "τ.μ.",
-          unitPrice: 29.34,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "5.06", description: "Επιχρίσματα τραβηχτά", unit: "τ.μ.", unitPrice: 29.34, quantity: 0, total: 0 },
       ],
     },
     {
@@ -466,30 +350,9 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΕΠΕΝΔΥΣΕΙΣ ΤΟΙΧΩΝ",
       subtotal: 0,
       items: [
-        {
-          code: "6.01",
-          description: "Με πλακάκια πορσελάνης",
-          unit: "τ.μ.",
-          unitPrice: 29.34,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "6.02",
-          description: "Με ξύλο",
-          unit: "τ.μ.",
-          unitPrice: 29.34,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "6.03",
-          description: "Με διακοσμητικά τούβλα",
-          unit: "τ.μ.",
-          unitPrice: 35.22,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "6.01", description: "Με πλακάκια πορσελάνης", unit: "τ.μ.", unitPrice: 29.34, quantity: 0, total: 0 },
+        { code: "6.02", description: "Με ξύλο", unit: "τ.μ.", unitPrice: 29.34, quantity: 0, total: 0 },
+        { code: "6.03", description: "Με διακοσμητικά τούβλα", unit: "τ.μ.", unitPrice: 35.22, quantity: 0, total: 0 },
         {
           code: "6.04",
           description: "Με λίθινες πλάκες (Καρύστου)",
@@ -498,22 +361,8 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "6.05",
-          description: "Με πλάκες μαρμάρου",
-          unit: "τ.μ.",
-          unitPrice: 41.08,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "6.06",
-          description: "Με αλουμίνιο",
-          unit: "τ.μ.",
-          unitPrice: 117.38,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "6.05", description: "Με πλάκες μαρμάρου", unit: "τ.μ.", unitPrice: 41.08, quantity: 0, total: 0 },
+        { code: "6.06", description: "Με αλουμίνιο", unit: "τ.μ.", unitPrice: 117.38, quantity: 0, total: 0 },
       ],
     },
     {
@@ -521,30 +370,9 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΣΤΡΩΣΕΙΣ ΔΑΠΕΔΩΝ",
       subtotal: 968.0,
       items: [
-        {
-          code: "7.01",
-          description: "Με τσιμεντοκονία",
-          unit: "τ.μ.",
-          unitPrice: 8.8,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "7.02",
-          description: "Με τσιμεντόπλακες",
-          unit: "τ.μ.",
-          unitPrice: 11.74,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "7.03",
-          description: "Με γαρμπιλομωσαϊκό",
-          unit: "τ.μ.",
-          unitPrice: 11.74,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "7.01", description: "Με τσιμεντοκονία", unit: "τ.μ.", unitPrice: 8.8, quantity: 0, total: 0 },
+        { code: "7.02", description: "Με τσιμεντόπλακες", unit: "τ.μ.", unitPrice: 11.74, quantity: 0, total: 0 },
+        { code: "7.03", description: "Με γαρμπιλομωσαϊκό", unit: "τ.μ.", unitPrice: 11.74, quantity: 0, total: 0 },
         {
           code: "7.04",
           description: "Με μωσαϊκό λευκού τσιμέντου",
@@ -561,14 +389,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "7.06",
-          description: "Με πλάκες μαρμάρου",
-          unit: "τ.μ.",
-          unitPrice: 35.22,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "7.06", description: "Με πλάκες μαρμάρου", unit: "τ.μ.", unitPrice: 35.22, quantity: 0, total: 0 },
         {
           code: "7.07",
           description: "Με πλακάκια κεραμικά ή πορσελάνης",
@@ -601,30 +422,9 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "7.11",
-          description: "Με λωρίδες δρυός",
-          unit: "τ.μ.",
-          unitPrice: 58.7,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "7.12",
-          description: "Με μοκέτα",
-          unit: "τ.μ.",
-          unitPrice: 17.6,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "7.13",
-          description: "Ασφαλτικές στρώσεις",
-          unit: "τ.μ.",
-          unitPrice: 14.0,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "7.11", description: "Με λωρίδες δρυός", unit: "τ.μ.", unitPrice: 58.7, quantity: 0, total: 0 },
+        { code: "7.12", description: "Με μοκέτα", unit: "τ.μ.", unitPrice: 17.6, quantity: 0, total: 0 },
+        { code: "7.13", description: "Ασφαλτικές στρώσεις", unit: "τ.μ.", unitPrice: 14.0, quantity: 0, total: 0 },
       ],
     },
     {
@@ -650,8 +450,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
         },
         {
           code: "8.03",
-          description:
-            "Πόρτες πρεσσαριστές με καπλαμά & κάσες από συμπαγή δρυ ή καρυδιά",
+          description: "Πόρτες πρεσσαριστές με καπλαμά & κάσες από συμπαγή δρυ ή καρυδιά",
           unit: "τ.μ.",
           unitPrice: 146.74,
           quantity: 0,
@@ -705,46 +504,11 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "8.10",
-          description: "Ρολλά από όρεγκον πάιν",
-          unit: "τ.μ.",
-          unitPrice: 88.04,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "8.11",
-          description: "Ρολλά πλαστικά",
-          unit: "τ.μ.",
-          unitPrice: 35.22,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "8.12",
-          description: "Σιδερένιες πόρτες",
-          unit: "τ.μ.",
-          unitPrice: 58.7,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "8.13",
-          description: "Σιδερένια παράθυρα",
-          unit: "τ.μ.",
-          unitPrice: 46.96,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "8.14",
-          description: "Σιδερένιες βιτρίνες",
-          unit: "τ.μ.",
-          unitPrice: 46.96,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "8.10", description: "Ρολλά από όρεγκον πάιν", unit: "τ.μ.", unitPrice: 88.04, quantity: 0, total: 0 },
+        { code: "8.11", description: "Ρολλά πλαστικά", unit: "τ.μ.", unitPrice: 35.22, quantity: 0, total: 0 },
+        { code: "8.12", description: "Σιδερένιες πόρτες", unit: "τ.μ.", unitPrice: 58.7, quantity: 0, total: 0 },
+        { code: "8.13", description: "Σιδερένια παράθυρα", unit: "τ.μ.", unitPrice: 46.96, quantity: 0, total: 0 },
+        { code: "8.14", description: "Σιδερένιες βιτρίνες", unit: "τ.μ.", unitPrice: 46.96, quantity: 0, total: 0 },
         {
           code: "8.15",
           description: "Συρόμενα ή σταθερά υαλοστάσια αλουμινίου",
@@ -769,18 +533,10 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "8.18",
-          description: "Βιτρίνες αλουμινίου",
-          unit: "τ.μ.",
-          unitPrice: 70.44,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "8.18", description: "Βιτρίνες αλουμινίου", unit: "τ.μ.", unitPrice: 70.44, quantity: 0, total: 0 },
         {
           code: "8.19",
-          description:
-            "Μονόφυλλη πυράντοχη πόρτα Τ30 ως Τ90 πλήρως εξοπλισμένη",
+          description: "Μονόφυλλη πυράντοχη πόρτα Τ30 ως Τ90 πλήρως εξοπλισμένη",
           unit: "τεμ.",
           unitPrice: 704.32,
           quantity: 0,
@@ -817,14 +573,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "9.02",
-          description: "Ντουλάπια κουζίνας κοινά",
-          unit: "μ.",
-          unitPrice: 88.04,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "9.02", description: "Ντουλάπια κουζίνας κοινά", unit: "μ.", unitPrice: 88.04, quantity: 0, total: 0 },
         {
           code: "9.03",
           description: "Ντουλάπια κουζίνας με φορμάικα ή καπλαμά",
@@ -897,21 +646,13 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       items: [
         {
           code: "11.01",
-          description:
-            "Κατώφλια, επίστρωση στηθαίων, ποδιές παραθύρων μπαλκονιών",
+          description: "Κατώφλια, επίστρωση στηθαίων, ποδιές παραθύρων μπαλκονιών",
           unit: "μ.",
           unitPrice: 8.8,
           quantity: 0,
           total: 0,
         },
-        {
-          code: "11.02",
-          description: "Μαρμαροεπένδυση βαθμίδος",
-          unit: "μ.",
-          unitPrice: 29.34,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "11.02", description: "Μαρμαροεπένδυση βαθμίδος", unit: "μ.", unitPrice: 29.34, quantity: 0, total: 0 },
       ],
     },
     {
@@ -919,22 +660,8 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΚΛΙΜΑΚΕΣ",
       subtotal: 0,
       items: [
-        {
-          code: "12.01",
-          description: "Σιδερένια βαθμίδα",
-          unit: "μ.",
-          unitPrice: 23.48,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "12.02",
-          description: "Ξύλινη βαθμίδα",
-          unit: "μ.",
-          unitPrice: 58.7,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "12.01", description: "Σιδερένια βαθμίδα", unit: "μ.", unitPrice: 23.48, quantity: 0, total: 0 },
+        { code: "12.02", description: "Ξύλινη βαθμίδα", unit: "μ.", unitPrice: 58.7, quantity: 0, total: 0 },
       ],
     },
     {
@@ -942,22 +669,8 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΥΑΛΟΠΙΝΑΚΕΣ",
       subtotal: 0,
       items: [
-        {
-          code: "13.01",
-          description: "Απλοί",
-          unit: "τ.μ.",
-          unitPrice: 6.46,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "13.02",
-          description: "Διπλοί θερμομονωτικοί",
-          unit: "τ.μ.",
-          unitPrice: 38.16,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "13.01", description: "Απλοί", unit: "τ.μ.", unitPrice: 6.46, quantity: 0, total: 0 },
+        { code: "13.02", description: "Διπλοί θερμομονωτικοί", unit: "τ.μ.", unitPrice: 38.16, quantity: 0, total: 0 },
       ],
     },
     {
@@ -973,14 +686,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "14.02",
-          description: "Από γυψοσανίδες",
-          unit: "τ.μ.",
-          unitPrice: 17.6,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "14.02", description: "Από γυψοσανίδες", unit: "τ.μ.", unitPrice: 17.6, quantity: 0, total: 0 },
         {
           code: "14.03",
           description: "Από πλάκες ορυκτών ινών σε μεταλλικό σκελετό",
@@ -989,14 +695,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "14.04",
-          description: "Από ξύλο",
-          unit: "τ.μ.",
-          unitPrice: 23.48,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "14.04", description: "Από ξύλο", unit: "τ.μ.", unitPrice: 23.48, quantity: 0, total: 0 },
       ],
     },
     {
@@ -1014,8 +713,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
         },
         {
           code: "15.02",
-          description:
-            "Ξύλινη στέγη με κεραμίδια εδραζόμενη σε πλάκα σκυροδέματος",
+          description: "Ξύλινη στέγη με κεραμίδια εδραζόμενη σε πλάκα σκυροδέματος",
           unit: "τ.μ.",
           unitPrice: 41.08,
           quantity: 0,
@@ -1068,30 +766,9 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΣΤΗΘΑΙΑ",
       subtotal: 0,
       items: [
-        {
-          code: "16.01",
-          description: "Από οπλισμένο σκυρόδεμα",
-          unit: "μ.",
-          unitPrice: 23.48,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "16.02",
-          description: "Από δρομική πλινθοδομή",
-          unit: "μ.",
-          unitPrice: 8.8,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "16.03",
-          description: "Από κιγκλίδωμα σιδερένιο",
-          unit: "μ.",
-          unitPrice: 23.48,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "16.01", description: "Από οπλισμένο σκυρόδεμα", unit: "μ.", unitPrice: 23.48, quantity: 0, total: 0 },
+        { code: "16.02", description: "Από δρομική πλινθοδομή", unit: "μ.", unitPrice: 8.8, quantity: 0, total: 0 },
+        { code: "16.03", description: "Από κιγκλίδωμα σιδερένιο", unit: "μ.", unitPrice: 23.48, quantity: 0, total: 0 },
         {
           code: "16.04",
           description: "Από κιγκλίδωμα αλουμινίου",
@@ -1100,14 +777,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "16.05",
-          description: "Από κιγκλίδωμα ξύλινο",
-          unit: "μ.",
-          unitPrice: 46.96,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "16.05", description: "Από κιγκλίδωμα ξύλινο", unit: "μ.", unitPrice: 46.96, quantity: 0, total: 0 },
         {
           code: "16.06",
           description: "Από υαλοπίνακες ασφαλείας (SECURIT)",
@@ -1123,14 +793,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΧΡΩΜΑΤΙΣΜΟΙ",
       subtotal: 0,
       items: [
-        {
-          code: "17.01",
-          description: "Υδροχρωματισμοί απλοί",
-          unit: "τ.μ.",
-          unitPrice: 1.18,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "17.01", description: "Υδροχρωματισμοί απλοί", unit: "τ.μ.", unitPrice: 1.18, quantity: 0, total: 0 },
         {
           code: "17.02",
           description: "Υδροχρωματισμοί με τσίγκο και κόλλα",
@@ -1139,70 +802,14 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 0,
           total: 0,
         },
-        {
-          code: "17.03",
-          description: "Πλαστικά επί τοίχου",
-          unit: "τ.μ.",
-          unitPrice: 3.52,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "17.04",
-          description: "Πλαστικά σπατουλαριστά",
-          unit: "τ.μ.",
-          unitPrice: 5.86,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "17.05",
-          description: "Τσιμεντοχρώματα",
-          unit: "τ.μ.",
-          unitPrice: 5.86,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "17.06",
-          description: "Ακρυλικά και ρελιέφ",
-          unit: "τ.μ.",
-          unitPrice: 7.04,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "17.07",
-          description: "Ριπολίνες κοινές",
-          unit: "τ.μ.",
-          unitPrice: 7.04,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "17.08",
-          description: "Ριπολίνες σατινέ",
-          unit: "τ.μ.",
-          unitPrice: 8.8,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "17.09",
-          description: "Ντουκοχρώματα",
-          unit: "τ.μ.",
-          unitPrice: 8.8,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "17.10",
-          description: "Λούστρα",
-          unit: "τ.μ.",
-          unitPrice: 23.48,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "17.03", description: "Πλαστικά επί τοίχου", unit: "τ.μ.", unitPrice: 3.52, quantity: 0, total: 0 },
+        { code: "17.04", description: "Πλαστικά σπατουλαριστά", unit: "τ.μ.", unitPrice: 5.86, quantity: 0, total: 0 },
+        { code: "17.05", description: "Τσιμεντοχρώματα", unit: "τ.μ.", unitPrice: 5.86, quantity: 0, total: 0 },
+        { code: "17.06", description: "Ακρυλικά και ρελιέφ", unit: "τ.μ.", unitPrice: 7.04, quantity: 0, total: 0 },
+        { code: "17.07", description: "Ριπολίνες κοινές", unit: "τ.μ.", unitPrice: 7.04, quantity: 0, total: 0 },
+        { code: "17.08", description: "Ριπολίνες σατινέ", unit: "τ.μ.", unitPrice: 8.8, quantity: 0, total: 0 },
+        { code: "17.09", description: "Ντουκοχρώματα", unit: "τ.μ.", unitPrice: 8.8, quantity: 0, total: 0 },
+        { code: "17.10", description: "Λούστρα", unit: "τ.μ.", unitPrice: 23.48, quantity: 0, total: 0 },
       ],
     },
     {
@@ -1218,22 +825,8 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           quantity: 55.0,
           total: 484.0,
         },
-        {
-          code: "18.02",
-          description: "Ικριώματα",
-          unit: "τ.μ.",
-          unitPrice: 2.06,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "18.03",
-          description: "Τζάκι με καπνοδόχο",
-          unit: "αποκοπή",
-          unitPrice: 880.42,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "18.02", description: "Ικριώματα", unit: "τ.μ.", unitPrice: 2.06, quantity: 0, total: 0 },
+        { code: "18.03", description: "Τζάκι με καπνοδόχο", unit: "αποκοπή", unitPrice: 880.42, quantity: 0, total: 0 },
         {
           code: "18.04",
           description: "Κλειδαριές και πόμολα",
@@ -1249,22 +842,8 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΠΕΡΓΚΟΛΕΣ",
       subtotal: 0,
       items: [
-        {
-          code: "19.01",
-          description: "Από μεταλλικό σκελετό",
-          unit: "τ.μ.",
-          unitPrice: 20.0,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "19.02",
-          description: "Από σκελετό αλουμινίου",
-          unit: "τ.μ.",
-          unitPrice: 25.0,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "19.01", description: "Από μεταλλικό σκελετό", unit: "τ.μ.", unitPrice: 20.0, quantity: 0, total: 0 },
+        { code: "19.02", description: "Από σκελετό αλουμινίου", unit: "τ.μ.", unitPrice: 25.0, quantity: 0, total: 0 },
         {
           code: "19.03",
           description: "Από ξυλεία προλουστραρισμένη",
@@ -1288,22 +867,8 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΠΕΡΙΦΡΑΞΕΙΣ",
       subtotal: 45.0,
       items: [
-        {
-          code: "20.01",
-          description: "Πάσσαλοι σιδερένιοι",
-          unit: "μ.",
-          unitPrice: 1.5,
-          quantity: 30.0,
-          total: 45.0,
-        },
-        {
-          code: "20.02",
-          description: "Πάσσαλοι ξύλινοι",
-          unit: "μ.",
-          unitPrice: 2.2,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "20.01", description: "Πάσσαλοι σιδερένιοι", unit: "μ.", unitPrice: 1.5, quantity: 30.0, total: 45.0 },
+        { code: "20.02", description: "Πάσσαλοι ξύλινοι", unit: "μ.", unitPrice: 2.2, quantity: 0, total: 0 },
         {
           code: "20.03",
           description: "Συρματόπλεγμα (κοτετσόσυρμα)",
@@ -1327,22 +892,8 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΕΙΔΗ ΥΓΙΕΙΝΗΣ",
       subtotal: 0,
       items: [
-        {
-          code: "21.01",
-          description: "Πλήρες σετ λουτρού",
-          unit: "αποκοπή",
-          unitPrice: 469.56,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "21.02",
-          description: "Σετ W.C.",
-          unit: "αποκοπή",
-          unitPrice: 176.08,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "21.01", description: "Πλήρες σετ λουτρού", unit: "αποκοπή", unitPrice: 469.56, quantity: 0, total: 0 },
+        { code: "21.02", description: "Σετ W.C.", unit: "αποκοπή", unitPrice: 176.08, quantity: 0, total: 0 },
         {
           code: "21.03",
           description: "Νεροχύτης - μπαταρία κουζίνας",
@@ -1368,8 +919,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
         },
         {
           code: "22.02",
-          description:
-            "Ύδρευση - αποχέτευση W.C. νεροχύτη κουζίνας ή εργαστηρίου",
+          description: "Ύδρευση - αποχέτευση W.C. νεροχύτη κουζίνας ή εργαστηρίου",
           unit: "αποκοπή",
           unitPrice: 352.16,
           quantity: 0,
@@ -1390,22 +940,8 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΘΕΡΜΑΝΣΗ – ΨΥΞΗ",
       subtotal: 0,
       items: [
-        {
-          code: "23.01",
-          description: "Κεντρική θέρμανση",
-          unit: "kcal",
-          unitPrice: 0.14,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "23.02",
-          description: "Κλιματισμός",
-          unit: "btu",
-          unitPrice: 0.14,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "23.01", description: "Κεντρική θέρμανση", unit: "kcal", unitPrice: 0.14, quantity: 0, total: 0 },
+        { code: "23.02", description: "Κλιματισμός", unit: "btu", unitPrice: 0.14, quantity: 0, total: 0 },
       ],
     },
     {
@@ -1428,30 +964,9 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΗΛΕΚΤΡΙΚΕΣ ΕΓΚΑΤΑΣΤΑΣΕΙΣ",
       subtotal: 0,
       items: [
-        {
-          code: "25.01",
-          description: "Κατοικίας",
-          unit: "κάτοψης",
-          unitPrice: 11.74,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "25.02",
-          description: "Καταστήματος",
-          unit: "κάτοψης",
-          unitPrice: 5.86,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "25.03",
-          description: "Γραφείου",
-          unit: "κάτοψης",
-          unitPrice: 5.86,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "25.01", description: "Κατοικίας", unit: "κάτοψης", unitPrice: 11.74, quantity: 0, total: 0 },
+        { code: "25.02", description: "Καταστήματος", unit: "κάτοψης", unitPrice: 5.86, quantity: 0, total: 0 },
+        { code: "25.03", description: "Γραφείου", unit: "κάτοψης", unitPrice: 5.86, quantity: 0, total: 0 },
       ],
     },
     {
@@ -1482,14 +997,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΔΙΑΦΟΡΕΣ ΕΓΚΑΤΑΣΤΑΣΕΙΣ",
       subtotal: 0,
       items: [
-        {
-          code: "27.01",
-          description: "Ηλιακός συλλέκτης",
-          unit: "τεμ.",
-          unitPrice: 880.42,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "27.01", description: "Ηλιακός συλλέκτης", unit: "τεμ.", unitPrice: 880.42, quantity: 0, total: 0 },
       ],
     },
     {
@@ -1497,54 +1005,21 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
       title: "ΠΕΡΙΒΑΛΛΩΝ ΧΩΡΟΣ",
       subtotal: 0,
       items: [
-        {
-          code: "28.01",
-          description: "Περιβάλλων χώρος",
-          unit: "αποκοπή",
-          unitPrice: 0,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "Π.1",
-          description: "Ύδρευση Πισίνας",
-          unit: "αποκοπή",
-          unitPrice: 0,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "Π.2",
-          description: "Αποχέτευση Πισίνας",
-          unit: "αποκοπή",
-          unitPrice: 0,
-          quantity: 0,
-          total: 0,
-        },
-        {
-          code: "Π.3",
-          description: "Ηλεκτρολογικά Πισίνας",
-          unit: "αποκοπή",
-          unitPrice: 0,
-          quantity: 0,
-          total: 0,
-        },
+        { code: "28.01", description: "Περιβάλλων χώρος", unit: "αποκοπή", unitPrice: 0, quantity: 0, total: 0 },
+        { code: "Π.1", description: "Ύδρευση Πισίνας", unit: "αποκοπή", unitPrice: 0, quantity: 0, total: 0 },
+        { code: "Π.2", description: "Αποχέτευση Πισίνας", unit: "αποκοπή", unitPrice: 0, quantity: 0, total: 0 },
+        { code: "Π.3", description: "Ηλεκτρολογικά Πισίνας", unit: "αποκοπή", unitPrice: 0, quantity: 0, total: 0 },
       ],
     },
-  ];
-  const grandTotal = categories.reduce(
-    (sum, category) => sum + category.subtotal,
-    0
-  );
-  const finalTotal = grandTotal + formData.unforeseen;
+  ]
+  const grandTotal = categories.reduce((sum, category) => sum + category.subtotal, 0)
+  const finalTotal = grandTotal + formData.unforeseen
 
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
       {/* Header */}
       <div className="text-center mb-6">
-        <h1 className="text-xl font-bold mb-2">
-          ΣΥΝΤΑΞΗ ΑΝΑΛΥΤΙΚΟΥ ΠΡΟΫΠΟΛΟΓΙΣΜΟΥ ΕΡΓΟΥ
-        </h1>
+        <h1 className="text-xl font-bold mb-2">ΣΥΝΤΑΞΗ ΑΝΑΛΥΤΙΚΟΥ ΠΡΟΫΠΟΛΟΓΙΣΜΟΥ ΕΡΓΟΥ</h1>
         <p className="text-sm ">(σύμφωνα με το Παράρτημα Β' του Ν.4495/17)</p>
       </div>
 
@@ -1556,7 +1031,7 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>
-          <h3 className="flex-1 text-black">{project_description || "N/a"}</h3>
+          <h3 className="flex-1 text-black">{project_description || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
@@ -1566,25 +1041,19 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
         </div>
       </div>
       {/* Budget Title */}
-      <div className="text-center bg-white p-2 border border-black border-b-0">
-        <h2 className="text-lg font-bold ">
-          ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ ΒΑΣΕΙ ΠΑΡΑΡΤΗΜΑΤΟΣ Β' Ν.4495/17)
-        </h2>
+      <div className="text-center bg-gray-200 p-2 border border-gray-400 border-b-0">
+        <h2 className="text-lg font-bold ">ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ ΒΑΣΕΙ ΠΑΡΑΡΤΗΜΑΤΟΣ Β' Ν.4495/17)</h2>
       </div>
 
       {/* Budget Table */}
-      <div className="border border-black">
+      <div className="border border-gray-400">
         {/* Table Header */}
-        <div className="grid grid-cols-12 bg-white border-b border-black font-bold text-sm">
-          <div className="col-span-1 p-2 border-r border-black">Κωδικός</div>
-          <div className="col-span-5 p-2 border-r border-black">Εργασία</div>
-          <div className="col-span-1 p-2 border-r border-black">
-            Μονάδα Μέτρησης
-          </div>
-          <div className="col-span-1 p-2 border-r border-black">
-            Τιμή Μονάδος €
-          </div>
-          <div className="col-span-2 p-2 border-r border-black">Ποσότητα</div>
+        <div className="grid grid-cols-12 bg-gray-100 border-b border-gray-400 font-bold text-sm">
+          <div className="col-span-1 p-2 border-r border-gray-400">Κωδικός</div>
+          <div className="col-span-5 p-2 border-r border-gray-400">Εργασία</div>
+          <div className="col-span-1 p-2 border-r border-gray-400">Μονάδα Μέτρησης</div>
+          <div className="col-span-1 p-2 border-r border-gray-400">Τιμή Μονάδος €</div>
+          <div className="col-span-2 p-2 border-r border-gray-400">Ποσότητα</div>
           <div className="col-span-2 p-2">Σύνολο €</div>
         </div>
 
@@ -1592,35 +1061,22 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
         {categories.map((category) => (
           <div key={category.id}>
             {/* Category Header */}
-            <div className="grid grid-cols-12 bg-white border-b border-black">
-              <div className="col-span-1 p-2 border-r border-black font-bold ">
-                {category.id}
-              </div>
-              <div className="col-span-9 p-2 border-r border-black font-bold ">
-                {category.title}
-              </div>
+            <div className="grid grid-cols-12 bg-gray-50 border-b border-gray-400">
+              <div className="col-span-1 p-2 border-r border-gray-400 font-bold ">{category.id}</div>
+              <div className="col-span-9 p-2 border-r border-gray-400 font-bold ">{category.title}</div>
               {/* <div className="col-span-2 p-2 font-bold text-right ">{category.subtotal.toFixed(2)}</div> */}
             </div>
 
             {/* Category Items */}
             {category.items.map((item) => (
-              <div
-                key={item.code}
-                className="grid grid-cols-12 border-b border-black text-sm"
-              >
-                <div className="col-span-1 p-2 border-r border-black ">
-                  {item.code}
-                </div>
-                <div className="col-span-5 p-2 border-r border-black ">
-                  {item.description}
-                </div>
-                <div className="col-span-1 p-2 border-r border-black text-center ">
-                  {item.unit}
-                </div>
-                <div className="col-span-1 p-2 border-r border-black text-right ">
+              <div key={item.code} className="grid grid-cols-12 border-b border-gray-400 text-sm">
+                <div className="col-span-1 p-2 border-r border-gray-400 ">{item.code}</div>
+                <div className="col-span-5 p-2 border-r border-gray-400 ">{item.description}</div>
+                <div className="col-span-1 p-2 border-r border-gray-400 text-center ">{item.unit}</div>
+                <div className="col-span-1 p-2 border-r border-gray-400 text-right ">
                   {item.unitPrice.toFixed(2)}
                 </div>
-                <div className="col-span-2 p-2 border-r border-black text-right ">
+                <div className="col-span-2 p-2 border-r border-gray-400 text-right ">
                   {item.quantity > 0 ? item.quantity.toFixed(2) : ""}
                 </div>
                 <div className="col-span-2 p-2 text-right font-medium ">
@@ -1630,42 +1086,30 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
             ))}
 
             {/* Category Subtotal */}
-            <div className="grid grid-cols-12 bg-white border-b border-black">
-              <div className="col-span-10 p-2 text-right font-bold">
-                Μερικό Σύνολο =
-              </div>
-              <div className="col-span-2 p-2 text-right font-bold ">
-                {category.subtotal.toFixed(2)}
-              </div>
+            <div className="grid grid-cols-12 bg-gray-50 border-b border-gray-400">
+              <div className="col-span-10 p-2 text-right font-bold">Μερικό Σύνολο =</div>
+              <div className="col-span-2 p-2 text-right font-bold ">{category.subtotal.toFixed(2)}</div>
             </div>
           </div>
         ))}
 
         {/* Grand Totals */}
         <div className="">
-          <div className="grid grid-cols-12 border-b border-black bg-white">
-            <div className="col-span-10 p-2 text-right font-bold">
-              Γενικό Σύνολο Αναλυτικού Προϋπολογισμού*. =
-            </div>
-            <div className="col-span-2 p-2 text-right font-bold ">
-              {grandTotal.toFixed(2)} €
-            </div>
+          <div className="grid grid-cols-12 border-b border-gray-400 bg-gray-100">
+            <div className="col-span-10 p-2 text-right font-bold">Γενικό Σύνολο Αναλυτικού Προϋπολογισμού*. =</div>
+            <div className="col-span-2 p-2 text-right font-bold ">{grandTotal.toFixed(2)} €</div>
           </div>
 
-          <div className="grid grid-cols-12 border-b border-black">
-            <div className="col-span-10 p-2 text-right font-bold">
-              Απρόβλεπτα*. =
-            </div>
-            <div className="col-span-2 p-2 text-right font-bold ">
-              {formData.unforeseen.toFixed(2)} €
-            </div>
+          <div className="grid grid-cols-12 border-b border-gray-400">
+            <div className="col-span-10 p-2 text-right font-bold">Απρόβλεπτα*. =</div>
+            <div className="col-span-2 p-2 text-right font-bold ">{formData.unforeseen.toFixed(2)} €</div>
           </div>
 
-          <div className="grid grid-cols-12 bg-white">
+          <div className="grid grid-cols-12 bg-gray-200">
             <div className="col-span-10 p-2 text-right font-bold ">
-              Σύνολο Αναλυτικού Προϋπολογισμού βάσει Παραρτήματος Β'
-              Ν.4495/17)*. =
+              Σύνολο Αναλυτικού Προϋπολογισμού βάσει Παραρτήματος Β' Ν.4495/17)*. =
             </div>
+            <div className="col-span-2 p-2 text-right font-bold text-lg">{finalTotal.toFixed(2)} €</div>
           </div>
         </div>
       </div>
@@ -1687,13 +1131,10 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
         <div className="col-span-1"></div>
         <div className="col-span-2 flex justify-center gap-6">
           <p className="w-1/2">
-            Here, the date the engineer starts the project should automatically
-            appear.
+            Here, the date the engineer starts the project should automatically appear.
           </p>
           <p className="w-1/2">
-            stamp and signature of an engineer, he should save it in his profile
-            and display it there or if he doesn't want it for personal data
-            reasons, we put a picture and he changes it
+            stamp and signature of an engineer, he should save it in his profile and display it there or if he doesn't want it for personal data reasons, we put a picture and he changes it
           </p>
         </div>
       </div>
@@ -1709,360 +1150,6 @@ export default function F1D1({ allData }: { allData: allDataProps }) {
           ]}
         />
       </div>
-    </div>
-  );
+    </div >
+  )
 }
-
-
-
-
-// "use client";
-// import { useState } from "react";
-// import StampComponent from "../../shared/signture/signture";
-
-// interface allDataProps {
-//   owner_address: string;
-//   owner_city: string;
-//   owner_name: string;
-//   owner_postal_code: string;
-//   project_description?: string;
-// }
-
-// export default function F1D1({ allData }: { allData: allDataProps }) {
-
-//   const {
-//     owner_address,
-//     owner_city,
-//     owner_name,
-//     owner_postal_code,
-//     project_description,
-//   } = allData;
-
-//   const [quantities, setQuantities] = useState<Record<string, string>>({
-//     '1.01': '',
-//     '1.02': '',
-//     '1.03': '',
-//     '1.04': '',
-//     '1.05': '',
-//     '1.06': '',
-//     '1.07': '',
-//     '1.08': ''
-//   });
-
-//   const handleQuantityChange = (code: string, value: string) => {
-//     setQuantities(prev => ({
-//       ...prev,
-//       [code]: value
-//     }));
-//   };
-
-//   console.log(quantities, "=================================sdldslfk")
-
-//   const calculateTotal = (price: string, quantity: string): string => {
-//     const numPrice = parseFloat(price.replace(',', '.'));
-//     const numQuantity = parseFloat(quantity) || 0;
-//     return (numPrice * numQuantity).toFixed(2).replace('.', ',');
-//   };
-
-//   const calculateGrandTotal = (): string => {
-//     const prices: Record<string, number> = {
-//       '1.01': 3.22,
-//       '1.02': 3.22,
-//       '1.03': 11.74,
-//       '1.04': 5.26,
-//       '1.05': 5.26,
-//       '1.06': 5.26,
-//       '1.07': 1.19,
-//       '1.08': 5.86
-//     };
-
-//     let total = 0;
-//     Object.keys(quantities).forEach(code => {
-//       const quantity = parseFloat(quantities[code]) || 0;
-//       const price = prices[code];
-//       if (price) {
-//         total += price * quantity;
-//       }
-//     });
-
-//     return total.toFixed(2).replace('.', ',');
-//   };
-
-//   return (
-//     <div className="max-w-[794px] mx-auto p-4 bg-white">
-//       {/* Header */}
-//       <div className="text-center mb-6">
-//         <h1 className="text-xl font-bold mb-2">
-//           ΣΥΝΤΑΞΗ ΑΝΑΛΥΤΙΚΟΥ ΠΡΟΫΠΟΛΟΓΙΣΜΟΥ ΕΡΓΟΥ
-//         </h1>
-//         <p className="text-sm ">(σύμφωνα με το Παράρτημα Β' του Ν.4495/17)</p>
-//       </div>
-
-//       {/* Project Info */}
-//       <div className="mb-6 space-y-4">
-//         <div className="flex items-center gap-4">
-//           <span className="font-medium w-1/4">Εργοδότες *:</span>
-//           <h3 className="flex-1 text-black text-sm">{owner_name || "N/A"}</h3>
-//         </div>
-//         <div className="flex items-center gap-4">
-//           <span className="font-medium w-1/4">Έργο *:</span>
-//           <h3 className="flex-1 text-black text-sm">{project_description || "N/A"}</h3>
-//         </div>
-//         <div className="flex items-center gap-4">
-//           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-//           <h3 className="flex-1 text-black text-sm">
-//             {owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} (FOR BUILDING)
-//           </h3>
-//         </div>
-//       </div>
-
-//       {/* Budget Title */}
-//       <div className="text-center bg-white p-2 border border-black border-b-0">
-//         <h2 className="text-lg font-bold ">
-//           ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ ΒΑΣΕΙ ΠΑΡΑΡΤΗΜΑΤΟΣ Β' Ν.4495/17)
-//         </h2>
-//       </div>
-
-//       <div className="w-full max-w-6xl mx-auto bg-white">
-//         {/* Budget Table Header */}
-//         <div className="border border-black">
-//           <div className="flex bg-white font-bold text-sm">
-//             <div className="w-16 p-2 border-r border-black text-center">Κωδικός</div>
-//             <div className="flex-1 p-2 border-r border-black">Εργασία</div>
-//             <div className="w-16 p-2 border-r border-black text-center">Μονάδα Μέτρησης</div>
-//             <div className="w-20 p-2 border-r border-black text-center">Τιμή Μονάδος €</div>
-//             <div className="w-24 p-2 border-r border-black text-center">Ποσότητα</div>
-//             <div className="w-24 p-2 text-center">Σύνολο €</div>
-//           </div>
-//         </div>
-
-//         {/* Category Header one */}
-//         <div className="bg-white border border-black">
-//           <div className="flex">
-//             <div className="w-16 border-r border-black p-2 text-center font-bold">
-//               1
-//             </div>
-//             <div className="flex-1 p-2 font-bold">
-//               ΧΩΜΑΤΟΥΡΓΙΚΑ
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Table rows one*/}
-//         <div className="border-l border-r border-black">
-//           {/* Row 1.01 */}
-//           <div className="flex border-b border-black">
-//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.01</div>
-//             <div className="flex-1 border-r border-black p-2 text-sm">Γενικές εκσκαφές γαιώδεις</div>
-//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
-//             <div className="w-20 border-r border-black p-2 text-center text-sm">3,22</div>
-//             <div className="w-24 border-r border-black p-1">
-//               <input
-//                 type="text"
-//                 step="0.01"
-//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
-//                 value={quantities['1.01']}
-//                 onChange={(e) => handleQuantityChange('1.01', e.target.value)}
-//               />
-//             </div>
-//             <div className="w-24 p-2 text-center text-sm font-medium">
-//               {quantities['1.01'] ? calculateTotal('3,22', quantities['1.01']) : ''}
-//             </div>
-//           </div>
-
-//           {/* Row 1.02 */}
-//           <div className="flex border-b border-black">
-//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.02</div>
-//             <div className="flex-1 border-r border-black p-2 text-sm">Γενικές εκσκαφές ημιβραχώδεις</div>
-//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
-//             <div className="w-20 border-r border-black p-2 text-center text-sm">3,22</div>
-//             <div className="w-24 border-r border-black p-1">
-//               <input
-//                 type="text"
-//                 step="0.01"
-//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
-//                 value={quantities['1.02']}
-//                 onChange={(e) => handleQuantityChange('1.02', e.target.value)}
-//               />
-//             </div>
-//             <div className="w-24 p-2 text-center text-sm font-medium">
-//               {quantities['1.02'] ? calculateTotal('3,22', quantities['1.02']) : ''}
-//             </div>
-//           </div>
-
-//           {/* Row 1.03 */}
-//           <div className="flex border-b border-black">
-//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.03</div>
-//             <div className="flex-1 border-r border-black p-2 text-sm">Γενικές εκσκαφές βραχώδεις</div>
-//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
-//             <div className="w-20 border-r border-black p-2 text-center text-sm">11,74</div>
-//             <div className="w-24 border-r border-black p-1">
-//               <input
-//                 type="text"
-//                 step="0.01"
-//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
-//                 value={quantities['1.03']}
-//                 onChange={(e) => handleQuantityChange('1.03', e.target.value)}
-//               />
-//             </div>
-//             <div className="w-24 p-2 text-center text-sm font-medium">
-//               {quantities['1.03'] ? calculateTotal('11,74', quantities['1.03']) : ''}
-//             </div>
-//           </div>
-
-//           {/* Row 1.04 */}
-//           <div className="flex border-b border-black">
-//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.04</div>
-//             <div className="flex-1 border-r border-black p-2 text-sm">Εκσκαφές θεμελίων γαιώδεις</div>
-//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
-//             <div className="w-20 border-r border-black p-2 text-center text-sm">5,26</div>
-//             <div className="w-24 border-r border-black p-1">
-//               <input
-//                 type="text"
-//                 step="0.01"
-//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
-//                 value={quantities['1.04']}
-//                 onChange={(e) => handleQuantityChange('1.04', e.target.value)}
-//               />
-//             </div>
-//             <div className="w-24 p-2 text-center text-sm font-medium">
-//               {quantities['1.04'] ? calculateTotal('5,26', quantities['1.04']) : ''}
-//             </div>
-//           </div>
-
-//           {/* Row 1.05 */}
-//           <div className="flex border-b border-black">
-//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.05</div>
-//             <div className="flex-1 border-r border-black p-2 text-sm">Εκσκαφές θεμελίων ημιβραχώδεις</div>
-//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
-//             <div className="w-20 border-r border-black p-2 text-center text-sm">5,26</div>
-//             <div className="w-24 border-r border-black p-1">
-//               <input
-//                 type="text"
-//                 step="0.01"
-//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
-//                 value={quantities['1.05']}
-//                 onChange={(e) => handleQuantityChange('1.05', e.target.value)}
-//               />
-//             </div>
-//             <div className="w-24 p-2 text-center text-sm font-medium">
-//               {quantities['1.05'] ? calculateTotal('5,26', quantities['1.05']) : ''}
-//             </div>
-//           </div>
-
-//           {/* Row 1.06 */}
-//           <div className="flex border-b border-black">
-//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.06</div>
-//             <div className="flex-1 border-r border-black p-2 text-sm">Εκσκαφές θεμελίων βραχώδεις</div>
-//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
-//             <div className="w-20 border-r border-black p-2 text-center text-sm">5,26</div>
-//             <div className="w-24 border-r border-black p-1">
-//               <input
-//                 type="text"
-//                 step="0.01"
-//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
-//                 value={quantities['1.06']}
-//                 onChange={(e) => handleQuantityChange('1.06', e.target.value)}
-//               />
-//             </div>
-//             <div className="w-24 p-2 text-center text-sm font-medium">
-//               {quantities['1.06'] ? calculateTotal('5,26', quantities['1.06']) : ''}
-//             </div>
-//           </div>
-
-//           {/* Row 1.07 */}
-//           <div className="flex border-b border-black">
-//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.07</div>
-//             <div className="flex-1 border-r border-black p-2 text-sm">Επίχωσης με προϊόντα εκσκαφής</div>
-//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
-//             <div className="w-20 border-r border-black p-2 text-center text-sm">1,19</div>
-//             <div className="w-24 border-r border-black p-1">
-//               <input
-//                 type="text"
-//                 step="0.01"
-//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
-//                 value={quantities['1.07']}
-//                 onChange={(e) => handleQuantityChange('1.07', e.target.value)}
-//               />
-//             </div>
-//             <div className="w-24 p-2 text-center text-sm font-medium">
-//               {quantities['1.07'] ? calculateTotal('1,19', quantities['1.07']) : ''}
-//             </div>
-//           </div>
-
-//           {/* Row 1.08 */}
-//           <div className="flex border-b border-black">
-//             <div className="w-16 border-r border-black p-2 text-center text-sm bg-white">1.08</div>
-//             <div className="flex-1 border-r border-black p-2 text-sm">Ειδικές επιχώσεις (σκύρα κ.λπ.)</div>
-//             <div className="w-16 border-r border-black p-2 text-center text-sm">κ.μ.</div>
-//             <div className="w-20 border-r border-black p-2 text-center text-sm">5,86</div>
-//             <div className="w-24 border-r border-black p-1">
-//               <input
-//                 type="text"
-//                 step="0.01"
-//                 className="w-full text-center text-sm px-1 py-0.5 focus:outline-none"
-//                 value={quantities['1.08']}
-//                 onChange={(e) => handleQuantityChange('1.08', e.target.value)}
-//               />
-//             </div>
-//             <div className="w-24 p-2 text-center text-sm font-medium">
-//               {quantities['1.08'] ? calculateTotal('5,86', quantities['1.08']) : ''}
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Footer - Total */}
-//         <div className="border border-t-0 border-black bg-white">
-//           <div className="flex">
-//             <div className="flex-1 p-2 text-center font-bold">
-//               Μερικό Σύνολο =
-//             </div>
-//             <div className="w-24 border-l border-black p-2 text-center text-red-600 font-bold">
-//               {calculateGrandTotal()}
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-      
-//       {/* Signature Section */}
-//       <div className="grid grid-cols-3 mb-2 mt-12">
-//         <div className="col-span-1"></div>
-//         <div className="col-span-2 flex justify-center gap-6">
-//           <p className="w-1/2">
-//             Here, the date the engineer starts the project should automatically
-//             appear.
-//           </p>
-//           <p className="w-1/2">
-//             stamp and signature of an engineer, he should save it in his profile
-//             and display it there or if he doesn't want it for personal data
-//             reasons, we put a picture and he changes it
-//           </p>
-//         </div>
-//       </div>
-//       <div className="mt-4 text-right p-5">
-//         <div className="flex justify-between items-start">
-//           <div className="flex items-center justify-between gap-2">
-//             <span className="">Ημερομηνία :</span>
-//             <span className="ml-30">6/25/2025</span>
-//           </div>
-//           <div className="">
-//             <h3 className="text-center mb-4">Ο Συντάξας Μηχανικός</h3>
-//             <h3 className="text-center mb-4">SIGN ENGINEER</h3>
-//           </div>
-//         </div>
-//       </div>
-
-//       <div className="flex flex-col items-end">
-//         {/* Dashed Border Box = common component */}
-//         <StampComponent
-//           title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
-//           instructions={[
-//             "Με δεξί κλικ",
-//             "Αλλαγή εικόνας",
-//             " Βάζετε την σφραγίδα σας",
-//           ]}
-//         />
-//       </div>
-//     </div>
-//   );
-// }
