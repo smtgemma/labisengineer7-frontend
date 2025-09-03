@@ -346,19 +346,19 @@ const MultiSelectSubcategory = () => {
           label: "Εσωτερικές διαρρυθμίσεις_6",
           selected: true,
         },
-        {
-          id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1",
-          label: "Εργασίες άλλης χρήσης_1",
-        },
+        // {
+        //   id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1",
+        //   label: "Εργασίες άλλης χρήσης_1",
+        // },
         {
           id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5",
           label: "Εργασίες χρωματισμών & επισκευών με χρήση ικριωμάτων_5",
           selected: true,
         },
-        {
-          id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΤΟΠΟΘΕΤΗΣΗ_ΙΚΡΙΩΜΑΤΩΝ_15",
-          label: "Τοποθέτηση ικριωμάτων_15",
-        },
+        // {
+        //   id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΤΟΠΟΘΕΤΗΣΗ_ΙΚΡΙΩΜΑΤΩΝ_15",
+        //   label: "Τοποθέτηση ικριωμάτων_15",
+        // },
         {
           id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10",
           label: "Επεμβάσεις στις όψεις και στα ανοίγματα_10",
@@ -382,24 +382,24 @@ const MultiSelectSubcategory = () => {
           id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΡΜΟΠΡΟΖΩΗΣ_7",
           label: "Εξωτερική θερμομόνωση & τοποθέτηση ηλιακών συστημάτων_7",
         },
-        {
-          id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΥΤΟΝΟΜΟ_ΣΥΣΤΗΜΑ_ΕΡΓΑΣΙΑΣ_3",
-          label: "Αυτόνομο Σύστημα Θέρμανσης_3",
-        },
+        // {
+        //   id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΥΤΟΝΟΜΟ_ΣΥΣΤΗΜΑ_ΕΡΓΑΣΙΑΣ_3",
+        //   label: "Αυτόνομο Σύστημα Θέρμανσης_3",
+        // },
       ],
     },
-    {
-      id: "small-construction",
-      title: "Small Construction & Installations",
-      icon: <Hammer size={20} className="text-blue-500" />,
-      options: [
-        {
-          id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΙΣΙΝΑ_COMPACT_ΕΩΣ_50_Τ_Μ__13",
-          label:
-            "Κατασκευή ασκεπούς δεξαμενής ή πισίνας COMPACT μέχρι 50 τ.μ._13",
-        },
-      ],
-    },
+    // {
+    //   id: "small-construction",
+    //   title: "Small Construction & Installations",
+    //   icon: <Hammer size={20} className="text-blue-500" />,
+    //   options: [
+    //     {
+    //       id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΙΣΙΝΑ_COMPACT_ΕΩΣ_50_Τ_Μ__13",
+    //       label:
+    //         "Κατασκευή ασκεπούς δεξαμενής ή πισίνας COMPACT μέχρι 50 τ.μ._13",
+    //     },
+    //   ],
+    // },
     {
       id: "landscaping-2",
       title: "Landscaping, Tree Works & Outdoor Installations",
@@ -411,44 +411,44 @@ const MultiSelectSubcategory = () => {
         },
       ],
     },
-    {
-      id: "operational-space",
-      title: "Operational Space Management",
-      icon: <Settings size={20} className="text-purple-600" />,
-      options: [
-        {
-          id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΕΙΤΟΥΡΓΙΚΗ_ΣΥΝΕΧΗΣ_ΧΡΟΝΟΣ_9",
-          label: "Λειτουργική συνένωση χώρων_9",
-        },
-      ],
-    },
-    {
-      id: "fencing",
-      title: "Fencing & Boundaries",
-      icon: <Building2 size={20} className="text-teal-600" />,
-      options: [
-        {
-          id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΕΡΙΦΡΑΞΗ_ΕΚΤΟΣ_ΞΕΛΟΥ_11",
-          label: "Περίφραξη ή περίφραξη σε εκτός σχεδίου γήπεδα & οικισμούς_11",
-        },
-        {
-          id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΕΡΙΦΡΑΞΗ_ΕΝΤΟΣ_ΞΕΛΟΥ_12",
-          label:
-            "Περίφραξη με πρόχειρη κατασκευή σε μη ρυμοτομ. εντός σχεδίου_12",
-        },
-      ],
-    },
-    {
-      id: "property-documentation",
-      title: "Property Documentation & Division",
-      icon: <FileText size={20} className="text-indigo-600" />,
-      options: [
-        {
-          id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟ_4",
-          label: "Λειτουργική συνένωση χώρων_4",
-        },
-      ],
-    },
+    // {
+    //   id: "operational-space",
+    //   title: "Operational Space Management",
+    //   icon: <Settings size={20} className="text-purple-600" />,
+    //   options: [
+    //     {
+    //       id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΕΙΤΟΥΡΓΙΚΗ_ΣΥΝΕΧΗΣ_ΧΡΟΝΟΣ_9",
+    //       label: "Λειτουργική συνένωση χώρων_9",
+    //     },
+    //   ],
+    // },
+    // {
+    //   id: "fencing",
+    //   title: "Fencing & Boundaries",
+    //   icon: <Building2 size={20} className="text-teal-600" />,
+    //   options: [
+    //     {
+    //       id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΕΡΙΦΡΑΞΗ_ΕΚΤΟΣ_ΞΕΛΟΥ_11",
+    //       label: "Περίφραξη ή περίφραξη σε εκτός σχεδίου γήπεδα & οικισμούς_11",
+    //     },
+    //     {
+    //       id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΕΡΙΦΡΑΞΗ_ΕΝΤΟΣ_ΞΕΛΟΥ_12",
+    //       label:
+    //         "Περίφραξη με πρόχειρη κατασκευή σε μη ρυμοτομ. εντός σχεδίου_12",
+    //     },
+    //   ],
+    // },
+    // {
+    //   id: "property-documentation",
+    //   title: "Property Documentation & Division",
+    //   icon: <FileText size={20} className="text-indigo-600" />,
+    //   options: [
+    //     {
+    //       id: "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟ_4",
+    //       label: "Λειτουργική συνένωση χώρων_4",
+    //     },
+    //   ],
+    // },
   ]);
 
   const navigate = useRouter();
@@ -486,7 +486,7 @@ const MultiSelectSubcategory = () => {
     console.log("Selected options:", selectedOptions);
     dispatch(setMultipleSubcategory(selectedOptions));
 
-    navigate.push("/create-project");
+    navigate.push("/description-task");
   };
 
   return (

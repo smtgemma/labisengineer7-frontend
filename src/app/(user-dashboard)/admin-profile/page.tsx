@@ -1,15 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Camera } from "lucide-react";
-import { useUserInfoQuery } from "@/redux/features/auth/auth";
+import {
+  useGetSinginTrackingQuery,
+  useUserInfoQuery,
+} from "@/redux/features/auth/auth";
 import { RootState } from "@/redux/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "@/components/Others/Loading";
 import tokenCatch from "@/lib/token";
 import { jwtDecode } from "jwt-decode";
 import {
+  useGetTheEngreerQuery,
+  usePostEngreerInfoMutation,
   useProfileUpdateMutation,
   useUpdatePasswordMutation,
 } from "@/redux/features/profile/profileSlice";
@@ -17,6 +22,7 @@ import { toast } from "sonner";
 import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
 import moment from "moment";
 import { useGetPlanQuery } from "@/redux/features/subscription/subscripionPlanSlice";
+import { setUserData } from "@/redux/features/auth/userDataCatchSlice";
 
 interface AdminFormData {
   firstName: string;
@@ -38,22 +44,19 @@ type PasswordForm = {
 };
 
 type EngineerFormData = {
-  engineerName: string;
-  engineerSurnName: string;
+  firstName: string;
+  lastName: string;
   fatherName: string;
   motherName: string;
   bornDate: string;
   bornTown: string;
-  id: string;
-  mobilePhone: string;
-  officePhone: string;
-  emailAddress: string;
+  idCardNumber: string;
+  phone: string;
   town: string;
   streetAddress: string;
   streetNumber: string;
   postalCode: string;
-  vatNumber: string;
-  signature: FileList;
+  engVatNumber: string;
 };
 
 interface AdminProfileProps {
@@ -65,6 +68,7 @@ type FormData = {
 };
 
 const AdminProfile = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -83,62 +87,92 @@ const AdminProfile = () => {
   const token = tokenCatch();
   const [preview, setPreview] = useState<string | null>(null);
   const [image, setImage] = useState<File | null>(null);
+  const [imageSin, setImageSin] = useState<File | null>(null);
   const [signaturePreview, setSignaturePreview] = useState<string | null>(null);
-  console.log(image);
+
   const {
     register: infoRegister,
     handleSubmit: handleUserInfo,
-    watch: infoWatch,
-  } = useForm<EngineerFormData>();
-
-  const signatureFile = infoWatch("signature");
-
-  React.useEffect(() => {
-    if (signatureFile && signatureFile.length > 0) {
-      const file = signatureFile[0];
-      const reader = new FileReader();
-      reader.onloadend = () => setSignaturePreview(reader.result as string);
-      reader.readAsDataURL(file);
-    } else {
-      setSignaturePreview(null);
-    }
-  }, [signatureFile]);
-  const handleEngineerFormSubmit = (formData: EngineerFormData) => {
-    console.log("Engineer Form Data:", formData);
-  };
+    reset,
+  } = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      fatherName: "",
+      motherName: "",
+      bornDate: "",
+      bornTown: "",
+      idCardNumber: "",
+      phone: "",
+      town: "",
+      streetAddress: "",
+      streetNumber: "",
+      postalCode: "",
+      engVatNumber: "",
+    },
+  });
 
   // const user = useSelector((state: any) => state.user.userData);
   // const [user, setUser] = useState<string | null>(null);
 
   if (token) {
     const decoded: string | null = jwtDecode(token || " ");
-    console.log(decoded);
   }
 
   const decoded: any = jwtDecode(token || " ");
   const id = decoded.id;
-
+  console.log(decoded);
   const [userUpdate, { isLoading: profileLoading }] =
     useProfileUpdateMutation();
 
   const [updatePasswordCatch, { isLoading: upPasswordLoading }] =
     useUpdatePasswordMutation();
+  const [engreeningPost, { isLoading: upEngLoading }] =
+    usePostEngreerInfoMutation();
 
   const { data, isLoading, refetch } = useUserInfoQuery({ id, token });
+  const { data: singInTrack } = useGetSinginTrackingQuery(token);
+
+  console.log("tracking for singin", singInTrack);
+
+  const {
+    data: engData,
+    isLoading: engLoading,
+    refetch: engRefetch,
+  } = useGetTheEngreerQuery(token);
 
   const { data: planGet } = useGetPlanQuery(token);
 
-  console.log("Palan", planGet);
+  console.log("engreer", engData?.data);
+  const engneerData = engData?.data;
+
+  useEffect(() => {
+    if (engneerData) {
+      reset({
+        firstName: engneerData.firstName || "",
+        lastName: engneerData.lastName || "",
+        fatherName: engneerData.fatherName || "",
+        motherName: engneerData.motherName || "",
+        bornDate: engneerData.bornDate || "",
+        bornTown: engneerData.bornTown || "",
+        idCardNumber: engneerData.idCardNumber || "",
+        phone: engneerData.phone || "",
+        town: engneerData.town || "",
+        streetAddress: engneerData.streetAddress || "",
+        streetNumber: engneerData.streetNumber || "",
+        postalCode: engneerData.postalCode || "",
+        engVatNumber: engneerData.engVatNumber || "",
+      });
+    }
+  }, [engneerData, reset]);
+
   if (isLoading) {
     return <Loading />;
   }
   const user = data?.data;
-
-  console.log(user);
+  const firstChar1 = user?.firstName.charAt(0);
 
   const onSubmit = async (data: AdminFormData) => {
-    // const file = image[0];
-    // console.log(file, "file");
     const user = {
       firstName: data.firstName,
       lastName: data.lastName,
@@ -157,32 +191,12 @@ const AdminProfile = () => {
     const res = await userUpdate({ formData, token }).unwrap();
     if (res?.success) {
       toast.success(res?.message);
+      dispatch(setUserData(res?.data));
       refetch();
     }
-    console.log(res);
   };
 
   // change password
-
-  // const handlePasswordUpdate = async (data: AdminFormData) => {
-  //   console.log(data, "formData");
-  //   const UpdatePasswoardData = {
-  //     currentPassword: data.currentPassword,
-  //     newPassword: data.newPassword,
-  //     confirmPassword: data.confirmPassword,
-  //   };
-
-  //   console.log("password", UpdatePasswoardData);
-  //   const res = await updatePasswordCatch({
-  //     UpdatePasswoardData,
-  //     token,
-  //   }).unwrap();
-  //   if (res?.success) {
-  //     toast.success(res?.message);
-  //     refetch();
-  //   }
-  //   console.log(res);
-  // };
 
   const handlePasswordUpdate = async (data: PasswordForm) => {
     try {
@@ -207,9 +221,26 @@ const AdminProfile = () => {
     }
   };
 
-  // const handleChangePassword = (data: AdminFormData) => {
-  //   console.log("Password change requested:", data);
-  // };
+  console.log("sign:", engneerData?.signature);
+  // engreening information working
+  const handleEngineerFormSubmit = async (newformData: EngineerFormData) => {
+    console.log("newformData eng", newformData);
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(newformData));
+    if (imageSin) {
+      formData.append("file", imageSin);
+    }
+
+    try {
+      const res = await engreeningPost({ formData, token }).unwrap();
+      if (res?.success) {
+        toast.success(res?.message);
+        engRefetch();
+      }
+    } catch (error: any) {
+      toast.error(error?.data?.message);
+    }
+  };
 
   return (
     <div className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen`}>
@@ -234,24 +265,36 @@ const AdminProfile = () => {
                     <div className="relative inline-block">
                       {/* Profile Image */}
 
-                      {preview ? (
+                      {user?.profilePic || preview ? (
                         <>
-                          <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
-                            <img
-                              src={preview}
-                              alt="Profile"
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
+                          {preview ? (
+                            <>
+                              <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+                                <img
+                                  src={preview}
+                                  alt="Profile"
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+                                <img
+                                  src={user?.profilePic}
+                                  alt="Profile"
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            </>
+                          )}
                         </>
                       ) : (
                         <>
-                          <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
-                            <img
-                              src={user?.profilePic}
-                              alt="Profile"
-                              className="w-full h-full object-cover"
-                            />
+                          <div className="w-24 h-24 rounded-full flex justify-center items-center overflow-hidden bg-blue-500">
+                            <h2 className="font-bold text-5xl text-white">
+                              {firstChar1}
+                            </h2>
                           </div>
                         </>
                       )}
@@ -375,9 +418,10 @@ const AdminProfile = () => {
                       Engineer Name
                     </label>
                     <input
-                      {...infoRegister("engineerName")}
+                      {...infoRegister("firstName")}
                       className="w-full border border-gray-300  rounded-md p-2"
                       placeholder="First Name"
+                      defaultValue={engneerData?.firstName}
                     />
                   </div>
                   <div>
@@ -385,9 +429,10 @@ const AdminProfile = () => {
                       Engineer SurnName
                     </label>
                     <input
-                      {...infoRegister("engineerSurnName")}
+                      {...infoRegister("lastName")}
                       className="w-full border border-gray-300  rounded-md p-2"
                       placeholder="Last Name"
+                      defaultValue={engneerData?.lastName}
                     />
                   </div>
                 </div>
@@ -402,6 +447,7 @@ const AdminProfile = () => {
                       {...infoRegister("fatherName")}
                       className="w-full border border-gray-300  rounded-md p-2"
                       placeholder="Father's Name"
+                      defaultValue={engneerData?.fatherName}
                     />
                   </div>
                   <div>
@@ -412,6 +458,7 @@ const AdminProfile = () => {
                       {...infoRegister("motherName")}
                       className="w-full border border-gray-300  rounded-md p-2"
                       placeholder="Mother's Name"
+                      defaultValue={engneerData?.motherName}
                     />
                   </div>
                 </div>
@@ -426,6 +473,7 @@ const AdminProfile = () => {
                       type="date"
                       {...infoRegister("bornDate")}
                       className="w-full border border-gray-300  rounded-md p-2"
+                      defaultValue={engneerData?.bornDate}
                     />
                   </div>
                   <div>
@@ -436,6 +484,7 @@ const AdminProfile = () => {
                       {...infoRegister("bornTown")}
                       className="w-full border border-gray-300  rounded-md p-2"
                       placeholder=" Born Town"
+                      defaultValue={engneerData?.bornTown}
                     />
                   </div>
                 </div>
@@ -445,9 +494,10 @@ const AdminProfile = () => {
                   <div>
                     <label className="block text-sm font-medium mb-1">ID</label>
                     <input
-                      {...infoRegister("id")}
+                      {...infoRegister("idCardNumber")}
                       className="w-full border border-gray-300  rounded-md p-2"
                       placeholder="ID Number"
+                      defaultValue={engneerData?.idCardNumber}
                     />
                   </div>
                   <div>
@@ -456,9 +506,10 @@ const AdminProfile = () => {
                     </label>
                     <input
                       type="tel"
-                      {...infoRegister("mobilePhone")}
+                      {...infoRegister("phone")}
                       className="w-full border border-gray-300  rounded-md p-2"
                       placeholder="+30 69..."
+                      defaultValue={engneerData?.phone}
                     />
                   </div>
                 </div>
@@ -472,6 +523,7 @@ const AdminProfile = () => {
                     <input
                       {...infoRegister("town")}
                       className="w-full border border-gray-300  rounded-md p-2"
+                      defaultValue={engneerData?.town}
                     />
                   </div>
                   <div>
@@ -481,6 +533,7 @@ const AdminProfile = () => {
                     <input
                       {...infoRegister("streetAddress")}
                       className="w-full border border-gray-300  rounded-md p-2"
+                      defaultValue={engneerData?.streetAddress}
                     />
                   </div>
                   <div>
@@ -490,6 +543,7 @@ const AdminProfile = () => {
                     <input
                       {...infoRegister("streetNumber")}
                       className="w-full border border-gray-300  rounded-md p-2"
+                      defaultValue={engneerData?.streetNumber}
                     />
                   </div>
                 </div>
@@ -503,6 +557,7 @@ const AdminProfile = () => {
                     <input
                       {...infoRegister("postalCode")}
                       className="w-full border border-gray-300  rounded-md p-2"
+                      defaultValue={engneerData?.postalCode}
                     />
                   </div>
                   <div>
@@ -510,8 +565,9 @@ const AdminProfile = () => {
                       VAT Number
                     </label>
                     <input
-                      {...infoRegister("vatNumber")}
+                      {...infoRegister("engVatNumber")}
                       className="w-full border border-gray-300  rounded-md p-2"
+                      defaultValue={engneerData?.engVatNumber}
                     />
                   </div>
                 </div>
@@ -524,28 +580,68 @@ const AdminProfile = () => {
                   <input
                     type="file"
                     accept="image/*"
-                    {...infoRegister("signature")}
-                    className="w-full border rounded-lg px-3 py-2"
+                    onChange={(e: any) => {
+                      if (e.target.files && e.target.files[0]) {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          setImageSin(file);
+                        }
+                        setSignaturePreview(
+                          URL.createObjectURL(e.target.files[0])
+                        );
+                      }
+                    }}
+                    className="w-full border border-gray-300  rounded-md rounded-lg px-3 py-2"
                   />
-                  {signaturePreview && (
+                  {signaturePreview ? (
                     <div className="mt-3">
                       <p className="text-sm text-gray-600 mb-1">Preview:</p>
-                      <img
-                        src={signaturePreview}
-                        alt="Signature Preview"
-                        className="h-20 object-contain border rounded-lg"
-                      />
+
+                      <>
+                        <img
+                          src={signaturePreview}
+                          alt="Signature Preview"
+                          className="h-20 object-contain border rounded-lg"
+                        />
+                      </>
                     </div>
+                  ) : (
+                    <>
+                      {engneerData?.signature ? (
+                        <>
+                          <div className="mt-3">
+                            <p className="text-sm text-gray-600 mb-1">
+                              Preview:
+                            </p>
+                            <>
+                              <img
+                                src={engneerData?.signature}
+                                alt="Signature Preview"
+                                className="h-20 object-contain border rounded-lg"
+                              />
+                            </>
+                          </div>
+                        </>
+                      ) : (
+                        <>No Signature . Please upload signatue .</>
+                      )}
+                    </>
                   )}
                 </div>
 
                 {/* Submit */}
-                <div className="text-end">
+                <div className="text-end mt-5">
                   <button
                     type="submit"
                     className="px-6 py-2 bg-blue-600 text-white rounded-sm hover:bg-blue-700"
                   >
-                    Save user Information
+                    {upEngLoading ? (
+                      <>
+                        <LoadingButton />
+                      </>
+                    ) : (
+                      "Save user Information"
+                    )}
                   </button>
                 </div>
               </form>
@@ -566,7 +662,7 @@ const AdminProfile = () => {
                     Login Method:
                   </span>
                   <button className="text-primary hover:text-blue-800 text-sm underline">
-                    Google Sign-in
+                    {singInTrack?.data?.loginMethod}
                   </button>
                 </div>
 
@@ -703,7 +799,7 @@ const AdminProfile = () => {
               <div className="flex justify-between items-center">
                 <span className="text-sm font-medium text-gray-700">Plan:</span>
                 <button className="text-primary hover:text-blue-800 text-sm underline">
-                  {planGet?.data?.planName}
+                  {planGet?.data?.planName || "No Subscription"}
                 </button>
               </div>
             </div>

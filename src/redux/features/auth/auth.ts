@@ -76,6 +76,16 @@ const authApi = baseUrlApi.injectEndpoints({
         },
       }),
     }),
+    // singin tracking api call
+    getSinginTracking: build.query({
+      query: (token) => ({
+        url: `/auth/loginInfo`,
+        method: "get",
+        headers: {
+          Authorization: token,
+        },
+      }),
+    }),
   }),
 });
 
@@ -87,4 +97,5 @@ export const {
   useRoleSetAndUpdateMutation,
   useUserInfoQuery,
   useGoogleLoginMutation,
+  useGetSinginTrackingQuery,
 } = authApi;

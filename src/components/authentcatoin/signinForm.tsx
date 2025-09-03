@@ -64,7 +64,7 @@ export default function SigninForm() {
 
   // google login working for functonalti
   const handleSuccess = async (credentialResponse: any) => {
-    // console.log("yesTonek= ", credentialResponse.credential);
+    console.log("yesTonek= ", credentialResponse);
     try {
       const googleToken = {
         googleToken: credentialResponse.credential,

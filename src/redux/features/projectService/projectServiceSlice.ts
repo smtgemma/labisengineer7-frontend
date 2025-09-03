@@ -25,9 +25,12 @@ const projectServiceApi = baseUrlApi.injectEndpoints({
 
     // all project
     getAllProject: build.query({
-      query: () => ({
-        url: `/projects/all`,
+      query: (token) => ({
+        url: `projects/my-projects`,
         method: "get",
+        headers: {
+          Authorization: `${token}`,
+        },
       }),
     }),
 
