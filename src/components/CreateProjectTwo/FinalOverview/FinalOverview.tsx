@@ -258,7 +258,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     };
   }, [isModalOpen]);
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 ">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -268,10 +268,11 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div
+      <div className="min-h-[500px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+          {/* <div
           // onClick={openPreview}
-          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
+          className="bg-white border border-gray-200 hover:bg-blue-50 p-6 rounded-lg cursor-pointer  hover:shadow-md"
         >
           <div className="flex items-center space-x-4 mb-4">
             <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
@@ -287,41 +288,48 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           <p className="text-gray-600 text-sm">
             Click to preview Word-style output
           </p>
-        </div>
+        </div> */}
 
-        {/* fdf */}
-        <div
-          onClick={handlePdfDownloadTempate}
-          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
-        >
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-              <FileText className="w-6 h-6 text-red-600" />
+          {/* fdf */}
+          <div
+            onClick={handlePdfDownloadTempate}
+            className="bg-white border border-gray-200 hover:bg-blue-50 p-6 rounded-lg cursor-pointer hover:shadow-md"
+          >
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                <FileText className="w-6 h-6 text-red-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Pdf File
+                </h3>
+                <p className="text-sm text-gray-500">Download pdf</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900">Pdf File</h3>
-              <p className="text-sm text-gray-500">Download pdf</p>
-            </div>
+            <p className="text-gray-600 text-sm">
+              Click to download document.docx
+            </p>
           </div>
-          <p className="text-gray-600 text-sm">
-            Click to download document.docx
-          </p>
-        </div>
-        {/* CSV */}
-        <div
-          onClick={downloadCSV}
-          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
-        >
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              <FileSpreadsheet className="w-6 h-6 text-green-600" />
+          {/* CSV */}
+          <div
+            onClick={downloadCSV}
+            className="bg-white border-gray-200 hover:bg-blue-50 border p-6 rounded-lg cursor-pointer hover:shadow-md"
+          >
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                <FileSpreadsheet className="w-6 h-6 text-green-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  CSV File
+                </h3>
+                <p className="text-sm text-gray-500">Structured spreadsheet</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900">CSV File</h3>
-              <p className="text-sm text-gray-500">Structured spreadsheet</p>
-            </div>
+            <p className="text-gray-600 text-sm">
+              Click to download owners.csv
+            </p>
           </div>
-          <p className="text-gray-600 text-sm">Click to download owners.csv</p>
         </div>
       </div>
 

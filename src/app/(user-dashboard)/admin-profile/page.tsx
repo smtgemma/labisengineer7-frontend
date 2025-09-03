@@ -90,12 +90,6 @@ const AdminProfile = () => {
   const [imageSin, setImageSin] = useState<File | null>(null);
   const [signaturePreview, setSignaturePreview] = useState<string | null>(null);
 
-  // const {
-  //   register: infoRegister,
-  //   handleSubmit: handleUserInfo,
-  //   watch: infoWatch,
-  // } = useForm<EngineerFormData>();
-
   const {
     register: infoRegister,
     handleSubmit: handleUserInfo,
@@ -176,6 +170,7 @@ const AdminProfile = () => {
     return <Loading />;
   }
   const user = data?.data;
+  const firstChar1 = user?.firstName.charAt(0);
 
   const onSubmit = async (data: AdminFormData) => {
     const user = {
@@ -270,24 +265,36 @@ const AdminProfile = () => {
                     <div className="relative inline-block">
                       {/* Profile Image */}
 
-                      {preview ? (
+                      {user?.profilePic || preview ? (
                         <>
-                          <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
-                            <img
-                              src={preview}
-                              alt="Profile"
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
+                          {preview ? (
+                            <>
+                              <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+                                <img
+                                  src={preview}
+                                  alt="Profile"
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
+                                <img
+                                  src={user?.profilePic}
+                                  alt="Profile"
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            </>
+                          )}
                         </>
                       ) : (
                         <>
-                          <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200">
-                            <img
-                              src={user?.profilePic}
-                              alt="Profile"
-                              className="w-full h-full object-cover"
-                            />
+                          <div className="w-24 h-24 rounded-full flex justify-center items-center overflow-hidden bg-blue-500">
+                            <h2 className="font-bold text-5xl text-white">
+                              {firstChar1}
+                            </h2>
                           </div>
                         </>
                       )}
@@ -600,16 +607,24 @@ const AdminProfile = () => {
                     </div>
                   ) : (
                     <>
-                      <div className="mt-3">
-                        <p className="text-sm text-gray-600 mb-1">Preview:</p>
+                      {engneerData?.signature ? (
                         <>
-                          <img
-                            src={engneerData?.signature}
-                            alt="Signature Preview"
-                            className="h-20 object-contain border rounded-lg"
-                          />
+                          <div className="mt-3">
+                            <p className="text-sm text-gray-600 mb-1">
+                              Preview:
+                            </p>
+                            <>
+                              <img
+                                src={engneerData?.signature}
+                                alt="Signature Preview"
+                                className="h-20 object-contain border rounded-lg"
+                              />
+                            </>
+                          </div>
                         </>
-                      </div>
+                      ) : (
+                        <>No Signature . Please upload signatue .</>
+                      )}
                     </>
                   )}
                 </div>

@@ -29,6 +29,8 @@ export default function TopBar({
   const { data, isLoading, refetch } = useUserInfoQuery({ id, token });
   const profileUser = data?.data;
 
+  const firstChar1 = profileUser?.firstName.charAt(0);
+
   return (
     <header className={`  shadow-md ${dark ? "bg-black " : "bg-white"}`}>
       <div className="flex items-center justify-between px-4 py-3">
@@ -69,13 +71,24 @@ export default function TopBar({
         {/* Right Section: User Actions */}
         {/* User Profile Section */}
         <div className="flex items-center gap-3 px-3 py-3">
-          <img
-            src={profile?.profilePic || profileUser?.profilePic}
-            alt="Profile"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
+          {profile?.profilePic || profileUser?.profilePic ? (
+            <>
+              <img
+                src={profile?.profilePic || profileUser?.profilePic}
+                alt="Profile"
+                width={40}
+                height={40}
+                className="rounded-full border-2 border-blue-500 w-11 h-11 object-fill"
+              />
+            </>
+          ) : (
+            <>
+              <div className="w-11 h-11 flex justify-center items-center rounded-full bg-blue-600">
+                <h2 className="text-3xl font-bold text-white">{firstChar1}</h2>
+              </div>
+            </>
+          )}
+
           <div className="flex-1">
             <div
               className={`font-medium ${dark ? "text-white" : "text-gray-500"}`}

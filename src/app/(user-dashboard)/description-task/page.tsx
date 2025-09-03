@@ -13,7 +13,10 @@ import {
 import Header from "@/components/shared/Header/Header";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { setMultipleSubcategory } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import {
+  setMultipleDescriptionTask,
+  setMultipleSubcategory,
+} from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { GoDotFill } from "react-icons/go";
 
 interface SubcategoryOption {
@@ -210,14 +213,13 @@ const descriptionTask = () => {
       const selected = category.options
         .filter((option) => option.selected)
         .map((option) => option.id);
-
       if (selected.length > 0) {
         selectedOptions[category.id] = selected;
       }
     });
 
     console.log("Selected options:", selectedOptions);
-    dispatch(setMultipleSubcategory(selectedOptions));
+    dispatch(setMultipleDescriptionTask(selectedOptions));
 
     navigate.push("/create-project");
   };
@@ -244,10 +246,10 @@ const descriptionTask = () => {
                     <button
                       key={option.id}
                       onClick={() => toggleOption(category.id, option.id)}
-                      className={`block px-4 py-2 text-left rounded-sm  text-sm font-medium border transition-all ${
+                      className={`block px-2 py-2 text-left rounded-sm  text-sm cursor-pointer font-medium border transition-all ${
                         option.selected
                           ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
-                          : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
+                          : "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200"
                       }`}
                     >
                       <div className="flex justify-center items-center">
@@ -280,10 +282,10 @@ const descriptionTask = () => {
                     <button
                       key={option.id}
                       onClick={() => toggleOption(category.id, option.id)}
-                      className={`block px-4 py-2  text-sm font-medium border transition-all ${
+                      className={`block px-2 py-2 rounded-sm text-sm font-medium border transition-all cursor-pointer ${
                         option.selected
                           ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
-                          : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
+                          : "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200"
                       }`}
                     >
                       <div className="flex justify-center items-center">
