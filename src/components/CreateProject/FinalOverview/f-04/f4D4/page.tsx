@@ -153,7 +153,6 @@ export default function F4D4() {
 
     return (
         <div className="max-w-[794px] mx-auto p-4 bg-white space-y-8">
-            {/* ΦΑΚΕΛΟΣ ΑΣΦΑΛΕΙΑΣ ΚΑΙ ΥΓΕΙΑΣ first stp=========================*/}
             <div className="border border-black">
                 {/* Header */}
                 <div className="text-center p-4">
