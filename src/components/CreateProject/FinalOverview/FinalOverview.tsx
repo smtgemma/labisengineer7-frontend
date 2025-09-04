@@ -79,6 +79,8 @@ import { useGetOwnerTemplateQuery } from "@/redux/features/templates/allTemplate
 import F1D1 from "./f-01/f1D1/page";
 import F1D2 from "./f-01/f1D2/page";
 import F1D3 from "./f-01/f1D3/page";
+import F5D4 from "./f-05/f4D1/page";
+import F6D11 from "./f-06/f6D11/page";
 
 interface Owner {
   id: string;
@@ -657,6 +659,15 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 >
                   _ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_
                 </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ
+                </button>
                 {/* add more buttons the same way */}
               </div>
             )}
@@ -744,6 +755,15 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   }}
                 >
                   ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_611");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ
                 </button>
                 {/* add more buttons the same way */}
               </div>
@@ -1204,6 +1224,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53" && (
                 <F5D3 allData={allData} />
               )}
+              {selected === "ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ" && (
+                <F5D4 allData={allData} />
+              )}
 
               {/* file 6======== */}
               {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61" && (
@@ -1231,6 +1254,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_68" && (
                 <F6D10 allData={allData} />
+              )}
+              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_611" && (
+                <F6D11 allData={allData} />
               )}
 
               {/* file 7======== */}
