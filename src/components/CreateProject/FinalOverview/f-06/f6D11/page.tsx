@@ -21,7 +21,7 @@ interface allDataProps {
 
 
 
-export default function F6D10({ allData }: { allData: allDataProps }) {
+export default function F6D11({ allData }: { allData: allDataProps }) {
     const {
         owner_address,
         owner_afm,
@@ -167,6 +167,11 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="p-4 text-sm">
                     <p className="mb-4">
                         Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
+                    </p>
+
+                    <p className="mb-2">
+                        ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ horiontal property που βρίσκεται επί της οδού ([Address, Number, Town, Postal code],
+                        αναθέτω στον/στην Διπλωματούχο Μηχανικό ( Engineers Surname  ,  Engineer's Name, Specialty Engineer AM TEE)
                     </p>
 
                     <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>

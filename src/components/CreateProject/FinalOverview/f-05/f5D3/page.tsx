@@ -1,20 +1,20 @@
 
 interface allDataProps {
-  owner_address: string;
-  owner_city: string;
-  owner_name: string;
-  owner_postal_code: string;
-  project_description?: string;
+    owner_address: string;
+    owner_city: string;
+    owner_name: string;
+    owner_postal_code: string;
+    project_description?: string;
 }
 function F5D3({ allData }: { allData: allDataProps }) {
-    
-  const {
-    owner_address,
-    owner_city,
-    owner_name,
-    owner_postal_code,
-    project_description,
-  } = allData;
+
+    const {
+        owner_address,
+        owner_city,
+        owner_name,
+        owner_postal_code,
+        project_description,
+    } = allData;
     return (
         <div className="max-w-[794px] mx-auto">
             <div className=" bg-white">
@@ -27,7 +27,7 @@ function F5D3({ allData }: { allData: allDataProps }) {
                 <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
                     <label className="col-span-2">Έργο:</label>
                     <div className="col-span-10">
-                       {project_description || "N/A"}
+                        {project_description || "N/A"}
                     </div>
                 </div>
 
@@ -53,6 +53,7 @@ function F5D3({ allData }: { allData: allDataProps }) {
 
                 {/* Works from Technical Description Section */}
                 <div className="mt-4">
+                    <p>επί της οδού {owner_address || "N/A"}, {owner_city || "N/A"} , {owner_postal_code || "N/A"} ( FOR PROPERTY)</p>
                     <p className="font-semibold text-sm my-6">[WORKS FROM TECHNICAL DESCRIPTION]</p>
                     <p className="text-sm ">
                         Η συναίνεση αφορά την υλοποίηση των ανωτέρω εργασιών στις κοινές όψεις/κοινόχρηστα μέρη του κτιρίου ή επεμβάσεις που επηρεάζουν την
@@ -77,7 +78,7 @@ function F5D3({ allData }: { allData: allDataProps }) {
                         {[...Array(10)].map((_, index) => (
                             <tr key={index}>
                                 <td className="border px-4 py-2">{index + 1}</td>
-                                <td className="border px-4 py-2"></td>
+                                <td className="border px-4 py-2">{owner_name || "N/A"}</td>
                                 <td className="border px-4 py-2"></td>
                                 <td className="border px-4 py-2"></td>
                             </tr>
