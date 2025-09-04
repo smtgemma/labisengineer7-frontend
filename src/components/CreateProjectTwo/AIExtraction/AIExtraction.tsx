@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Brain, CheckCircle, Loader } from "lucide-react";
-import { usePostFileAiDataExtractMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
+import {
+  usePostFileAiDataExtractMutation,
+  usePostSecondFileAiDataExtractMutation,
+} from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import Lottie from "lottie-react";
 import aiLoadingExtract from "../../../../public/aiFIleLoadingThree.json";
 import { toast } from "sonner";
@@ -90,7 +93,8 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   const [time, setTime] = useState(0);
   const dispatch = useDispatch();
 
-  const [aiFileUpload, { isLoading }] = usePostFileAiDataExtractMutation();
+  const [aiSecondFileUpload, { isLoading }] =
+    usePostSecondFileAiDataExtractMutation();
 
   const input = useSelector((state: any) => state.aiData.subcategory);
 
@@ -98,15 +102,6 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   const allDescriptions = Object.values(input)
     .flat()
     .map((v: any) => v.toString().trim());
-
-  // const filteredValues = projectDescriptionAll
-  //   .filter((obj) =>
-  //     Object.keys(obj).some((key) => allDescriptions.includes(key))
-  //   )
-  //   .map((obj) => {
-  //     const key = Object.keys(obj).find((k) => allDescriptions.includes(k));
-  //     return obj[key];
-  //   });
 
   const description: string = projectDescriptionAll
     .filter((obj) => allDescriptions.includes(Object.keys(obj)[0]))
@@ -117,6 +112,7 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   const contract = files[1];
   const permit = files[2];
   const Law = files[3];
+  const Law2 = files[4];
 
   // timer function
   const timerControling = () => {
@@ -148,11 +144,12 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     if (contract) formData.append("contract", contract);
     if (permit) formData.append("permit", permit);
     if (Law) formData.append("law4495", Law);
+    if (Law2) formData.append("law3843", Law2);
 
     formData.append("project_descriptions", JSON.stringify(description));
 
     try {
-      const res = await aiFileUpload(formData).unwrap();
+      const res = await aiSecondFileUpload(formData).unwrap();
       console.log(res);
       if (res) {
         dispatch(setAiExtractCatchData(res));

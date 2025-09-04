@@ -623,7 +623,9 @@ const AdminProfile = () => {
                           </div>
                         </>
                       ) : (
-                        <>No Signature . Please upload signatue .</>
+                        <p className=" mt-5 text-blue-500">
+                          No Signature . Please upload signatue .
+                        </p>
                       )}
                     </>
                   )}
