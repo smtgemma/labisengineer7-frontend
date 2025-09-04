@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className={openSans.variable}>
         <Toaster position="top-center" expand={true} richColors />
         <StoreProvider>
-          <GoogleOAuthProvider clientId="152063447217-4avt3vgeievkml9pcuv15a4oi90843he.apps.googleusercontent.com">
+          <GoogleOAuthProvider clientId="68253939211-2ah4drkmkhl74kjqe5tlpks4jk64f50h.apps.googleusercontent.com">
             <Suspense fallback={<Loading />}>{children}</Suspense>
           </GoogleOAuthProvider>
         </StoreProvider>

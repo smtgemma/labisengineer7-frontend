@@ -1,6 +1,7 @@
 import { baseUrlApi } from "@/redux/api/baseUrlApi";
 
 const userProfileApi = baseUrlApi.injectEndpoints({
+  overrideExisting: true,
   endpoints: (build) => ({
     profileUpdate: build.mutation({
       query: ({ formData, token }) => ({
@@ -24,15 +25,33 @@ const userProfileApi = baseUrlApi.injectEndpoints({
       }),
     }),
 
-    // all project
-    // getAllProject: build.query({
-    //   query: () => ({
-    //     url: `/projects/all`,
-    //     method: "get",
-    //   }),
-    // }),
+    postEngreerInfo: build.mutation({
+      query: ({ formData, token }) => ({
+        url: "/users/update-engineer",
+        method: "PATCH",
+        body: formData,
+        headers: {
+          Authorization: `${token}`,
+        },
+      }),
+    }),
+
+    // get engreening vlaue
+    getTheEngreer: build.query({
+      query: (token) => ({
+        url: `/users/getEngineer`,
+        method: "get",
+        headers: {
+          Authorization: `${token}`,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useProfileUpdateMutation, useUpdatePasswordMutation } =
-  userProfileApi;
+export const {
+  useProfileUpdateMutation,
+  useUpdatePasswordMutation,
+  usePostEngreerInfoMutation,
+  useGetTheEngreerQuery,
+} = userProfileApi;

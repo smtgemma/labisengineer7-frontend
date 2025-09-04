@@ -124,8 +124,9 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const [ownerInfoShow4, setOwnerInfoShow4] = useState<boolean>(true);
   const [ownerInfoShow5, setOwnerInfoShow5] = useState<boolean>(true);
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+  const user: any = useSelector((state: RootState) => state.user.userData);
 
-  console.log("data", currentStep);
+  console.log("user: ", user);
 
   // const { register, control, handleSubmit } = useForm<FormValues>({
   //   defaultValues: {
@@ -186,8 +187,6 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const projectData = stepByStepData.projectId;
   const subCategoryData = stepByStepData.subcategory;
   const filesData = stepByStepData.multiFiles;
-  console.log(allExtreactData);
-  console.log("allfiles = ", filesData);
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
 
@@ -214,7 +213,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
       "data",
       JSON.stringify({
         serviceId: projectData.id,
-        createdById: "68972468c6c27d509568985f",
+        createdById: user.userId,
         subCategories: subCategoryData,
         ...data,
       })
@@ -411,7 +410,6 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.Horizontal_property_name_two}
-                    // defaultValue={dataShowExtreact?.building_permit_date}
                   />
                 </div>
               </div>

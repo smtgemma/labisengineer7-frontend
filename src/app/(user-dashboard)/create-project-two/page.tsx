@@ -10,6 +10,7 @@ import ActionSelection from "@/components/CreateProjectTwo/ActionSelection/Actio
 import FinalOverview from "@/components/CreateProjectTwo/FinalOverview/FinalOverview";
 import WorkflowStepper from "@/components/CreateProjectTwo/WorkflowStepper/WorkflowStepper";
 import AIExtractionDataInPut from "@/components/CreateProjectTwo/aAIExtractionData/AIExtractionData";
+import QuestionAndAnswer from "@/components/CreateProjectTwo/QuestionAndAnswer/QuestionAndAnswer";
 
 const workflowSteps = [
   {
@@ -34,6 +35,10 @@ const workflowSteps = [
   },
   {
     id: 6,
+    title: "Question And Answer",
+  },
+  {
+    id: 7,
     title: "Final Overview",
   },
 ];
@@ -93,6 +98,8 @@ const WorkflowDemo: React.FC = () => {
       case 5:
         return true;
       case 6:
+        return true;
+      case 7:
         return true;
       default:
         return false;
@@ -159,6 +166,8 @@ const WorkflowDemo: React.FC = () => {
           />
         );
       case 6:
+        return <QuestionAndAnswer />;
+      case 7:
         return (
           <FinalOverview
             files={uploadedFiles}
@@ -224,7 +233,7 @@ const WorkflowDemo: React.FC = () => {
           <div className="mb-8">{renderStepContent()}</div>
 
           {/* Footer with Next Button - Hide for extraction data page and final overview */}
-          {!(currentStep === 2 && showExtractionData) && currentStep < 6 && (
+          {!(currentStep === 2 && showExtractionData) && currentStep < 7 && (
             <div className="flex justify-end">
               <button
                 onClick={nextStep}
