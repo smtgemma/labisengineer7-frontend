@@ -1028,15 +1028,15 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
       <div className="mb-6 space-y-4">
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Εργοδότες *:</span>
-          <h3 className="flex-1 text-black">{owner_name || "N/A"}</h3>
+          <h3 className="flex-1 text-black text-sm">{owner_name || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>
-          <h3 className="flex-1 text-black">{project_description || "N/A"}</h3>
+          <h3 className="flex-1 text-black text-sm">{project_description || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className="flex-1 text-black">{owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} (FOR BUILDING)</h3>
+          <h3 className="flex-1 text-black text-sm">{owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} (FOR BUILDING)</h3>
         </div>
       </div>
       {/* Budget Title */}

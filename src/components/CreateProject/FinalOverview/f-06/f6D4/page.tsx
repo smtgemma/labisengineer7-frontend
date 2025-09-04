@@ -31,6 +31,7 @@ export default function F6D4({ allData }: { allData: allDataProps }) {
             <div className="mb-8 space-y-4">
                 <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
+                    
                     <h3 className=" text-sm">{project_description || "N/A"}</h3>
                 </div>
 
