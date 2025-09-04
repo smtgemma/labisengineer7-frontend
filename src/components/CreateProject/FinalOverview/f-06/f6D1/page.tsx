@@ -1048,11 +1048,11 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
       <div className="border border-black">
         {/* Table Header */}
         <div className="grid grid-cols-12 bg-white border-b border-black font-bold text-sm">
-          <div className="col-span-1 p-2 border-r border-black">Κωδικός</div>
-          <div className="col-span-5 p-2 border-r border-black">Εργασία</div>
-          <div className="col-span-1 p-2 border-r border-black">Μονάδα Μέτρησης</div>
-          <div className="col-span-1 p-2 border-r border-black">Τιμή Μονάδος €</div>
-          <div className="col-span-2 p-2 border-r border-black">Ποσότητα</div>
+          <div className="col-span-1 py-2 border-r border-black text-xs px-1">Κωδικός</div>
+          <div className="col-span-5 p-2 border-r border-black text-xs">Εργασία</div>
+          <div className="col-span-1 py-2 border-r border-black text-xs px-1">Μονάδα Μέτρησης</div>
+          <div className="col-span-1 py-2 border-r border-black text-xs px-1">Τιμή Μονάδος €</div>
+          <div className="col-span-2 p-2 border-r border-black text-xs">Ποσότητα</div>
           <div className="col-span-2 p-2">Σύνολο €</div>
         </div>
 
@@ -1070,8 +1070,8 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
             {category.items.map((item) => (
               <div key={item.code} className="grid grid-cols-12 border-b border-black text-sm">
                 <div className="col-span-1 p-2 border-r border-black ">{item.code}</div>
-                <div className="col-span-5 p-2 border-r border-black ">{item.description}</div>
-                <div className="col-span-1 p-2 border-r border-black text-center ">{item.unit}</div>
+                <div className="col-span-5 p-2 border-r border-black">{item.description}</div>
+                <div className="col-span-1 py-2 border-r border-black text-center">{item.unit}</div>
                 <div className="col-span-1 p-2 border-r border-black text-right ">
                   {item.unitPrice.toFixed(2)}
                 </div>
