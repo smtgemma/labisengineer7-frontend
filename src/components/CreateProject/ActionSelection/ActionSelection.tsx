@@ -37,8 +37,6 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     }
   };
 
-  console.log(selectedActionsValue);
-
   const userData = useSelector(
     (state: RootState) => state.user.userData as UserData | null
   );
@@ -108,7 +106,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
             </div>
           </div>
         ))}
-
+        {/* 
         <div
           className={` flex gap-5
           }`}
@@ -116,14 +114,14 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           <div className="p-4 w-1/2 rounded-lg   cursor-pointer transition-all duration-200  border-gray-200 bg-white hover:border-gray-30">
             <span className={`font-medium `}>Auto-Fill Government Form</span>
           </div>
-          {/* auto copy file  */}
+      
           <button
             onClick={handleCopy}
             className="bg-blue-400 text-white px-4  rounded hover:bg-blue-700 cursor-pointer"
           >
             Copy User ID
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Next Button */}

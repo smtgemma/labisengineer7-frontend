@@ -83,6 +83,24 @@ import F6D11 from "./f-06/f6D11/page";
 import F1D2 from "./f-01/f1d2/page";
 import F1D3 from "./f-01/f1d3/page";
 import F1D1 from "./f-01/f1d3/page";
+import { setActionSelectName } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { toast } from "sonner";
+
+export interface UserData {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  profilePic?: string;
+  isVerified?: boolean;
+  role?: "ENGINEER" | "ADMIN" | "USER" | string;
+  status?: "ACTIVE" | "INACTIVE" | "PENDING" | string;
+  teeRegistration?: string;
+  vatNumber?: string;
+  hexToken?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
 
 interface Owner {
   id: string;
@@ -113,6 +131,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allTempate = stepByStepData.actionSelection;
   const dataAllFIled = stepByStepData.aiInputData;
   const subCategoryData = stepByStepData.subcategory;
+  const projectCodeId = stepByStepData.projectIdCode;
   const id = stepByStepData?.projectIdCode;
   const ownerId = id?.result?.project?.id;
 
@@ -133,11 +152,16 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const store = makeStore();
   const [selected, setSelected] = useState<string | null>(null);
+  const [projectHexCode, setProjectHexCode] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   // modal close click outside
   const modalContentRef = useRef<HTMLDivElement>(null);
 
-  // ✅ 2. DOWNLOAD CSV FILE
+  const userData = useSelector(
+    (state: RootState) => state.user.userData as UserData | null
+  );
+
+  //2. DOWNLOAD CSV FILE
   const downloadCSV = () => {
     const headers = ["First Name", "Surname", "Father Name", "VAT No"];
     const rows = selectedOwners.map((owner) =>
@@ -158,7 +182,18 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     },
   ];
 
-  console.log(selected);
+  const projectAndUserHexCode =
+    userData?.hexToken + `-${projectCodeId?.projectCode}`;
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(projectAndUserHexCode);
+      toast.success("successfully Id copy !. Use is id your extension.");
+      setProjectHexCode(projectAndUserHexCode);
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+  };
 
   // pdf file download
   const handleDownloadPdf = async () => {
@@ -271,30 +306,34 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* <div
-          // onClick={openPreview}
-          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
+        <div
+          onClick={handleCopy}
+          className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
           <div className="flex items-center space-x-4 mb-4">
             <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
               <FileText className="w-6 h-6 text-yellow-600" />
             </div>
-            <div>
+            <div className=" relative ">
               <h3 className="text-lg font-semibold text-gray-900">
-                Preview file
+                Auto-Fill Government Form
               </h3>
-              <p className="text-sm text-gray-500">Open in new tab</p>
+              <p className="text-sm text-gray-500">User and Project id</p>
+              {projectHexCode && (
+                <p className="text-gray-600 text-sm mt-2 absolute left-0 top-12 ">
+                  <button className="bg-blue-400 text-white px-4 py-1  rounded hover:bg-blue-700 cursor-pointer">
+                    {`Id: ${projectHexCode}`}
+                  </button>
+                </p>
+              )}
             </div>
           </div>
-          <p className="text-gray-600 text-sm">
-            Click to preview Word-style output
-          </p>
-        </div> */}
+        </div>
 
         {/* fdf */}
         <div
           onClick={handlePdfDownloadTempate}
-          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
+          className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
           <div className="flex items-center space-x-4 mb-4">
             <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
@@ -312,7 +351,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         {/* CSV */}
         <div
           onClick={downloadCSV}
-          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
+          className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
           <div className="flex items-center space-x-4 mb-4">
             <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
