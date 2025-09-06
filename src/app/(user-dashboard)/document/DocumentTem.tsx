@@ -1,11 +1,9 @@
 "use client";
-import React from "react";
-import { Download } from "lucide-react";
-import Header from "@/components/shared/Header/Header";
-import { useGetMyDocumentsQuery } from "@/redux/features/myDocument/DocumentSlice";
 import Loading from "@/components/Others/Loading";
 import tokenCatch from "@/lib/token";
+import { useGetMyDocumentsQuery } from "@/redux/features/myDocument/DocumentSlice";
 import { saveAs } from "file-saver";
+import { Download } from "lucide-react";
 
 export interface DocumentData {
   fileName: string;
@@ -65,7 +63,7 @@ const DocumentTable = () => {
 
   return (
     <section className="bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen">
-      <Header title="My Documents" />
+      {/* <Header title="My Documents" /> */}
 
       <div className={`rounded-lg shadow-sm overflow-auto my-6 `}>
         <table className="w-full">

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface Owner {
   name: string;
@@ -75,7 +75,7 @@ interface AiExtractState {
   projectId?: {} | undefined;
   subcategory?: [];
   descriptionTask?: [];
-  multiFiles?: File[];
+  multiFiles?: [];
   aiInputData?: any;
   actionSelection?: [];
   projectIdCode?: string | null;

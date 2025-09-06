@@ -1,3 +1,4 @@
+"use client";
 import DashboardLayout from "@/components/layouts/Dashboard";
 import { DashBoardLink } from "@/components/layouts/Navlink";
 

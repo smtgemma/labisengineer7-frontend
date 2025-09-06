@@ -6,7 +6,7 @@ import tokenCatch from "@/lib/token";
 import { useGetTheServiceQuery } from "@/redux/features/projectService/projectServiceSlice";
 import React from "react";
 
-export default function NewProject() {
+export default function page() {
   const token = tokenCatch();
 
   const { data, isLoading } = useGetTheServiceQuery(token);

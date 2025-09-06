@@ -1,13 +1,8 @@
 "use client";
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Cloud, Download, FileText } from "lucide-react";
-import { useParams } from "next/navigation";
-import { RootState } from "@/redux/store";
-import { useGetSignleProjectQuery } from "@/redux/features/projectService/projectServiceSlice";
-import tokenCatch from "@/lib/token";
 import Loading from "@/components/Others/Loading";
+import { useGetSignleProjectQuery } from "@/redux/features/projectService/projectServiceSlice";
 import moment from "moment";
+import { useParams } from "next/navigation";
 
 interface ProjectDetailsProps {
   className?: string;

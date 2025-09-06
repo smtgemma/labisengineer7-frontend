@@ -5,18 +5,8 @@ import { openSans } from "@/fonts/fonts";
 import { Suspense } from "react";
 import Loading from "@/components/Others/Loading";
 import { Toaster } from "sonner";
-import StoreProvider from "./StoreProvider";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import StoreProvider from "@/redux/StoreProvider";
 
 export const metadata: Metadata = {
   title: "Labis-Engineer 7",

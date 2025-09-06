@@ -1,7 +1,6 @@
-import Header from "@/components/shared/Header/Header";
 import BillingForm from "@/components/Subscription/Billing/BillingForm/BillingForm";
 import PaymentMethodForm from "@/components/Subscription/PaymentMethodForm/PaymentMethodForm";
-import React from "react";
+import { Header } from "antd/es/layout/layout";
 
 export default function SubscriptionPay() {
   return (

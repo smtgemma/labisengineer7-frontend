@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Brain, CheckCircle, Loader } from "lucide-react";
-import { usePostFileAiDataExtractMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
-import Lottie from "lottie-react";
-import aiLoadingExtract from "../../../../public/aiFIleLoadingThree.json";
-import { toast } from "sonner";
-import { useDispatch, useSelector } from "react-redux";
 import {
   setAiExtractCatchData,
   setImageFile,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { div } from "framer-motion/client";
-import { RootState } from "@/redux/store";
+import { usePostFileAiDataExtractMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
+import Lottie from "lottie-react";
+import { Brain, CheckCircle } from "lucide-react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import aiLoadingExtract from "../../../../public/aiFIleLoadingThree.json";
+
+import { toast } from "sonner";
 
 interface AIExtractionProps {
   files: File[];

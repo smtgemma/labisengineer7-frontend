@@ -5,7 +5,9 @@ import EditTemplateCard from "../EditTemplate";
 export default function page() {
   return (
     <div>
-      <EditTemplateCard />
+      {/* issues */}
+      <p>EditTemplateCard</p>
+      {/* <EditTemplateCard /> */}
     </div>
   );
 }

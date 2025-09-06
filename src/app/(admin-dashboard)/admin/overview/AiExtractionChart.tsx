@@ -1,9 +1,7 @@
 "use client";
 
-import Loading from "@/components/Others/Loading";
 import ButtonGlobal from "@/components/shared/GlobalButton";
 import tokenCatch from "@/lib/token";
-import { useGetMetricsDataQuery } from "@/redux/features/adminOverView/adminUserSlice";
 import React, { useState, useEffect } from "react";
 import {
   LineChart,
@@ -14,68 +12,18 @@ import {
   Legend,
   Tooltip,
   ResponsiveContainer,
-  // ReferenceDot
 } from "recharts";
 import axios from "axios";
 
-const token = tokenCatch();
-const metricsValue = async () => {
-  const res = await axios.get("https://api.buildai.gr/api/v1/ai/usage-graph", {
-    headers: { Authorization: token },
-  });
-  const grap = res?.data?.data;
-  return grap;
-};
-
-const { period, data } = await metricsValue();
-
-// const data = [
-//   { name: "Sun", uv: 250, pv: 2400, amt: 2400 },
-//   { name: "Mon", uv: 360, pv: 2210, amt: 2290 },
-//   { name: "Tues", uv: 200, pv: 2290, amt: 2000 },
-//   { name: "Wed", uv: 400, pv: 2100, amt: 2100 },
-//   { name: "Thu", uv: 310, pv: 2000, amt: 2200 },
-//   { name: "Fri", uv: 480, pv: 2150, amt: 2100 },
-//   { name: "Sat", uv: 350, pv: 2250, amt: 2300 },
-// ];
-
-// Custom dot: only render on first and last points
-// const CustomDot = (props) => {
-//   const { cx, cy, index } = props;
-
-//   if (index === 0 || index === data.length - 1) {
-//     return (
-//       <circle
-//         cx={cx}
-//         cy={cy}
-//         r={4}
-//         stroke="#2563eb"
-//         strokeWidth={2}
-//         fill="white"
-//       />
-//     );
-//   }
-//   return null;
-// };
-
-// Custom arrow dot for the end point
 interface ArrowDotProps {
   cx?: number;
   cy?: number;
   index?: number;
+  dataLength?: number;
 }
 
-const ArrowDot: React.FC<ArrowDotProps> = (props) => {
-  // const token = tokenCatch();
-  // const { data: merticeData, isLoading } = useGetMetricsDataQuery(token);
-
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
-
-  // const { period, data } = merticeData?.data;
-  const { cx, cy, index } = props;
-  if (index === data.length - 1) {
+const ArrowDot: React.FC<ArrowDotProps> = ({ cx, cy, index, dataLength }) => {
+  if (index === dataLength! - 1) {
     return (
       <g>
         <circle
@@ -113,13 +61,34 @@ const ArrowDot: React.FC<ArrowDotProps> = (props) => {
 
 export default function AiExtractionChart({ title }: { title: string }) {
   const [isClient, setIsClient] = useState(false);
+  const [chartData, setChartData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setIsClient(true);
+
+    const fetchMetrics = async () => {
+      try {
+        const token = tokenCatch();
+        const res = await axios.get(
+          "https://api.buildai.gr/api/v1/ai/usage-graph",
+          {
+            headers: { Authorization: token },
+          }
+        );
+        const grap = res?.data?.data;
+        setChartData(grap?.data || []);
+      } catch (error) {
+        console.error("Error fetching chart data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMetrics();
   }, []);
 
-  // Don't render the chart on the server
-  if (!isClient) {
+  if (!isClient || loading) {
     return (
       <div className="w-full h-[561px] p-4 flex items-center justify-center bg-gray-50 rounded-lg">
         <div className="text-gray-500">Loading chart...</div>
@@ -127,17 +96,17 @@ export default function AiExtractionChart({ title }: { title: string }) {
     );
   }
 
-  // const [selectedOption, setSelectedOption] = useState('User Signups');
-
   return (
     <div className="w-full h-96 p-6 rounded-lg bg-white mt-6">
-      {title != "AI usage over time" ? (
+      {title !== "AI usage over time" ? (
         <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4 md:gap-0">
           <select
             id="activityType"
-            className="  md:text-2xl font-semibold focus:outline-none  "
+            className="md:text-2xl font-semibold focus:outline-none"
           >
-            <option value="User Signups">AI Extraction Activity</option>
+            <option value="AI Extraction Activity">
+              AI Extraction Activity
+            </option>
             <option value="User Signups">User Signups</option>
             <option value="Documents by Service Type">
               Documents by Service Type
@@ -146,41 +115,25 @@ export default function AiExtractionChart({ title }: { title: string }) {
           <ButtonGlobal title="Last 30 days" />
         </div>
       ) : (
-        <>
-          <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4 md:gap-0">
-            <h1 className=" rounded-md  md:text-2xl font-semibold focus:outline-none  ">
-              {title}
-            </h1>
-            <select
-              id="activityType"
-              className=" font-semibold focus:outline-none  "
-            >
-              <option value="User Signups">Last 7 days</option>
-              <option value="User Signups">last 30 days</option>
-              <option value="Documents by Service Type">last 60 days</option>
-            </select>
-          </div>
-        </>
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4 md:gap-0">
+          <h1 className="md:text-2xl font-semibold">{title}</h1>
+          <select
+            id="activityType"
+            className="font-semibold focus:outline-none"
+          >
+            <option value="Last 7 days">Last 7 days</option>
+            <option value="Last 30 days">Last 30 days</option>
+            <option value="Last 60 days">Last 60 days</option>
+          </select>
+        </div>
       )}
 
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
-          data={data}
+          data={chartData}
           margin={{ top: 20, right: 50, bottom: 20, left: 20 }}
         >
-          <defs>
-            <marker
-              id="arrowhead"
-              markerWidth="10"
-              markerHeight="7"
-              refX="0"
-              refY="3.5"
-              orient="auto"
-            >
-              <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb" />
-            </marker>
-          </defs>
-          <CartesianGrid horizontal={true} vertical={false} stroke="#e5e7eb" />
+          <CartesianGrid horizontal vertical={false} stroke="#e5e7eb" />
           <XAxis
             dataKey="name"
             axisLine={false}
@@ -193,12 +146,6 @@ export default function AiExtractionChart({ title }: { title: string }) {
             tick={{ fontSize: 12, fill: "#6b7280" }}
             domain={[0, 500]}
             ticks={[100, 200, 300, 400, 500]}
-            label={{
-              value: "UV",
-              angle: -90,
-              position: "insideLeft",
-              style: { textAnchor: "middle" },
-            }}
           />
           <Tooltip
             contentStyle={{
@@ -214,15 +161,15 @@ export default function AiExtractionChart({ title }: { title: string }) {
             dataKey="uv"
             stroke="#2563eb"
             strokeWidth={3}
-            name=""
-            dot={<ArrowDot />}
+            dot={(props) => (
+              <ArrowDot {...props} dataLength={chartData.length} />
+            )}
             activeDot={{
               r: 6,
               stroke: "#2563eb",
               strokeWidth: 2,
               fill: "white",
             }}
-            isAnimationActive={true}
           />
         </LineChart>
       </ResponsiveContainer>
