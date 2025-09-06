@@ -186,7 +186,11 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const ownerData = stepByStepData.ownerBaseData;
   const projectData = stepByStepData.projectId;
   const subCategoryData = stepByStepData.subcategory;
+  const descrptionTasks = stepByStepData.descriptionTask;
   const filesData = stepByStepData.multiFiles;
+
+  console.log("stepByStepData:", stepByStepData);
+  console.log("descriptionTask:", descrptionTasks);
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
 
@@ -197,8 +201,10 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
     console.log("Form Data:", data);
     const DataPost = {
       serviceId: projectData.id,
-      createdById: "68972468c6c27d509568985f",
+      createdById: user.userId,
       subCategories: subCategoryData,
+      descrptionTasks: descrptionTasks,
+      technical_description: allExtreactData.technical_description,
       ...data,
     };
 
@@ -215,6 +221,8 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
         serviceId: projectData.id,
         createdById: user.userId,
         subCategories: subCategoryData,
+        descrptionTasks: descrptionTasks,
+        technical_description: allExtreactData.technical_description,
         ...data,
       })
     );

@@ -1,9 +1,9 @@
 "use client";
 import Loading from "@/components/Others/Loading";
-import Header from "@/components/shared/Header/Header";
 import BillingHistory from "@/components/Subscription/Billing/BillingHistory/BillingHistory";
 import PricingCard from "@/components/Subscription/PricingCard/PricingCard";
 import { useGetThePlanQuery } from "@/redux/features/subscription/subscripionPlanSlice";
+import { Header } from "antd/es/layout/layout";
 import React from "react";
 
 interface PricingPlan {

@@ -1,7 +1,5 @@
 "use client";
 import PDFToImageConverter from "@/components/advanceTools/fileUpload/ToolsFIlePdfToImg";
-import React from "react";
-import { useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation";
 import ImageToPdfConverter from "@/components/advanceTools/fileUpload/ToolsFIleImgToPdf";
 import PdfPackageAutoName from "@/components/advanceTools/fileUpload/ToolsAutoNamePdf";

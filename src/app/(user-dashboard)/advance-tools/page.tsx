@@ -7,7 +7,6 @@ import pdfToImg from "../../../assets/advanceTools/pdfToImgCovert.png";
 import pdfTopdfMerge from "../../../assets/advanceTools/pdfToPdfMerge.png";
 import pdfAutoName from "../../../assets/advanceTools/pdfPackagerAndAutoName.png";
 import imgToPdfs from "../../../assets/advanceTools/pdfToImgCovert.png";
-import PDFToImageConverter from "@/components/advanceTools/fileUpload/ToolsFIlePdfToImg";
 import { useRouter } from "next/navigation";
 
 export default function BuildAITools() {

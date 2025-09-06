@@ -1,36 +1,15 @@
 "use client";
-import React from "react";
-import { MoreHorizontal } from "lucide-react";
-import { CgArrowsV } from "react-icons/cg";
-import Link from "next/link";
-import { useGetMyDocumentPointQuery } from "@/redux/features/adminOverView/adminUserSlice";
-import tokenCatch from "@/lib/token";
-import moment from "moment";
-import ActionButtonOption from "./Action";
-import Swal from "sweetalert2";
-import { toast } from "sonner";
-import { useDeleteServiceMutation } from "@/redux/features/createService/serviceSlice";
 import Loading from "@/components/Others/Loading";
+import tokenCatch from "@/lib/token";
+import { useGetMyDocumentPointQuery } from "@/redux/features/adminOverView/adminUserSlice";
+import { useDeleteServiceMutation } from "@/redux/features/createService/serviceSlice";
+import moment from "moment";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-const templatesData = [
-  {
-    id: 1,
-    templateName: "Invoice Template",
-    serviceType: "Finance",
-    lastModified: "Jun 28, 2025",
-    description: "Used for generating invoices",
-    createdBy: "Admin",
-  },
-  {
-    id: 2,
-    templateName: "Project Report",
-    serviceType: "Engineering",
-    lastModified: "Jun 22, 2025",
-    description: "Summary report template",
-    createdBy: "John Smith",
-  },
-];
+import { CgArrowsV } from "react-icons/cg";
+import { toast } from "sonner";
+import Swal from "sweetalert2";
+import ActionButtonOption from "./Action";
 
 export default function SimpleTemplatesTable() {
   console.log("yes");

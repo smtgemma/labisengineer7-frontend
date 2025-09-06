@@ -68,12 +68,9 @@ const authApi = baseUrlApi.injectEndpoints({
 
     // user catch
     userInfo: build.query({
-      query: ({ id, token }) => ({
+      query: ({ id }) => ({
         url: `/auth/${id}`,
         method: "get",
-        headers: {
-          Authorization: token,
-        },
       }),
     }),
     // singin tracking api call

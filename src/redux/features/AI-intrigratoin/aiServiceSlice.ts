@@ -42,6 +42,14 @@ const aiServiceApi = baseUrlApi.injectEndpoints({
         body: formData,
       }),
     }),
+    // second service
+    postSecondFileAiDataExtract: build.mutation({
+      query: (formData) => ({
+        url: "http://31.97.37.168:8019/api/v1/process-documents-advanced-three",
+        method: "POST",
+        body: formData,
+      }),
+    }),
 
     posAiAllDataSave: build.mutation({
       query: ({ formData, accessToken }) => ({
@@ -63,4 +71,5 @@ export const {
   usePdfPackageAutoNameMutation,
   usePfdToFdfMergeMutation,
   usePosAiAllDataSaveMutation,
+  usePostSecondFileAiDataExtractMutation,
 } = aiServiceApi;

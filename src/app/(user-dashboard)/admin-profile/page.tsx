@@ -1,28 +1,27 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { Camera } from "lucide-react";
+import Loading from "@/components/Others/Loading";
+import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
+import tokenCatch from "@/lib/token";
 import {
   useGetSinginTrackingQuery,
   useUserInfoQuery,
 } from "@/redux/features/auth/auth";
-import { RootState } from "@/redux/store";
-import { useDispatch, useSelector } from "react-redux";
-import Loading from "@/components/Others/Loading";
-import tokenCatch from "@/lib/token";
-import { jwtDecode } from "jwt-decode";
+import { setUserData } from "@/redux/features/auth/userDataCatchSlice";
 import {
   useGetTheEngreerQuery,
   usePostEngreerInfoMutation,
   useProfileUpdateMutation,
   useUpdatePasswordMutation,
 } from "@/redux/features/profile/profileSlice";
-import { toast } from "sonner";
-import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
-import moment from "moment";
 import { useGetPlanQuery } from "@/redux/features/subscription/subscripionPlanSlice";
-import { setUserData } from "@/redux/features/auth/userDataCatchSlice";
+import { jwtDecode } from "jwt-decode";
+import { Camera } from "lucide-react";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { toast } from "sonner";
 
 interface AdminFormData {
   firstName: string;
@@ -115,13 +114,9 @@ const AdminProfile = () => {
   // const user = useSelector((state: any) => state.user.userData);
   // const [user, setUser] = useState<string | null>(null);
 
-  if (token) {
-    const decoded: string | null = jwtDecode(token || " ");
-  }
+  const decoded: { id: string } = jwtDecode(token as string);
+  const id = decoded?.id;
 
-  const decoded: any = jwtDecode(token || " ");
-  const id = decoded.id;
-  console.log(decoded);
   const [userUpdate, { isLoading: profileLoading }] =
     useProfileUpdateMutation();
 
@@ -623,7 +618,9 @@ const AdminProfile = () => {
                           </div>
                         </>
                       ) : (
-                        <>No Signature . Please upload signatue .</>
+                        <p className=" mt-5 text-blue-500">
+                          No Signature . Please upload signatue .
+                        </p>
                       )}
                     </>
                   )}
