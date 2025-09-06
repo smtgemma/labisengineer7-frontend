@@ -12,21 +12,10 @@ import Loading from "@/components/Others/Loading";
 import { toast } from "sonner";
 import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
 import Swal from "sweetalert2";
-
-const StatusBadge = ({ status }: { status: string }) => (
-  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200">
-    {status}
-  </span>
-);
-
-const ActionButton = () => (
-  <button className="p-1 hover:bg-gray-100 rounded transition-colors">
-    <MoreHorizontal size={16} className="text-gray-500" />
-  </button>
-);
+import tokenCatch from "@/lib/token";
 
 export default function UsersAccountsTable() {
-  const token = localStorage.getItem("accessToken");
+  const token = tokenCatch();
 
   const { data, isLoading, refetch } = useGetAllUserStatusQuery(token);
   const [updateStatus, { isLoading: statusChangLoading }] =

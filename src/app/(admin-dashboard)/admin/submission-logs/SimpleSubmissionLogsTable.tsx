@@ -1,40 +1,9 @@
 "use client";
-import React from "react";
-import { MoreHorizontal } from "lucide-react";
 import { CgArrowsV } from "react-icons/cg";
-import Link from "next/link";
 import tokenCatch from "@/lib/token";
 import { useGetAllsubmissionLogsQuery } from "@/redux/features/adminOverView/adminUserSlice";
 import Loading from "@/components/Others/Loading";
-import { log } from "console";
 import moment from "moment";
-
-const logsData = [
-  {
-    id: 1,
-    timestamp: "Jun 30, 2025 | 10:32 AM",
-    userName: "Ayesha Karim",
-    projectName: "Tower Redesign",
-    action: "Uploaded FloorPlan.pdf",
-    status: "Success",
-  },
-  {
-    id: 2,
-    timestamp: "Jun 29, 2025 | 02:14 PM",
-    userName: "Mohammed Iqbal",
-    projectName: "Bridge AI Model",
-    action: "AI Data Extraction",
-    status: "Updated",
-  },
-  {
-    id: 3,
-    timestamp: "Jun 28, 2025 | 09:40 AM",
-    userName: "Elena Ray",
-    projectName: "Office Tower A",
-    action: "Generated Engineer Certificate",
-    status: "Success",
-  },
-];
 
 const StatusBadge = ({ status }: { status: string }) => {
   const isSuccess = status.toLowerCase() === "success";
@@ -51,12 +20,6 @@ const StatusBadge = ({ status }: { status: string }) => {
     </span>
   );
 };
-
-const ActionButton = () => (
-  <button className="p-1 hover:bg-gray-100 rounded transition-colors">
-    <MoreHorizontal size={16} className="text-gray-500" />
-  </button>
-);
 
 export default function SimpleSubmissionLogsTable() {
   const token = tokenCatch();

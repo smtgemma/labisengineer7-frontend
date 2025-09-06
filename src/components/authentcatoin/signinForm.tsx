@@ -43,8 +43,8 @@ export default function SigninForm() {
       const response = await sigInUser(data).unwrap();
       console.log(response);
       if (response?.success) {
-        localStorage.setItem("accessToken", response?.data?.accessToken);
-        // Cookies.set("accessToken", response?.data?.accessToken);
+        // localStorage.setItem("accessToken", response?.data?.accessToken);
+        Cookies.set("accessToken", response?.data?.accessToken);
         console.log(response?.data?.userData?.role);
         dispath(setUserData(response?.data?.userData));
 

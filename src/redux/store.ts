@@ -15,9 +15,7 @@ export const makeStore = () => {
     },
 
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: false,
-      }).concat(baseUrlApi.middleware),
+      getDefaultMiddleware().concat(baseUrlApi.middleware),
   });
 };
 

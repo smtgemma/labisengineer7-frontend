@@ -1,12 +1,9 @@
-import React from 'react'
-
-import SimpleSubmissionLogsTable from './SimpleSubmissionLogsTable'
+import SimpleSubmissionLogsTable from "./SimpleSubmissionLogsTable";
 
 export default function page() {
   return (
     <div>
-
-     <SimpleSubmissionLogsTable/>
+      <SimpleSubmissionLogsTable />
     </div>
-  )
+  );
 }

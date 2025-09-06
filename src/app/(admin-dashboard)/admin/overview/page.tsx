@@ -1,21 +1,14 @@
 import SimpleActivityFeedTable from "./ActivityFeed";
-
 import AiExtractionChart from "./AiExtractionChart";
-
 import OverviewCards from "./OverviewCard";
 
-
-
-export default function DashboardPage() {
+export default function page() {
   return (
     <main className="">
       <div className="">
-        
         <OverviewCards />
-        <AiExtractionChart title=""/>
-        
-        
-        <SimpleActivityFeedTable/>
+        <AiExtractionChart title="" />
+        <SimpleActivityFeedTable />
       </div>
     </main>
   );

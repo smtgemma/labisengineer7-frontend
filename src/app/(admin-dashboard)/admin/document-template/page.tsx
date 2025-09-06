@@ -1,10 +1,10 @@
-import React from 'react'
-import SimpleTemplatesTable from './TempleteTable'
+"use client";
+import SimpleTemplatesTable from "./TempleteTable";
 
 export default function page() {
   return (
     <div>
-        <SimpleTemplatesTable/>
+      <SimpleTemplatesTable />
     </div>
-  )
+  );
 }

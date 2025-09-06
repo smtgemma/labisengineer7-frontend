@@ -271,7 +271,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div
+        {/* <div
           // onClick={openPreview}
           className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
@@ -289,7 +289,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           <p className="text-gray-600 text-sm">
             Click to preview Word-style output
           </p>
-        </div>
+        </div> */}
 
         {/* fdf */}
         <div
