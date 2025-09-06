@@ -76,13 +76,13 @@ import F14D3 from "./f-14/f14D3/page";
 import F15D1 from "./f-15/f15D1/page";
 
 import { useGetOwnerTemplateQuery } from "@/redux/features/templates/allTemplateSlice";
-
-import F5D4 from "./f-05/f4D1/page";
+import F1D1 from "./f-01/f1D1/page";
+import F1D2 from "./f-01/f1D2/page";
+import F1D3 from "./f-01/f1D3/page";
+import F5D4 from "./f-05/f5D4/page";
 import F6D11 from "./f-06/f6D11/page";
-
-import F1D2 from "./f-01/f1d2/page";
-import F1D3 from "./f-01/f1d3/page";
-import F1D1 from "./f-01/f1d3/page";
+import F6D12 from "./f-06/f6D12/page";
+import F5D5 from "./f-05/f5D5/page";
 
 interface Owner {
   id: string;
@@ -670,6 +670,15 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 >
                   ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ
                 </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ΠΙΝΑΚΑΣ 3_");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ΠΙΝΑΚΑΣ 3_
+                </button>
                 {/* add more buttons the same way */}
               </div>
             )}
@@ -766,6 +775,15 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   }}
                 >
                   ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ
+                </button>
+                <button
+                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                  onClick={() => {
+                    setSelected("ylSUSNZTkC0rKv46VI1lKk0Q5_612");
+                    setIsModalOpen(true);
+                  }}
+                >
+                  ylSUSNZTkC0rKv46VI1lKk0Q5
                 </button>
                 {/* add more buttons the same way */}
               </div>
@@ -1229,6 +1247,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ" && (
                 <F5D4 allData={allData} />
               )}
+              {selected === "ΠΙΝΑΚΑΣ 3_" && (
+                <F5D5 allData={allData} />
+              )}
 
               {/* file 6======== */}
               {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61" && (
@@ -1259,6 +1280,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_611" && (
                 <F6D11 allData={allData} />
+              )}
+              {selected === "ylSUSNZTkC0rKv46VI1lKk0Q5_612" && (
+                <F6D12 allData={allData} />
               )}
 
               {/* file 7======== */}
