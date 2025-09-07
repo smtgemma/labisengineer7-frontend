@@ -1041,6 +1041,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
   const onSubmit = (data: FormData) => {
     console.log("Updated Data:", data)
     reset()
+    setIsEditModalOpen(false)
   }
 
   return (
