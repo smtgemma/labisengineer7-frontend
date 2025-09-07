@@ -3,12 +3,9 @@ import { baseUrlApi } from "@/redux/api/baseUrlApi";
 const projectServiceApi = baseUrlApi.injectEndpoints({
   endpoints: (build) => ({
     getTheService: build.query({
-      query: (token) => ({
+      query: () => ({
         url: "/services",
         method: "get",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       }),
     }),
 

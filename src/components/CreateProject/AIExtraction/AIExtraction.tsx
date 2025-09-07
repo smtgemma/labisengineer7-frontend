@@ -107,10 +107,9 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   //     return obj[key];
   //   });
 
-  const description: string = projectDescriptionAll
+  const description: string[] = projectDescriptionAll
     .filter((obj) => allDescriptions.includes(Object.keys(obj)[0]))
-    .map((obj) => Object.values(obj)[0])
-    .join(" ");
+    .map((obj) => Object.values(obj)[0]);
 
   const ktimatologio = files[0];
   const contract = files[1];
@@ -143,8 +142,6 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     timerControling();
 
     const formData = new FormData();
-
-    console.log("description: ", description);
 
     if (ktimatologio) formData.append("ktimatologio", ktimatologio);
     if (contract) formData.append("contract", contract);
