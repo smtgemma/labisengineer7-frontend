@@ -2,6 +2,20 @@
 import { useState } from "react"
 import StampComponent from "../../shared/signture/signture"
 
+import { FaRegEdit } from "react-icons/fa";
+
+// for editing 
+import { useForm } from "react-hook-form"
+
+interface FormData {
+  owner_name: string
+  project_description: string
+  owner_address: string
+  owner_city: string
+  owner_postal_code: string
+}
+// end editing 
+
 interface allDataProps {
   owner_address: string
   owner_city: string
@@ -26,6 +40,8 @@ interface BudgetCategory {
 }
 
 export default function F5D5({ allData }: { allData: allDataProps }) {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const { owner_address, owner_city, owner_name, owner_postal_code, project_description } = allData
 
   const [formData, setFormData] = useState({
@@ -336,8 +352,30 @@ export default function F5D5({ allData }: { allData: allDataProps }) {
   const grandTotal = categories.reduce((acc, category) => acc + category.subtotal, 0)
   const finalTotal = grandTotal + formData.unforeseen
 
+  // for editing data 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormData>({})
+
+  const onSubmit = (data: FormData) => {
+    console.log("Updated Data:", data)
+    reset()
+    setIsEditModalOpen(false)
+  }
+
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
+      <div className="text-right -mt-7">
+        <button
+          className="mt-1 px-4 py-1"
+          onClick={() => setIsEditModalOpen(true)}
+        >
+          <FaRegEdit className="text-black text-2xl cursor-pointer" />
+        </button>
+      </div>
       {/* Project Info */}
       <div className="mb-6 space-y-4">
         <div className="flex items-center gap-4">
@@ -475,6 +513,86 @@ export default function F5D5({ allData }: { allData: allDataProps }) {
           <p className="text-center">Ο Συντάξας</p>
         </div>
       </div>
+
+      {/* EDIT MODAL */}
+      {isEditModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
+            {/* Close button */}
+            <button
+              className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
+              onClick={() => setIsEditModalOpen(false)}
+            >
+              ✕
+            </button>
+
+            <h2 className="text-lg font-bold mb-4">✍️ Edit Data</h2>
+            <div>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-4 p-4 border rounded-lg bg-white shadow-md"
+              >
+                {/* Employer */}
+                <div className="flex items-center gap-4">
+                  <label className="font-medium w-1/4">Εργοδότες *:</label>
+                  <input
+                    placeholder={owner_name || "nowner_name"}
+                    type="text"
+                    {...register("owner_name", { required: "This field is required" })}
+                    className="flex-1 border p-2 rounded text-sm"
+                  />
+                </div>
+
+                {/* Project */}
+                <div className="flex items-center gap-4">
+                  <label className="font-medium w-1/4">Έργο *:</label>
+                  <input
+                    placeholder={project_description || "Project description"}
+                    type="text"
+                    {...register("project_description", { required: "This field is required" })}
+                    className="flex-1 border p-2 rounded text-sm"
+                  />
+                </div>
+
+                {/* Address */}
+                <div className="flex items-center gap-4">
+                  <label className="font-medium w-1/4">Διεύθυνση Έργου *:</label>
+                  <div className="flex-1 grid grid-cols-3 gap-2">
+                    <input
+                      type="text"
+                      placeholder={owner_address || "Address"}
+                      {...register("owner_address", { required: "Address is required" })}
+                      className="border p-2 rounded text-sm"
+                    />
+                    <input
+                      type="text"
+                      placeholder={owner_city || "City"}
+                      {...register("owner_city", { required: "City is required" })}
+                      className="border p-2 rounded text-sm"
+                    />
+                    <input
+                      type="text"
+                      placeholder={owner_postal_code || "Postal Code"}
+                      {...register("owner_postal_code", { required: "Postal code is required" })}
+                      className="border p-2 rounded text-sm"
+                    />
+                  </div>
+                </div>
+
+                {/* Submit */}
+                <div className="flex justify-end">
+                  <button
+                    type="submit"
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm cursor-pointer"
+                  >
+                    Update
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
