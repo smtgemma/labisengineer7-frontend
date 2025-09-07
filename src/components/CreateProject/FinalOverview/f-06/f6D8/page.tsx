@@ -77,6 +77,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
     const onSubmit = (data: FormData) => {
         console.log("Updated Data:", data)
         reset()
+        setIsEditModalOpen(false)
     }
 
     return (
@@ -165,7 +166,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                        <div className="w-20 p-2 border-r border-gray-400 font-bold">{owner_id || "N/A"}</div>
+                        <div className=" p-2 border-r border-gray-400 font-bold">{owner_id || "N/A"}</div>
                         <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
                         <div className="flex-1 p-2 font-bold">{owner_phone || "N/A"}</div>
                     </div>
