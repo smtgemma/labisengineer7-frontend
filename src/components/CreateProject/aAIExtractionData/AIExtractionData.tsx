@@ -18,22 +18,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { overflow } from "html2canvas/dist/types/css/property-descriptors/overflow";
 import { CodeSquare } from "lucide-react";
 
-// type OwnerData = {
-//   firstName: string;
-//   lastName: string;
-//   fatherName: string;
-//   motherName: string;
-//   date_of_birth: string;
-//   birthPlace: string;
-//   address_number: string;
-//   postalCode: string;
-//   city: string;
-//   afm: string;
-//   phone: string;
-//   email: string;
-//   id_number: string;
-// };
-
 type OwnerData = {
   first_name: string; // Όνομα
   last_name: string; // Επώνυμο
@@ -54,6 +38,7 @@ type OwnerData = {
 
 type ProjectData = {
   project_description: string;
+  project_description2: string;
   Horizontal_property_name_two: string;
   Horizontal_property_name: string;
   construction: string;
@@ -119,7 +104,7 @@ const inputStyle =
 
 const AIExtractionDataInPut = ({ currentStep }: any) => {
   const [ownerInfoShow, setOwnerInfoShow] = useState<boolean>(true);
-  const [ownerInfoShow2, setOwnerInfoShow2] = useState<number | null>(null);
+  const [ownerInfoShow2, setOwnerInfoShow2] = useState<number | null>(0);
   const [ownerInfoShow3, setOwnerInfoShow3] = useState<boolean>(true);
   const [ownerInfoShow4, setOwnerInfoShow4] = useState<boolean>(true);
   const [ownerInfoShow5, setOwnerInfoShow5] = useState<boolean>(true);
@@ -128,28 +113,6 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
 
   console.log("user: ", user);
 
-  // const { register, control, handleSubmit } = useForm<FormValues>({
-  //   defaultValues: {
-  //     owners: stepByStepData.ownerBaseData.map((owner: any) => ({
-  //       firstName: owner.first_name || "",
-  //       lastName: owner.last_name || "",
-  //       fatherName: `${owner.father_first_name || ""} ${
-  //         owner.father_last_name || ""
-  //       }`,
-  //       motherName: `${owner.mother_first_name || ""} ${
-  //         owner.mother_last_name || ""
-  //       }`,
-  //       birthDate: owner.date_of_birth || "",
-  //       birthPlace: owner.place_of_birth || "",
-  //       address: owner.owner_address || "",
-  //       postalCode: owner.address_code || "",
-  //       city: owner.city || "",
-  //       afm: owner.tax_identification_number || "",
-  //       phone: owner.mobile || "",
-  //       email: owner.email || "",
-  //     })),
-  //   },
-  // });
   const { register, control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       owners: stepByStepData.ownerBaseData.map((owner: any) => ({
@@ -190,7 +153,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const filesData = stepByStepData.multiFiles;
 
   console.log("stepByStepData:", stepByStepData);
-  console.log("descriptionTask:", descrptionTasks);
+  console.log("descriptionTask:", allExtreactData?.project_descriptions);
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
 
@@ -290,16 +253,30 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-5">
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    Περιγραφή Έργου
+                    Περιγραφή Έργου (1)
                   </label>
                   <textarea
                     {...register("project_description")}
                     className={`${inputStyle} h-[150px] `}
                     readOnly
-                    defaultValue={allExtreactData?.project_description}
+                    defaultValue={
+                      allExtreactData?.project_descriptions[0] || "N/A"
+                    }
                   />
                 </div>
-
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    Περιγραφή Έργου(2)
+                  </label>
+                  <textarea
+                    {...register("project_description2")}
+                    className={`${inputStyle} h-[150px] `}
+                    readOnly
+                    defaultValue={
+                      allExtreactData?.project_descriptions[1] || "N/A"
+                    }
+                  />
+                </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     ΑΕΚ Ακινήτου
@@ -506,7 +483,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                       Date_of_birth (Ημερομηνία Γέννησης)
                     </label>
                     <input
-                      type="date"
+                      type="text"
                       {...register(`owners.${index}.date_of_birth`)}
                       defaultValue={field.date_of_birth}
                       className={inputStyle}

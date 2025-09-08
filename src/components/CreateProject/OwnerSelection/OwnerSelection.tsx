@@ -8,6 +8,7 @@ import {
   setAiExtractCatchWonerData,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { useForm } from "react-hook-form";
+import { IoClose } from "react-icons/io5";
 type Owner = {
   first_name: string; // Όνομα
   last_name: string; // Επώνυμο
@@ -23,25 +24,9 @@ type Owner = {
   tax_identification_number: string; // Αριθμός Φορολογικού Μητρώου (ΑΦΜ)
   email: string; // Email
   mobile: string; // Τηλέφωνο
+  ydom: string; // Τηλέφωνο
   selected?: boolean;
 };
-// interface Owner {
-//   address: string;
-//   address_code: string;
-//   address_municipality_community: string;
-//   date_of_birth: string;
-//   email: string;
-//   fathers_name: string;
-//   id_number: string;
-//   last_name: string;
-//   mobile: string;
-//   mothers_name: string;
-//   name: string;
-//   ownership_percentage: string;
-//   place_of_birth: string;
-//   tax_identification_number: string;
-//   selected?: boolean;
-// }
 
 interface AIDataState {
   formatted_data?: {
@@ -58,6 +43,7 @@ type OwnerFormInputs = {
   firstName: string;
   surname: string;
   fatherName: string;
+  ydom: string;
   vatNo: string;
 };
 
@@ -79,8 +65,7 @@ const OwnerSelection = () => {
 
   const dispatch = useDispatch();
   const ownerData = useSelector((state: any) => state.aiData.aiDataState);
-  console.log(ownerData.owners);
-  console.log(ownerData?.project_description);
+  console.log(ownerData);
 
   // const owners = (ownerData.owners ?? []) as Owner[];
 
@@ -108,6 +93,7 @@ const OwnerSelection = () => {
       id_number: "", // Α.Δ.Τ
       tax_identification_number: data.vatNo || "", // ΑΦΜ
       email: "", // Email
+      ydom: "",
       mobile: "", // Τηλέφωνο
     };
 
@@ -133,6 +119,7 @@ const OwnerSelection = () => {
         id_number: "", // Α.Δ.Τ
         tax_identification_number: data.vatNo || "", // ΑΦΜ
         email: "", // Email
+        ydom: "",
         mobile: "", // Τηλέφωνο
       };
 
@@ -157,15 +144,6 @@ const OwnerSelection = () => {
     setEditingOwner({ owner, index });
     setIsEditModalOpen(true);
   };
-  // toggle owner selection
-  // const toggleOwnerSelection = (index: number) => {
-  //   const updatedOwners = [...isOwner];
-  //   updatedOwners[index] = {
-  //     ...updatedOwners[index],
-  //     selected: !updatedOwners[index].selected,
-  //   };
-  //   setIsOwner(updatedOwners);
-  // };
 
   const toggleOwnerSelection = (index: number) => {
     const owner = isOwner[index];
@@ -196,6 +174,8 @@ const OwnerSelection = () => {
     dispatch(setAiExtractCatchWonerData(selectedOwners));
   }, [selectedOwners]);
 
+  console.log("desciption", ownerData?.project_descriptions);
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -216,16 +196,29 @@ const OwnerSelection = () => {
       </div>
 
       {/* Project Description */}
-      <div className="space-y-3 mb-8">
-        <label className="block text-gray-900 font-medium">
-          Project Description
-        </label>
-        <textarea
-          value={ownerData?.project_description}
-          onChange={(e) => setProjectDescription(e.target.value)}
-          className="w-full  px-4 py-2 border  h-[200px] border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="Enter project description"
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4">
+        <div className="space-y-3 mb-8">
+          <label className="block text-gray-900 font-medium">
+            Project Description (1)
+          </label>
+          <textarea
+            defaultValue={`${ownerData?.project_descriptions[0] || "N/A"}`}
+            onChange={(e) => setProjectDescription(e.target.value)}
+            className="w-full  px-4 py-2 border  h-[200px] border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Enter project description"
+          />
+        </div>
+        <div className="space-y-3 mb-8">
+          <label className="block text-gray-900 font-medium">
+            Project Description (2)
+          </label>
+          <textarea
+            defaultValue={`${ownerData?.project_descriptions[1] || "N/A"}`}
+            onChange={(e) => setProjectDescription(e.target.value)}
+            className="w-full  px-4 py-2 border  h-[200px] border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Enter project description"
+          />
+        </div>
       </div>
 
       {/* Owners Grid */}
@@ -296,7 +289,12 @@ const OwnerSelection = () => {
                   {owner.father_first_name || "Not set"}
                 </span>
               </div>
-
+              <div className="flex justify-between items-center">
+                <label className="text-gray-700 font-medium">Ydom:</label>
+                <span className="text-gray-900 font-medium">
+                  {ownerData?.municipality_community || "Not set"}
+                </span>
+              </div>
               <div className="flex justify-between items-center">
                 <label className="text-gray-700 font-medium">VAT No:</label>
                 <span className="text-gray-900 font-medium">
@@ -325,7 +323,7 @@ const OwnerSelection = () => {
                 onClick={() => setIsModalOpen(false)}
                 className="text-gray-400 hover:text-gray-600"
               >
-                <Edit3 className="w-5 h-5" />
+                <IoClose className="w-5 h-5" />
               </button>
             </div>
 
@@ -373,6 +371,21 @@ const OwnerSelection = () => {
                   placeholder="Nikos"
                 />
                 {errors.fatherName && (
+                  <span className="text-red-500 text-sm">Required</span>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">
+                  Ydom:
+                </label>
+                <input
+                  type="text"
+                  {...register("ydom", { required: true })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="ydom"
+                />
+                {errors.ydom && (
                   <span className="text-red-500 text-sm">Required</span>
                 )}
               </div>
@@ -468,6 +481,22 @@ const OwnerSelection = () => {
                   placeholder="Nikos"
                 />
                 {errors.fatherName && (
+                  <span className="text-red-500 text-sm">Required</span>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-gray-700 font-medium mb-2">
+                  Ydom:
+                </label>
+                <input
+                  type="text"
+                  defaultValue={editingOwner?.owner?.tax_identification_number}
+                  {...register("ydom", { required: true })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="ydom"
+                />
+                {errors.ydom && (
                   <span className="text-red-500 text-sm">Required</span>
                 )}
               </div>

@@ -75,14 +75,39 @@ import F14D2 from "./f-14/f14D2/page";
 import F14D3 from "./f-14/f14D3/page";
 import F15D1 from "./f-15/f15D1/page";
 
-import { useGetOwnerTemplateQuery } from "@/redux/features/templates/allTemplateSlice";
-import F1D1 from "./f-01/f1D1/page";
-import F1D2 from "./f-01/f1D2/page";
-import F1D3 from "./f-01/f1D3/page";
-import F5D4 from "./f-05/f5D4/page";
+
+import {
+  useDownloadTemplatePdfQuery,
+  useExeclDownloadTemplateQuery,
+  useGetOwnerTemplateQuery,
+} from "@/redux/features/templates/allTemplateSlice";
+
+import F5D4 from "./f-05/f4D1/page";
 import F6D11 from "./f-06/f6D11/page";
-import F6D12 from "./f-06/f6D12/page";
-import F5D5 from "./f-05/f5D5/page";
+
+import F1D2 from "./f-01/f1d2/page";
+import F1D3 from "./f-01/f1d3/page";
+import F1D1 from "./f-01/f1d3/page";
+import { setActionSelectName } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { toast } from "sonner";
+import { FaRegCopyright } from "react-icons/fa6";
+
+export interface UserData {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  profilePic?: string;
+  isVerified?: boolean;
+  role?: "ENGINEER" | "ADMIN" | "USER" | string;
+  status?: "ACTIVE" | "INACTIVE" | "PENDING" | string;
+  teeRegistration?: string;
+  vatNumber?: string;
+  hexToken?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 
 interface Owner {
   id: string;
@@ -113,14 +138,18 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allTempate = stepByStepData.actionSelection;
   const dataAllFIled = stepByStepData.aiInputData;
   const subCategoryData = stepByStepData.subcategory;
+  const projectCodeId = stepByStepData.projectIdCode;
   const id = stepByStepData?.projectIdCode;
   const ownerId = id?.result?.project?.id;
 
   const { data: ownerData } = useGetOwnerTemplateQuery(ownerId);
+  const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
+  const { data: execlDownload } = useExeclDownloadTemplateQuery("");
   console.log(ownerData?.data, "===============================");
   const allData = ownerData?.data;
 
-  console.log(ownerId, "projectId");
+  console.log("pdf", pdfdownload);
+  console.log("execl", execlDownload);
   console.log(dataAllFIled, "======================dataAllFiled");
 
   const buildingMods = subCategoryData["building-modifications"] || [];
@@ -133,11 +162,16 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const store = makeStore();
   const [selected, setSelected] = useState<string | null>(null);
+  const [projectHexCode, setProjectHexCode] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   // modal close click outside
   const modalContentRef = useRef<HTMLDivElement>(null);
 
-  // ✅ 2. DOWNLOAD CSV FILE
+  const userData = useSelector(
+    (state: RootState) => state.user.userData as UserData | null
+  );
+
+  //2. DOWNLOAD CSV FILE
   const downloadCSV = () => {
     const headers = ["First Name", "Surname", "Father Name", "VAT No"];
     const rows = selectedOwners.map((owner) =>
@@ -158,7 +192,18 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     },
   ];
 
-  console.log(selected);
+  const projectAndUserHexCode =
+    userData?.hexToken + `-${projectCodeId?.projectCode}`;
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(projectAndUserHexCode);
+      toast.success("successfully Id copy !. Use is id your extension.");
+      setProjectHexCode(projectAndUserHexCode);
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+  };
 
   // pdf file download
   const handleDownloadPdf = async () => {
@@ -271,67 +316,85 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* <div
-          // onClick={openPreview}
-          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
+        <div
+          onClick={handleCopy}
+          className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
-          <div className="flex items-center space-x-4 mb-4">
+          <div
+            title="The click copy user id"
+            className="flex items-center space-x-4 mb-4"
+          >
             <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-              <FileText className="w-6 h-6 text-yellow-600" />
+              {/* <FileText className="w-6 h-6 text-yellow-600" /> */}
+              <FaRegCopyright className="w-6 h-6 text-yellow-600" />
             </div>
-            <div>
+            <div className=" relative ">
               <h3 className="text-lg font-semibold text-gray-900">
-                Preview file
+                Auto-Fill Government Form
               </h3>
-              <p className="text-sm text-gray-500">Open in new tab</p>
+              <p className="text-sm text-gray-500">User and Project id</p>
+              {projectHexCode && (
+                <p className="text-gray-600 text-sm mt-2 absolute left-0 top-12 ">
+                  <button className="bg-blue-400 text-white px-4 py-1  rounded hover:bg-blue-700 cursor-pointer">
+                    {`Id: ${projectHexCode}`}
+                  </button>
+                </p>
+              )}
             </div>
           </div>
-          <p className="text-gray-600 text-sm">
-            Click to preview Word-style output
-          </p>
-        </div> */}
+        </div>
 
         {/* fdf */}
-        <div
-          onClick={handlePdfDownloadTempate}
-          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
+        <a
+          href={`${pdfdownload?.data?.pdfZipUrl}`}
+          download="generated_pdf_files.zip"
         >
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-              <FileText className="w-6 h-6 text-red-600" />
+          <div className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md">
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                <FileText className="w-6 h-6 text-red-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Pdf File
+                </h3>
+                <p className="text-sm text-gray-500">Download pdf</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900">Pdf File</h3>
-              <p className="text-sm text-gray-500">Download pdf</p>
-            </div>
+            <p className="text-gray-600 text-sm">
+              Click to download document.docx
+            </p>
           </div>
-          <p className="text-gray-600 text-sm">
-            Click to download document.docx
-          </p>
-        </div>
+        </a>
         {/* CSV */}
-        <div
-          onClick={downloadCSV}
-          className="bg-white border p-6 rounded-lg cursor-pointer hover:shadow-md"
+        <a
+          href={`${execlDownload?.data?.excelZipUrl}`}
+          download="generated_pdf_files.zip"
         >
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              <FileSpreadsheet className="w-6 h-6 text-green-600" />
+          <div className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md">
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                <FileSpreadsheet className="w-6 h-6 text-green-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  CSV File
+                </h3>
+                <p className="text-sm text-gray-500">Structured spreadsheet</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900">CSV File</h3>
-              <p className="text-sm text-gray-500">Structured spreadsheet</p>
-            </div>
+            <p className="text-gray-600 text-sm">
+              Click to download owners.csv
+            </p>
           </div>
-          <p className="text-gray-600 text-sm">Click to download owners.csv</p>
-        </div>
+        </a>
       </div>
 
       <div ref={printRef} className="space-y-3">
         {/* building-modifications */}
         {/* file-1  */}
         {buildingMods?.map((item: string, index: number) => (
-          <div>
+          <div key={index}>
             {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" && (
               <div className="flex flex-wrap gap-4">
                 <button
