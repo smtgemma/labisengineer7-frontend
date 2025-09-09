@@ -16,23 +16,19 @@ interface FormData {
 // end editing 
 
 interface allDataProps {
-    owner_address: string;
-    owner_city: string;
-    owner_name: string;
-    owner_postal_code: string;
-    project_description?: string;
+    owners: any[];
+    allDescriptionTasks: any[]
+    technical_description: string;
+    Horizontal_property_name: string;
 }
 
 export default function F6D2({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const {
-        owner_address,
-        owner_city,
-        owner_name,
-        owner_postal_code,
-        project_description,
-    } = allData;
+    const owner = allData?.owners[0] || {};
+    const allDescriptionTasks = allData?.allDescriptionTasks || {};
+    const { technical_description } = allData || {};
+    const { Horizontal_property_name } = allData || {};
 
     // for editing data 
     const {
@@ -50,14 +46,14 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
 
     return (
         <div className="max-w-[794px] mx-auto p-6 bg-white">
-              <div className="text-right -mt-9">
+            <div className="text-right -mt-9">
                 <button
-                  className="mt-1 px-4 py-1"
-                  onClick={() => setIsEditModalOpen(true)}
+                    className="mt-1 px-4 py-1"
+                    onClick={() => setIsEditModalOpen(true)}
                 >
-                  <FaRegEdit className="text-black text-2xl cursor-pointer" />
+                    <FaRegEdit className="text-black text-2xl cursor-pointer" />
                 </button>
-              </div>
+            </div>
             {/* Title */}
             <h2 className="text-center font-semibold underline text-sm mb-2">
                 ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ - ΒΕΒΑΙΩΣΗ ΜΗΧΑΝΙΚΟΥ
@@ -65,30 +61,30 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
 
             {/* Project Information */}
             <div className="mb-8 space-y-4">
-                <div className="flex items-start justify-between">
+                {/* <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
                     <h3 className=" text-sm">{project_description || "N/A"}</h3>
-                </div>
+                </div> */}
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">{owner?.address || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"} ( FOR BUILDING)</h3>
                 </div>
 
                 <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
                     <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">{owner_name || "N/A"}</h3>
+                    <h3 className=" text-sm">{owner?.firstName || "N/A"}</h3>
                 </div>
             </div>
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property</span> επί της οδού <br /> <span className="font-semibold">Address,Town/Area , postal code ( FOR BUILDING),</span>
+                <p>Στο ακίνητο <span className="font-semibold">{technical_description || "N/A"}/ {Horizontal_property_name || "N/A"}</span> επί της οδού <br /> <span className="font-semibold">Address,Town/Area , postal code ( FOR BUILDING),</span>
                     πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
 
             <div className="space-y-6 ml-10">
-                <div>
+                {/* <div>
                     <h3 className="text-sm font-bold">● Καθαίρεση εσωτερικών τοιχοποιιών και απομάκρυνση μπαζών
                     </h3>
                     <p className="text-sm mb-6">Αποξήλωση τοιχοποιιών από τούβλο ή γυψοσανίδα, απομάκρυνση μπαζών και καθαρισμός χώρου. Περιλαμβάνει χρήση κοπτικών εργαλείων και προστασία γειτονικών κατασκευών.</p>
@@ -171,12 +167,41 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                     <h3 className="text-sm font-bold">● Τοποθέτηση και μετακίνηση νέων σωμάτων καλοριφέρ
                     </h3>
                     <p className="text-sm mb-6">Αποσύνδεση/τοποθέτηση νέων σωμάτων, μεταφορά σημείων βάσει μελέτης, νέα σωληνώσεις και υδραυλικές συνδέσεις, εξαερώσεις και δοκιμή.</p>
-                </div>
-                <div>
+                </div> */}
+                {/* <div>
                     <h3 className="text-sm font-bold">● Θέρμανση / Ψύξη – Κλιματισμός
                     </h3>
                     <p className="text-sm mb-6">Τοποθέτηση κλιματιστικών (split unit, πολυδιαιρούμενα), προκαλωδίωση & σωληνώσεις ψυκτικού υγρού (χωνευτά), αντικατάσταση λεβητοστασίου ή μετάβαση σε αντλία θερμότητας, τοποθέτηση θερμοστατών – ζωνών θέρμανσης.</p>
+                </div> */}
+                {/* <div>
+                    <p className="text-sm mb-6">
+
+                        Σύμφωνα με την <span className="text-sm font-bold">Απόφαση ΥΠΕΝ/ΔΑΟΚΑ/69701/4461/18 (ΦΕΚ 4520 Β/16.10.2018),</span> και ειδικότερα με το <span className="text-sm font-bold">άρθρο 2, παράγραφος Ιζ),</span> αναφέρεται ότι για την πραγματοποίηση εσωτερικών διαρρυθμίσεων εντός υφιστάμενου κτιρίου, απαιτείται η υποβολή σχεδίου κάτοψης σε κλίμακα 1:100 ή 1:50, <span className="underline">μόνο στην περίπτωση που από τις διαρρυθμίσεις αυτές προκύπτει ανάγκη τροποποίησης υφιστάμενων μελετών του κτιρίου.</span></p>
                 </div>
+                <div>
+                    <p className="text-sm">Ενδεικτικά, τέτοιες μελέτες μπορεί να είναι:
+                    </p>
+                    <p className="text-sm">• Μελέτη ενεργητικής πυροπροστασίας
+                    </p>
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold underline">Ωστόσο, στη συγκεκριμένη περίπτωση, για το σύνολο των προβλεπόμενων εργασιών, διαπιστώνεται ότι οι διαρρυθμίσεις δεν τροποποιούν τις εγκεκριμένες μελέτες του κτιρίου και ιδίως δεν επηρεάζουν:
+                    </h3>
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold mb-6">Τη μελέτη ενεργητικής πυροπροστασίας     </h3>
+                    <p className="text-sm mb-6">Ως εκ τούτου, δεν απαιτείται η κατάθεση νέων ή τροποποιημένων μελετών για την ενημέρωση του φακέλου της οικοδομικής άδειας. Το παραπάνω επιβεβαιώνεται και από τις διατάξεις της παρ. 10 του άρθρου 42 του Ν.4495/2017, σύμφωνα με τις οποίες δεν απαιτείται επικαιροποίηση μελετών για διαρρυθμίσεις που δεν επηρεάζουν τα συστήματα πυροπροστασίας ή τις Η/Μ εγκαταστάσεις.</p>
+                </div> */}
+
+                {
+                    allDescriptionTasks?.map((task: any, index: number) => (
+                        <div key={index}>
+                            <h3 className="text-sm font-bold">{task?.id}</h3>
+                            <p className="text-sm">{task?.description}</p>
+                        </div>
+                    ))
+                }
+
                 <div>
                     <p className="text-sm mb-6">
 
@@ -196,6 +221,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                     <h3 className="text-sm font-bold mb-6">Τη μελέτη ενεργητικής πυροπροστασίας     </h3>
                     <p className="text-sm mb-6">Ως εκ τούτου, δεν απαιτείται η κατάθεση νέων ή τροποποιημένων μελετών για την ενημέρωση του φακέλου της οικοδομικής άδειας. Το παραπάνω επιβεβαιώνεται και από τις διατάξεις της παρ. 10 του άρθρου 42 του Ν.4495/2017, σύμφωνα με τις οποίες δεν απαιτείται επικαιροποίηση μελετών για διαρρυθμίσεις που δεν επηρεάζουν τα συστήματα πυροπροστασίας ή τις Η/Μ εγκαταστάσεις.</p>
                 </div>
+
                 {/* {/* Signature Section */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
                     <div className="max-w-[300px]">
@@ -241,7 +267,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Εργοδότες *:</label>
                                     <input
-                                        placeholder={owner_name || "nowner_name"}
+                                        placeholder={owner?.firstName || "nowner_name"}
                                         type="text"
                                         {...register("owner_name", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
@@ -252,14 +278,11 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Έργο *:</label>
                                     <input
-                                        placeholder={project_description || "Project description"}
+                                        // placeholder={project_description || "Project description"}
                                         type="text"
                                         {...register("project_description", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
-                                    {/* {errors.project_description && (
-                    <p className="text-red-500 text-xs">{errors.project_description.message}</p>
-                  )} */}
                                 </div>
 
                                 {/* Address */}
@@ -268,19 +291,19 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <input
                                             type="text"
-                                            placeholder={owner_address || "Address"}
+                                            placeholder={owner?.address || "Address"}
                                             {...register("owner_address", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner_city || "City"}
+                                            placeholder={owner?.city || "City"}
                                             {...register("owner_city", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner_postal_code || "Postal Code"}
+                                            placeholder={owner?.postalCode || "Postal Code"}
                                             {...register("owner_postal_code", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
