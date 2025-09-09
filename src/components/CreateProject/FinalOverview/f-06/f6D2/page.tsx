@@ -196,7 +196,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                 {
                     allDescriptionTasks?.map((task: any, index: number) => (
                         <div key={index}>
-                            <h3 className="text-sm font-bold">{task?.id}</h3>
+                            <h3 className="text-sm font-bold">● {task?.id}</h3>
                             <p className="text-sm">{task?.description}</p>
                         </div>
                     ))
@@ -267,7 +267,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Εργοδότες *:</label>
                                     <input
-                                        placeholder={owner?.firstName || "nowner_name"}
+                                        placeholder={owner?.firstName || "owner_name"}
                                         type="text"
                                         {...register("owner_name", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"

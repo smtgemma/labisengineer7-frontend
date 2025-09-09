@@ -1327,7 +1327,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_62" && (
                 <F6D2 allData={allData} />
               )}
-              {/*
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_63" && (
                 <F6D3 allData={allData} />
@@ -1350,6 +1349,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_611" && (
                 <F6D11 allData={allData} />
               )}
+              {/*
               {selected === "ylSUSNZTkC0rKv46VI1lKk0Q5_612" && (
                 <F6D12 allData={allData} />
               )} */}
