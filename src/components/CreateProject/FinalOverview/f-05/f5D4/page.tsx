@@ -1,3 +1,4 @@
+
 "use client"
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
@@ -44,7 +45,8 @@ interface allDataProps {
 }
 
 
-export default function F6D8({ allData }: { allData: allDataProps }) {
+
+export default function F5D4({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const {
@@ -79,7 +81,6 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
         reset()
         setIsEditModalOpen(false)
     }
-
     return (
         <div className="max-w-[796px] mx-auto bg-white">
             <div className="text-right -mt-3">
@@ -158,7 +159,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-                        <div className="flex-1 p-2 font-bold">{owner_birth_place}</div>
+                        <div className="flex-1 p-2 font-bold">{owner_birth_place || "N/A"}</div>
                     </div>
                 </div>
 
@@ -166,7 +167,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                        <div className=" p-2 border-r border-gray-400 font-bold">{owner_id || "N/A"}</div>
+                        <div className="w-20 p-2 border-r border-gray-400 font-bold">{owner_id || "N/A"}</div>
                         <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
                         <div className="flex-1 p-2 font-bold">{owner_phone || "N/A"}</div>
                     </div>
@@ -198,7 +199,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                 <div>ίου (Email):</div>
                             </div>
                         </div>
-                        <div className="p-2 underline ">{owner_email || "N/A"}</div>
+                        <div className=" p-2 underline ">{owner_email || "N/A"}</div>
                     </div>
                 </div>
 
@@ -216,11 +217,8 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                     <p className="mb-4">
                         Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                     </p>
-                    <p className="mb-4">
-                        ως κύριος/ιδιοκτήτης του ακινήτου που βρίσκεται επί της οδού ([Address, Number, Town, Postal code], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( Engineers Surname  ,  Engineer's Name, Specialty Engineer AM TEE)
-                    </p>
 
-                    <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
+                    <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
                     <p className=" mb-6">{project_description || "N/A"}</p>
                 </div>
 
@@ -228,10 +226,13 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                 <div className="space-y-4 text-sm m p-4">
                     <p>επί της οδού {owner_address || "N/A"}, {owner_city || "N/A"} , {owner_postal_code || "N/A"} ( FOR PROPERTY)</p>
                     <p>
-                        τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
-                    <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>
-                    <p>●Την κατάρτιση και υποβολή του φακέλου στην αρμόδια υπηρεσία (e-Άδειες / ΥΔΟΜ )</p>
-                    <p>●Τη συνεργασία με άλλους ειδικούς/μελετητές, όπου απαιτείται</p>
+                        <span className="text-sm font-bold">Οι προβλεπόμενες επεμβάσεις δεν θίγουν, δεν επηρεάζουν και δεν επιφέρουν καμία τροποποίηση στον φέροντα οργανισμό (Φ.Ο.)</span> του κτιρίου,
+                        όπως αυτός έχει κατασκευαστεί βάσει της εγκεκριμένης οικοδομικής άδειας και των εκάστοτε εγκεκριμένων στατικών μελετών.
+                    </p>
+                    <p>
+                        <span className="text-sm font-bold">Οι επεμβάσεις δεν αντίκεινται σε ειδικότερες διατάξεις</span>, που αφορούν στατικά, πυροπροστασία, υγιεινή,
+                        προσβασιμότητα, ενεργειακή απόδοση, προστασία πολιτιστικής κληρονομιάς ή οποιονδήποτε άλλον τομέα ειδικής νομοθεσίας που σχετίζεται με τις κατασκευές.
+                    </p>
                 </div>
 
                 {/* Signature section */}
