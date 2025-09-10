@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
-import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -31,6 +30,7 @@ interface allDataProps {
     engineers: any[]
     technical_description: string;
     Horizontal_property_name: string;
+    project_description: string;
 }
 
 
@@ -42,6 +42,7 @@ export default function F6D11({ allData }: { allData: allDataProps }) {
     const engineers = allData?.engineers || {};
     const { technical_description } = allData || {};
     const { Horizontal_property_name } = allData || {};
+    const { project_description } = allData || {};
 
 
     // for editing data 
@@ -130,7 +131,7 @@ export default function F6D11({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                                <div className="flex-1 p-2 font-bold">{format(new Date(owner?.bornDate), "dd/MM/yyyy") || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.birthDate || "N/A"}</div>
                             </div>
                         </div>
 
@@ -202,7 +203,7 @@ export default function F6D11({ allData }: { allData: allDataProps }) {
                             </p>
 
                             <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
-                            {/* <p className=" mb-6">{project_description || "N/A"}</p> */}
+                            <p className=" mb-6">{project_description || "N/A"}</p>
                         </div>
 
                         {/* Additional disclaimer text */}
@@ -414,7 +415,7 @@ export default function F6D11({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("project_description", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                            // defaultValue={project_description || ""}
+                                                defaultValue={project_description || ""}
                                             />
                                         </div>
 

@@ -142,7 +142,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const projectCodeId = stepByStepData.projectIdCode;
   const id = stepByStepData?.projectIdCode;
   const projectId = id?.result?.project?.id;
-  const userId = dataAllFIled?.createdById;
+  const userId = dataAllFIled?.createdById; 
 
   const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
@@ -1303,7 +1303,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )} */}
 
               {/* file 5======== */}
-              {/* {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && (
+              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && (
                 <F5D1 allData={allData} />
               )}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ" && (
@@ -1315,9 +1315,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ" && (
                 <F5D4 allData={allData} />
               )}
+              
               {selected === "ΠΙΝΑΚΑΣ 3_" && (
                 <F5D5 allData={allData} />
-              )} */}
+              )}
 
               {/* file 6======== */}
               {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61" && (
@@ -1349,16 +1350,16 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_611" && (
                 <F6D11 allData={allData} />
               )}
-              {/*
               {selected === "ylSUSNZTkC0rKv46VI1lKk0Q5_612" && (
                 <F6D12 allData={allData} />
-              )} */}
+              )}
 
               {/* file 7======== */}
               {/* {selected ===
                 "ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ ΔΙΑΤΑΞΕΩΝ" && (
                 <F7D1 allData={allData} />
               )}
+              
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
                 <F7D2 allData={allData} />
@@ -1371,7 +1372,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
                 <F7D5 allData={allData} />
-              )} */}
+              )}  */}
 
               {/* file 8======== */}
               {/* {selected === "_ΚΟΠΗ ΠΕΥΚΩΝ" && <F8D1 allData={allData} />}

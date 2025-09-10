@@ -16,22 +16,12 @@ interface FormData {
 // end editing 
 
 interface allDataProps {
-    owner_address: string;
-    owner_city: string;
-    owner_name: string;
-    owner_postal_code: string;
-    project_description?: string;
+    owners: any[];
 }
 function F5D3({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const {
-        owner_address,
-        owner_city,
-        owner_name,
-        owner_postal_code,
-        project_description,
-    } = allData;
+    const owner = allData?.owners[0] || {};
 
 
     // for editing data 
@@ -67,7 +57,7 @@ function F5D3({ allData }: { allData: allDataProps }) {
                 <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
                     <label className="col-span-2">Έργο:</label>
                     <div className="col-span-10">
-                        {project_description || "N/A"}
+                        {/* {project_description || "N/A"} */}
                     </div>
                 </div>
 
@@ -75,7 +65,7 @@ function F5D3({ allData }: { allData: allDataProps }) {
                 <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
                     <label className="col-span-2 ">Θέση:</label>
                     <div className="col-span-10">
-                        {owner_address || "N/A"}, {owner_city || "N/A"} , {owner_postal_code || "N/A"} (FOR BUILDING)
+                        <h3 className=" text-sm">{owner?.address || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"} ( FOR BUILDING)</h3>
                     </div>
                 </div>
 
@@ -85,7 +75,7 @@ function F5D3({ allData }: { allData: allDataProps }) {
                         Εμείς οι κάτωθι υπογεγραμμένοι, συνιδιοκτήτες της πολυκατοικίας επί της οδού
                     </p>
                     <h3>
-                        <span className="text-sm font-semibold">{owner_address || "N/A"}, {owner_city || "N/A"} , {owner_postal_code || "N/A"} (FOR BUILDING)</span>
+                        <span className="text-sm font-semibold">{owner?.address || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"} ( FOR BUILDING)</span>
                     </h3>
                     <p>
                         δηλώνουμε υπεύθυνα και ρητά συναινούμε στην εκτέλεση των παρακάτω εργασιών:</p>
@@ -93,7 +83,7 @@ function F5D3({ allData }: { allData: allDataProps }) {
 
                 {/* Works from Technical Description Section */}
                 <div className="mt-4">
-                    <p>επί της οδού {owner_address || "N/A"}, {owner_city || "N/A"} , {owner_postal_code || "N/A"} ( FOR PROPERTY)</p>
+                    <p>επί της οδού {owner?.address || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"} ( FOR BUILDING)</p>
                     <p className="font-semibold text-sm my-6">[WORKS FROM TECHNICAL DESCRIPTION]</p>
                     <p className="text-sm ">
                         Η συναίνεση αφορά την υλοποίηση των ανωτέρω εργασιών στις κοινές όψεις/κοινόχρηστα μέρη του κτιρίου ή επεμβάσεις που επηρεάζουν την
@@ -118,7 +108,7 @@ function F5D3({ allData }: { allData: allDataProps }) {
                         {[...Array(10)].map((_, index) => (
                             <tr key={index}>
                                 <td className="border px-4 py-2">{index + 1}</td>
-                                <td className="border px-4 py-2">{owner_name || "N/A"}</td>
+                                <td className="border px-4 py-2"></td>
                                 <td className="border px-4 py-2"></td>
                                 <td className="border px-4 py-2"></td>
                             </tr>
@@ -149,7 +139,7 @@ function F5D3({ allData }: { allData: allDataProps }) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Εργοδότες *:</label>
                                     <input
-                                        placeholder={owner_name || "nowner_name"}
+                                        placeholder={owner?.firstName || "owner_name"}
                                         type="text"
                                         {...register("owner_name", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
@@ -160,7 +150,7 @@ function F5D3({ allData }: { allData: allDataProps }) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Έργο *:</label>
                                     <input
-                                        placeholder={project_description || "Project description"}
+                                        // placeholder={project_description || "Project description"}
                                         type="text"
                                         {...register("project_description", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
@@ -173,19 +163,19 @@ function F5D3({ allData }: { allData: allDataProps }) {
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <input
                                             type="text"
-                                            placeholder={owner_address || "Address"}
+                                            placeholder={owner?.address || "Address"}
                                             {...register("owner_address", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner_city || "City"}
+                                            placeholder={owner?.city || "City"}
                                             {...register("owner_city", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner_postal_code || "Postal Code"}
+                                            placeholder={owner?.postalCode || "Postal Code"}
                                             {...register("owner_postal_code", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />

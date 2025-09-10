@@ -461,7 +461,6 @@
 "use client"
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
-import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -588,7 +587,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                                    <div className="flex-1 p-2 font-bold">{format(new Date(owner?.bornDate), "dd/MM/yyyy") || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owner?.birthDate || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -717,7 +716,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("owner_name", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.ydom || ""}
+                                                    defaultValue={owner?.firstName || ""}
                                                 />
                                             </div>
 

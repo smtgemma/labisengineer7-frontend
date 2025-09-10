@@ -125,7 +125,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                        <div className="flex-1 p-2 font-bold">{format(new Date(engineer.bornDate), "dd/MM/yyyy")  || " "}</div>
+                        <div className="flex-1 p-2 font-bold">{format(new Date(engineer?.bornDate), "dd/MM/yyyy")}</div>
                     </div>
                 </div>
 

@@ -18,6 +18,7 @@ interface FormData {
 
 interface allDataProps {
   owners: any[]
+  project_description: string
 }
 
 interface BudgetItem {
@@ -39,6 +40,7 @@ interface BudgetCategory {
 export default function F6D1({ allData}: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 const owner = allData?.owners[0] || {};
+  const project_description = allData?.project_description || "";
 
   const [formData, setFormData] = useState({
     employer: "",
@@ -1055,10 +1057,10 @@ const owner = allData?.owners[0] || {};
           <span className="font-medium w-1/4">Εργοδότες *:</span>
           <h3 className="flex-1 text-black text-sm">{owner?.firstName || "N/A"}</h3>
         </div>
-        {/* <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>
           <h3 className="flex-1 text-black text-sm">{project_description || "N/A"}</h3>
-        </div> */}
+        </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
           <h3 className="flex-1 text-black text-sm">{owner?.address || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"} (FOR BUILDING)</h3>
