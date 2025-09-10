@@ -51,8 +51,8 @@ export default function MainNavLink({
     setIsLoading(true);
 
     setTimeout(() => {
-      localStorage.removeItem("accessToken");
-      // Cookies.remove("accessToken");
+      // localStorage.removeItem("accessToken");
+      Cookies.remove("accessToken");
       toast.success("Logged out successfully");
       setIsLoading(false);
       router.push("/signIn"); // optional redirect

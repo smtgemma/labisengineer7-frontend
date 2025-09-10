@@ -88,7 +88,7 @@ import {
 import F6D11 from "./f-06/f6D11/page";
 import { setActionSelectName } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { toast } from "sonner";
-import { FaRegCopyright } from "react-icons/fa6";
+import { FaRegCopy, FaRegCopyright } from "react-icons/fa6";
 import F5D5 from "./f-05/f5D5/page";
 import F6D12 from "./f-06/f6D12/page";
 import { ProjectResponse } from "./shared/allDataType";
@@ -108,7 +108,6 @@ export interface UserData {
   createdAt?: string;
   updatedAt?: string;
 }
-
 
 interface Owner {
   id: string;
@@ -210,31 +209,24 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     }
   };
 
-  // pdf file download
-  const handleDownloadPdf = async () => {
-    const element = printRef.current;
-    if (!element) {
-      return;
-    }
+  const handleDownloadPdf = () => {
+    const link = document.createElement("a");
+    link.href =
+      "https://api.buildai.gr/generated-files/generated_pdf_files.zip";
+    link.download = "generated_pdf_files.zip";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
-    const canvas = await html2canvas(element, {
-      scale: 2,
-    });
-    const data = canvas.toDataURL("image/png");
-
-    const pdf = new jsPDF({
-      orientation: "portrait",
-      unit: "px",
-      format: "a4",
-    });
-
-    const imgProperties = pdf.getImageProperties(data);
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-
-    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-
-    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("examplepdf.pdf");
+  const handleDownloadExecl = () => {
+    const link = document.createElement("a");
+    link.href =
+      "https://api.buildai.gr/generated-files/generated_excel_files.zip";
+    link.download = "generated_pdf_files.zip";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const handleZipDownload = async () => {
@@ -331,7 +323,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           >
             <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
               {/* <FileText className="w-6 h-6 text-yellow-600" /> */}
-              <FaRegCopyright className="w-6 h-6 text-yellow-600" />
+              <FaRegCopy className="w-6 h-6 text-yellow-600" />
             </div>
             <div className=" relative ">
               <h3 className="text-lg font-semibold text-gray-900">
@@ -350,49 +342,42 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         </div>
 
         {/* fdf */}
-        <a
-          href={`${pdfdownload?.data?.pdfZipUrl}`}
-          download="generated_pdf_files.zip"
+
+        <div
+          onClick={handleDownloadPdf}
+          className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
-          <div className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md">
-            <div className="flex items-center space-x-4 mb-4">
-              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                <FileText className="w-6 h-6 text-red-600" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Pdf File
-                </h3>
-                <p className="text-sm text-gray-500">Download pdf</p>
-              </div>
+          <div className="flex items-center space-x-4 mb-4">
+            <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+              <FileText className="w-6 h-6 text-red-600" />
             </div>
-            <p className="text-gray-600 text-sm">
-              Click to download document.docx
-            </p>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">Pdf File</h3>
+              <p className="text-sm text-gray-500">Download pdf</p>
+            </div>
           </div>
-        </a>
+          <p className="text-gray-600 text-sm">
+            Click to download document.docx
+          </p>
+        </div>
+
         {/* CSV */}
-        <a
-          href={`${execlDownload?.data?.excelZipUrl}`}
-          download="generated_pdf_files.zip"
+
+        <div
+          onClick={handleDownloadExecl}
+          className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
-          <div className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md">
-            <div className="flex items-center space-x-4 mb-4">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                <FileSpreadsheet className="w-6 h-6 text-green-600" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  CSV File
-                </h3>
-                <p className="text-sm text-gray-500">Structured spreadsheet</p>
-              </div>
+          <div className="flex items-center space-x-4 mb-4">
+            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+              <FileSpreadsheet className="w-6 h-6 text-green-600" />
             </div>
-            <p className="text-gray-600 text-sm">
-              Click to download owners.csv
-            </p>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">CSV File</h3>
+              <p className="text-sm text-gray-500">Structured spreadsheet</p>
+            </div>
           </div>
-        </a>
+          <p className="text-gray-600 text-sm">Click to download owners.csv</p>
+        </div>
       </div>
 
       <div ref={printRef} className="space-y-3">
@@ -500,7 +485,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         ))}
         {/* file-2  */}
         {buildingMods?.map((item: string, index: number) => (
-          <div>
+          <div key={index}>
             {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2" && (
               <div className="flex flex-wrap gap-4">
                 <button
@@ -698,7 +683,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         ))}
         {/* file 5  */}
         {buildingMods?.map((item: string, index: number) => (
-          <div>
+          <div key={index}>
             {item ===
               "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5" && (
                 <div className="flex flex-wrap gap-4">
@@ -754,7 +739,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         ))}
         {/* file 6  */}
         {buildingMods?.map((item: string, index: number) => (
-          <div>
+          <div key={index}>
             {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" && (
               <div className="flex flex-wrap gap-4">
                 <button
@@ -994,7 +979,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         ))}
         {/* file 10 */}
         {buildingMods?.map((item: string, index: number) => (
-          <div>
+          <div key={index}>
             {item ===
               "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" && (
                 <div className="flex flex-wrap gap-4">
@@ -1152,7 +1137,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         ))}
         {/* file 14  */}
         {buildingMods?.map((item: string, index: number) => (
-          <div>
+          <div key={index}>
             {item ===
               "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" && (
                 <div className="flex flex-wrap gap-4">
@@ -1190,7 +1175,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
         ))}
         {/* file 15  */}
         {buildingMods?.map((item: string, index: number) => (
-          <div>
+          <div key={index}>
             {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΤΟΠΟΘΕΤΗΣΗ_ΙΚΡΙΩΜΑΤΩΝ_15" && (
               <div className="flex flex-wrap gap-4">
                 <button
