@@ -75,14 +75,12 @@ import F14D2 from "./f-14/f14D2/page";
 import F14D3 from "./f-14/f14D3/page";
 import F15D1 from "./f-15/f15D1/page";
 
-
 import {
   useDownloadTemplatePdfQuery,
   useExeclDownloadTemplateQuery,
   useGetOwnerTemplateQuery,
 } from "@/redux/features/templates/allTemplateSlice";
 
-import F5D4 from "./f-05/f4D1/page";
 import F6D11 from "./f-06/f6D11/page";
 
 import F1D2 from "./f-01/f1d2/page";
@@ -91,6 +89,9 @@ import F1D1 from "./f-01/f1d3/page";
 import { setActionSelectName } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { toast } from "sonner";
 import { FaRegCopy, FaRegCopyright } from "react-icons/fa6";
+import F5D4 from "./f-05/f5D4/page";
+import F5D5 from "./f-05/f5D5/page";
+import F6D12 from "./f-06/f6D12/page";
 
 export interface UserData {
   id: string;
@@ -107,7 +108,6 @@ export interface UserData {
   createdAt?: string;
   updatedAt?: string;
 }
-
 
 interface Owner {
   id: string;
@@ -1296,9 +1296,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ" && (
                 <F5D4 allData={allData} />
               )}
-              {selected === "ΠΙΝΑΚΑΣ 3_" && (
-                <F5D5 allData={allData} />
-              )}
+              {selected === "ΠΙΝΑΚΑΣ 3_" && <F5D5 allData={allData} />}
 
               {/* file 6======== */}
               {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61" && (
