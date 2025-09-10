@@ -354,8 +354,6 @@ import StampComponent from "../../shared/signture/signture"
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
 import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
-import { json } from "stream/consumers"
-
 interface FormData {
   firstName: string
   project_description: string
@@ -393,24 +391,24 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
     formState: { errors },
   } = useForm<FormData>({})
 
-  const [updateProject, { isLoading }] = useUpdateProjectMutation()
+  // const [updateProject, { isLoading }] = useUpdateProjectMutation()
 
   const onSubmit = async (data: FormData) => {
-    console.log("Updated Data:================================================================", data)
-     const formData = new FormData();
-      formData.append("data", JSON.stringify(data));
-    try {
+    // console.log("Updated Data:================================================================", data)
+    //  const formData = new FormData();
+    //   formData.append("data", JSON.stringify(data));
+    // try {
       
-    const response =  await updateProject({
-        projectId: id,
-        userId: createdById, // 👈 change this if your API expects another param instead of createdById
-        body: formData,
-      }).unwrap()
-      console.log(response, "Update response===================")
-      setIsEditModalOpen(false) // close modal after success
-    } catch (error) {
-      console.log("Update error:", error)
-    }
+    // const response =  await updateProject({
+    //     projectId: id,
+    //     userId: createdById, // 👈 change this if your API expects another param instead of createdById
+    //     body: formData,
+    //   }).unwrap()
+    //   console.log(response, "Update response===================")
+    //   setIsEditModalOpen(false) // close modal after success
+    // } catch (error) {
+    //   console.log("Update error:", error)
+    // }
     reset()
   }
 
@@ -439,7 +437,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
         <div className="flex items-start justify-between gap-4 max-w-xl">
           <span className=" text-sm">Θέση:</span>
           <h3 className=" text-sm">
-            {owner?.address || "N/A"}, {owner?.city || "N/A"},{" "}
+            {owner?.address || "N/A"}, {owner?.city || "N/A"},
             {owner?.postalCode || "N/A"} ( FOR BUILDING)
           </h3>
         </div>
@@ -615,10 +613,8 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    disabled={isLoading}
                     className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm cursor-pointer"
                   >
-                    {isLoading ? "Updating..." : "Update"}
                   </button>
                 </div>
               </form>

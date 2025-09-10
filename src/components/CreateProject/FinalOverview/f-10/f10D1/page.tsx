@@ -17,24 +17,26 @@ interface FormData {
 // end editing 
 
 interface allDataProps {
-  owner_address: string;
-  owner_city: string;
-  owner_name: string;
-  owner_postal_code: string;
-  project_description?: string;
+  owners: any[]
+  allDescriptionTasks: any[]
+  technical_description: string
+  Horizontal_property_name: string
+  project_description: string
+  id: string
+  createdById: string
 }
 
 
 export default function F10D1({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const {
-    owner_address,
-    owner_city,
-    owner_name,
-    owner_postal_code,
-    project_description,
-  } = allData;
+  const owner = allData?.owners[0] || {}
+  const allDescriptionTasks = allData?.allDescriptionTasks || []
+  const { technical_description } = allData || {}
+  const { Horizontal_property_name } = allData || {}
+  const { project_description } = allData || {}
+  const { id, createdById } = allData || {}
+  console.log(id, createdById, "id, createdById===================")
 
   // for editing data 
   const {
@@ -73,20 +75,23 @@ export default function F10D1({ allData }: { allData: allDataProps }) {
 
         <div className="flex items-start justify-between gap-4 max-w-xl">
           <span className=" text-sm">Θέση:</span>
-          <h3 className=" text-sm">{owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} ( FOR BUILDING)</h3>
+          <h3 className=" text-sm">
+            {owner?.address || "N/A"}, {owner?.city || "N/A"},
+            {owner?.postalCode || "N/A"} ( FOR BUILDING)
+          </h3>
         </div>
 
         <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
           <span className="">Ιδιοκτήτης:</span>
-          <h3 className=" text-sm">{owner_name || "N/A"}</h3>
+          <h3 className=" text-sm">{owner?.firstName || "N/A"}</h3>
         </div>
       </div>
 
       {/* Main Description */}
       <div className="text-sm mb-4 ml-10">
-        <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property
+        {/* <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property
         </span> επί της οδού <br /> <span className="font-semibold">{owner_address || "N/A"}, {owner_city || "N/A"} , {owner_postal_code || "N/A"} ( FOR BUILDING),</span>
-          πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
+          πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p> */}
       </div>
 
       {/* one  */}
@@ -232,7 +237,7 @@ export default function F10D1({ allData }: { allData: allDataProps }) {
                 <div className="flex items-center gap-4">
                   <label className="font-medium w-1/4">Εργοδότες *:</label>
                   <input
-                    placeholder={owner_name || "nowner_name"}
+                    defaultValue={owner?.firstName || "owner_name"}
                     type="text"
                     {...register("owner_name", { required: "This field is required" })}
                     className="flex-1 border p-2 rounded text-sm"
@@ -256,19 +261,19 @@ export default function F10D1({ allData }: { allData: allDataProps }) {
                   <div className="flex-1 grid grid-cols-3 gap-2">
                     <input
                       type="text"
-                      placeholder={owner_address || "Address"}
+                     defaultValue={owner?.address || "Address"}
                       {...register("owner_address", { required: "Address is required" })}
                       className="border p-2 rounded text-sm"
                     />
                     <input
                       type="text"
-                      placeholder={owner_city || "City"}
+                       defaultValue={owner?.city || "City"}
                       {...register("owner_city", { required: "City is required" })}
                       className="border p-2 rounded text-sm"
                     />
                     <input
                       type="text"
-                      placeholder={owner_postal_code || "Postal Code"}
+                     defaultValue={owner?.postalCode || "Postal Code"}
                       {...register("owner_postal_code", { required: "Postal code is required" })}
                       className="border p-2 rounded text-sm"
                     />

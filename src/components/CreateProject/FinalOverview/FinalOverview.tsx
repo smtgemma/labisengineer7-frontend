@@ -1393,13 +1393,13 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "Ιδιωτική Σύμβαση " && <F9D3 />} */}
 
               {/* file 10=== */}
-              {/* {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_" && (
+              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_" && (
                 <F10D1 allData={allData} />
               )}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102" && (
+              {/* {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102" && (
                 <F10D2 allData={allData} />
-              )}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ" && (
+              )} */}
+              {/* {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ" && (
                 <F10D3 allData={allData} />
               )} */}
 
