@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -6,15 +6,108 @@ import { UserData } from "@/redux/features/auth/userDataCatchSlice";
 import { setActionSelectName } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { CheckCircle, Clock } from "lucide-react";
 
+import Loading from "@/components/Others/Loading";
+import { useGetCreditServiceQuery } from "@/redux/features/credit/creditSlice";
+
 interface Service {
   id: string;
   title: string;
   price: number;
   description: string;
   delivery: string;
-
   required?: boolean;
 }
+
+interface TemplateName {
+  id: string;
+  title: string;
+  price: number;
+  required?: boolean;
+}
+
+const templateName: TemplateName[] = [
+  {
+    id: "owner_assignment",
+    title: "YΔ Ανάθεσης Ιδιοκτήτη",
+    price: 0.5,
+  },
+  {
+    id: "engineer_assumption",
+    title: "YΔ Ανάληψης Έργου Μηχανικού",
+    price: 0.5,
+  },
+  {
+    id: "bearing_organization",
+    title: "YΔ Φέροντα Οργανισμού",
+    price: 0.5,
+  },
+  {
+    id: "co_owners",
+    title: "YΔ Συνιδιοκτητών",
+    price: 0.5,
+  },
+  {
+    id: "technical_report",
+    title: "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου",
+    price: 1,
+  },
+  {
+    id: "detailed_budget",
+    title: "Αναλυτικός Προϋπολογισμός Εργασιών",
+    price: 0.5,
+  },
+  {
+    id: "safety_file",
+    title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
+    price: 1,
+  },
+  {
+    id: "waste_management",
+    title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
+    price: 0.5,
+  },
+  {
+    id: "table_3",
+    title: "Πίνακας 3",
+    price: 0.5,
+  },
+  {
+    id: "active_fire_protection",
+    title:
+      "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας",
+    price: 0.5,
+  },
+  {
+    id: "passive_fire_protection",
+    title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας",
+    price: 0.5,
+  },
+  {
+    id: "electrical_mechanical",
+    title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων",
+    price: 0.5,
+  },
+  {
+    id: "plumbing_sewage",
+    title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης",
+    price: 0.5,
+  },
+  {
+    id: "notarial_deed",
+    title: "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης",
+    price: 0.5,
+  },
+  {
+    id: "co_owners_consent",
+    title: "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών",
+    price: 0.5,
+  },
+  {
+    id: "autofill",
+    title: "Autofill (προαιρετικό add-on)",
+    price: 1,
+  },
+];
 
 const services: Service[] = [
   {
@@ -58,11 +151,16 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   const [selectedActionsValue, setSelectedActionsValue] = useState<string[]>(
     []
   );
+  const [selected, setSelected] = useState<string[]>(["technical", "engineer"]);
 
   const dispatch = useDispatch();
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+  const id = stepByStepData?.projectId?.id;
 
-  const [selected, setSelected] = useState<string[]>(["technical", "engineer"]);
+  console.log("stepByStepData", id);
+
+  const { data, isLoading } = useGetCreditServiceQuery(id);
+  console.log(data);
 
   const toggleSelect = (id: string) => {
     if (selected.includes(id)) {
@@ -72,7 +170,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     }
   };
 
-  const subtotal = services
+  const subtotal = templateName
     .filter((s) => selected.includes(s.id))
     .reduce((acc, s) => acc + s.price, 0);
 
@@ -86,21 +184,33 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     }
   };
 
-  const userData = useSelector(
-    (state: RootState) => state.user.userData as UserData | null
-  );
+  console.log(selected);
+  // const userData = useSelector(
+  //   (state: RootState) => state.user.userData as UserData | null
+  // );
 
-  dispatch(setActionSelectName(selectedActionsValue));
+  // dispatch(setActionSelectName(selectedActionsValue));
 
+  useEffect(() => {
+    if (selected.length > 0) {
+      dispatch(setActionSelectName(selected));
+    }
+  }, [selected]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  console.log(selected);
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="mb-8">
+      <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Select Actions
+          Select The Templates
         </h1>
         <p className="text-gray-600 text-lg">
-          Here is the extracted information. Please review and confirm.
+          Here is the template information. Please choose the template.
         </p>
       </div>
 
@@ -141,9 +251,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           </div>
         ))}
       </div> */}
-      <div className="container mx-auto px-4 py-8 grid lg:grid-cols-3 gap-6">
+      <div className="container mx-auto  grid lg:grid-cols-3 gap-6">
         {/* Services List */}
-        <div className="lg:col-span-2 space-y-6">
+        {/* <div className="lg:col-span-2 space-y-6">
           {services.map((service) => (
             <div
               key={service.id}
@@ -169,19 +279,44 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xl font-bold">€{service.price}</p>
+                  <p className="text-xl font-bold">{service.price}</p>
                   <p className="flex items-center gap-1 text-sm text-gray-500">
                     <Clock size={14} /> {service.delivery}
                   </p>
                 </div>
               </div>
-              {/* <ul className="grid grid-cols-2 gap-x-4 gap-y-2 mt-4 text-sm text-gray-700">
-                {service.includes.map((item, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <CheckCircle size={16} className="text-green-500" /> {item}
-                  </li>
-                ))}
-              </ul> */}
+       
+            </div>
+          ))}
+        </div> */}
+
+        {/* template Name  */}
+        <div className="lg:col-span-2 space-y-2">
+          {templateName.map((tem, i) => (
+            <div
+              key={i}
+              className={`cursor-pointer border-2 rounded-lg  hover:bg-blue-100 transition-all hover:shadow-sm px-4 py-2 ${
+                selected.includes(tem.id)
+                  ? "border-blue-500 bg-blue-50"
+                  : "border-gray-200"
+              }`}
+              onClick={() => toggleSelect(tem.id)}
+            >
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="text-base font-medium flex items-center gap-2">
+                    {tem.title}
+                    {tem.required && (
+                      <span className="text-xs border border-blue-700 bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
+                        Required
+                      </span>
+                    )}
+                  </h3>
+                </div>
+                <div className="text-right">
+                  <p className="text-base font-medium">{tem.price}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -189,23 +324,25 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         {/* Order Summary */}
         <div className="lg:col-span-1">
           <div className="p-6 shadow-md rounded-2xl border border-gray-200">
-            <h3 className="text-lg font-bold mb-4">Credit Summary</h3>
+            <div>
+              <h3 className="text-lg font-bold mb-4">Credit Summary</h3>
+            </div>
             <div className="space-y-2 text-sm">
-              {services
+              {templateName
                 .filter((s) => selected.includes(s.id))
                 .map((s) => (
                   <div key={s.id} className="flex justify-between">
                     <span>{s.title}</span>
-                    <span className="tex-block font-semibold">€{s.price}</span>
+                    <span className="tex-block font-semibold">{s.price}</span>
                   </div>
                 ))}
             </div>
-            <hr className="my-3" />
+            <hr className="my-3 border-gray-400" />
             <div className="flex justify-between font-semibold text-base">
               <span>Total</span>
-              <span>€{subtotal}</span>
+              <span>{subtotal}</span>
             </div>
-            <button className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
+            <button className="w-full cursor-pointer mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
               Proceed to Credit
             </button>
 
