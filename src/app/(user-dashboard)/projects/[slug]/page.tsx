@@ -17,8 +17,8 @@ const ProjectDetails = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-  const signleData = data.data;
-  console.log(signleData);
+  const signleData = data?.data;
+
   return (
     <div className={`bg-[#F1F5F9] min-h-screen p-8 `}>
       <div>
@@ -124,8 +124,8 @@ const ProjectDetails = () => {
                     Owner Name:
                   </span>
                   <span className="text-base text-gray-700">
-                    {signleData?.owners[0].firstName}{" "}
-                    {signleData?.owners[0].lastName}
+                    {signleData?.owners[0]?.firstName}{" "}
+                    {signleData?.owners[0]?.lastName}
                   </span>
                 </div>
                 <div className="space-x-3">
@@ -133,7 +133,7 @@ const ProjectDetails = () => {
                     KAEK:
                   </span>
                   <span className="text-base text-gray-700">
-                    {signleData?.owners[0].cadastralCode}
+                    {signleData?.owners[0]?.cadastralCode}
                   </span>
                 </div>
                 <div className="space-x-3">

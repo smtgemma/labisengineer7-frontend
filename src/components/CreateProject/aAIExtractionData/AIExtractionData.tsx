@@ -151,8 +151,14 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const subCategoryData = stepByStepData.subcategory;
   const descrptionTasks = stepByStepData.descriptionTask;
   const filesData = stepByStepData.multiFiles;
+  const descriptonAndYdom = stepByStepData.description;
 
-  console.log("stepByStepData:", stepByStepData);
+  const description = descriptonAndYdom?.description;
+  const ydom: string[] =
+    descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
+
+  console.log("descriptonAndYdom:", description[0].value);
+  console.log("ydom:", ydom);
   console.log("descriptionTask:", allExtreactData?.project_descriptions);
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
@@ -167,6 +173,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
       createdById: user.userId,
       subCategories: subCategoryData,
       descrptionTasks: descrptionTasks,
+      ydom: ydom,
       technical_description: allExtreactData.technical_description,
       ...data,
     };
@@ -185,6 +192,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
         createdById: user.userId,
         subCategories: subCategoryData,
         descrptionTasks: descrptionTasks,
+        ydom: ydom,
         technical_description: allExtreactData.technical_description,
         ...data,
       })
@@ -259,9 +267,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     {...register("project_description")}
                     className={`${inputStyle} h-[150px] `}
                     readOnly
-                    defaultValue={
-                      allExtreactData?.project_descriptions[0] || "N/A"
-                    }
+                    defaultValue={description[0]?.value || "N/A"}
                   />
                 </div>
                 <div>
@@ -272,9 +278,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     {...register("project_description2")}
                     className={`${inputStyle} h-[150px] `}
                     readOnly
-                    defaultValue={
-                      allExtreactData?.project_descriptions[1] || "N/A"
-                    }
+                    defaultValue={description[1]?.value || "N/A"}
                   />
                 </div>
                 <div>
