@@ -166,149 +166,122 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           ))}
         </select>
       </div>
-      {/* =========================================  */}
-      <div className="max-w-xl ">
-        {/* Checkbox to toggle input field */}
-        <div className="mb-4 flex items-center space-x-2">
-          <input
-            type="checkbox"
-            checked={isInputEnabled}
-            onChange={handleCheckboxChange}
-            className="h-5 w-5"
-          />
-          <label className="text-lg font-semibold">
-            Ενεργοποιήστε το πεδίο περιγραφής
-          </label>
-        </div>
 
-        {/* Input field (enabled/disabled based on checkbox) */}
-        <div className="mb-4">
-          <label className="block text-lg font-semibold">
-            Περιγραφή Παράβασης
-          </label>
-          <input
-            type="text"
-            value={searchText}
-            onChange={handleSearchChange}
-            className={`mt-2 w-full p-2 border  border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md ${
-              isInputEnabled
-                ? "bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                : "bg-gray-200 cursor-not-allowed"
-            }`}
-            placeholder="Αναζητήστε Παραβάσεις"
-            disabled={!isInputEnabled}
-          />
-          {/* Suggestions for violations */}
-          {isInputEnabled && searchText && (
-            <div className="mt-2 max-h-48 overflow-auto border border-gray-300 rounded-md">
-              {filteredViolations.length > 0 ? (
-                filteredViolations.map((violation) => (
-                  <div
-                    key={violation.value}
-                    onClick={() => handleSelectViolation(violation)}
-                    className="p-2 cursor-pointer hover:bg-gray-200"
-                  >
-                    {violation.label}
-                  </div>
-                ))
-              ) : (
-                <div className="p-2 text-gray-500">No matches found</div>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Selected Violations */}
-        <div className="mb-4">
-          <label className="block text-lg font-semibold">
-            Επιλεγμένες Παραβάσεις
-          </label>
-          <div className="mt-2  space-y-2 ">
-            {selectedViolations.map((violation) => (
-              <div
-                key={violation.value}
-                className="bg-blue-200 text-blue-800 px-4 py-1 rounded-md flex justify-between items-center space-x-2"
-              >
-                <div className="flex items-center rounded-full pr-4 py-2">
-                  <span className="text-xl">
-                    <FaCheckCircle className="text-xl" />
-                  </span>
-                  <span className="ml-2 text-sm font-semibold">
-                    {violation.label}
-                  </span>
-                </div>
-                <button
-                  onClick={() => handleRemoveViolation(violation)}
-                  className="text-red-600 hover:text-red-800"
-                >
-                  &times;
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      {/* =========================================  */}
-      <div className="max-w-xl">
-        <label
-          htmlFor="dropdown"
-          className="block text-lg font-semibold text-gray-700"
-        >
-          Παλαιότητα
-        </label>
-        <select
-          id="dropdown"
-          value={selectedValue}
-          onChange={handleChange}
-          className="mt-2 p-2 w-full border bg-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
       {/* Actions List */}
       <div className=" space-y-6">
         {/* Recording Sheets Section */}
-        <div className="space-y-4">
+        <div className="space-y-10">
           {recordingSheets.map((sheet) => (
             <div
               key={sheet.id}
               className="flex flex-col space-y-2 bg-gray-100  rounded-md"
             >
-              <h3 className="text-xl font-semibold">
-                Recording Sheet {sheet.id}
-              </h3>
-              <div className="space-x-2 space-y-2">
-                <input
-                  type="text"
-                  className="p-2 border border-gray-300 rounded-md w-1/3"
-                  placeholder="Field 1"
-                  value={sheet.field1}
-                  onChange={(e) =>
-                    handleFieldChange(sheet.id, "field1", e.target.value)
-                  }
-                />
-                <input
-                  type="text"
-                  className="p-2 border border-gray-300 rounded-md w-1/3"
-                  placeholder="Field 2"
-                  value={sheet.field2}
-                  onChange={(e) =>
-                    handleFieldChange(sheet.id, "field2", e.target.value)
-                  }
-                />
-                <input
-                  type="text"
-                  className="p-2 border border-gray-300 rounded-md w-1/3"
-                  placeholder="Field 3"
-                  value={sheet.field3}
-                  onChange={(e) =>
-                    handleFieldChange(sheet.id, "field3", e.target.value)
-                  }
-                />
+              <h3 className="text-2xl font-bold">Recording Sheet {sheet.id}</h3>
+
+              {/* =========================================  */}
+              <div className="max-w-xl ">
+                {/* Checkbox to toggle input field */}
+                <div className="mb-3 flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={isInputEnabled}
+                    onChange={handleCheckboxChange}
+                    className="h-5 w-5"
+                  />
+                  <label className="text-lg font-semibold">
+                    Ενεργοποιήστε το πεδίο περιγραφής
+                  </label>
+                </div>
+
+                {/* Input field (enabled/disabled based on checkbox) */}
+                <div className="mb-4">
+                  <label className="block text-lg font-semibold">
+                    Περιγραφή Παράβασης
+                  </label>
+                  <input
+                    type="text"
+                    value={searchText}
+                    onChange={handleSearchChange}
+                    className={`mt-2 w-full p-2 border  border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md ${
+                      isInputEnabled
+                        ? "bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        : "bg-gray-200 cursor-not-allowed"
+                    }`}
+                    placeholder="Αναζητήστε Παραβάσεις"
+                    disabled={!isInputEnabled}
+                  />
+                  {/* Suggestions for violations */}
+                  {isInputEnabled && searchText && (
+                    <div className="mt-2 max-h-48 overflow-auto border border-gray-300 rounded-md">
+                      {filteredViolations.length > 0 ? (
+                        filteredViolations.map((violation) => (
+                          <div
+                            key={violation.value}
+                            onClick={() => handleSelectViolation(violation)}
+                            className="p-2 cursor-pointer hover:bg-gray-200"
+                          >
+                            {violation.label}
+                          </div>
+                        ))
+                      ) : (
+                        <div className="p-2 text-gray-500">
+                          No matches found
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Selected Violations */}
+                <div className="mb-4">
+                  <label className="block text-lg font-semibold">
+                    Επιλεγμένες Παραβάσεις
+                  </label>
+                  <div className="mt-2  space-y-2 ">
+                    {selectedViolations.map((violation) => (
+                      <div
+                        key={violation.value}
+                        className="bg-blue-200 text-blue-800 px-4 py-1 rounded-md flex justify-between items-center space-x-2"
+                      >
+                        <div className="flex items-center rounded-full pr-4 py-2">
+                          <span className="text-xl">
+                            <FaCheckCircle className="text-xl" />
+                          </span>
+                          <span className="ml-2 text-sm font-semibold">
+                            {violation.label}
+                          </span>
+                        </div>
+                        <button
+                          onClick={() => handleRemoveViolation(violation)}
+                          className="text-red-600 hover:text-red-800"
+                        >
+                          &times;
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              {/* =========================================  */}
+              <div className="max-w-xl">
+                <label
+                  htmlFor="dropdown"
+                  className="block text-lg font-semibold text-gray-700"
+                >
+                  Παλαιότητα
+                </label>
+                <select
+                  id="dropdown"
+                  value={selectedValue}
+                  onChange={handleChange}
+                  className="mt-2 p-2 w-full border bg-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  {options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           ))}

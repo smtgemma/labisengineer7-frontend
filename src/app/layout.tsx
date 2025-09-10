@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={openSans.variable}>
+      <body className={openSans.variable} suppressHydrationWarning={true}>
         <Toaster position="top-center" expand={true} richColors />
         <StoreProvider>
           <GoogleOAuthProvider clientId="68253939211-2ah4drkmkhl74kjqe5tlpks4jk64f50h.apps.googleusercontent.com">

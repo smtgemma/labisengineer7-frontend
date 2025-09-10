@@ -6,13 +6,15 @@ import { MdDeleteOutline } from "react-icons/md";
 import {
   Owner as Owners,
   setAiExtractCatchWonerData,
+  setMultipleDescription,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
+import { FiEdit2 } from "react-icons/fi";
 type Owner = {
   first_name: string; // Όνομα
   last_name: string; // Επώνυμο
-  father_first_last_name: string; // Όνοματεπώνυμο Πατρός
+  fatherName: string; // Όνοματεπώνυμο Πατρός
   mothers_first_last_name: string; // Όνοματεπώνυμο Μητρός
   date_of_birth: string; // Ημερομηνία Γέννησης
   place_of_birth: string; // Τόπος Γέννησης
@@ -52,6 +54,16 @@ type EditingOwnerType = {
   index: number;
 };
 
+type Property = {
+  title: string;
+  description: string;
+  selected?: boolean;
+};
+
+type SelectedProperty = {
+  index: number;
+  value: string;
+};
 const OwnerSelection = () => {
   const [projectDescription, setProjectDescription] = useState(
     "Renovation of residence"
@@ -63,13 +75,31 @@ const OwnerSelection = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedOwners, setSelectedOwners] = useState<Owner[]>([]);
 
+  const [selectedProperty, setSelectedProperty] = useState<SelectedProperty[]>(
+    []
+  );
+  const [ydomModalOpen, setYdomModalOpen] = useState(false);
+
+  const [newText, setNewText] = useState("");
+  const [editId, setEditId] = useState<number | null>(null);
+  const [ydom, setYdom] = useState<
+    { id: number; title: string; text: string }[]
+  >([]);
+
   const dispatch = useDispatch();
   const ownerData = useSelector((state: any) => state.aiData.aiDataState);
-  console.log(ownerData);
-
-  // const owners = (ownerData.owners ?? []) as Owner[];
 
   const [isOwner, setIsOwner] = useState<Owner[]>(ownerData.owners);
+
+  const description1 = ownerData?.project_descriptions
+    .filter((_: any, i: number) => i % 2 === 0)
+    .join(" & ");
+  const description2 = ownerData?.project_descriptions
+    .filter((_: any, i: number) => i % 2 === 1)
+    .join(" & ");
+
+  const result = [description1, description2];
+  const [descriptionShow, setDescriptionShow] = useState<string[]>(result);
 
   const {
     register,
@@ -82,7 +112,7 @@ const OwnerSelection = () => {
     const emptyOwner: Owner = {
       first_name: data.firstName || "", // Όνομα
       last_name: data.surname || "", // Επώνυμο
-      father_first_last_name: data.fatherName || "", // Πατέρας
+      fatherName: data.fatherName || "", // Πατέρας
       mothers_first_last_name: "", // Μητέρα
       date_of_birth: "", // Ημερομηνία Γέννησης
       place_of_birth: "", // Τόπος Γέννησης
@@ -93,7 +123,7 @@ const OwnerSelection = () => {
       id_number: "", // Α.Δ.Τ
       tax_identification_number: data.vatNo || "", // ΑΦΜ
       email: "", // Email
-      ydom: "",
+      ydom: data.ydom,
       mobile: "", // Τηλέφωνο
     };
 
@@ -102,13 +132,51 @@ const OwnerSelection = () => {
     setIsModalOpen(false);
   };
 
+  // ydom working function
+  const handleOpenNew = () => {
+    setEditId(null);
+    setNewText("");
+    setYdomModalOpen(true);
+  };
+
+  // Open modal for editing existing owner
+  const handleOpenEdit = (id: number, text: string) => {
+    setEditId(id);
+    setNewText(text);
+    setYdomModalOpen(true);
+  };
+
+  // Save owner (new or edited)
+  const handleSave = () => {
+    if (newText.trim() === "") return;
+
+    if (editId) {
+      // update existing
+      setYdom(ydom.map((o) => (o.id === editId ? { ...o, text: newText } : o)));
+    } else {
+      // add new
+      setYdom([
+        ...ydom,
+        {
+          id: ydom.length + 1,
+          title: `Description ${ydom.length + 1}`,
+          text: newText,
+        },
+      ]);
+    }
+
+    setNewText("");
+    setEditId(null);
+    setYdomModalOpen(false);
+  };
+
   // edit page owner
   const onEditSubmit = (data: OwnerFormInputs) => {
     if (editingOwner !== null) {
       const updatedOwner: Owner = {
         first_name: data.firstName || "", // Όνομα
         last_name: data.surname || "", // Επώνυμο
-        father_first_last_name: data.fatherName || "", // Πατέρας
+        fatherName: data.fatherName || "", // Πατέρας
         mothers_first_last_name: "", // Μητέρα
         date_of_birth: "", // Ημερομηνία Γέννησης
         place_of_birth: "", // Τόπος Γέννησης
@@ -119,7 +187,7 @@ const OwnerSelection = () => {
         id_number: "", // Α.Δ.Τ
         tax_identification_number: data.vatNo || "", // ΑΦΜ
         email: "", // Email
-        ydom: "",
+        ydom: data.ydom,
         mobile: "", // Τηλέφωνο
       };
 
@@ -130,6 +198,43 @@ const OwnerSelection = () => {
       setIsEditModalOpen(false);
     }
   };
+
+  // the description functionalty working
+
+  const togglePropertySelection = (index: number, value: string) => {
+    const alreadySelected = selectedProperty.find(
+      (item) => item.index === index
+    );
+
+    if (alreadySelected) {
+      // remove
+      setSelectedProperty(
+        selectedProperty.filter((item) => item.index !== index)
+      );
+    } else {
+      // add
+      setSelectedProperty([...selectedProperty, { index, value }]);
+    }
+  };
+  // const togglePropertySelection = (index: number) => {
+  //   const property = descriptionShow[index];
+
+  //   // check if already selected
+  //   const alreadySelected = selectedProperty.some((o, i) => i === i);
+
+  //   if (alreadySelected) {
+  //     // if already selected → remove it
+  //     setSelectedProperty(selectedProperty.filter((o, i) => i !== i));
+  //   } else {
+  //     // otherwise add it
+  //     setSelectedProperty([
+  //       ...selectedProperty,
+  //       { ...property, selected: true },
+  //     ]);
+
+  //     // setOwnerNumber(4);
+  //   }
+  // };
 
   const handleDeleteOwner = (index: number) => {
     const deleteowner = isOwner.filter((item, i) => i !== index);
@@ -144,37 +249,33 @@ const OwnerSelection = () => {
     setEditingOwner({ owner, index });
     setIsEditModalOpen(true);
   };
-
+  // the owner functionalty working
   const toggleOwnerSelection = (index: number) => {
     const owner = isOwner[index];
 
-    // check if already selected
     const alreadySelected = selectedOwners.some(
-      (o) => o.tax_identification_number === owner.tax_identification_number
+      (o) => o.first_name === owner.first_name
     );
 
     if (alreadySelected) {
-      // if already selected → remove it
       setSelectedOwners(
-        selectedOwners.filter(
-          (o) => o.tax_identification_number !== owner.tax_identification_number
-        )
+        selectedOwners.filter((o) => o.first_name !== owner.first_name)
       );
     } else {
-      // otherwise add it
       setSelectedOwners([...selectedOwners, { ...owner, selected: true }]);
-
-      // setOwnerNumber(4);
     }
   };
 
-  console.log("new", selectedOwners);
+  console.log(selectedProperty);
 
+  useEffect(() => {
+    dispatch(
+      setMultipleDescription({ description: selectedProperty, ydom: ydom })
+    );
+  }, [selectedProperty, ydom]);
   useEffect(() => {
     dispatch(setAiExtractCatchWonerData(selectedOwners));
   }, [selectedOwners]);
-
-  console.log("desciption", ownerData?.project_descriptions);
 
   return (
     <div className="space-y-8">
@@ -186,43 +287,104 @@ const OwnerSelection = () => {
           </h1>
           <p className="text-gray-600 text-lg">if not clear from document</p>
         </div>
-        <button
-          onClick={openAddOwnerModal}
-          className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200 flex items-center space-x-2 font-medium"
-        >
-          <Plus className="w-4 h-4" />
-          <span>Add Owner</span>
-        </button>
+        <div className="flex gap-5">
+          <button
+            onClick={handleOpenNew}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+          >
+            + Add Ydom
+          </button>
+          <button
+            onClick={openAddOwnerModal}
+            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200 flex items-center space-x-2 font-medium"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Add Owner</span>
+          </button>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        {descriptionShow?.map((property: string, index: number) => (
+          <div
+            onClick={() => togglePropertySelection(index, property)}
+            key={index}
+            className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
+        ${
+          selectedProperty.some((item) => item.index === index)
+            ? "border-blue-600 bg-blue-50 shadow-md"
+            : "border-gray-200 bg-white hover:border-blue-300"
+        }`}
+          >
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              Description {index + 1}
+            </h3>
+            <p>{property}</p>
+          </div>
+        ))}
       </div>
 
       {/* Project Description */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4">
-        <div className="space-y-3 mb-8">
-          <label className="block text-gray-900 font-medium">
-            Project Description (1)
-          </label>
-          <textarea
-            defaultValue={`${ownerData?.project_descriptions[0] || "N/A"}`}
-            onChange={(e) => setProjectDescription(e.target.value)}
-            className="w-full  px-4 py-2 border  h-[200px] border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Enter project description"
-          />
-        </div>
-        <div className="space-y-3 mb-8">
-          <label className="block text-gray-900 font-medium">
-            Project Description (2)
-          </label>
-          <textarea
-            defaultValue={`${ownerData?.project_descriptions[1] || "N/A"}`}
-            onChange={(e) => setProjectDescription(e.target.value)}
-            className="w-full  px-4 py-2 border  h-[200px] border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Enter project description"
-          />
-        </div>
+
+      {/* ydom show  */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {ydom.map((dom, i) => (
+          <div
+            key={dom.id}
+            className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm relative"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="font-semibold">Serial {`(${i + 1})`}</h3>
+
+              <button
+                onClick={() => handleOpenEdit(dom.id, dom.text)}
+                className="text-gray-500 hover:text-blue-500"
+              >
+                <FiEdit2 />
+              </button>
+            </div>
+
+            <div className="flex justify-between items-start mb-2">
+              <h3 className="">Ydom:</h3>
+              <p className="text-sm text-gray-700 whitespace-pre-line">
+                {`${dom.text}` || "N/A"}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
 
+      {/* ydom Modal */}
+      {ydomModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
+            <h2 className="text-lg font-semibold mb-4">
+              {editId ? "Edit Ydom" : "Add New Ydom"}
+            </h2>
+            <textarea
+              value={newText}
+              onChange={(e) => setNewText(e.target.value)}
+              className="w-full border rounded-lg p-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
+              rows={4}
+              placeholder="Enter description..."
+            />
+            <div className="flex justify-end gap-2 mt-4">
+              <button
+                onClick={() => setYdomModalOpen(false)}
+                className="px-4 py-2 rounded-lg border hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSave}
+                className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Owners Grid */}
-
       {isOwner?.length === 0 && (
         <div className="flex justify-center w-full mt-20">
           <div className="border border-dashed p-20 border-blue-500 rounded-xl">
@@ -239,9 +401,7 @@ const OwnerSelection = () => {
             key={index}
             className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
     ${
-      selectedOwners?.some(
-        (o) => o.tax_identification_number === owner.tax_identification_number
-      )
+      selectedOwners?.some((o, i) => o.first_name === owner.first_name)
         ? "border-blue-600 bg-blue-50 shadow-md"
         : "border-gray-200 bg-white hover:border-blue-300"
     }`}
@@ -286,19 +446,21 @@ const OwnerSelection = () => {
                   Father's Name:
                 </label>
                 <span className="text-gray-900 font-medium">
-                  {owner.father_first_name || "Not set"}
+                  {owner?.fatherName || "Not set"}
                 </span>
               </div>
               <div className="flex justify-between items-center">
                 <label className="text-gray-700 font-medium">Ydom:</label>
                 <span className="text-gray-900 font-medium">
-                  {ownerData?.municipality_community || "Not set"}
+                  {ownerData?.municipality_community ||
+                    owner?.ydom ||
+                    "Not set"}
                 </span>
               </div>
               <div className="flex justify-between items-center">
                 <label className="text-gray-700 font-medium">VAT No:</label>
                 <span className="text-gray-900 font-medium">
-                  {owner.tax_identification_number || "Not set"}
+                  {owner?.tax_identification_number || "Not set"}
                 </span>
               </div>
             </div>
@@ -313,7 +475,7 @@ const OwnerSelection = () => {
         </button>
       </div> */}
 
-      {/* Add/Edit Modal */}
+      {/* Add Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-[rgba(0,0,0,0.5)] bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 w-full max-w-md mx-4">
@@ -491,7 +653,7 @@ const OwnerSelection = () => {
                 </label>
                 <input
                   type="text"
-                  defaultValue={editingOwner?.owner?.tax_identification_number}
+                  defaultValue={`${ownerData?.municipality_community || " "}`}
                   {...register("ydom", { required: true })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="ydom"

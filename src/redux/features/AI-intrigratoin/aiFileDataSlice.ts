@@ -75,6 +75,7 @@ interface AiExtractState {
   projectId?: {} | undefined;
   subcategory?: [];
   descriptionTask?: [];
+  description?: [];
   multiFiles?: [];
   aiInputData?: any;
   actionSelection?: [];
@@ -88,6 +89,7 @@ const initialState: AiExtractState = {
   subcategory: [],
   descriptionTask: [],
   multiFiles: [],
+  description: [],
   aiInputData: null,
   actionSelection: [],
   projectIdCode: null,
@@ -119,6 +121,10 @@ const aiExtractDataSlice = createSlice({
     setMultipleDescriptionTask: (state, action) => {
       state.descriptionTask = action.payload;
     },
+    setMultipleDescription: (state, action) => {
+      console.log("ydom and descipton", action.payload);
+      state.description = action.payload;
+    },
     setImageFile: (state, action) => {
       state.multiFiles = action.payload;
     },
@@ -143,5 +149,6 @@ export const {
   setActionSelectName,
   setTheProjectCode,
   setMultipleDescriptionTask,
+  setMultipleDescription,
 } = aiExtractDataSlice.actions;
 export default aiExtractDataSlice.reducer;
