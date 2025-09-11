@@ -226,13 +226,13 @@ const DescriptionTask = () => {
       prevCategories.map((category) =>
         category.id === categoryId
           ? {
-              ...category,
-              options: category.options.map((option) =>
-                option.id === optionId
-                  ? { ...option, selected: !option.selected }
-                  : option
-              ),
-            }
+            ...category,
+            options: category.options.map((option) =>
+              option.id === optionId
+                ? { ...option, selected: !option.selected }
+                : option
+            ),
+          }
           : category
       )
     );
@@ -265,6 +265,8 @@ const DescriptionTask = () => {
     console.log("Selected options:", selectedOptions);
     dispatch(setMultipleDescriptionTask(selectedOptions));
 
+    //Tahsin
+    //need a validation here minimum one select
     navigate.push("/create-project");
   };
 
@@ -289,11 +291,10 @@ const DescriptionTask = () => {
                     <button
                       key={option.id}
                       onClick={() => toggleOption(category.id, option.id)}
-                      className={`block px-2 py-2 text-left rounded-sm  text-sm cursor-pointer font-medium border transition-all ${
-                        option.selected
+                      className={`block px-2 py-2 text-left rounded-sm  text-sm cursor-pointer font-medium border transition-all ${option.selected
                           ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
                           : "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200"
-                      }`}
+                        }`}
                     >
                       <div className="flex justify-center items-center">
                         <p>
@@ -325,11 +326,10 @@ const DescriptionTask = () => {
                     <button
                       key={option.id}
                       onClick={() => toggleOption(category.id, option.id)}
-                      className={`block px-2 py-2 rounded-sm text-sm font-medium border transition-all cursor-pointer ${
-                        option.selected
+                      className={`block px-2 py-2 rounded-sm text-sm font-medium border transition-all cursor-pointer ${option.selected
                           ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
                           : "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200"
-                      }`}
+                        }`}
                     >
                       <div className="flex justify-center items-center">
                         <p>

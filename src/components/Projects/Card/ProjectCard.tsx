@@ -1,10 +1,9 @@
-import React from "react";
 import img from "@/assets/project-card/project-card-img.jpg";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
 import { setTheProjectId } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { useDispatch } from "react-redux";
 
 interface ProjectCardProps {
   // image: string;
@@ -32,12 +31,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         id,
       })
     );
+    // need to chnages the routing
+    //Tahsin
+    // services -1 
     if (id === "6880d91b519cab74df7b09b2") {
       router.push("/service/sub-category");
-    } else if (id === "6880dbb7519cab74df7b09b4") {
+
+    }
+    // services -2
+    else if (id === "6880dbb7519cab74df7b09b4") {
       router.push("/create-project-two");
     }
   };
+
   return (
     <div className="bg-white rounded-lg border-2 border-transparent hover:border-[#017AFF] overflow-hidden max-w-5xl mx-auto p-6">
       <div className="flex justify-between items-center gap-6">

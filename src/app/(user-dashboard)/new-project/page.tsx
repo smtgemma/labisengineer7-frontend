@@ -15,7 +15,7 @@ export default function page() {
   const projects = data?.data;
 
   return (
-    <section className="bg-[#F1F5F9] py-8 px-12">
+    <section className="bg-[#F1F5F9] py-8 ">
       <Header
         title="Start a New Project"
         subtitle="Select the type of documentation you need to generate."

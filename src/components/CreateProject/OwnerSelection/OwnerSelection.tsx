@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Plus, Edit3 } from "lucide-react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/redux/store";
-import { MdDeleteOutline } from "react-icons/md";
 import {
-  Owner as Owners,
   setAiExtractCatchWonerData,
-  setMultipleDescription,
+  setMultipleDescription
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { Edit3, Plus } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { IoClose } from "react-icons/io5";
 import { FiEdit2 } from "react-icons/fi";
+import { IoClose } from "react-icons/io5";
+import { MdDeleteOutline } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 type Owner = {
   first_name: string; // Όνομα
   last_name: string; // Επώνυμο
@@ -26,7 +24,6 @@ type Owner = {
   tax_identification_number: string; // Αριθμός Φορολογικού Μητρώου (ΑΦΜ)
   email: string; // Email
   mobile: string; // Τηλέφωνο
-  ydom: string; // Τηλέφωνο
   selected?: boolean;
 };
 
@@ -45,7 +42,6 @@ type OwnerFormInputs = {
   firstName: string;
   surname: string;
   fatherName: string;
-  ydom: string;
   vatNo: string;
 };
 
@@ -121,7 +117,6 @@ const OwnerSelection = () => {
       id_number: "", // Α.Δ.Τ
       tax_identification_number: data.vatNo || "", // ΑΦΜ
       email: "", // Email
-      ydom: data.ydom,
       mobile: "", // Τηλέφωνο
     };
 
@@ -166,7 +161,6 @@ const OwnerSelection = () => {
         id_number: "", // Α.Δ.Τ
         tax_identification_number: data.vatNo || "", // ΑΦΜ
         email: "", // Email
-        ydom: data.ydom,
         mobile: "", // Τηλέφωνο
       };
 
@@ -281,11 +275,10 @@ const OwnerSelection = () => {
             onClick={() => togglePropertySelection(index, property)}
             key={index}
             className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
-        ${
-          selectedProperty.some((item) => item.index === index)
-            ? "border-blue-600 bg-blue-50 shadow-md"
-            : "border-gray-200 bg-white hover:border-blue-300"
-        }`}
+        ${selectedProperty.some((item) => item.index === index)
+                ? "border-blue-600 bg-blue-50 shadow-md"
+                : "border-gray-200 bg-white hover:border-blue-300"
+              }`}
           >
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Description {index + 1}
@@ -325,6 +318,9 @@ const OwnerSelection = () => {
         ))}
       </div> */}
 
+
+      {/* need to work here in modal
+Tahsin */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm relative">
           <div className="flex justify-end items-start mb-4">
@@ -392,11 +388,10 @@ const OwnerSelection = () => {
             onClick={() => toggleOwnerSelection(index)}
             key={index}
             className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
-    ${
-      selectedOwners?.some((o, i) => o.first_name === owner.first_name)
-        ? "border-blue-600 bg-blue-50 shadow-md"
-        : "border-gray-200 bg-white hover:border-blue-300"
-    }`}
+    ${selectedOwners?.some((o, i) => o.first_name === owner.first_name)
+                ? "border-blue-600 bg-blue-50 shadow-md"
+                : "border-gray-200 bg-white hover:border-blue-300"
+              }`}
           >
             <div className="flex gap-2 absolute top-4 right-4 text-gray-400  ">
               <button
@@ -523,21 +518,6 @@ const OwnerSelection = () => {
 
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
-                  Ydom:
-                </label>
-                <input
-                  type="text"
-                  {...register("ydom", { required: true })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="ydom"
-                />
-                {errors.ydom && (
-                  <span className="text-red-500 text-sm">Required</span>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-gray-700 font-medium mb-2">
                   VAT No:
                 </label>
                 <input
@@ -631,21 +611,7 @@ const OwnerSelection = () => {
                 )}
               </div>
 
-              <div>
-                <label className="block text-gray-700 font-medium mb-2">
-                  Ydom:
-                </label>
-                <input
-                  type="text"
-                  defaultValue={`${ownerData?.municipality_community || " "}`}
-                  {...register("ydom", { required: true })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="ydom"
-                />
-                {errors.ydom && (
-                  <span className="text-red-500 text-sm">Required</span>
-                )}
-              </div>
+
 
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
