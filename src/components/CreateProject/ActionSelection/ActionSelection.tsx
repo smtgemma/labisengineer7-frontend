@@ -303,16 +303,19 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           ))}
         </div> */}
 
+        {/* 
+THIS IS THE DYNAMIC TEMPLATE NAME SECTION
+DO NOT CHNAGE EXCEPT DEDIGN
+THAISN */}
         {/* template Name  */}
         <div className="lg:col-span-2 space-y-2">
           {templateName.map((tem, i) => (
             <div
               key={i}
-              className={`cursor-pointer border-2 rounded-lg  hover:bg-blue-100 transition-all hover:shadow-sm px-4 py-2 ${
-                selected.includes(tem.id)
-                  ? "border-blue-500 bg-blue-50"
-                  : "border-gray-200"
-              }`}
+              className={`cursor-pointer border-2 rounded-lg  hover:bg-blue-100 transition-all hover:shadow-sm px-4 py-2 ${selected.includes(tem.id)
+                ? "border-blue-500 bg-blue-50"
+                : "border-gray-200"
+                }`}
               onClick={() => toggleSelect(tem.id)}
             >
               <div className="flex justify-between items-start">

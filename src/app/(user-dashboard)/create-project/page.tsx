@@ -80,6 +80,9 @@ const WorkflowDemo: React.FC = () => {
   console.log(ownerNumber);
   console.log("currentStep", currentStep);
 
+  //Tahsin
+  //Need a id in params , to  prevent reload and loss of data and step issues
+
   const canProceed = () => {
     switch (currentStep) {
       case 1:

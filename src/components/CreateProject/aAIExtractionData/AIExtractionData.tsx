@@ -118,12 +118,10 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
       owners: stepByStepData.ownerBaseData.map((owner: any) => ({
         first_name: owner.first_name || "", // Όνομα
         last_name: owner.last_name || "", // Επώνυμο
-        father_first_last_name: `${owner.father_first_name || ""} ${
-          owner.father_last_name || ""
-        }`, // Πατέρας
-        mothers_first_last_name: `${owner.mother_first_name || ""} ${
-          owner.mother_last_name || ""
-        }`, // Μητέρα
+        father_first_last_name: `${owner.father_first_name || ""} ${owner.father_last_name || ""
+          }`, // Πατέρας
+        mothers_first_last_name: `${owner.mother_first_name || ""} ${owner.mother_last_name || ""
+          }`, // Μητέρα
         date_of_birth: owner.date_of_birth || "", // Ημερομηνία Γέννησης
         place_of_birth: owner.place_of_birth || "", // Τόπος Γέννησης
         owner_address: owner.owner_address || "", // Διεύθυνση Ιδιοκτήτη
@@ -279,7 +277,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.kaek_property}
-                    // defaultValue={dataShowExtreact?.cadastral_code_kaek}
+                  // defaultValue={dataShowExtreact?.cadastral_code_kaek}
                   />
                 </div>
 
@@ -405,6 +403,9 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                 <div>
                   <button
                     type="button"
+                    // NEED TO WORK HERE
+                    // Tahsin
+
                     onClick={() => setOwnerInfoShow2(index)}
                   >
                     {!ownerInfoShow2 ? (
@@ -619,6 +620,8 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
               <div>
                 <button
                   type="button"
+                  // NEED TO WORK HERE
+                  // Tahsin
                   onClick={() => setOwnerInfoShow3(!ownerInfoShow3)}
                 >
                   {" "}

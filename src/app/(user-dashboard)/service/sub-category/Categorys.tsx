@@ -1,14 +1,10 @@
 "use client";
 
 import { setMultipleSubcategory } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { Header } from "antd/es/layout/layout";
 import {
   Building2,
-  FileText,
-  Hammer,
-  Settings,
   Trees,
-  Zap,
+  Zap
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -156,13 +152,13 @@ const Category = () => {
       prevCategories.map((category) =>
         category.id === categoryId
           ? {
-              ...category,
-              options: category.options.map((option) =>
-                option.id === optionId
-                  ? { ...option, selected: !option.selected }
-                  : option
-              ),
-            }
+            ...category,
+            options: category.options.map((option) =>
+              option.id === optionId
+                ? { ...option, selected: !option.selected }
+                : option
+            ),
+          }
           : category
       )
     );
@@ -187,7 +183,7 @@ const Category = () => {
   };
 
   return (
-    <div className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen`}>
+    <div className={`bg-[#F1F5F9] py-8 min-h-screen`}>
       <h2 className="text-2xl text-black font-semibold">
         Select Multiple Subcategory
       </h2>
@@ -214,11 +210,10 @@ const Category = () => {
                     <button
                       key={option.id}
                       onClick={() => toggleOption(category.id, option.id)}
-                      className={`inline-block px-4 py-2 rounded-full text-sm font-medium border transition-all ${
-                        option.selected
-                          ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
-                          : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
-                      }`}
+                      className={`inline-block px-4 py-2 rounded-full text-sm font-medium border transition-all ${option.selected
+                        ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
+                        : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
+                        }`}
                     >
                       {option.label}
                     </button>
@@ -249,11 +244,10 @@ const Category = () => {
                     <button
                       key={option.id}
                       onClick={() => toggleOption(category.id, option.id)}
-                      className={`inline-block px-4 py-2 rounded-full text-sm font-medium border transition-all ${
-                        option.selected
-                          ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
-                          : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
-                      }`}
+                      className={`inline-block px-4 py-2 rounded-full text-sm font-medium border transition-all ${option.selected
+                        ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
+                        : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
+                        }`}
                     >
                       {option.label}
                     </button>
