@@ -3,7 +3,10 @@ import { toast } from "sonner";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
 import { UserData } from "@/redux/features/auth/userDataCatchSlice";
-import { setActionSelectName } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import {
+  setActionSelectName,
+  setSelectTemplate,
+} from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { CheckCircle, Clock } from "lucide-react";
 
 import Loading from "@/components/Others/Loading";
@@ -152,12 +155,11 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     []
   );
   const [selected, setSelected] = useState<string[]>(["technical", "engineer"]);
+  const [template, setTemplate] = useState([]);
 
   const dispatch = useDispatch();
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
   const id = stepByStepData?.projectId?.id;
-
-  console.log("stepByStepData", id);
 
   const { data, isLoading } = useGetCreditServiceQuery(id);
   console.log(data);
@@ -174,6 +176,17 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     .filter((s) => selected.includes(s.id))
     .reduce((acc, s) => acc + s.price, 0);
 
+  useEffect(() => {
+    const filtered: any = templateName.filter((s) => selected.includes(s.id));
+    if (filtered.length > 0) {
+      setTemplate(filtered);
+    } else {
+      setTemplate([]);
+    }
+    dispatch(setSelectTemplate(template));
+  }, [selected]);
+
+  console.log(template);
   const toggleAction = (action: string) => {
     if (selectedActions.includes(action)) {
       onActionsChange(selectedActions.filter((a) => a !== action));

@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import aiLoadingExtract from "../../../../public/aiFIleLoadingThree.json";
 
 import { toast } from "sonner";
+import { file } from "jszip";
 
 interface AIExtractionProps {
   files: File[];
@@ -96,7 +97,7 @@ const projectDescriptionAll: ProjectDescription[] = [
   {
     ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6: [
       "ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ Α-4 ΤΟΥ Α’ ΟΡΟΦΟΥ",
-      "ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΚΤΙΡΙΟΥ/ΑΚΙΝΗΤΟΥ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ",
+      "ΑΛΛΑΓΗ ΧΡΗΣΗΣ ΑΠΟ ΚΑΤΑΣΤΗΜΑ ΣΕ ΚΑΤΟΙΚΙΑ ΣΤΟ A-4",
     ],
   },
 
@@ -164,10 +165,6 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     return allDescriptions.includes(key) ? obj[key] : [];
   });
 
-  // useEffect(()=> {
-
-  // },[])
-
   const ktimatologio = files[0];
   const contract = files[1];
   const permit = files[2];
@@ -204,7 +201,7 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     if (ktimatologio) formData.append("file1", ktimatologio);
     if (contract) formData.append("file2", contract);
     if (permit) formData.append("file3", permit);
-    if (Law) formData.append("file3", Law);
+    if (Law) formData.append("file4", Law);
 
     formData.append("project_descriptions", JSON.stringify(description));
     formData.append(

@@ -82,14 +82,12 @@ const OwnerSelection = () => {
 
   const [newText, setNewText] = useState("");
   const [editId, setEditId] = useState<number | null>(null);
-  const [ydom, setYdom] = useState<
-    { id: number; title: string; text: string }[]
-  >([]);
 
   const dispatch = useDispatch();
   const ownerData = useSelector((state: any) => state.aiData.aiDataState);
 
   const [isOwner, setIsOwner] = useState<Owner[]>(ownerData.owners);
+  const [ydom, setYdom] = useState<string>(ownerData?.municipality_community);
 
   const description1 = ownerData?.project_descriptions
     .filter((_: any, i: number) => i % 2 === 0)
@@ -132,16 +130,8 @@ const OwnerSelection = () => {
     setIsModalOpen(false);
   };
 
-  // ydom working function
-  const handleOpenNew = () => {
-    setEditId(null);
-    setNewText("");
-    setYdomModalOpen(true);
-  };
-
   // Open modal for editing existing owner
-  const handleOpenEdit = (id: number, text: string) => {
-    setEditId(id);
+  const handleOpenEdit = (text: string) => {
     setNewText(text);
     setYdomModalOpen(true);
   };
@@ -149,22 +139,11 @@ const OwnerSelection = () => {
   // Save owner (new or edited)
   const handleSave = () => {
     if (newText.trim() === "") return;
-
     if (editId) {
       // update existing
-      setYdom(ydom.map((o) => (o.id === editId ? { ...o, text: newText } : o)));
+      setYdom(newText);
     } else {
-      // add new
-      setYdom([
-        ...ydom,
-        {
-          id: ydom.length + 1,
-          title: `Description ${ydom.length + 1}`,
-          text: newText,
-        },
-      ]);
     }
-
     setNewText("");
     setEditId(null);
     setYdomModalOpen(false);
@@ -200,7 +179,6 @@ const OwnerSelection = () => {
   };
 
   // the description functionalty working
-
   const togglePropertySelection = (index: number, value: string) => {
     const alreadySelected = selectedProperty.find(
       (item) => item.index === index
@@ -289,12 +267,6 @@ const OwnerSelection = () => {
         </div>
         <div className="flex gap-5">
           <button
-            onClick={handleOpenNew}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-          >
-            + Add Ydom
-          </button>
-          <button
             onClick={openAddOwnerModal}
             className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200 flex items-center space-x-2 font-medium"
           >
@@ -326,7 +298,7 @@ const OwnerSelection = () => {
       {/* Project Description */}
 
       {/* ydom show  */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {ydom.map((dom, i) => (
           <div
             key={dom.id}
@@ -351,6 +323,26 @@ const OwnerSelection = () => {
             </div>
           </div>
         ))}
+      </div> */}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm relative">
+          <div className="flex justify-end items-start mb-4">
+            <button
+              onClick={() => handleOpenEdit(ydom)}
+              className="text-gray-500 hover:text-blue-500 cursor-pointer"
+            >
+              <FiEdit2 />
+            </button>
+          </div>
+
+          <div className="flex justify-between items-start mb-2">
+            <h3 className="font-semibold text-lg ">Ydom: </h3>
+            <p className="text-sm text-gray-700 whitespace-pre-line">
+              {ydom || "N/A"}
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* ydom Modal */}
@@ -361,8 +353,8 @@ const OwnerSelection = () => {
               {editId ? "Edit Ydom" : "Add New Ydom"}
             </h2>
             <textarea
-              value={newText}
-              onChange={(e) => setNewText(e.target.value)}
+              value={ydom}
+              onChange={(e) => setYdom(e.target.value)}
               className="w-full border rounded-lg p-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
               rows={4}
               placeholder="Enter description..."
@@ -447,14 +439,6 @@ const OwnerSelection = () => {
                 </label>
                 <span className="text-gray-900 font-medium">
                   {owner?.fatherName || "Not set"}
-                </span>
-              </div>
-              <div className="flex justify-between items-center">
-                <label className="text-gray-700 font-medium">Ydom:</label>
-                <span className="text-gray-900 font-medium">
-                  {ownerData?.municipality_community ||
-                    owner?.ydom ||
-                    "Not set"}
                 </span>
               </div>
               <div className="flex justify-between items-center">
