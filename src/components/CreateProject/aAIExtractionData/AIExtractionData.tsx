@@ -39,8 +39,8 @@ type OwnerData = {
 type ProjectData = {
   project_description: string;
   project_description2: string;
-  Horizontal_property_name_two: string;
-  Horizontal_property_name: string;
+  horizontal_property_name_two: string;
+  horizontal_property_name: string;
   construction: string;
   property_postal_code: string;
   municipality_community: string;
@@ -154,12 +154,11 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const descriptonAndYdom = stepByStepData.description;
 
   const description = descriptonAndYdom?.description;
-  const ydom: string[] =
-    descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
+  // const ydom: string[] =
+  //   descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
 
-  console.log("descriptonAndYdom:", description[0].value);
-  console.log("ydom:", ydom);
-  console.log("descriptionTask:", allExtreactData?.project_descriptions);
+  // console.log("ydom:", ydom);
+  console.log("allExtreactData:", allExtreactData);
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
 
@@ -173,7 +172,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
       createdById: user.userId,
       subCategories: subCategoryData,
       descrptionTasks: descrptionTasks,
-      ydom: ydom,
+      ydom: "",
       technical_description: allExtreactData.technical_description,
       ...data,
     };
@@ -192,7 +191,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
         createdById: user.userId,
         subCategories: subCategoryData,
         descrptionTasks: descrptionTasks,
-        ydom: ydom,
+        ydom: "",
         technical_description: allExtreactData.technical_description,
         ...data,
       })
@@ -259,28 +258,18 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
 
             {ownerInfoShow && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-5">
-                <div>
+                <div className="col-span-full">
                   <label className="block text-sm font-medium mb-1">
                     Περιγραφή Έργου (1)
                   </label>
                   <textarea
                     {...register("project_description")}
-                    className={`${inputStyle} h-[150px] `}
+                    className={`${inputStyle} h-[100px] `}
                     readOnly
                     defaultValue={description[0]?.value || "N/A"}
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Περιγραφή Έργου(2)
-                  </label>
-                  <textarea
-                    {...register("project_description2")}
-                    className={`${inputStyle} h-[150px] `}
-                    readOnly
-                    defaultValue={description[1]?.value || "N/A"}
-                  />
-                </div>
+
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     ΑΕΚ Ακινήτου
@@ -383,10 +372,10 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Horizontal_property_name (Οριζόντια Ιδιοκτησία 1)
                   </label>
                   <input
-                    {...register("Horizontal_property_name")}
+                    {...register("horizontal_property_name")}
                     className={inputStyle}
                     readOnly
-                    defaultValue={allExtreactData?.Horizontal_property_name}
+                    defaultValue={allExtreactData?.horizontal_property_name}
                   />
                 </div>
 
@@ -395,10 +384,10 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Horizontal_property_name_two (Οριζόντια Ιδιοκτησία 2)
                   </label>
                   <input
-                    {...register("Horizontal_property_name_two")}
+                    {...register("horizontal_property_name_two")}
                     className={inputStyle}
                     readOnly
-                    defaultValue={allExtreactData?.Horizontal_property_name_two}
+                    defaultValue={allExtreactData?.horizontal_property_name_two}
                   />
                 </div>
               </div>

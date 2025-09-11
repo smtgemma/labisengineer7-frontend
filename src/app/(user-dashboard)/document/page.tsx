@@ -3,9 +3,7 @@ import DocumentTable from "./DocumentTem";
 const page = () => {
   return (
     <div>
-      {/* issues */}
-      <p>document table</p>
-      {/* <DocumentTable /> */}
+      <DocumentTable />
     </div>
   );
 };

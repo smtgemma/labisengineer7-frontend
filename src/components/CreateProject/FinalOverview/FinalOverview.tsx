@@ -138,6 +138,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allTempate = stepByStepData.actionSelection;
   const dataAllFIled = stepByStepData.aiInputData;
   const subCategoryData = stepByStepData.subcategory;
+  const allTemplate = stepByStepData.selectTemplate;
   const projectCodeId = stepByStepData.projectIdCode;
   const id = stepByStepData?.projectIdCode;
   const ownerId = id?.result?.project?.id;
@@ -145,12 +146,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const { data: ownerData } = useGetOwnerTemplateQuery(ownerId);
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
   const { data: execlDownload } = useExeclDownloadTemplateQuery("");
-  console.log(ownerData?.data, "===============================");
+
   const allData = ownerData?.data;
 
-  console.log("pdf", pdfdownload);
-  console.log("execl", execlDownload);
-  console.log(dataAllFIled, "======================dataAllFiled");
+  console.log("======================allTemplate,", allTemplate);
 
   const buildingMods = subCategoryData["building-modifications"] || [];
   const energy = subCategoryData["energy-systems"] || [];
