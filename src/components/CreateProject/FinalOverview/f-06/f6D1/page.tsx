@@ -37,9 +37,9 @@ interface BudgetCategory {
   subtotal: number
 }
 
-export default function F6D1({ allData}: { allData: allDataProps }) {
+export default function F6D1({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-const owner = allData?.owners[0] || {};
+  const owner = allData?.owners?.[0] || {}
   const project_description = allData?.project_description || "";
 
   const [formData, setFormData] = useState({
@@ -1198,7 +1198,7 @@ const owner = allData?.owners[0] || {};
                 <div className="flex items-center gap-4">
                   <label className="font-medium w-1/4">Εργοδότες *:</label>
                   <input
-                  placeholder={owner?.firstName || "N/A"}
+                    placeholder={owner?.firstName || "N/A"}
                     type="text"
                     {...register("owner_name", { required: "This field is required" })}
                     className="flex-1 border p-2 rounded text-sm"
@@ -1237,7 +1237,7 @@ const owner = allData?.owners[0] || {};
                     />
                     <input
                       type="text"
-                      placeholder= {owner?.postalCode || "N/A"}
+                      placeholder={owner?.postalCode || "N/A"}
                       {...register("owner_postal_code", { required: "Postal code is required" })}
                       className="border p-2 rounded text-sm"
                     />

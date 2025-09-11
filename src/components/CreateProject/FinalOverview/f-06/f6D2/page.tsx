@@ -375,7 +375,7 @@ interface allDataProps {
 export default function F6D2({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
-  const owner = allData?.owners[0] || {}
+  const owner = allData?.owners?.[0] || {}
   const allDescriptionTasks = allData?.allDescriptionTasks || []
   const { technical_description } = allData || {}
   const { Horizontal_property_name } = allData || {}
@@ -395,11 +395,11 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
 
   const onSubmit = async (data: FormData) => {
     console.log("Updated Data:================================================================", data)
-     const formData = new FormData();
-      formData.append("data", JSON.stringify(data));
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
     try {
-      
-    const response =  await updateProject({
+
+      const response = await updateProject({
         projectId: id,
         userId: createdById, // 👈 change this if your API expects another param instead of createdById
         body: formData,
@@ -465,7 +465,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
       </div>
 
       <div className="space-y-6 ml-10">
-        {allDescriptionTasks?.map((task: any, index: number) => (
+        {(allDescriptionTasks || []).map((task: any, index: number) => (
           <div key={index}>
             <h3 className="text-sm font-bold">● {task?.id}</h3>
             <p className="text-sm">{task?.description}</p>
@@ -559,7 +559,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                   <label className="font-medium w-1/4">Εργοδότες *:</label>
                   <input
                     // placeholder={owner?.firstName || "owner_name"}
-                    defaultValue={owner?.firstName || "owner_name"}
+                    defaultValue={owner?.firstName || " "}
                     type="text"
                     {...register("firstName", {
                       required: "This field is required",
@@ -572,7 +572,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                 <div className="flex items-center gap-4">
                   <label className="font-medium w-1/4">Έργο *:</label>
                   <input
-                    defaultValue={project_description || "Project description"}
+                    defaultValue={project_description || ""}
                     type="text"
                     {...register("project_description", {
                       required: "This field is required",
@@ -587,7 +587,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                   <div className="flex-1 grid grid-cols-3 gap-2">
                     <input
                       type="text"
-                      defaultValue={owner?.address || "Address"}
+                      defaultValue={owner?.address || " "}
                       {...register("address", {
                         required: "Address is required",
                       })}
@@ -595,13 +595,13 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                     />
                     <input
                       type="text"
-                      defaultValue={owner?.city || "City"}
+                      defaultValue={owner?.city || " "}
                       {...register("city", { required: "City is required" })}
                       className="border p-2 rounded text-sm"
                     />
                     <input
                       type="text"
-                      defaultValue={owner?.postalCode || "Postal Code"}
+                      defaultValue={owner?.postalCode || " "}
                       {...register("postalCode", {
                         required: "Postal code is required",
                       })}

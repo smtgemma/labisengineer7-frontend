@@ -318,46 +318,46 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       name: "F6D2.pdf",
       component: <F6D2 allData={allData}/>,
     },
-    {
-      id: "template8",
-      name: "F6D3.pdf",
-      component: <F6D3 allData={allData}/>,
-    },
-    {
-      id: "template8",
-      name: "F6D4.pdf",
-      component: <F6D4 allData={allData}/>,
-    },
-    {
-      id: "template8",
-      name: "F6D7.pdf",
-      component: <F6D7 allData={allData}/>,
-    },
-    {
-      id: "template8",
-      name: "F6D7.pdf",
-      component: <F6D8 allData={allData}/>,
-    },
-    {
-      id: "template8",
-      name: "F6D7.pdf",
-      component: <F6D9 allData={allData}/>,
-    },
-    {
-      id: "template8",
-      name: "F6D7.pdf",
-      component: <F6D10 allData={allData}/>,
-    },
-    {
-      id: "template8",
-      name: "F6D7.pdf",
-      component: <F6D11 allData={allData}/>,
-    },
-    {
-      id: "template8",
-      name: "F6D7.pdf",
-      component: <F6D12 allData={allData}/>,
-    },
+    // {
+    //   id: "template8",
+    //   name: "F6D3.pdf",
+    //   component: <F6D3 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D4.pdf",
+    //   component: <F6D4 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D7 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D8 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D9 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D10 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D11 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D12 allData={allData}/>,
+    // },
   ]
   
   return (

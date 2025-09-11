@@ -158,12 +158,8 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   // const ydom: string[] =
   //   descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
 
-<<<<<<< HEAD
- 
-=======
   // console.log("ydom:", ydom);
   console.log("allExtreactData:", allExtreactData);
->>>>>>> caf8ece2852b7da5f884b9be4f32bc0ee597bd8c
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
 
@@ -173,8 +169,8 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
     // Here you can send data to API
     console.log("Form Data:", data);
     const DataPost = {
-      serviceId: projectData.id,
-      createdById: user.userId,
+      serviceId: projectData?.id,
+      createdById: user?.userId,
       subCategories: subCategoryData,
       descrptionTasks: descrptionTasks,
       ydom: "",

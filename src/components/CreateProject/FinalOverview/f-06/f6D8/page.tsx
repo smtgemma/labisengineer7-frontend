@@ -496,7 +496,7 @@ interface allDataProps {
 export default function F6D8({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owners = allData?.owners || {};
+    const owners = Array.isArray(allData?.owners) ? allData.owners : [];
     const engineers = allData?.engineers || {};
     const { technical_description } = allData || {};
     const { Horizontal_property_name } = allData || {};
@@ -516,7 +516,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
     }
     return (
         <div>
-            {owners?.map((owner: any, index: number) => (
+            {owners && owners?.map((owner: any, index: number) => (
                 <div key={index} className="max-w-[796px] mx-auto bg-white mb-16">
                     <div className="max-w-[796px] mx-auto bg-white">
                         <div className="text-right -mt-3">

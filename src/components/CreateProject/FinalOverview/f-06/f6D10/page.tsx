@@ -36,7 +36,7 @@ interface allDataProps {
 export default function F6D10({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const engineers = allData?.engineers || {};
+    const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
 
 
     // for editing data 
@@ -55,7 +55,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
 
     return (
         <div>
-            {engineers?.map((engineer: any, index: number) => (
+            {engineers && engineers?.map((engineer: any, index: number) => (
         <div className="max-w-[796px] mx-auto bg-white">
             <div className="text-right -mt-3">
                 <button
