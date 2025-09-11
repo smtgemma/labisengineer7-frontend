@@ -9,6 +9,7 @@ import Image from "next/image";
 import { jwtDecode } from "jwt-decode";
 import tokenCatch from "@/lib/token";
 import { useUserInfoQuery } from "@/redux/features/auth/auth";
+import { LanguageSwitcher } from "@/components/googleTranslation/LanguageSwitcher";
 
 export default function TopBar({
   isOpen,
@@ -36,9 +37,8 @@ export default function TopBar({
       <div className="flex items-center justify-between px-4 py-3">
         {/* Left Section: Toggle Button (Mobile) */}
         <button
-          className={`lg:hidden p-2 rounded-md  transition-colors ${
-            dark ? "bg-black " : "hover:bg-gray-100"
-          }`}
+          className={`lg:hidden p-2 rounded-md  transition-colors ${dark ? "bg-black " : "hover:bg-gray-100"
+            }`}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -56,9 +56,8 @@ export default function TopBar({
         {/* Left Section: Welcome Message (Desktop) */}
         <div className="items-center gap-2 ">
           <span
-            className={` text-sm font-medium ${
-              dark ? "text-white " : "text-gray-700"
-            }`}
+            className={` text-sm font-medium ${dark ? "text-white " : "text-gray-700"
+              }`}
           >
             Welcome Back,{" "}
             {!profile
@@ -68,6 +67,7 @@ export default function TopBar({
           <span className="text-xl">👋</span>
         </div>
 
+        <LanguageSwitcher />
         {/* Right Section: User Actions */}
         {/* User Profile Section */}
         <div className="flex items-center gap-3 px-3 py-3">

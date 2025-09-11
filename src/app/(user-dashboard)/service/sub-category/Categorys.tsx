@@ -215,7 +215,7 @@ const Category = () => {
                         : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
                         }`}
                     >
-                      {option.label}
+                      <span>{option.label}</span>
                     </button>
                   ))}
                 </div>

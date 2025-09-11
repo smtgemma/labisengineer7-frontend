@@ -7,6 +7,7 @@ import Loading from "@/components/Others/Loading";
 import { Toaster } from "sonner";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import StoreProvider from "@/redux/StoreProvider";
+import GoogleTranslateProvider from "@/components/googleTranslation/GoogleLang";
 
 export const metadata: Metadata = {
   title: "Labis-Engineer 7",
@@ -20,12 +21,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={openSans.variable} suppressHydrationWarning={true}>
+      <body className={`${openSans.variable} relative! z-20 top-0!`} suppressHydrationWarning={true}>
         <Toaster position="top-center" expand={true} richColors />
         <StoreProvider>
-          <GoogleOAuthProvider clientId="68253939211-2ah4drkmkhl74kjqe5tlpks4jk64f50h.apps.googleusercontent.com">
-            <Suspense fallback={<Loading />}>{children}</Suspense>
-          </GoogleOAuthProvider>
+          <GoogleTranslateProvider>
+            <GoogleOAuthProvider clientId="68253939211-2ah4drkmkhl74kjqe5tlpks4jk64f50h.apps.googleusercontent.com">
+              <Suspense fallback={<Loading />}>{children}</Suspense>
+            </GoogleOAuthProvider>
+          </GoogleTranslateProvider>
         </StoreProvider>
       </body>
     </html>

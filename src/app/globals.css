@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
-:root {
-}
+:root {}
 
 body {
   font-family: var(--font-open-sans);
@@ -26,4 +25,33 @@ body {
 
 .error-text {
   @apply text-red-500 text-sm mt-1;
+}
+
+
+body .skiptranslate {
+  display: none !important;
+  position: absolute;
+}
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+  position: absolute;
+}
+
+.VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate {
+  visibility: hidden !important;
+  height: 0 !important;
+  position: absolute !important;
+  top: 0 !important;
+  position: absolute;
+}
+
+section[aria-live="polite"] {
+  display: none !important;
+  position: absolute;
+}
+
+body element.style {
+  top: 0px !important;
+  ;
 }
