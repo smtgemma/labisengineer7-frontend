@@ -11,9 +11,7 @@ import { downloadZip } from "client-zip";
 import { Provider } from "react-redux";
 import { makeStore } from "@/redux/store";
 import FileOneDesignEleven from "./file-one/design-eleven/page";
-import F1D1 from "./f-01/f1D1/page";
-import F1D2 from "./f-01/f1D2/page";
-import F1D3 from "./f-01/f1D3/page";
+
 import F1D4 from "@/components/CreateProject/FinalOverview/f-01/f1D4/page";
 import F1D5 from "@/components/CreateProject/FinalOverview/f-01/f1D5/page";
 import F1D6 from "@/components/CreateProject/FinalOverview/f-01/f1D6/page";
