@@ -140,6 +140,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allTempate = stepByStepData.actionSelection;
   const dataAllFIled = stepByStepData.aiInputData;
   const subCategoryData = stepByStepData.subcategory;
+  const allTemplate = stepByStepData.selectTemplate;
   const projectCodeId = stepByStepData.projectIdCode;
   const id = stepByStepData?.projectIdCode;
   const projectId = id?.result?.project?.id;
@@ -157,6 +158,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   console.log("pdf", pdfdownload);
   console.log("execl", execlDownload);
   // console.log(dataAllFIled, "======================dataAllFiled");
+
+  console.log("======================allTemplate,", allTemplate);
 
   const buildingMods = subCategoryData["building-modifications"] || [];
   const energy = subCategoryData["energy-systems"] || [];

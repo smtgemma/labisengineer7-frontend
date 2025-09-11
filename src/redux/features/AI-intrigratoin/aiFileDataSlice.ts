@@ -79,6 +79,7 @@ interface AiExtractState {
   multiFiles?: [];
   aiInputData?: any;
   actionSelection?: [];
+  selectTemplate?: [];
   projectIdCode?: string | null;
 }
 
@@ -88,6 +89,7 @@ const initialState: AiExtractState = {
   projectId: undefined,
   subcategory: [],
   descriptionTask: [],
+  selectTemplate: [],
   multiFiles: [],
   description: [],
   aiInputData: null,
@@ -128,6 +130,9 @@ const aiExtractDataSlice = createSlice({
     setImageFile: (state, action) => {
       state.multiFiles = action.payload;
     },
+    setSelectTemplate: (state, action) => {
+      state.selectTemplate = action.payload;
+    },
     // setImageFile: (state, action: PayloadAction<FileMeta[]>) => {
     //   console.log(action.payload);
     //   state.multiFiles = action.payload;
@@ -150,5 +155,6 @@ export const {
   setTheProjectCode,
   setMultipleDescriptionTask,
   setMultipleDescription,
+  setSelectTemplate,
 } = aiExtractDataSlice.actions;
 export default aiExtractDataSlice.reducer;
