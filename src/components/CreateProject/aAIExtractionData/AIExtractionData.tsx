@@ -111,7 +111,8 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
   const user: any = useSelector((state: RootState) => state.user.userData);
 
-  console.log("user: ", user);
+
+  
 
   const { register, control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
@@ -157,9 +158,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const ydom: string[] =
     descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
 
-  console.log("descriptonAndYdom:", description[0].value);
-  console.log("ydom:", ydom);
-  console.log("descriptionTask:", allExtreactData?.project_descriptions);
+ 
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
 
@@ -173,7 +172,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
       createdById: user.userId,
       subCategories: subCategoryData,
       descrptionTasks: descrptionTasks,
-      ydom: ydom,
+      ydom: "",
       technical_description: allExtreactData.technical_description,
       ...data,
     };
@@ -192,7 +191,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
         createdById: user.userId,
         subCategories: subCategoryData,
         descrptionTasks: descrptionTasks,
-        ydom: ydom,
+        ydom: "",
         technical_description: allExtreactData.technical_description,
         ...data,
       })

@@ -92,6 +92,8 @@ import { FaRegCopy, FaRegCopyright } from "react-icons/fa6";
 import F5D5 from "./f-05/f5D5/page";
 import F6D12 from "./f-06/f6D12/page";
 import { ProjectResponse } from "./shared/allDataType";
+import PdfZipDownloader from "@/utility/PdfZipDownloader";
+import F6D5 from "./f-06/f6D5/page";
 
 export interface UserData {
   id: string;
@@ -148,8 +150,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
   // console.log(allData?.data, "===============================");
-  const allData = allTemplateData?.data ;
-  console.log(allData, "all data for all template")
+  const allData = allTemplateData?.data || {} ;
+  console.log(allData, "all data for all template===================================================================")
 
 
   console.log("pdf", pdfdownload);
@@ -186,15 +188,15 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     saveAs(blob, "owners.csv");
   };
+   
+  // const templates = [
+  //   { name: "TemplateFile", component: <TemplateFile /> },
 
-  const templates = [
-    { name: "TemplateFile", component: <TemplateFile /> },
-
-    {
-      name: "ProjectDescriptionSix",
-      component: <FileOneDesignEleven />,
-    },
-  ];
+  //   {
+  //     name: "ProjectDescriptionSix",
+  //     component: <FileOneDesignEleven />,
+  //   },
+  // ];
 
   const projectAndUserHexCode =
     userData?.hexToken + `-${projectCodeId?.projectCode}`;
@@ -301,6 +303,60 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isModalOpen]);
+
+  const templates = [
+    // {
+    //   id: "template7",
+    //   name: "F6D1.pdf",
+    //   component: < TemplateFile/>,
+    // },
+    {
+      id: "template8",
+      name: "F6D2.pdf",
+      component: <F6D2 allData={allData}/>,
+    },
+    {
+      id: "template8",
+      name: "F6D3.pdf",
+      component: <F6D3 allData={allData}/>,
+    },
+    {
+      id: "template8",
+      name: "F6D4.pdf",
+      component: <F6D4 allData={allData}/>,
+    },
+    {
+      id: "template8",
+      name: "F6D7.pdf",
+      component: <F6D7 allData={allData}/>,
+    },
+    {
+      id: "template8",
+      name: "F6D7.pdf",
+      component: <F6D8 allData={allData}/>,
+    },
+    {
+      id: "template8",
+      name: "F6D7.pdf",
+      component: <F6D9 allData={allData}/>,
+    },
+    {
+      id: "template8",
+      name: "F6D7.pdf",
+      component: <F6D10 allData={allData}/>,
+    },
+    {
+      id: "template8",
+      name: "F6D7.pdf",
+      component: <F6D11 allData={allData}/>,
+    },
+    {
+      id: "template8",
+      name: "F6D7.pdf",
+      component: <F6D12 allData={allData}/>,
+    },
+  ]
+  
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -1439,6 +1495,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
 
       <div className="flex justify-end">
+        <PdfZipDownloader templates={templates} zipName="Invoices.zip"  />
         <button
           onClick={onComplete}
           className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"

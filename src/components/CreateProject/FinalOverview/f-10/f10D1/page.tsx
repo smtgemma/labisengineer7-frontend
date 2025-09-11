@@ -89,9 +89,9 @@ export default function F10D1({ allData }: { allData: allDataProps }) {
 
       {/* Main Description */}
       <div className="text-sm mb-4 ml-10">
-        {/* <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property
-        </span> επί της οδού <br /> <span className="font-semibold">{owner_address || "N/A"}, {owner_city || "N/A"} , {owner_postal_code || "N/A"} ( FOR BUILDING),</span>
-          πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p> */}
+        <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property
+        </span> επί της οδού <br /> <span className="font-semibold">{owner?.address || "N/A"}, {owner?.city || "N/A"} , {owner?.postalCode || "N/A"} ( FOR BUILDING),</span>
+          πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
       </div>
 
       {/* one  */}
