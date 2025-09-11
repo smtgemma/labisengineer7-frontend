@@ -111,7 +111,8 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
   const user: any = useSelector((state: RootState) => state.user.userData);
 
-  console.log("user: ", user);
+
+  
 
   const { register, control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
@@ -166,8 +167,8 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
     // Here you can send data to API
     console.log("Form Data:", data);
     const DataPost = {
-      serviceId: projectData.id,
-      createdById: user.userId,
+      serviceId: projectData?.id,
+      createdById: user?.userId,
       subCategories: subCategoryData,
       descrptionTasks: descrptionTasks,
       ydom: "",

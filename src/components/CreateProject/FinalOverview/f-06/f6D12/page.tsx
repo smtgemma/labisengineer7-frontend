@@ -11,20 +11,20 @@ interface FormData {
 }
 
 interface allDataProps {
-  ydom_name: string
+  protocolNumber?: string
   project_description?: string
+  ydom?: string
   submission_date?: string
-  protocol_number?: string
 }
 
 export default function F6D12({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
   const [formData, setFormData] = useState({
-    projectDescription: allData.project_description || "PROJECT DESCRIPTION",
-    responsibleAuthority: allData.ydom_name || "YDOM",
-    submissionDate: allData.submission_date || "DATE OF PROJECT",
-    protocolNumber: allData.protocol_number || "",
+    projectDescription: allData?.project_description || "PROJECT DESCRIPTION",
+    responsibleAuthority: allData?.ydom || "YDOM",
+    submissionDate: allData?.submission_date || "DATE OF PROJECT",
+    protocolNumber: allData?.protocolNumber || "",
   })
 
   const handleInputChange = (field: string, value: string) => {

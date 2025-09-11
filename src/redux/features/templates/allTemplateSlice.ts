@@ -9,6 +9,14 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
       }),
     }),
 
+    updateProject: build.mutation({
+      query: ({ projectId, userId, body }) => ({
+        url: `/projects/update-project/${projectId}/${userId}`,
+        method: "patch",
+        body,
+      }),
+    }),
+
     downloadTemplatePdf: build.query({
       query: () => ({
         url: `/templates/get-pdf-zip`,
@@ -27,6 +35,7 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
 
 export const {
   useGetOwnerTemplateQuery,
+  useUpdateProjectMutation,
   useDownloadTemplatePdfQuery,
   useExeclDownloadTemplateQuery,
 } = allTemplatesApi;

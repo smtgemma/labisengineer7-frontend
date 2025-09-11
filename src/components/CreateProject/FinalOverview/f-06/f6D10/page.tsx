@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
+import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -27,22 +28,7 @@ interface FormData {
 
 
 interface allDataProps {
-    owner_address: string;
-    owner_afm: string;
-    owner_birth_date: string;
-    owner_birth_place: string;
-    owner_city: string;
-    owner_email: string;
-    owner_father_name: string;
-    owner_mother_name: string;
-    owner_name: string;
-    owner_phone: string;
-    owner_postal_code: string;
-    owner_surname: string;
-    ydom_name: string;
-    project_description?: string;
-    owner_id?: string;
-    owner_address_number?: string;
+    engineers: any[];
 }
 
 
@@ -50,24 +36,7 @@ interface allDataProps {
 export default function F6D10({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const {
-        owner_address,
-        owner_afm,
-        owner_birth_date,
-        owner_birth_place,
-        owner_city,
-        owner_email,
-        owner_father_name,
-        owner_mother_name,
-        owner_name,
-        owner_phone,
-        owner_postal_code,
-        owner_surname,
-        ydom_name,
-        project_description,
-        owner_id,
-        owner_address_number,
-    } = allData;
+    const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
 
 
     // for editing data 
@@ -85,6 +54,8 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
     }
 
     return (
+        <div>
+            {engineers && engineers?.map((engineer: any, index: number) => (
         <div className="max-w-[796px] mx-auto bg-white">
             <div className="text-right -mt-3">
                 <button
@@ -120,7 +91,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400 bg-gray-50">
                     <div className="flex">
                         <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-                        <div className="flex-1 p-2  font-bold">{ydom_name || "N/A"}</div>
+                        <div className="flex-1 p-2  font-bold">{engineer?.ydom || "N/A"}</div>
                     </div>
                 </div>
 
@@ -128,9 +99,9 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-                        <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner_name || "N/A"}</div>
+                        <div className="w-40 p-2 border-r border-gray-400  font-bold">{engineer?.firstName || "N/A"}</div>
                         <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-                        <div className="flex-1 p-2  font-bold">{owner_surname || "N/A"}</div>
+                        <div className="flex-1 p-2  font-bold">{engineer?.lastName || "N/A"}</div>
                     </div>
                 </div>
 
@@ -138,7 +109,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                        <div className="flex-1 p-2 font-bold">{owner_father_name || "N/A"}</div>
+                        <div className="flex-1 p-2 font-bold">{engineer?.fatherName || "N/A"}</div>
                     </div>
                 </div>
 
@@ -146,7 +117,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                        <div className="flex-1 p-2 font-bold">{owner_mother_name || "N/A"}</div>
+                        <div className="flex-1 p-2 font-bold">{engineer?.motherName  || "N/A"}</div>
                     </div>
                 </div>
 
@@ -154,7 +125,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                        <div className="flex-1 p-2 font-bold">{owner_birth_date || "N/A"}</div>
+                        <div className="flex-1 p-2 font-bold">{format(new Date(engineer?.bornDate), "dd/MM/yyyy")}</div>
                     </div>
                 </div>
 
@@ -162,7 +133,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-                        <div className="flex-1 p-2 font-bold">{owner_birth_place || "N/A"}</div>
+                        <div className="flex-1 p-2 font-bold">{engineer?.bornTown  || "N/A"}</div>
                     </div>
                 </div>
 
@@ -170,9 +141,9 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                        <div className=" p-2 border-r border-gray-400 font-bold">{owner_id || "N/A"}</div>
+                        <div className=" p-2 border-r border-gray-400 font-bold">{engineer?.idCardNumber  || "N/A"}</div>
                         <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-                        <div className="flex-1 p-2 font-bold">{owner_phone || "N/A"}</div>
+                        <div className="flex-1 p-2 font-bold">{engineer?.phone  || "N/A"}</div>
                     </div>
                 </div>
 
@@ -180,13 +151,13 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                        <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner_city || "N/A"}</div>
+                        <div className="w-20 p-2 border-r border-gray-400 font-bold ">{engineer?.town  || "N/A"}</div>
                         <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
-                        <div className="w-24 p-2 border-r border-gray-400 font-bold ">{owner_address || "N/A"}</div>
+                        <div className="w-24 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress  || "N/A"}</div>
                         <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
-                        <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner_address_number || "N/A"}</div>
+                        <div className="w-20 p-2 border-r border-gray-400 font-bold ">{engineer?.streetNumber || "N/A"}</div>
                         <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-                        <div className="flex-1 p-2 font-bold">{owner_postal_code || "N/A"}</div>
+                        <div className="flex-1 p-2 font-bold">{engineer?.postalCode || "N/A"}</div>
                     </div>
                 </div>
 
@@ -202,7 +173,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                 <div>ίου (Email):</div>
                             </div>
                         </div>
-                        <div className=" p-2 underline ">{owner_email || "N/A"}</div>
+                        <div className=" p-2 underline ">{engineer?.email || "N/A"}</div>
                     </div>
                 </div>
 
@@ -210,7 +181,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-                        <div className="flex-1 p-2 font-bold">{owner_afm || "N/A"}</div>
+                        <div className="flex-1 p-2 font-bold">{engineer?.engVatNumber || "N/A"}</div>
                         <div className="w-32 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
                     </div>
                 </div>
@@ -222,12 +193,12 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                     </p>
 
                     <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
-                    <p className=" mb-6">{project_description || "N/A"}</p>
+                    {/* <p className=" mb-6">{project_description || "N/A"}</p> */}
                 </div>
 
                 {/* Additional disclaimer text */}
                 <div className="space-y-4 text-sm m p-4">
-                    <p>επί της οδού {owner_address || "N/A"}, {owner_city || "N/A"} , {owner_postal_code || "N/A"} ( FOR PROPERTY)</p>
+                    <p>επί της οδού {engineer?.streetAddress || "N/A"}, {engineer?.town  || "N/A"} , {engineer?.postalCode || "N/A"} ( FOR PROPERTY)</p>
                     <p>
                         από την ανάλυση του συνόλου των προβλεπόμενων εργασιών προκύπτει <span className="font-bold">ότι δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία του οργανισμού του κτιρίου.</span>
                         Οι εργασίες περιορίζονται αποκλειστικά σε μη φέροντα στοιχεία και δεν επηρεάζουν καθ’ οποιονδήποτε τρόπο την ευστάθεια, φέρουσα ικανότητα ή δομική λειτουργία του κτιρίου.
@@ -280,7 +251,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_name", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_name || ""}
+                                       defaultValue={engineer?.firstName || "N/A"} 
                                     />
                                 </div>
 
@@ -291,7 +262,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_surname", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_surname || ""}
+                                         defaultValue={engineer?.lastName || "N/A"}
                                     />
                                 </div>
 
@@ -302,7 +273,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_father_name", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_father_name || ""}
+                                        defaultValue={engineer?.fatherName || "N/A"}
                                     />
                                 </div>
 
@@ -313,7 +284,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_mother_name", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_mother_name || ""}
+                                        defaultValue={engineer?.motherName  || "N/A"}
                                     />
                                 </div>
 
@@ -324,7 +295,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="date"
                                         {...register("owner_birth_date", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_birth_date || ""}
+                                        defaultValue={engineer?.bornDate  || "N/A"}
                                     />
                                 </div>
 
@@ -335,7 +306,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_birth_place", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_birth_place || ""}
+                                        defaultValue={engineer?.bornTown  || "N/A"}
                                     />
                                 </div>
 
@@ -346,7 +317,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_id", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_id || ""}
+                                        defaultValue={engineer?.idCardNumber  || "N/A"}
                                     />
                                 </div>
 
@@ -357,7 +328,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_phone", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_phone || ""}
+                                        defaultValue={engineer?.phone  || "N/A"}
                                     />
                                 </div>
 
@@ -368,7 +339,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_city", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_city || ""}
+                                        defaultValue={engineer?.town  || "N/A"}
                                     />
                                 </div>
 
@@ -379,7 +350,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_address", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_address || ""}
+                                        defaultValue={engineer?.streetAddress  || "N/A"}
                                     />
                                 </div>
 
@@ -390,7 +361,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_address_number", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_address_number || ""}
+                                         defaultValue={engineer?.streetNumber || "N/A"}
                                     />
                                 </div>
 
@@ -401,7 +372,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_postal_code", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_postal_code || ""}
+                                        defaultValue={engineer?.postalCode || "N/A"}
                                     />
                                 </div>
 
@@ -412,7 +383,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="email"
                                         {...register("owner_email", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_email || ""}
+                                        defaultValue={engineer?.email || "N/A"}
                                     />
                                 </div>
 
@@ -423,7 +394,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("owner_afm", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={owner_afm || ""}
+                                        defaultValue={engineer?.engVatNumber || "N/A"}
                                     />
                                 </div>
 
@@ -434,7 +405,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                         type="text"
                                         {...register("project_description", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
-                                        defaultValue={project_description || ""}
+                                        // defaultValue={project_description || ""}
                                     />
                                 </div>
 
@@ -452,6 +423,8 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                     </div>
                 </div>
             )}
+        </div>
+            ))}
         </div>
     )
 }

@@ -11,6 +11,7 @@ import { downloadZip } from "client-zip";
 import { Provider } from "react-redux";
 import { makeStore } from "@/redux/store";
 import FileOneDesignEleven from "./file-one/design-eleven/page";
+
 import F1D4 from "@/components/CreateProject/FinalOverview/f-01/f1D4/page";
 import F1D5 from "@/components/CreateProject/FinalOverview/f-01/f1D5/page";
 import F1D6 from "@/components/CreateProject/FinalOverview/f-01/f1D6/page";
@@ -38,6 +39,7 @@ import F4D11 from "./f-04/f4D11/page";
 import F5D1 from "./f-05/f5D1/page";
 import F5D2 from "./f-05/f5D2/page";
 import F5D3 from "./f-05/f5D3/page";
+import F5D4 from "./f-05/f5D4/page";
 import F6D1 from "./f-06/f6D1/page";
 import F6D2 from "./f-06/f6D2/page";
 import F6D3 from "./f-06/f6D3/page";
@@ -82,16 +84,14 @@ import {
 } from "@/redux/features/templates/allTemplateSlice";
 
 import F6D11 from "./f-06/f6D11/page";
-
-import F1D2 from "./f-01/f1d2/page";
-import F1D3 from "./f-01/f1d3/page";
-import F1D1 from "./f-01/f1d3/page";
 import { setActionSelectName } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { toast } from "sonner";
 import { FaRegCopy, FaRegCopyright } from "react-icons/fa6";
-import F5D4 from "./f-05/f5D4/page";
 import F5D5 from "./f-05/f5D5/page";
 import F6D12 from "./f-06/f6D12/page";
+import { ProjectResponse } from "./shared/allDataType";
+import PdfZipDownloader from "@/utility/PdfZipDownloader";
+import F6D5 from "./f-06/f6D5/page";
 
 export interface UserData {
   id: string;
@@ -141,13 +141,21 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allTemplate = stepByStepData.selectTemplate;
   const projectCodeId = stepByStepData.projectIdCode;
   const id = stepByStepData?.projectIdCode;
-  const ownerId = id?.result?.project?.id;
+  const projectId = id?.result?.project?.id;
+  const userId = dataAllFIled?.createdById; 
 
-  const { data: ownerData } = useGetOwnerTemplateQuery(ownerId);
+  const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
   const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
-  const allData = ownerData?.data;
+  // console.log(allData?.data, "===============================");
+  const allData = allTemplateData?.data || {} ;
+  console.log(allData, "all data for all template===================================================================")
+
+
+  console.log("pdf", pdfdownload);
+  console.log("execl", execlDownload);
+  // console.log(dataAllFIled, "======================dataAllFiled");
 
   console.log("======================allTemplate,", allTemplate);
 
@@ -181,15 +189,15 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     saveAs(blob, "owners.csv");
   };
+   
+  // const templates = [
+  //   { name: "TemplateFile", component: <TemplateFile /> },
 
-  const templates = [
-    { name: "TemplateFile", component: <TemplateFile /> },
-
-    {
-      name: "ProjectDescriptionSix",
-      component: <FileOneDesignEleven />,
-    },
-  ];
+  //   {
+  //     name: "ProjectDescriptionSix",
+  //     component: <FileOneDesignEleven />,
+  //   },
+  // ];
 
   const projectAndUserHexCode =
     userData?.hexToken + `-${projectCodeId?.projectCode}`;
@@ -296,6 +304,60 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isModalOpen]);
+
+  const templates = [
+    // {
+    //   id: "template7",
+    //   name: "F6D1.pdf",
+    //   component: < TemplateFile/>,
+    // },
+    {
+      id: "template8",
+      name: "F6D2.pdf",
+      component: <F6D2 allData={allData}/>,
+    },
+    // {
+    //   id: "template8",
+    //   name: "F6D3.pdf",
+    //   component: <F6D3 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D4.pdf",
+    //   component: <F6D4 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D7 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D8 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D9 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D10 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D11 allData={allData}/>,
+    // },
+    // {
+    //   id: "template8",
+    //   name: "F6D7.pdf",
+    //   component: <F6D12 allData={allData}/>,
+    // },
+  ]
+  
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -681,55 +743,55 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           <div key={index}>
             {item ===
               "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  _ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΠΙΝΑΚΑΣ 3_");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΠΙΝΑΚΑΣ 3_
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
+                <div className="flex flex-wrap gap-4">
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    _ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΠΙΝΑΚΑΣ 3_");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΠΙΝΑΚΑΣ 3_
+                  </button>
+                  {/* add more buttons the same way */}
+                </div>
+              )}
           </div>
         ))}
         {/* file 6  */}
@@ -977,37 +1039,37 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           <div key={index}>
             {item ===
               "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
+                <div className="flex flex-wrap gap-4">
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ
+                  </button>
+                  {/* add more buttons the same way */}
+                </div>
+              )}
           </div>
         ))}
         {/* file 11 */}
@@ -1135,37 +1197,37 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           <div key={index}>
             {item ===
               "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_141");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_142");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
+                <div className="flex flex-wrap gap-4">
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_141");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_142");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
+                  </button>
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ");
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ
+                  </button>
+                  {/* add more buttons the same way */}
+                </div>
+              )}
           </div>
         ))}
         {/* file 15  */}
@@ -1205,7 +1267,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
               {/* building-modifications */}
               {/* file 1======== */}
-              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && (
+              {/* {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && (
                 <F1D1 allData={allData} />
               )}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && (
@@ -1227,20 +1289,20 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && (
                 <F1D9 allData={allData} />
-              )}
+              )} */}
 
               {/* file 2======= */}
-              {selected === "Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020" && (
+              {/* {selected === "Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020" && (
                 <F2D1 allData={allData} />
               )}
               {selected === "ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ" && <F2D2 allData={allData} />}
               {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_23" && (
                 <F2D3 allData={allData} />
-              )}
+              )} */}
 
               {/* energy-systems  */}
               {/* file 3======== */}
-              {selected === "ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ" && <F3D1 allData={allData} />}
+              {/* {selected === "ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ" && <F3D1 allData={allData} />}
               {selected === "άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020" && (
                 <F3D2 allData={allData} />
               )}
@@ -1251,10 +1313,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && (
                 <F3D6 allData={allData} />
-              )}
+              )} */}
 
               {/* file 4======== */}
-              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ" && (
+              {/* {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ" && (
                 <F4D1 allData={allData} />
               )}
               {selected === "_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ" && (
@@ -1280,7 +1342,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && (
                 <F4D11 allData={allData} />
-              )}
+              )} */}
 
               {/* file 5======== */}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && (
@@ -1295,13 +1357,16 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ" && (
                 <F5D4 allData={allData} />
               )}
-              {selected === "ΠΙΝΑΚΑΣ 3_" && <F5D5 allData={allData} />}
+              
+              {selected === "ΠΙΝΑΚΑΣ 3_" && (
+                <F5D5 allData={allData} />
+              )}
 
               {/* file 6======== */}
               {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61" && (
-                <F6D1 allData={allData} />
+                <F6D1 allData={allData}/>
               )}
-              {selected ===
+               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_62" && (
                 <F6D2 allData={allData} />
               )}
@@ -1332,10 +1397,11 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
 
               {/* file 7======== */}
-              {selected ===
+              {/* {selected ===
                 "ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ ΔΙΑΤΑΞΕΩΝ" && (
                 <F7D1 allData={allData} />
               )}
+              
               {selected ===
                 "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
                 <F7D2 allData={allData} />
@@ -1348,51 +1414,51 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
                 <F7D5 allData={allData} />
-              )}
+              )}  */}
 
               {/* file 8======== */}
-              {selected === "_ΚΟΠΗ ΠΕΥΚΩΝ" && <F8D1 allData={allData} />}
+              {/* {selected === "_ΚΟΠΗ ΠΕΥΚΩΝ" && <F8D1 allData={allData} />}
               {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ_" && (
                 <F8D2 allData={allData} />
               )}
               {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
                 <F8D3 allData={allData} />
-              )}
+              )} */}
 
               {/* file 9======== */}
-              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜ" && (
+              {/* {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜ" && (
                 <F9D1 allData={allData} />
               )}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣ" && (
                 <F9D2 allData={allData} />
               )}
-              {selected === "Ιδιωτική Σύμβαση " && <F9D3 />}
+              {selected === "Ιδιωτική Σύμβαση " && <F9D3 />} */}
 
               {/* file 10=== */}
               {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_" && (
                 <F10D1 allData={allData} />
               )}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102" && (
+              {/* {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102" && (
                 <F10D2 allData={allData} />
-              )}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ" && (
+              )} */}
+              {/* {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ" && (
                 <F10D3 allData={allData} />
-              )}
+              )} */}
 
               {/* file 11  */}
-              {selected === "ΠΕΡΙΤΟΙΧΗΣΗΣ Π" && <F11D1 allData={allData} />}
+              {/* {selected === "ΠΕΡΙΤΟΙΧΗΣΗΣ Π" && <F11D1 allData={allData} />}
               {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΑΠΟΣΤΑΣΗ ΑΝΩ ΤΩΝ" && (
                 <F11D2 allData={allData} />
-              )}
+              )} */}
 
               {/* file 12  */}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_121" && (
+              {/* {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_121" && (
                 <F12D1 allData={allData} />
               )}
-              {selected === "ΣΤΕΓΕΣ" && <F12D2 allData={allData} />}
+              {selected === "ΣΤΕΓΕΣ" && <F12D2 allData={allData} />} */}
 
               {/* file 13  */}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΠΙΣΙΝΑ COMPACT ΕΩΣ" && (
+              {/* {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΠΙΣΙΝΑ COMPACT ΕΩΣ" && (
                 <F13D1 allData={allData} />
               )}
               {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_132" && (
@@ -1409,10 +1475,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_άρθρου 4 ΥΑ ΦΕΚ Β" && (
                 <F13D6 allData={allData} />
-              )}
+              )} */}
 
               {/* file 14  */}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_141" && (
+              {/* {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_141" && (
                 <F14D1 allData={allData} />
               )}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_142" && (
@@ -1420,16 +1486,17 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ" && (
                 <F14D3 allData={allData} />
-              )}
+              )} */}
 
               {/* file 15  */}
-              {selected === "ΙΚΡΙΩΜΑΤΑ" && <F15D1 allData={allData} />}
+              {/* {selected === "ΙΚΡΙΩΜΑΤΑ" && <F15D1 allData={allData} />} */}
             </div>
           </div>
         )}
       </div>
 
       <div className="flex justify-end">
+        <PdfZipDownloader templates={templates} zipName="Invoices.zip"  />
         <button
           onClick={onComplete}
           className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
