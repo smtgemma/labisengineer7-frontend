@@ -25,7 +25,7 @@ interface allDataProps {
 export default function F5D1({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owner = allData?.owners[0] || {};
+    const owner = allData?.owners?.[0] || {};
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
     const { technical_description } = allData || {};
     const { Horizontal_property_name } = allData || {};
@@ -118,7 +118,7 @@ export default function F5D1({ allData }: { allData: allDataProps }) {
                 </div> */}
 
                 {
-                    allDescriptionTasks?.map((task: any, index: number) => (
+                     allDescriptionTasks?.map((task: any, index: number) => (
                         <div key={index}>
                             <h3 className="text-sm font-bold">● {task?.id}</h3>
                             <p className="text-sm">{task?.description}</p>
