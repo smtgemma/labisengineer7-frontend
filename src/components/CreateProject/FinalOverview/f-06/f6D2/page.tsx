@@ -353,7 +353,6 @@ import StampComponent from "../../shared/signture/signture"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 interface FormData {
   firstName: string
   project_description: string
@@ -367,7 +366,7 @@ interface allDataProps {
   allDescriptionTasks: any[]
   technical_description: string
   Horizontal_property_name: string
-  project_description: string
+  projectDescription: string
   id: string
   createdById: string
 }
@@ -379,7 +378,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
   const allDescriptionTasks = allData?.allDescriptionTasks || []
   const { technical_description } = allData || {}
   const { Horizontal_property_name } = allData || {}
-  const { project_description } = allData || {}
+  const { projectDescription } = allData || {}
   const { id, createdById } = allData || {}
   console.log(id, createdById, "id, createdById===================")
 
@@ -391,24 +390,8 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
     formState: { errors },
   } = useForm<FormData>({})
 
-  const [updateProject, { isLoading }] = useUpdateProjectMutation()
-
   const onSubmit = async (data: FormData) => {
-    console.log("Updated Data:================================================================", data)
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(data));
-    try {
-
-      const response = await updateProject({
-        projectId: id,
-        userId: createdById, // 👈 change this if your API expects another param instead of createdById
-        body: formData,
-      }).unwrap()
-      console.log(response, "Update response===================")
-      setIsEditModalOpen(false) // close modal after success
-    } catch (error) {
-      console.log("Update error:", error)
-    }
+    console.log(data, "template data two")
     reset()
   }
 
@@ -431,15 +414,14 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
       <div className="mb-8 space-y-4">
         <div className="flex items-start justify-between">
           <span className=" min-w-[80px] text-sm">Έργο:</span>
-          <h3 className=" text-sm">{project_description || "N/A"}</h3>
-          <h3 className=" text-sm">{project_description || "N/A"}</h3>
+          <h3 className=" text-sm">{projectDescription || "N/A"}</h3>
         </div>
 
         <div className="flex items-start justify-between gap-4 max-w-xl">
           <span className=" text-sm">Θέση:</span>
           <h3 className=" text-sm">
             {owner?.address || "N/A"}, {owner?.city || "N/A"},
-            {owner?.postalCode || "N/A"} ( FOR BUILDING)
+            {owner?.postal_code || "N/A"} ( FOR BUILDING)
           </h3>
         </div>
 
@@ -454,11 +436,11 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
         <p>
           Στο ακίνητο{" "}
           <span className="font-semibold">
-            {technical_description || "N/A"}/ {Horizontal_property_name || "N/A"}
-          </span>{" "}
+            Description for building/ horiontal property
+          </span>
           επί της οδού <br />{" "}
           <span className="font-semibold">
-            Address,Town/Area , postal code ( FOR BUILDING),
+            {owner?.ownerAddress || "N/A"},{owner?.city || "N/A"} , {owner?.postal_code || "N/A"} ( FOR BUILDING),
           </span>
           πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :
         </p>
@@ -572,7 +554,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                 <div className="flex items-center gap-4">
                   <label className="font-medium w-1/4">Έργο *:</label>
                   <input
-                    defaultValue={project_description || ""}
+                    defaultValue={projectDescription || ""}
                     type="text"
                     {...register("project_description", {
                       required: "This field is required",
@@ -587,7 +569,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                   <div className="flex-1 grid grid-cols-3 gap-2">
                     <input
                       type="text"
-                      defaultValue={owner?.address || " "}
+                      defaultValue={owner?.ownerAddress || " "}
                       {...register("address", {
                         required: "Address is required",
                       })}
@@ -601,7 +583,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                     />
                     <input
                       type="text"
-                      defaultValue={owner?.postalCode || " "}
+                      defaultValue={owner?.postal_code || " "}
                       {...register("postalCode", {
                         required: "Postal code is required",
                       })}
@@ -616,7 +598,6 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                     type="submit"
                     className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm cursor-pointer"
                   >
-                    {isLoading ? "Updating..." : "Update"}
                   </button>
                 </div>
               </form>

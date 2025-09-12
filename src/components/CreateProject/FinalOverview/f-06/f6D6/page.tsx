@@ -2,9 +2,19 @@
 
 import React, { useState } from 'react';
 
-export default function F6D6() {
+interface allDataProps {
+    owners: any[];
+    projectDescription: string;
+}
+
+export default function F6D6({ allData }: { allData: allDataProps }) {
+    
+    const owner = allData?.owners?.[0] || {}
+    const projectDescription = allData?.projectDescription || {}; 
+    
     const [formData, setFormData] = useState({
-        projectDescription: 'PROJECT DISCRIPISON',
+
+        projectDescription: 'N/A',
         responsibleAuthority: 'YDOM',
         submissionDate: 'DATE OF PROJECT',
         protocolNumber: ''

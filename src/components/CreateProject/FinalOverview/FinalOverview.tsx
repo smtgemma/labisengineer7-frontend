@@ -535,32 +535,38 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F6D1 allData={allData} />
               )}
               {selected ===
-                "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
+                "YΔ Ανάληψης Έργου Μηχανικού" && (
                   <F6D2 allData={allData} />
                 )}
               {selected ===
-                "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
+                "YΔ Φέροντα Οργανισμού" && (
                   <F6D3 allData={allData} />
                 )}
-              {selected === "YΔ Φέροντα Οργανισμού" && (
+              {selected === "YΔ Συνιδιοκτητών" && (
                 <F6D4 allData={allData} />
               )}
-              {selected === "YΔ Συνιδιοκτητών" && (
-                <F6D7 allData={allData} />
-              )}
               {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
-                <F6D8 allData={allData} />
+                <F6D5 allData={allData} />
               )}
               {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
-                <F6D9 allData={allData} />
+                <F6D6 allData={allData} />
               )}
               {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
-                <F6D10 allData={allData} />
+                <F6D7 allData={allData} />
               )}
               {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
+                <F6D8 allData={allData} />
+              )}
+              {selected === "Πίνακας" && (
+                <F6D9 allData={allData} />
+              )}
+              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
+                <F6D10 allData={allData} />
+              )}
+              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
                 <F6D11 allData={allData} />
               )}
-              {selected === "ylSUSNZTkC0rKv46VI1lKk0Q5_612" && (
+              {selected === "νημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
                 <F6D12 allData={allData} />
               )}
 
