@@ -73,6 +73,8 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
   const onSubmit = async (data: FormValues) => {
     setLoading(true);
+    //Tahsin
+    //why static description
     const description: string =
       "ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ ΟΡΓΑΝΙΣΜΟΥ  ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ A-4 ΤΟΥ Α ΟΡΟΦΟΥ";
     try {
@@ -107,7 +109,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
   return (
     <div className="space-y-6 ">
       <div className="">
-        {/* ktimatologio   */}
+        {/* ktimatologio*/}
         <div>
           <div
             className={`

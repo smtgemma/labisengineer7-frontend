@@ -24,6 +24,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   // routing and id catch
   const handleProjectId = (id: string) => {
+
     dispatch(
       setTheProjectId({
         title,
@@ -31,6 +32,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         id,
       })
     );
+
     // need to chnages the routing
     //Tahsin
     // services -1 

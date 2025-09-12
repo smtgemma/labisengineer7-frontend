@@ -1,81 +1,23 @@
-import React, { useEffect, useRef, useState } from "react";
-import { FileSpreadsheet, FileText } from "lucide-react";
+import { makeStore, RootState } from "@/redux/store";
+import { downloadZip } from "client-zip";
 import { saveAs } from "file-saver";
-import ReactDOMServer from "react-dom/server";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import TemplateFile from "./Template";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import { downloadZip } from "client-zip";
-import { Provider } from "react-redux";
-import { makeStore } from "@/redux/store";
-import FileOneDesignEleven from "./file-one/design-eleven/page";
+import { FileSpreadsheet, FileText } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import ReactDOMServer from "react-dom/server";
+import { Provider, useSelector } from "react-redux";
 
-import F1D4 from "@/components/CreateProject/FinalOverview/f-01/f1D4/page";
-import F1D5 from "@/components/CreateProject/FinalOverview/f-01/f1D5/page";
-import F1D6 from "@/components/CreateProject/FinalOverview/f-01/f1D6/page";
-import F1D7 from "@/components/CreateProject/FinalOverview/f-01/f1D7/page";
-import F1D8 from "@/components/CreateProject/FinalOverview/f-01/f1D8/page";
-import F1D9 from "@/components/CreateProject/FinalOverview/f-01/f1D9/page";
-import F2D1 from "./f-02/f2D1/page";
-import F2D2 from "./f-02/f2D2/page";
-import F2D3 from "./f-02/f2D3/page";
-import F3D1 from "./f-03/f3D1/page";
-import F3D2 from "./f-03/f3D2/page";
-import F3D3 from "./f-03/f3D3/page";
-import F3D4 from "./f-03/f3D4/page";
-import F3D5 from "./f-03/f3D5/page";
-import F3D6 from "./f-03/f3D6/page";
 // import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
-import F4D1 from "./f-04/f4D1/page";
-import F4D2 from "./f-04/f4D2/page";
-import F4D3 from "./f-04/f4D3/page";
-import F4D6 from "./f-04/f4D6/page";
-import F4D7 from "./f-04/f4D7/page";
-import F4D8 from "./f-04/f4D8/page";
-import F4D9 from "./f-04/f4D9/page";
-import F4D11 from "./f-04/f4D11/page";
-import F5D1 from "./f-05/f5D1/page";
-import F5D2 from "./f-05/f5D2/page";
-import F5D3 from "./f-05/f5D3/page";
-import F5D4 from "./f-05/f5D4/page";
 import F6D1 from "./f-06/f6D1/page";
+import F6D10 from "./f-06/f6D10/page";
 import F6D2 from "./f-06/f6D2/page";
 import F6D3 from "./f-06/f6D3/page";
 import F6D4 from "./f-06/f6D4/page";
 import F6D7 from "./f-06/f6D7/page";
 import F6D8 from "./f-06/f6D8/page";
 import F6D9 from "./f-06/f6D9/page";
-import F6D10 from "./f-06/f6D10/page";
-import F7D1 from "./f-07/f7D1/page";
-import F7D2 from "./f-07/f7D2/page";
-import F7D3 from "./f-07/f7D3/page";
-import F7D4 from "./f-07/f7D4/page";
-import F7D5 from "./f-07/f7D5/page";
-import F8D1 from "./f-08/f8D1/page";
-import F8D2 from "./f-08/f8D2/page";
-import F8D3 from "./f-08/f8D3/page";
-import F9D1 from "./f-09/f9D1/page";
-import F9D2 from "./f-09/f9D2/page";
-import F9D3 from "./f-09/f9D3/page";
 import F10D1 from "./f-10/f10D1/page";
-import F10D2 from "./f-10/f10D2/page";
-import F10D3 from "./f-10/f10D3/page";
-import F11D1 from "./f-11/f11D1/page";
-import F11D2 from "./f-11/f11D2/page";
-import F12D1 from "./f-12/f11D1/page";
-import F12D2 from "./f-12/f12D2/page";
-import F13D1 from "./f-13/f13D1/page";
-import F13D2 from "./f-13/f13D2/page";
-import F13D3 from "./f-13/f13D3/page";
-import F13D4 from "./f-13/f13D4/page";
-import F13D5 from "./f-13/f13D5/page";
-import F13D6 from "./f-13/f13D6/page";
-import F14D1 from "./f-14/f14D1/page";
-import F14D2 from "./f-14/f14D2/page";
-import F14D3 from "./f-14/f14D3/page";
-import F15D1 from "./f-15/f15D1/page";
 
 import {
   useDownloadTemplatePdfQuery,
@@ -83,16 +25,11 @@ import {
   useGetOwnerTemplateQuery,
 } from "@/redux/features/templates/allTemplateSlice";
 
-import F6D11 from "./f-06/f6D11/page";
-import { setActionSelectName } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { toast } from "sonner";
-import { FaRegCopy, FaRegCopyright } from "react-icons/fa6";
-import F5D5 from "./f-05/f5D5/page";
-import F6D12 from "./f-06/f6D12/page";
-import { ProjectResponse } from "./shared/allDataType";
 import PdfZipDownloader from "@/utility/PdfZipDownloader";
-import F6D5 from "./f-06/f6D5/page";
-import F6D6 from "./f-06/f6D6/page";
+import { FaRegCopy } from "react-icons/fa6";
+import { toast } from "sonner";
+import F6D11 from "./f-06/f6D11/page";
+import F6D12 from "./f-06/f6D12/page";
 
 export interface UserData {
   id: string;
@@ -179,10 +116,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   // modal close click outside
   const modalContentRef = useRef<HTMLDivElement>(null);
 
-  const userData = useSelector(
-    (state: RootState) => state.user.userData as UserData | null
-  );
+  const userData = useSelector((state: any) => state.user.userData);
 
+  console.log(userData)
   //2. DOWNLOAD CSV FILE
   const downloadCSV = () => {
     const headers = ["First Name", "Surname", "Father Name", "VAT No"];
