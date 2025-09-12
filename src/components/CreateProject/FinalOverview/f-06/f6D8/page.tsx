@@ -487,8 +487,7 @@ interface FormData {
 interface allDataProps {
     owners: any[];
     engineers: any[]
-    technical_description: string;
-    horizontalPropertyName: string;
+    projectDescription: string;
 }
 
 
@@ -496,10 +495,9 @@ interface allDataProps {
 export default function F6D8({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    // const owners = Array.isArray(allData?.owners) ? allData.owners : [];
+    const owners = Array.isArray(allData?.owners) ? allData.owners : [];
     const engineers = allData?.engineers || {};
-    const { technical_description } = allData || {};
-    const { horizontalPropertyName } = allData || {};
+    const { projectDescription } = allData || {};
 
 
     console.log(allData)
@@ -647,7 +645,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.afm || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owner?.taxIdentificationNumber || owner?.tax_identification_number || "N/A"}</div>
                                     <div className="w-32 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
                                 </div>
                             </div>
@@ -658,16 +656,16 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                     Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                                 </p>
                                 <p className="mb-4">
-                                    ως κύριος/ιδιοκτήτης του ακινήτου {technical_description || "N/A"}/ {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού([{owner?.address || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, Specialty Engineer AM TEE)
+                                    ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ horiontal property που βρίσκεται επί της οδού([{owner?.ownerAddress || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, Specialty Engineer AM TEE)
                                 </p>
 
                                 <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
-                                {/* <p className=" mb-6">{project_description || "N/A"}</p> */}
+                                <p className=" mb-6">{projectDescription || "N/A"}</p>
                             </div>
 
                             {/* Additional disclaimer text */}
                             <div className="space-y-4 text-sm m p-4">
-                                <p>επί της οδού {owner?.address || "N/A"}, {owner?.city || "N/A"} , {owner?.postalCode || "N/A"} ( FOR PROPERTY)</p>
+                                <p>επί της οδού {owner?.ownerAddress || "N/A============="}, {owner?.city || "N/A"} , {owner?.postal_code || "N/A"} ( FOR PROPERTY)</p>
                                 <p>
                                     τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
                                 <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>
