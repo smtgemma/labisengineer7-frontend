@@ -72,7 +72,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <div>
             <button
               onClick={() => handleProjectId(id)}
-              className="bg-[#017AFF] hover:bg-blue-600 text-white px-6 py-3 rounded-md font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+              className="bg-[#017AFF] hover:bg-blue-600 text-white px-6 py-3 rounded-md font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 cursor-pointer"
             >
               Begin Project
             </button>

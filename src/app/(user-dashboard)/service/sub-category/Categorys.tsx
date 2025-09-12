@@ -1,5 +1,6 @@
 "use client";
 
+import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { setMultipleSubcategory } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import {
   Building2,
@@ -260,12 +261,11 @@ const Category = () => {
 
       {/* Save Button */}
       <div className="flex justify-end mt-8">
-        <button
+        <PrimaryButton
+          label="Save & Continue"
           onClick={handleSave}
-          className="bg-primary hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm"
         >
-          Save & Continue
-        </button>
+        </PrimaryButton>
       </div>
     </div>
   );

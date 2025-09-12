@@ -18,54 +18,73 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { overflow } from "html2canvas/dist/types/css/property-descriptors/overflow";
 import { CodeSquare } from "lucide-react";
 
+
+// {
+//   "firstName": "STAVROULA",
+//   "lastName": "KOUNTRAROU",
+//   "fatherFirstLastName": "NIKOLAOS KOUNTRAROS",
+//   "mothersFirstLastName": "CHRISTINA KOUNTRAROU",
+//   "dateOfBirth": "1967-08-14",
+//   "placeOfBirth": "KASTANEI KILKIS",
+//   "ownerAddress": "POLLES ELLIES",
+//   "addressNumber": "3",
+//   "city": "AIGINIS",
+//   "postalCode": "18010",
+//   "idNumber": "X116649",
+//   "taxIdentificationNumber": "055110554",
+//   "email": "",
+//   "mobile": ""
+// }, 
+
+
 type OwnerData = {
-  first_name: string; // Όνομα
-  last_name: string; // Επώνυμο
-  father_first_last_name: string; // Όνοματεπώνυμο Πατρός
-  mothers_first_last_name: string; // Όνοματεπώνυμο Μητρός
-  date_of_birth: string; // Ημερομηνία Γέννησης
-  place_of_birth: string; // Τόπος Γέννησης
-  owner_address: string; // Διεύθυνση Ιδιοκτήτη
-  address_number: string; // Αριθμός Διεύθυνσης Ιδιοκτήτη
+  firstName: string; // Όνομα
+  lastName: string; // Επώνυμο
+  fatherFirstLastName: string; // Όνοματεπώνυμο Πατρός
+  mothersFirstLastName: string; // Όνοματεπώνυμο Μητρός
+  dateOfBirth: string; // Ημερομηνία Γέννησης
+  placeOfBirth: string; // Τόπος Γέννησης
+  ownerAddress: string; // Διεύθυνση Ιδιοκτήτη
+  addressNumber: string; // Αριθμός Διεύθυνσης Ιδιοκτήτη
   city: string; // Πόλη
   postal_code: string; // Ταχυδρομικός Κώδικας
-  id_number: string; // Α.Δ.Τ
-  tax_identification_number: string; // Αριθμός Φορολογικού Μητρώου (ΑΦΜ)
+  idNumber: string; // Α.Δ.Τ
+  taxIdentificationNumber: string; // Αριθμός Φορολογικού Μητρώου (ΑΦΜ)
   email: string; // Email
   mobile: string; // Τηλέφωνο
   selected?: boolean;
 };
 
 type ProjectData = {
-  project_description: string;
-  project_description2: string;
-  horizontal_property_name_two: string;
-  horizontal_property_name: string;
+  projectDescription: string;
+  projectDescription2: string;
+  horizontalPropertyNameTwo: string;
+  horizontalPropertyName: string;
   construction: string;
-  property_postal_code: string;
-  municipality_community: string;
-  property_address: string;
-  property_number: string;
-  property_place: string;
-  property_type: string;
+  propertyPostalCode: string;
+  municipalityCommunity: string;
+  propertyAddress: string;
+  propertyNumber: string;
+  propertyPlace: string;
+  propertyType: string;
   cadastralCode: string;
-  kaek_property: string;
-  permit_number: string;
-  title_area: string;
-  floor_property: string;
+  kaekProperty: string;
+  permitNumber: string;
+  titleArea: string;
+  floorProperty: string;
 };
 
 interface LicenseLegalFormData {
-  plot_area: string;
-  within_outside_city_plan: string;
-  permit_number: string;
-  issuing_authority: string;
-  legalization_statement_number: string;
-  engineer_full_name: string;
-  electronic_code: string;
-  tee_registration_number: string;
+  plotArea: string;
+  withinOutsideCityPlan: string;
+  permitNumber: string;
+  issuingAuthority: string;
+  legalizationStatementNumber: string;
+  engineerFullName: string;
+  electronicCode: string;
+  teeRegistrationNumber: string;
   specialty: string;
-  inclusion_date_legalization: string;
+  inclusionDateLegalization: string;
 }
 
 interface EPCFormValues {
@@ -96,7 +115,7 @@ type FormValues = ProjectData &
   EPCFormValues &
   OtherOpation &
   OthersValue & {
-    owners: OwnerData[];
+    owners: any[];
   };
 
 const inputStyle =
@@ -106,14 +125,10 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const [ownerInfoShow, setOwnerInfoShow] = useState<boolean>(true);
   const [ownerInfoShow2, setOwnerInfoShow2] = useState<number | null>(0);
   const [ownerInfoShow3, setOwnerInfoShow3] = useState<boolean>(true);
-  const [ownerInfoShow4, setOwnerInfoShow4] = useState<boolean>(true);
-  const [ownerInfoShow5, setOwnerInfoShow5] = useState<boolean>(true);
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
   const user: any = useSelector((state: RootState) => state.user.userData);
 
-
-  
-
+  console.log(stepByStepData)
   const { register, control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       owners: stepByStepData.ownerBaseData.map((owner: any) => ({
@@ -136,6 +151,8 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
       })),
     },
   });
+
+
   const dispatch = useDispatch();
   const hasSubmittedRef = useRef(false);
 
@@ -151,13 +168,12 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   const descrptionTasks = stepByStepData.descriptionTask;
   const filesData = stepByStepData.multiFiles;
   const descriptonAndYdom = stepByStepData.description;
-
   const description = descriptonAndYdom?.description;
   // const ydom: string[] =
   //   descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
 
   // console.log("ydom:", ydom);
-  console.log("allExtreactData:", allExtreactData);
+  console.log("allExtreactData:", stepByStepData);
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
 
@@ -171,12 +187,13 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
       createdById: user?.userId,
       subCategories: subCategoryData,
       descrptionTasks: descrptionTasks,
-      ydom: "",
-      technical_description: allExtreactData.technical_description,
+      ydom: description?.ydom,
+      technicalDescription: allExtreactData?.technical_description,
       ...data,
     };
 
     dispatch(setAiExtreactAndInputData(DataPost));
+
     console.log("sever send Data:", DataPost);
 
     const formData = new FormData();
@@ -186,12 +203,12 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
     formData.append(
       "data",
       JSON.stringify({
-        serviceId: projectData.id,
-        createdById: user.userId,
+        serviceId: projectData?.id,
+        createdById: user?.userId,
         subCategories: subCategoryData,
         descrptionTasks: descrptionTasks,
-        ydom: "",
-        technical_description: allExtreactData.technical_description,
+        ydom: description?.ydom,
+        technicalDescription: allExtreactData?.technical_description,
         ...data,
       })
     );
@@ -211,6 +228,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   useEffect(() => {
     if (currentStep === 4 && filesData?.length && !hasSubmittedRef.current) {
       hasSubmittedRef.current = true; // lock it
+      // create-project 
       handleSubmit(onSubmitAiDataSend)();
     }
   }, [currentStep]);
@@ -225,7 +243,6 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
           Here is the extracted information. Please review and confirm.
         </p>
       </div>
-
       <form
         onSubmit={handleSubmit(onSubmitAiDataSend)}
         className="max-w-6xl mx-auto   rounded-xl mt-13"
@@ -262,7 +279,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Περιγραφή Έργου (1)
                   </label>
                   <textarea
-                    {...register("project_description")}
+                    {...register("projectDescription")}
                     className={`${inputStyle} h-[100px] `}
                     readOnly
                     defaultValue={description[0]?.value || "N/A"}
@@ -274,7 +291,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     ΑΕΚ Ακινήτου
                   </label>
                   <input
-                    {...register("kaek_property")}
+                    {...register("kaekProperty")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.kaek_property}
@@ -287,7 +304,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Title_area (Εμβαδόν Ιδιοκτησίας)
                   </label>
                   <input
-                    {...register("title_area")}
+                    {...register("titleArea")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.title_area}
@@ -299,7 +316,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Floor_property (Όροφος Ακινήτου)
                   </label>
                   <input
-                    {...register("floor_property")}
+                    {...register("floorProperty")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.floor_property}
@@ -311,7 +328,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Place_property (Αριθμός Ακινήτου)
                   </label>
                   <input
-                    {...register("property_place")}
+                    {...register("propertyPlace")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.property_place}
@@ -323,7 +340,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     property_number (Αριθμός Διεύθυνσης Ακινήτου)
                   </label>
                   <input
-                    {...register("property_number")}
+                    {...register("propertyNumber")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.property_number}
@@ -335,7 +352,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Property_address (Διεύθυνση Ακινήτου)
                   </label>
                   <input
-                    {...register("property_address")}
+                    {...register("propertyAddress")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.property_address}
@@ -347,7 +364,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Municipality_community (Δήμος/Κοινότητα Ακινήτου)
                   </label>
                   <input
-                    {...register("municipality_community")}
+                    {...register("municipalityCommunity")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.municipality_community}
@@ -359,7 +376,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Property_postal_code (Ταχυδρομικός Κώδικας Ακινήτου)
                   </label>
                   <input
-                    {...register("property_postal_code")}
+                    {...register("propertyPostalCode")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.property_postal_code}
@@ -371,7 +388,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Horizontal_property_name (Οριζόντια Ιδιοκτησία 1)
                   </label>
                   <input
-                    {...register("horizontal_property_name")}
+                    {...register("horizontalPropertyName")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.horizontal_property_name}
@@ -383,7 +400,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Horizontal_property_name_two (Οριζόντια Ιδιοκτησία 2)
                   </label>
                   <input
-                    {...register("horizontal_property_name_two")}
+                    {...register("horizontalPropertyNameTwo")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.horizontal_property_name_two}
@@ -426,7 +443,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                       First_name (Όνομα)
                     </label>
                     <input
-                      {...register(`owners.${index}.first_name`)}
+                      {...register(`owners.${index}.firstName`)}
                       defaultValue={field.first_name}
                       className={`${inputStyle} `}
                       readOnly
@@ -439,7 +456,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                       Last_name (Επώνυμο)
                     </label>
                     <input
-                      {...register(`owners.${index}.last_name`)}
+                      {...register(`owners.${index}.lastName`)}
                       defaultValue={field.last_name}
                       className={inputStyle}
                       readOnly
@@ -452,7 +469,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                       Father_first_last_name (Όνοματεπώνυμο Πατρός)
                     </label>
                     <input
-                      {...register(`owners.${index}.father_first_last_name`)}
+                      {...register(`owners.${index}.fatherFirstLastName`)}
                       defaultValue={field.father_first_last_name}
                       className={inputStyle}
                       readOnly
@@ -465,7 +482,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                       Mothers_first_last_name (Όνοματεπώνυμο Μητρός)
                     </label>
                     <input
-                      {...register(`owners.${index}.mothers_first_last_name`)}
+                      {...register(`owners.${index}.mothersFirstLastName`)}
                       defaultValue={field.mothers_first_last_name}
                       className={inputStyle}
                       readOnly
@@ -479,7 +496,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     </label>
                     <input
                       type="text"
-                      {...register(`owners.${index}.date_of_birth`)}
+                      {...register(`owners.${index}.dateOfBirth`)}
                       defaultValue={field.date_of_birth}
                       className={inputStyle}
                       readOnly
@@ -492,7 +509,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                       Place_of_birth (Τόπος Γέννησης)
                     </label>
                     <input
-                      {...register(`owners.${index}.place_of_birth`)}
+                      {...register(`owners.${index}.placeOfBirth`)}
                       defaultValue={field.place_of_birth}
                       className={inputStyle}
                       readOnly
@@ -505,7 +522,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                       Owner_address (Διεύθυνση Ιδιοκτήτη)
                     </label>
                     <input
-                      {...register(`owners.${index}.owner_address`)}
+                      {...register(`owners.${index}.ownerAddress`)}
                       defaultValue={field.owner_address}
                       className={inputStyle}
                       readOnly
@@ -518,7 +535,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                       Address_number (Αριθμός Διεύθυνσης Ιδιοκτήτη)
                     </label>
                     <input
-                      {...register(`owners.${index}.address_number`)}
+                      {...register(`owners.${index}.addressNumber`)}
                       defaultValue={field.address_number}
                       className={inputStyle}
                       readOnly
@@ -557,7 +574,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                       Id_number (Α.Δ.Τ)
                     </label>
                     <input
-                      {...register(`owners.${index}.id_number`)}
+                      {...register(`owners.${index}.idNumber`)}
                       defaultValue={field.id_number}
                       className={inputStyle}
                       readOnly
@@ -570,7 +587,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                       Tax_identification_number (ΑΦΜ)
                     </label>
                     <input
-                      {...register(`owners.${index}.tax_identification_number`)}
+                      {...register(`owners.${index}.taxIdentificationNumber`)}
                       defaultValue={field.tax_identification_number}
                       className={inputStyle}
                       readOnly
@@ -646,7 +663,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     plot_area (Εμβαδόν Οικοπέδου)
                   </label>
                   <input
-                    {...register("plot_area")}
+                    {...register("plotArea")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData.plot_area}
@@ -654,10 +671,10 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    Within_outside_city_plan (Εντός/Εκτός Σχεδίου Πόλης)
+                    withinOutsideCityPlan (Εντός/Εκτός Σχεδίου Πόλης)
                   </label>
                   <input
-                    {...register("within_outside_city_plan")}
+                    {...register("withinOutsideCityPlan")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData.within_outside_city_plan}
@@ -666,10 +683,10 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
 
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    Permit_number (Αριθμός Οικοδομικής Άδειας){" "}
+                    permitNumber (Αριθμός Οικοδομικής Άδειας){" "}
                   </label>
                   <input
-                    {...register("permit_number")}
+                    {...register("permitNumber")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData.permit_number}
@@ -681,7 +698,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Issuing_authority (Εκδούσα Αρχή)
                   </label>
                   <input
-                    {...register("issuing_authority")}
+                    {...register("issuingAuthority")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData.issuing_authority}
@@ -692,7 +709,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Legalization_statement_number (Αριθμός Δήλωσης Νομ)
                   </label>
                   <input
-                    {...register("legalization_statement_number")}
+                    {...register("legalizationStatementNumber")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData.legalization_statement_number}
@@ -704,7 +721,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Engineer_full_name (Στοιχεία Μηχανικού)
                   </label>
                   <input
-                    {...register("engineer_full_name")}
+                    {...register("engineerFullName")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData.engineer_full_name}
@@ -716,7 +733,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Electronic_code (Ηλεκτρονικός Κωδικός Δήλωσης)
                   </label>
                   <input
-                    {...register("electronic_code")}
+                    {...register("electronicCode")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData.electronic_code}
@@ -728,7 +745,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Tee_registration_number (Αριθμός Μητρώου ΤΕΕ)
                   </label>
                   <input
-                    {...register("tee_registration_number")}
+                    {...register("teeRegistrationNumber")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData.tee_registration_number}
@@ -753,7 +770,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
                     Νομιμοποίησης)
                   </label>
                   <input
-                    {...register("inclusion_date_legalization")}
+                    {...register("inclusionDateLegalization")}
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.inclusion_date_legalization}

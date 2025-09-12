@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { toast } from "sonner";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/redux/store";
-import { UserData } from "@/redux/features/auth/userDataCatchSlice";
 import {
   setActionSelectName,
   setSelectTemplate,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { CheckCircle, Clock } from "lucide-react";
+import { RootState } from "@/redux/store";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Loading from "@/components/Others/Loading";
-import { useGetCreditServiceQuery } from "@/redux/features/credit/creditSlice";
+import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
 
 interface Service {
   id: string;
@@ -156,11 +153,11 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   );
   const [selected, setSelected] = useState<string[]>(["technical", "engineer"]);
   const [template, setTemplate] = useState([]);
-
+  const { data: remainingCredit } = useRemainingCreditQuery("")
+  const [useCredit] = useUseCreditsMutation()
   const dispatch = useDispatch();
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
   const id = stepByStepData?.projectId?.id;
-
   const { data, isLoading } = useGetCreditServiceQuery(id);
   console.log(data);
 
@@ -197,7 +194,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     }
   };
 
-  console.log(selected);
+  console.log("Remaining Credit", remainingCredit?.data?.credits)
   // const userData = useSelector(
   //   (state: RootState) => state.user.userData as UserData | null
   // );
@@ -210,11 +207,16 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     }
   }, [selected]);
 
+
+  const handleUseCredit = async (number: number) => {
+    const res = await useCredit(number)
+    console.log(res)
+  }
+
   if (isLoading) {
     return <Loading />;
   }
 
-  console.log(selected);
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -358,13 +360,14 @@ THAISN */}
               <span>Total</span>
               <span>{subtotal}</span>
             </div>
-            <button className="w-full cursor-pointer mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
+
+            <button onClick={() => handleUseCredit(subtotal)} className="w-full cursor-pointer mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
               Proceed to Credit
             </button>
 
             <div className="mt-6 text-xs text-gray-500 text-center">
               <p className="font-bold mb-1 text-lg">My Total Credit:</p>
-              <p className="font-bold  text-lg">1000</p>
+              <p className="font-bold  text-lg">{remainingCredit?.data?.credits}</p>
             </div>
           </div>
         </div>

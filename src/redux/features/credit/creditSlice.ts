@@ -5,10 +5,25 @@ const creditApi = baseUrlApi.injectEndpoints({
     getCreditService: build.query({
       query: (id) => ({
         url: `/features/getAllFeatures/${id}`,
-        method: "get",
+        method: "GET",
       }),
     }),
+    remainingCredit: build.query({
+      query: () => ({
+        url: `/features/remaining-credits`,
+        method: "GET",
+      }),
+    }),
+    useCredits: build.mutation({
+      query: (data: any) => ({
+        url: `/credits/use-credits`,
+        method: "POST",
+        data: { totalCredits: data }
+      }),
+    }),
+
+
   }),
 });
 
-export const { useGetCreditServiceQuery } = creditApi;
+export const { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } = creditApi;

@@ -73,13 +73,21 @@ export default function MainNavLink({
     return (
       <div key={link.name}>
         <div
-          className={`flex items-center justify-between gap-3 px-3 py-3 rounded-md cursor-pointer ${
-            isActive(link.href)
-              ? "bg-primary text-white"
+          className={`flex items-center justify-between gap-3 px-3 py-3 rounded-md cursor-pointer ${isActive(link.href)
+              ? "text-white" // text stays white
               : dark
-              ? "text-white hover:bg-primary/40"
-              : "hover:bg-primary/10 hover:text-primary"
-          }`}
+                ? "text-white hover:bg-primary/40"
+                : "hover:bg-primary/10 hover:text-primary"
+            }`}
+          style={
+            isActive(link.href)
+              ? {
+                background:
+                  "linear-gradient(44deg, #017AFF 37.44%, #61BDFF 67.11%)",
+              }
+              : {}
+          }
+
           onClick={() => hasSubItems && toggleDropdown(link.name)}
           onMouseEnter={() => setIsShort(true)}
         >
@@ -138,21 +146,19 @@ export default function MainNavLink({
 
         {hasSubItems && link.subItems && isShort && (
           <div
-            className={`pl-6 transition-all duration-300 ease-in-out overflow-hidden ${
-              openDropdown === link.name ? "max-h-96" : "max-h-0"
-            }`}
+            className={`pl-6 transition-all duration-300 ease-in-out overflow-hidden ${openDropdown === link.name ? "max-h-96" : "max-h-0"
+              }`}
           >
             {link.subItems.map((subItem) => (
               <Link
                 key={subItem.name}
                 href={subItem.href}
-                className={`flex items-center gap-3 px-3 py-2 rounded-md overflow-hidden ${
-                  isActive(subItem.href)
+                className={`flex items-center gap-3 px-3 py-2 rounded-md overflow-hidden ${isActive(subItem.href)
                     ? "bg-primary text-white"
                     : dark
-                    ? "text-white hover:bg-primary/40"
-                    : "hover:bg-primary/10 hover:text-primary"
-                }`}
+                      ? "text-white hover:bg-primary/40"
+                      : "hover:bg-primary/10 hover:text-primary"
+                  }`}
               >
                 {isShort && <span className="text-nowrap">{subItem.name}</span>}
               </Link>
@@ -165,29 +171,25 @@ export default function MainNavLink({
 
   return (
     <div
-      className={`flex flex-col min-h-screen relative ${
-        dark ? "bg-black" : "bg-white"
-      }`}
+      className={`flex flex-col min-h-screen relative ${dark ? "bg-black" : "bg-white"
+        }`}
     >
       <div className="lg:block absolute top-16 right-0 hidden z-50">
         <button
-          className={`rounded-md transition-colors w-fit shadow-md px-3 z-50 ${
-            dark ? "bg-primary" : "bg-white hover:bg-gray-100"
-          }`}
+          className={`rounded-md transition-colors w-fit shadow-md px-3 z-50 ${dark ? "bg-primary" : "bg-white hover:bg-gray-100"
+            }`}
           onClick={() => setIsShort(!isShort)}
           aria-label="Toggle menu"
         >
           {isShort ? (
             <LuChevronsRight
-              className={`h-6 w-6 z-50 ${
-                dark ? "hover:text-white" : "hover:text-primary"
-              }`}
+              className={`h-6 w-6 z-50 ${dark ? "hover:text-white" : "hover:text-primary"
+                }`}
             />
           ) : (
             <LuChevronsLeft
-              className={`h-6 w-6 z-50 ${
-                dark ? "hover:text-white" : "hover:text-primary"
-              }`}
+              className={`h-6 w-6 z-50 ${dark ? "hover:text-white" : "hover:text-primary"
+                }`}
             />
           )}
         </button>
@@ -219,11 +221,10 @@ export default function MainNavLink({
           <Link
             key={link.name}
             href={link.href}
-            className={`flex items-center gap-3 px-3 py-3 rounded-md ${
-              isActive(link.href)
+            className={`flex items-center gap-3 px-3 py-3 rounded-md ${isActive(link.href)
                 ? "bg-primary text-white"
                 : "hover:bg-primary/10"
-            }`}
+              }`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -244,9 +245,8 @@ export default function MainNavLink({
 
         <div
           onClick={handleLogout}
-          className={`flex items-center gap-3 px-3 py-3 rounded-md cursor-pointer ${
-            dark ? "hover:bg-primary/40" : "hover:bg-primary/10"
-          }`}
+          className={`flex items-center gap-3 px-3 py-3 rounded-md cursor-pointer ${dark ? "hover:bg-primary/40" : "hover:bg-primary/10"
+            }`}
         >
           <IoLogOut
             className={`min-w-6 min-h-6 ${dark ? "text-white" : "text-black"}`}

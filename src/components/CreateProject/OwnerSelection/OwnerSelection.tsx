@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 type Owner = {
   first_name: string; // Όνομα
   last_name: string; // Επώνυμο
-  fatherName: string; // Όνοματεπώνυμο Πατρός
+  father_first_name: string; // Όνοματεπώνυμο Πατρός
   mothers_first_last_name: string; // Όνοματεπώνυμο Μητρός
   date_of_birth: string; // Ημερομηνία Γέννησης
   place_of_birth: string; // Τόπος Γέννησης
@@ -83,13 +83,13 @@ const OwnerSelection = () => {
   const ownerData = useSelector((state: any) => state.aiData.aiDataState);
 
   const [isOwner, setIsOwner] = useState<Owner[]>(ownerData.owners);
-  const [ydom, setYdom] = useState<string>(ownerData?.municipality_community);
+  const [ydom, setYdom] = useState<string>(ownerData?.ydom);
 
   const description1 = ownerData?.project_descriptions
-    .filter((_: any, i: number) => i % 2 === 0)
+    ?.filter((_: any, i: number) => i % 2 === 0)
     .join(" & ");
   const description2 = ownerData?.project_descriptions
-    .filter((_: any, i: number) => i % 2 === 1)
+    ?.filter((_: any, i: number) => i % 2 === 1)
     .join(" & ");
 
   const result = [description1, description2];
@@ -106,7 +106,7 @@ const OwnerSelection = () => {
     const emptyOwner: Owner = {
       first_name: data.firstName || "", // Όνομα
       last_name: data.surname || "", // Επώνυμο
-      fatherName: data.fatherName || "", // Πατέρας
+      father_first_name: data.fatherName || "", // Πατέρας
       mothers_first_last_name: "", // Μητέρα
       date_of_birth: "", // Ημερομηνία Γέννησης
       place_of_birth: "", // Τόπος Γέννησης
@@ -131,6 +131,7 @@ const OwnerSelection = () => {
     setYdomModalOpen(true);
   };
 
+  console.log("checking ai extracted data", ownerData)
   // Save owner (new or edited)
   const handleSave = () => {
     if (newText.trim() === "") return;
@@ -150,7 +151,7 @@ const OwnerSelection = () => {
       const updatedOwner: Owner = {
         first_name: data.firstName || "", // Όνομα
         last_name: data.surname || "", // Επώνυμο
-        fatherName: data.fatherName || "", // Πατέρας
+        father_first_name: data.fatherName || "", // Πατέρας
         mothers_first_last_name: "", // Μητέρα
         date_of_birth: "", // Ημερομηνία Γέννησης
         place_of_birth: "", // Τόπος Γέννησης
@@ -269,6 +270,7 @@ const OwnerSelection = () => {
           </button>
         </div>
       </div>
+      <p>Please select one</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
         {descriptionShow?.map((property: string, index: number) => (
           <div
@@ -320,7 +322,7 @@ const OwnerSelection = () => {
 
 
       {/* need to work here in modal
-Tahsin */}
+     Tahsin */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm relative">
           <div className="flex justify-end items-start mb-4">
@@ -373,6 +375,7 @@ Tahsin */}
         </div>
       )}
       {/* Owners Grid */}
+      <p>Please Choose your Owner</p>
       {isOwner?.length === 0 && (
         <div className="flex justify-center w-full mt-20">
           <div className="border border-dashed p-20 border-blue-500 rounded-xl">
@@ -433,7 +436,7 @@ Tahsin */}
                   Father's Name:
                 </label>
                 <span className="text-gray-900 font-medium">
-                  {owner?.fatherName || "Not set"}
+                  {owner?.father_first_name || "Not set"}
                 </span>
               </div>
               <div className="flex justify-between items-center">
@@ -454,7 +457,7 @@ Tahsin */}
         </button>
       </div> */}
 
-      {/* Add Modal */}
+      {/* Add Owner */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-[rgba(0,0,0,0.5)] bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 w-full max-w-md mx-4">
