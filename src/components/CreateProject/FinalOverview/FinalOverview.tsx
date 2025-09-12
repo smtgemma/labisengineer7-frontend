@@ -92,6 +92,7 @@ import F6D12 from "./f-06/f6D12/page";
 import { ProjectResponse } from "./shared/allDataType";
 import PdfZipDownloader from "@/utility/PdfZipDownloader";
 import F6D5 from "./f-06/f6D5/page";
+import F6D6 from "./f-06/f6D6/page";
 
 export interface UserData {
   id: string;
@@ -142,14 +143,14 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const projectCodeId = stepByStepData.projectIdCode;
   const id = stepByStepData?.projectIdCode;
   const projectId = id?.result?.project?.id;
-  const userId = dataAllFIled?.createdById; 
+  const userId = dataAllFIled?.createdById;
 
   const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
   const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
   // console.log(allData?.data, "===============================");
-  const allData = allTemplateData?.data || {} ;
+  const allData = allTemplateData?.data || {};
   console.log(allData, "all data for all template===================================================================")
 
 
@@ -189,7 +190,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     saveAs(blob, "owners.csv");
   };
-   
+
   // const templates = [
   //   { name: "TemplateFile", component: <TemplateFile /> },
 
@@ -306,58 +307,28 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   }, [isModalOpen]);
 
   const templates = [
-    // {
-    //   id: "template7",
-    //   name: "F6D1.pdf",
-    //   component: < TemplateFile/>,
-    // },
     {
-      id: "template8",
-      name: "F6D2.pdf",
-      component: <F6D2 allData={allData}/>,
+      id: "template7",
+      name: "F6D1.pdf",
+      component: < TemplateFile />,
     },
-    // {
-    //   id: "template8",
-    //   name: "F6D3.pdf",
-    //   component: <F6D3 allData={allData}/>,
-    // },
-    // {
-    //   id: "template8",
-    //   name: "F6D4.pdf",
-    //   component: <F6D4 allData={allData}/>,
-    // },
-    // {
-    //   id: "template8",
-    //   name: "F6D7.pdf",
-    //   component: <F6D7 allData={allData}/>,
-    // },
-    // {
-    //   id: "template8",
-    //   name: "F6D7.pdf",
-    //   component: <F6D8 allData={allData}/>,
-    // },
-    // {
-    //   id: "template8",
-    //   name: "F6D7.pdf",
-    //   component: <F6D9 allData={allData}/>,
-    // },
-    // {
-    //   id: "template8",
-    //   name: "F6D7.pdf",
-    //   component: <F6D10 allData={allData}/>,
-    // },
-    // {
-    //   id: "template8",
-    //   name: "F6D7.pdf",
-    //   component: <F6D11 allData={allData}/>,
-    // },
-    // {
-    //   id: "template8",
-    //   name: "F6D7.pdf",
-    //   component: <F6D12 allData={allData}/>,
-    // },
+    {
+      id: "template2",
+      name: "F6D2.pdf",
+      component: <F6D2 allData={allData} />,
+    },
+    {
+      id: "template3",
+      name: "F6D3.pdf",
+      component: <F6D3 allData={allData} />,
+    },
+    {
+      id: "template3",
+      name: "F6D12.pdf",
+      component: <F6D12 allData={allData} />,
+    },
   ]
-  
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -438,818 +409,25 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
 
       <div ref={printRef} className="space-y-3">
-        {/* building-modifications */}
-        {/* file-1  */}
-        {buildingMods?.map((item: string, index: number) => (
-          <div key={index}>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΛΛΑΦ_ΧΡΗΣΗΣ_1" && (
-              <div className="flex flex-wrap gap-4">
-                <button
+        <div className="flex items-center flex-wrap gap-3">
+          {allTemplate?.length > 0 ? (
+          allTemplate.map((template : any) => (
+            <div key={template.id}>
+              <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
-                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017");
+                    setSelected(template.title);
                     setIsModalOpen(true);
                   }}
                 >
-                  ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017
+                  {template.title}
                 </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΣΑΥ_ΦΑΥ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΣΑΥ_ΦΑΥ
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΣΔΑ ΕΡΓΟΥ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΣΔΑ ΕΡΓΟΥ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ_15");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_16");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
-                  onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
-                  onClick={() => {
-                    setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  // onClick={() => {setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ")}}
-                  onClick={() => {
-                    setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* file-2  */}
-        {buildingMods?.map((item: string, index: number) => (
-          <div key={index}>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_23");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* energy-systems  */}
-        {/* file 3  */}
-        {energy?.map((item: string, index: number) => (
-          <div>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΥΤΟΝΟΜΟ_ΣΥΣΤΗΜΑ_ΕΡΓΑΣΙΑΣ_3" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("άρθρο 4 της ΥΑ ΦΕ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  _άρθρο 4 της ΥΑ ΦΕ
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΛΕΒΗΤΑΣ Φ.Α");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΛΕΒΗΤΑΣ Φ.Α
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΠΙΒΛΕΨΗΣ ΕΡΓΟΥ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΑΝΑΛΗΨΗΣ ΕΠΙΒΛΕΨΗΣ ΕΡΓΟΥ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* file 4  */}
-        {property?.map((item: string, index: number) => (
-          <div>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟ_4" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  _ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected(
-                      "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ"
-                    );
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected(
-                      "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ"
-                    );
-                    setIsModalOpen(true);
-                  }}
-                >
-                  _ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ
-                </button>
-
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected(
-                      "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ"
-                    );
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("_ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  _ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("_ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  _ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  _ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* file 5  */}
-        {buildingMods?.map((item: string, index: number) => (
-          <div key={index}>
-            {item ===
-              "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5" && (
-                <div className="flex flex-wrap gap-4">
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    _ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΠΙΝΑΚΑΣ 3_");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΠΙΝΑΚΑΣ 3_
-                  </button>
-                  {/* add more buttons the same way */}
-                </div>
-              )}
-          </div>
-        ))}
-        {/* file 6  */}
-        {buildingMods?.map((item: string, index: number) => (
-          <div key={index}>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected(
-                      "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_62"
-                    );
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ
-                  ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected(
-                      "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_63"
-                    );
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ
-                  ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ Α_64");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ Α
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_65");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_66");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_67");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_68");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_611");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ylSUSNZTkC0rKv46VI1lKk0Q5_612");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ylSUSNZTkC0rKv46VI1lKk0Q5
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* file 7  */}
-        {energy?.map((item: string, index: number) => (
-          <div>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΡΜΟΠΡΟΖΩΗΣ_7" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected(
-                      "ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ ΔΙΑΤΑΞΕΩΝ"
-                    );
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ
-                  ΔΙΑΤΑΞΕΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected(
-                      "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_"
-                    );
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_73");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_74");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* file 8  */}
-        {landscaping?.map((item: string, index: number) => (
-          <div>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΚΟΙΝΗ_ΔΡΑΣΗ_ΕΝΤΟΣ_ΟΙΚΟΠΕΔΟΥ_8" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("_ΚΟΠΗ ΠΕΥΚΩΝ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΚΟΠΗ ΠΕΥΚΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ_");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* file 9 */}
-        {operational?.map((item: string, index: number) => (
-          <div>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΕΙΤΟΥΡΓΙΚΗ_ΣΥΝΕΧΗΣ_ΧΡΟΝΟΣ_9" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("Ιδιωτική Σύμβαση ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  Ιδιωτική Σύμβαση
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* file 10 */}
-        {buildingMods?.map((item: string, index: number) => (
-          <div key={index}>
-            {item ===
-              "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10" && (
-                <div className="flex flex-wrap gap-4">
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ
-                  </button>
-                  {/* add more buttons the same way */}
-                </div>
-              )}
-          </div>
-        ))}
-        {/* file 11 */}
-        {fencing?.map((item: string, index: number) => (
-          <div>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΕΡΙΦΡΑΞΗ_ΕΚΤΟΣ_ΞΕΛΟΥ_11" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΠΕΡΙΤΟΙΧΗΣΗΣ Π");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΠΕΡΙΤΟΙΧΗΣΗΣ Π
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΑΠΟΣΤΑΣΗ ΑΝΩ ΤΩΝ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΑΠΟΣΤΑΣΗ ΑΝΩ ΤΩΝ
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* file 12  */}
-        {fencing?.map((item: string, index: number) => (
-          <div>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΕΡΙΦΡΑΞΗ_ΕΝΤΟΣ_ΞΕΛΟΥ_12" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_121");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΣΤΕΓΕΣ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΣΤΕΓΕΣ
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* file 13  */}
-        {small?.map((item: string, index: number) => (
-          <div>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΠΙΣΙΝΑ_COMPACT_ΕΩΣ_50_Τ.Μ._13" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΠΙΣΙΝΑ COMPACT ΕΩΣ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΠΙΣΙΝΑ COMPACT ΕΩΣ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_132");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ_133");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ Η_Μ ΑΣΦΑΛΕΙΑ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ Η_Μ ΑΣΦΑΛΕΙΑ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΣΤΑΤΙΚΗ ΑΣΦΑΛΕΙΑ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΣΤΑΤΙΚΗ ΑΣΦΑΛΕΙΑ
-                </button>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_άρθρου 4 ΥΑ ΦΕΚ Β");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΥΔ ΜΗΧΑΝΙΚΟΥ_άρθρου 4 ΥΑ ΦΕΚ Β
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* file 14  */}
-        {buildingMods?.map((item: string, index: number) => (
-          <div key={index}>
-            {item ===
-              "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14" && (
-                <div className="flex flex-wrap gap-4">
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_141");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_142");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ
-                  </button>
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected("ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ");
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ
-                  </button>
-                  {/* add more buttons the same way */}
-                </div>
-              )}
-          </div>
-        ))}
-        {/* file 15  */}
-        {buildingMods?.map((item: string, index: number) => (
-          <div key={index}>
-            {item === "ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΤΟΠΟΘΕΤΗΣΗ_ΙΚΡΙΩΜΑΤΩΝ_15" && (
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected("ΙΚΡΙΩΜΑΤΑ");
-                    setIsModalOpen(true);
-                  }}
-                >
-                  ΙΚΡΙΩΜΑΤΑ
-                </button>
-                {/* add more buttons the same way */}
-              </div>
-            )}
-          </div>
-        ))}
-
+            </div>
+          ))
+        ) : (
+          <p>No  available</p>
+        )}
+        </div>
         {/* Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
@@ -1345,7 +523,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )} */}
 
               {/* file 5======== */}
-              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && (
+              {/* {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && (
                 <F5D1 allData={allData} />
               )}
               {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ" && (
@@ -1357,39 +535,39 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ" && (
                 <F5D4 allData={allData} />
               )}
-              
+
               {selected === "ΠΙΝΑΚΑΣ 3_" && (
                 <F5D5 allData={allData} />
-              )}
+              )} */}
 
               {/* file 6======== */}
-              {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_61" && (
-                <F6D1 allData={allData}/>
-              )}
-               {selected ===
-                "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_62" && (
-                <F6D2 allData={allData} />
+              {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
+                <F6D1 allData={allData} />
               )}
               {selected ===
-                "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ_63" && (
-                <F6D3 allData={allData} />
-              )}
-              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ Α_64" && (
+                "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
+                  <F6D2 allData={allData} />
+                )}
+              {selected ===
+                "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
+                  <F6D3 allData={allData} />
+                )}
+              {selected === "YΔ Φέροντα Οργανισμού" && (
                 <F6D4 allData={allData} />
               )}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_65" && (
+              {selected === "YΔ Συνιδιοκτητών" && (
                 <F6D7 allData={allData} />
               )}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_66" && (
+              {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
                 <F6D8 allData={allData} />
               )}
-              {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_67" && (
+              {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
                 <F6D9 allData={allData} />
               )}
-              {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ_68" && (
+              {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
                 <F6D10 allData={allData} />
               )}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_611" && (
+              {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
                 <F6D11 allData={allData} />
               )}
               {selected === "ylSUSNZTkC0rKv46VI1lKk0Q5_612" && (
@@ -1496,7 +674,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
 
       <div className="flex justify-end">
-        <PdfZipDownloader templates={templates} zipName="Invoices.zip"  />
+        <PdfZipDownloader templates={templates} zipName="Invoices.zip" />
         <button
           onClick={onComplete}
           className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
