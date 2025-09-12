@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import banner from "@/assets/landing-page/banner-bg.png";
-import ButtonArrow from "../shared/ButtonArrow";
 import Container from "../shared/Container/Container";
+import { ArrowRight } from "lucide-react";
 
 export default function Banner() {
   return (
@@ -34,10 +34,30 @@ export default function Banner() {
             Automate HTK, e-Adeies, and Law 4495 with AI-powered tools.
           </p>
           <div className="mt-16 ">
-            <ButtonArrow
-              title="Start for Free"
-              onClick={() => alert("Button clicked!")}
-            />
+            <button
+              className="
+        flex items-center justify-center gap-2 
+        px-6 py-3 rounded-xl font-medium text-white 
+        bg-gradient-to-r from-blue-500 to-sky-400
+        hover:from-sky-500 hover:to-blue-500
+        transition-all duration-300 shadow-md
+      "
+            >
+              Start for Free
+              <ArrowRight className="w-5 h-5" />
+            </button>
+            <button
+              className="
+        flex items-center justify-center gap-2 
+        px-6 py-3 rounded-xl font-medium text-white 
+        bg-gradient-to-bl from-blue-500 to-sky-400
+        hover:from-sky-500 hover:to-blue-500
+        transition-all duration-300 shadow-md
+      "
+            >
+              Start for Free
+              <ArrowRight className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </Container>
