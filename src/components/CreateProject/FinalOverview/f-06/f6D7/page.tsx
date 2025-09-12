@@ -15,20 +15,17 @@ interface FormData {
 }
 // end editing 
 
-interface allDataProps {
-    owners: any[];
-    allDescriptionTasks: any[]
-    technical_description: string;
-    Horizontal_property_name: string;
-}
-
-export default function F6D7({ allData }: { allData: allDataProps }) {
+export default function F6D7({ allData }: { allData: any }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { technical_description } = allData || {};
-    const { Horizontal_property_name } = allData || {};
+
+    const { technicalDescription } = allData || {};
+    const { horizontalPropertyName } = allData || {};
+
+
+    console.log(allData)
 
     // for editing data 
     const {
@@ -78,7 +75,7 @@ export default function F6D7({ allData }: { allData: allDataProps }) {
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">{technical_description || "N/A"}/ {Horizontal_property_name || "N/A"}</span> επί της οδού <br /> <span className="font-semibold">Address,Town/Area , postal code ( FOR BUILDING),</span>
+                <p>Στο ακίνητο <span className="font-semibold">{technicalDescription || "N/A"}/ {horizontalPropertyName || "N/A"}</span> επί της οδού <br /> <span className="font-semibold">Address,Town/Area , postal code ( FOR BUILDING),</span>
                     πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
 

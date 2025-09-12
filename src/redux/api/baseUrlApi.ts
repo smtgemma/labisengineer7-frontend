@@ -20,6 +20,8 @@ export const baseUrlApi = createApi({
       }
       return headers;
     },
+
   }),
+  tagTypes: ["Credit"],
   endpoints: () => ({}),
 });

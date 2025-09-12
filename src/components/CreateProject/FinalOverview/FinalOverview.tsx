@@ -142,15 +142,19 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allTemplate = stepByStepData.selectTemplate;
   const projectCodeId = stepByStepData.projectIdCode;
   const id = stepByStepData?.projectIdCode;
-  const projectId = id?.result?.project?.id;
+  const projectId = stepByStepData?.projectIdCode?.result.id;
   const userId = dataAllFIled?.createdById;
+
+  console.log(stepByStepData)
+  console.log(stepByStepData?.projectIdCode?.id)
+  console.log(projectId)
 
   const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
   const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
-  // console.log(allData?.data, "===============================");
   const allData = allTemplateData?.data || {};
+  console.log(allTemplateData, "===============================");
   console.log(allData, "all data for all template===================================================================")
 
 
@@ -308,25 +312,11 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const templates = [
     {
-      id: "template7",
-      name: "F6D1.pdf",
-      component: < TemplateFile />,
-    },
-    {
-      id: "template2",
-      name: "F6D2.pdf",
-      component: <F6D2 allData={allData} />,
-    },
-    {
       id: "template3",
       name: "F6D3.pdf",
-      component: <F6D3 allData={allData} />,
+      component: <F6D8 allData={allData} />,
     },
-    {
-      id: "template3",
-      name: "F6D12.pdf",
-      component: <F6D12 allData={allData} />,
-    },
+
   ]
 
   return (
@@ -411,9 +401,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       <div ref={printRef} className="space-y-3">
         <div className="flex items-center flex-wrap gap-3">
           {allTemplate?.length > 0 ? (
-          allTemplate.map((template : any) => (
-            <div key={template.id}>
-              <button
+            allTemplate.map((template: any) => (
+              <div key={template.id}>
+                <button
                   className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                   onClick={() => {
                     setSelected(template.title);
@@ -422,11 +412,11 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 >
                   {template.title}
                 </button>
-            </div>
-          ))
-        ) : (
-          <p>No  available</p>
-        )}
+              </div>
+            ))
+          ) : (
+            <p>No  available</p>
+          )}
         </div>
         {/* Modal */}
         {isModalOpen && (

@@ -13,14 +13,19 @@ const creditApi = baseUrlApi.injectEndpoints({
         url: `/features/remaining-credits`,
         method: "GET",
       }),
+      providesTags: ["Credit"],
     }),
     useCredits: build.mutation({
-      query: (data: any) => ({
-        url: `/credits/use-credits`,
-        method: "POST",
-        data: { totalCredits: data }
-      }),
+      query: (payload) => {
+        return {
+          url: "/credits/use-credits",
+          method: "POST",
+          body: payload,
+        };
+      },
+      invalidatesTags: ["Credit"],
     }),
+
 
 
   }),

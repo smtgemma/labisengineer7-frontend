@@ -209,7 +209,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
 
   const handleUseCredit = async (number: number) => {
-    const res = await useCredit(number)
+    console.log(number)
+    const payload = { totalCredits: number }
+    const res = await useCredit(payload)
     console.log(res)
   }
 

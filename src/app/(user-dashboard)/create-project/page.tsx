@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import AIExtractionData from "@/components/CreateProject/AIExtractionData/AIExtractionData";
 import FileUpload from "@/components/CreateProject/FileUpload/FileUpload";
@@ -12,128 +13,54 @@ import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/Workflow
 import AIExtractionDataInPut from "@/components/CreateProject/aAIExtractionData/AIExtractionData";
 
 const workflowSteps = [
-  {
-    id: 1,
-    title: "Upload Documents",
-  },
-  {
-    id: 2,
-    title: "AI Data Extraction",
-  },
-  {
-    id: 3,
-    title: "Select Owner(s)",
-  },
-  {
-    id: 4,
-    title: "AI Extraction Data",
-  },
-  {
-    id: 5,
-    title: "Select Actions",
-  },
-  {
-    id: 6,
-    title: "Final Overview",
-  },
+  { id: 1, title: "Upload Documents" },
+  { id: 2, title: "AI Data Extraction" },
+  { id: 3, title: "Select Owner(s)" },
+  { id: 4, title: "AI Extraction Data" },
+  { id: 5, title: "Select Actions" },
+  { id: 6, title: "Final Overview" },
 ];
 
-interface Owner {
-  id: string;
-  firstName: string;
-  surname: string;
-  fatherName: string;
-  vatNo: string;
-}
-
 const WorkflowDemo: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [showExtractionData, setShowExtractionData] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const stepParam = Number(searchParams.get("step")) || 1;
+
+  const [currentStep, setCurrentStep] = useState(stepParam);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [extractedData, setExtractedData] = useState<any>(null);
-  const [ownerNumber, setOwnerNumber] = useState<any>(null);
-  const [inputExtractedData, setInputExtractedData] = useState<string[]>([]);
-  // const [isAi, set] = useState<string[]>([]);
-  const [selectedOwners, setSelectedOwners] = useState<Owner[]>([
-    {
-      id: "1",
-      firstName: "Giannis",
-      surname: "Papadopoulos",
-      fatherName: "Nikos",
-      vatNo: "VAT-12213484",
-    },
-  ]);
+  const [selectedOwners, setSelectedOwners] = useState<any[]>([]);
   const [selectedActions, setSelectedActions] = useState<string[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
 
-  const nextStep = () => {
-    if (currentStep === 2 && showExtractionData) {
-      setShowExtractionData(false);
-      return;
-    }
+  useEffect(() => {
+    setCurrentStep(stepParam);
+  }, [stepParam]);
 
-    if (currentStep < workflowSteps.length) {
-      setCurrentStep(currentStep + 1);
-    }
+  const goToStep = (step: number) => {
+    router.push(`?step=${step}`);
   };
 
-  console.log(ownerNumber);
-  console.log("currentStep", currentStep);
-
-  //Tahsin
-  //Need a id in params , to  prevent reload and loss of data and step issues
+  const nextStep = () => {
+    if (currentStep < workflowSteps.length) {
+      goToStep(currentStep + 1);
+    }
+  };
 
   const canProceed = () => {
     switch (currentStep) {
       case 1:
         return uploadedFiles.length > 0;
       case 2:
-        return currentStep < extractedData;
-      case 3:
-        return true;
-      case 4:
-        return true;
-      case 5:
-        return true;
-      case 6:
-        return true;
+        return extractedData !== null;
       default:
-        return false;
+        return true;
     }
   };
 
-  const handleComplete = () => {
-    setIsCompleted(true);
-  };
-
-  const resetWorkflow = () => {
-    setCurrentStep(1);
-    setShowExtractionData(false);
-    setUploadedFiles([]);
-    setExtractedData(null);
-    // setSelectedOwners([
-    //   {
-    //     id: "1",
-    //     firstName: "Giannis",
-    //     surname: "Papadopoulos",
-    //     fatherName: "Nikos",
-    //     vatNo: "VAT-12213484",
-    //   },
-    // ]);
-    setSelectedActions([]);
-    setInputExtractedData([]);
-    setIsCompleted(false);
-  };
-
-  const handleExtractionDataContinue = () => {
-    setShowExtractionData(false);
-  };
+  const handleComplete = () => setIsCompleted(true);
 
   const renderStepContent = () => {
-    if (currentStep === 2 && showExtractionData) {
-      return <AIExtractionData onContinue={handleExtractionDataContinue} />;
-    }
-
     switch (currentStep) {
       case 1:
         return (
@@ -177,65 +104,25 @@ const WorkflowDemo: React.FC = () => {
   };
 
   if (isCompleted) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-8">
-        <div className="max-w-md mx-auto text-center bg-white p-8 rounded-2xl shadow-lg">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg
-              className="w-8 h-8 text-green-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            Workflow Complete!
-          </h2>
-          <p className="text-gray-600 mb-6">
-            Your document processing workflow has been successfully configured
-            and is now active.
-          </p>
-          <button
-            onClick={resetWorkflow}
-            className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
-          >
-            Start New Workflow
-          </button>
-        </div>
-      </div>
-    );
+    return <div>✅ Workflow Complete</div>;
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
-      {/* Left Sidebar - Stepper */}
+    <div className="min-h-screen flex">
       <div className="bg-white shadow-sm">
         <WorkflowStepper steps={workflowSteps} currentStep={currentStep} />
       </div>
-
-      {/* Main Content Area */}
       <div className="flex-1 p-12">
         <div className="max-w-6xl">
-          {/* Step Content */}
           <div className="mb-8">{renderStepContent()}</div>
-
-          {/* Footer with Next Button - Hide for extraction data page and final overview */}
-          {!(currentStep === 2 && showExtractionData) && currentStep < 6 && (
+          {currentStep < 6 && (
             <div className="flex justify-end">
               <button
                 onClick={nextStep}
                 disabled={!canProceed()}
-                className="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2 font-medium text-lg"
+                className="bg-blue-500 text-white px-8 py-3 rounded-lg"
               >
-                <span>Next</span>
-                <ChevronRight className="w-5 h-5" />
+                Next <ChevronRight className="inline w-5 h-5 ml-2" />
               </button>
             </div>
           )}

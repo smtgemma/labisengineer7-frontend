@@ -488,7 +488,7 @@ interface allDataProps {
     owners: any[];
     engineers: any[]
     technical_description: string;
-    Horizontal_property_name: string;
+    horizontalPropertyName: string;
 }
 
 
@@ -496,11 +496,13 @@ interface allDataProps {
 export default function F6D8({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owners = Array.isArray(allData?.owners) ? allData.owners : [];
+    // const owners = Array.isArray(allData?.owners) ? allData.owners : [];
     const engineers = allData?.engineers || {};
     const { technical_description } = allData || {};
-    const { Horizontal_property_name } = allData || {};
+    const { horizontalPropertyName } = allData || {};
 
+
+    console.log(allData)
     // for editing data 
     const {
         register,
@@ -514,9 +516,10 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
         reset()
         setIsEditModalOpen(false)
     }
+
     return (
         <div>
-            {owners && owners?.map((owner: any, index: number) => (
+            {allData?.owners && allData?.owners?.map((owner: any, index: number) => (
                 <div key={index} className="max-w-[796px] mx-auto bg-white mb-16">
                     <div className="max-w-[796px] mx-auto bg-white">
                         <div className="text-right -mt-3">
@@ -553,7 +556,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400 bg-gray-50">
                                 <div className="flex">
                                     <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-                                    <div className="flex-1 p-2  font-bold">{owner?.ydom || "N/A"}</div>
+                                    <div className="flex-1 p-2  font-bold">{owner?.ydom || ""}</div>
                                 </div>
                             </div>
 
@@ -561,9 +564,9 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-                                    <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.firstName || "N/A"}</div>
+                                    <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.firstName || owner?.first_name || "N/A"}</div>
                                     <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-                                    <div className="flex-1 p-2  font-bold">{owner?.lastName || "N/A"}</div>
+                                    <div className="flex-1 p-2  font-bold">{owner?.lastName || owner?.last_name || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -571,7 +574,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.fatherName || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owner?.fatherFirstLastName || owner?.father_first_last_name || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -579,7 +582,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.motherName || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owner?.mothersFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -587,7 +590,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.birthDate || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owner?.dateOfBirth || owner?.date_of_birth || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -595,7 +598,8 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.birthPlace}</div>
+                                    <div className="flex-1 p-2 font-bold">{owner?.placeOfBirth || owner?.place_of_birth
+                                    }</div>
                                 </div>
                             </div>
 
@@ -603,7 +607,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                    <div className=" p-2 border-r border-gray-400 font-bold">{owner?.idNumber || "N/A"}</div>
+                                    <div className=" p-2 border-r border-gray-400 font-bold">{owner?.idNumber || owner?.id_number || "N/A"}</div>
                                     <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
                                     <div className="flex-1 p-2 font-bold">{owner?.phone || "N/A"}</div>
                                 </div>
@@ -615,11 +619,11 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
                                     <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
                                     <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
-                                    <div className="w-24 p-2 border-r border-gray-400 font-bold ">{owner?.address || "N/A"}</div>
+                                    <div className="w-24 p-2 border-r border-gray-400 font-bold ">{owner?.ownerAddress || owner?.owner_address || "N/A"}</div>
                                     <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
-                                    <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner?.addressNumber || "N/A"}</div>
+                                    <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner?.addressNumber || owner?.address_number || "N/A"}</div>
                                     <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.postalCode || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -654,7 +658,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                     Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                                 </p>
                                 <p className="mb-4">
-                                    ως κύριος/ιδιοκτήτης του ακινήτου {technical_description || "N/A"}/ {Horizontal_property_name || "N/A"} που βρίσκεται επί της οδού([{owner?.address || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, Specialty Engineer AM TEE)
+                                    ως κύριος/ιδιοκτήτης του ακινήτου {technical_description || "N/A"}/ {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού([{owner?.address || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, Specialty Engineer AM TEE)
                                 </p>
 
                                 <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
