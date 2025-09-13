@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
 import StampComponent from "../../shared/signture/signture"
+import { format } from "date-fns"
 
 interface FormData {
     owner_name: string
@@ -15,18 +16,20 @@ interface FormData {
 }
 // end editing 
 
-interface allDataProps {
-    owners: any[];
-    allDescriptionTasks: any[]
-    projectDescription: string;
-}
 
-export default function F6D13({ allData }: { allData: allDataProps }) {
+export default function F6D13({ allData }: { allData: any }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {}
+    const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { projectDescription } = allData || {};
+    const { projectDescription,
+        propertyAddress,
+        propertyNumber,
+        municipalityCommunity,
+        propertyPostalCode,
+        createdAt,
+    } = allData || {};
 
     // for editing data 
     const {
@@ -66,12 +69,12 @@ export default function F6D13({ allData }: { allData: allDataProps }) {
 
                 <div className="flex items-center justify-center gap-5">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">Property_address, Property_numbe, Municipality_community Property_postal_code). ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyNumber || "N/A"}, {municipalityCommunity || "N/A"} {propertyPostalCode || "N/A"}). ( FOR BUILDING)</h3>
                 </div>
 
                 <div className="flex items-center justify-center text-sm gap-5">
                     <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">Name and Surname Owner/Owners</h3>
+                    <h3 className=" text-sm">{owner?.firstName} {owner?.lastName}</h3>
                 </div>
             </div>
             <div className="space-y-6 ml-10">
@@ -140,12 +143,13 @@ export default function F6D13({ allData }: { allData: allDataProps }) {
 
                         <div className="text-center mb-10 space-y-1">
                             <p>Hμερομηνία </p>
-                            <p>../../2025 (date project)</p>
+                            <p>{format(new Date(createdAt), "dd/MM/yyyy")}</p>
                         </div>
                         <div className="text-center space-y-1">
                             <p>Ο Συντάξας Μηχανικός
                             </p>
-                            <p>Name/ surname Engineer</p>
+                            {/* <p>Name/ surname Engineer</p> */}
+                            <p>{engineers?.firstName} {engineers?.lasttName}</p>
                             <p>Speciality</p>
                             <p>Α.Μ. ΤΕΕ: 123456
                             </p>

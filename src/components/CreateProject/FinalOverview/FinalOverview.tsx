@@ -1,4 +1,5 @@
-import { makeStore, RootState } from "@/redux/store";
+// import { makeStore, RootState } from "@/redux/store";
+import { RootState } from "@/redux/store";
 import { downloadZip } from "client-zip";
 import { saveAs } from "file-saver";
 import html2canvas from "html2canvas";
@@ -111,7 +112,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const property = subCategoryData["property-documentation"] || [];
   const small = subCategoryData["small-construction"] || [];
 
-  const store = makeStore();
+  // const store = makeStore();
   const [selected, setSelected] = useState<string | null>(null);
   const [projectHexCode, setProjectHexCode] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -175,58 +176,60 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     document.body.removeChild(link);
   };
 
-  const handleZipDownload = async () => {
-    const files = await Promise.all(
-      templates.map(async (t) => {
-        const html = ReactDOMServer.renderToStaticMarkup(
-          <Provider store={store}>{t.component}</Provider>
-        );
+  // const handleZipDownload = async () => {
+  //   const files = await Promise.all(
+  //     templates.map(async (t) => {
+  //       const html = ReactDOMServer.renderToStaticMarkup(
+  //         <Provider store={store}>{t.component}</Provider>
+  //       );
 
-        const container = document.createElement("div");
-        container.innerHTML = html;
-        container.style.width = "794px";
-        container.style.background = "#fff";
-        document.body.appendChild(container);
+  //       const container = document.createElement("div");
+  //       container.innerHTML = html;
+  //       container.style.width = "794px";
+  //       container.style.background = "#fff";
+  //       document.body.appendChild(container);
 
-        const canvas = await html2canvas(container, {
-          scale: 3,
-          useCORS: true,
-        });
-        const imgWidth = canvas.width;
-        const imgHeight = canvas.height;
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF({
-          unit: "px",
-          format: [imgWidth, imgHeight],
-        });
-        const imgProps = pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+  //       const canvas = await html2canvas(container, {
+  //         scale: 3,
+  //         useCORS: true,
+  //       });
+  //       const imgWidth = canvas.width;
+  //       const imgHeight = canvas.height;
+  //       const imgData = canvas.toDataURL("image/png");
+  //       const pdf = new jsPDF({
+  //         unit: "px",
+  //         format: [imgWidth, imgHeight],
+  //       });
+  //       const imgProps = pdf.getImageProperties(imgData);
+  //       const pdfWidth = pdf.internal.pageSize.getWidth();
+  //       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  //       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
 
-        const pdfBlob = pdf.output("blob");
-        document.body.removeChild(container);
+  //       const pdfBlob = pdf.output("blob");
+  //       document.body.removeChild(container);
 
-        return {
-          name: `${t.name}.pdf`,
-          lastModified: new Date(),
-          input: pdfBlob,
-        };
-      })
-    );
+  //       return {
+  //         name: `${t.name}.pdf`,
+  //         lastModified: new Date(),
+  //         input: pdfBlob,
+  //       };
+  //     })
+  //   );
 
-    const zipBlob = await downloadZip(files).blob();
-    saveAs(zipBlob, "templates.zip");
-  };
+  //   const zipBlob = await downloadZip(files).blob();
+  //   saveAs(zipBlob, "templates.zip");
+  // };
 
-  const handlePdfDownloadTempate = () => {
-    if (templates.length === 0) {
-      handleDownloadPdf();
-    } else {
-      handleZipDownload();
-    }
-  };
+  // const handlePdfDownloadTempate = () => {
+  //   if (templates.length === 0) {
+  //     handleDownloadPdf();
+  //   } else {
+  //     handleZipDownload();
+  //   }
+  // };
   // 🔹 Click outside handler
+  
+  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -504,10 +507,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
                 <F6D11 allData={allData} />
               )}
-              {selected === "νημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
+              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
                 <F6D12 allData={allData} />
               )}
-              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
+              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
                 <F6D13 allData={allData} />
               )}
 
