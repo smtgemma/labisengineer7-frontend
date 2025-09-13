@@ -181,7 +181,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
       setTemplate([]);
     }
     dispatch(setSelectTemplate(template));
-  }, [selected, template]);
+  }, [selected]);
+
+  console.log(template, template)
 
 
   const toggleAction = (action: string) => {

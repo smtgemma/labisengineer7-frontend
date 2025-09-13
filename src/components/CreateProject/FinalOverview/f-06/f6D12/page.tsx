@@ -39,7 +39,7 @@ interface BudgetCategory {
 export default function F6D12({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const owner = allData?.owners[0] || {};
+  const owner = allData?.owners?.[0] || {};
   const {projectDescription} = allData || {}
 
   const [formData, setFormData] = useState({

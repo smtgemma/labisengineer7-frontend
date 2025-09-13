@@ -143,7 +143,9 @@ export default function F6D13({ allData }: { allData: any }) {
 
                         <div className="text-center mb-10 space-y-1">
                             <p>Hμερομηνία </p>
-                            <p>{format(new Date(createdAt), "dd/MM/yyyy")}</p>
+                            <p>{createdAt
+                                ? format(new Date(createdAt), "dd/MM/yyyy")
+                                : "N/A"}</p>
                         </div>
                         <div className="text-center space-y-1">
                             <p>Ο Συντάξας Μηχανικός

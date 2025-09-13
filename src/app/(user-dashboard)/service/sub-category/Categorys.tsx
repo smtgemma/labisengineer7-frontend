@@ -210,12 +210,13 @@ const Category = () => {
 
                 <div className="space-y-3">
                   {category.options.map((option) => (
-                    <SelectOption
+                    <div key={option.id}>
+                      <SelectOption
                       option={option}
                       categoryId={option.id}
                       toggleOption={() => toggleOption(category.id, option.id)}
                     />
-
+                      </div>
                   ))}
                 </div>
               </div>
