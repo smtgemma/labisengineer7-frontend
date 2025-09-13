@@ -1,16 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ChevronRight } from "lucide-react";
-import AIExtractionData from "@/components/CreateProject/AIExtractionData/AIExtractionData";
-import FileUpload from "@/components/CreateProject/FileUpload/FileUpload";
 import AIExtraction from "@/components/CreateProject/AIExtraction/AIExtraction";
-import OwnerSelection from "@/components/CreateProject/OwnerSelection/OwnerSelection";
 import ActionSelection from "@/components/CreateProject/ActionSelection/ActionSelection";
+import FileUpload from "@/components/CreateProject/FileUpload/FileUpload";
 import FinalOverview from "@/components/CreateProject/FinalOverview/FinalOverview";
+import OwnerSelection from "@/components/CreateProject/OwnerSelection/OwnerSelection";
 import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
 import AIExtractionDataInPut from "@/components/CreateProject/aAIExtractionData/AIExtractionData";
+import { ChevronRight } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 const workflowSteps = [
   { id: 1, title: "Upload Documents" },
@@ -64,17 +63,22 @@ const WorkflowDemo: React.FC = () => {
     switch (currentStep) {
       case 1:
         return (
+          //completed
           <FileUpload
             onFilesChange={setUploadedFiles}
             uploadedFiles={uploadedFiles}
+            canProceed={canProceed}
+            currentStep={currentStep}
+            nextStep={nextStep}
           />
         );
       case 2:
         return (
+          //button addewd
           <AIExtraction
-            files={uploadedFiles}
-            extractedData={extractedData}
-            setExtractedData={setExtractedData}
+            canProceed={canProceed}
+            currentStep={currentStep}
+            nextStep={nextStep}
           />
         );
       case 3:
@@ -120,7 +124,7 @@ const WorkflowDemo: React.FC = () => {
               <button
                 onClick={nextStep}
                 disabled={!canProceed()}
-                className="bg-blue-500 text-white px-8 py-3 rounded-lg"
+                className="bg-green-500 text-white px-8 py-3 rounded-lg"
               >
                 Next <ChevronRight className="inline w-5 h-5 ml-2" />
               </button>

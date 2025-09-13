@@ -1,4 +1,4 @@
-import { makeStore, RootState } from "@/redux/store";
+import { RootState, store } from "@/redux/store";
 import { downloadZip } from "client-zip";
 import { saveAs } from "file-saver";
 import html2canvas from "html2canvas";
@@ -109,7 +109,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const property = subCategoryData["property-documentation"] || [];
   const small = subCategoryData["small-construction"] || [];
 
-  const store = makeStore();
+  // const store = makeStore();
   const [selected, setSelected] = useState<string | null>(null);
   const [projectHexCode, setProjectHexCode] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);

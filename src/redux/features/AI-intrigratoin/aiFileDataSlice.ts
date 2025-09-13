@@ -124,7 +124,7 @@ const aiExtractDataSlice = createSlice({
       state.descriptionTask = action.payload;
     },
     setMultipleDescription: (state, action) => {
-      console.log("ydom and descipton", action.payload);
+
       state.description = action.payload;
     },
     setImageFile: (state, action) => {
@@ -141,6 +141,7 @@ const aiExtractDataSlice = createSlice({
     setAiExtreactAndInputData: (state, action) => {
       state.aiInputData = action.payload;
     },
+    resetAiExtractState: () => initialState,
   },
 });
 
@@ -156,5 +157,6 @@ export const {
   setMultipleDescriptionTask,
   setMultipleDescription,
   setSelectTemplate,
+  resetAiExtractState
 } = aiExtractDataSlice.actions;
 export default aiExtractDataSlice.reducer;

@@ -1,21 +1,19 @@
 import {
-  setAiExtractCatchData,
-  setImageFile,
+  setAiExtractCatchData
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { usePostFileAiDataExtractMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import Lottie from "lottie-react";
-import { Brain, CheckCircle } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { Brain, CheckCircle, ChevronRight } from "lucide-react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import aiLoadingExtract from "../../../../public/aiFIleLoadingThree.json";
 
 import { toast } from "sonner";
-import { file } from "jszip";
 
 interface AIExtractionProps {
-  files: File[];
-  extractedData: any;
-  setExtractedData: any;
+  currentStep: number
+  nextStep: () => void
+  canProceed: () => boolean
 }
 
 // const projectDescriptionAll = [
@@ -141,9 +139,9 @@ const projectDescriptionAll: ProjectDescription[] = [
 ];
 
 const AIExtraction: React.FC<AIExtractionProps> = ({
-  files,
-  extractedData,
-  setExtractedData,
+  currentStep,
+  nextStep,
+  canProceed
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -155,6 +153,9 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
 
   const input = useSelector((state: any) => state.aiData.subcategory);
 
+  const newFiles = useSelector((state: any) => state.aiData.multiFiles);
+
+
   // --- Matching process ---
   const allDescriptions: string[] = Object.values(input)
     .flat()
@@ -165,10 +166,10 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     return allDescriptions.includes(key) ? obj[key] : [];
   });
 
-  const ktimatologio = files[0];
-  const contract = files[1];
-  const permit = files[2];
-  const Law = files[3];
+  const ktimatologio = newFiles[0];
+  const contract = newFiles[1];
+  const permit = newFiles[2];
+  const Law = newFiles[3];
 
   // timer function
   const timerControling = () => {
@@ -184,13 +185,16 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   const seconds = time % 60;
 
   const startExtraction = async () => {
-    dispatch(setImageFile(files));
+
 
     const technicalDescription =
-      "Το ακίνητο βρίσκεται (Within_outside_city_plan), είναι καταχωρημένο στο Εθνικό Κτηματολόγιο με ΚΑΕΚ Kaek_property στην οδό Property_address, Property_number στο Place_property στο Municipality_community με Τ.Κ. Property_postal_code .Πρόκειται για Horizontal_property_name (, επιφανείας Title_area ,το οποίο αποτελεί αυτοτελή οριζόντια ιδιοκτησία κατά τις διατάξεις του Ν.3741/1929 και του Ν.Δ. 1024/1971. Η πολυκατοικία ανεγέρθηκε βάσει της υπ’ αριθμ. Permit_number οικοδομικής άδειας, που εκδόθηκε από την Issuing_authority Η παραπάνω ιδιοκτησία έχει ενταχθεί στο ν.3843/2010 ή 4178/2013 ή 4495/2017 με Α/Α Δήλωσης  Legalization_statement_number ηλεκτρονικό κωδικό, Electronic_code και ημερομηνία υπαγωγής Inclusion_date_legalization από τον /την Engineer_full_name, (Specialty ) με αριθμό μητρώου ΤΕΕ (Tee_registration_number )";
+      "Το ακίνητο βρίσκεται (Within_outside_city_plan), συνολικής επιφάνειας (Αrea Plot) τ.μ , είναι καταχωρημένο στο Εθνικό Κτηματολόγιο με ΚΑΕΚ Kaek_property στην οδό Property_address, Property_number στο Place_property στο Municipality_community με Τ.Κ. Property_postal_code .Πρόκειται για Horizontal_property_name (, επιφανείας Title_area ,το οποίο αποτελεί αυτοτελή οριζόντια ιδιοκτησία κατά τις διατάξεις του Ν.3741/1929 και του Ν.Δ. 1024/1971. Η πολυκατοικία ανεγέρθηκε βάσει της υπ’ αριθμ. Permit_number οικοδομικής άδειας, που εκδόθηκε από την Issuing_authority Η παραπάνω ιδιοκτησία έχει ενταχθεί στο ν.3843/2010 ή 4178/2013 ή 4495/2017 με Α/Α Δήλωσης  Legalization_statement_number ηλεκτρονικό κωδικό, Electronic_code και ημερομηνία υπαγωγής Inclusion_date_legalization από τον /την Engineer_full_name, (Specialty ) με αριθμό μητρώου ΤΕΕ (Tee_registration_number )";
     const technicalDescriptionTwo =
-      "Το ακίνητο βρίσκεται (Within_outside_city_plan), δεν εμπίπτει σε Ζώνες Απαγόρευσης (π.χ. Δασική, Αιγιαλός, Ζώνες προστασίας ΥΠΠΟ ή Natura), ούτε εντοπίζεται εντός χαρακτηρισμένων παραδοσιακών οικισμών ή διατηρητέων κελυφών.   Δηλώνεται ότι δεν συντρέχουν οι απαγορευτικές περιπτώσεις του άρθρου 1 του Ν.4495/2017, ούτε απαιτείται έγκριση άλλων αρχών. Το κτίσμα είναι νομίμως υφιστάμενο κατά την έννοια του άρθρου 23 του Ν.4495/2017 και συνοδεύεται από τα απαραίτητα νομιμοποιητικά στοιχεία.   Οι εργασίες πληρούν τις προϋποθέσεις του άρθρου 2 της ΥΑ ΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020, και ως εκ τούτου η άδεια Μικρής Κλίμακας μπορεί να εκδοθεί χωρίς περαιτέρω εγκρίσεις ή έλεγχο ΣΑ.)";
-    if (files.length === 0) return;
+      "Το ακίνητο βρίσκεται (Within_outside_city_plan), δεν εμπίπτει σε Ζώνες Απαγόρευσης (π.χ. Δασική, Αιγιαλός, Ζώνες προστασίας ΥΠΠΟ ή Natura), ούτε εντοπίζεται εντός χαρακτηρισμένων παραδοσιακών οικισμών ή διατηρητέων κελυφών.Δηλώνεται ότι δεν συντρέχουν οι απαγορευτικές περιπτώσεις του άρθρου 1 του Ν.4495/2017, ούτε απαιτείται έγκριση άλλων αρχών. Το κτίσμα είναι νομίμως υφιστάμενο κατά την έννοια του άρθρου 23 του Ν.4495/2017 και συνοδεύεται από τα απαραίτητα νομιμοποιητικά στοιχεία.Οι εργασίες πληρούν τις προϋποθέσεις του άρθρου 2 της ΥΑ ΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020, και ως εκ τούτου η άδεια Μικρής Κλίμακας μπορεί να εκδοθεί χωρίς περαιτέρω εγκρίσεις ή έλεγχο ΣΑ.";
+
+
+    if (newFiles.length === 0) return;
+
     setIsProcessing(true);
     setProgress(0);
     setIsCompleted(false);
@@ -230,16 +234,20 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
             }
             return prev + Math.random() * 15;
           });
-          setExtractedData(3);
+          // setExtractedData(3);
         }, 200);
       }
     } catch (error: any) {
+      // need to work here 
       toast.error(error.data.message);
     }
   };
+
+
+
   return (
     <div className="space-y-8">
-      {files.length === 0 ? (
+      {newFiles.length === 0 ? (
         <div className="text-center py-16">
           <Brain className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <p className="text-gray-500 text-lg">
@@ -312,9 +320,24 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
             Start AI Extraction
           </button>
           <p className="text-sm text-gray-500 mt-4">
-            Processing {files.length} document{files.length !== 1 ? "s" : ""}
+            Processing {newFiles.length} document{newFiles.length !== 1 ? "s" : ""}
           </p>
         </div>
+      )}
+      {currentStep < 6 && (
+        <div className="flex justify-end">
+          <button
+            onClick={nextStep}
+            disabled={newFiles.length === 0}
+            className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${newFiles.length === 0
+              ? "bg-gray-400 cursor-not-allowed" // ✅ disabled color
+              : "bg-blue-500 hover:bg-blue-600" // ✅ enabled color
+              }`}
+          >
+            Next <ChevronRight className="inline w-5 h-5 ml-2" />
+          </button>
+        </div>
+
       )}
     </div>
   );

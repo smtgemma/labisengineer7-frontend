@@ -1,10 +1,9 @@
 import img from "@/assets/project-card/project-card-img.jpg";
-import { setTheProjectId } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { resetAiExtractState, setTheProjectId } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useDispatch } from "react-redux";
-
 interface ProjectCardProps {
   // image: string;
   title: string;
@@ -21,7 +20,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const router = useRouter();
 
   const dispatch = useDispatch();
-
   // routing and id catch
   const handleProjectId = (id: string) => {
 
@@ -32,10 +30,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         id,
       })
     );
-
-    // need to chnages the routing
-    //Tahsin
-    // services -1 
+    dispatch(resetAiExtractState()); // all state fields go back to initialState
     if (id === "68c4ee46620b644fb88ef886") {
       router.push("/service/sub-category");
 
@@ -70,7 +65,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <p className="text-gray-700 text-base leading-relaxed mb-5 font-normal">
             {description}
           </p>
-
           <div>
             <button
               onClick={() => handleProjectId(id)}

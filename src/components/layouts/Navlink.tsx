@@ -120,7 +120,7 @@ export const DashBoardLink = [
   // name is services but will be dashboard
   {
     name: "Service",
-    href: "/new-project",
+    href: "/services",
     icon: VscServerProcess,
   },
   {

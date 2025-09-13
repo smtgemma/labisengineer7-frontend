@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
+import SelectOption from "../service/sub-category/SelectOption";
+import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 
 // interface SubcategoryOption {
 //   id: string;
@@ -273,7 +275,7 @@ const DescriptionTask = () => {
   };
 
   return (
-    <div className={`bg-[#F1F5F9] py-3 px-4 md:px-12 min-h-screen`}>
+    <div className={`bg-[#F1F5F9] py-3  min-h-screen`}>
       <h2 className="text-3xl text-black font-semibold">Description Task</h2>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-4">
         {/* Left Column */}
@@ -290,21 +292,11 @@ const DescriptionTask = () => {
 
                 <div className="space-y-3 ">
                   {category.options.map((option) => (
-                    <button
-                      key={option.id}
-                      onClick={() => toggleOption(category.id, option.id)}
-                      className={`block px-2 py-2 text-left rounded-sm  text-sm cursor-pointer font-medium border transition-all ${option.selected
-                        ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
-                        : "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200"
-                        }`}
-                    >
-                      <div className="flex justify-center items-center">
-                        <p>
-                          <GoDotFill className="text-blue-600 mr-1" />
-                        </p>
-                        <p>{option.label}</p>
-                      </div>
-                    </button>
+                    <SelectOption
+                      option={option}
+                      categoryId={option.id}
+                      toggleOption={() => toggleOption(category.id, option.id)}
+                    />
                   ))}
                 </div>
               </div>
@@ -325,21 +317,12 @@ const DescriptionTask = () => {
 
                 <div className="space-y-3">
                   {category.options.map((option) => (
-                    <button
+                    <SelectOption
                       key={option.id}
-                      onClick={() => toggleOption(category.id, option.id)}
-                      className={`block px-2 py-2 rounded-sm text-sm font-medium border transition-all cursor-pointer ${option.selected
-                        ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
-                        : "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200"
-                        }`}
-                    >
-                      <div className="flex justify-center items-center">
-                        <p>
-                          <GoDotFill className="text-blue-600 mr-1" />
-                        </p>
-                        <p>{option.label}</p>
-                      </div>
-                    </button>
+                      option={option}
+                      categoryId={option.id}
+                      toggleOption={() => toggleOption(category.id, option.id)}
+                    />
                   ))}
                 </div>
               </div>
@@ -349,12 +332,11 @@ const DescriptionTask = () => {
 
       {/* Save Button */}
       <div className="flex justify-end mt-8">
-        <button
+        <PrimaryButton
+          label="Save & Continue"
           onClick={handleSave}
-          className="bg-primary hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-medium transition-colors shadow-sm"
-        >
-          Save & Continue
-        </button>
+
+        />
       </div>
     </div>
   );
