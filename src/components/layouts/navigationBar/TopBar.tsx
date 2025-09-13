@@ -23,7 +23,7 @@ export default function TopBar({
   dark?: boolean;
 }) {
   const profile = useSelector((state: any) => state.user.userData);
-
+  console.log("User form topbar", profile)
   const token = tokenCatch();
   const decoded: any = jwtDecode(token || " ");
   const id = decoded.id;

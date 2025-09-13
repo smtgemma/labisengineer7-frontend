@@ -1,62 +1,148 @@
-"use client";
+import React from "react";
+import { Search, FileText, Scale, HardHat, LucideIcon } from "lucide-react";
 
-import Image from "next/image";
-import Container from "../shared/Container/Container";
-import serviceImg from "@/assets/landing-page/service.jpg";
+interface ServiceCard {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  buttonText: string;
+  bgColor: string;
+  iconColor: string;
+  textColor: string;
+}
 
-import ServiceOverviewCard from "./ServiceOverviewCard";
+const ServicesOverview: React.FC = () => {
+  const services: ServiceCard[] = [
+    {
+      icon: Search,
+      title: "Construction Project Planning",
+      description:
+        "Comprehensive project planning and scheduling services. From initial design to final inspection, we manage every phase of your construction project with precision.",
+      buttonText: "Start Planning",
+      bgColor: "bg-gradient-to-br from-white-50 via-blue-50 to-blue-300",
+      iconColor: "text-gray-800",
+      textColor: "text-gray-800",
+    },
+    {
+      icon: FileText,
+      title: "Building Permits & Documentation",
+      description:
+        "Navigate complex permit processes with ease. We handle all regulatory documentation, ensuring compliance with local building codes and regulations.",
+      buttonText: "Get Permits",
+      bgColor: "bg-gradient-to-br from-white-50 via-blue-50 to-blue-300",
+      iconColor: "text-gray-800",
+      textColor: "text-gray-800",
+    },
+    {
+      icon: Scale,
+      title: "Quality Control & Inspection",
+      description:
+        "Professional quality assurance throughout your project. Our certified inspectors ensure construction meets all safety standards and specifications.",
+      buttonText: "Schedule Inspection",
+      bgColor: "bg-gradient-to-br from-white-50 via-blue-50 to-blue-300",
+      iconColor: "text-gray-800",
+      textColor: "text-gray-800",
+    },
+    {
+      icon: HardHat,
+      title: "Engineer Certificate",
+      description:
+        "Quickly produce valid engineer certificates for property sales and transactions. AI checks and fills all necessary details.",
+      buttonText: "Begin Project",
+      bgColor: "bg-gradient-to-br from-white-50 via-blue-50 to-blue-300",
+      iconColor: "text-gray-800",
+      textColor: "text-gray-800",
+    },
+  ];
 
-const services = [
-  {
-    title: "HTK – Electronic Building ID",
-    description:
-      "Instantly create and manage HTK files for your property. Upload your documents, and the platform does the rest—powered by AI.",
-    image: serviceImg,
-    link: "#",
-  },
-  {
-    title: "e-Adeies – Building Permit",
-    description:
-      "Prepare and submit your Building Permit documents faster. All data is auto-filled from your uploads and prepped for e-adeies.tee.gr.",
-    image: serviceImg,
-    link: "#",
-  },
-  {
-    title: "Law 4495/17 – Unauthorized Declarations",
-    description:
-      "Automatically generate the required declarations and forms under Law 4495/17. Greatly reduce manual data entry.",
-    image: serviceImg,
-    link: "#",
-  },
-  {
-    title: "Engineer Certificate",
-    description:
-      "Quickly produce valid engineer certificates for property sales and transactions. AI checks and fills all necessary details.",
-    image: serviceImg,
-    link: "#",
-  },
-];
+  const handleServiceClick = (serviceTitle: string): void => {
+    console.log(`Starting service: ${serviceTitle}`);
+    // Add your service navigation logic here
+  };
 
-export default function ServicesOverview() {
   return (
-    <div id="service" className="py-[100px]">
-      <Container>
-        <section
-          data-aos="fade-up"
-          data-aos-anchor-placement="top-bottom"
-          className="bg-white md:px-6  "
-        >
-          <h2 className="text-3xl md:text-5xl font-bold text-center  text-primary mb-12">
-            Services Overview
-          </h2>
+    <div className="w-full max-w-7xl my-14  mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      {/* Header */}
+      <div className="text-center mb-12">
+        <h2 className="text-3xl sm:text-5xl font-bold text-[#017AFF] mb-4">
+          Services Overview
+        </h2>
+      </div>
 
-          <div className="grid gap-6 grid-cols-1 lg:grid-cols-2 ">
-            {services.map((service, i) => (
-              <ServiceOverviewCard key={service.title} service={service} />
-            ))}
-          </div>
-        </section>
-      </Container>
+      {/* Services Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        {services.map((service: ServiceCard, index: number) => {
+          const IconComponent: LucideIcon = service.icon;
+          const isLightCard: boolean = service.textColor === "text-gray-800";
+
+          return (
+            <div
+              key={index}
+              className={`
+    bg-gradient-to-br from-white-50 via-blue-50 to-blue-300
+    rounded-2xl p-6 lg:p-8 cursor-pointer
+    transition-all duration-500 ease-in-out
+    hover:shadow-2xl hover:scale-[1.02]
+    hover:bg-gradient-to-br hover:from-blue-300 hover:via-blue-50 hover:to-white
+    ${
+      isLightCard
+        ? "border border-blue-200"
+        : "border border-white/20 backdrop-blur-sm"
+    }
+  `}
+            >
+              {/* Icon */}
+              <div className="mb-6">
+                <div
+                  className={`w-18 h-18 rounded-full ${
+                    isLightCard
+                      ? "bg-white shadow-md border border-gray-200"
+                      : "bg-white/20 backdrop-blur-sm shadow-lg border border-white/30"
+                  } flex items-center justify-center`}
+                >
+                  <IconComponent className={`w-12 h-12 ${service.iconColor}`} />
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="mb-6">
+                <h3
+                  className={`text-xl lg:text-2xl font-bold ${
+                    service.textColor
+                  } mb-4 leading-tight ${isLightCard ? "" : "drop-shadow-sm"}`}
+                >
+                  {service.title}
+                </h3>
+                <p
+                  className={`${
+                    service.textColor
+                  } text-sm lg:text-base leading-relaxed ${
+                    isLightCard ? "opacity-80" : "opacity-90"
+                  }`}
+                >
+                  {service.description}
+                </p>
+              </div>
+
+              {/* Button */}
+              <button
+                onClick={() => handleServiceClick(service.title)}
+                className={`inline-flex items-center px-6 py-3 ${
+                  isLightCard
+                    ? " text-[#017AFF] hover:text-white border-2 border-blue-300 hover:bg-blue-500 focus:ring-blue-500  shadow-md"
+                    : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 focus:ring-white/50 border border-white/30 shadow-lg"
+                } font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2`}
+                type="button"
+                aria-label={`Start ${service.title} service`}
+              >
+                Begin Project
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
-}
+};
+
+export default ServicesOverview;

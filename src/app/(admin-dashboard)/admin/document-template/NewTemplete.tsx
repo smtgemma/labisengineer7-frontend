@@ -58,7 +58,7 @@ export default function AddNewTemplateCard() {
   return (
     <div className="max-w-[1079px] mx-auto bg-white p-8 rounded-2xl shadow-lg my-20">
       <h2 className="text-2xl md:text-3xl text-info font-semibold mb-6">
-        Add New Template
+        Add New Service
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -66,7 +66,7 @@ export default function AddNewTemplateCard() {
           {/* Upload Section */}
           <div className="w-1/2 h-full">
             <label className="block text-sm md:text-xl font-medium mb-2">
-              Upload Image
+              Upload Icon
             </label>
             <div className="w-full p-6 bg-gray-50 border border-[#c2c2c2] rounded-md flex flex-col items-center justify-center text-center h-[460px] px-[73px]">
               {image ? (
@@ -88,7 +88,7 @@ export default function AddNewTemplateCard() {
                       d="M12 4v16m8-8H4"
                     />
                   </svg>
-                  <p className="text-gray-500 mb-2">Drop file or browse</p>
+
                   <p className="text-xs text-gray-400 mb-4">
                     Format: jpeg, png & Max file size: 25 MB
                   </p>
@@ -121,7 +121,7 @@ export default function AddNewTemplateCard() {
             {/* Template Title */}
             <div>
               <label className="block text-sm md:text-xl font-medium mb-1">
-                Template Title
+                Sevice Title
               </label>
               <input
                 type="text"
@@ -145,14 +145,14 @@ export default function AddNewTemplateCard() {
             {/* Service Selection */}
             <div>
               <label className="block text-sm md:text-xl font-medium mb-1">
-                Select Service
+                Service NO
               </label>
               <input
                 type="text"
                 {...register("serviceName", {
                   required: "Service selection is required",
                 })}
-                placeholder="Select service"
+                placeholder=" service-1, service-2 e.g."
                 className="w-full px-4 py-5 border border-zinc-300 rounded-lg text-black"
               />
               {errors.serviceName && (
