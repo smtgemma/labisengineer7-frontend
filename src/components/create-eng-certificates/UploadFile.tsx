@@ -88,7 +88,7 @@ export default function FileUploadPage() {
     }
 
     return (
-        <div className="min-h-screen p-6 bg-slate-50">
+        <div className=" bg-slate-50">
             {/* Header */}
             <div className="max-w-4xl mx-auto mb-8">
                 <h1 className="text-2xl font-semibold mb-2 text-slate-900">
@@ -180,16 +180,6 @@ export default function FileUploadPage() {
                     ))}
                 </div>
             )}
-
-            {/* Footer Actions */}
-            <div className="max-w-4xl mx-auto mt-8 flex justify-end space-x-3">
-                <button className="px-4 py-2 border rounded text-slate-600 hover:bg-slate-100">
-                    Cancel
-                </button>
-                <button className="px-4 py-2 rounded text-white bg-blue-500 hover:bg-blue-600">
-                    Next
-                </button>
-            </div>
         </div>
     )
 }

@@ -1,221 +1,68 @@
 "use client";
 
-import React, { useState } from "react";
-import { ChevronRight } from "lucide-react";
-import AIExtractionData from "@/components/CreateProjectTwo/AIExtractionData/AIExtractionData";
-import FileUpload from "@/components/CreateProjectTwo/FileUpload/FileUpload";
-import AIExtraction from "@/components/CreateProjectTwo/AIExtraction/AIExtraction";
-import OwnerSelection from "@/components/CreateProjectTwo/OwnerSelection/OwnerSelection";
-import ActionSelection from "@/components/CreateProjectTwo/ActionSelection/ActionSelection";
-import FinalOverview from "@/components/CreateProjectTwo/FinalOverview/FinalOverview";
-import WorkflowStepper from "@/components/CreateProjectTwo/WorkflowStepper/WorkflowStepper";
-import AIExtractionDataInPut from "@/components/CreateProjectTwo/aAIExtractionData/AIExtractionData";
-import QuestionAndAnswer from "@/components/CreateProjectTwo/QuestionAndAnswer/QuestionAndAnswer";
+import React, { useState, useEffect } from "react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import FileUploadPage from "./UploadFile";
+import { Extraction } from "./Extraction";
+import WorkflowStepper from "@/components/CreateProjectTwo/WorkflowStepper/WorkflowStepper";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const workflowSteps = [
-    {
-        id: 1,
-        title: "Upload Documents",
-    },
-    {
-        id: 2,
-        title: "AI Data Extraction",
-    },
-    {
-        id: 3,
-        title: "Select Owner(s)",
-    },
-    {
-        id: 4,
-        title: "AI Extraction Data",
-    },
-    {
-        id: 5,
-        title: "Select Actions",
-    },
-    {
-        id: 6,
-        title: "Question And Answer",
-    },
-    {
-        id: 7,
-        title: "Final Overview",
-    },
+    { id: 1, title: "Upload Documents" },
+    { id: 2, title: "AI Data Extraction" },
+    { id: 3, title: "Select Owner(s)" },
+    { id: 4, title: "AI Extraction Data" },
+    { id: 5, title: "Select Actions" },
+    { id: 6, title: "Question And Answer" },
+    { id: 7, title: "Final Overview" },
 ];
 
-interface Owner {
-    id: string;
-    firstName: string;
-    surname: string;
-    fatherName: string;
-    vatNo: string;
+interface CreateEngCertProps {
+    startStep?: number; // optional prop to start at a specific step
 }
 
-const CreateEngCert: React.FC = () => {
-    const [currentStep, setCurrentStep] = useState(1);
-    const [showExtractionData, setShowExtractionData] = useState(false);
+const CreateEngCert: React.FC<CreateEngCertProps> = ({ startStep = 1 }) => {
+    const [currentStep, setCurrentStep] = useState(startStep);
     const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
     const [extractedData, setExtractedData] = useState<any>(null);
-    const [ownerNumber, setOwnerNumber] = useState<any>(null);
-    const [inputExtractedData, setInputExtractedData] = useState<string[]>([]);
-    // const [isAi, set] = useState<string[]>([]);
-    const [selectedOwners, setSelectedOwners] = useState<Owner[]>([
-        {
-            id: "1",
-            firstName: "Giannis",
-            surname: "Papadopoulos",
-            fatherName: "Nikos",
-            vatNo: "VAT-12213484",
-        },
-    ]);
-    const [selectedActions, setSelectedActions] = useState<string[]>([]);
-    const [isCompleted, setIsCompleted] = useState(false);
+    const searchParams = useSearchParams();
+    const stepParam = Number(searchParams.get("step")) || 1;
+
+    const router = useRouter()
+    useEffect(() => {
+        if (startStep > 1 && startStep <= workflowSteps.length) {
+            setCurrentStep(startStep);
+        }
+    }, [startStep]);
+
+    const goToStep = (step: number) => {
+        router.push(`?step=${step}`);
+    };
 
     const nextStep = () => {
-        if (currentStep === 2 && showExtractionData) {
-            setShowExtractionData(false);
-            return;
-        }
-
         if (currentStep < workflowSteps.length) {
-            setCurrentStep(currentStep + 1);
+            goToStep(currentStep + 1);
         }
     };
 
-    console.log(ownerNumber);
-    console.log("currentStep", currentStep);
-
-    const canProceed = () => {
-        switch (currentStep) {
-            case 1:
-                return uploadedFiles.length > 0;
-            case 2:
-                return currentStep < extractedData;
-            case 3:
-                return true;
-            case 4:
-                return true;
-            case 5:
-                return true;
-            case 6:
-                return true;
-            case 7:
-                return true;
-            default:
-                return false;
+    const prevStep = () => {
+        if (currentStep > 1) {
+            setCurrentStep(currentStep - 1);
         }
     };
-
-    const handleComplete = () => {
-        setIsCompleted(true);
-    };
-
-    const resetWorkflow = () => {
-        setCurrentStep(1);
-        setShowExtractionData(false);
-        setUploadedFiles([]);
-        setExtractedData(null);
-        // setSelectedOwners([
-        //   {
-        //     id: "1",
-        //     firstName: "Giannis",
-        //     surname: "Papadopoulos",
-        //     fatherName: "Nikos",
-        //     vatNo: "VAT-12213484",
-        //   },
-        // ]);
-        setSelectedActions([]);
-        setInputExtractedData([]);
-        setIsCompleted(false);
-    };
-
-    const handleExtractionDataContinue = () => {
-        setShowExtractionData(false);
-    };
-
+    useEffect(() => {
+        setCurrentStep(stepParam);
+    }, [stepParam]);
     const renderStepContent = () => {
-        if (currentStep === 2 && showExtractionData) {
-            return <AIExtractionData onContinue={handleExtractionDataContinue} />;
-        }
-
         switch (currentStep) {
             case 1:
-                return (
-                    <FileUploadPage />
-                );
+                return <FileUploadPage />;
             case 2:
-                return (
-                    <AIExtraction
-                        files={uploadedFiles}
-                        extractedData={extractedData}
-                        setExtractedData={setExtractedData}
-                    />
-                );
-            case 3:
-                return <OwnerSelection />;
-            case 4:
-                return <AIExtractionDataInPut currentStep={currentStep} />;
-            case 5:
-                return (
-                    <ActionSelection
-                        selectedActions={selectedActions}
-                        onActionsChange={setSelectedActions}
-                    />
-                );
-            case 6:
-                return <QuestionAndAnswer />;
-            case 7:
-                return (
-                    <FinalOverview
-                        files={uploadedFiles}
-                        extractedData={extractedData}
-                        selectedOwners={selectedOwners}
-                        selectedActions={selectedActions}
-                        onComplete={handleComplete}
-                    />
-                );
+                return <Extraction estimatedTime={20} onComplete={() => setExtractedData({})} />;
             default:
-                return null;
+                return <p className="text-gray-600">Step {currentStep} content here...</p>;
         }
     };
-
-    if (isCompleted) {
-        return (
-            <div className="min-h-screen bg-gray-50 flex items-center justify-center p-8">
-                <div className="max-w-md mx-auto text-center bg-white p-8 rounded-2xl shadow-lg">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg
-                            className="w-8 h-8 text-green-600"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M5 13l4 4L19 7"
-                            />
-                        </svg>
-                    </div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                        Workflow Complete!
-                    </h2>
-                    <p className="text-gray-600 mb-6">
-                        Your document processing workflow has been successfully configured
-                        and is now active.
-                    </p>
-                    <button
-                        onClick={resetWorkflow}
-                        className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
-                    >
-                        Start New Workflow
-                    </button>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <div className="min-h-screen bg-gray-100 flex">
@@ -230,13 +77,24 @@ const CreateEngCert: React.FC = () => {
                     {/* Step Content */}
                     <div className="mb-8">{renderStepContent()}</div>
 
-                    {/* Footer with Next Button - Hide for extraction data page and final overview */}
-                    {!(currentStep === 2 && showExtractionData) && currentStep < 7 && (
-                        <div className="flex justify-end">
+                    {/* Footer with Back & Next Buttons */}
+                    {currentStep < 7 && (
+                        <div className="flex justify-between">
+                            {currentStep > 1 ? (
+                                <button
+                                    onClick={prevStep}
+                                    className="bg-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-400 transition-colors duration-200 flex items-center space-x-2 font-medium text-lg"
+                                >
+                                    <ChevronLeft className="w-5 h-5" />
+                                    <span>Back</span>
+                                </button>
+                            ) : (
+                                <div />
+                            )}
+
                             <button
                                 onClick={nextStep}
-                                disabled={!canProceed()}
-                                className="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2 font-medium text-lg"
+                                className="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-200 flex items-center space-x-2 font-medium text-lg"
                             >
                                 <span>Next</span>
                                 <ChevronRight className="w-5 h-5" />
@@ -250,4 +108,3 @@ const CreateEngCert: React.FC = () => {
 };
 
 export default CreateEngCert;
-
