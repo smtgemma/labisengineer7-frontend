@@ -1,10 +1,11 @@
 "use client";
 import { setMultipleDescriptionTask } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { RootState } from "@/redux/store";
 import { Header } from "antd/es/layout/layout";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // interface SubcategoryOption {
 //   id: string;
@@ -220,7 +221,8 @@ const DescriptionTask = () => {
 
   const navigate = useRouter();
   const dispatch = useDispatch();
-
+  const aiExtractData = useSelector((state: RootState) => state.aiData);
+  console.log("Redux Data", aiExtractData, "....................")
   const toggleOption = (categoryId: string, optionId: string) => {
     setDescription((prevCategories) =>
       prevCategories.map((category) =>
@@ -292,8 +294,8 @@ const DescriptionTask = () => {
                       key={option.id}
                       onClick={() => toggleOption(category.id, option.id)}
                       className={`block px-2 py-2 text-left rounded-sm  text-sm cursor-pointer font-medium border transition-all ${option.selected
-                          ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
-                          : "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200"
+                        ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
+                        : "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200"
                         }`}
                     >
                       <div className="flex justify-center items-center">
@@ -327,8 +329,8 @@ const DescriptionTask = () => {
                       key={option.id}
                       onClick={() => toggleOption(category.id, option.id)}
                       className={`block px-2 py-2 rounded-sm text-sm font-medium border transition-all cursor-pointer ${option.selected
-                          ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
-                          : "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200"
+                        ? "bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200"
+                        : "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200"
                         }`}
                     >
                       <div className="flex justify-center items-center">

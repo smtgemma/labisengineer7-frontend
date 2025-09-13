@@ -36,7 +36,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     // need to chnages the routing
     //Tahsin
     // services -1 
-    if (id === "6880d91b519cab74df7b09b2") {
+    if (id === "68c4ee46620b644fb88ef886") {
       router.push("/service/sub-category");
 
     }

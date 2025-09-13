@@ -1,23 +1,12 @@
-// src/providers/StoreProvider.tsx (or wherever you keep it)
+// src/providers/StoreProvider.tsx
 "use client";
-import { useRef } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { makeStore, AppStore, persistor } from "../redux/store";
+import { store, persistor } from "../redux/store";
 
-export default function StoreProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const storeRef = useRef<AppStore>(undefined);
-
-  if (!storeRef.current) {
-    storeRef.current = makeStore();
-  }
-
+export default function StoreProvider({ children }: { children: React.ReactNode }) {
   return (
-    <Provider store={storeRef.current}>
+    <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         {children}
       </PersistGate>

@@ -2,6 +2,7 @@
 
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { setMultipleSubcategory } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { RootState } from "@/redux/store";
 import {
   Building2,
   Trees,
@@ -9,7 +10,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 interface SubcategoryOption {
   id: string;
@@ -147,7 +148,6 @@ const Category = () => {
 
   const navigate = useRouter();
   const dispatch = useDispatch();
-
   const toggleOption = (categoryId: string, optionId: string) => {
     setCategories((prevCategories) =>
       prevCategories.map((category) =>
@@ -179,10 +179,10 @@ const Category = () => {
 
     console.log("Selected options:", selectedOptions);
     dispatch(setMultipleSubcategory(selectedOptions));
-
     navigate.push("/description-task");
   };
-
+  const aiExtractData = useSelector((state: RootState) => state.aiData);
+  console.log("Redux Data", aiExtractData, "....................")
   return (
     <div className={`bg-[#F1F5F9] py-8 min-h-screen`}>
       <h2 className="text-2xl text-black font-semibold">

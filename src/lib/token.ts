@@ -9,7 +9,7 @@ const tokenCatch = () => {
 
   try {
     const token = Cookies.get("accessToken");
-    console.log(token);
+    // console.log(token);
 
     // Additional validation to ensure token is properly formatted
     if (token) {
