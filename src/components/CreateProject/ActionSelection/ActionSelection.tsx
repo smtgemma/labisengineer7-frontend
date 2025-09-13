@@ -180,15 +180,18 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     .reduce((acc, s) => acc + s.price, 0);
 
   useEffect(() => {
+
     const filtered: any = templateName.filter((s) => selected.includes(s.id));
     if (filtered.length > 0) {
       setTemplate(filtered);
     } else {
       setTemplate([]);
     }
-    dispatch(setSelectTemplate(template));
+
   }, [selected]);
 
+  console.log("template", template)
+  dispatch(setSelectTemplate(template));
 
   const toggleAction = (action: string) => {
     if (selectedActions.includes(action)) {

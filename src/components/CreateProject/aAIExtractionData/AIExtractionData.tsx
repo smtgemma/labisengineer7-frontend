@@ -177,7 +177,7 @@ const AIExtractionDataInPut = ({ currentStep, canProceed, nextStep }: {
   //   descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
 
   // console.log("ydom:", ydom);
-  console.log("allExtreactData:", stepByStepData);
+  console.log("allExtreactData:", descriptonAndYdom);
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
 
@@ -191,7 +191,7 @@ const AIExtractionDataInPut = ({ currentStep, canProceed, nextStep }: {
       // createdById: user?.userId,/
       subCategories: subCategoryData,
       descrptionTasks: descrptionTasks,
-      ydom: description?.ydom,
+      ydom: descriptonAndYdom?.ydom,
       technicalDescription: allExtreactData?.technical_description,
       ...data,
     };
@@ -211,7 +211,7 @@ const AIExtractionDataInPut = ({ currentStep, canProceed, nextStep }: {
         // createdById: user?.userId,
         subCategories: subCategoryData,
         descrptionTasks: descrptionTasks,
-        ydom: description?.ydom,
+        ydom: descriptonAndYdom?.ydom,
         technicalDescription: allExtreactData?.technical_description,
         ...data,
       })
