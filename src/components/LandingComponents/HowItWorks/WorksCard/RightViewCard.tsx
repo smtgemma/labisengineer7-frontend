@@ -30,14 +30,14 @@ export default function RightViewCard({
   formats,
 }: RightViewCardProps) {
   return (
-    <div className="py-10 md:py-20 ">
+    <div className="py-10 md:py-20  ">
       <Container>
         <div className={`${className} flex   items-center gap-10`}>
           <div className="w-full md:w-1/2">
             <Image
               src={workImg}
               alt="HTK solution overview"
-              className="w-full h-auto "
+              className="w-full h-auto  relative z-30 "
             />
           </div>
 

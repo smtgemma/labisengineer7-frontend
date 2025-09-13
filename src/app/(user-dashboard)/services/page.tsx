@@ -1,12 +1,12 @@
-import MainServices from '@/components/services/Services';
-import React from 'react';
+import MainServices from "@/components/services/Services";
+import React from "react";
 
 const page = () => {
-    return (
-        <div>
-            <MainServices />
-        </div>
-    );
+  return (
+    <div className="px-8">
+      <MainServices />
+    </div>
+  );
 };
 
 export default page;
