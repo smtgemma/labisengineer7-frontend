@@ -120,7 +120,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const userData = useSelector((state: any) => state.user.userData);
 
-  console.log(userData)
+  console.log(userData, "projectCodeId:", projectCodeId?.result?.projectCode)
   //2. DOWNLOAD CSV FILE
   const downloadCSV = () => {
     const headers = ["First Name", "Surname", "Father Name", "VAT No"];
@@ -143,7 +143,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   // ];
 
   const projectAndUserHexCode =
-    userData?.hexToken + `-${projectCodeId?.projectCode}`;
+    userData?.hexToken + `-${projectCodeId?.result?.projectCode}`;
 
   const handleCopy = async () => {
     try {

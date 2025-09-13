@@ -293,6 +293,7 @@ const DescriptionTask = () => {
                 <div className="space-y-3 ">
                   {category.options.map((option) => (
                     <SelectOption
+                      key={option.id}
                       option={option}
                       categoryId={option.id}
                       toggleOption={() => toggleOption(category.id, option.id)}

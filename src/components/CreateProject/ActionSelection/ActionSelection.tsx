@@ -137,11 +137,17 @@ const services: Service[] = [
 interface ActionSelectionProps {
   selectedActions: string[];
   onActionsChange: (actions: string[]) => void;
+  currentStep: number
+  nextStep: () => void
+  canProceed: () => boolean
 }
 
 const ActionSelection: React.FC<ActionSelectionProps> = ({
   selectedActions,
   onActionsChange,
+  canProceed,
+  currentStep,
+  nextStep
 }) => {
   const actions = [
     "Generate Engineer Declaration (YA)",
@@ -174,17 +180,17 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     .reduce((acc, s) => acc + s.price, 0);
 
   useEffect(() => {
+
     const filtered: any = templateName.filter((s) => selected.includes(s.id));
     if (filtered.length > 0) {
       setTemplate(filtered);
     } else {
       setTemplate([]);
     }
-    dispatch(setSelectTemplate(template));
+
   }, [selected]);
 
-  console.log(template, template)
-
+  dispatch(setSelectTemplate(template));
 
   const toggleAction = (action: string) => {
     if (selectedActions.includes(action)) {
@@ -376,6 +382,20 @@ THAISN */}
           </div>
         </div>
       </div>
+      {currentStep < 6 && (
+        <div className="flex justify-end mt-4">
+          <button
+            onClick={nextStep}
+            // disabled={canProceed()}
+            className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${canProceed()
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-500 hover:bg-blue-600"
+              }`}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

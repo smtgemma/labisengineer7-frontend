@@ -121,14 +121,18 @@ type FormValues = ProjectData &
 const inputStyle =
   "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
 
-const AIExtractionDataInPut = ({ currentStep }: any) => {
+const AIExtractionDataInPut = ({ currentStep, canProceed, nextStep }: {
+  currentStep: number
+  nextStep: () => void
+  canProceed: () => boolean
+}) => {
   const [ownerInfoShow, setOwnerInfoShow] = useState<boolean>(true);
   const [ownerInfoShow2, setOwnerInfoShow2] = useState<number | null>(0);
   const [ownerInfoShow3, setOwnerInfoShow3] = useState<boolean>(true);
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
-  const user: any = useSelector((state: RootState) => state.user.userData);
+  // const user: any = useSelector((state: RootState) => state.user.userData);
 
-  console.log(stepByStepData)
+  // console.log(stepByStepData)
   const { register, control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       owners: stepByStepData.ownerBaseData.map((owner: any) => ({
@@ -162,7 +166,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   });
 
   const allExtreactData = stepByStepData.aiDataState;
-  const ownerData = stepByStepData.ownerBaseData;
+  // const ownerData = stepByStepData.ownerBaseData;
   const projectData = stepByStepData.projectId;
   const subCategoryData = stepByStepData.subcategory;
   const descrptionTasks = stepByStepData.descriptionTask;
@@ -173,7 +177,7 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
   //   descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
 
   // console.log("ydom:", ydom);
-  console.log("allExtreactData:", stepByStepData);
+  console.log("allExtreactData:", descriptonAndYdom);
 
   const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
 
@@ -184,10 +188,10 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
     console.log("Form Data:", data);
     const DataPost = {
       serviceId: projectData?.id,
-      createdById: user?.userId,
+      // createdById: user?.userId,/
       subCategories: subCategoryData,
       descrptionTasks: descrptionTasks,
-      ydom: description?.ydom,
+      ydom: descriptonAndYdom?.ydom,
       technicalDescription: allExtreactData?.technical_description,
       ...data,
     };
@@ -204,10 +208,10 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
       "data",
       JSON.stringify({
         serviceId: projectData?.id,
-        createdById: user?.userId,
+        // createdById: user?.userId,
         subCategories: subCategoryData,
         descrptionTasks: descrptionTasks,
-        ydom: description?.ydom,
+        ydom: descriptonAndYdom?.ydom,
         technicalDescription: allExtreactData?.technical_description,
         ...data,
       })
@@ -780,8 +784,33 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
             )}
           </div>
         </div>
-        {/* "Energy Performance Certificate (EPC)"  */}
-        {/* <div className="mt-10">
+      </form>
+      {currentStep < 6 && (
+        <div className="flex justify-end mt-4">
+          <button
+            onClick={nextStep}
+            // disabled={canProceed()}
+            className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${canProceed()
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-500 hover:bg-blue-600"
+              }`}
+          >
+            Next
+          </button>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default AIExtractionDataInPut;
+
+
+
+// trash 
+
+{/* "Energy Performance Certificate (EPC)"  */ }
+{/* <div className="mt-10">
           <div className="bg-gray-50 rounded-xl p-6 shadow-sm w-full">
             <div className="flex justify-between items-center ">
               <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
@@ -892,8 +921,8 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
           </div>
         </div> */}
 
-        {/* "others option  */}
-        {/* <div className="mt-10">
+{/* "others option  */ }
+{/* <div className="mt-10">
           <div className="bg-gray-50 rounded-xl p-6 shadow-sm w-full">
             <div className="flex justify-between items-center ">
               <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
@@ -958,9 +987,3 @@ const AIExtractionDataInPut = ({ currentStep }: any) => {
             )}
           </div>
         </div> */}
-      </form>
-    </>
-  );
-};
-
-export default AIExtractionDataInPut;
