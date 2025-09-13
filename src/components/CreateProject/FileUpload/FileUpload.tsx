@@ -1,4 +1,5 @@
 import { setImageFile } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { RootState } from "@/redux/store";
 import { ChevronRight, FileText, Upload, X } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +9,6 @@ interface FileUploadProps {
   uploadedFiles: File[];
   currentStep: number
   nextStep: () => void
-  canProceed: () => boolean
 }
 
 // type FormValues = {
@@ -24,13 +24,15 @@ const FileUpload: React.FC<FileUploadProps> = ({
   uploadedFiles,
   currentStep,
   nextStep,
-  canProceed
 }) => {
   const dispatch = useDispatch();
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   // const { register, handleSubmit, reset } = useForm<FormValues>();
   // const [loading, setLoading] = useState(false);
+  const aiExtractData = useSelector((state: RootState) => state.aiData);
+  console.log(aiExtractData)
+
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -56,6 +58,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
     );
 
     onFilesChange([...uploadedFiles, ...validFiles]);
+    dispatch(setImageFile([...uploadedFiles, ...files]));
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,6 +73,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
   const removeFile = (index: number) => {
     const newFiles = uploadedFiles.filter((_, i) => i !== index);
     onFilesChange(newFiles);
+    dispatch(setImageFile([newFiles]));
   };
 
   const formatFileSize = (bytes: number) => {
@@ -195,8 +199,8 @@ const FileUpload: React.FC<FileUploadProps> = ({
             onClick={nextStep}
             disabled={uploadedFiles.length === 0}
             className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${uploadedFiles.length === 0
-                ? "bg-gray-400 cursor-not-allowed" // ✅ disabled color
-                : "bg-blue-500 hover:bg-blue-600" // ✅ enabled color
+              ? "bg-gray-400 cursor-not-allowed" // ✅ disabled color
+              : "bg-blue-500 hover:bg-blue-600" // ✅ enabled color
               }`}
           >
             Next <ChevronRight className="inline w-5 h-5 ml-2" />

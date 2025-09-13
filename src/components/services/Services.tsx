@@ -13,6 +13,8 @@ export default function MainServices() {
 
     const projects = data?.data;
     console.log(projects)
+
+
     return (
         <section className="bg-[#F1F5F9] py-8 ">
             <Header

@@ -7,7 +7,6 @@ import FinalOverview from "@/components/CreateProject/FinalOverview/FinalOvervie
 import OwnerSelection from "@/components/CreateProject/OwnerSelection/OwnerSelection";
 import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
 import AIExtractionDataInPut from "@/components/CreateProject/aAIExtractionData/AIExtractionData";
-import { ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -24,6 +23,7 @@ const WorkflowDemo: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const stepParam = Number(searchParams.get("step")) || 1;
+
 
   const [currentStep, setCurrentStep] = useState(stepParam);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
@@ -67,7 +67,6 @@ const WorkflowDemo: React.FC = () => {
           <FileUpload
             onFilesChange={setUploadedFiles}
             uploadedFiles={uploadedFiles}
-            canProceed={canProceed}
             currentStep={currentStep}
             nextStep={nextStep}
           />
@@ -82,14 +81,24 @@ const WorkflowDemo: React.FC = () => {
           />
         );
       case 3:
-        return <OwnerSelection />;
+        return <OwnerSelection
+          canProceed={canProceed}
+          currentStep={currentStep}
+          nextStep={nextStep}
+        />;
       case 4:
-        return <AIExtractionDataInPut currentStep={currentStep} />;
+        return <AIExtractionDataInPut currentStep={currentStep}
+          canProceed={canProceed}
+          nextStep={nextStep}
+        />;
       case 5:
         return (
           <ActionSelection
             selectedActions={selectedActions}
             onActionsChange={setSelectedActions}
+            currentStep={currentStep}
+            canProceed={canProceed}
+            nextStep={nextStep}
           />
         );
       case 6:
@@ -119,7 +128,20 @@ const WorkflowDemo: React.FC = () => {
       <div className="flex-1 p-12">
         <div className="max-w-6xl">
           <div className="mb-8">{renderStepContent()}</div>
-          {currentStep < 6 && (
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default WorkflowDemo;
+
+
+
+//trash
+
+{/* {currentStep < 6 && (
             <div className="flex justify-end">
               <button
                 onClick={nextStep}
@@ -129,11 +151,4 @@ const WorkflowDemo: React.FC = () => {
                 Next <ChevronRight className="inline w-5 h-5 ml-2" />
               </button>
             </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default WorkflowDemo;
+          )} */}

@@ -55,11 +55,14 @@ export interface FormattedData {
   document_of_anticipation: string;
 }
 
-interface FileMeta {
+// Store only serializable file metadata instead of File objects
+export interface FileMeta {
   name: string;
   type: string;
   size: number;
-  preview: string;
+  lastModified: number;
+  // You can add a preview URL if needed, but handle it carefully
+  preview?: string;
 }
 
 interface Data {
@@ -71,15 +74,15 @@ interface Data {
 
 interface AiExtractState {
   aiDataState?: any;
-  ownerBaseData?: any;
+  ownerBaseData?: any[];
   projectId?: {} | undefined;
-  subcategory?: [];
-  descriptionTask?: [];
-  description?: [];
-  multiFiles?: [];
+  subcategory?: any[];
+  descriptionTask?: any[];
+  description?: any[];
+  multiFiles?: FileMeta[]; // Store file metadata instead of File objects
   aiInputData?: any;
-  actionSelection?: [];
-  selectTemplate?: [];
+  actionSelection?: any[];
+  selectTemplate?: any[];
   projectIdCode?: string | null;
 }
 
@@ -116,7 +119,6 @@ const aiExtractDataSlice = createSlice({
     setTheProjectCode: (state, action) => {
       state.projectIdCode = action.payload;
     },
-
     setMultipleSubcategory: (state, action) => {
       state.subcategory = action.payload;
     },
@@ -124,20 +126,15 @@ const aiExtractDataSlice = createSlice({
       state.descriptionTask = action.payload;
     },
     setMultipleDescription: (state, action) => {
-
       state.description = action.payload;
     },
+    // Updated to handle FileMeta objects instead of File objects
     setImageFile: (state, action) => {
       state.multiFiles = action.payload;
     },
     setSelectTemplate: (state, action) => {
       state.selectTemplate = action.payload;
     },
-    // setImageFile: (state, action: PayloadAction<FileMeta[]>) => {
-    //   console.log(action.payload);
-    //   state.multiFiles = action.payload;
-    // },
-
     setAiExtreactAndInputData: (state, action) => {
       state.aiInputData = action.payload;
     },
@@ -159,4 +156,5 @@ export const {
   setSelectTemplate,
   resetAiExtractState
 } = aiExtractDataSlice.actions;
+
 export default aiExtractDataSlice.reducer;

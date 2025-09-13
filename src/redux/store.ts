@@ -6,7 +6,16 @@ import aiExtractDataReducer from "./features/AI-intrigratoin/aiFileDataSlice";
 import userDataReducer from "./features/auth/userDataCatchSlice";
 
 // persist
-import { persistStore, persistReducer } from "redux-persist";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const rootReducer = combineReducers({
@@ -29,7 +38,16 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
+        ignoredActions: [
+          FLUSH,
+          REHYDRATE,
+          PAUSE,
+          PERSIST,
+          PURGE,
+          REGISTER,
+        ],
+        // Add this to ignore the multiFiles path where File objects might exist
+        ignoredPaths: ['aiData.multiFiles'],
       },
     }).concat(baseUrlApi.middleware),
 });

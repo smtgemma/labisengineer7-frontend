@@ -22,7 +22,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const dispatch = useDispatch();
   // routing and id catch
   const handleProjectId = (id: string) => {
-
+    dispatch(resetAiExtractState()); // all state fields go back to initialState
     dispatch(
       setTheProjectId({
         title,
@@ -30,7 +30,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         id,
       })
     );
-    dispatch(resetAiExtractState()); // all state fields go back to initialState
+
     if (id === "68c4ee46620b644fb88ef886") {
       router.push("/service/sub-category");
 
