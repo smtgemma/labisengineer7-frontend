@@ -32,6 +32,8 @@ import F6D12 from "./f-06/f6D12/page";
 import F6D5 from "./f-06/f6D5/page";
 import F6D6 from "./f-06/f6D6/page";
 import F6D13 from "./f-06/f6D13/page";
+import F6D14 from "./f-06/f6D14/page";
+import F6D15 from "./f-06/f6D15/page";
 
 export interface UserData {
   id: string;
@@ -227,8 +229,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   //   }
   // };
   // 🔹 Click outside handler
-  
-  
+
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -258,6 +260,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     },
 
   ]
+
+  console.log(selected, "selected==================");
 
   return (
     <div className="space-y-8">
@@ -472,46 +476,73 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
               {/* file 6======== */}
               {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
-                <F6D1 allData={allData} />
+                <F6D8 allData={allData} />
               )}
               {selected ===
                 "YΔ Ανάληψης Έργου Μηχανικού" && (
-                  <F6D2 allData={allData} />
+                  <F6D9 allData={allData} />
                 )}
               {selected ===
                 "YΔ Φέροντα Οργανισμού" && (
-                  <F6D3 allData={allData} />
+                  <F6D10 allData={allData} />
                 )}
               {selected === "YΔ Συνιδιοκτητών" && (
                 <F6D4 allData={allData} />
               )}
               {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
-                <F6D5 allData={allData} />
-              )}
-              {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
-                <F6D6 allData={allData} />
-              )}
-              {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
-                <F6D7 allData={allData} />
-              )}
-              {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
-                <F6D8 allData={allData} />
-              )}
-              {selected === "Πίνακας 3" && (
-                <F6D9 allData={allData} />
-              )}
-              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
-                <F6D10 allData={allData} />
-              )}
-              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
-                <F6D11 allData={allData} />
-              )}
-              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
-                <F6D12 allData={allData} />
-              )}
-              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
                 <F6D13 allData={allData} />
               )}
+              {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
+                <F6D1 allData={allData} />
+              )}
+              {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
+                <F6D5 allData={allData} />
+              )}
+              {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
+                <F6D6 allData={allData} />
+              )}
+              {selected === "Πίνακας 3" && (
+                <F6D12 allData={allData} />
+              )}
+              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
+                <F6D2 allData={allData} />
+              )}
+              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
+                <F6D14 allData={allData} />
+              )}
+              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
+                <F6D7 allData={allData} />
+              )}
+              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
+                <F6D15 allData={allData} />
+              )}
+              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
+                <F6D3 allData={allData} />
+              )}
+              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
+                <F6D4 allData={allData} />
+              )}
+              {selected === "Autofill (προαιρετικό add-on)" && (
+                // <F6D8 allData={allData} />ok 1
+                // <F6D9 allData={allData} />ok 2
+                // <F6D10 allData={allData} /> ok 3
+                // <F6D13 allData={allData} /> ok 5
+                // <F6D1 allData={allData} /> ok 6
+                // <F6D5 allData={allData} /> ok  7
+                // <F6D6 allData={allData} /> ok 8
+                // <F6D12 allData={allData} /> ok 9
+                // <F6D2 allData={allData} /> ok 10
+                // <F6D14 allData={allData} /> ok 11 
+                // <F6D7 allData={allData} />  ok 12
+                // <F6D3 allData={allData} />  ok 14
+                // <F6D4 allData={allData} />  ok 15 
+
+
+                //  axtra component 
+                <F6D11 allData={allData} /> 
+              )}
+
+
 
               {/* file 7======== */}
               {/* {selected ===
@@ -552,9 +583,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "Ιδιωτική Σύμβαση " && <F9D3 />} */}
 
               {/* file 10=== */}
-              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_" && (
+              {/* {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_" && (
                 <F10D1 allData={allData} />
-              )}
+              )} */}
               {/* {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102" && (
                 <F10D2 allData={allData} />
               )} */}

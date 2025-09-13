@@ -494,8 +494,6 @@ interface allDataProps {
 
 export default function F6D8({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-    const owners = Array.isArray(allData?.owners) ? allData.owners : [];
     const engineers = allData?.engineers || {};
     const { projectDescription } = allData || {};
 
@@ -665,7 +663,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
 
                             {/* Additional disclaimer text */}
                             <div className="space-y-4 text-sm m p-4">
-                                <p>επί της οδού {owner?.ownerAddress || owner?.owner_address || "N/A"}, {owner?.city || "N/A"} , {owner?.postal_code || "N/A"} ( FOR PROPERTY)</p>
+                                {/* <p>επί της οδού {owner?.ownerAddress || owner?.owner_address || "N/A"}, {owner?.city || "N/A"} , {owner?.postal_code || "N/A"} ( FOR PROPERTY)</p> */}
                                 <p>
                                     τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
                                 <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>

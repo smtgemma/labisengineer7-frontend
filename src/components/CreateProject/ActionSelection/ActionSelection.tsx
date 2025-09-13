@@ -27,83 +27,82 @@ interface TemplateName {
 
 const templateName: TemplateName[] = [
   {
-    id: "owner_assignment",
+    id: "owner_assignment_1",
     title: "YΔ Ανάθεσης Ιδιοκτήτη",
     price: 0.5,
   },
   {
-    id: "engineer_assumption",
+    id: "engineer_assumption_2",
     title: "YΔ Ανάληψης Έργου Μηχανικού",
     price: 0.5,
   },
   {
-    id: "bearing_organization",
+    id: "bearing_organization_3",
     title: "YΔ Φέροντα Οργανισμού",
     price: 0.5,
   },
   {
-    id: "co_owners",
+    id: "co_owners_4",
     title: "YΔ Συνιδιοκτητών",
     price: 0.5,
   },
   {
-    id: "technical_report",
+    id: "technical_report_5",
     title: "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου",
     price: 1,
   },
   {
-    id: "detailed_budget",
+    id: "detailed_budget_6",
     title: "Αναλυτικός Προϋπολογισμός Εργασιών",
     price: 0.5,
   },
   {
-    id: "safety_file",
+    id: "safety_file_7",
     title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
     price: 1,
   },
   {
-    id: "waste_management",
+    id: "waste_management_8",
     title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
     price: 0.5,
   },
   {
-    id: "table_3",
+    id: "table_3_9",
     title: "Πίνακας 3",
     price: 0.5,
   },
   {
-    id: "active_fire_protection",
-    title:
-      "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας",
+    id: "active_fire_protection_10",
+    title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας",
     price: 0.5,
   },
   {
-    id: "passive_fire_protection",
+    id: "passive_fire_protection_11",
     title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας",
     price: 0.5,
   },
   {
-    id: "electrical_mechanical",
+    id: "electrical_mechanical_12",
     title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων",
     price: 0.5,
   },
   {
-    id: "plumbing_sewage",
+    id: "plumbing_sewage_13",
     title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης",
     price: 0.5,
   },
   {
-    id: "notarial_deed",
+    id: "notarial_deed_14",
     title: "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης",
     price: 0.5,
   },
   {
-    id: "co_owners_consent",
+    id: "co_owners_consent_15",
     title: "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών",
     price: 0.5,
   },
   {
-    id: "autofill",
+    id: "autofill_16",
     title: "Autofill (προαιρετικό add-on)",
     price: 1,
   },

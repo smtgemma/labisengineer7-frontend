@@ -15,7 +15,7 @@ interface FormData {
 }
 // end editing 
 
-export default function F6D7({ allData }: { allData: any }) {
+export default function F6D14({ allData }: { allData: any }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {}
@@ -196,7 +196,7 @@ export default function F6D7({ allData }: { allData: any }) {
                 </div>
                 <div>
                     <p className="text-sm">Ενδεικτικά, τέτοιες μελέτες μπορεί να είναι:</p>
-                    <p className="text-sm">• Μελέτη ηλεκτρομηχανολογικών εγκαταστάσεων (Η/Μ)</p>
+                    <p className="text-sm">• Μελέτη παθητικής πυροπροστασίας</p>
                 </div>
                 <div>
                     <h3 className="text-sm font-bold underline">
@@ -207,7 +207,7 @@ export default function F6D7({ allData }: { allData: any }) {
                 </div>
                 <div>
                     <h3 className="text-sm font-bold mb-6">
-                        Τις Μελέτες Ηλεκτρομηχανολογικών Εγκαταστάσεων   
+                        Τη μελέτη παθητικής πυροπροστασίας
                     </h3>
                     <p className="text-sm mb-6">
                         Ως εκ τούτου, δεν απαιτείται η κατάθεση νέων ή τροποποιημένων
