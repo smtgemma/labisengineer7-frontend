@@ -1,28 +1,36 @@
-import React, { useState, useRef } from "react";
-import { Upload, X, FileText } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { setImageFile } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { ChevronRight, FileText, Upload, X } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 interface FileUploadProps {
   onFilesChange: (files: File[]) => void;
   uploadedFiles: File[];
+  currentStep: number
+  nextStep: () => void
+  canProceed: () => boolean
 }
 
-type FormValues = {
-  ktimatologio: FileList;
-  contract: FileList;
-  permit: FileList;
-  law4495: FileList;
-  project_descriptions: string;
-  sub_categories: string;
-};
+// type FormValues = {
+//   ktimatologio: FileList;
+//   contract: FileList;
+//   permit: FileList;
+//   law4495: FileList;
+//   project_descriptions: string;
+//   sub_categories: string;
+// };
 const FileUpload: React.FC<FileUploadProps> = ({
   onFilesChange,
   uploadedFiles,
+  currentStep,
+  nextStep,
+  canProceed
 }) => {
+  const dispatch = useDispatch();
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { register, handleSubmit, reset } = useForm<FormValues>();
-  const [loading, setLoading] = useState(false);
+  // const { register, handleSubmit, reset } = useForm<FormValues>();
+  // const [loading, setLoading] = useState(false);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -55,6 +63,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
       const files = Array.from(e.target.files);
       console.log(files);
       onFilesChange([...uploadedFiles, ...files]);
+      dispatch(setImageFile([...uploadedFiles, ...files]));
     }
   };
 
@@ -71,40 +80,41 @@ const FileUpload: React.FC<FileUploadProps> = ({
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
-  const onSubmit = async (data: FormValues) => {
-    setLoading(true);
-    //Tahsin
-    //why static description
-    const description: string =
-      "ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ ΟΡΓΑΝΙΣΜΟΥ  ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ A-4 ΤΟΥ Α ΟΡΟΦΟΥ";
-    try {
-      const formData = new FormData();
-      formData.append("project_descriptions", JSON.stringify(description));
-      formData.append("ktimatologio", data.ktimatologio[0]);
-      formData.append("contract", data.contract[0]);
-      formData.append("permit", data.permit[0]);
-      if (data.law4495?.length) {
-        formData.append("law4495", data.law4495[0]);
-      }
+  // const onSubmit = async (data: FormValues) => {
+  //   setLoading(true);
+  //   //Tahsin
+  //   //why static description
+  //   const description: string =
+  //     "ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ ΟΡΓΑΝΙΣΜΟΥ  ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ A-4 ΤΟΥ Α ΟΡΟΦΟΥ";
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("project_descriptions", JSON.stringify(description));
+  //     formData.append("ktimatologio", data.ktimatologio[0]);
+  //     formData.append("contract", data.contract[0]);
+  //     formData.append("permit", data.permit[0]);
 
-      const res = await fetch(
-        "http://172.252.13.69:8019/api/v1/process-documents-advanced",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+  //     if (data.law4495?.length) {
+  //       formData.append("law4495", data.law4495[0]);
+  //     }
 
-      if (!res.ok) throw new Error("Upload failed");
-      alert("Upload successful!");
-      reset();
-    } catch (err) {
-      console.error(err);
-      alert("Error uploading files");
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     const res = await fetch(
+  //       "http://172.252.13.69:8019/api/v1/process-documents-advanced",
+  //       {
+  //         method: "POST",
+  //         body: formData,
+  //       }
+  //     );
+
+  //     if (!res.ok) throw new Error("Upload failed");
+  //     alert("Upload successful!");
+  //     reset();
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("Error uploading files");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <div className="space-y-6 ">
@@ -178,6 +188,21 @@ const FileUpload: React.FC<FileUploadProps> = ({
             </div>
           ))}
         </div>
+      )}
+      {currentStep < 6 && (
+        <div className="flex justify-end">
+          <button
+            onClick={nextStep}
+            disabled={uploadedFiles.length === 0}
+            className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${uploadedFiles.length === 0
+                ? "bg-gray-400 cursor-not-allowed" // ✅ disabled color
+                : "bg-blue-500 hover:bg-blue-600" // ✅ enabled color
+              }`}
+          >
+            Next <ChevronRight className="inline w-5 h-5 ml-2" />
+          </button>
+        </div>
+
       )}
     </div>
   );

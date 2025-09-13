@@ -183,7 +183,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     dispatch(setSelectTemplate(template));
   }, [selected, template]);
 
-  console.log(template);
+
   const toggleAction = (action: string) => {
     if (selectedActions.includes(action)) {
       onActionsChange(selectedActions.filter((a) => a !== action));
