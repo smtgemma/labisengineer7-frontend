@@ -1,10 +1,10 @@
-import Services4Des from '@/components/description-pages/Services4Des';
+import CreateEngCert from '@/components/create-eng-certificates/CreateEngCert';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-            <Services4Des />
+            <CreateEngCert />
         </div>
     );
 };
