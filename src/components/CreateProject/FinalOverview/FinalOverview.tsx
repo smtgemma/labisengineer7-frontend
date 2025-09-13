@@ -90,9 +90,9 @@ import { FaRegCopy, FaRegCopyright } from "react-icons/fa6";
 import F5D5 from "./f-05/f5D5/page";
 import F6D12 from "./f-06/f6D12/page";
 import { ProjectResponse } from "./shared/allDataType";
-import PdfZipDownloader from "@/utility/PdfZipDownloader";
 import F6D5 from "./f-06/f6D5/page";
 import F6D6 from "./f-06/f6D6/page";
+import F6D13 from "./f-06/f6D13/page";
 
 export interface UserData {
   id: string;
@@ -557,7 +557,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
                 <F6D8 allData={allData} />
               )}
-              {selected === "Πίνακας" && (
+              {selected === "Πίνακας 3" && (
                 <F6D9 allData={allData} />
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
@@ -568,6 +568,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "νημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
                 <F6D12 allData={allData} />
+              )}
+              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
+                <F6D13 allData={allData} />
               )}
 
               {/* file 7======== */}
@@ -670,7 +673,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
 
       <div className="flex justify-end">
-        <PdfZipDownloader templates={templates} zipName="Invoices.zip" />
         <button
           onClick={onComplete}
           className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"

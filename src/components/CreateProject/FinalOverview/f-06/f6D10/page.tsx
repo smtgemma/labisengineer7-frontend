@@ -151,7 +151,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400">
                     <div className="flex">
                         <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                        <div className="w-20 p-2 border-r border-gray-400 font-bold ">{engineer?.town  || "N/A"}</div>
+                        <div className=" p-2 border-r border-gray-400 font-bold ">{engineer?.town  || "N/A"}</div>
                         <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
                         <div className="w-24 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress  || "N/A"}</div>
                         <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>

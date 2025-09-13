@@ -665,7 +665,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
 
                             {/* Additional disclaimer text */}
                             <div className="space-y-4 text-sm m p-4">
-                                <p>επί της οδού {owner?.ownerAddress || "N/A============="}, {owner?.city || "N/A"} , {owner?.postal_code || "N/A"} ( FOR PROPERTY)</p>
+                                <p>επί της οδού {owner?.ownerAddress || owner?.owner_address || "N/A"}, {owner?.city || "N/A"} , {owner?.postal_code || "N/A"} ( FOR PROPERTY)</p>
                                 <p>
                                     τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
                                 <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>
@@ -740,7 +740,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("owner_father_name", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.fatherName || "N/A"}
+                                                    defaultValue={owner?.fatherFirstLastName || "N/A"}
                                                 />
                                             </div>
 
@@ -751,7 +751,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("owner_mother_name", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.motherName || "N/A"}
+                                                    defaultValue={owner?.mothersFirstLastName || "N/A"}
                                                 />
                                             </div>
 
@@ -762,7 +762,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="date"
                                                     {...register("owner_birth_date", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.birthDate || "N/A"}
+                                                    defaultValue={owner?.dateOfBirth || "N/A"}
                                                 />
                                             </div>
 
@@ -773,7 +773,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("owner_birth_place", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.birthPlace}
+                                                    defaultValue={owner?.placeOfBirth}
                                                 />
                                             </div>
 
@@ -817,7 +817,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("owner_address", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.address || "N/A"}
+                                                    defaultValue={owner?.ownerAddress || "N/A"}
                                                 />
                                             </div>
 
@@ -839,7 +839,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("owner_postal_code", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.postalCode || "N/A"}
+                                                    defaultValue={owner?.postalCode || owner?.postal_code || "N/A"}
                                                 />
                                             </div>
 
@@ -861,7 +861,8 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("owner_afm", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.afm || "N/A"}
+                                                    defaultValue={owner?.taxIdentificationNumber
+                                                        || "N/A"}
                                                 />
                                             </div>
 
@@ -872,7 +873,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("project_description", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                // defaultValue={project_description || ""}
+                                                    defaultValue={projectDescription || ""}
                                                 />
                                             </div>
 
