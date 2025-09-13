@@ -20,9 +20,7 @@ export default function F6D7({ allData }: { allData: any }) {
 
     const owner = allData?.owners?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-
-    const { technicalDescription } = allData || {};
-    const { horizontalPropertyName } = allData || {};
+    const { projectDescription } = allData || {};
 
 
     console.log(allData)
@@ -57,14 +55,14 @@ export default function F6D7({ allData }: { allData: any }) {
 
             {/* Project Information */}
             <div className="mb-8 space-y-4">
-                {/* <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    <h3 className=" text-sm">{project_description || "N/A"}</h3>
-                </div> */}
+                    <h3 className=" text-sm">{projectDescription || "N/A"}</h3>
+                </div>
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{owner?.address || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"} ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">{owner?.ownerAddress || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"} ( FOR BUILDING)</h3>
                 </div>
 
                 <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
@@ -75,7 +73,7 @@ export default function F6D7({ allData }: { allData: any }) {
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">{technicalDescription || "N/A"}/ {horizontalPropertyName || "N/A"}</span> επί της οδού <br /> <span className="font-semibold">Address,Town/Area , postal code ( FOR BUILDING),</span>
+                <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property</span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city} , {owner?.postal_code} ( FOR BUILDING),</span>
                     πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
 
@@ -179,6 +177,48 @@ export default function F6D7({ allData }: { allData: any }) {
                     ))
                 }
 
+                <div>
+                    <p className="text-sm mb-6">
+                        Σύμφωνα με την{" "}
+                        <span className="text-sm font-bold">
+                            Απόφαση ΥΠΕΝ/ΔΑΟΚΑ/69701/4461/18 (ΦΕΚ 4520 Β/16.10.2018),
+                        </span>{" "}
+                        και ειδικότερα με το{" "}
+                        <span className="text-sm font-bold">άρθρο 2, παράγραφος Ιζ),</span>{" "}
+                        αναφέρεται ότι για την πραγματοποίηση εσωτερικών διαρρυθμίσεων εντός
+                        υφιστάμενου κτιρίου, απαιτείται η υποβολή σχεδίου κάτοψης σε
+                        κλίμακα 1:100 ή 1:50,{" "}
+                        <span className="underline">
+                            μόνο στην περίπτωση που από τις διαρρυθμίσεις αυτές προκύπτει
+                            ανάγκη τροποποίησης υφιστάμενων μελετών του κτιρίου.
+                        </span>
+                    </p>
+                </div>
+                <div>
+                    <p className="text-sm">Ενδεικτικά, τέτοιες μελέτες μπορεί να είναι:</p>
+                    <p className="text-sm">• Μελέτη ηλεκτρομηχανολογικών εγκαταστάσεων (Η/Μ)</p>
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold underline">
+                        Ωστόσο, στη συγκεκριμένη περίπτωση, για το σύνολο των προβλεπόμενων
+                        εργασιών, διαπιστώνεται ότι οι διαρρυθμίσεις δεν τροποποιούν τις
+                        εγκεκριμένες μελέτες του κτιρίου και ιδίως δεν επηρεάζουν:
+                    </h3>
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold mb-6">
+                        Τις Μελέτες Ηλεκτρομηχανολογικών Εγκαταστάσεων   
+                    </h3>
+                    <p className="text-sm mb-6">
+                        Ως εκ τούτου, δεν απαιτείται η κατάθεση νέων ή τροποποιημένων
+                        μελετών για την ενημέρωση του φακέλου της οικοδομικής άδειας. Το
+                        παραπάνω επιβεβαιώνεται και από τις διατάξεις της παρ. 10 του άρθρου
+                        42 του Ν.4495/2017, σύμφωνα με τις οποίες δεν απαιτείται
+                        επικαιροποίηση μελετών για διαρρυθμίσεις που δεν επηρεάζουν τα
+                        συστήματα πυροπροστασίας ή τις Η/Μ εγκαταστάσεις.
+                    </p>
+                </div>
+
                 {/* {/* Signature Section */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
                     <div className="max-w-[300px]">
@@ -236,7 +276,7 @@ export default function F6D7({ allData }: { allData: any }) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Έργο *:</label>
                                     <input
-                                        // placeholder={project_description || "Project description"}
+                                        placeholder={projectDescription || "projectDescription"}
                                         type="text"
                                         {...register("project_description", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
@@ -249,7 +289,7 @@ export default function F6D7({ allData }: { allData: any }) {
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <input
                                             type="text"
-                                            placeholder={owner?.address || "Address"}
+                                            placeholder={owner?.ownerAddress || "Address"}
                                             {...register("owner_address", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
@@ -261,7 +301,7 @@ export default function F6D7({ allData }: { allData: any }) {
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner?.postalCode || "Postal Code"}
+                                            placeholder={owner?.postal_code || "Postal Code"}
                                             {...register("owner_postal_code", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />

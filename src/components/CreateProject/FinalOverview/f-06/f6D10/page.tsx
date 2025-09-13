@@ -29,6 +29,7 @@ interface FormData {
 
 interface allDataProps {
     engineers: any[];
+    projectDescription: string;
 }
 
 
@@ -37,6 +38,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
+    const { projectDescription } = allData || {};
 
 
     // for editing data 
@@ -193,7 +195,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                     </p>
 
                     <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
-                    {/* <p className=" mb-6">{project_description || "N/A"}</p> */}
+                    <p className=" mb-6">{projectDescription || "N/A"}</p>
                 </div>
 
                 {/* Additional disclaimer text */}

@@ -15,18 +15,15 @@ interface FormData {
 }
 // end editing 
 
-interface allDataProps {
-    owners: any[];
-    allDescriptionTasks: any[]
-    projectDescription: string;
-}
-
-export default function F6D4({ allData }: { allData: allDataProps }) {
+export default function F6D15({ allData }: { allData: any }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
     const { projectDescription } = allData || {};
+
+
+    console.log(allData)
 
     // for editing data 
     const {
@@ -76,7 +73,7 @@ export default function F6D4({ allData }: { allData: allDataProps }) {
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property</span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || " N/A"} ( FOR BUILDING),</span>
+                <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property</span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city} , {owner?.postal_code} ( FOR BUILDING),</span>
                     πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
 
@@ -170,6 +167,7 @@ export default function F6D4({ allData }: { allData: allDataProps }) {
                     </h3>
                     <p className="text-sm mb-6">Τοποθέτηση κλιματιστικών (split unit, πολυδιαιρούμενα), προκαλωδίωση & σωληνώσεις ψυκτικού υγρού (χωνευτά), αντικατάσταση λεβητοστασίου ή μετάβαση σε αντλία θερμότητας, τοποθέτηση θερμοστατών – ζωνών θέρμανσης.</p>
                 </div> */}
+
                 {Array.isArray(allDescriptionTasks) &&
                     allDescriptionTasks.map((task: any, index: number) => (
                         <div key={index}>
@@ -178,20 +176,47 @@ export default function F6D4({ allData }: { allData: allDataProps }) {
                         </div>
                     ))
                 }
+
                 <div>
                     <p className="text-sm mb-6">
-                        <span className="font-bold">Βάσει των ισχυουσών πολεοδομικών και αστικών διατάξεων</span> για τις προβλεπόμενες εργασίες που πρόκειται να υλοποιηθούν στη συγκεκριμένη ιδιοκτησία, <span className="font-bold">δεν απαιτείται η συναίνεση των λοιπών συνιδιοκτητών της πολυκατοικίας.</span></p>
-                    <p className="text-sm mb-6">Ο λόγος είναι ότι:
+                        Σύμφωνα με την{" "}
+                        <span className="text-sm font-bold">
+                            Απόφαση ΥΠΕΝ/ΔΑΟΚΑ/69701/4461/18 (ΦΕΚ 4520 Β/16.10.2018),
+                        </span>{" "}
+                        και ειδικότερα με το{" "}
+                        <span className="text-sm font-bold">άρθρο 2, παράγραφος Ιζ),</span>{" "}
+                        αναφέρεται ότι για την πραγματοποίηση εσωτερικών διαρρυθμίσεων εντός
+                        υφιστάμενου κτιρίου, απαιτείται η υποβολή σχεδίου κάτοψης σε
+                        κλίμακα 1:100 ή 1:50,{" "}
+                        <span className="underline">
+                            μόνο στην περίπτωση που από τις διαρρυθμίσεις αυτές προκύπτει
+                            ανάγκη τροποποίησης υφιστάμενων μελετών του κτιρίου.
+                        </span>
                     </p>
-                    <p className="text-sm">● Το σύνολο των εργασιών πρόκειται να εκτελεστεί αποκλειστικά εντός του περιγράμματος της ιδιοκτησίας, χωρίς επέμβαση σε κοινόχρηστους ή κοινόκτητους χώρους.
+                </div>
+                <div>
+                    <p className="text-sm">Ενδεικτικά, τέτοιες μελέτες μπορεί να είναι:</p>
+                    <p className="text-sm">• Μελέτη ηλεκτρομηχανολογικών εγκαταστάσεων (Η/Μ)</p>
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold underline">
+                        Ωστόσο, στη συγκεκριμένη περίπτωση, για το σύνολο των προβλεπόμενων
+                        εργασιών, διαπιστώνεται ότι οι διαρρυθμίσεις δεν τροποποιούν τις
+                        εγκεκριμένες μελέτες του κτιρίου και ιδίως δεν επηρεάζουν:
+                    </h3>
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold mb-6">
+                        Τη μελέτη παθητικής πυροπροστασίας
+                    </h3>
+                    <p className="text-sm mb-6">
+                        Ως εκ τούτου, δεν απαιτείται η κατάθεση νέων ή τροποποιημένων
+                        μελετών για την ενημέρωση του φακέλου της οικοδομικής άδειας. Το
+                        παραπάνω επιβεβαιώνεται και από τις διατάξεις της παρ. 10 του άρθρου
+                        42 του Ν.4495/2017, σύμφωνα με τις οποίες δεν απαιτείται
+                        επικαιροποίηση μελετών για διαρρυθμίσεις που δεν επηρεάζουν τα
+                        συστήματα πυροπροστασίας ή τις Η/Μ εγκαταστάσεις.
                     </p>
-                    <p className="text-sm">● Δεν υφίσταται επέμβαση σε στατικά, φέροντα ή κοινόχρηστα δομικά στοιχεία του κτιρίου.
-                    </p>
-                    <p className="text-sm mb-6">● Δεν πραγματοποιούνται επεμβάσεις σε δίκτυα ή υποδομές που εξυπηρετούν άλλες ιδιοκτησίες (όπως δίκτυα θέρμανσης, ύδρευσης ή πυρασφάλειας κοινόχρηστων χώρων).
-                    </p>
-                    <p className="text-sm mb-6 font-bold underline">Συνεπώς, δεν απαιτείται σύγκληση ή απόφαση γενικής συνέλευσης ή άλλη μορφή συναίνεσης των υπολοίπων συνιδιοκτητών, για την εκτέλεση των εν λόγω εργασιών.
-                    </p>
-                    <p className="text-sm">Η παρούσα δήλωση αποτελεί στοιχείο τεκμηρίωσης για τον φάκελο του έργου, σύμφωνα και με το ισχύον νομικό πλαίσιο (Ν. 4495/2017).</p>
                 </div>
 
                 {/* {/* Signature Section */}
@@ -217,6 +242,7 @@ export default function F6D4({ allData }: { allData: allDataProps }) {
                     </div>
                 </div>
             </div>
+
             {/* EDIT MODAL */}
             {isEditModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
@@ -239,7 +265,7 @@ export default function F6D4({ allData }: { allData: allDataProps }) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Εργοδότες *:</label>
                                     <input
-                                        placeholder={owner?.firstName || " "}
+                                        placeholder={owner?.firstName || "owner_name"}
                                         type="text"
                                         {...register("owner_name", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
@@ -250,7 +276,7 @@ export default function F6D4({ allData }: { allData: allDataProps }) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Έργο *:</label>
                                     <input
-                                        placeholder={projectDescription || "Project Description "}
+                                        placeholder={projectDescription || "projectDescription"}
                                         type="text"
                                         {...register("project_description", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"

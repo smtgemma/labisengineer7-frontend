@@ -18,7 +18,7 @@ interface FormData {
 
 interface allDataProps {
   owners: any[]
-  project_description: string
+  projectDescription: string
 }
 
 interface BudgetItem {
@@ -40,7 +40,8 @@ interface BudgetCategory {
 export default function F6D1({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const owner = allData?.owners?.[0] || {}
-  const project_description = allData?.project_description || "";
+  const projectDescription = allData?.projectDescription || "";
+  console.log(allData)
 
   const [formData, setFormData] = useState({
     employer: "",
@@ -1059,11 +1060,11 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>
-          <h3 className="flex-1 text-black text-sm">{project_description || "N/A"}</h3>
+          <h3 className="flex-1 text-black text-sm">{projectDescription || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className="flex-1 text-black text-sm">{owner?.address || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"} (FOR BUILDING)</h3>
+          <h3 className="flex-1 text-black text-sm">{owner?.ownerAddress || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"} (FOR BUILDING)</h3>
         </div>
       </div>
       {/* Budget Title */}
@@ -1207,16 +1208,16 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
 
                 {/* Project */}
                 <div className="flex items-center gap-4">
-                  {/* <label className="font-medium w-1/4">Έργο *:</label>
+
+                  <label className="font-medium w-1/4">Έργο *:</label>
                   <input
-                  placeholder={project_description || "Project description"}
+                  placeholder={projectDescription || "Project description"}
                     type="text"
                     {...register("project_description", { required: "This field is required" })}
                     className="flex-1 border p-2 rounded text-sm"
-                  /> */}
-                  {/* {errors.project_description && (
+                  />  {errors.project_description && (
                     <p className="text-red-500 text-xs">{errors.project_description.message}</p>
-                  )} */}
+                  )}
                 </div>
 
                 {/* Address */}
@@ -1225,7 +1226,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
                   <div className="flex-1 grid grid-cols-3 gap-2">
                     <input
                       type="text"
-                      placeholder={owner?.address || "N/A"}
+                      placeholder={owner?.ownerAddress || "N/A"}
                       {...register("owner_address", { required: "Address is required" })}
                       className="border p-2 rounded text-sm"
                     />
@@ -1237,7 +1238,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
                     />
                     <input
                       type="text"
-                      placeholder={owner?.postalCode || "N/A"}
+                      placeholder={owner?.postal_code || "N/A"}
                       {...register("owner_postal_code", { required: "Postal code is required" })}
                       className="border p-2 rounded text-sm"
                     />
