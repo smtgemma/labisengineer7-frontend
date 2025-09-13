@@ -6,6 +6,7 @@ import ServicesOverview from "@/components/LandingComponents/ServiceOverview";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import CounterView from "@/components/LandingComponents/Counter";
 
 const page = () => {
   useEffect(() => {
@@ -17,7 +18,7 @@ const page = () => {
   return (
     <div>
       <Banner />
-      <AboutUs />
+      <CounterView />
       <ServicesOverview />
       <HowItWorks />
     </div>

@@ -19,7 +19,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="w-full px-4 py-3 bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <nav className="w-full px-4 py-6 bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="flex-shrink-0">

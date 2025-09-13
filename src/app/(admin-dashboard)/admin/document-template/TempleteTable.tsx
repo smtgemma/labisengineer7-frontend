@@ -71,7 +71,7 @@ export default function SimpleTemplatesTable() {
           className="bg-neutral-950 px-4 py-3 text-white  rounded-lg"
           href={"/admin/document-template/add-templete"}
         >
-          Add New Templete
+          Add New Service
         </Link>
       </div>
 

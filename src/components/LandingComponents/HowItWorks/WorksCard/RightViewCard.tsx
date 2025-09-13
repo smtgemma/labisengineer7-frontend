@@ -3,7 +3,7 @@
 import React from "react";
 import Container from "@/components/shared/Container/Container";
 import Image, { StaticImageData } from "next/image";
-import workImg from "@/assets/landing-page/login.png";
+import workImg from "@/assets/landing-page/monitor.png";
 import stepShape from "@/assets/landing-page/Vector.png";
 import StepTextBlock, { StepTextBlockProps } from "./LeftViewCard";
 
@@ -28,7 +28,6 @@ export default function RightViewCard({
   buttonLink = "",
   list = [],
   formats,
-  workImg,
 }: RightViewCardProps) {
   return (
     <div className="py-10 md:py-20 ">
@@ -38,7 +37,7 @@ export default function RightViewCard({
             <Image
               src={workImg}
               alt="HTK solution overview"
-              className="w-full h-auto rounded-lg bg-primary shadow-md "
+              className="w-full h-auto "
             />
           </div>
 

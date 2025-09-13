@@ -7,6 +7,7 @@ import submit from "@/assets/landing-page/submit.jpg";
 import review from "@/assets/landing-page/review.png";
 import aiExtension from "@/assets/landing-page/ai-extension.jpg";
 import document from "@/assets/landing-page/document.jpg";
+import ShapOne from "./WorksCard/ShapOne";
 
 export default function HowItWorks() {
   return (
@@ -14,12 +15,12 @@ export default function HowItWorks() {
       data-aos="fade-up"
       data-aos-anchor-placement="top-bottom"
       id="works"
-      className="bg-background pb-[100px]"
+      className="bg-background pb-[100px] relative z-[-0]"
     >
       <h2 className="text-3xl md:text-5xl font-bold text-center  text-primary mb-12 pt-[100px]">
         How It Works
       </h2>
-      <div>
+      <ShapOne>
         <RightViewCard
           workImg={workImg}
           stepNumber="Step 1"
@@ -27,7 +28,7 @@ export default function HowItWorks() {
           description="Create a free account or log in to your existing one to access your personalized dashboard."
           className="flex-col md:flex-row"
         />
-      </div>
+      </ShapOne>
 
       <RightViewCard
         workImg={serviceType}
