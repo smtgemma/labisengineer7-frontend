@@ -99,7 +99,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     >
       {/* Icon */}
       <div className="mb-6">
-        <img src={image} alt="" />
+        <img src={image} alt="no icon" />
       </div>
 
       {/* Content */}
@@ -119,9 +119,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* Button */}
       <button
         onClick={() => handleServiceClick(id)}
-        className={`inline-flex items-center px-6 py-3 ${"bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 focus:ring-white/50 border border-white/30 shadow-lg"} font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2`}
         type="button"
         aria-label={`Start ${title} service`}
+        className="relative  border-[#61BDFF] inline-flex items-center justify-center px-6 py-3 border font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#61BDFF]
+            hover:bg-[linear-gradient(44deg,#017AFF_37.44%,#61BDFF_67.11%)]   hover:text-white  p-[2px] cursor-pointer"
       >
         Begin Project
       </button>
