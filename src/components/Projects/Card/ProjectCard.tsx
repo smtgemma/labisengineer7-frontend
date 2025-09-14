@@ -23,7 +23,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   const router = useRouter();
 
   const dispatch = useDispatch();
-  console.log(title);
+  console.log(id);
   console.log(`Starting service: ${image}`);
   const handleServiceClick = (serviceTitle: string): void => {
     console.log(`Starting service: ${serviceTitle}`);
@@ -42,11 +42,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     );
 
     console.log("image", image);
-    if (id === "68c4ee46620b644fb88ef886") {
+    if (id === "68c565d9d5f94c3ac153e678") {
       router.push("/service/sub-category");
     }
     // services -2
-    else if (id === "6880dbb7519cab74df7b09b4") {
+    else if (id === "68c56689d5f94c3ac153e67a") {
       router.push("/create-project-two");
     }
   };
@@ -118,7 +118,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
       {/* Button */}
       <button
-        onClick={() => handleServiceClick(id)}
+        onClick={() => handleProjectId(id)}
         type="button"
         aria-label={`Start ${title} service`}
         className="relative  border-[#61BDFF] inline-flex items-center justify-center px-6 py-3 border font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#61BDFF]
