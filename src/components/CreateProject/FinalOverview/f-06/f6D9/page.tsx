@@ -30,6 +30,9 @@ interface allDataProps {
     engineers: any[];
     projectDescription?: string;    
     ydom?: string;
+    propertyPostalCode?: string;
+    propertyAddress?: string;
+    propertyPlace?: string;
 }
 
 
@@ -40,6 +43,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
+    const { propertyPostalCode } = allData || {};
+    const { propertyAddress } = allData || {};
+    const { propertyPlace } = allData || {};
     console.log("Engineers Data:", engineers);
 
     // for editing data 
@@ -201,7 +207,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {engineer?.streetAddress || "N/A"}, {engineer?.town  || "N/A"} , {engineer?.postalCode || "N/A"} ( FOR PROPERTY)</p>
+                            <p>επί της οδού {propertyAddress|| "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
                             <p>
                                 τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
                             <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>

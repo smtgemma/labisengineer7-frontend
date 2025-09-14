@@ -31,6 +31,9 @@ interface allDataProps {
     engineers: any[];
     projectDescription: string; 
     ydom?: string;
+    propertyPostalCode?: string;
+    propertyPlace?: string;
+    propertyAddress?: string;
 }
 
 
@@ -40,7 +43,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
 
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const { projectDescription } = allData || {};
-    const { ydom } = allData || {};
+    const { ydom, propertyPostalCode, propertyPlace, propertyAddress } = allData || {};
 
 
     // for editing data 
@@ -202,7 +205,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
 
                 {/* Additional disclaimer text */}
                 <div className="space-y-4 text-sm m p-4">
-                    <p>επί της οδού {engineer?.streetAddress || "N/A"}, {engineer?.town  || "N/A"} , {engineer?.postalCode || "N/A"} ( FOR PROPERTY)</p>
+                    <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace  || "N/A"} , {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
                     <p>
                         από την ανάλυση του συνόλου των προβλεπόμενων εργασιών προκύπτει <span className="font-bold">ότι δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία του οργανισμού του κτιρίου.</span>
                         Οι εργασίες περιορίζονται αποκλειστικά σε μη φέροντα στοιχεία και δεν επηρεάζουν καθ’ οποιονδήποτε τρόπο την ευστάθεια, φέρουσα ικανότητα ή δομική λειτουργία του κτιρίου.

@@ -6,14 +6,18 @@ import StampComponent from "../../shared/signture/signture"
 
 interface allDataProps {
     owners: any[];
-    allDescriptionTasks: any[]
+    engineers: any[];
     projectDescription: string;
+    propertyAddress: string;
+    propertyPlace: string;
+    propertyPostalCode: string;     
+    technicalDescription: string;     
 }
 
 export default function F6D5({ allData }: { allData: allDataProps }) {
     const owner = allData?.owners?.[0] || {}
-    const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { projectDescription } = allData || {};
+    const engineers = allData?.engineers?.[0] || {}
+    const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription } = allData || {};
     const descriptions = [
         {
             "id": 1,
@@ -182,10 +186,10 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
 
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΔΙΕΥΘΥΝΣΗ :</span>
-                            <span className=" font-bold">{owner?.ownerAddress}</span>
-                            <span className=" font-bold">, {owner?.city || "N/A"}</span>
+                            <span className=" font-bold">{propertyAddress || "N/A"}</span>
+                            <span className=" font-bold">, {propertyPlace || "N/A"}</span>
                             {/* <span className=" font-bold">, TOWN</span> */}
-                            <span className=" font-bold">, {owner?.postal_code || "N/A"}</span>
+                            <span className=" font-bold">, {propertyPostalCode || "N/A"}</span>
                             <span className=" font-bold">FOR BUILDING</span>
                         </div>
 
@@ -196,7 +200,7 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
                         <div className="flex justify-between">
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-center justify-center">
-                                <span className="flex-1  font-bold">NAME AND SURNAME ENGINEER</span>
+                                <span className="flex-1  font-bold">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
                                 <span className="flex-1  font-bold">SPECIALTY</span>
                             </div>
                         </div>
@@ -224,7 +228,7 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
                         <h3 className="font-medium mb-2">3. ΣΧΕΔΙΑ</h3>
                         <p className="mb-2">Για την κατασκευή του κτιρίου χρειάστηκε να γίνουν οι παρακάτω μελέτες:</p>
                         <div className="space-y-1 text-sm">
-                            <div className="">1. Αρχιτεκτονικά</div>
+                            {/* <div className="">1. Αρχιτεκτονικά</div>
                             <div className="">2. Στατικά</div>
                             <div className="">3. Παθητική Πυροπροστασία</div>
                             <div className="">4. Θερμομόνωση</div>
@@ -233,7 +237,10 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
                             <div className="">7. Ηλεκτρικές Εγκαταστάσεις</div>
                             <div className="">8. Κλιματισμός</div>
                             <div className="">9. Μελέτη Ενεργειακής Απόδοσης</div>
-                            <div className="">10. Τοπογραφικό</div>
+                            <div className="">10. Τοπογραφικό</div> */}
+                            {
+                                technicalDescription || "N/A"
+                            }
                         </div>
                         <p className="mt-2 text-sm">
                             Θα προσαρτηθούν στο Φ.Α.Υ. με τη μορφή παραρτήματος τα "ως κατασκευάστηκε" σχέδια του έργου, μετά την

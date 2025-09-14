@@ -489,6 +489,7 @@ interface allDataProps {
     engineers: any[]
     projectDescription: string;
     ydom: string;
+    horizontalPropertyName: string;
 }
 
 
@@ -498,7 +499,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
     const engineers = allData?.engineers || {};
     const { projectDescription } = allData || {};
     const { ydom } = allData || {};
-
+    const { horizontalPropertyName } = allData || {};
 
     console.log(allData, "allData in f6d8")
     // for editing data 
@@ -656,7 +657,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                     Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                                 </p>
                                 <p className="mb-4">
-                                    ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ horiontal property που βρίσκεται επί της οδού([{owner?.ownerAddress || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, Specialty Engineer AM TEE)
+                                    ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού([{owner?.ownerAddress || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, Specialty Engineer AM TEE)
                                 </p>
 
                                 <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
@@ -665,7 +666,6 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
 
                             {/* Additional disclaimer text */}
                             <div className="space-y-4 text-sm m p-4">
-                                {/* <p>επί της οδού {owner?.ownerAddress || owner?.owner_address || "N/A"}, {owner?.city || "N/A"} , {owner?.postal_code || "N/A"} ( FOR PROPERTY)</p> */}
                                 <p>
                                     τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
                                 <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>

@@ -477,51 +477,51 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
               {/* file 6======== */}
               {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
-                <F6D8 allData={allData} />
+                <F6D8 allData={allData} /> // 1
               )}
               {selected ===
                 "YΔ Ανάληψης Έργου Μηχανικού" && (
-                  <F6D9 allData={allData} />
+                  <F6D9 allData={allData} />// 2
                 )}
               {selected ===
                 "YΔ Φέροντα Οργανισμού" && (
-                  <F6D10 allData={allData} />
+                  <F6D10 allData={allData} /> // 3
                 )}
               {selected === "YΔ Συνιδιοκτητών" && (
-                <F6D4 allData={allData} />
+                <F6D4 allData={allData} /> // 4
               )}
               {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
-                <F6D13 allData={allData} />
+                <F6D13 allData={allData} /> // 5
               )}
               {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
-                <F6D1 allData={allData} />
+                <F6D1 allData={allData} /> // 6
               )}
               {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
-                <F6D5 allData={allData} />
+                <F6D5 allData={allData} /> // 7
               )}
               {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
-                <F6D6 allData={allData} />
+                <F6D6 allData={allData} /> // 8
               )}
               {selected === "Πίνακας 3" && (
-                <F6D12 allData={allData} />
+                <F6D12 allData={allData} /> // 9
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
-                <F6D2 allData={allData} />
+                <F6D2 allData={allData} /> // 10
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
-                <F6D14 allData={allData} />
+                <F6D14 allData={allData} /> // 11
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
-                <F6D7 allData={allData} />
+                <F6D7 allData={allData} /> // 12
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
-                <F6D15 allData={allData} />
+                <F6D15 allData={allData} /> // 13
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
-                <F6D3 allData={allData} />
+                <F6D3 allData={allData} /> // 14
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
-                <F6D4 allData={allData} />
+                <F6D4 allData={allData} /> // 15
               )}
               {selected === "Autofill (προαιρετικό add-on)" && (
                 // <F6D8 allData={allData} />ok 1

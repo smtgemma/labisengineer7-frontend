@@ -13,6 +13,7 @@ interface FormData {
     owner_address: string
     owner_city: string
     owner_postal_code: string
+    technicalDescription: string
 }
 // end editing 
 
@@ -29,6 +30,7 @@ export default function F6D13({ allData }: { allData: any }) {
         municipalityCommunity,
         propertyPostalCode,
         createdAt,
+        technicalDescription,
     } = allData || {};
 
     // for editing data 
@@ -89,8 +91,8 @@ export default function F6D13({ allData }: { allData: any }) {
                 </div>
                 <div>
                     <h3 className="text-sm font-bold mb-2">2. Στοιχεία Ακινήτου</h3>
-                    <p className="text-sm mb-5">Το ακίνητο βρίσκεται (Within_outside_city_plan), συνολικής επιφάνειας (Αrea Plot) τ.μ , είναι καταχωρημένο στο Εθνικό Κτηματολόγιο με ΚΑΕΚ Kaek_property στην οδό Property_address, Property_number στο Place_property στο Municipality_community με Τ.Κ. Property_postal_code .Πρόκειται για Horizontal_property_name (, επιφανείας Title_area ,το οποίο αποτελεί αυτοτελή οριζόντια ιδιοκτησία κατά τις διατάξεις του Ν.3741/1929 και του Ν.Δ. 1024/1971. Η πολυκατοικία ανεγέρθηκε βάσει της υπ’ αριθμ. Permit_number οικοδομικής άδειας, που εκδόθηκε από την Issuing_authority Η παραπάνω ιδιοκτησία έχει ενταχθεί στο ν.3843/2010 ή 4178/2013 ή 4495/2017 με Α/Α Δήλωσης  Legalization_statement_number ηλεκτρονικό κωδικό,
-                        Electronic_code και ημερομηνία υπαγωγής Inclusion_date_legalization από τον /την Engineer_full_name, (Specialty ) με αριθμό μητρώου ΤΕΕ (Tee_registration_number )
+                    <p className="text-sm mb-5">
+                        {technicalDescription || "N/A"}
                     </p>
                 </div>
                 <div>
