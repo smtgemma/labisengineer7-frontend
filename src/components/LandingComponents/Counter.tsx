@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import Container from "../shared/Container/Container";
 
 interface Stat {
   value: number;
@@ -36,13 +37,13 @@ const StatsSection = () => {
 
   return (
     <section ref={sectionRef} className="bg-gray-50 py-12">
-      <div className="container mx-auto px-6 lg:px-16">
+      <Container>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {stats.map((item, index) => (
             <CounterBox key={index} {...item} animate={visible} />
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };
@@ -63,7 +64,7 @@ const CounterBox: React.FC<CounterBoxProps> = ({
     if (!animate) return;
 
     let start = 0;
-    const duration = 1500; // 1.5s
+    const duration = 2000;
     const startTime = performance.now();
 
     const step = (currentTime: number) => {
@@ -78,7 +79,7 @@ const CounterBox: React.FC<CounterBoxProps> = ({
   return (
     <div className="flex flex-col items-center justify-center border-r last:border-r-0 border-gray-200">
       <h2
-        className="text-3xl md:text-7xl font-bold text-transparent bg-clip-text"
+        className="text-4xl lg:text-7xl font-bold text-transparent bg-clip-text"
         style={{
           backgroundImage:
             "linear-gradient(44deg, #017AFF 37.44%, #61BDFF 67.11%)",

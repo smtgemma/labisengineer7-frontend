@@ -27,7 +27,7 @@ export default function Banner() {
             data-aos-duration="900"
             className="relative z-10 text-center flex flex-col items-center justify-center transform -translate-y-30 lg:-translate-y-20"
           >
-            <div className="container mx-auto px-6 lg:px-16 py-20 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="container mx-auto   py-20 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Left Content */}
               <div className="space-y-6 text-center lg:text-left mt-10">
                 <h1 className="text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
