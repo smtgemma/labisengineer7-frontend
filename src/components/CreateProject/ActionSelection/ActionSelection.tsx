@@ -7,7 +7,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Loading from "@/components/Others/Loading";
-import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
+import {
+  useGetCreditServiceQuery,
+  useRemainingCreditQuery,
+  useUseCreditsMutation,
+} from "@/redux/features/credit/creditSlice";
 
 interface Service {
   id: string;
@@ -41,11 +45,11 @@ const templateName: TemplateName[] = [
     title: "YΔ Φέροντα Οργανισμού",
     price: 0.5,
   },
-  {
-    id: "co_owners_4",
-    title: "YΔ Συνιδιοκτητών",
-    price: 0.5,
-  },
+  // {
+  //   id: "co_owners_4",
+  //   title: "YΔ Συνιδιοκτητών",
+  //   price: 0.5,
+  // },
   {
     id: "technical_report_5",
     title: "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου",
@@ -73,7 +77,8 @@ const templateName: TemplateName[] = [
   },
   {
     id: "active_fire_protection_10",
-    title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας",
+    title:
+      "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας",
     price: 0.5,
   },
   {
@@ -136,9 +141,9 @@ const services: Service[] = [
 interface ActionSelectionProps {
   selectedActions: string[];
   onActionsChange: (actions: string[]) => void;
-  currentStep: number
-  nextStep: () => void
-  canProceed: () => boolean
+  currentStep: number;
+  nextStep: () => void;
+  canProceed: () => boolean;
 }
 
 const ActionSelection: React.FC<ActionSelectionProps> = ({
@@ -146,7 +151,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   onActionsChange,
   canProceed,
   currentStep,
-  nextStep
+  nextStep,
 }) => {
   const actions = [
     "Generate Engineer Declaration (YA)",
@@ -158,8 +163,8 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   );
   const [selected, setSelected] = useState<string[]>(["technical", "engineer"]);
   const [template, setTemplate] = useState([]);
-  const { data: remainingCredit } = useRemainingCreditQuery("")
-  const [useCredit] = useUseCreditsMutation()
+  const { data: remainingCredit } = useRemainingCreditQuery("");
+  const [useCredit] = useUseCreditsMutation();
   const dispatch = useDispatch();
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
   const id = stepByStepData?.projectId?.id;
@@ -179,14 +184,12 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     .reduce((acc, s) => acc + s.price, 0);
 
   useEffect(() => {
-
     const filtered: any = templateName.filter((s) => selected.includes(s.id));
     if (filtered.length > 0) {
       setTemplate(filtered);
     } else {
       setTemplate([]);
     }
-
   }, [selected]);
 
   dispatch(setSelectTemplate(template));
@@ -201,7 +204,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     }
   };
 
-  console.log("Remaining Credit", remainingCredit?.data?.credits)
+  console.log("Remaining Credit", remainingCredit?.data?.credits);
   // const userData = useSelector(
   //   (state: RootState) => state.user.userData as UserData | null
   // );
@@ -214,13 +217,12 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     }
   }, [selected]);
 
-
   const handleUseCredit = async (number: number) => {
-    console.log(number)
-    const payload = { totalCredits: number }
-    const res = await useCredit(payload)
-    console.log(res)
-  }
+    console.log(number);
+    const payload = { totalCredits: number };
+    const res = await useCredit(payload);
+    console.log(res);
+  };
 
   if (isLoading) {
     return <Loading />;
@@ -323,10 +325,11 @@ THAISN */}
           {templateName.map((tem, i) => (
             <div
               key={i}
-              className={`cursor-pointer border-2 rounded-lg  hover:bg-blue-100 transition-all hover:shadow-sm px-4 py-2 ${selected.includes(tem.id)
-                ? "border-blue-500 bg-blue-50"
-                : "border-gray-200"
-                }`}
+              className={`cursor-pointer border-2 rounded-lg  hover:bg-blue-100 transition-all hover:shadow-sm px-4 py-2 ${
+                selected.includes(tem.id)
+                  ? "border-blue-500 bg-blue-50"
+                  : "border-gray-200"
+              }`}
               onClick={() => toggleSelect(tem.id)}
             >
               <div className="flex justify-between items-start">
@@ -370,13 +373,18 @@ THAISN */}
               <span>{subtotal}</span>
             </div>
 
-            <button onClick={() => handleUseCredit(subtotal)} className="w-full cursor-pointer mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
+            <button
+              onClick={() => handleUseCredit(subtotal)}
+              className="w-full cursor-pointer mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md"
+            >
               Proceed to Credit
             </button>
 
             <div className="mt-6 text-xs text-gray-500 text-center">
               <p className="font-bold mb-1 text-lg">My Total Credit:</p>
-              <p className="font-bold  text-lg">{remainingCredit?.data?.credits}</p>
+              <p className="font-bold  text-lg">
+                {remainingCredit?.data?.credits}
+              </p>
             </div>
           </div>
         </div>
@@ -386,10 +394,11 @@ THAISN */}
           <button
             onClick={nextStep}
             // disabled={canProceed()}
-            className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${canProceed()
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600"
-              }`}
+            className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${
+              canProceed()
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600"
+            }`}
           >
             Next
           </button>
