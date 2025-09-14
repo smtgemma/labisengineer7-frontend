@@ -1,7 +1,10 @@
+import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { setImageFile } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { RootState } from "@/redux/store";
-import { ChevronRight, FileText, Upload, X } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import React, { useRef, useState } from "react";
+import { CiTrash } from "react-icons/ci";
+import { FcDocument, FcRules } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 
 interface FileUploadProps {
@@ -137,19 +140,20 @@ const FileUpload: React.FC<FileUploadProps> = ({
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
           >
-            <Upload className="w-16 h-16 text-gray-400 mx-auto mb-6" />
+            <FcRules className="min-w-20" size={80} />
+
             <p className="text-xl text-gray-600 mb-2 font-medium">
-              ktimatologio File
+              Drag and drop your files
             </p>
             <p className="text-gray-500 mb-6">
-              Format: PDF & Max file size: 25 MB
+              JPEG, PND, PDF formats, up to 50MB 25 MB
             </p>
 
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200 font-medium"
+              className="border border-gray-300 px-4 py-2 rounded-2xl hover:cursor-pointer"
             >
-              Browse Files
+              Select file
             </button>
 
             <input
@@ -175,7 +179,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
               className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm"
             >
               <div className="flex items-center space-x-4">
-                <FileText className="w-6 h-6 text-gray-500" />
+                <FcDocument className="w-6 h-6 " />
                 <div>
                   <p className="font-medium text-gray-900">{file.name}</p>
                   <p className="text-sm text-gray-500">
@@ -185,26 +189,22 @@ const FileUpload: React.FC<FileUploadProps> = ({
               </div>
               <button
                 onClick={() => removeFile(index)}
-                className="text-gray-400 hover:text-red-500 transition-colors duration-200 p-1"
+                className="text-gray-400 hover:text-red-500 transition-colors duration-200 p-1 hover:cursor-pointer"
               >
-                <X className="w-5 h-5" />
+                <CiTrash className="w-5 h-5" />
               </button>
             </div>
           ))}
         </div>
       )}
       {currentStep < 6 && (
-        <div className="flex justify-end">
-          <button
+        <div className="flex justify-end w-fit ml-auto">
+          <PrimaryButton
             onClick={nextStep}
             disabled={uploadedFiles.length === 0}
-            className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${uploadedFiles.length === 0
-              ? "bg-gray-400 cursor-not-allowed" // ✅ disabled color
-              : "bg-blue-500 hover:bg-blue-600" // ✅ enabled color
-              }`}
           >
             Next <ChevronRight className="inline w-5 h-5 ml-2" />
-          </button>
+          </PrimaryButton>
         </div>
 
       )}

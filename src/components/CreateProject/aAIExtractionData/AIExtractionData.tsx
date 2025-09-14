@@ -1,130 +1,27 @@
 "use client";
-import { div } from "framer-motion/client";
-import React, { useState, useEffect, useRef } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
-import { warn } from "console";
-import { toast } from "sonner";
-import { usePosAiAllDataSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
-import LoadingButton from "@/components/shared/LoadingBtn/LoadingButton";
+import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import tokenCatch from "@/lib/token";
 import {
-  setAiExtractCatchData,
   setAiExtreactAndInputData,
-  setTheProjectCode,
+  setTheProjectCode
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { usePosAiAllDataSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
+import { RootState } from "@/redux/store";
+import { useEffect, useRef, useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { overflow } from "html2canvas/dist/types/css/property-descriptors/overflow";
-import { CodeSquare } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
+import { FormValues } from "./types";
 
 
-// {
-//   "firstName": "STAVROULA",
-//   "lastName": "KOUNTRAROU",
-//   "fatherFirstLastName": "NIKOLAOS KOUNTRAROS",
-//   "mothersFirstLastName": "CHRISTINA KOUNTRAROU",
-//   "dateOfBirth": "1967-08-14",
-//   "placeOfBirth": "KASTANEI KILKIS",
-//   "ownerAddress": "POLLES ELLIES",
-//   "addressNumber": "3",
-//   "city": "AIGINIS",
-//   "postalCode": "18010",
-//   "idNumber": "X116649",
-//   "taxIdentificationNumber": "055110554",
-//   "email": "",
-//   "mobile": ""
-// }, 
-
-
-type OwnerData = {
-  firstName: string; // Όνομα
-  lastName: string; // Επώνυμο
-  fatherFirstLastName: string; // Όνοματεπώνυμο Πατρός
-  mothersFirstLastName: string; // Όνοματεπώνυμο Μητρός
-  dateOfBirth: string; // Ημερομηνία Γέννησης
-  placeOfBirth: string; // Τόπος Γέννησης
-  ownerAddress: string; // Διεύθυνση Ιδιοκτήτη
-  addressNumber: string; // Αριθμός Διεύθυνσης Ιδιοκτήτη
-  city: string; // Πόλη
-  postal_code: string; // Ταχυδρομικός Κώδικας
-  idNumber: string; // Α.Δ.Τ
-  taxIdentificationNumber: string; // Αριθμός Φορολογικού Μητρώου (ΑΦΜ)
-  email: string; // Email
-  mobile: string; // Τηλέφωνο
-  selected?: boolean;
-};
-
-type ProjectData = {
-  projectDescription: string;
-  projectDescription2: string;
-  horizontalPropertyNameTwo: string;
-  horizontalPropertyName: string;
-  construction: string;
-  propertyPostalCode: string;
-  municipalityCommunity: string;
-  propertyAddress: string;
-  propertyNumber: string;
-  propertyPlace: string;
-  propertyType: string;
-  cadastralCode: string;
-  kaekProperty: string;
-  permitNumber: string;
-  titleArea: string;
-  floorProperty: string;
-};
-
-interface LicenseLegalFormData {
-  plotArea: string;
-  withinOutsideCityPlan: string;
-  permitNumber: string;
-  issuingAuthority: string;
-  legalizationStatementNumber: string;
-  engineerFullName: string;
-  electronicCode: string;
-  teeRegistrationNumber: string;
-  specialty: string;
-  inclusionDateLegalization: string;
-}
-
-interface EPCFormValues {
-  issueDate: string;
-  epcCode: string;
-  protocolNumber: string;
-  energyCategory: string;
-  primaryEnergy: string;
-  co2Emissions: string;
-  zonePrice: string;
-}
-
-type OtherOpation = {
-  residenceType: string;
-  expectationDocument: string;
-  includedInFolder: boolean;
-  unauthorizedConstructions: string;
-};
-
-interface OthersValue {
-  land_use: string;
-  arbitrary_constructions_description: string;
-  expectation_Document: string;
-}
-
-type FormValues = ProjectData &
-  LicenseLegalFormData &
-  EPCFormValues &
-  OtherOpation &
-  OthersValue & {
-    owners: any[];
-  };
 
 const inputStyle =
   "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
 
-const AIExtractionDataInPut = ({ currentStep, canProceed, nextStep }: {
+const AIExtractionDataInPut = ({ currentStep, nextStep }: {
   currentStep: number
   nextStep: () => void
-  canProceed: () => boolean
 }) => {
   const [ownerInfoShow, setOwnerInfoShow] = useState<boolean>(true);
   const [ownerInfoShow2, setOwnerInfoShow2] = useState<number | null>(0);
@@ -193,7 +90,7 @@ const AIExtractionDataInPut = ({ currentStep, canProceed, nextStep }: {
       descrptionTasks: descrptionTasks,
       ydom: descriptonAndYdom?.ydom,
       technicalDescription: allExtreactData?.technical_description,
-      technicalDescriptiontWO: allExtreactData?.technical_description_two,
+      technicalDescriptionTwo: allExtreactData?.technical_description_two,
       ...data,
     };
 
@@ -241,7 +138,7 @@ const AIExtractionDataInPut = ({ currentStep, canProceed, nextStep }: {
 
   return (
     <>
-      <div className="mt-[-40]">
+      <div className="">
         <h2 className="text-[#333333] text-5xl font-semibold">
           AI Extraction Data
         </h2>
@@ -788,17 +685,12 @@ const AIExtractionDataInPut = ({ currentStep, canProceed, nextStep }: {
         </div>
       </form>
       {currentStep < 6 && (
-        <div className="flex justify-end mt-4">
-          <button
+        <div className="flex justify-end mt-4 w-fit ml-auto" >
+          <PrimaryButton
             onClick={nextStep}
             // disabled={canProceed()}
-            className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${canProceed()
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600"
-              }`}
-          >
-            Next
-          </button>
+            label="Next"
+          />
         </div>
       )}
     </>
