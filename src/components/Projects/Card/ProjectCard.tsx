@@ -48,7 +48,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       router.push("/service/sub-category");
     }
     if (serviceTitle === "service-4") {
-      router.push("/create-eng-certificates");
+      router.push("/description-task-for-eng");
     }
     // // services -2
     // else if (id === "68c56689d5f94c3ac153e67a") {

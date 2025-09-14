@@ -3,14 +3,14 @@ import {
   setSelectTemplate,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { RootState } from "@/redux/store";
+import { AlertTriangle, CheckCircle, CreditCard, Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CheckCircle, AlertTriangle, CreditCard, Loader2 } from "lucide-react";
 
 import Loading from "@/components/Others/Loading";
+import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
 import { templateName } from "./data";
-import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 
 interface ActionSelectionProps {
   selectedActions: string[];
@@ -21,10 +21,7 @@ interface ActionSelectionProps {
 }
 
 const ActionSelection: React.FC<ActionSelectionProps> = ({
-  selectedActions,
-  onActionsChange,
   canProceed,
-  currentStep,
   nextStep,
 }) => {
   const actions = [

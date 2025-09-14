@@ -1,11 +1,17 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { ChevronRight, ChevronLeft } from "lucide-react";
-import FileUploadPage from "./UploadFile";
-import { Extraction } from "./Extraction";
+import AIExtraction from "@/components/CreateProject/AIExtraction/AIExtraction";
+import ActionSelection from "@/components/CreateProject/ActionSelection/ActionSelection";
+import FileUpload from "@/components/CreateProject/FileUpload/FileUpload";
+import FinalOverview from "@/components/CreateProject/FinalOverview/FinalOverview";
+import OwnerSelection from "@/components/CreateProject/OwnerSelection/OwnerSelection";
+import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
+import AIExtractionDataInPut from "@/components/CreateProject/aAIExtractionData/AIExtractionData";
 import { useRouter, useSearchParams } from "next/navigation";
-import WorkflowStepper from "../CreateProject/WorkflowStepper/WorkflowStepper";
+import React, { useEffect, useState } from "react";
+import AIExtractionFour from "./Extraction";
+import TemplateSelectionComponents from "./TemplateSelection";
+import FinalSteps from "./FinaleSteps";
 
 const workflowSteps = [
     { id: 1, title: "Upload Documents" },
@@ -13,27 +19,25 @@ const workflowSteps = [
     { id: 3, title: "Select Owner(s)" },
     { id: 4, title: "AI Extraction Data" },
     { id: 5, title: "Select Actions" },
-    { id: 6, title: "Question And Answer" },
-    { id: 7, title: "Final Overview" },
+    { id: 6, title: "Final Overview" },
 ];
 
-interface CreateEngCertProps {
-    startStep?: number; // optional prop to start at a specific step
-}
-
-const CreateEngCert: React.FC<CreateEngCertProps> = ({ startStep = 1 }) => {
-    const [currentStep, setCurrentStep] = useState(startStep);
-    const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-    const [extractedData, setExtractedData] = useState<any>(null);
+const WorkflowDemo: React.FC = () => {
+    const router = useRouter();
     const searchParams = useSearchParams();
     const stepParam = Number(searchParams.get("step")) || 1;
 
-    const router = useRouter()
+
+    const [currentStep, setCurrentStep] = useState(stepParam);
+    const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+    const [extractedData, setExtractedData] = useState<any>(null);
+    const [selectedOwners, setSelectedOwners] = useState<any[]>([]);
+    const [selectedActions, setSelectedActions] = useState<string[]>([]);
+    const [isCompleted, setIsCompleted] = useState(false);
+
     useEffect(() => {
-        if (startStep > 1 && startStep <= workflowSteps.length) {
-            setCurrentStep(startStep);
-        }
-    }, [startStep]);
+        setCurrentStep(stepParam);
+    }, [stepParam]);
 
     const goToStep = (step: number) => {
         router.push(`?step=${step}`);
@@ -45,66 +49,112 @@ const CreateEngCert: React.FC<CreateEngCertProps> = ({ startStep = 1 }) => {
         }
     };
 
-    const prevStep = () => {
-        if (currentStep > 1) {
-            setCurrentStep(currentStep - 1);
+    const canProceed = () => {
+        switch (currentStep) {
+            case 1:
+                return uploadedFiles.length > 0;
+            case 2:
+                return extractedData !== null;
+            default:
+                return true;
         }
     };
-    useEffect(() => {
-        setCurrentStep(stepParam);
-    }, [stepParam]);
+
+    console.log(uploadedFiles)
+    const handleComplete = () => setIsCompleted(true);
+
     const renderStepContent = () => {
         switch (currentStep) {
             case 1:
-                return <FileUploadPage />;
+                return (
+                    //same
+                    <FileUpload
+                        onFilesChange={setUploadedFiles}
+                        uploadedFiles={uploadedFiles}
+                        currentStep={currentStep}
+                        nextStep={nextStep}
+                    />
+                );
             case 2:
-                return <Extraction estimatedTime={20} onComplete={() => setExtractedData({})} />;
+                return (
+                    //same
+                    <AIExtractionFour
+                        uploadedFiles={uploadedFiles}
+                        currentStep={currentStep}
+                        nextStep={nextStep}
+                    />
+                );
+            case 3:
+                //same
+                return <OwnerSelection
+                    currentStep={currentStep}
+                    nextStep={nextStep}
+                />;
+            case 4:
+                //same
+                return <AIExtractionDataInPut currentStep={currentStep}
+                    nextStep={nextStep}
+                />;
+            case 5:
+                //need to work
+                return (
+                    <TemplateSelectionComponents
+                        selectedActions={selectedActions}
+                        onActionsChange={setSelectedActions}
+                        currentStep={currentStep}
+                        canProceed={canProceed}
+                        nextStep={nextStep}
+                    />
+                );
+            case 6:
+                return (
+                    //need to work
+                    <FinalSteps
+                        files={uploadedFiles}
+                        extractedData={extractedData}
+                        selectedOwners={selectedOwners}
+                        selectedActions={selectedActions}
+                        onComplete={handleComplete}
+                    />
+                );
             default:
-                return <p className="text-gray-600">Step {currentStep} content here...</p>;
+                return null;
         }
     };
 
+    if (isCompleted) {
+        return <div>✅ Workflow Complete</div>;
+    }
+
     return (
-        <div className="min-h-screen bg-gray-100 flex">
-            {/* Left Sidebar - Stepper */}
+        <div className="min-h-screen flex">
             <div className="bg-white shadow-sm">
                 <WorkflowStepper steps={workflowSteps} currentStep={currentStep} />
             </div>
-
-            {/* Main Content Area */}
             <div className="flex-1 p-12">
                 <div className="max-w-6xl">
-                    {/* Step Content */}
                     <div className="mb-8">{renderStepContent()}</div>
 
-                    {/* Footer with Back & Next Buttons */}
-                    {currentStep < 7 && (
-                        <div className="flex justify-between">
-                            {currentStep > 1 ? (
-                                <button
-                                    onClick={prevStep}
-                                    className="bg-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-400 transition-colors duration-200 flex items-center space-x-2 font-medium text-lg"
-                                >
-                                    <ChevronLeft className="w-5 h-5" />
-                                    <span>Back</span>
-                                </button>
-                            ) : (
-                                <div />
-                            )}
-
-                            <button
-                                onClick={nextStep}
-                                className="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-200 flex items-center space-x-2 font-medium text-lg"
-                            >
-                                <span>Next</span>
-                                <ChevronRight className="w-5 h-5" />
-                            </button>
-                        </div>
-                    )}
                 </div>
             </div>
         </div>
     );
 };
 
-export default CreateEngCert;
+export default WorkflowDemo;
+
+
+
+//trash
+
+{/* {currentStep < 6 && (
+            <div className="flex justify-end">
+              <button
+                onClick={nextStep}
+                disabled={!canProceed()}
+                className="bg-green-500 text-white px-8 py-3 rounded-lg"
+              >
+                Next <ChevronRight className="inline w-5 h-5 ml-2" />
+              </button>
+            </div>
+          )} */}

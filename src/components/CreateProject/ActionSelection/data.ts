@@ -7,7 +7,7 @@ interface Service {
     required?: boolean;
 }
 
-interface TemplateName {
+export interface TemplateName {
     id: string;
     title: string;
     price: number;
