@@ -8,7 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { CheckCircle, AlertTriangle, CreditCard, Loader2 } from "lucide-react";
 
 import Loading from "@/components/Others/Loading";
-import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
+import {
+  useGetCreditServiceQuery,
+  useRemainingCreditQuery,
+  useUseCreditsMutation,
+} from "@/redux/features/credit/creditSlice";
 import { templateName } from "./data";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 
@@ -86,8 +90,13 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
       return;
     }
 
-    if (!remainingCredit?.data?.credits || remainingCredit.data.credits < subtotal) {
-      setError(`Insufficient credits. You need ${subtotal} credits, but only have ${remainingCredit?.data?.credits} available.`);
+    if (
+      !remainingCredit?.data?.credits ||
+      remainingCredit.data.credits < subtotal
+    ) {
+      setError(
+        `Insufficient credits. You need ${subtotal} credits, but only have ${remainingCredit?.data?.credits} available.`
+      );
       return;
     }
 
@@ -124,7 +133,8 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           Select The Templates
         </h1>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto lg:mx-0">
-          Choose the required documents to generate. Your selected templates will be used to create official files automatically.
+          Choose the required documents to generate. Your selected templates
+          will be used to create official files automatically.
         </p>
       </div>
 
@@ -134,10 +144,11 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           {templateName.map((tem, i) => (
             <div
               key={i}
-              className={`cursor-pointer border rounded-xl px-6 py-4 transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5 ${selected.includes(tem.id)
-                ? "border-blue-500 bg-blue-50 shadow-md ring-2 ring-blue-200"
-                : "border-gray-200 bg-white hover:border-blue-300"
-                }`}
+              className={`cursor-pointer border rounded-xl px-6 py-4 transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5 ${
+                selected.includes(tem.id)
+                  ? "border-blue-500 bg-blue-50 shadow-md ring-2 ring-blue-200"
+                  : "border-gray-200 bg-white hover:border-blue-300"
+              }`}
               onClick={() => toggleSelect(tem.id)}
             >
               <div className="flex justify-between items-start">
@@ -153,9 +164,13 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
                   {/* <p className="text-sm text-gray-600 mt-1">{tem.description}</p> */}
                 </div>
                 <div className="flex flex-col items-end">
-                  <span className="text-lg font-semibold text-gray-900">{tem.price} credits</span>
+                  <span className="text-lg font-semibold text-gray-900">
+                    {tem.price} credits
+                  </span>
                   {tem.required && (
-                    <span className="text-xs text-gray-400 mt-1">Mandatory</span>
+                    <span className="text-xs text-gray-400 mt-1">
+                      Mandatory
+                    </span>
                   )}
                 </div>
               </div>
@@ -175,11 +190,15 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
               template.map((item) => (
                 <div key={item.id} className="flex justify-between text-sm">
                   <span className="text-gray-700">{item.title}</span>
-                  <span className="font-medium text-gray-900">{item.price} pts</span>
+                  <span className="font-medium text-gray-900">
+                    {item.price} pts
+                  </span>
                 </div>
               ))
             ) : (
-              <p className="text-gray-500 text-sm italic">No templates selected</p>
+              <p className="text-gray-500 text-sm italic">
+                No templates selected
+              </p>
             )}
           </div>
 
@@ -194,7 +213,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-600">Available Credits</span>
-              <span className="font-bold text-blue-700">{remainingCredit?.data?.credits || 0}</span>
+              <span className="font-bold text-blue-700">
+                {remainingCredit?.data?.credits || 0}
+              </span>
             </div>
           </div>
 
@@ -237,7 +258,8 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           </PrimaryButton>
 
           <p className="text-xs text-gray-500 text-center mt-4">
-            Templates are automatically generated using AI. Only pay for what you use.
+            Templates are automatically generated using AI. Only pay for what
+            you use.
           </p>
         </div>
       </div>
@@ -431,10 +453,11 @@ export default ActionSelection;
 
 // export default ActionSelection;
 
-
-
-{/* Actions List */ }
-{/* <div className="space-y-4">
+{
+  /* Actions List */
+}
+{
+  /* <div className="space-y-4">
         {actions.map((action, index) => (
           <div
             key={action}
@@ -469,10 +492,14 @@ export default ActionSelection;
             </div>
           </div>
         ))}
-      </div> */}
+      </div> */
+}
 
-{/* Services List */ }
-{/* <div className="lg:col-span-2 space-y-6">
+{
+  /* Services List */
+}
+{
+  /* <div className="lg:col-span-2 space-y-6">
           {services.map((service) => (
             <div
               key={service.id}
@@ -507,12 +534,15 @@ export default ActionSelection;
        
             </div>
           ))}
-        </div> */}
+        </div> */
+}
 
-{/* 
+{
+  /* 
 THIS IS THE DYNAMIC TEMPLATE NAME SECTION
 DO NOT CHNAGE EXCEPT DEDIGN
-THAISN */}
+THAISN */
+}
 
 // const userData = useSelector(
 //   (state: RootState) => state.user.userData as UserData | null
