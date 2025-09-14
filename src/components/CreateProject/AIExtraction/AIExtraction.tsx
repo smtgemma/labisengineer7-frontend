@@ -6,13 +6,15 @@ import Lottie from "lottie-react";
 import { Brain, CheckCircle } from "lucide-react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import aiLoadingExtract from "../../../../public/aiFIleLoadingThree.json";
+import aiLoadingExtract from "../../../../public/aiFIleLoadingTwo.json";
 import { RootState } from "@/redux/store";
+import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
+import { FcFinePrint } from "react-icons/fc";
 
 interface AIExtractionProps {
   currentStep: number
   nextStep: () => void
-  canProceed: () => boolean
+  uploadedFiles: File[]
 }
 
 type ProjectDescription = Record<string, string[]>;
@@ -67,6 +69,7 @@ const projectDescriptionAll: ProjectDescription[] = [
 const AIExtraction: React.FC<AIExtractionProps> = ({
   currentStep,
   nextStep,
+  uploadedFiles
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
@@ -89,8 +92,6 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     return allDescriptions.includes(key) ? obj[key] : [];
   });
 
-  const newFiles = useSelector((state: any) => state.aiData.multiFiles);
-
   const aiExtractData = useSelector((state: RootState) => state.aiData);
   console.log(aiExtractData)
   // Helper: check if files are valid
@@ -112,24 +113,23 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
 
 
 
-
   // Timer
-  const timerControling = () => {
-    if (time >= 120) return;
-    const timer = setInterval(() => {
-      setTime((prev) => prev + 1);
-    }, 1000);
+  // const timerControling = () => {
+  //   if (time >= 120) return;
+  //   const timer = setInterval(() => {
+  //     setTime((prev) => prev + 1);
+  //   }, 1000);
 
-    return () => clearInterval(timer);
-  };
+  //   return () => clearInterval(timer);
+  // };
 
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
+  // const minutes = Math.floor(time / 60);
+  // const seconds = time % 60;
 
   const startExtraction = async () => {
     setErrorMsg(""); // reset previous error
 
-    if (!hasValidFiles(newFiles)) {
+    if (!hasValidFiles(uploadedFiles)) {
       setErrorMsg("Please upload valid files before starting extraction.");
       return;
     }
@@ -137,12 +137,12 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     setIsProcessing(true);
     setProgress(0);
     setIsCompleted(false);
-    timerControling();
+    // timerControling();
 
-    const ktimatologio = newFiles[0];
-    const contract = newFiles[1];
-    const permit = newFiles[2];
-    const Law = newFiles[3];
+    const ktimatologio = uploadedFiles[0];
+    const contract = uploadedFiles[1];
+    const permit = uploadedFiles[2];
+    const Law = uploadedFiles[3];
     const technical_description = "Το ακίνητο βρίσκεται (Within_outside_city_plan), συνολικής επιφάνειας (Αrea Plot) τ.μ , είναι καταχωρημένο στο Εθνικό Κτηματολόγιο με ΚΑΕΚ Kaek_property στην οδό Property_address, Property_number στο Place_property στο Municipality_community με Τ.Κ. Property_postal_code .Πρόκειται για Horizontal_property_name (, επιφανείας Title_area ,το οποίο αποτελεί αυτοτελή οριζόντια ιδιοκτησία κατά τις διατάξεις του Ν.3741/1929 και του Ν.Δ. 1024/1971. Η πολυκατοικία ανεγέρθηκε βάσει της υπ’ αριθμ. Permit_number οικοδομικής άδειας, που εκδόθηκε από την Issuing_authority Η παραπάνω ιδιοκτησία έχει ενταχθεί στο ν.3843/2010 ή 4178/2013 ή 4495/2017 με Α/Α Δήλωσης  Legalization_statement_number ηλεκτρονικό κωδικό, Electronic_code και ημερομηνία υπαγωγής Inclusion_date_legalization από τον /την Engineer_full_name, (Specialty ) με αριθμό μητρώου ΤΕΕ (Tee_registration_number )"
     const technical_description_two = "Το ακίνητο βρίσκεται (Within_outside_city_plan), δεν εμπίπτει σε Ζώνες Απαγόρευσης (π.χ. Δασική, Αιγιαλός, Ζώνες προστασίας ΥΠΠΟ ή Natura), ούτε εντοπίζεται εντός χαρακτηρισμένων παραδοσιακών οικισμών ή διατηρητέων κελυφών. Δηλώνεται ότι δεν συντρέχουν οι απαγορευτικές περιπτώσεις του άρθρου 1 του Ν.4495/2017, ούτε απαιτείται έγκριση άλλων αρχών. Το κτίσμα είναι νομίμως υφιστάμενο κατά την έννοια του άρθρου 23 του Ν.4495/2017 και συνοδεύεται από τα απαραίτητα νομιμοποιητικά στοιχεία. Οι εργασίες πληρούν τις προϋποθέσεις του άρθρου 2 της ΥΑ ΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020, και ως εκ τούτου η άδεια Μικρής Κλίμακας μπορεί να εκδοθεί χωρίς περαιτέρω εγκρίσεις ή έλεγχο ΣΑ."
 
@@ -185,7 +185,7 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   return (
     <div className="space-y-8">
       {/* Empty files */}
-      {newFiles.length === 0 ? (
+      {uploadedFiles.length === 0 ? (
         <div className="text-center py-16">
           <Brain className="w-16 h-16 text-gray-400 mx-auto mb-4" />
           <p className="text-gray-500 text-lg">
@@ -211,28 +211,17 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
           <div className="w-[300px]">
             <Lottie animationData={aiLoadingExtract} loop={true} />
           </div>
-          <div className="flex items-center justify-center text-black mt-10">
+          {/* <div className="flex items-center justify-center text-black mt-10">
             <div className="text-center">
               <p className="text-6xl mt-4 font-mono">
                 {minutes}:{seconds.toString().padStart(2, "0")}
               </p>
             </div>
-          </div>
-          <div className="w-full bg-gray-200 rounded-full h-3 mt-6">
-            <div
-              className="bg-blue-500 h-3 rounded-full transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <div className="text-center mt-4">
-            <span className="text-6xl font-light text-gray-400">
-              {Math.round(progress)}%
-            </span>
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className="text-center py-16">
-          <Brain className="w-16 h-16 text-blue-500 mx-auto mb-6" />
+          <FcFinePrint className="w-16 h-16 text-blue-500 mx-auto mb-6" />
           <h3 className="text-xl font-semibold text-gray-900 mb-4">
             Ready for AI Extraction
           </h3>
@@ -241,7 +230,7 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
           </p>
           <p className="text-sm text-gray-500 mt-4">
             {
-              hasValidFiles(newFiles) ? `Processing ${newFiles.length} document${newFiles.length !== 1 ? "s" : ""}` : "Please upload valid files to start extraction."
+              hasValidFiles(uploadedFiles) ? `Processing ${uploadedFiles.length} document${uploadedFiles.length !== 1 ? "s" : ""}` : "Please upload valid files to start extraction."
             }
 
           </p>
@@ -255,17 +244,13 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
 
       {/* Button */}
       {currentStep < 6 && (
-        <div className="flex justify-end">
-          <button
+        <div className="flex justify-end w-fit ml-auto">
+          <PrimaryButton
             onClick={startExtraction}
-            disabled={!hasValidFiles(newFiles)}
-            className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${!hasValidFiles(newFiles)
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600"
-              }`}
+            disabled={!hasValidFiles(uploadedFiles)}
           >
             Start AI Extraction
-          </button>
+          </PrimaryButton>
         </div>
       )}
     </div>

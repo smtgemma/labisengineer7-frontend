@@ -212,11 +212,11 @@ const Category = () => {
                   {category.options.map((option) => (
                     <div key={option.id}>
                       <SelectOption
-                      option={option}
-                      categoryId={option.id}
-                      toggleOption={() => toggleOption(category.id, option.id)}
-                    />
-                      </div>
+                        option={option}
+                        categoryId={option.id}
+                        toggleOption={() => toggleOption(category.id, option.id)}
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -255,7 +255,7 @@ const Category = () => {
       </div>
 
       {/* Save Button */}
-      <div className="flex justify-end mt-8">
+      <div className="flex justify-end mt-8 w-fit ml-auto">
         <PrimaryButton
           label="Save & Continue"
           onClick={handleSave}

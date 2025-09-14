@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import FileUploadPage from "./UploadFile";
 import { Extraction } from "./Extraction";
-import WorkflowStepper from "@/components/CreateProjectTwo/WorkflowStepper/WorkflowStepper";
 import { useRouter, useSearchParams } from "next/navigation";
+import WorkflowStepper from "../CreateProject/WorkflowStepper/WorkflowStepper";
 
 const workflowSteps = [
     { id: 1, title: "Upload Documents" },

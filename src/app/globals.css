@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-:root {}
+:root {
+}
 
 body {
   font-family: var(--font-open-sans);
@@ -27,7 +28,6 @@ body {
   @apply text-red-500 text-sm mt-1;
 }
 
-
 body .skiptranslate {
   display: none !important;
   position: absolute;
@@ -53,5 +53,26 @@ section[aria-live="polite"] {
 
 body element.style {
   top: 0px !important;
-  ;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  animation-duration: 0.7s;
+  animation-name: fadeInDown;
+  animation-timing-function: ease-out;
+  z-index: 999;
+  border-bottom: 1px solid #fafafa;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -1,78 +1,46 @@
 "use client";
-import Image from "next/image";
 import banner from "@/assets/landing-page/banner.png";
 import Container from "../shared/Container/Container";
 import { ArrowRight } from "lucide-react";
 
 export default function Banner() {
   return (
-    <>
-      <main className="relative flex items-center justify-center min-h-[700px]  bg-white overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0 ">
-          <Image
-            src={banner}
-            alt="Banner Background"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-            priority
-          />
-        </div>
+    <main
+      className="h-[770px] bg-left bg-no-repeat bg-[100% 100%]"
+      style={{
+        backgroundImage: `url(${banner.src})`,
+      }}
+    >
+      <Container>
+        <div className="flex items-center h-[770px] ">
+          {/* Left Content (center vertically in grid) */}
+          <div className="  space-y-4 md:space-y-6 text-center lg:text-left">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
+              The Smart <br />
+              Platform For <br />
+              <span className="bg-[#017AFF] text-white mt-3 inline-block px-2">
+                Civil Engineers
+              </span>
+            </h1>
 
-        {/* Content */}
-        <Container>
-          <div
-            data-aos="zoom-in"
-            data-aos-duration="900"
-            className="relative z-10 text-center flex flex-col items-center justify-center transform -translate-y-30 lg:-translate-y-20"
-          >
-            <div className="container mx-auto px-6 lg:px-16 py-20 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Left Content */}
-              <div className="space-y-6 text-center lg:text-left mt-10">
-                <h1 className="text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                  The Smart <br />
-                  Platform For <br></br>{" "}
-                  <span className="bg-[#017AFF] text-white">
-                    Civil Engineers
-                  </span>
-                </h1>
-                <p className="text-gray-600 text-lg max-w-lg mx-auto lg:mx-0">
-                  Automate HTK, e-Adeies, and Law 4495 with AI-powered tools.
-                </p>
-                <button
-                  className=" 
-        flex items-center justify-center gap-2
-        px-6 py-3 rounded-md font-medium text-white
-        bg-gradient-to-r from-blue-500 to-sky-400
-        hover:from-sky-500 hover:to-blue-500
-        transition-all duration-300 shadow-md
-      "
-                >
-                  Start for Free
-                  <ArrowRight className="w-5 h-5" />
-                </button>
+            <p className="text-gray-700 text-base md:text-lg max-w-xl mx-auto lg:mx-0">
+              Automate HTK, e-Adeies, and Law 4495 with AI-powered tools.
+            </p>
 
-                {/* <button
-                  className="
-        flex items-center justify-center gap-2
-        px-6 py-3 rounded-xl font-medium text-white
-        bg-gradient-to-bl from-blue-500 to-sky-400
-        hover:from-sky-500 hover:to-blue-500
-        transition-all duration-300 shadow-md
-      "
-                >
-                  Start for Free
-                  <ArrowRight className="w-5 h-5" />
-                </button> */}
-              </div>
-
-              {/* Right Image (Laptop Preview) */}
-              <div className="flex justify-center lg:justify-end"></div>
+            <div className="flex justify-center lg:justify-start mt-16">
+              <button className="flex items-center justify-center gap-2 px-5 md:px-6 py-3 md:py-4 rounded-md font-medium text-white text-sm md:text-base bg-gradient-to-r from-blue-500 to-sky-400 hover:from-sky-500 hover:to-blue-500 transition-all duration-300 shadow-md">
+                Start for Free
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+              </button>
             </div>
           </div>
-        </Container>
-      </main>
-    </>
+
+          {/* Right Image (optional preview) */}
+          <div className="hidden lg:flex justify-end items-center">
+            {/* Add preview image if needed */}
+          </div>
+        </div>
+      </Container>
+    </main>
   );
 }
