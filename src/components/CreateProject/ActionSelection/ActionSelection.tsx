@@ -41,11 +41,11 @@ const templateName: TemplateName[] = [
     title: "YΔ Φέροντα Οργανισμού",
     price: 0.5,
   },
-  {
-    id: "co_owners_4",
-    title: "YΔ Συνιδιοκτητών",
-    price: 0.5,
-  },
+  // {
+  //   id: "co_owners_4",
+  //   title: "YΔ Συνιδιοκτητών",
+  //   price: 0.5,
+  // },
   {
     id: "technical_report_5",
     title: "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου",

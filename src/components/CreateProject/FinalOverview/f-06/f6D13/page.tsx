@@ -6,14 +6,18 @@ import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
 import StampComponent from "../../shared/signture/signture"
 import { format } from "date-fns"
+import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 
 interface FormData {
-    owner_name: string
-    project_description: string
-    owner_address: string
-    owner_city: string
-    owner_postal_code: string
+    firstName: string
+    lastName: string
+    projectDescription: string
+    propertyAddress: string
+    propertyPostalCode: string
+    municipalityCommunity:string
+    propertyNumber: string
     technicalDescription: string
+    technicalDescriptionTwo: string
 }
 // end editing 
 
@@ -24,6 +28,9 @@ export default function F6D13({ allData }: { allData: any }) {
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
+    const { id, createdById } = allData || {}
+
+
     const { projectDescription,
         propertyAddress,
         propertyNumber,
@@ -31,7 +38,10 @@ export default function F6D13({ allData }: { allData: any }) {
         propertyPostalCode,
         createdAt,
         technicalDescription,
+        technicalDescriptionTwo,
     } = allData || {};
+
+     const [updateProject] = useUpdateProjectMutation()
 
     // for editing data 
     const {
@@ -40,11 +50,27 @@ export default function F6D13({ allData }: { allData: any }) {
         reset,
         formState: { errors },
     } = useForm<FormData>({})
+    
 
-    const onSubmit = (data: FormData) => {
+
+    
+       
+    const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
+         const formData= new FormData()
+        formData.append("data", JSON.stringify(data))
+   
+      try {
+        const responsive = await updateProject(formData).unwrap()
+        console.log(responsive)
+      } catch (error) {
+        console.log(error)
+      }
+        
         reset()
     }
+
+   
 
     return (
         <div className="max-w-[794px] mx-auto p-6 bg-white">
@@ -112,17 +138,7 @@ export default function F6D13({ allData }: { allData: any }) {
                 </div>
                 <div>
                     <h3 className="text-sm font-bold mb-2">4. Νομιμότητα / Πολεοδομική Υπόσταση</h3>
-                    <p className="text-sm mb-5">Το ακίνητο βρίσκεται (Within_outside_city_plan), δεν εμπίπτει σε Ζώνες Απαγόρευσης (π.χ. Δασική, Αιγιαλός, Ζώνες προστασίας ΥΠΠΟ ή Natura),
-                        ούτε εντοπίζεται εντός χαρακτηρισμένων παραδοσιακών οικισμών ή διατηρητέων κελυφών.
-                    </p>
-                    <p className="text-sm mb-5">
-                        Δηλώνεται ότι δεν συντρέχουν οι απαγορευτικές περιπτώσεις του άρθρου 1 του Ν.4495/2017, ούτε απαιτείται έγκριση άλλων αρχών.
-                        Το κτίσμα είναι νομίμως υφιστάμενο κατά την έννοια του άρθρου 23 του Ν.4495/2017 και συνοδεύεται από τα απαραίτητα νομιμοποιητικά στοιχεία.
-                    </p>
-                    <p className="text-sm mb-5">
-                        Οι εργασίες πληρούν τις προϋποθέσεις του άρθρου 2 της ΥΑ ΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020, και ως
-                        εκ τούτου η άδεια Μικρής Κλίμακας μπορεί να εκδοθεί χωρίς περαιτέρω εγκρίσεις ή έλεγχο ΣΑ.
-                    </p>
+                    {technicalDescriptionTwo || "N/A"}
                 </div>
                 <div>
                     <h3 className="text-sm font-bold mb-2">5. Οικονομικά Στοιχεία – Προϋπολογισμός Έργου</h3>
@@ -183,48 +199,61 @@ export default function F6D13({ allData }: { allData: any }) {
                                 onSubmit={handleSubmit(onSubmit)}
                                 className="space-y-4 p-4 border rounded-lg bg-white shadow-md"
                             >
-                                {/* Employer */}
-                                <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Εργοδότες *:</label>
-                                    <input
-                                        placeholder={owner?.firstName || " "}
-                                        type="text"
-                                        {...register("owner_name", { required: "This field is required" })}
-                                        className="flex-1 border p-2 rounded text-sm"
-                                    />
-                                </div>
-
                                 {/* Project */}
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Έργο *:</label>
                                     <input
-                                        placeholder={projectDescription || "Project Description "}
+                                        defaultValue={projectDescription || "Project Description "}
                                         type="text"
-                                        {...register("project_description", { required: "This field is required" })}
+                                        {...register("projectDescription", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
 
                                 {/* Address */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Διεύθυνση Έργου *:</label>
+                                    <label className="font-medium w-1/4">Θέση*:</label>
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <input
                                             type="text"
-                                            placeholder={owner?.ownerAddress || "Address"}
-                                            {...register("owner_address", { required: "Address is required" })}
+                                            defaultValue={propertyAddress || "propertyAddress"}
+                                            {...register("propertyAddress", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner?.city || "City"}
-                                            {...register("owner_city", { required: "City is required" })}
+                                            defaultValue={propertyNumber || "propertyNumber"}
+                                            {...register("propertyNumber", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner?.postal_code || "Postal Code"}
-                                            {...register("owner_postal_code", { required: "Postal code is required" })}
+                                            defaultValue={municipalityCommunity || "municipalityCommunity"}
+                                            {...register("municipalityCommunity", { required: "Postal code is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyPostalCode || "propertyPostalCode"}
+                                            {...register("propertyPostalCode", { required: "Postal code is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                    </div>
+                                </div>
+                                {/* Address */}
+                                <div className="flex items-center gap-4">
+                                    <label className="font-medium w-1/4">Ιδιοκτήτης*:</label>
+                                    <div className="flex-1 grid grid-cols-3 gap-2">
+                                        <input
+                                            type="text"
+                                            defaultValue={owner?.firstName || "firstName"}
+                                            {...register("firstName", { required: "Address is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={owner?.lastName || "lastName"}
+                                            {...register("lastName", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>

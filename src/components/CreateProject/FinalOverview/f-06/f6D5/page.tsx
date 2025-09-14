@@ -3,6 +3,7 @@
 "use client"
 
 import StampComponent from "../../shared/signture/signture"
+import { format } from "date-fns"
 
 interface allDataProps {
     owners: any[];
@@ -10,14 +11,16 @@ interface allDataProps {
     projectDescription: string;
     propertyAddress: string;
     propertyPlace: string;
-    propertyPostalCode: string;     
-    technicalDescription: string;     
+    propertyPostalCode: string;
+    technicalDescription: string;
+    technicalDescriptionTwo: string
+    createdAt:string
 }
 
 export default function F6D5({ allData }: { allData: allDataProps }) {
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers?.[0] || {}
-    const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription } = allData || {};
+    const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt } = allData || {};
     const descriptions = [
         {
             "id": 1,
@@ -215,12 +218,7 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
                         <h3 className="font-medium mb-2 underline">1. TECHNICAL DESCRIPTION OF PROJECT</h3>
                         <div className="mb-2">
                             {/* Mapping over the fetched data */}
-                            {descriptions.map((description, i) => (
-                                <div key={i} className="flex items-center gap-2">
-                                    <span className="">{i + 1}</span>
-                                    <span className=" "></span>
-                                </div>
-                            ))}
+                            {technicalDescription || "N/A"}
                         </div>
                     </div>
 
@@ -228,7 +226,7 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
                         <h3 className="font-medium mb-2">3. ΣΧΕΔΙΑ</h3>
                         <p className="mb-2">Για την κατασκευή του κτιρίου χρειάστηκε να γίνουν οι παρακάτω μελέτες:</p>
                         <div className="space-y-1 text-sm">
-                            {/* <div className="">1. Αρχιτεκτονικά</div>
+                            <div className="">1. Αρχιτεκτονικά</div>
                             <div className="">2. Στατικά</div>
                             <div className="">3. Παθητική Πυροπροστασία</div>
                             <div className="">4. Θερμομόνωση</div>
@@ -237,10 +235,8 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
                             <div className="">7. Ηλεκτρικές Εγκαταστάσεις</div>
                             <div className="">8. Κλιματισμός</div>
                             <div className="">9. Μελέτη Ενεργειακής Απόδοσης</div>
-                            <div className="">10. Τοπογραφικό</div> */}
-                            {
-                                technicalDescription || "N/A"
-                            }
+                            <div className="">10. Τοπογραφικό</div>
+
                         </div>
                         <p className="mt-2 text-sm">
                             Θα προσαρτηθούν στο Φ.Α.Υ. με τη μορφή παραρτήματος τα "ως κατασκευάστηκε" σχέδια του έργου, μετά την
@@ -318,7 +314,9 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
                             </div>
                             <div className="flex items-center justify-center gap-2">
                                 <span className=" ">Ημερομηνία :</span>
-                                <span className=" ">2/8/2025</span>
+                                <p>{createdAt
+                                ? format(new Date(createdAt), "dd/MM/yyyy")
+                                : "N/A"}</p>
                             </div>
                         </div>
                     </div>
@@ -346,15 +344,17 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
 
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΔΙΕΥΘΥΝΣΗ :</span>
+                            <span className=" font-bold">{propertyAddress || "N/A"}</span>
+                            <span className=" font-bold">, {propertyPlace || "N/A"}</span>
+                            {/* <span className=" font-bold">, TOWN</span> */}
+                            <span className=" font-bold">, {propertyPostalCode || "N/A"}</span>
+                            <span className=" font-bold">FOR BUILDING</span>
                         </div>
 
-                        <div className="flex items-center gap-2">
-                            <span className="font-medium">ΙΔΙΟΚΤΗΤΗΣ :</span>
-                        </div>
                         <div className="flex justify-start gap-12">
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-start justify-center">
-                                <span className="flex-1 font-bold">NAME AND SURNAME ENGINEER</span>
+                                <span className="flex-1  font-bold">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
                                 <span className="flex-1 font-bold">SPECIALTY</span>
                             </div>
                         </div>
@@ -367,12 +367,7 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
                         <h3 className="font-medium mb-2">PROJECT WORKS FOR TECHNICAL DESCRIPTION</h3>
                         <div className="mb-2">
                             {/* Mapping over the fetched data */}
-                            {descriptions2.map((description, i) => (
-                                <div key={i} className="flex items-center gap-2">
-                                    <span className="w-6">{i + 1}</span>
-                                    <span className=" "></span>
-                                </div>
-                            ))}
+                            {technicalDescriptionTwo || "N/A"}
                         </div>
                     </div>
                 </div>
@@ -508,7 +503,9 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
                         </div>
                         <div className="flex items-center justify-center gap-2">
                             <span className=" ">Ημερομηνία :</span>
-                            <span className=" ">2/8/2025</span>
+                            <p>{createdAt
+                                ? format(new Date(createdAt), "dd/MM/yyyy")
+                                : "N/A"}</p>
                         </div>
                     </div>
                 </div>

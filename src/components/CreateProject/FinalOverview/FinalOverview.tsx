@@ -276,34 +276,39 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div
-          onClick={handleCopy}
-          className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
-        >
-          <div
-            title="The click copy user id"
-            className="flex items-center space-x-4 mb-4"
-          >
-            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-              {/* <FileText className="w-6 h-6 text-yellow-600" /> */}
-              <FaRegCopy className="w-6 h-6 text-yellow-600" />
+        {/* aufil groverment */}
+        {
+          allTemplate &&
+          allTemplate.find((item: { title: string }) => item.title === "Autofill (προαιρετικό add-on)") && (
+            <div
+              onClick={handleCopy}
+              className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
+            >
+              <div
+                title="The click copy user id"
+                className="flex items-center space-x-4 mb-4"
+              >
+                <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                  {/* <FileText className="w-6 h-6 text-yellow-600" /> */}
+                  <FaRegCopy className="w-6 h-6 text-yellow-600" />
+                </div>
+                <div className=" relative ">
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    Auto-Fill Government Form
+                  </h3>
+                  <p className="text-sm text-gray-500">User and Project id</p>
+                  {projectHexCode && (
+                    <p className="text-gray-600 text-sm mt-2 absolute left-0 top-12 ">
+                      <button className="bg-blue-400 text-white px-4 py-1  rounded hover:bg-blue-700 cursor-pointer">
+                        {`Id: ${projectHexCode}`}
+                      </button>
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
-            <div className=" relative ">
-              <h3 className="text-lg font-semibold text-gray-900">
-                Auto-Fill Government Form
-              </h3>
-              <p className="text-sm text-gray-500">User and Project id</p>
-              {projectHexCode && (
-                <p className="text-gray-600 text-sm mt-2 absolute left-0 top-12 ">
-                  <button className="bg-blue-400 text-white px-4 py-1  rounded hover:bg-blue-700 cursor-pointer">
-                    {`Id: ${projectHexCode}`}
-                  </button>
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-
+          )
+        }
         {/* fdf */}
 
         <div
@@ -342,26 +347,29 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           <p className="text-gray-600 text-sm">Click to download owners.csv</p>
         </div>
       </div>
-
       <div ref={printRef} className="space-y-3">
         <div className="flex items-center flex-wrap gap-3">
-          {allTemplate?.length > 0 ? (
-            allTemplate.map((template: any) => (
-              <div key={template.id}>
-                <button
-                  className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                  onClick={() => {
-                    setSelected(template.title);
-                    setIsModalOpen(true);
-                  }}
-                >
-                  {template.title}
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>No  available</p>
-          )}
+          {
+            allTemplate?.length > 0 ? (
+              allTemplate.map((template: any) => (
+                <div key={template.id}>
+                  {template.id !== "autofill_16" && (
+                    <button
+                      className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                      onClick={() => {
+                        setSelected(template.title);
+                        setIsModalOpen(true);
+                      }}
+                    >
+                      {template.title}
+                    </button>
+                  )}
+                </div>
+              ))
+            ) : (
+              <p>No available</p>
+            )
+          }
         </div>
         {/* Modal */}
         {isModalOpen && (
@@ -487,9 +495,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 "YΔ Φέροντα Οργανισμού" && (
                   <F6D10 allData={allData} /> // 3
                 )}
-              {selected === "YΔ Συνιδιοκτητών" && (
+              {/* {selected === "YΔ Συνιδιοκτητών" && (
                 <F6D4 allData={allData} /> // 4
-              )}
+              )} */}
               {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
                 <F6D13 allData={allData} /> // 5
               )}
@@ -523,25 +531,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
                 <F6D4 allData={allData} /> // 15
               )}
-              {selected === "Autofill (προαιρετικό add-on)" && (
-                // <F6D8 allData={allData} />ok 1
-                // <F6D9 allData={allData} />ok 2
-                // <F6D10 allData={allData} /> ok 3
-                // <F6D13 allData={allData} /> ok 5
-                // <F6D1 allData={allData} /> ok 6
-                // <F6D5 allData={allData} /> ok  7
-                // <F6D6 allData={allData} /> ok 8
-                // <F6D12 allData={allData} /> ok 9
-                // <F6D2 allData={allData} /> ok 10
-                // <F6D14 allData={allData} /> ok 11 
-                // <F6D7 allData={allData} />  ok 12
-                // <F6D3 allData={allData} />  ok 14
-                // <F6D4 allData={allData} />  ok 15 
-
-
-                //  axtra component 
-                <F6D11 allData={allData} /> 
-              )}
+              {/* {selected === "Autofill (προαιρετικό add-on)" && (
+                <div>Autofill (προαιρετικό add-on)</div> 
+              )} */}
 
 
 
