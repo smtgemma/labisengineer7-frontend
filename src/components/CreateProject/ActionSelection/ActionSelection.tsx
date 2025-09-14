@@ -5,140 +5,19 @@ import {
 import { RootState } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { CheckCircle, AlertTriangle, CreditCard, Loader2 } from "lucide-react";
 
 import Loading from "@/components/Others/Loading";
 import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
-
-interface Service {
-  id: string;
-  title: string;
-  price: number;
-  description: string;
-  delivery: string;
-  required?: boolean;
-}
-
-interface TemplateName {
-  id: string;
-  title: string;
-  price: number;
-  required?: boolean;
-}
-
-const templateName: TemplateName[] = [
-  {
-    id: "owner_assignment_1",
-    title: "YΔ Ανάθεσης Ιδιοκτήτη",
-    price: 0.5,
-  },
-  {
-    id: "engineer_assumption_2",
-    title: "YΔ Ανάληψης Έργου Μηχανικού",
-    price: 0.5,
-  },
-  {
-    id: "bearing_organization_3",
-    title: "YΔ Φέροντα Οργανισμού",
-    price: 0.5,
-  },
-  {
-    id: "co_owners_4",
-    title: "YΔ Συνιδιοκτητών",
-    price: 0.5,
-  },
-  {
-    id: "technical_report_5",
-    title: "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου",
-    price: 1,
-  },
-  {
-    id: "detailed_budget_6",
-    title: "Αναλυτικός Προϋπολογισμός Εργασιών",
-    price: 0.5,
-  },
-  {
-    id: "safety_file_7",
-    title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
-    price: 1,
-  },
-  {
-    id: "waste_management_8",
-    title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
-    price: 0.5,
-  },
-  {
-    id: "table_3_9",
-    title: "Πίνακας 3",
-    price: 0.5,
-  },
-  {
-    id: "active_fire_protection_10",
-    title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας",
-    price: 0.5,
-  },
-  {
-    id: "passive_fire_protection_11",
-    title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας",
-    price: 0.5,
-  },
-  {
-    id: "electrical_mechanical_12",
-    title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων",
-    price: 0.5,
-  },
-  {
-    id: "plumbing_sewage_13",
-    title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης",
-    price: 0.5,
-  },
-  {
-    id: "notarial_deed_14",
-    title: "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης",
-    price: 0.5,
-  },
-  {
-    id: "co_owners_consent_15",
-    title: "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών",
-    price: 0.5,
-  },
-  {
-    id: "autofill_16",
-    title: "Autofill (προαιρετικό add-on)",
-    price: 1,
-  },
-];
-
-const services: Service[] = [
-  {
-    id: "technical",
-    title: "Generate Engineer Declaration (YA)",
-    price: 300,
-    description: "Comprehensive technical analysis show the tempatete",
-    delivery: "10–15 business days",
-    required: true,
-  },
-  {
-    id: "Responsibility",
-    title: "Generate Assignment of Responsibility",
-    price: 200,
-    description: "Official engineering certificate for Article 30 compliance",
-    delivery: "5 -7 business days",
-  },
-  {
-    id: "supporting",
-    title: "Create Technical Description",
-    price: 100,
-    description: "Additional declarations and Technical Description.",
-    delivery: "1–3 business days",
-  },
-];
+import { templateName } from "./data";
+import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 
 interface ActionSelectionProps {
   selectedActions: string[];
   onActionsChange: (actions: string[]) => void;
-  currentStep: number
-  nextStep: () => void
-  canProceed: () => boolean
+  currentStep: number;
+  nextStep: () => void;
+  canProceed: () => boolean;
 }
 
 const ActionSelection: React.FC<ActionSelectionProps> = ({
@@ -146,26 +25,52 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   onActionsChange,
   canProceed,
   currentStep,
-  nextStep
+  nextStep,
 }) => {
   const actions = [
     "Generate Engineer Declaration (YA)",
     "Generate Assignment of Responsibility",
     "Create Technical Description",
   ];
-  const [selectedActionsValue, setSelectedActionsValue] = useState<string[]>(
-    []
-  );
-  const [selected, setSelected] = useState<string[]>(["technical", "engineer"]);
-  const [template, setTemplate] = useState([]);
-  const { data: remainingCredit } = useRemainingCreditQuery("")
-  const [useCredit] = useUseCreditsMutation()
+
+  const [selected, setSelected] = useState<string[]>(["technical", "engineer"]); // default selected
+  const [template, setTemplate] = useState<any[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const { data: remainingCredit } = useRemainingCreditQuery("");
+  const [useCredit] = useUseCreditsMutation();
   const dispatch = useDispatch();
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
   const id = stepByStepData?.projectId?.id;
-  const { data, isLoading } = useGetCreditServiceQuery(id);
-  console.log(data);
 
+  const { data, isLoading } = useGetCreditServiceQuery(id || "", { skip: !id });
+
+  console.log("Credit Service Data:", data);
+
+  // Compute subtotal
+  const subtotal = templateName
+    .filter((s) => selected.includes(s.id))
+    .reduce((acc, s) => acc + s.price, 0);
+
+  // Update template list when selections change
+  useEffect(() => {
+    const filtered = templateName.filter((s) => selected.includes(s.id));
+    setTemplate(filtered);
+  }, [selected]);
+
+  // Sync selected templates with Redux
+  useEffect(() => {
+    dispatch(setSelectTemplate(template));
+  }, [template, dispatch]);
+
+  // Sync selected action names with Redux
+  useEffect(() => {
+    dispatch(setActionSelectName(selected));
+  }, [selected, dispatch]);
+
+  // Handle template selection toggle
   const toggleSelect = (id: string) => {
     if (selected.includes(id)) {
       setSelected(selected.filter((s) => s !== id));
@@ -174,227 +79,168 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     }
   };
 
-  const subtotal = templateName
-    .filter((s) => selected.includes(s.id))
-    .reduce((acc, s) => acc + s.price, 0);
-
-  useEffect(() => {
-
-    const filtered: any = templateName.filter((s) => selected.includes(s.id));
-    if (filtered.length > 0) {
-      setTemplate(filtered);
-    } else {
-      setTemplate([]);
+  // Handle checkout & continue
+  const handleCheckout = async () => {
+    if (subtotal === 0) {
+      setError("Please select at least one template.");
+      return;
     }
 
-  }, [selected]);
+    if (!remainingCredit?.data?.credits || remainingCredit.data.credits < subtotal) {
+      setError(`Insufficient credits. You need ${subtotal} credits, but only have ${remainingCredit?.data?.credits} available.`);
+      return;
+    }
 
-  dispatch(setSelectTemplate(template));
+    setIsProcessing(true);
+    setError(null);
+    setSuccess(null);
 
-  const toggleAction = (action: string) => {
-    if (selectedActions.includes(action)) {
-      onActionsChange(selectedActions.filter((a) => a !== action));
-      setSelectedActionsValue(selectedActions.filter((a) => a !== action));
-    } else {
-      onActionsChange([...selectedActions, action]);
-      setSelectedActionsValue([...selectedActions, action]);
+    try {
+      const res: any = await useCredit({ totalCredits: subtotal }).unwrap();
+      if (res.success) {
+        setSuccess("Credit deducted successfully! Proceeding...");
+        setTimeout(() => {
+          nextStep();
+        }, 1500);
+      } else {
+        setError(res.message || "Failed to deduct credits. Please try again.");
+      }
+    } catch (err: any) {
+      setError(err?.data?.message || "An unexpected error occurred.");
+    } finally {
+      setIsProcessing(false);
     }
   };
-
-  console.log("Remaining Credit", remainingCredit?.data?.credits)
-  // const userData = useSelector(
-  //   (state: RootState) => state.user.userData as UserData | null
-  // );
-
-  // dispatch(setActionSelectName(selectedActionsValue));
-
-  useEffect(() => {
-    if (selected.length > 0) {
-      dispatch(setActionSelectName(selected));
-    }
-  }, [selected]);
-
-
-  const handleUseCredit = async (number: number) => {
-    console.log(number)
-    const payload = { totalCredits: number }
-    const res = await useCredit(payload)
-    console.log(res)
-  }
 
   if (isLoading) {
     return <Loading />;
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 max-w-7xl mx-auto">
       {/* Header */}
-      <div className="mb-6">
+      <div className="text-center lg:text-left">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           Select The Templates
         </h1>
-        <p className="text-gray-600 text-lg">
-          Here is the template information. Please choose the template.
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto lg:mx-0">
+          Choose the required documents to generate. Your selected templates will be used to create official files automatically.
         </p>
       </div>
 
-      {/* Actions List */}
-      {/* <div className="space-y-4">
-        {actions.map((action, index) => (
-          <div
-            key={action}
-            className={`p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
-              selectedActions.includes(action)
-                ? "border-blue-500 bg-blue-50"
-                : "border-gray-200 bg-white hover:border-gray-300"
-            }`}
-            onClick={() => toggleAction(action)}
-          >
-            <div className="flex items-center justify-between">
-              <span
-                className={`font-medium ${
-                  selectedActions.includes(action)
-                    ? "text-blue-900"
-                    : "text-gray-900"
-                }`}
-              >
-                {action}
-              </span>
-              <div
-                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                  selectedActions.includes(action)
-                    ? "border-blue-500 bg-blue-500"
-                    : "border-gray-300"
-                }`}
-              >
-                {selectedActions.includes(action) && (
-                  <div className="w-2 h-2 bg-white rounded-full" />
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div> */}
-      <div className="container mx-auto  grid lg:grid-cols-3 gap-6">
-        {/* Services List */}
-        {/* <div className="lg:col-span-2 space-y-6">
-          {services.map((service) => (
-            <div
-              key={service.id}
-              className={`cursor-pointer border-2 rounded-lg shadow-md hover:bg-blue-100 transition-all hover:shadow-lg p-6 ${
-                selected.includes(service.id)
-                  ? "border-blue-500"
-                  : "border-gray-200"
-              }`}
-              onClick={() => toggleSelect(service.id)}
-            >
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-lg font-semibold flex items-center gap-2">
-                    {service.title}
-                    {service.required && (
-                      <span className="text-xs border border-blue-700 bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
-                        Required
-                      </span>
-                    )}
-                  </h3>
-                  <p className="text-sm text-gray-600 mt-1">
-                    {service.description}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xl font-bold">{service.price}</p>
-                  <p className="flex items-center gap-1 text-sm text-gray-500">
-                    <Clock size={14} /> {service.delivery}
-                  </p>
-                </div>
-              </div>
-       
-            </div>
-          ))}
-        </div> */}
-
-        {/* 
-THIS IS THE DYNAMIC TEMPLATE NAME SECTION
-DO NOT CHNAGE EXCEPT DEDIGN
-THAISN */}
-        {/* template Name  */}
-        <div className="lg:col-span-2 space-y-2">
+      <div className="grid lg:grid-cols-3 gap-8">
+        {/* Template Selection Panel */}
+        <div className="lg:col-span-2 space-y-4">
           {templateName.map((tem, i) => (
             <div
               key={i}
-              className={`cursor-pointer border-2 rounded-lg  hover:bg-blue-100 transition-all hover:shadow-sm px-4 py-2 ${selected.includes(tem.id)
-                ? "border-blue-500 bg-blue-50"
-                : "border-gray-200"
+              className={`cursor-pointer border rounded-xl px-6 py-4 transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5 ${selected.includes(tem.id)
+                ? "border-blue-500 bg-blue-50 shadow-md ring-2 ring-blue-200"
+                : "border-gray-200 bg-white hover:border-blue-300"
                 }`}
               onClick={() => toggleSelect(tem.id)}
             >
               <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-base font-medium flex items-center gap-2">
+                <div className="flex-1">
+                  <h3 className="text-base font-medium flex items-center gap-2 text-gray-800">
                     {tem.title}
                     {tem.required && (
-                      <span className="text-xs border border-blue-700 bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
+                      <span className="text-xs border border-red-700 bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-medium">
                         Required
                       </span>
                     )}
                   </h3>
+                  {/* <p className="text-sm text-gray-600 mt-1">{tem.description}</p> */}
                 </div>
-                <div className="text-right">
-                  <p className="text-base font-medium">{tem.price}</p>
+                <div className="flex flex-col items-end">
+                  <span className="text-lg font-semibold text-gray-900">{tem.price} credits</span>
+                  {tem.required && (
+                    <span className="text-xs text-gray-400 mt-1">Mandatory</span>
+                  )}
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Order Summary */}
-        <div className="lg:col-span-1">
-          <div className="p-6 shadow-md rounded-2xl border border-gray-200">
-            <div>
-              <h3 className="text-lg font-bold mb-4">Credit Summary</h3>
-            </div>
-            <div className="space-y-2 text-sm">
-              {templateName
-                .filter((s) => selected.includes(s.id))
-                .map((s) => (
-                  <div key={s.id} className="flex justify-between">
-                    <span>{s.title}</span>
-                    <span className="tex-block font-semibold">{s.price}</span>
-                  </div>
-                ))}
-            </div>
-            <hr className="my-3 border-gray-400" />
-            <div className="flex justify-between font-semibold text-base">
-              <span>Total</span>
-              <span>{subtotal}</span>
-            </div>
+        {/* Order Summary Panel */}
+        <div className="lg:col-span-1 bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sticky top-26 h-fit">
+          <div className="flex items-center mb-6">
+            <CreditCard className="w-6 h-6 text-blue-600 mr-2" />
+            <h3 className="text-lg font-bold text-gray-800">Credit Summary</h3>
+          </div>
 
-            <button onClick={() => handleUseCredit(subtotal)} className="w-full cursor-pointer mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">
-              Proceed to Credit
-            </button>
+          <div className="space-y-3 mb-6">
+            {template.length > 0 ? (
+              template.map((item) => (
+                <div key={item.id} className="flex justify-between text-sm">
+                  <span className="text-gray-700">{item.title}</span>
+                  <span className="font-medium text-gray-900">{item.price} pts</span>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500 text-sm italic">No templates selected</p>
+            )}
+          </div>
 
-            <div className="mt-6 text-xs text-gray-500 text-center">
-              <p className="font-bold mb-1 text-lg">My Total Credit:</p>
-              <p className="font-bold  text-lg">{remainingCredit?.data?.credits}</p>
+          <hr className="my-4 border-gray-200" />
+
+          <div className="flex justify-between font-bold text-lg text-gray-800 mb-6">
+            <span>Total</span>
+            <span>{subtotal} credits</span>
+          </div>
+
+          {/* Credit Balance */}
+          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-600">Available Credits</span>
+              <span className="font-bold text-blue-700">{remainingCredit?.data?.credits || 0}</span>
             </div>
           </div>
+
+          {/* Error / Success Messages */}
+          {error && (
+            <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 p-3 rounded-lg mb-4">
+              <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+              <p className="text-sm">{error}</p>
+            </div>
+          )}
+
+          {success && (
+            <div className="flex items-center gap-2 bg-green-50 border border-green-200 text-green-700 p-3 rounded-lg mb-4">
+              <CheckCircle className="w-4 h-4 flex-shrink-0" />
+              <p className="text-sm">{success}</p>
+            </div>
+          )}
+
+          {/* Primary Action Button */}
+          <PrimaryButton
+            onClick={handleCheckout}
+            disabled={
+              isProcessing ||
+              subtotal === 0 ||
+              !remainingCredit?.data?.credits ||
+              remainingCredit.data.credits < subtotal ||
+              !canProceed()
+            }
+          >
+            <div className="flex items-center justify-center">
+              {isProcessing ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Processing...
+                </>
+              ) : (
+                "Checkout & Continue"
+              )}
+            </div>
+          </PrimaryButton>
+
+          <p className="text-xs text-gray-500 text-center mt-4">
+            Templates are automatically generated using AI. Only pay for what you use.
+          </p>
         </div>
       </div>
-      {currentStep < 6 && (
-        <div className="flex justify-end mt-4">
-          <button
-            onClick={nextStep}
-            // disabled={canProceed()}
-            className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${canProceed()
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600"
-              }`}
-          >
-            Next
-          </button>
-        </div>
-      )}
     </div>
   );
 };
@@ -584,3 +430,92 @@ export default ActionSelection;
 // };
 
 // export default ActionSelection;
+
+
+
+{/* Actions List */ }
+{/* <div className="space-y-4">
+        {actions.map((action, index) => (
+          <div
+            key={action}
+            className={`p-4 rounded-lg border cursor-pointer transition-all duration-200 ${
+              selectedActions.includes(action)
+                ? "border-blue-500 bg-blue-50"
+                : "border-gray-200 bg-white hover:border-gray-300"
+            }`}
+            onClick={() => toggleAction(action)}
+          >
+            <div className="flex items-center justify-between">
+              <span
+                className={`font-medium ${
+                  selectedActions.includes(action)
+                    ? "text-blue-900"
+                    : "text-gray-900"
+                }`}
+              >
+                {action}
+              </span>
+              <div
+                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                  selectedActions.includes(action)
+                    ? "border-blue-500 bg-blue-500"
+                    : "border-gray-300"
+                }`}
+              >
+                {selectedActions.includes(action) && (
+                  <div className="w-2 h-2 bg-white rounded-full" />
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div> */}
+
+{/* Services List */ }
+{/* <div className="lg:col-span-2 space-y-6">
+          {services.map((service) => (
+            <div
+              key={service.id}
+              className={`cursor-pointer border-2 rounded-lg shadow-md hover:bg-blue-100 transition-all hover:shadow-lg p-6 ${
+                selected.includes(service.id)
+                  ? "border-blue-500"
+                  : "border-gray-200"
+              }`}
+              onClick={() => toggleSelect(service.id)}
+            >
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="text-lg font-semibold flex items-center gap-2">
+                    {service.title}
+                    {service.required && (
+                      <span className="text-xs border border-blue-700 bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
+                        Required
+                      </span>
+                    )}
+                  </h3>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {service.description}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xl font-bold">{service.price}</p>
+                  <p className="flex items-center gap-1 text-sm text-gray-500">
+                    <Clock size={14} /> {service.delivery}
+                  </p>
+                </div>
+              </div>
+       
+            </div>
+          ))}
+        </div> */}
+
+{/* 
+THIS IS THE DYNAMIC TEMPLATE NAME SECTION
+DO NOT CHNAGE EXCEPT DEDIGN
+THAISN */}
+
+// const userData = useSelector(
+//   (state: RootState) => state.user.userData as UserData | null
+// );
+
+// dispatch(setActionSelectName(selectedActionsValue));

@@ -82,13 +82,11 @@ const WorkflowDemo: React.FC = () => {
         );
       case 3:
         return <OwnerSelection
-          canProceed={canProceed}
           currentStep={currentStep}
           nextStep={nextStep}
         />;
       case 4:
         return <AIExtractionDataInPut currentStep={currentStep}
-          canProceed={canProceed}
           nextStep={nextStep}
         />;
       case 5:

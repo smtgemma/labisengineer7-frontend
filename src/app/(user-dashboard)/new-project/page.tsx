@@ -28,6 +28,7 @@ export default function page() {
             description={project.serviceDescription}
             id={project.id}
             key={idx}
+            serviceTitle={project.serviceTitle}
           />
         ))}
       </div>

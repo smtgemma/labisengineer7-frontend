@@ -3,18 +3,18 @@ import {
   setMultipleDescription
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { Edit3, Plus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiEdit2 } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { EditingOwnerType, Owner, OwnerFormInputs, SelectedProperty } from "./types";
+import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 
-const OwnerSelection = ({ canProceed, currentStep, nextStep }: {
+const OwnerSelection = ({ currentStep, nextStep }: {
   currentStep: number
   nextStep: () => void
-  canProceed: () => boolean
 }) => {
   const [editingOwner, setEditingOwner] = useState<EditingOwnerType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,6 +22,10 @@ const OwnerSelection = ({ canProceed, currentStep, nextStep }: {
   const [selectedOwners, setSelectedOwners] = useState<Owner[]>([]);
   const [selectedProperty, setSelectedProperty] = useState<SelectedProperty[]>([]);
   const [ydomModalOpen, setYdomModalOpen] = useState(false);
+  const [validationError, setValidationError] = useState<{ description: string; owner: string }>({
+    description: "",
+    owner: ""
+  });
 
   const dispatch = useDispatch();
   const ownerData = useSelector((state: any) => state.aiData.aiDataState);
@@ -91,14 +95,21 @@ const OwnerSelection = ({ canProceed, currentStep, nextStep }: {
     }
   };
 
-  // Handle property selection
+  // Handle property selection — enforce single selection only
   const togglePropertySelection = (index: number, value: string) => {
     const alreadySelected = selectedProperty.find(item => item.index === index);
 
     if (alreadySelected) {
+      // Deselect if already selected
       setSelectedProperty(prev => prev.filter(item => item.index !== index));
     } else {
-      setSelectedProperty(prev => [...prev, { index, value }]);
+      // Select this one and deselect all others
+      setSelectedProperty([{ index, value }]);
+    }
+
+    // Clear validation error when a selection is made
+    if (validationError.description) {
+      setValidationError(prev => ({ ...prev, description: "" }));
     }
   };
 
@@ -112,6 +123,11 @@ const OwnerSelection = ({ canProceed, currentStep, nextStep }: {
     } else {
       setSelectedOwners(prev => [...prev, { ...owner, selected: true }]);
     }
+
+    // Clear validation error when a selection is made
+    if (validationError.owner) {
+      setValidationError(prev => ({ ...prev, owner: "" }));
+    }
   };
 
   // Delete owner
@@ -120,6 +136,11 @@ const OwnerSelection = ({ canProceed, currentStep, nextStep }: {
     // Also remove from selected if it was selected
     const deletedOwner = isOwner[index];
     setSelectedOwners(prev => prev.filter(o => o.first_name !== deletedOwner.first_name));
+
+    // Clear validation error if owner was selected
+    if (validationError.owner && selectedOwners.length === 0) {
+      setValidationError(prev => ({ ...prev, owner: "Please select at least one owner." }));
+    }
   };
 
   // Open edit modal for owner
@@ -143,13 +164,30 @@ const OwnerSelection = ({ canProceed, currentStep, nextStep }: {
 
   // Update Redux store when selections change
   useEffect(() => {
-    dispatch(setMultipleDescription({ description: selectedProperty, ydom: ydom }));
-  }, [selectedProperty, ydom, dispatch]);
+    dispatch(setMultipleDescription({ description: selectedProperty, ydom }));
+  }, [selectedProperty, ydom]);
 
   useEffect(() => {
     dispatch(setAiExtractCatchWonerData(selectedOwners));
-  }, [selectedOwners, dispatch]);
+  }, [selectedOwners]);
 
+  // Validate before proceeding
+  const isValid = useMemo(() => {
+    const descriptionValid = selectedProperty.length === 1;
+    const ownerValid = selectedOwners.length >= 1;
+    return descriptionValid && ownerValid;
+  }, [selectedProperty, selectedOwners]);
+
+  // Add this useEffect right after your other useEffects
+  useEffect(() => {
+    const descriptionValid = selectedProperty.length === 1;
+    const ownerValid = selectedOwners.length >= 1;
+
+    setValidationError({
+      description: !descriptionValid ? "Please select exactly one property description." : "",
+      owner: !ownerValid ? "Please select at least one owner." : ""
+    });
+  }, [selectedProperty, selectedOwners]); // Only re-run when these change
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -191,6 +229,11 @@ const OwnerSelection = ({ canProceed, currentStep, nextStep }: {
               </div>
             ))}
           </div>
+
+          {/* Validation Error for Property */}
+          {validationError.description && (
+            <p className="text-red-500 text-sm mt-2">{validationError.description}</p>
+          )}
         </div>
       )}
 
@@ -324,6 +367,11 @@ const OwnerSelection = ({ canProceed, currentStep, nextStep }: {
               </div>
             ))}
           </div>
+        )}
+
+        {/* Validation Error for Owner */}
+        {validationError.owner && (
+          <p className="text-red-500 text-sm mt-2">{validationError.owner}</p>
         )}
       </div>
 
@@ -506,20 +554,20 @@ const OwnerSelection = ({ canProceed, currentStep, nextStep }: {
           </div>
         </div>
       )}
-
       {/* Next Button */}
       {currentStep < 6 && (
         <div className="flex justify-end">
-          <button
-            onClick={nextStep}
-            // disabled={canProceed()}
-            className={`px-8 py-3 rounded-lg text-white flex items-center justify-center transition-colors ${canProceed()
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-500 hover:bg-blue-600"
-              }`}
-          >
-            Save & Continue
-          </button>
+          <PrimaryButton
+
+            onClick={() => {
+              if (isValid) {
+                nextStep();
+              }
+            }}
+            label="Save and Continue"
+            disabled={!isValid}
+
+          />
         </div>
       )}
     </div>
@@ -527,72 +575,3 @@ const OwnerSelection = ({ canProceed, currentStep, nextStep }: {
 };
 
 export default OwnerSelection;
-
-
-
-// trash 
-
-
-{/* Save & Continue Button */ }
-{/* <div className="flex justify-end">
-        <button className="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium text-lg">
-          Save & Continue
-        </button>
-      </div> */}
-
-
-{/* Project Description */ }
-
-{/* ydom show  */ }
-{/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {ydom.map((dom, i) => (
-          <div
-            key={dom.id}
-            className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm relative"
-          >
-            <div className="flex justify-between items-start mb-4">
-              <h3 className="font-semibold">Serial {`(${i + 1})`}</h3>
-
-              <button
-                onClick={() => handleOpenEdit(dom.id, dom.text)}
-                className="text-gray-500 hover:text-blue-500"
-              >
-                <FiEdit2 />
-              </button>
-            </div>
-
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="">Ydom:</h3>
-              <p className="text-sm text-gray-700 whitespace-pre-line">
-                {`${dom.text}` || "N/A"}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div> */}
-
-// const togglePropertySelection = (index: number) => {
-//   const property = descriptionShow[index];
-
-//   // check if already selected
-//   const alreadySelected = selectedProperty.some((o, i) => i === i);
-
-//   if (alreadySelected) {
-//     // if already selected → remove it
-//     setSelectedProperty(selectedProperty.filter((o, i) => i !== i));
-//   } else {
-//     // otherwise add it
-//     setSelectedProperty([
-//       ...selectedProperty,
-//       { ...property, selected: true },
-//     ]);
-
-//     // setOwnerNumber(4);
-//   }
-// };
-
-//   type Property = {
-// //   title: string;
-// //   description: string;
-// //   selected?: boolean;
-// // };
