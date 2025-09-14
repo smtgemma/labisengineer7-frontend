@@ -13,7 +13,7 @@ export default function page() {
   }
 
   const projects = data?.data;
-  console.log(projects)
+  console.log("============", projects);
   return (
     <section className="bg-[#F1F5F9] py-8 ">
       <Header
@@ -24,6 +24,7 @@ export default function page() {
         {projects?.map((project: any, idx: number) => (
           <ProjectCard
             title={project.serviceName}
+            image={project.imageUrl}
             description={project.serviceDescription}
             id={project.id}
             key={idx}

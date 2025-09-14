@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren } from "react";
 
-const ShapOne: FC<PropsWithChildren> = ({ children }) => {
+const RightShape: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className="relative h-full w-full  ">
       {/* <img
@@ -11,11 +11,11 @@ const ShapOne: FC<PropsWithChildren> = ({ children }) => {
       <img
         src={"./shapOne.png"}
         alt="shape"
-        className="absolute top-[-222px] right-[-322px] z-10 h-[1100px] w-[60%] object-contain"
+        className="absolute top-20 right-[-322px] z-10 h-[1100px] w-[70%] object-contain"
       />
       {children}
     </div>
   );
 };
 
-export default ShapOne;
+export default RightShape;
