@@ -64,7 +64,7 @@ export default function F6D13({ allData }: { allData: any }) {
             <div className="mb-8 space-y-4">
                 <div className="flex items-center justify-center gap-5">
                     <span className=" text-sm">Έργο:</span>
-                    <h3 className=" text-sm">Project Descriprion</h3>
+                    <h3 className=" text-sm text-center">{projectDescription}</h3>
                 </div>
 
                 <div className="flex items-center justify-center gap-5">

@@ -29,7 +29,8 @@ interface FormData {
 
 interface allDataProps {
     engineers: any[];
-    projectDescription: string;
+    projectDescription: string; 
+    ydom?: string;
 }
 
 
@@ -39,6 +40,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
 
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const { projectDescription } = allData || {};
+    const { ydom } = allData || {};
 
 
     // for editing data 
@@ -93,7 +95,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400 bg-gray-50">
                     <div className="flex">
                         <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-                        <div className="flex-1 p-2  font-bold">{engineer?.ydom || "N/A"}</div>
+                        <div className="flex-1 p-2  font-bold">{ydom || "N/A"}</div>
                     </div>
                 </div>
 

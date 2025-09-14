@@ -488,6 +488,7 @@ interface allDataProps {
     owners: any[];
     engineers: any[]
     projectDescription: string;
+    ydom: string;
 }
 
 
@@ -496,9 +497,10 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const engineers = allData?.engineers || {};
     const { projectDescription } = allData || {};
+    const { ydom } = allData || {};
 
 
-    console.log(allData)
+    console.log(allData, "allData in f6d8")
     // for editing data 
     const {
         register,
@@ -552,7 +554,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400 bg-gray-50">
                                 <div className="flex">
                                     <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-                                    <div className="flex-1 p-2  font-bold">{owner?.ydom || ""}</div>
+                                    <div className="flex-1 p-2  font-bold">{ydom || ""}</div>
                                 </div>
                             </div>
 
