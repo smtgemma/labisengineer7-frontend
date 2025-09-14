@@ -33,6 +33,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
   // routing and id catch
   const handleProjectId = (serviceTitle: string) => {
+      console.log("image", serviceTitle);
     dispatch(resetAiExtractState()); // all state fields go back to initialState
     dispatch(
       setTheProjectId({
@@ -46,9 +47,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     console.log("image", serviceTitle);
     if (serviceTitle === "service-1") {
       router.push("/service/sub-category");
+      console.log(serviceTitle)
     }
+
     if (serviceTitle === "service-4") {
       router.push("/create-eng-certificates");
+       console.log(serviceTitle)
     }
     // // services -2
     // else if (id === "68c56689d5f94c3ac153e67a") {
@@ -126,7 +130,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         onClick={() => handleProjectId(serviceTitle)}
         type="button"
         aria-label={`Start ${title} service`}
-        className="relative  border-[#61BDFF] inline-flex items-center justify-center px-6 py-3 border font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#61BDFF]
+        className="relative  border-[#61BDFF]  inline-flex items-center justify-center px-6 py-3 border font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#61BDFF]
             hover:bg-[linear-gradient(44deg,#017AFF_37.44%,#61BDFF_67.11%)]   hover:text-white  p-[2px] cursor-pointer"
       >
         Begin Project

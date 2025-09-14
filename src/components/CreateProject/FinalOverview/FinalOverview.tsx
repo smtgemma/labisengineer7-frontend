@@ -499,7 +499,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F6D4 allData={allData} /> // 4
               )} */}
               {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
-                <F6D13 allData={allData} /> // 5
+                <F6D13 allData={allData} setIsModalOpen={setIsModalOpen}/> // 5
               )}
               {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
                 <F6D1 allData={allData} /> // 6

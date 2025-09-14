@@ -2,11 +2,17 @@
 
 import { useState } from "react"
 // for editing 
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
 import StampComponent from "../../shared/signture/signture"
 import { format } from "date-fns"
 import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+
+
+type F6D13Props = {
+  allData: any;
+  setIsModalOpen: (value: boolean) => void;
+};
 
 interface FormData {
     firstName: string
@@ -14,21 +20,45 @@ interface FormData {
     projectDescription: string
     propertyAddress: string
     propertyPostalCode: string
-    municipalityCommunity:string
+    municipalityCommunity: string
     propertyNumber: string
     technicalDescription: string
     technicalDescriptionTwo: string
 }
 // end editing 
+interface Owner {
+    firstName: string
+    lastName: string
+}
+
+interface FormData {
+    owners: Owner[]
+}
 
 
-export default function F6D13({ allData }: { allData: any }) {
+export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
     const { id, createdById } = allData || {}
+    console.log(id, createdById, "=======================shahidul")
+
+
+
+    const {
+        register,
+        handleSubmit,
+        control,
+        reset,
+        formState: { errors },
+    } = useForm<FormData>({
+
+        defaultValues: {
+            owners: allData?.owners || [{ firstName: "", lastName: "" }],
+        },
+    })
 
 
     const { projectDescription,
@@ -41,36 +71,37 @@ export default function F6D13({ allData }: { allData: any }) {
         technicalDescriptionTwo,
     } = allData || {};
 
-     const [updateProject] = useUpdateProjectMutation()
+    const [updateProject] = useUpdateProjectMutation()
 
     // for editing data 
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm<FormData>({})
-    
 
 
-    
-       
+
+
+
+
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
-         const formData= new FormData()
-        formData.append("data", JSON.stringify(data))
-   
-      try {
-        const responsive = await updateProject(formData).unwrap()
-        console.log(responsive)
-      } catch (error) {
-        console.log(error)
-      }
-        
+        const addNewData = {
+            serviceId: "68c565d9d5f94c3ac153e678",
+            ...data
+        }
+        const formData = new FormData()
+        formData.append("data", JSON.stringify(addNewData))
+
+        try {
+            const responsive = await updateProject({projectId: id, userId: createdById, formData}).unwrap()
+            console.log(responsive)
+        } catch (error) {
+            console.log(error)
+        }
+
         reset()
+        setIsEditModalOpen(false)
+        setIsModalOpen(false)
     }
 
-   
+
 
     return (
         <div className="max-w-[794px] mx-auto p-6 bg-white">
@@ -102,7 +133,7 @@ export default function F6D13({ allData }: { allData: any }) {
 
                 <div className="flex items-center justify-center text-sm gap-5">
                     <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">{owner?.firstName} {owner?.lastName}</h3>
+                    <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
                 </div>
             </div>
             <div className="space-y-6 ml-10">
@@ -241,23 +272,33 @@ export default function F6D13({ allData }: { allData: any }) {
                                     </div>
                                 </div>
                                 {/* Address */}
-                                <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Ιδιοκτήτης*:</label>
-                                    <div className="flex-1 grid grid-cols-3 gap-2">
+                                {/* First Name */}
+                                <Controller
+                                    name="owners.0.firstName"
+                                    control={control}
+                                    rules={{ required: "First name is required" }}
+                                    render={({ field }) => (
                                         <input
-                                            type="text"
-                                            defaultValue={owner?.firstName || "firstName"}
-                                            {...register("firstName", { required: "Address is required" })}
-                                            className="border p-2 rounded text-sm"
+                                            {...field}
+                                            placeholder="First Name"
+                                            className="border p-2 rounded text-sm w-full"
                                         />
+                                    )}
+                                />
+
+                                {/* Last Name */}
+                                <Controller
+                                    name="owners.0.lastName"
+                                    control={control}
+                                    rules={{ required: "Last name is required" }}
+                                    render={({ field }) => (
                                         <input
-                                            type="text"
-                                            defaultValue={owner?.lastName || "lastName"}
-                                            {...register("lastName", { required: "City is required" })}
-                                            className="border p-2 rounded text-sm"
+                                            {...field}
+                                            placeholder="Last Name"
+                                            className="border p-2 rounded text-sm w-full"
                                         />
-                                    </div>
-                                </div>
+                                    )}
+                                />
 
                                 {/* Submit */}
                                 <div className="flex justify-end">
