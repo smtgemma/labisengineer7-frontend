@@ -20,7 +20,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   image,
   description,
   id,
-  serviceTitle
+  serviceTitle,
 }) => {
   const router = useRouter();
 
