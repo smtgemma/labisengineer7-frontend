@@ -17,7 +17,7 @@ const ServicesOverview: React.FC = () => {
       icon: Search,
       title: "Construction Project Planning",
       description:
-        "Comprehensive project planning and scheduling services. From initial design to final inspection, we manage every phase of your construction project with precision.",
+        "Comprehensive project planning and scheduling services. From initial design to final inspection, we manage every phase of your construction project with precision. Comprehensive project planning and scheduling services. From initial design to final inspection, we manage every phase of your construction project with precision.",
       buttonText: "Start Planning",
       bgColor: "bg-gradient-to-br from-white-50 via-blue-50 to-blue-300",
       iconColor: "text-gray-800",
