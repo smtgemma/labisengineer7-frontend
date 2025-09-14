@@ -74,16 +74,16 @@ export default function MainNavLink({
       <div key={link.name}>
         <div
           className={`flex items-center justify-between gap-3 px-3 py-3 rounded-md cursor-pointer ${isActive(link.href)
-              ? "text-white" // text stays white
-              : dark
-                ? "text-white hover:bg-primary/40"
-                : "hover:bg-primary/10 hover:text-primary"
+            ? "text-white" // text stays white
+            : dark
+              ? "text-white hover:bg-primary/40"
+              : "hover:bg-primary/10 hover:text-primary"
             }`}
           style={
             isActive(link.href)
               ? {
                 background:
-                  "linear-gradient(44deg, #017AFF 37.44%, #61BDFF 67.11%)",
+                  "linear-gradient(12deg, #017AFF 37.44%, #61BDFF 67.11%)",
               }
               : {}
           }
@@ -154,10 +154,10 @@ export default function MainNavLink({
                 key={subItem.name}
                 href={subItem.href}
                 className={`flex items-center gap-3 px-3 py-2 rounded-md overflow-hidden ${isActive(subItem.href)
-                    ? "bg-primary text-white"
-                    : dark
-                      ? "text-white hover:bg-primary/40"
-                      : "hover:bg-primary/10 hover:text-primary"
+                  ? "bg-primary text-white"
+                  : dark
+                    ? "text-white hover:bg-primary/40"
+                    : "hover:bg-primary/10 hover:text-primary"
                   }`}
               >
                 {isShort && <span className="text-nowrap">{subItem.name}</span>}
@@ -222,8 +222,8 @@ export default function MainNavLink({
             key={link.name}
             href={link.href}
             className={`flex items-center gap-3 px-3 py-3 rounded-md ${isActive(link.href)
-                ? "bg-primary text-white"
-                : "hover:bg-primary/10"
+              ? "bg-primary text-white"
+              : "hover:bg-primary/10"
               }`}
           >
             <svg

@@ -556,7 +556,7 @@ const OwnerSelection = ({ currentStep, nextStep }: {
       )}
       {/* Next Button */}
       {currentStep < 6 && (
-        <div className="flex justify-end">
+        <div className="flex justify-end w-fit ml-auto">
           <PrimaryButton
 
             onClick={() => {

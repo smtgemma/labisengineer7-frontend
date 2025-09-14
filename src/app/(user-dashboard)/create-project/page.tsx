@@ -57,6 +57,7 @@ const WorkflowDemo: React.FC = () => {
     }
   };
 
+  console.log(uploadedFiles)
   const handleComplete = () => setIsCompleted(true);
 
   const renderStepContent = () => {
@@ -75,7 +76,7 @@ const WorkflowDemo: React.FC = () => {
         return (
           //button addewd
           <AIExtraction
-            canProceed={canProceed}
+            uploadedFiles={uploadedFiles}
             currentStep={currentStep}
             nextStep={nextStep}
           />

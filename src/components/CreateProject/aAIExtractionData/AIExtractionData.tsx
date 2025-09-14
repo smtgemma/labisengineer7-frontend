@@ -90,7 +90,7 @@ const AIExtractionDataInPut = ({ currentStep, nextStep }: {
       descrptionTasks: descrptionTasks,
       ydom: descriptonAndYdom?.ydom,
       technicalDescription: allExtreactData?.technical_description,
-      technicalDescriptiontWO: allExtreactData?.technical_description_two,
+      technicalDescriptionTwo: allExtreactData?.technical_description_two,
       ...data,
     };
 
@@ -685,7 +685,7 @@ const AIExtractionDataInPut = ({ currentStep, nextStep }: {
         </div>
       </form>
       {currentStep < 6 && (
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-end mt-4 w-fit ml-auto" >
           <PrimaryButton
             onClick={nextStep}
             // disabled={canProceed()}

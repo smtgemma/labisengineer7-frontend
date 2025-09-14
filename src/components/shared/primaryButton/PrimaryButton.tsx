@@ -14,8 +14,8 @@ const PrimaryButton = ({ label, onClick, disabled, children }: PrimaryButtonProp
         ${disabled ? "cursor-not-allowed bg-gray-300 text-gray-600" : "cursor-pointer text-white"}`}
             style={{
                 background: disabled
-                    ? "linear-gradient(44deg, #d1d5db 37.44%, #9ca3af 67.11%)"
-                    : "linear-gradient(44deg, #017AFF 37.44%, #61BDFF 67.11%)",
+                    ? "linear-gradient(46deg, #d1d5db 37.44%, #9ca3af 67.11%)"
+                    : "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
             }}
         >
             {children ? children : label}
