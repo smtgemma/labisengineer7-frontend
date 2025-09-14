@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import CounterView from "@/components/LandingComponents/Counter";
+import VideoSeciton from "@/components/LandingComponents/VideoSection";
+import TestimonialsSlider from "@/components/LandingComponents/Testimonials";
 
 const page = () => {
   useEffect(() => {
@@ -21,6 +23,8 @@ const page = () => {
       <CounterView />
       <ServicesOverview />
       <HowItWorks />
+      <VideoSeciton />
+      <TestimonialsSlider />
     </div>
   );
 };
