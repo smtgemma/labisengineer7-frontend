@@ -214,7 +214,7 @@ const AIExtractionDataInPut = ({ currentStep, canProceed, nextStep }: {
         descrptionTasks: descrptionTasks,
         ydom: descriptonAndYdom?.ydom,
         technicalDescription: allExtreactData?.technical_description,
-        technicalDescriptiontWO: allExtreactData?.technical_description_two,
+        technicalDescriptionTwo: allExtreactData?.technical_description_two,
         ...data,
       })
     );
