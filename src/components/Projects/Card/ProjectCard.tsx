@@ -11,6 +11,7 @@ interface ProjectCardProps {
   title: string;
   image: string;
   description: string;
+  serviceTitle: string;
   id: string;
 }
 
@@ -19,6 +20,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   image,
   description,
   id,
+  serviceTitle
 }) => {
   const router = useRouter();
 
@@ -30,7 +32,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     // Add your service navigation logic here
   };
   // routing and id catch
-  const handleProjectId = (id: string) => {
+  const handleProjectId = (serviceTitle: string) => {
     dispatch(resetAiExtractState()); // all state fields go back to initialState
     dispatch(
       setTheProjectId({
@@ -41,14 +43,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       })
     );
 
-    console.log("image", image);
-    if (id === "68c565d9d5f94c3ac153e678") {
+    console.log("image", serviceTitle);
+    if (serviceTitle === "service-1") {
       router.push("/service/sub-category");
     }
-    // services -2
-    else if (id === "68c56689d5f94c3ac153e67a") {
-      router.push("/create-project-two");
+    if (serviceTitle === "service-4") {
+      router.push("/create-eng-certificates");
     }
+    // // services -2
+    // else if (id === "68c56689d5f94c3ac153e67a") {
+    //   router.push("/create-project-two");
+    // }
   };
 
   return (
@@ -118,7 +123,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
       {/* Button */}
       <button
-        onClick={() => handleProjectId(id)}
+        onClick={() => handleProjectId(serviceTitle)}
         type="button"
         aria-label={`Start ${title} service`}
         className="relative  border-[#61BDFF] inline-flex items-center justify-center px-6 py-3 border font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#61BDFF]

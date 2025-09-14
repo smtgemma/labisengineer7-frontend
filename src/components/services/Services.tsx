@@ -27,6 +27,7 @@ export default function MainServices() {
             description={project.serviceDescription}
             id={project.id}
             key={idx}
+            serviceTitle={project.serviceTitle}
           />
         ))}
       </div>
