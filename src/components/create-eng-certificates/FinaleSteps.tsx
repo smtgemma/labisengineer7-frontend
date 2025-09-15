@@ -22,6 +22,7 @@ import F6D8 from "../CreateProject/FinalOverview/f-06/f6D8/page";
 import F6D9 from "../CreateProject/FinalOverview/f-06/f6D9/page";
 import S4D2 from "../CreateProject/FinalOverview/srv-4t/s4D2/page";
 import S4D1 from "../CreateProject/FinalOverview/srv-4t/s4D1/page";
+import { FormDataOne } from "./template";
 export interface UserData {
     id: string;
     firstName: string;
@@ -130,6 +131,27 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     //     component: <FileOneDesignEleven />,
     //   },
     // ];
+
+    const [formData, setFormData] = useState<FormDataOne>({
+        recipient: "ydom",
+        name: "Name Owner",
+        surname: "Surname Owner",
+        fatherName: "Fathers name and surname Owner",
+        motherName: "Mothers name and surname Owner",
+        birthDate: "Born date Owner",
+        birthTown: "Born Town owner",
+        idNumber: "ID",
+        mobile: "mobile",
+        town: "Town",
+        address: "Address",
+        addressNumber: "Number",
+        postalCode: "postal code",
+        email: "email owner",
+        vat: "VAT owner",
+        projectDescription: "PROJECT DESCRIPTION",
+        date: "8/18/2025"
+    });
+
 
     const projectAndUserHexCode =
         userData?.hexToken + `-${projectCodeId?.result?.projectCode}`;
@@ -366,18 +388,16 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
 
                             {/* file 6======== */}
                             {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
-                                <S4D1 /> 
+                                <S4D1 formData={formData} setFormData={setFormData} />
                             )}
                             {selected ===
                                 "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
-                                    <S4D2 /> 
+                                    <S4D2 />
                                 )}
-
                         </div>
                     </div>
                 )}
             </div>
-
             <div className="flex justify-end">
                 <button
                     onClick={onComplete}
