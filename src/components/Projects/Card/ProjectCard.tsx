@@ -98,8 +98,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     bg-gradient-to-br from-white via-blue-50 to-blue-200
     rounded-2xl p-6 lg:p-8 cursor-pointer
     transform  transition-transform hover:duration-1000 hover:transition-transform duration-1000 
-    hover:shadow-xl hover:scale-[1.02]
-    hover:bg-gradient-to-br hover:from-blue-300 hover:via-blue-50 hover:to-white
   `}
     >
       {/* Icon */}

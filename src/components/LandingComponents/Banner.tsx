@@ -28,7 +28,14 @@ export default function Banner() {
             </p>
 
             <div className="flex justify-center lg:justify-start mt-16">
-              <button className="flex items-center justify-center gap-2 px-5 md:px-6 py-3 md:py-4 rounded-md font-medium text-white text-sm md:text-base bg-gradient-to-r from-blue-500 to-sky-400 hover:from-sky-500 hover:to-blue-500 transition-all duration-300 shadow-md">
+              <button
+                style={{
+                  borderRadius: "6px",
+                  background:
+                    "linear-gradient(44deg, #017AFF 37.44%, #61BDFF 67.11%)",
+                }}
+                className="flex items-center justify-center gap-2 px-5 md:px-6 py-3 md:py-4 cursor-pointer rounded-md font-medium text-white text-sm md:text-base "
+              >
                 Start for Free
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
               </button>
