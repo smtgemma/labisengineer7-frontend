@@ -1,17 +1,14 @@
 "use client";
 
-import AIExtraction from "@/components/CreateProject/AIExtraction/AIExtraction";
-import ActionSelection from "@/components/CreateProject/ActionSelection/ActionSelection";
 import FileUpload from "@/components/CreateProject/FileUpload/FileUpload";
-import FinalOverview from "@/components/CreateProject/FinalOverview/FinalOverview";
 import OwnerSelection from "@/components/CreateProject/OwnerSelection/OwnerSelection";
 import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
 import AIExtractionDataInPut from "@/components/CreateProject/aAIExtractionData/AIExtractionData";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import AIExtractionFour from "./Extraction";
-import TemplateSelectionComponents from "./TemplateSelection";
 import FinalSteps from "./FinaleSteps";
+import TemplateSelectionComponents from "./TemplateSelection";
 
 const workflowSteps = [
     { id: 1, title: "Upload Documents" },
