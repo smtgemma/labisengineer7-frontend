@@ -1,108 +1,197 @@
-import { useEffect, useRef, useState } from "react"
-
+import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
+import {
+    setAiExtractCatchData
+} from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
+import { usePostFileAiDataExtractMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
+import { RootState } from "@/redux/store";
+import Lottie from "lottie-react";
+import { Brain, CheckCircle } from "lucide-react";
+import React, { useState } from "react";
+import { FcFinePrint } from "react-icons/fc";
+import { useDispatch, useSelector } from "react-redux";
+import aiLoadingExtract from "../../../public/aiFIleLoadingTwo.json";
 
 interface AIExtractionProps {
-    estimatedTime: number // in seconds
-    onComplete?: () => void
+    currentStep: number
+    nextStep: () => void
+    uploadedFiles: File[]
 }
-export function Extraction({ estimatedTime, onComplete }: AIExtractionProps) {
-    const [progress, setProgress] = useState(0)
-    const [isComplete, setIsComplete] = useState(false)
-    const startTimeRef = useRef<number>(Date.now())
-    const intervalRef = useRef<NodeJS.Timeout>(null)
 
-    useEffect(() => {
-        startTimeRef.current = Date.now()
+const AIExtractionFour: React.FC<AIExtractionProps> = ({
+    currentStep,
+    nextStep,
+    uploadedFiles
+}) => {
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [isCompleted, setIsCompleted] = useState<boolean>(false);
+    const [progress, setProgress] = useState(0);
+    const [time, setTime] = useState(0);
+    const [errorMsg, setErrorMsg] = useState(""); // ✅ Error message state
+    const dispatch = useDispatch();
 
-        // Simulate AI processing with intelligent progress
-        const updateProgress = () => {
-            const elapsed = (Date.now() - startTimeRef.current) / 1000
-            let newProgress: number
+    const [aiFileUpload] = usePostFileAiDataExtractMutation();
 
-            if (elapsed < estimatedTime) {
-                // Normal progress based on estimated time
-                newProgress = (elapsed / estimatedTime) * 90 // Cap at 90% until actual completion
-            } else {
-                // If taking longer than estimated, slow down progress increase
-                const overtime = elapsed - estimatedTime
-                const slowdownFactor = Math.max(0.1, 1 / (1 + overtime / estimatedTime))
-                newProgress = 90 + (overtime / (estimatedTime * 2)) * 10 * slowdownFactor
-                newProgress = Math.min(newProgress, 95) // Never exceed 95% until actual completion
-            }
+    const aiExtractData = useSelector((state: RootState) => state.aiData);
+    console.log(aiExtractData)
+    // Helper: check if files are valid
+    const hasValidFiles = (files: any[]) => {
+        if (!Array.isArray(files) || files.length === 0) return false;
 
-            setProgress(Math.floor(newProgress))
+        return files.every(
+            (file) =>
+                file &&
+                typeof file === "object" &&
+                "name" in file &&
+                "size" in file &&
+                "type" in file &&
+                file.name.trim() !== "" &&
+                file.size > 0 &&
+                file.type.trim() !== ""
+        );
+    };
+
+
+
+    // Timer
+    // const timerControling = () => {
+    //   if (time >= 120) return;
+    //   const timer = setInterval(() => {
+    //     setTime((prev) => prev + 1);
+    //   }, 1000);
+
+    //   return () => clearInterval(timer);
+    // };
+
+    // const minutes = Math.floor(time / 60);
+    // const seconds = time % 60;
+    // const horizontal_property_name = "Εργασίες βάσει του άρθρου 30 του ν.4495 / 2017 στην {{Horizontal_property_name}}"
+
+    const technical_description = "Το ακίνητο βρίσκεται {{Within_outside_city_plan}}, συνολικής επιφάνειας {{Area_plot}} τ.μ., είναι καταχωρημένο στο Εθνικό Κτηματολόγιο με ΚΑΕΚ {{Kaek_property}}, στην οδό {{Property_address}} {{Property_number}}, στη θέση {{Place_property}}, στο Δήμο {{Municipality_community}}, με Τ.Κ. {{Property_postal_code}}.Πρόκειται για {{Horizontal_property_name}}, επιφανείας {{Title_area}} τ.μ., η οποία αποτελεί αυτοτελή οριζόντια ιδιοκτησία κατά τις διατάξεις του Ν.3741/1929 και του Ν.Δ. 1024/1971."
+
+    // const technical_description_two = "Οι περιγραφόμενες εργασίες υπάγονται στις ρητά προβλεπόμενες περιπτώσεις του άρθρου 30 του Ν.4495/2017 και, ως εκ τούτου, δεν απαιτείται έκδοση οικοδομικής άδειας ή άδειας μικρής κλίμακας.Βεβαιώνεται επίσης,  ότι το ακίνητο δεν εμπίπτει σε ειδικό καθεστώς προστασίας, σύμφωνα με τη παρ.2 του άρθρου 30 του Ν.4495/2017, όπως:παραδοσιακό οικισμό, σε χαρακτηρισμένο διατηρητέο κτίριο, σε αρχαιολογική ζώνη, σε δασική έκταση ή σε περιοχή Natura."
+
+
+    const startExtraction = async () => {
+        setErrorMsg(""); // reset previous error
+
+        if (!hasValidFiles(uploadedFiles)) {
+            setErrorMsg("Please upload valid files before starting extraction.");
+            return;
         }
 
-        intervalRef.current = setInterval(updateProgress, 100)
+        setIsProcessing(true);
+        setProgress(0);
+        setIsCompleted(false);
+        // timerControling();
 
-        // Simulate actual completion (random time between 80% and 120% of estimated)
-        const actualCompletionTime = estimatedTime * (0.8 + Math.random() * 0.4)
+        const ktimatologio = uploadedFiles[0];
+        const contract = uploadedFiles[1];
+        const permit = uploadedFiles[2];
+        const Law = uploadedFiles[3];
 
-        setTimeout(() => {
-            setProgress(100)
-            setIsComplete(true)
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current)
+
+        const formData = new FormData();
+        if (ktimatologio) formData.append("file1", ktimatologio);
+        if (contract) formData.append("file2", contract);
+        if (permit) formData.append("file3", permit);
+        if (Law) formData.append("file4", Law);
+
+        // formData.append("horizontal_property_name", JSON.stringify(horizontal_property_name));
+        formData.append("technical_description", JSON.stringify(technical_description));
+        // formData.append("technical_description_two", JSON.stringify(technical_description_two));
+
+        try {
+            const res = await aiFileUpload(formData).unwrap();
+            if (res) {
+                dispatch(setAiExtractCatchData(res));
+
+                // simulate progress
+                const interval = setInterval(() => {
+                    setProgress((prev) => {
+                        if (prev >= 100) {
+                            clearInterval(interval);
+                            setIsCompleted(true);
+                            setIsProcessing(false);
+                            return 100;
+                        }
+                        return prev + Math.random() * 15;
+                    });
+                }, 200);
+
+                nextStep();
             }
-            setTimeout(() => {
-                onComplete?.()
-            }, 1000)
-        }, actualCompletionTime * 1000)
-
-        return () => {
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current)
-            }
+        } catch (error: any) {
+            setErrorMsg("Error during AI extraction. Please try again."); // show error in <p>
+            setIsProcessing(false);
         }
-    }, [estimatedTime, onComplete])
+    };
 
     return (
-        <div className="text-center max-w-md mx-auto px-6">
-            <h1 className="text-3xl font-bold mb-4" style={{ color: "#1e293b" }}>
-                AI Extraction
-            </h1>
-            <p className="text-base mb-12" style={{ color: "#64748b" }}>
-                Here is the extracted information. Please review and confirm.
-            </p>
-
-            {/* AI Logo with decorative elements */}
-            <div className="relative mb-12">
-                {/* Decorative diamonds */}
-                <div className="absolute -top-4 -left-8">
-                    <div className="w-4 h-4 rotate-45" style={{ backgroundColor: "#3b82f6" }}></div>
+        <div className="space-y-8">
+            {/* Empty files */}
+            {uploadedFiles.length === 0 ? (
+                <div className="text-center py-16">
+                    <Brain className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-500 text-lg">
+                        Please upload documents first to begin extraction.
+                    </p>
                 </div>
-                <div className="absolute -top-2 -right-6">
-                    <div className="w-3 h-3 rotate-45" style={{ backgroundColor: "#f97316" }}></div>
-                </div>
-                <div className="absolute top-8 -right-8">
-                    <div className="w-3 h-3 rotate-45" style={{ backgroundColor: "#3b82f6" }}></div>
-                </div>
-
-                {/* Main AI text */}
-                <div className="text-8xl font-bold" style={{ color: "#3b82f6" }}>
-                    AI
-                </div>
-            </div>
-
-            {/* Progress bar */}
-            <div className="w-full max-w-sm mx-auto">
-                <div className="flex items-center justify-between mb-2">
-                    <div className="flex-1">
-                        <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                            <div
-                                className="h-full rounded-full transition-all duration-300 ease-out"
-                                style={{
-                                    backgroundColor: "#3b82f6",
-                                    width: `${progress}%`,
-                                }}
-                            ></div>
+            ) : isCompleted ? (
+                <div className="flex items-center justify-center min-h-[400px]">
+                    <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-xl text-center">
+                        <div className="bg-blue-500 rounded-full p-4 mb-4 inline-block">
+                            <CheckCircle className="h-8 w-8 text-white" />
                         </div>
+                        <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+                            Extraction Successful
+                        </h2>
+                        <p className="text-gray-600 mb-6 text-sm">
+                            Your document data has been extracted.
+                        </p>
                     </div>
-                    <span className="ml-4 text-lg font-medium" style={{ color: "#1e293b" }}>
-                        {progress}%
-                    </span>
                 </div>
-            </div>
+            ) : isProcessing ? (
+                <div className="space-y-8 min-h-[450px] flex flex-col justify-center items-center">
+                    <div className="w-[300px]">
+                        <Lottie animationData={aiLoadingExtract} loop={true} />
+                    </div>
+                </div>
+            ) : (
+                <div className="text-center py-16">
+                    <FcFinePrint className="w-16 h-16 text-blue-500 mx-auto mb-6" />
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                        Ready for AI Extraction
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                        Our AI will analyze your documents and extract key information automatically.
+                    </p>
+                    <p className="text-sm text-gray-500 mt-4">
+                        {
+                            hasValidFiles(uploadedFiles) ? `Processing ${uploadedFiles.length} document${uploadedFiles.length !== 1 ? "s" : ""}` : "Please upload valid files to start extraction."
+                        }
+
+                    </p>
+                </div>
+            )}
+
+            {/* Error message */}
+            {errorMsg && (
+                <p className="text-red-500 text-center font-medium">{errorMsg}</p>
+            )}
+
+            {/* Button */}
+            {currentStep < 6 && (
+                <div className="flex justify-end w-fit ml-auto">
+                    <PrimaryButton
+                        onClick={startExtraction}
+                        disabled={!hasValidFiles(uploadedFiles)}
+                    >
+                        Start AI Extraction
+                    </PrimaryButton>
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
+
+export default AIExtractionFour;

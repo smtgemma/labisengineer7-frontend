@@ -2,47 +2,106 @@
 
 import { useState } from "react"
 // for editing 
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
 import StampComponent from "../../shared/signture/signture"
 import { format } from "date-fns"
+import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+
+
+type F6D13Props = {
+  allData: any;
+  setIsModalOpen: (value: boolean) => void;
+};
 
 interface FormData {
-    owner_name: string
-    project_description: string
-    owner_address: string
-    owner_city: string
-    owner_postal_code: string
+    firstName: string
+    lastName: string
+    projectDescription: string
+    propertyAddress: string
+    propertyPostalCode: string
+    municipalityCommunity: string
+    propertyNumber: string
+    technicalDescription: string
+    technicalDescriptionTwo: string
 }
 // end editing 
+interface Owner {
+    firstName: string
+    lastName: string
+}
+
+interface FormData {
+    owners: Owner[]
+}
 
 
-export default function F6D13({ allData }: { allData: any }) {
+export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
+    const { id, createdById } = allData || {}
+    console.log(id, createdById, "=======================shahidul")
+
+
+
+    const {
+        register,
+        handleSubmit,
+        control,
+        reset,
+        formState: { errors },
+    } = useForm<FormData>({
+
+        defaultValues: {
+            owners: allData?.owners || [{ firstName: "", lastName: "" }],
+        },
+    })
+
+
     const { projectDescription,
         propertyAddress,
         propertyNumber,
         municipalityCommunity,
         propertyPostalCode,
         createdAt,
+        technicalDescription,
+        technicalDescriptionTwo,
     } = allData || {};
 
-    // for editing data 
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm<FormData>({})
+    const [updateProject] = useUpdateProjectMutation()
 
-    const onSubmit = (data: FormData) => {
+    // for editing data 
+
+
+
+
+
+
+    const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
+        const addNewData = {
+            serviceId: "68c565d9d5f94c3ac153e678",
+            ...data
+        }
+        const formData = new FormData()
+        formData.append("data", JSON.stringify(addNewData))
+
+        try {
+            const responsive = await updateProject({projectId: id, userId: createdById, formData}).unwrap()
+            console.log(responsive)
+        } catch (error) {
+            console.log(error)
+        }
+
         reset()
+        setIsEditModalOpen(false)
+        setIsModalOpen(false)
     }
+
+
 
     return (
         <div className="max-w-[794px] mx-auto p-6 bg-white">
@@ -64,7 +123,7 @@ export default function F6D13({ allData }: { allData: any }) {
             <div className="mb-8 space-y-4">
                 <div className="flex items-center justify-center gap-5">
                     <span className=" text-sm">Έργο:</span>
-                    <h3 className=" text-sm">Project Descriprion</h3>
+                    <h3 className=" text-sm text-center">{projectDescription}</h3>
                 </div>
 
                 <div className="flex items-center justify-center gap-5">
@@ -74,7 +133,7 @@ export default function F6D13({ allData }: { allData: any }) {
 
                 <div className="flex items-center justify-center text-sm gap-5">
                     <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">{owner?.firstName} {owner?.lastName}</h3>
+                    <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
                 </div>
             </div>
             <div className="space-y-6 ml-10">
@@ -89,8 +148,8 @@ export default function F6D13({ allData }: { allData: any }) {
                 </div>
                 <div>
                     <h3 className="text-sm font-bold mb-2">2. Στοιχεία Ακινήτου</h3>
-                    <p className="text-sm mb-5">Το ακίνητο βρίσκεται (Within_outside_city_plan), συνολικής επιφάνειας (Αrea Plot) τ.μ , είναι καταχωρημένο στο Εθνικό Κτηματολόγιο με ΚΑΕΚ Kaek_property στην οδό Property_address, Property_number στο Place_property στο Municipality_community με Τ.Κ. Property_postal_code .Πρόκειται για Horizontal_property_name (, επιφανείας Title_area ,το οποίο αποτελεί αυτοτελή οριζόντια ιδιοκτησία κατά τις διατάξεις του Ν.3741/1929 και του Ν.Δ. 1024/1971. Η πολυκατοικία ανεγέρθηκε βάσει της υπ’ αριθμ. Permit_number οικοδομικής άδειας, που εκδόθηκε από την Issuing_authority Η παραπάνω ιδιοκτησία έχει ενταχθεί στο ν.3843/2010 ή 4178/2013 ή 4495/2017 με Α/Α Δήλωσης  Legalization_statement_number ηλεκτρονικό κωδικό,
-                        Electronic_code και ημερομηνία υπαγωγής Inclusion_date_legalization από τον /την Engineer_full_name, (Specialty ) με αριθμό μητρώου ΤΕΕ (Tee_registration_number )
+                    <p className="text-sm mb-5">
+                        {technicalDescription || "N/A"}
                     </p>
                 </div>
                 <div>
@@ -110,17 +169,7 @@ export default function F6D13({ allData }: { allData: any }) {
                 </div>
                 <div>
                     <h3 className="text-sm font-bold mb-2">4. Νομιμότητα / Πολεοδομική Υπόσταση</h3>
-                    <p className="text-sm mb-5">Το ακίνητο βρίσκεται (Within_outside_city_plan), δεν εμπίπτει σε Ζώνες Απαγόρευσης (π.χ. Δασική, Αιγιαλός, Ζώνες προστασίας ΥΠΠΟ ή Natura),
-                        ούτε εντοπίζεται εντός χαρακτηρισμένων παραδοσιακών οικισμών ή διατηρητέων κελυφών.
-                    </p>
-                    <p className="text-sm mb-5">
-                        Δηλώνεται ότι δεν συντρέχουν οι απαγορευτικές περιπτώσεις του άρθρου 1 του Ν.4495/2017, ούτε απαιτείται έγκριση άλλων αρχών.
-                        Το κτίσμα είναι νομίμως υφιστάμενο κατά την έννοια του άρθρου 23 του Ν.4495/2017 και συνοδεύεται από τα απαραίτητα νομιμοποιητικά στοιχεία.
-                    </p>
-                    <p className="text-sm mb-5">
-                        Οι εργασίες πληρούν τις προϋποθέσεις του άρθρου 2 της ΥΑ ΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020, και ως
-                        εκ τούτου η άδεια Μικρής Κλίμακας μπορεί να εκδοθεί χωρίς περαιτέρω εγκρίσεις ή έλεγχο ΣΑ.
-                    </p>
+                    {technicalDescriptionTwo || "N/A"}
                 </div>
                 <div>
                     <h3 className="text-sm font-bold mb-2">5. Οικονομικά Στοιχεία – Προϋπολογισμός Έργου</h3>
@@ -181,52 +230,75 @@ export default function F6D13({ allData }: { allData: any }) {
                                 onSubmit={handleSubmit(onSubmit)}
                                 className="space-y-4 p-4 border rounded-lg bg-white shadow-md"
                             >
-                                {/* Employer */}
-                                <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Εργοδότες *:</label>
-                                    <input
-                                        placeholder={owner?.firstName || " "}
-                                        type="text"
-                                        {...register("owner_name", { required: "This field is required" })}
-                                        className="flex-1 border p-2 rounded text-sm"
-                                    />
-                                </div>
-
                                 {/* Project */}
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Έργο *:</label>
                                     <input
-                                        placeholder={projectDescription || "Project Description "}
+                                        defaultValue={projectDescription || "Project Description "}
                                         type="text"
-                                        {...register("project_description", { required: "This field is required" })}
+                                        {...register("projectDescription", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
 
                                 {/* Address */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Διεύθυνση Έργου *:</label>
+                                    <label className="font-medium w-1/4">Θέση*:</label>
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <input
                                             type="text"
-                                            placeholder={owner?.ownerAddress || "Address"}
-                                            {...register("owner_address", { required: "Address is required" })}
+                                            defaultValue={propertyAddress || "propertyAddress"}
+                                            {...register("propertyAddress", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner?.city || "City"}
-                                            {...register("owner_city", { required: "City is required" })}
+                                            defaultValue={propertyNumber || "propertyNumber"}
+                                            {...register("propertyNumber", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner?.postal_code || "Postal Code"}
-                                            {...register("owner_postal_code", { required: "Postal code is required" })}
+                                            defaultValue={municipalityCommunity || "municipalityCommunity"}
+                                            {...register("municipalityCommunity", { required: "Postal code is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyPostalCode || "propertyPostalCode"}
+                                            {...register("propertyPostalCode", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>
                                 </div>
+                                {/* Address */}
+                                {/* First Name */}
+                                <Controller
+                                    name="owners.0.firstName"
+                                    control={control}
+                                    rules={{ required: "First name is required" }}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            placeholder="First Name"
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    )}
+                                />
+
+                                {/* Last Name */}
+                                <Controller
+                                    name="owners.0.lastName"
+                                    control={control}
+                                    rules={{ required: "Last name is required" }}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            placeholder="Last Name"
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    )}
+                                />
 
                                 {/* Submit */}
                                 <div className="flex justify-end">

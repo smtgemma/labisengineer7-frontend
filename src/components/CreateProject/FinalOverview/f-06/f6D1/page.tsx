@@ -1064,7 +1064,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className="flex-1 text-black text-sm">{owner?.ownerAddress || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"} (FOR BUILDING)</h3>
+          <h3 className="flex-1 text-black text-sm">{owner?.ownerAddress || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"} (FOR BUILDING)</h3>
         </div>
       </div>
       {/* Budget Title */}
@@ -1238,7 +1238,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
                     />
                     <input
                       type="text"
-                      placeholder={owner?.postal_code || "N/A"}
+                      placeholder={owner?.postalCode || "N/A"}
                       {...register("owner_postal_code", { required: "Postal code is required" })}
                       className="border p-2 rounded text-sm"
                     />

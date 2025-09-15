@@ -29,7 +29,11 @@ interface FormData {
 
 interface allDataProps {
     engineers: any[];
-    projectDescription: string;
+    projectDescription: string; 
+    ydom?: string;
+    propertyPostalCode?: string;
+    propertyPlace?: string;
+    propertyAddress?: string;
 }
 
 
@@ -39,6 +43,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
 
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const { projectDescription } = allData || {};
+    const { ydom, propertyPostalCode, propertyPlace, propertyAddress } = allData || {};
 
 
     // for editing data 
@@ -93,7 +98,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                 <div className="border-b border-gray-400 bg-gray-50">
                     <div className="flex">
                         <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-                        <div className="flex-1 p-2  font-bold">{engineer?.ydom || "N/A"}</div>
+                        <div className="flex-1 p-2  font-bold">{ydom || "N/A"}</div>
                     </div>
                 </div>
 
@@ -200,7 +205,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
 
                 {/* Additional disclaimer text */}
                 <div className="space-y-4 text-sm m p-4">
-                    <p>επί της οδού {engineer?.streetAddress || "N/A"}, {engineer?.town  || "N/A"} , {engineer?.postalCode || "N/A"} ( FOR PROPERTY)</p>
+                    <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace  || "N/A"} , {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
                     <p>
                         από την ανάλυση του συνόλου των προβλεπόμενων εργασιών προκύπτει <span className="font-bold">ότι δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία του οργανισμού του κτιρίου.</span>
                         Οι εργασίες περιορίζονται αποκλειστικά σε μη φέροντα στοιχεία και δεν επηρεάζουν καθ’ οποιονδήποτε τρόπο την ευστάθεια, φέρουσα ικανότητα ή δομική λειτουργία του κτιρίου.

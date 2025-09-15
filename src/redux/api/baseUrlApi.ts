@@ -22,6 +22,6 @@ export const baseUrlApi = createApi({
     },
 
   }),
-  tagTypes: ["Credit"],
+  tagTypes: ["Credit", "Templates"],
   endpoints: () => ({}),
 });
