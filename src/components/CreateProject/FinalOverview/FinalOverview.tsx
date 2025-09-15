@@ -523,13 +523,13 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F6D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
-                <F6D15 allData={allData} /> // 13
+                <F6D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 13
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
-                <F6D3 allData={allData} /> // 14
+                <F6D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 14
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
-                <F6D4 allData={allData} /> // 15
+                <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 15
               )}
               {/* {selected === "Autofill (προαιρετικό add-on)" && (
                 <div>Autofill (προαιρετικό add-on)</div> 
