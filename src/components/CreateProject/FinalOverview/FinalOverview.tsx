@@ -514,13 +514,13 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F6D12 allData={allData} /> // 9
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
-                <F6D2 allData={allData} /> // 10
+                <F6D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
-                <F6D14 allData={allData} /> // 11
+                <F6D14 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
-                <F6D7 allData={allData} /> // 12
+                <F6D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
                 <F6D15 allData={allData} /> // 13
