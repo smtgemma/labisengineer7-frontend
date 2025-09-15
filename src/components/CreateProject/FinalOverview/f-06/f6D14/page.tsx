@@ -43,8 +43,7 @@ export default function F6D14({ allData, setIsModalOpen }: F6D5Props) {
 
     const owner = allData?.owners?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress } = allData || {}
-    const { id, createdById } = allData || {}
+    const {id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress } = allData || {}
 
     const [updateProject] = useUpdateProjectMutation()
 
@@ -73,7 +72,7 @@ export default function F6D14({ allData, setIsModalOpen }: F6D5Props) {
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
-            serviceId: "68c565d9d5f94c3ac153e678",
+            serviceId: serviceId,
             ...data
         }
         const formData = new FormData()

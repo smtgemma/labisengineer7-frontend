@@ -51,8 +51,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers?.[0] || {}
-    const { id, createdById } = allData || {}
-    const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt } = allData || {};
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt } = allData || {};
     const descriptions = [
         {
             "id": 1,
@@ -228,7 +227,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
-            serviceId: "68c565d9d5f94c3ac153e678",
+            serviceId: "68c7d2cc94994d27e3fa0148",
             ...data
         }
         const formData = new FormData()
