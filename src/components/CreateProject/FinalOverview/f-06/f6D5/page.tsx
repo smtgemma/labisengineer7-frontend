@@ -2,8 +2,29 @@
 
 "use client"
 
+import { useState } from "react";
 import StampComponent from "../../shared/signture/signture"
 import { format } from "date-fns"
+
+import { useForm, Controller } from "react-hook-form"
+import { FaRegEdit } from "react-icons/fa"
+import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+
+interface FormData {
+    projectDescription: string;
+    propertyAddress: string;
+    propertyPlace: string;
+    propertyPostalCode: string;
+    owners: {
+        firstName: string;
+        lastName: string;
+    }[];
+    engineers: {
+        firstName: string;
+        lastName: string;
+    }[];
+}
+
 
 interface allDataProps {
     owners: any[];
@@ -14,12 +35,23 @@ interface allDataProps {
     propertyPostalCode: string;
     technicalDescription: string;
     technicalDescriptionTwo: string
-    createdAt:string
+    createdAt: string
+    id: string
+    createdById: string
 }
 
-export default function F6D5({ allData }: { allData: allDataProps }) {
+type F6D5Props = {
+  allData: any;
+  setIsModalOpen: (value: boolean) => void;
+};
+
+
+
+export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers?.[0] || {}
+    const { id, createdById } = allData || {}
     const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt } = allData || {};
     const descriptions = [
         {
@@ -165,14 +197,70 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
             "description": "Technical Description 13 of the project"
         },
     ]
+    const [updateProject] = useUpdateProjectMutation()
+    const {
+        register,
+        handleSubmit,
+        control,
+        reset,
+        formState: { errors },
+    } = useForm<FormData>({
+        defaultValues: {
+            projectDescription: allData?.projectDescription || "",
+            propertyAddress: allData?.propertyAddress || "",
+            propertyPlace: allData?.propertyPlace || "",
+            propertyPostalCode: allData?.propertyPostalCode || "",
+            owners: [
+                {
+                    firstName: allData?.owners?.[0]?.firstName || "",
+                    lastName: allData?.owners?.[0]?.lastName || "",
+                },
+            ],
+            engineers: [
+                {
+                    firstName: allData?.engineers?.[0]?.firstName || "",
+                    lastName: allData?.engineers?.[0]?.lastName || "",
+                },
+            ],
+        },
+    })
+
+    const onSubmit = async (data: FormData) => {
+        console.log("Updated Data:", data)
+        const addNewData = {
+            serviceId: "68c565d9d5f94c3ac153e678",
+            ...data
+        }
+        const formData = new FormData()
+        formData.append("data", JSON.stringify(addNewData))
+
+        try {
+            const responsive = await updateProject({ projectId: id, userId: createdById, formData }).unwrap()
+            console.log(responsive)
+        } catch (error) {
+            console.log(error)
+        }
+
+        reset()
+        setIsEditModalOpen(false)
+        setIsModalOpen(false)
+    }
 
     return (
         <div className="max-w-[794px] mx-auto p-4 bg-white space-y-8">
+            <div className="text-right -mt-6">
+                <button
+                    className="mt-1 px-4 py-1"
+                    onClick={() => setIsEditModalOpen(true)}
+                >
+                    <FaRegEdit className="text-black text-2xl cursor-pointer" />
+                </button>
+            </div>
             {/* ΦΑΚΕΛΟΣ ΑΣΦΑΛΕΙΑΣ ΚΑΙ ΥΓΕΙΑΣ first stp=========================*/}
             <div className="border border-black">
                 {/* Header */}
                 <div className="text-center p-4">
-                    <h1 className="text-xl font-bold mb-2">ΦΑΚΕΛΟΣ ΑΣΦΑΛΕΙΑΣ ΚΑΙ ΥΓΕΙΑΣ </h1>
+                    <h1 className="text-xl font-bold mb-2">ΦΑΚΕΛΟΣ ΑΣΦΑΛΕΙΑΣ ΚΑΙ ΥΓΕΙΑΣ</h1>
                     <p className="text-xl font-bold">(Φ.Α.Υ.)</p>
                     <p className="text-lg font-bold">(Π.Δ. 305/96, άρθρο 3 - παρ. 3, 7, 8, 9, 10, 11)</p>
                 </div>
@@ -315,8 +403,8 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
                             <div className="flex items-center justify-center gap-2">
                                 <span className=" ">Ημερομηνία :</span>
                                 <p>{createdAt
-                                ? format(new Date(createdAt), "dd/MM/yyyy")
-                                : "N/A"}</p>
+                                    ? format(new Date(createdAt), "dd/MM/yyyy")
+                                    : "N/A"}</p>
                             </div>
                         </div>
                     </div>
@@ -509,9 +597,116 @@ export default function F6D5({ allData }: { allData: allDataProps }) {
                         </div>
                     </div>
                 </div>
-
-
             </div>
+            {/* EDIT MODAL */}
+            {isEditModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                    <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
+                        {/* Close button */}
+                        <button
+                            className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
+                            onClick={() => setIsEditModalOpen(false)}
+                        >
+                            ✕
+                        </button>
+
+                        <h2 className="text-lg font-bold mb-4">✍️ Edit Data</h2>
+                        <div>
+                            <form
+                                onSubmit={handleSubmit(onSubmit)}
+                                className="space-y-4 p-4 border rounded-lg bg-white shadow-md"
+                            >
+                                {/* Project */}
+                                <div className="flex items-center gap-4">
+                                    <label className="font-medium w-1/4">Έργο *:</label>
+                                    <input
+                                        defaultValue={projectDescription || "Project Description "}
+                                        type="text"
+                                        {...register("projectDescription", { required: "This field is required" })}
+                                        className="flex-1 border p-2 rounded text-sm"
+                                    />
+                                </div>
+
+                                {/* Address */}
+                                <div className="flex items-center gap-4">
+                                    <label className="font-medium w-1/4">Θέση*:</label>
+                                    <div className="flex-1 grid grid-cols-3 gap-2">
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyAddress || "propertyAddress"}
+                                            {...register("propertyPlace", { required: "Address is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyPlace || "propertyNumber"}
+                                            {...register("propertyPlace", { required: "City is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyPostalCode || "municipalityCommunity"}
+                                            {...register("propertyPostalCode", { required: "Postal code is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                    </div>
+                                </div>
+                                {/* Address */}
+                                {/* First Name */}
+                                <Controller
+                                    name="owners.0.firstName"
+                                    control={control}
+                                    rules={{ required: "First name is required" }}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            placeholder="First Name"
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    )}
+                                />
+
+                                {/* Last Name */}
+                                <Controller
+                                    name="engineers.0.firstName"
+                                    control={control}
+                                    rules={{ required: "Last name is required" }}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            placeholder="Last Name"
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    )}
+                                />
+                                {/* Last Name */}
+                                <Controller
+                                    name="engineers.0.lastName"
+                                    control={control}
+                                    rules={{ required: "Last name is required" }}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            placeholder="Last Name"
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    )}
+                                />
+
+                                {/* Submit */}
+                                <div className="flex justify-end">
+                                    <button
+                                        type="submit"
+                                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm cursor-pointer"
+                                    >
+                                        Update
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

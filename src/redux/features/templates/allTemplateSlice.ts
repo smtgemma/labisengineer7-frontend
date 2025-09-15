@@ -54,15 +54,6 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
       providesTags: ["Templates"], // 👈 provides cache
     }),
 
-    // updateProject: build.mutation({
-    //   query: (projectId, userId, formData) => ({
-    //     url: `/projects/update-project/${projectId}/${userId}`,
-    //     method: "PATCH",
-    //     body: formData,
-    //   }),
-    //   invalidatesTags: ["Templates"], // 👈 invalidate the same tag
-    // }),
-
     updateProject: build.mutation({
       query: ({ projectId, userId, formData }) => ({
         url: `/projects/update-project/${projectId}/${userId}`,

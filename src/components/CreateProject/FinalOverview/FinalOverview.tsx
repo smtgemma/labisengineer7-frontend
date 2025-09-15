@@ -505,7 +505,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F6D1 allData={allData} /> // 6
               )}
               {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
-                <F6D5 allData={allData} /> // 7
+                <F6D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 7
               )}
               {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
                 <F6D6 allData={allData} /> // 8
