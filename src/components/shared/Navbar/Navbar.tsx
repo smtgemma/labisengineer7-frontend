@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react"; // Optional icons
 import Logo from "../Logo";
 import Container from "../Container/Container";
+import "./navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,7 @@ const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      setScroll(window.scrollY > 600);
+      setScroll(window.scrollY > 400);
     });
   });
 
@@ -48,7 +49,7 @@ const Navbar = () => {
   return (
     <nav
       className={`w-full px-4 py-6 bg-white shadow-sm border-b border-gray-100  top-0 z-50 bg-camp-primary ${
-        scroll ? "sticky w-full bg-camp-primary " : ""
+        scroll ? "sticky-navbar w-full bg-camp-primary " : ""
       }`}
     >
       <Container>

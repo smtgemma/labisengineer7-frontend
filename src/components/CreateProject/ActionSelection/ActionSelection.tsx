@@ -3,18 +3,14 @@ import {
   setSelectTemplate,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { RootState } from "@/redux/store";
+import { AlertTriangle, CheckCircle, CreditCard, Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CheckCircle, AlertTriangle, CreditCard, Loader2 } from "lucide-react";
 
 import Loading from "@/components/Others/Loading";
-import {
-  useGetCreditServiceQuery,
-  useRemainingCreditQuery,
-  useUseCreditsMutation,
-} from "@/redux/features/credit/creditSlice";
-import { templateName } from "./data";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
+import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
+import { templateName } from "./data";
 
 interface ActionSelectionProps {
   selectedActions: string[];
@@ -25,10 +21,7 @@ interface ActionSelectionProps {
 }
 
 const ActionSelection: React.FC<ActionSelectionProps> = ({
-  selectedActions,
-  onActionsChange,
   canProceed,
-  currentStep,
   nextStep,
 }) => {
   const actions = [
@@ -144,11 +137,10 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           {templateName.map((tem, i) => (
             <div
               key={i}
-              className={`cursor-pointer border rounded-xl px-6 py-4 transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5 ${
-                selected.includes(tem.id)
-                  ? "border-blue-500 bg-blue-50 shadow-md ring-2 ring-blue-200"
-                  : "border-gray-200 bg-white hover:border-blue-300"
-              }`}
+              className={`cursor-pointer border rounded-xl px-6 py-4 transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5 ${selected.includes(tem.id)
+                ? "border-blue-500 bg-blue-50 shadow-md ring-2 ring-blue-200"
+                : "border-gray-200 bg-white hover:border-blue-300"
+                }`}
               onClick={() => toggleSelect(tem.id)}
             >
               <div className="flex justify-between items-start">

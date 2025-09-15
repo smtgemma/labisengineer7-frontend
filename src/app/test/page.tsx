@@ -18,7 +18,7 @@ import React from 'react'
 function Test({allData}:any) {
   return (
     <div>
-        <F6D1 allData={allData}/>
+        {/* <F6D1 allData={allData}/>
         <F6D2 allData={allData}/>
         <F6D3 allData={allData}/>
         <F6D4 allData={allData}/>
@@ -32,7 +32,7 @@ function Test({allData}:any) {
         <F6D12 allData={allData}/>
         <F6D13 allData={allData}/>
         <F6D14 allData={allData}/>
-        <F6D15 allData={allData}/>
+        <F6D15 allData={allData}/> */}
     </div>
   )
 }

@@ -369,6 +369,9 @@ interface allDataProps {
   projectDescription: string
   id: string
   createdById: string
+  propertyPostalCode:string
+  propertyAddress: string
+  propertyPlace: string
 }
 
 export default function F6D2({ allData }: { allData: allDataProps }) {
@@ -378,7 +381,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
   const allDescriptionTasks = allData?.allDescriptionTasks || []
   const { technical_description } = allData || {}
   const { Horizontal_property_name } = allData || {}
-  const { projectDescription } = allData || {}
+  const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress } = allData || {}
   const { id, createdById } = allData || {}
   console.log(id, createdById, "id, createdById===================")
 
@@ -420,14 +423,14 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
         <div className="flex items-start justify-between gap-4 max-w-xl">
           <span className=" text-sm">Θέση:</span>
           <h3 className=" text-sm">
-            {owner?.address || "N/A"}, {owner?.city || "N/A"},
-            {owner?.postal_code || "N/A"} ( FOR BUILDING)
+            {propertyAddress|| "N/A"}, {propertyPlace || "N/A"},
+            {propertyPostalCode || "N/A"} ( FOR BUILDING)
           </h3>
         </div>
 
         <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
           <span className="">Ιδιοκτήτης:</span>
-          <h3 className=" text-sm">{owner?.firstName || "N/A"}</h3>
+          <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
         </div>
       </div>
 
@@ -440,7 +443,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
           </span>
           επί της οδού <br />{" "}
           <span className="font-semibold">
-            {owner?.ownerAddress || "N/A"},{owner?.city || "N/A"} , {owner?.postal_code || "N/A"} ( FOR BUILDING),
+            {propertyAddress || "N/A"},{propertyPlace || "N/A"} , {propertyPostalCode || "N/A"} ( FOR BUILDING),
           </span>
           πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :
         </p>
@@ -569,7 +572,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                   <div className="flex-1 grid grid-cols-3 gap-2">
                     <input
                       type="text"
-                      defaultValue={owner?.ownerAddress || " "}
+                      defaultValue={propertyAddress|| " "}
                       {...register("address", {
                         required: "Address is required",
                       })}
@@ -577,13 +580,13 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                     />
                     <input
                       type="text"
-                      defaultValue={owner?.city || " "}
+                      defaultValue={propertyPlace || " "}
                       {...register("city", { required: "City is required" })}
                       className="border p-2 rounded text-sm"
                     />
                     <input
                       type="text"
-                      defaultValue={owner?.postal_code || " "}
+                      defaultValue={propertyPostalCode || " "}
                       {...register("postalCode", {
                         required: "Postal code is required",
                       })}
@@ -598,6 +601,7 @@ export default function F6D2({ allData }: { allData: allDataProps }) {
                     type="submit"
                     className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm cursor-pointer"
                   >
+                    Update
                   </button>
                 </div>
               </form>
