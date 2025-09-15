@@ -1,12 +1,8 @@
-import { RootState, store } from "@/redux/store";
-import { downloadZip } from "client-zip";
+import { RootState } from "@/redux/store";
 import { saveAs } from "file-saver";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import { FileSpreadsheet, FileText } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
-import ReactDOMServer from "react-dom/server";
-import { Provider, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 // import { useGetTemplateDataQuery } from "@/redux/features/createService/serviceSlice";
 
@@ -18,11 +14,9 @@ import {
 
 import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "sonner";
-import F6D8 from "../CreateProject/FinalOverview/f-06/f6D8/page";
-import F6D9 from "../CreateProject/FinalOverview/f-06/f6D9/page";
-import S4D2 from "../CreateProject/FinalOverview/srv-4t/s4D2/page";
 import S4D1 from "../CreateProject/FinalOverview/srv-4t/s4D1/page";
-import { FormDataOne } from "./template";
+import S4D2 from "../CreateProject/FinalOverview/srv-4t/s4D2/page";
+import { FormDataOne, FormDataTwo } from "./template";
 export interface UserData {
     id: string;
     firstName: string;
@@ -74,32 +68,18 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const projectId = stepByStepData?.projectIdCode?.result.id;
     const userId = dataAllFIled?.createdById;
 
-    console.log(stepByStepData)
-    console.log(stepByStepData?.projectIdCode?.id)
-    console.log(projectId)
-
     const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
     const allData = allTemplateData?.data || {};
-    console.log(allTemplateData, "===============================");
-    console.log(allData, "all data for all template===================================================================")
-
-
-    console.log("pdf", pdfdownload);
-    console.log("execl", execlDownload);
-    // console.log(dataAllFIled, "======================dataAllFiled");
-
-    console.log("======================allTemplate,", allTemplate);
-
-    const buildingMods = subCategoryData["building-modifications"] || [];
-    const energy = subCategoryData["energy-systems"] || [];
-    const fencing = subCategoryData["fencing"] || [];
-    const landscaping = subCategoryData["landscaping-2"] || [];
-    const operational = subCategoryData["operational-space"] || [];
-    const property = subCategoryData["property-documentation"] || [];
-    const small = subCategoryData["small-construction"] || [];
+    // const buildingMods = subCategoryData["building-modifications"] || [];
+    // const energy = subCategoryData["energy-systems"] || [];
+    // const fencing = subCategoryData["fencing"] || [];
+    // const landscaping = subCategoryData["landscaping-2"] || [];
+    // const operational = subCategoryData["operational-space"] || [];
+    // const property = subCategoryData["property-documentation"] || [];
+    // const small = subCategoryData["small-construction"] || [];
 
     // const store = makeStore();
     const [selected, setSelected] = useState<string | null>(null);
@@ -123,15 +103,6 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
         saveAs(blob, "owners.csv");
     };
 
-    // const templates = [
-    //   { name: "TemplateFile", component: <TemplateFile /> },
-
-    //   {
-    //     name: "ProjectDescriptionSix",
-    //     component: <FileOneDesignEleven />,
-    //   },
-    // ];
-
     const [formData, setFormData] = useState<FormDataOne>({
         recipient: "ydom",
         name: "Name Owner",
@@ -152,6 +123,50 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
         date: "8/18/2025"
     });
 
+    const [secondData, setSecondData] = useState<FormDataTwo>({
+        recipient: "ydom",
+        name: "Name Engineer",
+        surname: "Surname Engineer",
+        fatherName: "Fathers name and surname Engineer",
+        motherName: "Mothers name and surname Engineer",
+        birthDate: "Born date Engineer",
+        birthTown: "Born Town Engineer",
+        idNumber: "ID",
+        mobile: "mobile",
+        town: "Town",
+        address: "Address",
+        addressNumber: "Number",
+        postalCode: "postal code",
+        email: "email Engineer",
+        vat: "VAT Engineer",
+        projectDescription: "PROJECT DESCRIPTION",
+        date: "8/18/2025"
+    });
+
+    console.log("..............Ownert", allData)
+
+    useEffect(() => {
+        setFormData(prev => ({
+            ...prev,
+            name: `${allData?.engineers?.[0]?.firstName ?? ""}`,
+            surname: allData?.engineers?.[0]?.lastName ?? "",
+            fatherName: allData?.engineers?.[0]?.fatherName ?? "",
+            motherName: allData?.engineers?.[0]?.motherName ?? "",
+            birthDate: allData?.engineers?.[0]?.motherName.bornDate,
+            birthTown: allData?.engineers?.[0]?.bornTown,
+            idNumber: allData?.engineers?.[0]?.motherName.idCardNumber,
+            mobile: "mobile",
+            town: "Town",
+            address: "Address",
+            addressNumber: "Number",
+            postalCode: "postalCode",
+            email: "email owner",
+            vat: "VAT owner",
+            projectDescription: "PROJECT DESCRIPTION",
+            date: "8/18/2025"
+        }));
+    }, [allTemplateData])
+
 
     const projectAndUserHexCode =
         userData?.hexToken + `-${projectCodeId?.result?.projectCode}`;
@@ -166,78 +181,54 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
         }
     };
 
-    const handleDownloadPdf = () => {
-        const link = document.createElement("a");
-        link.href =
-            "https://api.buildai.gr/generated-files/generated_pdf_files.zip";
-        link.download = "generated_pdf_files.zip";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    const handleDownloadPdf = async () => {
+        console.log("download clicked");
+        try {
+            const response = await fetch("https://api.buildai.gr/generated-files/generated_pdf_files.zip");
+
+            if (!response.ok) throw new Error("Network response was not ok");
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "generated_pdf_files.zip";
+            document.body.appendChild(link);
+            link.click();
+
+            link.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Download failed:", error);
+        }
     };
 
-    const handleDownloadExecl = () => {
-        const link = document.createElement("a");
-        link.href =
-            "https://api.buildai.gr/generated-files/generated_excel_files.zip";
-        link.download = "generated_pdf_files.zip";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+
+    const handleDownloadExcel = async () => {
+        console.log("download clicked");
+        try {
+            const response = await fetch("https://api.buildai.gr/generated-files/generated_excel_files.zip");
+
+            if (!response.ok) throw new Error("Network response was not ok");
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "generated_excel_files.zip"; // 👈 corrected filename
+            document.body.appendChild(link);
+            link.click();
+
+            link.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Download failed:", error);
+        }
     };
 
-    // const handleZipDownload = async () => {
-    //   const files = await Promise.all(
-    //     templates.map(async (t) => {
-    //       const html = ReactDOMServer.renderToStaticMarkup(
-    //         <Provider store={store}>{t.component}</Provider>
-    //       );
 
-    //       const container = document.createElement("div");
-    //       container.innerHTML = html;
-    //       container.style.width = "794px";
-    //       container.style.background = "#fff";
-    //       document.body.appendChild(container);
-
-    //       const canvas = await html2canvas(container, {
-    //         scale: 3,
-    //         useCORS: true,
-    //       });
-    //       const imgWidth = canvas.width;
-    //       const imgHeight = canvas.height;
-    //       const imgData = canvas.toDataURL("image/png");
-    //       const pdf = new jsPDF({
-    //         unit: "px",
-    //         format: [imgWidth, imgHeight],
-    //       });
-    //       const imgProps = pdf.getImageProperties(imgData);
-    //       const pdfWidth = pdf.internal.pageSize.getWidth();
-    //       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-    //       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-
-    //       const pdfBlob = pdf.output("blob");
-    //       document.body.removeChild(container);
-
-    //       return {
-    //         name: `${t.name}.pdf`,
-    //         lastModified: new Date(),
-    //         input: pdfBlob,
-    //       };
-    //     })
-    //   );
-
-    //   const zipBlob = await downloadZip(files).blob();
-    //   saveAs(zipBlob, "templates.zip");
-    // };
-
-    // const handlePdfDownloadTempate = () => {
-    //   if (templates.length === 0) {
-    //     handleDownloadPdf();
-    //   } else {
-    //     handleZipDownload();
-    //   }
-    // };
-    // 🔹 Click outside handler
 
 
     useEffect(() => {
@@ -260,17 +251,6 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [isModalOpen]);
-
-    // const templates = [
-    //     {
-    //         id: "template3",
-    //         name: "F6D3.pdf",
-    //         component: <F6D8 allData={allData} />,
-    //     },
-
-    // ]
-
-    console.log(selected, "selected==================");
 
     return (
         <div className="space-y-8">
@@ -315,7 +295,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                 {/* fdf */}
 
                 <div
-                    onClick={handleDownloadPdf}
+                    onClick={() => handleDownloadPdf()}
                     className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
                 >
                     <div className="flex items-center space-x-4 mb-4">
@@ -335,7 +315,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                 {/* CSV */}
 
                 <div
-                    onClick={handleDownloadExecl}
+                    onClick={() => handleDownloadExcel()}
                     className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
                 >
                     <div className="flex items-center space-x-4 mb-4">
@@ -372,7 +352,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                     )}
                 </div>
                 {/* Modal */}
-                {isModalOpen && (
+                {isModalOpen && allData && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
                         <div
                             className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-4xl max-h-[80vh] overflow-y-auto relative"
@@ -392,7 +372,10 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                             )}
                             {selected ===
                                 "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
-                                    <S4D2 />
+                                    <div>
+                                        {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)}
+                                    </div>
+
                                 )}
                         </div>
                     </div>
