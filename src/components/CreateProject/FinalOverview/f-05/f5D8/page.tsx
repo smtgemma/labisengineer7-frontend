@@ -35,10 +35,10 @@ interface BudgetCategory {
   subtotal: number
 }
 
-export default function F5D5({ allData }: { allData: allDataProps }) {
+export default function F5D8({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const owner = allData?.owners[0] || {};
+  const owner = allData?.owners?.[0] || {};
 
   const [formData, setFormData] = useState({
     employer: "",

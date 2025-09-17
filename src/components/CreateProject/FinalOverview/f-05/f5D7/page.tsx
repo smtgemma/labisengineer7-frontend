@@ -22,13 +22,14 @@ interface allDataProps {
     Horizontal_property_name: string;
 }
 
-export default function F5D1({ allData }: { allData: allDataProps }) {
+export default function F5D7({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
-    const allDescriptionTasks = allData?.allDescriptionTasks || {};
+    const {allDescriptionTasks} = allData || {}
     const { technical_description } = allData || {};
     const { Horizontal_property_name } = allData || {};
+    console.log(allDescriptionTasks)
 
 
     // for editing data 
@@ -58,7 +59,7 @@ export default function F5D1({ allData }: { allData: allDataProps }) {
             </div>
             {/* Title */}
             <h2 className="text-center font-semibold underline text-sm mb-2">
-                ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ - ΒΕΒΑΙΩΣΗ ΜΗΧΑΝΙΚΟΥ
+                ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΣΗΣ ΣΧΕΔΙΩΝ ΟΨΕΩΝ
             </h2>
 
             {/* Project Information */}
@@ -118,12 +119,14 @@ export default function F5D1({ allData }: { allData: allDataProps }) {
                 </div> */}
 
                 {
-                     allDescriptionTasks?.map((task: any, index: number) => (
+                    allDescriptionTasks ? (allDescriptionTasks?.map((task: any, index: number) => (
                         <div key={index}>
                             <h3 className="text-sm font-bold">● {task?.id}</h3>
                             <p className="text-sm">{task?.description}</p>
                         </div>
-                    ))
+                    ))) : (
+                        <h2 className="text-3xl font-bold">Data not found</h2>
+                    )
                 }
                 <div>
                     <p className="text-sm mb-6">Για το σύνολο των προβλεπόμενων εργασιών <span className="text-sm font-bold">δεν απαιτείται η υποβολή αρχιτεκτονικών όψεων,</span> καθώς:</p>
