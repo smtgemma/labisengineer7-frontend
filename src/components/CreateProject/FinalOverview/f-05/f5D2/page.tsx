@@ -21,13 +21,14 @@ interface allDataProps {
     allDescriptionTasks: any[]
     technical_description: string;
     Horizontal_property_name: string;
+    projectDescription: string;
 }
 
 export default function F5D2({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owner = allData?.owners[0] || {};
-    const allDescriptionTasks = allData?.allDescriptionTasks || {};
+    const owner = allData?.owners?.[0] || {};
+    const {allDescriptionTasks, projectDescription} = allData || {};
     const { technical_description } = allData || {};
     const { Horizontal_property_name } = allData || {};
 
@@ -65,7 +66,7 @@ export default function F5D2({ allData }: { allData: allDataProps }) {
             <div className="mb-8 space-y-4">
                 <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    {/* <h3 className=" text-sm">{project_description || "N/A"}</h3> */}
+                    <h3 className=" text-sm">{projectDescription || "N/A"}</h3>
                 </div>
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
@@ -118,12 +119,14 @@ export default function F5D2({ allData }: { allData: allDataProps }) {
                 </div> */}
 
                 {
-                    allDescriptionTasks?.map((task: any, index: number) => (
+                    allDescriptionTasks ? (allDescriptionTasks?.map((task: any, index: number) => (
                         <div key={index}>
                             <h3 className="text-sm font-bold">● {task?.id}</h3>
                             <p className="text-sm">{task?.description}</p>
                         </div>
-                    ))
+                    ))) : (
+                        <h2 className="text-3xl font-bold">Data not found</h2>
+                    )
                 }
 
                 {/* {/* Signature Section */}
