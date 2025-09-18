@@ -184,6 +184,7 @@ const Category = () => {
   };
   const aiExtractData = useSelector((state: RootState) => state.aiData);
   console.log("Redux Data", aiExtractData, "....................")
+  console.log(categories, "==========================category")
 
   return (
     <div className={`bg-[#F1F5F9] py-8 min-h-screen`}>
