@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import S4D1 from "../CreateProject/FinalOverview/srv-4t/s4D1/page";
 import S4D2 from "../CreateProject/FinalOverview/srv-4t/s4D2/page";
 import { FormDataOne, FormDataTwo } from "./template";
+import PrimaryButton from "../shared/primaryButton/PrimaryButton";
 export interface UserData {
     id: string;
     firstName: string;
@@ -381,13 +382,12 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                     </div>
                 )}
             </div>
-            <div className="flex justify-end">
-                <button
+            <div className="flex justify-end w-fit ml-auto">
+                <PrimaryButton
                     onClick={onComplete}
-                    className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
                 >
                     Save & Continue
-                </button>
+                </PrimaryButton>
             </div>
         </div>
     );

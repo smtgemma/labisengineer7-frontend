@@ -12,19 +12,29 @@ import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
 import { TemplateName } from "../CreateProject/ActionSelection/data";
 
-
 export const templateName: TemplateName[] = [
     {
-        id: "owner_assignment_1",
-        title: "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ",
+        id: "template_1",
+        title: "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017",
         price: 0.5,
     },
     {
-        id: "engineer_assumption_2",
-        title: "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ",
+        id: "template_2",
+        title: "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ",
         price: 0.5,
     },
-]
+    {
+        id: "template_3",
+        title: "Declaration owner for 4495_2017",
+        price: 0.5,
+    },
+    {
+        id: "template_4",
+        title: "Declaration of Building 4495_2017",
+        price: 0.5,
+    },
+];
+
 interface ActionSelectionProps {
     selectedActions: string[];
     onActionsChange: (actions: string[]) => void;
