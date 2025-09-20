@@ -18,12 +18,12 @@ interface FormData {
 interface allDataProps {
     owners: any[];
     allDescriptionTasks: any[]
-    propertyPlace: string
-    propertyAddress: string
-    propertyPostalCode: string
     projectDescription: string
+    propertyAddress: string
+    propertyPlace: string
+    propertyPostalCode: string
 }
-function F5D16({ allData }: { allData: allDataProps }) {
+function F10D14({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
@@ -67,7 +67,7 @@ function F5D16({ allData }: { allData: allDataProps }) {
                             <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
                                 <label className="col-span-2">Έργο:</label>
                                 <div className="col-span-10">
-                                    {/* {project_description || "N/A"} */}
+                                    {projectDescription || "N/A"}
                                 </div>
                             </div>
 
@@ -170,7 +170,7 @@ function F5D16({ allData }: { allData: allDataProps }) {
                                             <div className="flex items-center gap-4">
                                                 <label className="font-medium w-1/4">Έργο *:</label>
                                                 <input
-                                                    defaultValue={projectDescription || "Project description"}
+                                                    placeholder={projectDescription || "Project description"}
                                                     type="text"
                                                     {...register("projectDescription", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
@@ -225,4 +225,4 @@ function F5D16({ allData }: { allData: allDataProps }) {
     )
 }
 
-export default F5D16
+export default F10D14

@@ -42,20 +42,20 @@ interface allDataProps {
 }
 
 type F6D5Props = {
-  allData: any;
-//   setIsModalOpen: (value: boolean) => void;
+    allData: any;
+    //   setIsModalOpen: (value: boolean) => void;
 };
 
 
 
-export default function F5D9({ allData,
+export default function F10D7({ allData,
     //  setIsModalOpen 
-    }: F6D5Props) {
+}: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt, specialty } = allData || {};
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, specialty } = allData || {};
     const descriptions = [
         {
             "id": 1,

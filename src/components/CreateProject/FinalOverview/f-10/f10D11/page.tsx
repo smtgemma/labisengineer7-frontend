@@ -3,6 +3,7 @@
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
 import { format } from "date-fns"
+
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -46,7 +47,7 @@ interface allDataProps {
 
 
 
-export default function F5D13({ allData }: { allData: allDataProps }) {
+export default function F10D11({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
@@ -253,12 +254,12 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
                         <div className="space-y-4 text-sm m p-4">
                             <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
                             <p className="mb-4">
-                                την επίβλεψη των προβλεπόμενων εργασιών που πρόκειται να εκτελεστούν στο ανωτέρω ακίνητο, στο πλαίσιο της
-                                διαδικασίας έκδοσης Έγκρισης Εργασιών Μικρής Κλίμακας, σύμφωνα με τις ισχύουσες πολεοδομικές διατάξεις και ειδικότερα τις προβλέψεις του άρθρου 29 του Ν.4495/2017.
+                                την επίβλεψη των προβλεπόμενων εργασιών που πρόκειται να εκτελεστούν στο ανωτέρω ακίνητο, στο πλαίσιο της διαδικασίας έκδοσης
+                                Έγκρισης Εργασιών Μικρής Κλίμακας, σύμφωνα με τις ισχύουσες πολεοδομικές διατάξεις και ειδικότερα τις προβλέψεις του άρθρου 29 του Ν.4495/2017.
                             </p>
                             <p>
-                                Η παρούσα ανάθεση αφορά την τεχνική καθοδήγηση και εποπτεία των εργασιών κατά την υλοποίησή τους, την τήρηση των σχετικών κανονισμών ασφαλείας, καθώς
-                                και την ευθύνη για την πιστή εφαρμογή του εγκεκριμένου περιεχομένου της άδειας.
+                                Η παρούσα ανάθεση αφορά την τεχνική καθοδήγηση και εποπτεία των εργασιών κατά την υλοποίησή τους, την τήρηση των
+                                σχετικών κανονισμών ασφαλείας, καθώς και την ευθύνη για την πιστή εφαρμογή του εγκεκριμένου περιεχομένου της άδειας.
                             </p>
                         </div>
 

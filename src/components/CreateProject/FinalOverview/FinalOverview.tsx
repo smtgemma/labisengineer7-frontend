@@ -17,7 +17,6 @@ import F6D4 from "./f-06/f6D4/page";
 import F6D7 from "./f-06/f6D7/page";
 import F6D8 from "./f-06/f6D8/page";
 import F6D9 from "./f-06/f6D9/page";
-import F10D1 from "./f-10/f10D1/page";
 
 import {
   useDownloadTemplatePdfQuery,
@@ -538,7 +537,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
 
               {/* file 6======== */}
-              {/* {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
+              {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
                 <F6D8 allData={allData} /> // 1
               )}
               {selected ===
@@ -548,11 +547,11 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected ===
                 "YΔ Φέροντα Οργανισμού" && (
                   <F6D10 allData={allData} /> // 3
-                )} */}
-              {/* {selected === "YΔ Συνιδιοκτητών" && (
-                <F6D4 allData={allData} /> // 4
-              )} */}
-              {/* {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
+                )}
+              {selected === "YΔ Συνιδιοκτητών" && (
+                <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
+              )}
+              {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
                 <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
               )}
               {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
@@ -584,7 +583,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
                 <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 15
-              )} */}
+              )}
               
               {/* {selected === "Autofill (προαιρετικό add-on)" && (
                 <div>Autofill (προαιρετικό add-on)</div> 

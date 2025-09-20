@@ -4,6 +4,8 @@
 "use client"
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
+
+import { format } from "date-fns";
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -39,6 +41,7 @@ interface allDataProps {
     id: string;
     createdById: string;
     serviceId: string;
+    createdAt: string;
 }
 
 
@@ -47,7 +50,7 @@ export default function F5D11({ allData }: { allData: allDataProps }) {
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = allData?.engineers || {};
-    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom } = allData || {};
+    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, createdAt } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
     // for editing data 
@@ -261,7 +264,7 @@ export default function F5D11({ allData }: { allData: allDataProps }) {
                                     <div className="text-right space-y-2">
                                         <div className="flex items-center gap-4">
                                             <span className="text-sm">Ημερομηνία :</span>
-                                            <span className="text-sm font-medium">8/18/2025</span>
+                                            <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
                                         </div>
                                         <div className="text-sm mt-8 text-center">
                                             <div>( Υπογραφή )</div>

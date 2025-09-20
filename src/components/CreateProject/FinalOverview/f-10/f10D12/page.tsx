@@ -30,7 +30,6 @@ interface FormInputs {
 }
 // end editing 
 
-
 interface allDataProps {
     engineers: any[];
     projectDescription?: string;
@@ -46,7 +45,7 @@ interface allDataProps {
 
 
 
-export default function F5D13({ allData }: { allData: allDataProps }) {
+export default function F10D12({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
@@ -54,7 +53,6 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
     const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
-
 
     const [updateProject] = useUpdateProjectMutation()
     // for editing data 
@@ -106,7 +104,7 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
     return (
         <div>
             {engineers.length > 0 ? (engineers?.map((engineer: any, index: number) => (
-                <div className="max-w-[796px] mx-auto bg-white">
+                <div key={index} className="max-w-[796px] mx-auto bg-white">
                     <div className="text-right -mt-3">
                         <button
                             className="px-4 py-1"
@@ -204,7 +202,7 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                                <div className="w-20 p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
+                                <div className=" p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
                                 <div className="w-24 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
@@ -245,21 +243,18 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
 
-                            <p className=" font-bold">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις αναλαμβάνω για το έργο</p>
+                            <p className="mb-2">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις <span className="text-sm font-bold">αναλαμβάνω</span> για το έργο</p>
                             <p className=" mb-6">{projectDescription || "N/A"}</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
-                            <p className="mb-4">
-                                την επίβλεψη των προβλεπόμενων εργασιών που πρόκειται να εκτελεστούν στο ανωτέρω ακίνητο, στο πλαίσιο της
-                                διαδικασίας έκδοσης Έγκρισης Εργασιών Μικρής Κλίμακας, σύμφωνα με τις ισχύουσες πολεοδομικές διατάξεις και ειδικότερα τις προβλέψεις του άρθρου 29 του Ν.4495/2017.
-                            </p>
+                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
                             <p>
-                                Η παρούσα ανάθεση αφορά την τεχνική καθοδήγηση και εποπτεία των εργασιών κατά την υλοποίησή τους, την τήρηση των σχετικών κανονισμών ασφαλείας, καθώς
-                                και την ευθύνη για την πιστή εφαρμογή του εγκεκριμένου περιεχομένου της άδειας.
-                            </p>
+                                τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
+                            <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>
+                            <p>●Την κατάρτιση και υποβολή του φακέλου στην αρμόδια υπηρεσία (e-Άδειες / ΥΔΟΜ )</p>
+                            <p>●Τη συνεργασία με άλλους ειδικούς/μελετητές, όπου απαιτείται</p>
                         </div>
 
                         {/* Signature section */}
@@ -268,7 +263,7 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
                                 <div className="text-right space-y-2">
                                     <div className="flex items-center gap-4">
                                         <span className="text-sm">Ημερομηνία :</span>
-                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+                                         <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
                                     </div>
                                     <div className="text-sm mt-8 text-center">
                                         <div>( Υπογραφή )</div>
@@ -495,5 +490,6 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
                 <h2 className="text-3xl font-bold p-10">Data not found</h2>
             )}
         </div>
+
     )
 }

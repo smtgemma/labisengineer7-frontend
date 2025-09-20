@@ -4,8 +4,6 @@ import { useState } from "react"
 import StampComponent from "../../shared/signture/signture"
 import { FaRegEdit } from "react-icons/fa";
 
-import { format } from "date-fns";
-
 // for editing 
 import { useForm } from "react-hook-form"
 
@@ -24,7 +22,6 @@ interface allDataProps {
   propertyPostalCode: string
   propertyAddress: string
   propertyPlace: string
-  createdAt: string
 }
 
 interface BudgetItem {
@@ -43,11 +40,11 @@ interface BudgetCategory {
   subtotal: number
 }
 
-export default function F5D6({ allData }: { allData: allDataProps }) {
+export default function F10D4({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const owner = allData?.owners?.[0] || {}
   const projectDescription = allData?.projectDescription || "";
-  const {propertyPostalCode, propertyAddress, propertyPlace, createdAt} = allData || {}
+  const { propertyPostalCode, propertyAddress, propertyPlace} = allData || {}
   console.log(allData)
 
   const [formData, setFormData] = useState({
@@ -1071,7 +1068,7 @@ export default function F5D6({ allData }: { allData: allDataProps }) {
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className="flex-1 text-black text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} (FOR BUILDING)</h3>
+          <h3 className="flex-1 text-black text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyAddress || "N/A"} (FOR BUILDING)</h3>
         </div>
       </div>
       {/* Budget Title */}
@@ -1152,7 +1149,7 @@ export default function F5D6({ allData }: { allData: allDataProps }) {
         <div className="flex justify-between items-start">
           <div className="flex items-center justify-between gap-2">
             <span className="">Ημερομηνία :</span>
-            <span className="ml-30">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+            <span className="ml-30">6/25/2025</span>
           </div>
           <div className="">
             <h3 className="text-center mb-4">Ο Συντάξας Μηχανικός</h3>
