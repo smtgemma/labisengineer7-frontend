@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import StampComponent from "../../shared/signture/signture"
+import { format } from "date-fns";
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -31,7 +32,7 @@ interface allDataProps {
     owners: any[]
     allDescriptionTasks: any[]
     technical_description: string
-    Horizontal_property_name: string
+    horizontalPropertyName: string
     projectDescription: string
     id: string
     createdById: string
@@ -50,7 +51,7 @@ export default function F6D3({ allData, setIsModalOpen }: F6D5Props) {
 
     const owner = allData?.owners?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress } = allData || {}
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, horizontalPropertyName, createdAt } = allData || {}
 
     const [updateProject] = useUpdateProjectMutation()
     // for editing data 
@@ -136,7 +137,7 @@ export default function F6D3({ allData, setIsModalOpen }: F6D5Props) {
                 <p>
                     Στο ακίνητο{" "}
                     <span className="font-semibold">
-                        Description for building/ horiontal property
+                        Description for building/ {horizontalPropertyName || "N/A"}
                     </span>
                     επί της οδού <br />{" "}
                     <span className="font-semibold">
@@ -266,7 +267,7 @@ export default function F6D3({ allData, setIsModalOpen }: F6D5Props) {
 
                         <div className="text-center">
                             <p>Ημερομηνία :</p>
-                            <p>6/25/2025</p>
+                            <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</p>
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>
@@ -319,7 +320,7 @@ export default function F6D3({ allData, setIsModalOpen }: F6D5Props) {
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyPlace", { required: "Address is required" })}
+                                            {...register("propertyAddress", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input

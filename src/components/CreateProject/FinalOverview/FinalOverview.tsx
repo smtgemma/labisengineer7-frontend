@@ -538,7 +538,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
 
               {/* file 6======== */}
-              {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
+              {/* {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
                 <F6D8 allData={allData} /> // 1
               )}
               {selected ===
@@ -548,11 +548,11 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected ===
                 "YΔ Φέροντα Οργανισμού" && (
                   <F6D10 allData={allData} /> // 3
-                )}
+                )} */}
               {/* {selected === "YΔ Συνιδιοκτητών" && (
                 <F6D4 allData={allData} /> // 4
               )} */}
-              {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
+              {/* {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
                 <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
               )}
               {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
@@ -584,7 +584,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
                 <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 15
-              )}
+              )} */}
               
               {/* {selected === "Autofill (προαιρετικό add-on)" && (
                 <div>Autofill (προαιρετικό add-on)</div> 
