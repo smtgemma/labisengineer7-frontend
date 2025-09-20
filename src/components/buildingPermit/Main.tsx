@@ -12,6 +12,7 @@ import TemplateSelectionComponents from "./TemplateSelection";
 import OwnerSelectionFour from "./OwnerSelection";
 import BuildingAIExtractionDataInPut from "./BuildingExtractedDataInput";
 import QuestionAnswers from "./QuestionAndAnswer";
+import RecordViolations from "./RecordViolations";
 
 const workflowSteps = [
     { id: 1, title: "Upload Documents" },
@@ -19,7 +20,7 @@ const workflowSteps = [
     { id: 3, title: "Select Owner(s)" },
     { id: 4, title: "AI Extraction Data" },
     { id: 5, title: "Record Violation" },
-    { id: 7, title: "Questions Answer" },
+    { id: 6, title: "Questions Answer" },
     { id: 7, title: "Select Actions" },
     { id: 8, title: "Final Overview" },
 ];
@@ -100,9 +101,7 @@ const MainBuildingPermit: React.FC = () => {
             case 5:
                 //need to work
                 return (
-                    <div>
-                        <p>Record Violations</p>
-                    </div>
+                    <RecordViolations currentStep={currentStep} nextStep={nextStep} />
                 );
             case 6:
                 //need to work

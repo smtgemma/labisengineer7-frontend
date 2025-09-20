@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PrimaryButton from '../shared/primaryButton/PrimaryButton';
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 interface Question {
     id: number;
     text: string;
@@ -16,7 +16,7 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
     currentStep: number
     nextStep: () => void
 }) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const [questions, setQuestions] = useState<Question[]>([
         {
             id: 1,
@@ -82,6 +82,14 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
         }));
     };
 
+    const handleSaveAndContinue = () => {
+        // Log the questions data to console
+        console.log("Question Answers Data:", questions);
+
+        // Continue to next step
+        nextStep();
+    };
+
     return (
         <div className="  min-h-screen">
             <h2 className="text-[#333333] text-5xl font-semibold">
@@ -126,12 +134,8 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
             {currentStep < 7 && (
                 <div className="flex justify-end w-fit ml-auto">
                     <PrimaryButton
-
-                        onClick={() => {
-                            nextStep();
-                        }}
+                        onClick={handleSaveAndContinue}
                         label="Save and Continue"
-
                     />
                 </div>
             )}
