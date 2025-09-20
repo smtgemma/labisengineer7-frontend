@@ -73,7 +73,7 @@ export default function F6D15({ allData, setIsModalOpen }: F6D5Props) {
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
-            serviceId: "68c565d9d5f94c3ac153e678",
+            serviceId: "68c7d2cc94994d27e3fa0148",
             ...data
         }
         const formData = new FormData()

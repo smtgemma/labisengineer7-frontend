@@ -33,7 +33,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   };
   // routing and id catch
   const handleProjectId = (serviceTitle: string) => {
-      console.log("image", serviceTitle);
+    console.log("image", serviceTitle);
     dispatch(resetAiExtractState()); // all state fields go back to initialState
     dispatch(
       setTheProjectId({
@@ -52,6 +52,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
     if (serviceTitle === "service-4") {
       router.push("/description-task-for-eng");
+    }
+    if (serviceTitle === "service-2") {
+      router.push("/building-permit");
     }
     // // services -2
     // else if (id === "68c56689d5f94c3ac153e67a") {
