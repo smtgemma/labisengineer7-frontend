@@ -103,7 +103,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
 
     return (
         <div>
-            {engineers ? (engineers?.map((engineer: any, index: number) => (
+            {engineers.length  > 0 ? (engineers?.map((engineer: any, index: number) => (
                 <div key={index} className="max-w-[796px] mx-auto bg-white">
                     <div className="text-right -mt-3">
                         <button

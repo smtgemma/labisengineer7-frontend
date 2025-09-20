@@ -26,6 +26,9 @@ import F10D12 from '@/components/CreateProject/FinalOverview/f-10/f10D12/page'
 import F10D13 from '@/components/CreateProject/FinalOverview/f-10/f10D13/page'
 import F10D14 from '@/components/CreateProject/FinalOverview/f-10/f10D14/page'
 import F10D15 from '@/components/CreateProject/FinalOverview/f-10/f10D15/page'
+import F6D8 from '@/components/CreateProject/FinalOverview/f-06/f6D8/page'
+import F6D9 from '@/components/CreateProject/FinalOverview/f-06/f6D9/page'
+import F6D10 from '@/components/CreateProject/FinalOverview/f-06/f6D10/page'
 
 function Test(allData : any) {
   return (
@@ -49,7 +52,7 @@ function Test(allData : any) {
         {/* <F5D17 allData={allData}/> */}
         
         {/* file 10 */}
-        <F10D4 allData={allData} />
+        {/* <F10D4 allData={allData} />
         <F10D5 allData={allData} />
         <F10D6 allData={allData} />
         <F10D7 allData={allData} />
@@ -60,7 +63,13 @@ function Test(allData : any) {
         <F10D12 allData={allData} />
         <F10D13 allData={allData} />
         <F10D14 allData={allData} />
-        <F10D15 allData={allData} />
+        <F10D15 allData={allData} /> */}
+
+
+        {/* file 6 */}
+        <F6D8 allData={allData} /> 
+        <F6D9 allData={allData} /> 
+        <F6D10 allData={allData} /> 
 
     </div>
   )
