@@ -51,7 +51,7 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
         url: `/projects/${ownerId}/templete-two`,
         method: "GET",
       }),
-      providesTags: ["Templates"], // 👈 provides cache
+      providesTags: ["Templates"], 
     }),
 
     updateProject: build.mutation({
@@ -60,7 +60,7 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
         method: "PATCH",
         body: formData,
       }),
-      invalidatesTags: ["Templates"], // ✅ invalidate cache
+      invalidatesTags: ["Templates"], 
     }),
 
     downloadTemplatePdf: build.query({

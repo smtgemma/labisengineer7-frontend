@@ -11,7 +11,7 @@ interface AllDataProps {
     createdAt: string;
 }
 
-export default function F6D6({ allData }: { allData: AllDataProps }) {
+export default function F5D10({ allData }: { allData: AllDataProps }) {
     const { projectDescription, createdAt, ydom } = allData || {};
 
     const [formData, setFormData] = useState({

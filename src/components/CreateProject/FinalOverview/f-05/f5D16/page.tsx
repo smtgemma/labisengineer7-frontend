@@ -18,7 +18,7 @@ interface FormData {
 interface allDataProps {
     owners: any[];
 }
-function F5D3({ allData }: { allData: allDataProps }) {
+function F5D16({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
@@ -86,8 +86,7 @@ function F5D3({ allData }: { allData: allDataProps }) {
 
                 {/* Works from Technical Description Section */}
                 <div className="mt-4">
-                    <p>επί της οδού {owner?.address || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"} ( FOR BUILDING)</p>
-                    <p className="font-semibold text-sm my-6">[WORKS FROM TECHNICAL DESCRIPTION]</p>
+                    <div className="mb-4">[WORKS/TASKS FROM CHOISE USER)</div>
                     <p className="text-sm ">
                         Η συναίνεση αφορά την υλοποίηση των ανωτέρω εργασιών στις κοινές όψεις/κοινόχρηστα μέρη του κτιρίου ή επεμβάσεις που επηρεάζουν την
                         αισθητική και λειτουργική ενότητα του ακινήτου. Οι εργασίες θα εκτελεστούν από εξουσιοδοτημένο μηχανικό σύμφωνα με την πολεοδομική νομοθεσία
@@ -208,4 +207,4 @@ function F5D3({ allData }: { allData: allDataProps }) {
     )
 }
 
-export default F5D3
+export default F5D16
