@@ -137,7 +137,10 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
     }, [currentStep]);
 
     return (
-        <>
+        <div >
+            <div>
+
+            </div>
             <div className="">
                 <h2 className="text-[#333333] text-5xl font-semibold">
                     AI Extraction Data
@@ -189,14 +192,15 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                     />
                                 </div>
 
-                                <div>
+                                <div className="cursor-not-allowed">
                                     <label className="block text-sm font-medium mb-1">
                                         ΑΕΚ Ακινήτου
                                     </label>
                                     <input
                                         {...register("kaekProperty")}
-                                        className={inputStyle}
+                                        className={`${inputStyle} cursor-not-allowed`}
                                         readOnly
+
                                         defaultValue={allExtreactData?.kaek_property}
                                     // defaultValue={dataShowExtreact?.cadastral_code_kaek}
                                     />
@@ -693,7 +697,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                     />
                 </div>
             )}
-        </>
+        </div>
     );
 };
 

@@ -15,24 +15,33 @@ import { TemplateName } from "../CreateProject/ActionSelection/data";
 export const templateName: TemplateName[] = [
     {
         id: "template_1",
-        title: "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017",
+        title: "Αναλυτικός Προϋπολογισμούς 4495/2017",
         price: 0.5,
     },
     {
         id: "template_2",
-        title: "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ",
+        title: "Τεχνική Έκθεση 4495/2017",
         price: 0.5,
     },
     {
         id: "template_3",
-        title: "Declaration owner for 4495_2017",
+        title: " ΥΔ Ανάθεσης Ιδιοκτήτη 4495/2017 Owner 1 {name + surname}",
         price: 0.5,
     },
     {
-        id: "template_4",
-        title: "Declaration of Building 4495_2017",
+        id: "template_3",
+        title: " ΥΔ Ανάθεσης Ιδιοκτήτη 4495/2017 Owner 2 {name + surname}",
         price: 0.5,
     },
+
+    //same for teh 4
+    {
+        id: "template_4",
+        title: "ΥΔ Αυθαιρέτων Ιδιοκτήτη 4495/2017",
+        price: 0.5,
+    },
+
+    //also add autofill 1 credit
 ];
 
 interface ActionSelectionProps {

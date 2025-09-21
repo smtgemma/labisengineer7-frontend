@@ -304,7 +304,63 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                         )}
                     </div>
                 </div>
+                {/* Violations autocomplete */}
+                <div className="space-y-2">
+                    <label className="text-sm font-medium block">
+                        Παράβαση{" "}
+                        {selectedCategory === "3" && (
+                            <span className="text-xs text-gray-500 ml-2">
+                                ({showRemainingViolations ? "Λοιπές" : "Βασικές"})
+                            </span>
+                        )}
+                    </label>
 
+                    {selectedViolations.length > 0 && (
+                        <div className="space-y-2 mb-3">
+                            {selectedViolations.map((violation, idx) => (
+                                <div
+                                    key={idx}
+                                    className="flex items-center justify-between bg-blue-50 border border-blue-200 rounded-md px-3 py-2"
+                                >
+                                    <span className="text-sm text-blue-800">{violation}</span>
+                                    <button
+                                        type="button"
+                                        onClick={() => removeViolation(idx)}
+                                        className="text-blue-600 hover:text-blue-800"
+                                    >
+                                        <X size={16} />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
+                    <div className="relative">
+                        <input
+                            type="text"
+                            value={violationInput}
+                            onChange={(e) => handleViolationInputChange(e.target.value)}
+                            placeholder="Αρχίστε να πληκτρολογείτε..."
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                            disabled={!selectedCategory}
+                        />
+
+                        {showViolationSuggestions && violationSuggestions.length > 0 && (
+                            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-48 overflow-y-auto">
+                                {violationSuggestions.map((suggestion, idx) => (
+                                    <button
+                                        key={idx}
+                                        type="button"
+                                        onClick={() => handleViolationSelect(suggestion)}
+                                        className="w-full px-3 py-2 text-left text-sm hover:bg-blue-50"
+                                    >
+                                        {suggestion}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
                 {/* Category 3 toggle */}
                 {selectedCategory === "3" && (
                     <div className="flex items-center space-x-3">
@@ -373,63 +429,7 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                     </div>
                 )}
 
-                {/* Violations autocomplete */}
-                <div className="space-y-2">
-                    <label className="text-sm font-medium block">
-                        Παράβαση{" "}
-                        {selectedCategory === "3" && (
-                            <span className="text-xs text-gray-500 ml-2">
-                                ({showRemainingViolations ? "Λοιπές" : "Βασικές"})
-                            </span>
-                        )}
-                    </label>
 
-                    {selectedViolations.length > 0 && (
-                        <div className="space-y-2 mb-3">
-                            {selectedViolations.map((violation, idx) => (
-                                <div
-                                    key={idx}
-                                    className="flex items-center justify-between bg-blue-50 border border-blue-200 rounded-md px-3 py-2"
-                                >
-                                    <span className="text-sm text-blue-800">{violation}</span>
-                                    <button
-                                        type="button"
-                                        onClick={() => removeViolation(idx)}
-                                        className="text-blue-600 hover:text-blue-800"
-                                    >
-                                        <X size={16} />
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-
-                    <div className="relative">
-                        <input
-                            type="text"
-                            value={violationInput}
-                            onChange={(e) => handleViolationInputChange(e.target.value)}
-                            placeholder="Αρχίστε να πληκτρολογείτε..."
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                            disabled={!selectedCategory}
-                        />
-
-                        {showViolationSuggestions && violationSuggestions.length > 0 && (
-                            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-48 overflow-y-auto">
-                                {violationSuggestions.map((suggestion, idx) => (
-                                    <button
-                                        key={idx}
-                                        type="button"
-                                        onClick={() => handleViolationSelect(suggestion)}
-                                        className="w-full px-3 py-2 text-left text-sm hover:bg-blue-50"
-                                    >
-                                        {suggestion}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                </div>
 
                 {/* Age dropdown */}
                 <div className="space-y-2">

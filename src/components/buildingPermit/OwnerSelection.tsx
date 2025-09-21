@@ -27,9 +27,9 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
     });
 
     const dispatch = useDispatch();
-    const ownerData = useSelector((state: any) => state.aiData.aiDataState);
+    const ownerData = useSelector((state: any) => state.aiData?.aiDataState);
 
-    const [isOwner, setIsOwner] = useState<Owner[]>(ownerData.owners || []);
+    const [isOwner, setIsOwner] = useState<Owner[]>(ownerData?.owners || []);
     const [ydom, setYdom] = useState<string>(ownerData?.ydom || "");
 
     // Generate descriptions from project_descriptions
