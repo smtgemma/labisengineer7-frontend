@@ -3,6 +3,7 @@
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
 import { format } from "date-fns"
+
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -46,7 +47,7 @@ interface allDataProps {
 
 
 
-export default function F6D10({ allData }: { allData: allDataProps }) {
+export default function F10D11({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
@@ -245,17 +246,20 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
 
-                            <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
+                            <p className=" font-bold">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις αναλαμβάνω για το έργο</p>
                             <p className=" mb-6">{projectDescription || "N/A"}</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
                             <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
+                            <p className="mb-4">
+                                την επίβλεψη των προβλεπόμενων εργασιών που πρόκειται να εκτελεστούν στο ανωτέρω ακίνητο, στο πλαίσιο της διαδικασίας έκδοσης
+                                Έγκρισης Εργασιών Μικρής Κλίμακας, σύμφωνα με τις ισχύουσες πολεοδομικές διατάξεις και ειδικότερα τις προβλέψεις του άρθρου 29 του Ν.4495/2017.
+                            </p>
                             <p>
-                                από την ανάλυση του συνόλου των προβλεπόμενων εργασιών προκύπτει <span className="font-bold">ότι δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία του οργανισμού του κτιρίου.</span>
-                                Οι εργασίες περιορίζονται αποκλειστικά σε μη φέροντα στοιχεία και δεν επηρεάζουν καθ’ οποιονδήποτε τρόπο την ευστάθεια, φέρουσα ικανότητα ή δομική λειτουργία του κτιρίου.
-                                Η παρούσα δήλωση τεκμηριώνεται σύμφωνα με τις διατάξεις του άρθρου 29 του Ν.4495/2017.
+                                Η παρούσα ανάθεση αφορά την τεχνική καθοδήγηση και εποπτεία των εργασιών κατά την υλοποίησή τους, την τήρηση των
+                                σχετικών κανονισμών ασφαλείας, καθώς και την ευθύνη για την πιστή εφαρμογή του εγκεκριμένου περιεχομένου της άδειας.
                             </p>
                         </div>
 

@@ -84,7 +84,6 @@ interface AiExtractState {
   actionSelection?: any[];
   selectTemplate?: any[];
   projectIdCode?: string | null;
-  questionAnswer: any
 }
 
 const initialState: AiExtractState = {
@@ -99,7 +98,6 @@ const initialState: AiExtractState = {
   aiInputData: null,
   actionSelection: [],
   projectIdCode: null,
-  questionAnswer: []
 };
 
 const aiExtractDataSlice = createSlice({
@@ -139,9 +137,6 @@ const aiExtractDataSlice = createSlice({
     },
     setAiExtreactAndInputData: (state, action) => {
       state.aiInputData = action.payload;
-    },
-    setQuestionAnswer: (state, action) => {
-      state.questionAnswer = action.payload;
     },
     resetAiExtractState: () => initialState,
   },

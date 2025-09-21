@@ -3,8 +3,7 @@
 
 "use client"
 import { useState } from "react";
-import StampComponent from "../../shared/signture/signture";
-
+// import StampComponent from "../../shared/signture/signture";
 import { format } from "date-fns";
 // for editing 
 import { useForm } from "react-hook-form"
@@ -41,17 +40,17 @@ interface allDataProps {
     id: string;
     createdById: string;
     serviceId: string;
-    createdAt: string;
     specialty: string;
+    createdAt: string;
 }
 
 
-export default function F5D12({ allData }: { allData: allDataProps }) {
+export default function F10D9({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = allData?.engineers || {};
-    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, createdAt, specialty } = allData || {};
+    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
     // for editing data 
@@ -253,10 +252,10 @@ export default function F5D12({ allData }: { allData: allDataProps }) {
 
                             {/* Additional disclaimer text */}
                             <div className="space-y-4 text-sm m p-4">
-                                <p>τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:</p>
-                                <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>
-                                <p>●Την κατάρτιση και υποβολή του φακέλου στην αρμόδια υπηρεσία (e-Άδειες / ΥΔΟΜ )</p>
-                                <p>●Τη συνεργασία με άλλους ειδικούς/μελετητές, όπου απαιτείται</p>
+                                <p>την επίβλεψη των προβλεπόμενων εργασιών που πρόκειται να εκτελεστούν στο ανωτέρω ακίνητο, στο πλαίσιο της διαδικασίας έκδοσης Έγκρισης Εργασιών Μικρής
+                                    Κλίμακας, σύμφωνα με τις ισχύουσες πολεοδομικές διατάξεις και ειδικότερα τις προβλέψεις του άρθρου 29 του Ν.4495/2017.</p>
+                                <p>Η παρούσα ανάθεση αφορά την τεχνική καθοδήγηση και εποπτεία των εργασιών κατά την υλοποίησή τους, την τήρηση των σχετικών κανονισμών ασφαλείας,
+                                    καθώς και την ευθύνη για την πιστή εφαρμογή του εγκεκριμένου περιεχομένου της άδειας.</p>
                             </div>
 
                             {/* Signature section */}
@@ -275,9 +274,9 @@ export default function F5D12({ allData }: { allData: allDataProps }) {
                                 </div>
                             </div>
                             {/* common component  */}
-                            <div className="flex items-center justify-end mt-6 p-4">
+                            {/* <div className="flex items-center justify-end mt-6 p-4">
                                 <StampComponent />
-                            </div>
+                            </div> */}
                         </div>
                         {/* EDIT MODAL */}
                         {isEditModalOpen && selectedOwnerIndex !== null && (
@@ -488,15 +487,11 @@ export default function F5D12({ allData }: { allData: allDataProps }) {
                         )}
                     </div>
                 </div>
-            ))): (
+            ))) : (
                 <h2 className="text-3xl font-bold p-10">Data not found</h2>
-            )} 
+            )}
         </div>
     )
 
 }
-
-
-
-
 

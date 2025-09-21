@@ -18,6 +18,10 @@ interface FormData {
 
 interface allDataProps {
     owners: any[];
+    projectDescription: string;
+    propertyPostalCode: string;
+    propertyAddress: string;
+    propertyPlace: string;
 }
 
 interface BudgetItem {
@@ -39,6 +43,7 @@ export default function F5D8({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const owner = allData?.owners?.[0] || {};
+  const {projectDescription, propertyAddress, propertyPostalCode, propertyPlace} = allData || {}
 
   const [formData, setFormData] = useState({
     employer: "",
@@ -364,28 +369,28 @@ export default function F5D8({ allData }: { allData: allDataProps }) {
 
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
-      <div className="text-right -mt-7">
+      {/* <div className="text-right -mt-7">
         <button
           className="mt-1 px-4 py-1"
           onClick={() => setIsEditModalOpen(true)}
         >
           <FaRegEdit className="text-black text-2xl cursor-pointer" />
         </button>
-      </div>
+      </div> */}
       {/* Project Info */}
       <div className="mb-6 space-y-4">
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Εργοδότες *:</span>
-          <h3 className="flex-1 text-black text-sm">{owner?.firstName || "N/A"}</h3>
+          <h3 className="flex-1 text-black text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>
-          {/* <h3 className="flex-1 text-black text-sm">{project_description || "N/A"}</h3> */}
+          <h3 className="flex-1 text-black text-sm">{projectDescription || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
           <h3 className="flex-1 text-black text-sm">
-            {owner?.address || "N/A"},  {owner?.city || "N/A"},  {owner?.postalCode || "N/A"}(FOR BUILDING)
+            {propertyAddress || "N/A"},  {propertyPlace || "N/A"},  {propertyPostalCode || "N/A"}(FOR BUILDING)
           </h3>
         </div>
       </div>

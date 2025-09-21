@@ -3,6 +3,8 @@
 import StampComponent from "../../shared/signture/signture"
 import { FaRegEdit } from "react-icons/fa";
 
+import { format } from "date-fns";
+
 // for editing 
 import { useForm } from "react-hook-form"
 import { useState } from "react";
@@ -23,14 +25,15 @@ interface allDataProps {
     propertyPostalCode: string;
     propertyAddress: string;
     propertyPlace: string;
+    createdAt: string;
 }
 
-export default function F5D7({ allData }: { allData: allDataProps }) {
+export default function F10D5({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
     const {allDescriptionTasks} = allData || {}
-    const { horizontalPropertyName, projectDescription, propertyPostalCode, propertyAddress, propertyPlace } = allData || {};
+    const { horizontalPropertyName, propertyPostalCode, propertyAddress, propertyPlace, projectDescription, createdAt } = allData || {};
     console.log(allDescriptionTasks)
 
 
@@ -73,18 +76,18 @@ export default function F5D7({ allData }: { allData: allDataProps }) {
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{propertyAddress|| "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING)</h3>
                 </div>
 
                 <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
                     <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">{owner?.firstName || "N/A"}</h3>
+                    <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
                 </div>
             </div>
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">Description for building/ {horizontalPropertyName || "N/A"}</span> επί της οδού <br /> <span className="font-semibold">{propertyAddress|| "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING),</span>
+                <p>Στο ακίνητο <span className="font-semibold">Description for building/ {horizontalPropertyName || "N/A"}</span> επί της οδού <br /> <span className="font-semibold">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING),</span>
                     πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
 
@@ -146,7 +149,7 @@ export default function F5D7({ allData }: { allData: allDataProps }) {
 
                         <div className="text-center">
                             <p>Ημερομηνία :</p>
-                            <p>6/25/2025</p>
+                            <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</p>
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>
