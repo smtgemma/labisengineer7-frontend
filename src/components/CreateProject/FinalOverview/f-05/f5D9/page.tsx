@@ -55,7 +55,7 @@ export default function F5D9({ allData,
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt } = allData || {};
+    const { id, createdById, serviceId, specialty, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt } = allData || {};
     const descriptions = [
         {
             "id": 1,

@@ -117,7 +117,7 @@ const ImageToPdfConverter = () => {
       }
 
       // Merge chunks into one Blob
-      const blob = new Blob(chunks, { type: "application/pdf" });
+      const blob = new Blob(chunks as BlobPart[], { type: "application/pdf" });
       saveAs(blob, "downloaded-file.pdf");
 
       setTimeout(() => {
@@ -170,11 +170,10 @@ const ImageToPdfConverter = () => {
               </div>
               <div
                 {...getRootProps()}
-                className={`border-2 border-dashed rounded-lg p-8 lg:p-16 text-center cursor-pointer transition-colors ${
-                  isDragActive
+                className={`border-2 border-dashed rounded-lg p-8 lg:p-16 text-center cursor-pointer transition-colors ${isDragActive
                     ? "border-blue-500 bg-blue-50"
                     : "border-gray-300 hover:border-blue-400"
-                }`}
+                  }`}
               >
                 <input {...getInputProps()} onChange={handleFileChange} />
                 {isLoading ? (
@@ -302,11 +301,10 @@ const ImageToPdfConverter = () => {
                     className="h-3 rounded-lg transition-all duration-300"
                     style={{
                       width: `${progress}%`,
-                      background: `${
-                        progress
+                      background: `${progress
                           ? "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)"
                           : ""
-                      }`,
+                        }`,
                     }}
                   ></div>
                 </div>
