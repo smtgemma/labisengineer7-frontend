@@ -38,11 +38,12 @@ interface allDataProps {
     createdAt: string
     id: string
     createdById: string
+    specialty: string
 }
 
 type F6D5Props = {
-  allData: any;
-  setIsModalOpen: (value: boolean) => void;
+    allData: any;
+    setIsModalOpen: (value: boolean) => void;
 };
 
 
@@ -51,8 +52,8 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers?.[0] || {}
-    const { id, createdById } = allData || {}
-    const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt } = allData || {};
+    const allDescriptionTasks = allData?.allDescriptionTasks || {};
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt, specialty } = allData || {};
     const descriptions = [
         {
             "id": 1,
@@ -228,7 +229,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
-            serviceId: "68c565d9d5f94c3ac153e678",
+            serviceId: "68c7d2cc94994d27e3fa0148",
             ...data
         }
         const formData = new FormData()
@@ -286,13 +287,13 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
 
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΙΔΙΟΚΤΗΤΗΣ :</span>
-                            <span className="flex-1  font-bold">{owner?.firstName || "N/A"}</span>
+                            <span className="flex-1  font-bold">{owner?.firstName || "N/A"}, {owner?.lastName || "N/A"}</span>
                         </div>
                         <div className="flex justify-between">
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-center justify-center">
                                 <span className="flex-1  font-bold">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1  font-bold">SPECIALTY</span>
+                                <span className="flex-1  font-bold">{specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -306,7 +307,14 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                         <h3 className="font-medium mb-2 underline">1. TECHNICAL DESCRIPTION OF PROJECT</h3>
                         <div className="mb-2">
                             {/* Mapping over the fetched data */}
-                            {technicalDescription || "N/A"}
+                            {Array.isArray(allDescriptionTasks) &&
+                                allDescriptionTasks.map((task: any, index: number) => (
+                                    <div key={index}>
+                                        <h3 className="text-sm font-bold">● {task?.id}</h3>
+                                        <p className="text-sm">{task?.description}</p>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
 
@@ -427,7 +435,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΕΡΓΟ :</span>
-                            <span className="flex-1 font-bold">PROJECT DESCRIPTION</span>
+                            <span className="flex-1 font-bold">{projectDescription || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
@@ -443,7 +451,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-start justify-center">
                                 <span className="flex-1  font-bold">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1 font-bold">SPECIALTY</span>
+                                <span className="flex-1 font-bold">{specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -455,7 +463,14 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                         <h3 className="font-medium mb-2">PROJECT WORKS FOR TECHNICAL DESCRIPTION</h3>
                         <div className="mb-2">
                             {/* Mapping over the fetched data */}
-                            {technicalDescriptionTwo || "N/A"}
+                            {Array.isArray(allDescriptionTasks) &&
+                                allDescriptionTasks.map((task: any, index: number) => (
+                                    <div key={index}>
+                                        <h3 className="text-sm font-bold">● {task?.id}</h3>
+                                        <p className="text-sm">{task?.description}</p>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>
@@ -634,7 +649,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyPlace", { required: "Address is required" })}
+                                            {...register("propertyAddress", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input

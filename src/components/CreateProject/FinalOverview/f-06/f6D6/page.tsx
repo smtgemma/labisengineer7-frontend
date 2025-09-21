@@ -17,7 +17,7 @@ export default function F6D6({ allData }: { allData: AllDataProps }) {
     const [formData, setFormData] = useState({
         projectDescription: projectDescription || "N/A",
         ydom: ydom || "YDOM",
-        submissionDate: format(new Date(createdAt), "dd/MM/yyyy") || "DATE OF PROJECT",
+        submissionDate: createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "DATE OF PROJECT",
         protocolNumber: "",
     });
 
@@ -37,14 +37,14 @@ export default function F6D6({ allData }: { allData: AllDataProps }) {
 
     return (
         <div className="max-w-[794px] mx-auto bg-[#99cc00] pb-35 p-5">
-            <div className="text-right -mt-6">
+            {/* <div className="text-right -mt-6">
                 <button
                     className="mt-1 px-4 py-1"
                     onClick={() => setIsModalOpen(true)}
                 >
                     <FaRegEdit className="text-black text-2xl cursor-pointer" />
                 </button>
-            </div>
+            </div> */}
             <div className="max-w-4xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">

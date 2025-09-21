@@ -4,12 +4,13 @@
 "use client"
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
+import { format } from "date-fns";
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
 import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
-interface FormData {
+interface FormInputs {
     firstName?: string;
     lastName?: string;
     fatherFirstLastName?: string;
@@ -25,58 +26,91 @@ interface FormData {
     email?: string;
     taxIdentificationNumber?: string;
     projectDescription?: string;
+    ydom?: string;
+    serviceId?: string;
 }
 // end editing 
 
 interface allDataProps {
     owners: any[];
-    engineers: any[]
+    engineers: any[];
     projectDescription: string;
     ydom: string;
     horizontalPropertyName: string;
-    id: string
-    createdById: string
+    id: string;
+    createdById: string;
+    serviceId: string;
+    specialty: string;
+    createdAt: string;
 }
 
 
 export default function F6D8({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
+
     const engineers = allData?.engineers || {};
-    const { projectDescription } = allData || {};
-    const { ydom } = allData || {};
-    const { horizontalPropertyName } = allData || {};
-    const { id, createdById } = allData || {}
-    console.log(id, createdById, "id, createdById===================")
+    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
-
-    console.log(allData, "allData in f6d8")
     // for editing data 
     const {
         register,
         handleSubmit,
         reset,
-        formState: { errors },
-    } = useForm<FormData>({})
+    } = useForm<FormInputs>({})
 
-    const onSubmit = (data: FormData) => {
-        console.log("Updated Data:", data)
-        const formData= new FormData()
-        formData.append("body", JSON.stringify(data))
-        const res = updateProject({ projectId: id, userId: createdById, formData })
-        reset()
-        setIsEditModalOpen(false)
+    // Submit handler
+    const onSubmit = async (data: FormInputs) => {
+        if (selectedOwnerIndex === null) return;
+
+        // old owner copy
+        const updatedOwners = [...allData.owners];
+
+        //    owner replace of old owner 
+        updatedOwners[selectedOwnerIndex] = {
+            ...updatedOwners[selectedOwnerIndex],
+            ...data
+        };
+
+        // make formData 
+        const formData = new FormData();
+        formData.append("data", JSON.stringify({
+            owners: updatedOwners,
+            projectDescription: data.projectDescription || allData.projectDescription,
+            ydom: data.ydom || allData.ydom,
+            serviceId: serviceId
+        }));
+
+        try {
+            await updateProject({
+                projectId: id,
+                userId: createdById,
+                formData: formData,
+            }).unwrap()
+
+            reset();
+            setIsEditModalOpen(false)
+            setSelectedOwnerIndex(null)
+
+        } catch (error) {
+            console.error("Update failed", error)
+        }
+
     }
 
     return (
         <div>
-            {allData?.owners && allData?.owners?.map((owner: any, index: number) => (
+            {allData?.owners ? (allData?.owners?.map((owner: any, index: number) => (
                 <div key={index} className="max-w-[796px] mx-auto bg-white mb-16">
                     <div className="max-w-[796px] mx-auto bg-white">
                         <div className="text-right -mt-3">
                             <button
-                                className="mt-1 px-4 py-1"
-                                onClick={() => setIsEditModalOpen(true)}
+                                className="px-4 py-1"
+                                onClick={() => {
+                                    setSelectedOwnerIndex(index);
+                                    setIsEditModalOpen(true);
+                                }}
                             >
                                 <FaRegEdit className="text-black text-2xl cursor-pointer" />
                             </button>
@@ -209,7 +243,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                     Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                                 </p>
                                 <p className="mb-4">
-                                    ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού([{owner?.ownerAddress || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, Specialty Engineer AM TEE)
+                                    ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού([{owner?.ownerAddress || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
                                 </p>
 
                                 <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
@@ -231,7 +265,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                     <div className="text-right space-y-2">
                                         <div className="flex items-center gap-4">
                                             <span className="text-sm">Ημερομηνία :</span>
-                                            <span className="text-sm font-medium">8/18/2025</span>
+                                            <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
                                         </div>
                                         <div className="text-sm mt-8 text-center">
                                             <div>( Υπογραφή )</div>
@@ -246,7 +280,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             </div>
                         </div>
                         {/* EDIT MODAL */}
-                        {isEditModalOpen && (
+                        {isEditModalOpen && selectedOwnerIndex !== null && (
                             <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
                                 <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
                                     {/* Close button */}
@@ -263,6 +297,16 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                             onSubmit={handleSubmit(onSubmit)}
                                             className="grid grid-cols-1 md:grid-cols-2 gap-4"
                                         >
+                                            {/* ydom */}
+                                            <div className="flex flex-col gap-2">
+                                                <label className="font-medium">ΠΡΟΣ *:</label>
+                                                <input
+                                                    type="text"
+                                                    {...register("ydom", { required: "This field is required" })}
+                                                    className="flex-1 border p-2 rounded text-sm"
+                                                    defaultValue={allData?.ydom || ""}
+                                                />
+                                            </div>
                                             {/* Name */}
                                             <div className="flex flex-col gap-2">
                                                 <label className="font-medium">Όνομα *:</label>
@@ -270,7 +314,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("firstName", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.firstName || ""}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.firstName || ""}
                                                 />
                                             </div>
 
@@ -281,7 +325,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("lastName", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.lastName || ""}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.lastName || ""}
                                                 />
                                             </div>
 
@@ -292,7 +336,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("fatherFirstLastName", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.fatherFirstLastName || "N/A"}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.fatherFirstLastName || ""}
                                                 />
                                             </div>
 
@@ -303,7 +347,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("mothersFirstLastName", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.mothersFirstLastName || "N/A"}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.mothersFirstLastName || ""}
                                                 />
                                             </div>
 
@@ -314,7 +358,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="date"
                                                     {...register("dateOfBirth", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.dateOfBirth || "N/A"}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.dateOfBirth || ""}
                                                 />
                                             </div>
 
@@ -325,7 +369,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("placeOfBirth", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.placeOfBirth}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.placeOfBirth || ""}
                                                 />
                                             </div>
 
@@ -336,7 +380,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("idNumber", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.idNumber || "N/A"}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.idNumber || ""}
                                                 />
                                             </div>
 
@@ -347,7 +391,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("phone", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.phone || "N/A"}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.phone || ""}
                                                 />
                                             </div>
 
@@ -358,7 +402,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("city", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.city || "N/A"}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.city || ""}
                                                 />
                                             </div>
 
@@ -369,7 +413,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("ownerAddress", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.ownerAddress || "N/A"}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.ownerAddress || ""}
                                                 />
                                             </div>
 
@@ -380,7 +424,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("addressNumber", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.addressNumber || "N/A"}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.addressNumber || ""}
                                                 />
                                             </div>
 
@@ -391,7 +435,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("postalCode", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.postalCode || owner?.postal_code || "N/A"}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.postalCode || ""}
                                                 />
                                             </div>
 
@@ -402,7 +446,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="email"
                                                     {...register("email", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.email || "N/A"}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.email || ""}
                                                 />
                                             </div>
 
@@ -413,19 +457,18 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("taxIdentificationNumber", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={owner?.taxIdentificationNumber
-                                                        || "N/A"}
+                                                    defaultValue={allData.owners[selectedOwnerIndex]?.taxIdentificationNumber || ""}
                                                 />
                                             </div>
 
                                             {/* Project Description */}
-                                            <div className="flex flex-col gap-2 md:col-span-2">
+                                            <div className="flex flex-col gap-2">
                                                 <label className="font-medium">Περιγραφή Έργου *:</label>
                                                 <input
                                                     type="text"
                                                     {...register("projectDescription", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={projectDescription || ""}
+                                                    defaultValue={allData.projectDescription || ""}
                                                 />
                                             </div>
 
@@ -445,9 +488,197 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                         )}
                     </div>
                 </div>
-            ))}
+            ))): (
+                <h2 className="text-3xl font-bold p-10">Data not found</h2>
+            )} 
         </div>
     )
 
 }
 
+
+
+
+
+
+
+// "use client"
+// import { useState } from "react";
+// import { useForm } from "react-hook-form"
+// import { FaRegEdit } from "react-icons/fa"
+// import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+
+// interface FormInputs {
+//     firstName?: string;
+//     lastName?: string;
+//     fatherFirstLastName?: string;
+//     mothersFirstLastName?: string;
+//     dateOfBirth?: string;
+//     placeOfBirth?: string;
+//     idNumber?: string;
+//     phone?: string;
+//     city?: string;
+//     ownerAddress?: string;
+//     addressNumber?: string;
+//     postalCode?: string;
+//     email?: string;
+//     taxIdentificationNumber?: string;
+//     projectDescription?: string;
+//     serviceId?: string;
+// }
+
+// interface AllDataProps {
+//     owners: any[];
+//     engineers: any[];
+//     projectDescription: string;
+//     ydom: string;
+//     horizontalPropertyName: string;
+//     id: string;
+//     createdById: string;
+//     serviceId: string;
+// }
+
+// export default function F6D8({ allData }: { allData: AllDataProps }) {
+//     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+//     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
+
+//     const { projectDescription, ydom, id, createdById, serviceId } = allData || {};
+//     const [updateProject] = useUpdateProjectMutation();
+
+//     const { register, handleSubmit, reset } = useForm<FormInputs>({})
+
+//     // Submit handler
+//     const onSubmit = async (data: FormInputs) => {
+//         if (selectedOwnerIndex === null) return;
+
+//         // পুরানো owners কপি
+//         const updatedOwners = [...allData.owners];
+
+//         // ওই index এর owner replace
+//         updatedOwners[selectedOwnerIndex] = {
+//             ...updatedOwners[selectedOwnerIndex],
+//             ...data
+//         };
+
+//         // FormData তৈরি
+//         const formData = new FormData();
+//         formData.append('data', JSON.stringify({
+//             owners: updatedOwners,
+//             projectDescription: data.projectDescription || allData.projectDescription,
+//             serviceId: serviceId
+//         }));
+
+//         try {
+//             await updateProject({
+//                 projectId: id,
+//                 userId: createdById,
+//                 formData: formData // ✅ FormData পাঠানো হচ্ছে
+//             }).unwrap();
+
+//             reset();
+//             setIsEditModalOpen(false);
+//             setSelectedOwnerIndex(null);
+//         } catch (err) {
+//             console.error("Update failed:", err);
+//         }
+//     }
+
+//     return (
+//         <div>
+//             {/* Owners List */}
+//             {allData?.owners?.map((owner, index) => (
+//                 <div key={index} className="max-w-[796px] mx-auto bg-white mb-6 p-4 border rounded-lg">
+//                     <div className="text-right mb-2">
+//                         <button
+//                             className="px-4 py-1"
+//                             onClick={() => {
+//                                 setSelectedOwnerIndex(index);
+//                                 setIsEditModalOpen(true);
+//                             }}
+//                         >
+//                             <FaRegEdit className="text-black text-2xl cursor-pointer" />
+//                         </button>
+//                     </div>
+
+//                     <div className="border border-gray-300 p-2 rounded">
+//                         <div className="flex mb-1">
+//                             <div className="w-32 font-bold">Όνομα:</div>
+//                             <div className="flex-1">{owner.firstName || "N/A"}</div>
+//                         </div>
+//                         <div className="flex mb-1">
+//                             <div className="w-32 font-bold">Επώνυμο:</div>
+//                             <div className="flex-1">{owner.lastName || "N/A"}</div>
+//                         </div>
+//                         <div className="flex mb-1">
+//                             <div className="w-32 font-bold">Πόλη:</div>
+//                             <div className="flex-1">{owner.city || "N/A"}</div>
+//                         </div>
+//                     </div>
+//                 </div>
+//             ))}
+
+//             {/* Edit Modal */}
+//             {isEditModalOpen && selectedOwnerIndex !== null && (
+//                 <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+//                     <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
+//                         <button
+//                             className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
+//                             onClick={() => setIsEditModalOpen(false)}
+//                         >
+//                             ✕
+//                         </button>
+
+//                         <h2 className="text-lg font-bold mb-4">✍️ Edit Owner</h2>
+//                         <form
+//                             onSubmit={handleSubmit(onSubmit)}
+//                             className="grid grid-cols-1 md:grid-cols-2 gap-4"
+//                         >
+//                             {/* First Name */}
+//                             <div className="flex flex-col gap-2">
+//                                 <label className="font-medium">Όνομα:</label>
+//                                 <input
+//                                     type="text"
+//                                     {...register("firstName")}
+//                                     className="border p-2 rounded text-sm"
+//                                     defaultValue={allData.owners[selectedOwnerIndex]?.firstName || ""}
+//                                 />
+//                             </div>
+
+//                             {/* Last Name */}
+//                             <div className="flex flex-col gap-2">
+//                                 <label className="font-medium">Επώνυμο:</label>
+//                                 <input
+//                                     type="text"
+//                                     {...register("lastName")}
+//                                     className="border p-2 rounded text-sm"
+//                                     defaultValue={allData.owners[selectedOwnerIndex]?.lastName || ""}
+//                                 />
+//                             </div>
+
+//                             {/* City */}
+//                             <div className="flex flex-col gap-2">
+//                                 <label className="font-medium">Πόλη:</label>
+//                                 <input
+//                                     type="text"
+//                                     {...register("city")}
+//                                     className="border p-2 rounded text-sm"
+//                                     defaultValue={allData.owners[selectedOwnerIndex]?.city || ""}
+//                                 />
+//                             </div>
+
+//                             {/* Submit Button */}
+//                             <div className="flex justify-end md:col-span-2">
+//                                 <button
+//                                     type="submit"
+//                                     className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm"
+//                                 >
+//                                     Update
+//                                 </button>
+//                             </div>
+//                         </form>
+//                     </div>
+//                 </div>
+//             )}
+//         </div>
+//     )
+// }

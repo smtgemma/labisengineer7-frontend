@@ -21,7 +21,7 @@ interface allDataProps {
 function F5D3({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owner = allData?.owners[0] || {};
+    const owner = allData?.owners?.[0] || {};
 
 
     // for editing data 
@@ -38,7 +38,10 @@ function F5D3({ allData }: { allData: allDataProps }) {
         setIsEditModalOpen(false)
     }
     return (
-        <div className="max-w-[794px] mx-auto">
+        <div>
+            {
+                owner ? (
+                    <div className="max-w-[794px] mx-auto">
             <div className="text-right -mt-3">
                 <button
                     className="mt-1 px-4 py-1"
@@ -196,6 +199,11 @@ function F5D3({ allData }: { allData: allDataProps }) {
                     </div>
                 </div>
             )}
+        </div>
+                ) : (
+                    <h2>Data not found</h2>
+                )
+            }
         </div>
     )
 }

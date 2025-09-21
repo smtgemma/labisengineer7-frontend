@@ -34,7 +34,8 @@ interface allDataProps {
 export default function F5D4({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owners = allData?.owners || {};
+    const owners = allData?.owners || [];
+    console.log(owners, "-09-============================================")
 
     // for editing data 
     const {
@@ -51,7 +52,6 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
     }
     return (
         <div>
-            {owners?.map((owner: any, index: number) => (
                 <div className="max-w-[796px] mx-auto bg-white my-16">
                     <div className="text-right -mt-3">
                         <button
@@ -87,7 +87,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400 bg-gray-50">
                             <div className="flex">
                                 <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-                                <div className="flex-1 p-2  font-bold">{owner?.ydom || "N/A"}</div>
+                                {/* <div className="flex-1 p-2  font-bold">{owner?.ydom || "N/A"}</div> */}
                             </div>
                         </div>
 
@@ -95,9 +95,9 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.firstName || "N/A"}</div>
+                                {/* <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.firstName || "N/A"}</div> */}
                                 <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-                                <div className="flex-1 p-2  font-bold">{owner?.lastName || "N/A"}</div>
+                                {/* <div className="flex-1 p-2  font-bold">{owner?.lastName || "N/A"}</div> */}
                             </div>
                         </div>
 
@@ -105,7 +105,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.fatherName || "N/A"}</div>
+                                {/* <div className="flex-1 p-2 font-bold">{owner?.fatherName || "N/A"}</div> */}
                             </div>
                         </div>
 
@@ -113,7 +113,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.motherName || "N/A"}</div>
+                                {/* <div className="flex-1 p-2 font-bold">{owner?.motherName || "N/A"}</div> */}
                             </div>
                         </div>
 
@@ -121,7 +121,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.birthDate || "N/A"}</div>
+                                {/* <div className="flex-1 p-2 font-bold">{owner?.birthDate || "N/A"}</div> */}
                             </div>
                         </div>
 
@@ -129,7 +129,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.birthPlace}</div>
+                                {/* <div className="flex-1 p-2 font-bold">{owner?.birthPlace}</div> */}
                             </div>
                         </div>
 
@@ -137,9 +137,9 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                <div className=" p-2 border-r border-gray-400 font-bold">{owner?.idNumber || "N/A"}</div>
+                                {/* <div className=" p-2 border-r border-gray-400 font-bold">{owner?.idNumber || "N/A"}</div> */}
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.phone || "N/A"}</div>
+                                {/* <div className="flex-1 p-2 font-bold">{owner?.phone || "N/A"}</div> */}
                             </div>
                         </div>
 
@@ -147,13 +147,13 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                                <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
+                                {/* <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div> */}
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
-                                <div className="w-24 p-2 border-r border-gray-400 font-bold ">{owner?.address || "N/A"}</div>
+                                {/* <div className="w-24 p-2 border-r border-gray-400 font-bold ">{owner?.address || "N/A"}</div> */}
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
-                                <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner?.addressNumber || "N/A"}</div>
+                                {/* <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner?.addressNumber || "N/A"}</div> */}
                                 <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.postalCode || "N/A"}</div>
+                                {/* <div className="flex-1 p-2 font-bold">{owner?.postalCode || "N/A"}</div> */}
                             </div>
                         </div>
 
@@ -169,7 +169,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                         <div>ίου (Email):</div>
                                     </div>
                                 </div>
-                                <div className=" p-2 underline ">{owner?.email || "N/A"}</div>
+                                {/* <div className=" p-2 underline ">{owner?.email || "N/A"}</div> */}
                             </div>
                         </div>
 
@@ -177,7 +177,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.afm || "N/A"}</div>
+                                {/* <div className="flex-1 p-2 font-bold">{owner?.afm || "N/A"}</div> */}
                                 <div className="w-32 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
                             </div>
                         </div>
@@ -194,7 +194,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {owner?.address || "N/A"}, {owner?.city || "N/A"} , {owner?.postalCode || "N/A"} ( FOR PROPERTY)</p>
+                            {/* <p>επί της οδού {owner?.address || "N/A"}, {owner?.city || "N/A"} , {owner?.postalCode || "N/A"} ( FOR PROPERTY)</p> */}
                             <p>
                                 <span className="text-sm font-bold">Οι προβλεπόμενες επεμβάσεις δεν θίγουν, δεν επηρεάζουν και δεν επιφέρουν καμία τροποποίηση στον φέροντα οργανισμό (Φ.Ο.)</span> του κτιρίου,
                                 όπως αυτός έχει κατασκευαστεί βάσει της εγκεκριμένης οικοδομικής άδειας και των εκάστοτε εγκεκριμένων στατικών μελετών.
@@ -250,7 +250,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_name", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.firstName || ""}
+                                                // defaultValue={owner?.firstName || ""}
                                             />
                                         </div>
 
@@ -261,7 +261,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_surname", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.lastName || ""}
+                                                // defaultValue={owner?.lastName || ""}
                                             />
                                         </div>
 
@@ -272,7 +272,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_father_name", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.fatherName || "N/A"}
+                                                // defaultValue={owner?.fatherName || ""}
                                             />
                                         </div>
 
@@ -283,7 +283,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_mother_name", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.motherName || "N/A"}
+                                                // defaultValue={owner?.motherName || ""}
                                             />
                                         </div>
 
@@ -294,7 +294,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="date"
                                                 {...register("owner_birth_date", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.birthDate || "N/A"}
+                                                // defaultValue={owner?.birthDate || ""}
                                             />
                                         </div>
 
@@ -305,7 +305,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_birth_place", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.birthPlace}
+                                                // defaultValue={owner?.birthPlace}
                                             />
                                         </div>
 
@@ -316,7 +316,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_id", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.idNumber || "N/A"}
+                                                // defaultValue={owner?.idNumber || ""}
                                             />
                                         </div>
 
@@ -327,7 +327,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_phone", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.phone || "N/A"}
+                                                // defaultValue={owner?.phone || ""}
                                             />
                                         </div>
 
@@ -338,7 +338,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_city", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.city || "N/A"}
+                                                // defaultValue={owner?.city || ""}
                                             />
                                         </div>
 
@@ -349,7 +349,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_address", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.address || "N/A"}
+                                                // defaultValue={owner?.address || ""}
                                             />
                                         </div>
 
@@ -360,7 +360,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_address_number", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.addressNumber || "N/A"}
+                                                // defaultValue={owner?.addressNumber || ""}
                                             />
                                         </div>
 
@@ -371,7 +371,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_postal_code", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.postalCode || "N/A"}
+                                                // defaultValue={owner?.postalCode || ""}
                                             />
                                         </div>
 
@@ -382,7 +382,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="email"
                                                 {...register("owner_email", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.email || "N/A"}
+                                                // defaultValue={owner?.email || ""}
                                             />
                                         </div>
 
@@ -393,7 +393,7 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                                                 type="text"
                                                 {...register("owner_afm", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                 defaultValue={owner?.afm || "N/A"}
+                                                //  defaultValue={owner?.afm || ""}
                                             />
                                         </div>
 
@@ -423,7 +423,6 @@ export default function F5D4({ allData }: { allData: allDataProps }) {
                         </div>
                     )}
                 </div>
-            ))}
         </div>
     )
 }

@@ -6,70 +6,112 @@ import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
+import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
-interface FormData {
-    owner_name?: string;
-    owner_surname?: string;
-    owner_father_name?: string;
-    owner_mother_name?: string;
-    owner_birth_date?: string;
-    owner_birth_place?: string;
-    owner_id?: string;
-    owner_phone?: string;
-    owner_city?: string;
-    owner_address?: string;
-    owner_address_number?: string;
-    owner_postal_code?: string;
-    owner_email?: string;
-    owner_afm?: string;
-    project_description?: string;
+interface FormInputs {
+    bornDate?: string;
+    bornTown?: string;
+    email?: string;
+    engVatNumber?: string;
+    fatherName?: string;
+    firstName?: string;
+    idCardNumber?: string;
+    lastName?: string;
+    motherName?: string;
+    phone?: string;
+    postalCode?: string;
+    signature?: string;
+    streetAddress?: string;
+    streetNumber?: string;
+    town?: string;
+    projectDescription?: string;
+    ydom?: string;
+    serviceId?: string;
 }
 // end editing 
 
 interface allDataProps {
     engineers: any[];
-    projectDescription?: string;    
+    projectDescription?: string;
     ydom?: string;
     propertyPostalCode?: string;
     propertyAddress?: string;
     propertyPlace?: string;
+    id: string;
+    createdById: string;
+    serviceId: string;
+    createdAt: string;
 }
 
 
 
 export default function F6D9({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
-    const { propertyPostalCode } = allData || {};
-    const { propertyAddress } = allData || {};
-    const { propertyPlace } = allData || {};
-    console.log("Engineers Data:", engineers);
+    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
 
+    const [updateProject] = useUpdateProjectMutation()
     // for editing data 
     const {
         register,
         handleSubmit,
         reset,
-        formState: { errors },
-    } = useForm<FormData>({})
+    } = useForm<FormInputs>({})
 
-    const onSubmit = (data: FormData) => {
-        console.log("Updated Data:", data)
-        reset()
-        setIsEditModalOpen(false)
+    // Submit handler
+    const onSubmit = async (data: FormInputs) => {
+        if (selectedOwnerIndex === null) return;
+
+        // old owner copy
+        const updatedOwners = [...allData.engineers];
+
+        //    owner replace of old owner 
+        updatedOwners[selectedOwnerIndex] = {
+            ...updatedOwners[selectedOwnerIndex],
+            ...data
+        };
+
+        // make formData 
+        const formData = new FormData();
+        formData.append("data", JSON.stringify({
+            engineers: updatedOwners,
+            projectDescription: data.projectDescription || allData.projectDescription,
+            ydom: data.ydom || allData.ydom,
+            serviceId: serviceId
+        }));
+
+        try {
+            await updateProject({
+                projectId: id,
+                userId: createdById,
+                formData: formData,
+            }).unwrap()
+
+            reset();
+            setIsEditModalOpen(false)
+            setSelectedOwnerIndex(null)
+
+        } catch (error) {
+            console.error("Update failed", error)
+        }
+
     }
 
     return (
         <div>
-            {engineers && engineers?.map((engineer: any, index: number) => (
+            {engineers.length  > 0 ? (engineers?.map((engineer: any, index: number) => (
                 <div key={index} className="max-w-[796px] mx-auto bg-white">
                     <div className="text-right -mt-3">
                         <button
-                            className="mt-1 px-4 py-1"
-                            onClick={() => setIsEditModalOpen(true)}
+                            className="px-4 py-1"
+                            onClick={() => {
+                                setSelectedOwnerIndex(index);
+                                setIsEditModalOpen(true);
+                            }}
                         >
                             <FaRegEdit className="text-black text-2xl cursor-pointer" />
                         </button>
@@ -126,7 +168,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{engineer?.motherName  || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{engineer?.motherName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -134,7 +176,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                                <div className="flex-1 p-2 font-bold">{format(new Date(engineer?.bornDate), "dd/MM/yyyy")}</div>
+                                <div className="flex-1 p-2 font-bold">{engineer?.bornDate && format(new Date(engineer?.bornDate), "dd/MM/yyyy") || "N/A"}</div>
                             </div>
                         </div>
 
@@ -142,7 +184,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-                                <div className="flex-1 p-2 font-bold">{engineer?.bornTown  || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{engineer?.bornTown || "N/A"}</div>
                             </div>
                         </div>
 
@@ -150,9 +192,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                <div className=" p-2 border-r border-gray-400 font-bold">{engineer?.idCardNumber  || "N/A"}</div>
+                                <div className=" p-2 border-r border-gray-400 font-bold">{engineer?.idCardNumber || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-                                <div className="flex-1 p-2 font-bold">{engineer?.phone  || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{engineer?.phone || "N/A"}</div>
                             </div>
                         </div>
 
@@ -160,9 +202,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                                <div className=" p-2 border-r border-gray-400 font-bold ">{engineer?.town  || "N/A"}</div>
+                                <div className=" p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
-                                <div className="w-24 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress  || "N/A"}</div>
+                                <div className="w-24 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
                                 <div className="w-20 p-2 border-r border-gray-400 font-bold ">{engineer?.streetNumber || "N/A"}</div>
                                 <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
@@ -207,7 +249,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {propertyAddress|| "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
+                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
                             <p>
                                 τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
                             <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>
@@ -221,7 +263,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                 <div className="text-right space-y-2">
                                     <div className="flex items-center gap-4">
                                         <span className="text-sm">Ημερομηνία :</span>
-                                        <span className="text-sm font-medium">8/18/2025</span>
+                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
                                     </div>
                                     <div className="text-sm mt-8 text-center">
                                         <div>( Υπογραφή )</div>
@@ -236,7 +278,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         </div>
                     </div>
                     {/* EDIT MODAL */}
-                    {isEditModalOpen && (
+                    {isEditModalOpen && selectedOwnerIndex !== null && (
                         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
                             <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
                                 {/* Close button */}
@@ -253,14 +295,25 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                         onSubmit={handleSubmit(onSubmit)}
                                         className="grid grid-cols-1 md:grid-cols-2 gap-4"
                                     >
+                                        {/* ydom */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">ΠΡΟΣ *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("ydom", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData?.ydom || ""}
+                                            />
+                                        </div>
+
                                         {/* Name */}
                                         <div className="flex flex-col gap-2">
                                             <label className="font-medium">Όνομα *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_name", { required: "This field is required" })}
+                                                {...register("firstName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.firstName || "N/A"} 
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.firstName || ""}
                                             />
                                         </div>
 
@@ -269,9 +322,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Επώνυμο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_surname", { required: "This field is required" })}
+                                                {...register("lastName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.lastName || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.lastName || ""}
                                             />
                                         </div>
 
@@ -280,9 +333,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Όνομα Πατρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_father_name", { required: "This field is required" })}
+                                                {...register("fatherName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.fatherName || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.fatherName || ""}
                                             />
                                         </div>
 
@@ -291,9 +344,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Όνομα Μητρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_mother_name", { required: "This field is required" })}
-                                                className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.motherName  || "N/A"}
+                                                {...register("motherName", { required: "This field is required" })}
+                                                className="flex-1 border motherName-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.motherName || ""}
                                             />
                                         </div>
 
@@ -302,9 +355,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Ημερομηνία Γέννησης *:</label>
                                             <input
                                                 type="date"
-                                                {...register("owner_birth_date", { required: "This field is required" })}
+                                                {...register("bornDate", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.bornDate  || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.bornDate || ""}
                                             />
                                         </div>
 
@@ -313,9 +366,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Τόπος Γέννησης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_birth_place", { required: "This field is required" })}
+                                                {...register("bornTown", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.bornTown  || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.bornTown || ""}
                                             />
                                         </div>
 
@@ -324,9 +377,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Αριθμός Ταυτότητας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_id", { required: "This field is required" })}
+                                                {...register("idCardNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.idCardNumber  || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.idCardNumber || ""}
                                             />
                                         </div>
 
@@ -335,9 +388,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Τηλέφωνο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_phone", { required: "This field is required" })}
+                                                {...register("phone", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.phone  || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.phone || ""}
                                             />
                                         </div>
 
@@ -346,9 +399,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Πόλη *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_city", { required: "This field is required" })}
+                                                {...register("town", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.town  || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.town || ""}
                                             />
                                         </div>
 
@@ -357,9 +410,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Διεύθυνση *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_address", { required: "This field is required" })}
+                                                {...register("streetAddress", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.streetAddress  || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.streetAddress || ""}
                                             />
                                         </div>
 
@@ -368,9 +421,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Αριθμός Διεύθυνσης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_address_number", { required: "This field is required" })}
+                                                {...register("streetNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.streetNumber || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.streetNumber || ""}
                                             />
                                         </div>
 
@@ -379,9 +432,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Ταχυδρομικός Κώδικας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_postal_code", { required: "This field is required" })}
+                                                {...register("postalCode", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.postalCode || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.postalCode || ""}
                                             />
                                         </div>
 
@@ -390,9 +443,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Email *:</label>
                                             <input
                                                 type="email"
-                                                {...register("owner_email", { required: "This field is required" })}
+                                                {...register("email", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.email || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.email || ""}
                                             />
                                         </div>
 
@@ -401,20 +454,20 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Α.Φ.Μ. *:</label>
                                             <input
                                                 type="text"
-                                                {...register("owner_afm", { required: "This field is required" })}
+                                                {...register("engVatNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={engineer?.engVatNumber || "N/A"}
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.engVatNumber || ""}
                                             />
                                         </div>
 
                                         {/* Project Description */}
-                                        <div className="flex flex-col gap-2 md:col-span-2">
+                                        <div className="flex flex-col gap-2">
                                             <label className="font-medium">Περιγραφή Έργου *:</label>
                                             <input
                                                 type="text"
-                                                {...register("project_description", { required: "This field is required" })}
+                                                {...register("projectDescription", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                // defaultValue={project_description || ""}
+                                                defaultValue={allData.projectDescription || ""}
                                             />
                                         </div>
 
@@ -433,7 +486,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         </div>
                     )}
                 </div>
-            ))}
+            ))) : (
+                <h2 className="text-3xl font-bold p-10">Data not found</h2>
+            )}
         </div>
 
     )

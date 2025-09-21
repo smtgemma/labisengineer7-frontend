@@ -17,7 +17,6 @@ import F6D4 from "./f-06/f6D4/page";
 import F6D7 from "./f-06/f6D7/page";
 import F6D8 from "./f-06/f6D8/page";
 import F6D9 from "./f-06/f6D9/page";
-import F10D1 from "./f-10/f10D1/page";
 
 import {
   useDownloadTemplatePdfQuery,
@@ -35,6 +34,18 @@ import F6D13 from "./f-06/f6D13/page";
 import F6D14 from "./f-06/f6D14/page";
 import F6D15 from "./f-06/f6D15/page";
 import Test from "@/app/test/page";
+import F5D6 from "./f-05/f5D6/page";
+import F5D7 from "./f-05/f5D7/page";
+import F5D8 from "./f-05/f5D8/page";
+import F5D9 from "./f-05/f5D9/page";
+import F5D10 from "./f-05/f5D10/page";
+import F5D11 from "./f-05/f5D11/page";
+import F5D12 from "./f-05/f5D12/page";
+import F5D13 from "./f-05/f5D13/page";
+import F5D14 from "./f-05/f5D14/page";
+import F5D15 from "./f-05/f5D15/page";
+import F5D16 from "./f-05/f5D16/page";
+import F5D17 from "./f-05/f5D17/page";
 
 export interface UserData {
   id: string;
@@ -86,6 +97,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const id = stepByStepData?.projectIdCode;
   const projectId = stepByStepData?.projectIdCode?.result.id;
   const userId = dataAllFIled?.createdById;
+  console.log(subCategoryData, "..........................................")
 
   console.log(stepByStepData)
   console.log(stepByStepData?.projectIdCode?.id)
@@ -483,6 +495,47 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F5D5 allData={allData} />
               )} */}
 
+
+              {/* file 5======== */}
+              {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
+                <F5D6 allData={allData} /> //1
+              )}
+              {selected === "Ενημερωτικό Σημείωμα Σχεδίων Όψεων" && (
+                <F5D7 allData={allData} /> //2
+              )}
+              {selected === "Πίνακας 3(ΙΚΑ)" && (
+                <F5D8 allData={allData} /> //3
+              )}
+              {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
+                <F5D9 allData={allData} /> //4
+              )}
+              {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
+                <F5D10 allData={allData} /> //5
+              )}
+              {selected === "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη" && (
+                <F5D11 allData={allData} /> //6
+              )}
+              {selected === "ΥΔ Ανάθεσης Ιδιοκτήτη" && (
+                <F5D12 allData={allData} /> //7
+              )}
+              {selected === "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού" && (
+                <F5D13 allData={allData} /> //8
+              )}
+              {selected === "ΥΔ Ανάληψης Έργου Μηχανικού" && (
+                <F5D14 allData={allData} /> //9
+              )}
+              {selected === "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού" && (
+                <F5D15 allData={allData} /> //10
+              )}
+              {selected === "Υπόδειγμα Συναίνεσης Συνιδιοκτητών" && (
+                <F5D16 allData={allData} /> //11
+              )}
+              {selected === "Τεχνική Έκθεση / Βεβαίωση Μηχανικού" && (
+                <F5D17 allData={allData} /> //12
+              )}
+
+
+
               {/* file 6======== */}
               {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
                 <F6D8 allData={allData} /> // 1
@@ -495,11 +548,11 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 "YΔ Φέροντα Οργανισμού" && (
                   <F6D10 allData={allData} /> // 3
                 )}
-              {/* {selected === "YΔ Συνιδιοκτητών" && (
-                <F6D4 allData={allData} /> // 4
-              )} */}
+              {selected === "YΔ Συνιδιοκτητών" && (
+                <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
+              )}
               {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
-                <F6D13 allData={allData} setIsModalOpen={setIsModalOpen}/> // 5
+                <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
               )}
               {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
                 <F6D1 allData={allData} /> // 6
@@ -523,14 +576,15 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F6D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
-                <F6D15 allData={allData} /> // 13
+                <F6D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 13
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
-                <F6D3 allData={allData} /> // 14
+                <F6D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 14
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
-                <F6D4 allData={allData} /> // 15
+                <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 15
               )}
+              
               {/* {selected === "Autofill (προαιρετικό add-on)" && (
                 <div>Autofill (προαιρετικό add-on)</div> 
               )} */}

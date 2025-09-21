@@ -178,6 +178,9 @@ const Category = () => {
     dispatch(setMultipleSubcategory(selectedOptions));
     navigate.push("/description-task");
   };
+  const aiExtractData = useSelector((state: RootState) => state.aiData);
+  console.log("Redux Data", aiExtractData, "....................");
+  console.log(categories, "==========================category");
 
   return (
     <div className={`bg-[#F1F5F9] py-8 min-h-screen`}>

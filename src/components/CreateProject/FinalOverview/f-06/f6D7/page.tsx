@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import StampComponent from "../../shared/signture/signture"
+import { format } from "date-fns";
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -22,13 +23,14 @@ interface allDataProps {
     owners: any[]
     allDescriptionTasks: any[]
     technical_description: string
-    Horizontal_property_name: string
+    horizontalPropertyName: string
     projectDescription: string
     id: string
     createdById: string
     propertyPostalCode: string
     propertyAddress: string
     propertyPlace: string
+    createdAt: string
 }
 
 type F6D5Props = {
@@ -42,8 +44,7 @@ export default function F6D7({ allData, setIsModalOpen }: F6D5Props) {
 
     const owner = allData?.owners?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress } = allData || {}
-    const { id, createdById } = allData || {}
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, horizontalPropertyName, createdAt } = allData || {}
 
 
     const [updateProject] = useUpdateProjectMutation()
@@ -72,7 +73,7 @@ export default function F6D7({ allData, setIsModalOpen }: F6D5Props) {
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
-            serviceId: "68c565d9d5f94c3ac153e678",
+            serviceId: serviceId,
             ...data
         }
         const formData = new FormData()
@@ -128,7 +129,7 @@ export default function F6D7({ allData, setIsModalOpen }: F6D5Props) {
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property</span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city} , {owner?.postal_code} ( FOR BUILDING),</span>
+                <p>Στο ακίνητο <span className="font-semibold">Description for building/ {horizontalPropertyName || "N/A"}</span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city} , {owner?.postal_code} ( FOR BUILDING),</span>
                     πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
 
@@ -280,7 +281,7 @@ export default function F6D7({ allData, setIsModalOpen }: F6D5Props) {
 
                         <div className="text-center">
                             <p>Ημερομηνία :</p>
-                            <p>6/25/2025</p>
+                            <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</p>
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>

@@ -18,17 +18,20 @@ interface FormData {
 interface allDataProps {
     owners: any[];
     allDescriptionTasks: any[]
-    technical_description: string;
-    Horizontal_property_name: string;
+    projectDescription: string;
+    horizontalPropertyName: string;
+    propertyPostalCode: string;
+    propertyAddress: string;
+    propertyPlace: string;
 }
 
-export default function F5D1({ allData }: { allData: allDataProps }) {
+export default function F5D7({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
-    const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { technical_description } = allData || {};
-    const { Horizontal_property_name } = allData || {};
+    const {allDescriptionTasks} = allData || {}
+    const { horizontalPropertyName, projectDescription, propertyPostalCode, propertyAddress, propertyPlace } = allData || {};
+    console.log(allDescriptionTasks)
 
 
     // for editing data 
@@ -58,19 +61,19 @@ export default function F5D1({ allData }: { allData: allDataProps }) {
             </div>
             {/* Title */}
             <h2 className="text-center font-semibold underline text-sm mb-2">
-                ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ - ΒΕΒΑΙΩΣΗ ΜΗΧΑΝΙΚΟΥ
+                ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΣΗΣ ΣΧΕΔΙΩΝ ΟΨΕΩΝ
             </h2>
 
             {/* Project Information */}
             <div className="mb-8 space-y-4">
                 <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    {/* <h3 className=" text-sm">{project_description || "N/A"}</h3> */}
+                    <h3 className=" text-sm">{projectDescription || "N/A"}</h3>
                 </div>
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{owner?.address || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"} ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">{propertyAddress|| "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING)</h3>
                 </div>
 
                 <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
@@ -81,7 +84,7 @@ export default function F5D1({ allData }: { allData: allDataProps }) {
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">{technical_description || "N/A"}/ {Horizontal_property_name || "N/A"}</span> επί της οδού <br /> <span className="font-semibold">Address,Town/Area , postal code ( FOR BUILDING),</span>
+                <p>Στο ακίνητο <span className="font-semibold">Description for building/ {horizontalPropertyName || "N/A"}</span> επί της οδού <br /> <span className="font-semibold">{propertyAddress|| "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING),</span>
                     πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
 
@@ -118,12 +121,14 @@ export default function F5D1({ allData }: { allData: allDataProps }) {
                 </div> */}
 
                 {
-                     allDescriptionTasks?.map((task: any, index: number) => (
+                    allDescriptionTasks ? (allDescriptionTasks?.map((task: any, index: number) => (
                         <div key={index}>
                             <h3 className="text-sm font-bold">● {task?.id}</h3>
                             <p className="text-sm">{task?.description}</p>
                         </div>
-                    ))
+                    ))) : (
+                        <h2 className="text-3xl font-bold">Data not found</h2>
+                    )
                 }
                 <div>
                     <p className="text-sm mb-6">Για το σύνολο των προβλεπόμενων εργασιών <span className="text-sm font-bold">δεν απαιτείται η υποβολή αρχιτεκτονικών όψεων,</span> καθώς:</p>

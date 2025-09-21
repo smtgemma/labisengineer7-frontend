@@ -2,40 +2,95 @@
 
 import { useState } from "react"
 import StampComponent from "../../shared/signture/signture"
+import { format } from "date-fns";
 // for editing 
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
+import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 
 interface FormData {
-    owner_name: string
-    project_description: string
-    owner_address: string
-    owner_city: string
-    owner_postal_code: string
+    projectDescription: string;
+    propertyAddress: string;
+    propertyPlace: string;
+    propertyPostalCode: string;
+    owners: {
+        firstName: string;
+        lastName: string;
+    }[];
 }
+
+interface allDataProps {
+    owners: any[]
+    allDescriptionTasks: any[]
+    technical_description: string
+    horizontalPropertyName: string
+    projectDescription: string
+    id: string
+    createdById: string
+    propertyPostalCode: string
+    propertyAddress: string
+    propertyPlace: string
+    createdAt: string
+}
+
+type F6D5Props = {
+    allData: any;
+    setIsModalOpen: (value: boolean) => void;
+};
 // end editing 
 
-export default function F6D15({ allData }: { allData: any }) {
+export default function F6D15({ allData, setIsModalOpen }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { projectDescription } = allData || {};
+    const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, horizontalPropertyName, createdAt } = allData || {}
+    const { id, createdById } = allData || {}
 
 
-    console.log(allData)
+    const [updateProject] = useUpdateProjectMutation()
 
     // for editing data 
     const {
         register,
         handleSubmit,
+        control,
         reset,
         formState: { errors },
-    } = useForm<FormData>({})
+    } = useForm<FormData>({
+        defaultValues: {
+            projectDescription: allData?.projectDescription || "",
+            propertyAddress: allData?.propertyAddress || "",
+            propertyPlace: allData?.propertyPlace || "",
+            propertyPostalCode: allData?.propertyPostalCode || "",
+            owners: [
+                {
+                    firstName: allData?.owners?.[0]?.firstName || "",
+                    lastName: allData?.owners?.[0]?.lastName || "",
+                },
+            ],
+        },
+    })
 
-    const onSubmit = (data: FormData) => {
+    const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
+        const addNewData = {
+            serviceId: "68c7d2cc94994d27e3fa0148",
+            ...data
+        }
+        const formData = new FormData()
+        formData.append("data", JSON.stringify(addNewData))
+
+        try {
+            const responsive = await updateProject({ projectId: id, userId: createdById, formData }).unwrap()
+            console.log(responsive)
+        } catch (error) {
+            console.log(error)
+        }
+
         reset()
+        setIsEditModalOpen(false)
+        setIsModalOpen(false)
     }
 
     return (
@@ -62,19 +117,31 @@ export default function F6D15({ allData }: { allData: any }) {
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{owner?.ownerAddress || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"} ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">
+                        {propertyAddress || "N/A"}, {propertyPlace || "N/A"},
+                        {propertyPostalCode || "N/A"} ( FOR BUILDING)
+                    </h3>
                 </div>
 
                 <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
                     <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">{owner?.firstName || "N/A"}</h3>
+                    <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
                 </div>
             </div>
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property</span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city} , {owner?.postal_code} ( FOR BUILDING),</span>
-                    πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
+                <p>
+                    Στο ακίνητο{" "}
+                    <span className="font-semibold">
+                        Description for building/ {horizontalPropertyName || "N/A"}
+                    </span>
+                    επί της οδού <br />{" "}
+                    <span className="font-semibold">
+                        {propertyAddress || "N/A"},{propertyPlace || "N/A"} , {propertyPostalCode || "N/A"} ( FOR BUILDING),
+                    </span>
+                    πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :
+                </p>
             </div>
 
             <div className="space-y-6 ml-10">
@@ -225,7 +292,7 @@ export default function F6D15({ allData }: { allData: any }) {
 
                         <div className="text-center">
                             <p>Ημερομηνία :</p>
-                            <p>6/25/2025</p>
+                            <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</p>
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>
@@ -261,52 +328,68 @@ export default function F6D15({ allData }: { allData: any }) {
                                 onSubmit={handleSubmit(onSubmit)}
                                 className="space-y-4 p-4 border rounded-lg bg-white shadow-md"
                             >
-                                {/* Employer */}
-                                <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Εργοδότες *:</label>
-                                    <input
-                                        placeholder={owner?.firstName || "owner_name"}
-                                        type="text"
-                                        {...register("owner_name", { required: "This field is required" })}
-                                        className="flex-1 border p-2 rounded text-sm"
-                                    />
-                                </div>
-
                                 {/* Project */}
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Έργο *:</label>
                                     <input
-                                        placeholder={projectDescription || "projectDescription"}
+                                        defaultValue={projectDescription || "Project Description "}
                                         type="text"
-                                        {...register("project_description", { required: "This field is required" })}
+                                        {...register("projectDescription", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
 
                                 {/* Address */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Διεύθυνση Έργου *:</label>
+                                    <label className="font-medium w-1/4">Θέση*:</label>
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <input
                                             type="text"
-                                            placeholder={owner?.ownerAddress || "Address"}
-                                            {...register("owner_address", { required: "Address is required" })}
+                                            defaultValue={propertyAddress || "propertyAddress"}
+                                            {...register("propertyAddress", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner?.city || "City"}
-                                            {...register("owner_city", { required: "City is required" })}
+                                            defaultValue={propertyPlace || "propertyNumber"}
+                                            {...register("propertyPlace", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner?.postal_code || "Postal Code"}
-                                            {...register("owner_postal_code", { required: "Postal code is required" })}
+                                            defaultValue={propertyPostalCode || "municipalityCommunity"}
+                                            {...register("propertyPostalCode", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>
                                 </div>
+                                {/* Address */}
+                                {/* First Name */}
+                                <Controller
+                                    name="owners.0.firstName"
+                                    control={control}
+                                    rules={{ required: "First name is required" }}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            placeholder="First Name"
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    )}
+                                />
+                                {/* Last Name */}
+                                <Controller
+                                    name="owners.0.lastName"
+                                    control={control}
+                                    rules={{ required: "Last name is required" }}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            placeholder="Last Name"
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    )}
+                                />
 
                                 {/* Submit */}
                                 <div className="flex justify-end">
