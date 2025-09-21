@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import StampComponent from "../../shared/signture/signture"
+import { format } from "date-fns"
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -29,6 +30,8 @@ interface allDataProps {
     propertyPostalCode: string
     propertyAddress: string
     propertyPlace: string
+    createdAt: string
+    horizontalPropertyName: string
 }
 
 type F6D5Props = {
@@ -42,7 +45,7 @@ export default function F6D7({ allData, setIsModalOpen }: F6D5Props) {
 
     const owner = allData?.owners?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress } = allData || {}
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
 
 
     const [updateProject] = useUpdateProjectMutation()
@@ -127,7 +130,7 @@ export default function F6D7({ allData, setIsModalOpen }: F6D5Props) {
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property</span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city} , {owner?.postal_code} ( FOR BUILDING),</span>
+                <p>Στο ακίνητο <span className="font-semibold">Description for building/ { horizontalPropertyName || "N/A"} </span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city} , {owner?.postal_code} ( FOR BUILDING),</span>
                     πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
 
@@ -279,7 +282,7 @@ export default function F6D7({ allData, setIsModalOpen }: F6D5Props) {
 
                         <div className="text-center">
                             <p>Ημερομηνία :</p>
-                            <p>6/25/2025</p>
+                            <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</p>
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>

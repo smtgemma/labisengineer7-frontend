@@ -228,7 +228,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
-            serviceId: "68c7d2cc94994d27e3fa0148",
+            serviceId: serviceId,
             ...data
         }
         const formData = new FormData()
@@ -434,7 +434,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΕΡΓΟ :</span>
-                            <span className="flex-1 font-bold">PROJECT DESCRIPTION</span>
+                            <span className="flex-1 font-bold">{projectDescription || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
@@ -450,7 +450,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-start justify-center">
                                 <span className="flex-1  font-bold">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1 font-bold">SPECIALTY</span>
+                                <span className="flex-1 font-bold">{specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -648,18 +648,18 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyPlace", { required: "Address is required" })}
+                                            {...register("propertyAddress", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPlace || "propertyNumber"}
+                                            defaultValue={propertyPlace || "propertyPlace"}
                                             {...register("propertyPlace", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPostalCode || "municipalityCommunity"}
+                                            defaultValue={propertyPostalCode || "propertyPostalCode"}
                                             {...register("propertyPostalCode", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />

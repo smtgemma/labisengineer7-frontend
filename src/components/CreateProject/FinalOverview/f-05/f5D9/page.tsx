@@ -42,19 +42,19 @@ interface allDataProps {
 
 type F6D5Props = {
     allData: any;
-    //   setIsModalOpen: (value: boolean) => void;
+      setIsModalOpen: (value: boolean) => void;
 };
 
 
 
 export default function F5D9({ allData,
-    //  setIsModalOpen 
+     setIsModalOpen 
 }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt } = allData || {};
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt, specialty } = allData || {};
     const descriptions = [
         {
             "id": 1,
@@ -230,7 +230,7 @@ export default function F5D9({ allData,
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
-            serviceId: "68c7d2cc94994d27e3fa0148",
+            serviceId: serviceId,
             ...data
         }
         const formData = new FormData()
@@ -245,7 +245,7 @@ export default function F5D9({ allData,
 
         reset()
         setIsEditModalOpen(false)
-        // setIsModalOpen(false)
+        setIsModalOpen(false)
     }
 
     return (
@@ -294,7 +294,7 @@ export default function F5D9({ allData,
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-center justify-center">
                                 <span className="flex-1  font-bold">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1  font-bold">SPECIALTY</span>
+                                <span className="flex-1  font-bold">{specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -436,7 +436,7 @@ export default function F5D9({ allData,
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΕΡΓΟ :</span>
-                            <span className="flex-1 font-bold">PROJECT DESCRIPTION</span>
+                            <span className="flex-1 font-bold">{projectDescription || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
@@ -452,7 +452,7 @@ export default function F5D9({ allData,
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-start justify-center">
                                 <span className="flex-1  font-bold">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1 font-bold">SPECIALTY</span>
+                                <span className="flex-1 font-bold">{specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -650,18 +650,18 @@ export default function F5D9({ allData,
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyPlace", { required: "Address is required" })}
+                                            {...register("propertyAddress", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPlace || "propertyNumber"}
+                                            defaultValue={propertyPlace || "propertyPlace"}
                                             {...register("propertyPlace", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPostalCode || "municipalityCommunity"}
+                                            defaultValue={propertyPostalCode || "propertyPostalCode"}
                                             {...register("propertyPostalCode", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />

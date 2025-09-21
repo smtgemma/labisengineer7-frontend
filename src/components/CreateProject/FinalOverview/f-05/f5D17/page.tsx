@@ -45,7 +45,15 @@ export default function F5D17({ allData,
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
     const { id, createdById, serviceId } = allData || {}
-
+    const { projectDescription,
+        propertyAddress,
+        propertyNumber,
+        municipalityCommunity,
+        propertyPostalCode,
+        createdAt,
+        technicalDescription,
+        technicalDescriptionTwo,
+    } = allData || {};
 
 
     const {
@@ -60,26 +68,9 @@ export default function F5D17({ allData,
             owners: allData?.owners || [{ firstName: "", lastName: "" }],
         },
     })
-
-
-    const { projectDescription,
-        propertyAddress,
-        propertyNumber,
-        municipalityCommunity,
-        propertyPostalCode,
-        createdAt,
-        technicalDescription,
-        technicalDescriptionTwo,
-    } = allData || {};
-
     const [updateProject] = useUpdateProjectMutation()
 
     // for editing data 
-
-
-
-
-
 
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
