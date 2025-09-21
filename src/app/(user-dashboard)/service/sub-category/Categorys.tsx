@@ -3,11 +3,7 @@
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { setMultipleSubcategory } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { RootState } from "@/redux/store";
-import {
-  Building2,
-  Trees,
-  Zap
-} from "lucide-react";
+import { Building2, Trees, Zap } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -154,13 +150,13 @@ const Category = () => {
       prevCategories.map((category) =>
         category.id === categoryId
           ? {
-            ...category,
-            options: category.options.map((option) =>
-              option.id === optionId
-                ? { ...option, selected: !option.selected }
-                : option
-            ),
-          }
+              ...category,
+              options: category.options.map((option) =>
+                option.id === optionId
+                  ? { ...option, selected: !option.selected }
+                  : option
+              ),
+            }
           : category
       )
     );
@@ -182,8 +178,6 @@ const Category = () => {
     dispatch(setMultipleSubcategory(selectedOptions));
     navigate.push("/description-task");
   };
-  const aiExtractData = useSelector((state: RootState) => state.aiData);
-  console.log("Redux Data", aiExtractData, "....................")
 
   return (
     <div className={`bg-[#F1F5F9] py-8 min-h-screen`}>
@@ -197,10 +191,7 @@ const Category = () => {
           {categories
             .slice(0, Math.ceil(categories.length / 2))
             .map((category) => (
-              <div
-                key={category.id}
-                className=" rounded-lg p-6 "
-              >
+              <div key={category.id} className=" rounded-lg p-6 ">
                 <div className="flex items-center gap-3 mb-4">
                   {category.icon}
                   <h2 className="text-lg font-semibold text-gray-900">
@@ -214,7 +205,9 @@ const Category = () => {
                       <SelectOption
                         option={option}
                         categoryId={option.id}
-                        toggleOption={() => toggleOption(category.id, option.id)}
+                        toggleOption={() =>
+                          toggleOption(category.id, option.id)
+                        }
                       />
                     </div>
                   ))}
@@ -228,10 +221,7 @@ const Category = () => {
           {categories
             .slice(Math.ceil(categories.length / 2))
             .map((category) => (
-              <div
-                key={category.id}
-                className=" rounded-lg p-6 "
-              >
+              <div key={category.id} className=" rounded-lg p-6 ">
                 <div className="flex items-center gap-3 mb-4">
                   {category.icon}
                   <h2 className="text-lg font-semibold text-gray-900">
@@ -259,8 +249,7 @@ const Category = () => {
         <PrimaryButton
           label="Save & Continue"
           onClick={handleSave}
-        >
-        </PrimaryButton>
+        ></PrimaryButton>
       </div>
     </div>
   );
