@@ -1,3 +1,5 @@
+
+
 interface Service {
     id: string;
     title: string;
@@ -14,152 +16,182 @@ export interface TemplateName {
     required?: boolean;
 }
 
-export const templateName: TemplateName[] = [
-    // subcatagory 6
-    {
-        id: "owner_assignment_1",
-        title: "YΔ Ανάθεσης Ιδιοκτήτη",
-        price: 0.5,
-    },
-    {
-        id: "engineer_assumption_2",
-        title: "YΔ Ανάληψης Έργου Μηχανικού",
-        price: 0.5,
-    },
-    {
-        id: "bearing_organization_3",
-        title: "YΔ Φέροντα Οργανισμού",
-        price: 0.5,
-    },
-    // {
-    //     id: "co_owners_4",
-    //     title: "YΔ Συνιδιοκτητών",
-    //     price: 0.5,
-    // },
-    {
-        id: "technical_report_5",
-        title: "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου",
-        price: 1,
-    },
-    {
-        id: "detailed_budget_6",
-        title: "Αναλυτικός Προϋπολογισμός Εργασιών",
-        price: 0.5,
-    },
-    {
-        id: "safety_file_7",
-        title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
-        price: 1,
-    },
-    {
-        id: "waste_management_8",
-        title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
-        price: 0.5,
-    },
-    {
-        id: "table_3_9",
-        title: "Πίνακας 3",
-        price: 0.5,
-    },
-    {
-        id: "active_fire_protection_10",
-        title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας",
-        price: 0.5,
-    },
-    {
-        id: "passive_fire_protection_11",
-        title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας",
-        price: 0.5,
-    },
-    {
-        id: "electrical_mechanical_12",
-        title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων",
-        price: 0.5,
-    },
-    {
-        id: "plumbing_sewage_13",
-        title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης",
-        price: 0.5,
-    },
-    {
-        id: "notarial_deed_14",
-        title: "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης",
-        price: 0.5,
-    },
-    {
-        id: "co_owners_consent_15",
-        title: "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών",
-        price: 0.5,
-    },
-    {
-        id: "autofill_16",
-        title: "Autofill (προαιρετικό add-on)",
-        price: 1,
-    },
+export const templateName1: Record<string, TemplateName[]> = {
+    // subcategory 6
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΣΠΕΡΙΚΕΣ_ΔΙΑΡΡΥΜΙΣΕΙΣ_6: [
+        {
+            id: "owner_assignment_1",
+            title: "YΔ Ανάθεσης Ιδιοκτήτη",
+            price: 0.5,
+        },
+        {
+            id: "engineer_assumption_2",
+            title: "YΔ Ανάληψης Έργου Μηχανικού",
+            price: 0.5,
+        },
+        {
+            id: "bearing_organization_3",
+            title: "YΔ Φέροντα Οργανισμού",
+            price: 0.5,
+        },
+        {
+            id: "technical_report_5",
+            title: "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου",
+            price: 1,
+        },
+        {
+            id: "detailed_budget_6",
+            title: "Αναλυτικός Προϋπολογισμός Εργασιών",
+            price: 0.5,
+        },
+        {
+            id: "safety_file_7",
+            title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
+            price: 1,
+        },
+        {
+            id: "waste_management_8",
+            title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
+            price: 0.5,
+        },
+        {
+            id: "table_3_9",
+            title: "Πίνακας 3",
+            price: 0.5,
+        },
+        {
+            id: "active_fire_protection_10",
+            title:
+                "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας",
+            price: 0.5,
+        },
+        {
+            id: "passive_fire_protection_11",
+            title:
+                "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας",
+            price: 0.5,
+        },
+        {
+            id: "electrical_mechanical_12",
+            title:
+                "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων",
+            price: 0.5,
+        },
+        {
+            id: "plumbing_sewage_13",
+            title:
+                "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης",
+            price: 0.5,
+        },
+        {
+            id: "notarial_deed_14",
+            title:
+                "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης",
+            price: 0.5,
+        },
+        {
+            id: "co_owners_consent_15",
+            title:
+                "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών",
+            price: 0.5,
+        },
+        {
+            id: "autofill_16",
+            title: "Autofill (προαιρετικό add-on)",
+            price: 1,
+        },
+    ],
 
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΔΑΧΤΥΛΙΔΙΩΝ_ΟΠΙΣΘΙΟΠΟΙΗΣΗΣ_ΙΟΚΘΕΙΑΣ_5: [
+        {
+            id: "DOC001",
+            title: "Αναλυτικός Προϋπολογισμός Εργασιών",
+            price: 0.5,
+        },
+        {
+            id: "DOC002",
+            title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων",
+            price: 0.5,
+        },
+        {
+            id: "DOC003",
+            title: "Πίνακας 3(ΙΚΑ)",
+            price: 0.5,
+        },
+        {
+            id: "DOC004",
+            title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
+            price: 0.5,
+        },
+        {
+            id: "DOC005",
+            title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
+            price: 0.5,
+        },
+        {
+            id: "DOC006",
+            title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη",
+            price: 0.5,
+        },
+        {
+            id: "DOC007",
+            title: "ΥΔ Ανάθεσης Ιδιοκτήτη",
+            price: 0.5,
+        },
+        {
+            id: "DOC008",
+            title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού",
+            price: 0.5,
+        },
+        {
+            id: "DOC009",
+            title: "ΥΔ Ανάληψης Έργου Μηχανικού",
+            price: 0.5,
+        },
+        {
+            id: "DOC010",
+            title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού",
+            price: 0.5,
+        },
+        {
+            id: "DOC011",
+            title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών",
+            price: 0.5,
+        },
+        {
+            id: "DOC012",
+            title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού",
+            price: 0.5,
+        },
+        {
+            id: "autofill_16",
+            title: "Autofill (προαιρετικό add-on)",
+            price: 1,
+        },
+    ],
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΡΜΟΠΡΟΖΩΗΣ_7: [
+        {
+            id: "DOC001",
+            title: "Αναλυτικός Προϋπολογισμός Εργασιών 10",
+            price: 0.5,
+        },
 
-    // subcatagory 5
-    {
-        id: "DOC001",
-        title: "Αναλυτικός Προϋπολογισμός Εργασιών",
-        price: 0.5,
-    },
-    {
-        id: "DOC002",
-        title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων",
-        price: 0.5,
-    },
-    {
-        id: "DOC003",
-        title: "Πίνακας 3(ΙΚΑ)",
-        price: 0.5,
-    },
-    {
-        id: "DOC004",
-        title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
-        price: 0.5,
-    },
-    {
-        id: "DOC005",
-        title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
-        price: 0.5,
-    },
-    {
-        id: "DOC006",
-        title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη",
-        price: 0.5,
-    },
-    {
-        id: "DOC007",
-        title: "ΥΔ Ανάθεσης Ιδιοκτήτη",
-        price: 0.5,
-    },
-    {
-        id: "DOC008",
-        title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού",
-        price: 0.5,
-    },
-    {
-        id: "DOC009",
-        title: "ΥΔ Ανάληψης Έργου Μηχανικού",
-        price: 0.5,
-    },
-    {
-        id: "DOC010",
-        title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού",
-        price: 0.5,
-    },
-    {
-        id: "DOC011",
-        title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών",
-        price: 0.5,
-    },
-    {
-        id: "DOC012",
-        title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού",
-        price: 0.5,
-    }
-];
+    ],
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10: [
+        {
+            id: "DOC001",
+            title: "Αναλυτικός Προϋπολογισμός Εργασιών 10",
+            price: 0.5,
+        },
+        {
+            id: "DOC001",
+            title: "Αναλυτικός Προϋπολογισμός Εργασιών 11",
+            price: 0.5,
+        },
+
+    ],
+};
+
 
 export const services: Service[] = [
     {
@@ -184,4 +216,4 @@ export const services: Service[] = [
         description: "Additional declarations and Technical Description.",
         delivery: "1–3 business days",
     },
-];
+]

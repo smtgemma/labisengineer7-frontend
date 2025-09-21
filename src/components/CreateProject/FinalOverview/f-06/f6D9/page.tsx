@@ -103,7 +103,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
 
     return (
         <div>
-            {engineers.length  > 0 ? (engineers?.map((engineer: any, index: number) => (
+            {engineers.length > 0 ? (engineers?.map((engineer: any, index: number) => (
                 <div key={index} className="max-w-[796px] mx-auto bg-white">
                     <div className="text-right -mt-3">
                         <button
@@ -263,7 +263,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                 <div className="text-right space-y-2">
                                     <div className="flex items-center gap-4">
                                         <span className="text-sm">Ημερομηνία :</span>
-                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</span>
                                     </div>
                                     <div className="text-sm mt-8 text-center">
                                         <div>( Υπογραφή )</div>

@@ -4,7 +4,7 @@
 "use client"
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
-import { format } from "date-fns";
+import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -265,7 +265,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                     <div className="text-right space-y-2">
                                         <div className="flex items-center gap-4">
                                             <span className="text-sm">Ημερομηνία :</span>
-                                            <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+                                            <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</span>
                                         </div>
                                         <div className="text-sm mt-8 text-center">
                                             <div>( Υπογραφή )</div>
@@ -488,9 +488,9 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                         )}
                     </div>
                 </div>
-            ))): (
+            ))) : (
                 <h2 className="text-3xl font-bold p-10">Data not found</h2>
-            )} 
+            )}
         </div>
     )
 

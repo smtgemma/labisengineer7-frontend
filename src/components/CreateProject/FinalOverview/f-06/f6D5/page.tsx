@@ -311,7 +311,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                                 allDescriptionTasks.map((task: any, index: number) => (
                                     <div key={index}>
                                         <h3 className="text-sm font-bold">● {task?.id}</h3>
-                                        <p className="text-sm">{task?.description}</p>
+                                        <p className="text-sm mb-6">{task?.description}</p>
                                     </div>
                                 ))
                             }
@@ -467,7 +467,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                                 allDescriptionTasks.map((task: any, index: number) => (
                                     <div key={index}>
                                         <h3 className="text-sm font-bold">● {task?.id}</h3>
-                                        <p className="text-sm">{task?.description}</p>
+                                        <p className="text-sm mb-6">{task?.description}</p>
                                     </div>
                                 ))
                             }
