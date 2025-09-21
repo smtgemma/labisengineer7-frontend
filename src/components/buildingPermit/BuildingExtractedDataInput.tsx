@@ -137,8 +137,8 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
     }, [currentStep]);
 
     return (
-        <div >
-            <div>
+        <div className="relative">
+            <div id="secret" className="absolute w-full h-full z-30">
 
             </div>
             <div className="">
