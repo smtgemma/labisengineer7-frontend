@@ -47,7 +47,10 @@ const MainBuildingPermit: React.FC = () => {
     };
 
     const nextStep = () => {
+        console.log("nest step")
         if (currentStep < workflowSteps.length) {
+            console.log("nest step")
+
             goToStep(currentStep + 1);
         }
     };
