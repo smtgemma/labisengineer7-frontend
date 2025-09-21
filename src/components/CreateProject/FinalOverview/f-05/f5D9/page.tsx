@@ -41,18 +41,19 @@ interface allDataProps {
 }
 
 type F6D5Props = {
-  allData: any;
-//   setIsModalOpen: (value: boolean) => void;
+    allData: any;
+    //   setIsModalOpen: (value: boolean) => void;
 };
 
 
 
 export default function F5D9({ allData,
     //  setIsModalOpen 
-    }: F6D5Props) {
+}: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers?.[0] || {}
+    const allDescriptionTasks = allData?.allDescriptionTasks || {};
     const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt } = allData || {};
     const descriptions = [
         {
@@ -307,7 +308,14 @@ export default function F5D9({ allData,
                         <h3 className="font-medium mb-2 underline">1. TECHNICAL DESCRIPTION OF PROJECT</h3>
                         <div className="mb-2">
                             {/* Mapping over the fetched data */}
-                            {technicalDescription || "N/A"}
+                            {Array.isArray(allDescriptionTasks) &&
+                                allDescriptionTasks.map((task: any, index: number) => (
+                                    <div key={index}>
+                                        <h3 className="text-sm font-bold">● {task?.id}</h3>
+                                        <p className="text-sm mb-6">{task?.description}</p>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
 
@@ -456,7 +464,14 @@ export default function F5D9({ allData,
                         <h3 className="font-medium mb-2">PROJECT WORKS FOR TECHNICAL DESCRIPTION</h3>
                         <div className="mb-2">
                             {/* Mapping over the fetched data */}
-                            {technicalDescriptionTwo || "N/A"}
+                            {Array.isArray(allDescriptionTasks) &&
+                                allDescriptionTasks.map((task: any, index: number) => (
+                                    <div key={index}>
+                                        <h3 className="text-sm font-bold">● {task?.id}</h3>
+                                        <p className="text-sm mb-6">{task?.description}</p>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>

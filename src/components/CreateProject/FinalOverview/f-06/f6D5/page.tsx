@@ -41,8 +41,8 @@ interface allDataProps {
 }
 
 type F6D5Props = {
-  allData: any;
-  setIsModalOpen: (value: boolean) => void;
+    allData: any;
+    setIsModalOpen: (value: boolean) => void;
 };
 
 
@@ -51,7 +51,8 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers?.[0] || {}
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt } = allData || {};
+    const allDescriptionTasks = allData?.allDescriptionTasks || {};
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt, specialty } = allData || {};
     const descriptions = [
         {
             "id": 1,
@@ -291,7 +292,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-center justify-center">
                                 <span className="flex-1  font-bold">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1  font-bold">SPECIALTY</span>
+                                <span className="flex-1  font-bold">{specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -305,7 +306,14 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                         <h3 className="font-medium mb-2 underline">1. TECHNICAL DESCRIPTION OF PROJECT</h3>
                         <div className="mb-2">
                             {/* Mapping over the fetched data */}
-                            {technicalDescription || "N/A"}
+                            {Array.isArray(allDescriptionTasks) &&
+                                allDescriptionTasks.map((task: any, index: number) => (
+                                    <div key={index}>
+                                        <h3 className="text-sm font-bold">● {task?.id}</h3>
+                                        <p className="text-sm mb-6">{task?.description}</p>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
 
@@ -454,7 +462,14 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                         <h3 className="font-medium mb-2">PROJECT WORKS FOR TECHNICAL DESCRIPTION</h3>
                         <div className="mb-2">
                             {/* Mapping over the fetched data */}
-                            {technicalDescriptionTwo || "N/A"}
+                            {Array.isArray(allDescriptionTasks) &&
+                                allDescriptionTasks.map((task: any, index: number) => (
+                                    <div key={index}>
+                                        <h3 className="text-sm font-bold">● {task?.id}</h3>
+                                        <p className="text-sm mb-6">{task?.description}</p>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>

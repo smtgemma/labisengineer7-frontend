@@ -34,7 +34,6 @@ import F6D6 from "./f-06/f6D6/page";
 import F6D13 from "./f-06/f6D13/page";
 import F6D14 from "./f-06/f6D14/page";
 import F6D15 from "./f-06/f6D15/page";
-import Test from "@/app/test/page";
 import F5D6 from "./f-05/f5D6/page";
 import F5D7 from "./f-05/f5D7/page";
 import F5D8 from "./f-05/f5D8/page";
