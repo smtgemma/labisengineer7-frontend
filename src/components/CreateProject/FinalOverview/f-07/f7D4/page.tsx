@@ -39,7 +39,7 @@ interface BudgetCategory {
   subtotal: number
 }
 
-export default function F10D6({ allData }: { allData: allDataProps }) {
+export default function F7D4({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const owner = allData?.owners?.[0] || {};

@@ -61,6 +61,7 @@ import Test from "@/app/test/page";
 import F7D1 from "./f-07/f7D1/page";
 import F7D2 from "./f-07/f7D2/page";
 import F7D3 from "./f-07/f7D3/page";
+import F7D4 from "./f-07/f7D4/page";
 
 export interface UserData {
   id: string;
@@ -628,7 +629,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F7D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 3
               )}
               {selected === "seven_four" && (
-                <F10D15 allData={allData} /> // 4
+                <F7D4 allData={allData} /> // 4
               )}
               {selected === "seven_five" && (
                 <F10D15 allData={allData} /> // 5
