@@ -288,6 +288,11 @@ export const templateName1: Record<string, TemplateName[]> = {
             title: "seven_ten",
             price: 0.5,
         },
+        {
+            id: "711",
+            title: "seven_eleven",
+            price: 0.5,
+        },
 
     ],
 };

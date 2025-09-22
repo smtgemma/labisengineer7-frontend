@@ -67,6 +67,8 @@ import F7D6 from "./f-07/f7D6/page";
 import F7D7 from "./f-07/f7D7/page";
 import F7D8 from "./f-07/f7D8/page";
 import F7D9 from "./f-07/f7D9/page";
+import F7D10 from "./f-07/f7D10/page";
+import F7D11 from "./f-07/f7D11/page";
 
 export interface UserData {
   id: string;
@@ -652,7 +654,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F7D9 allData={allData} /> // 9
               )}
               {selected === "seven_ten" && (
-                <F10D15 allData={allData} /> // 10
+                <F7D10 allData={allData} /> // 10
+              )}
+              {selected === "seven_eleven" && (
+                <F7D11 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
               )}
               
               {/* file 7======== */}
