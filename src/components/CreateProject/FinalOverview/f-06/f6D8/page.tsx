@@ -50,7 +50,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = allData?.engineers || {};
-    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt} = allData || {};
+    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
     // for editing data 
@@ -488,9 +488,9 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                         )}
                     </div>
                 </div>
-            ))): (
+            ))) : (
                 <h2 className="text-3xl font-bold p-10">Data not found</h2>
-            )} 
+            )}
         </div>
     )
 

@@ -78,7 +78,7 @@ const Navbar = () => {
           <div className="hidden lg:flex space-x-4">
             <Link
               href="/signIn"
-              className="border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50 transition"
+              className="border border-blue-600 text-blue-600 px-8 py-3 rounded hover:bg-blue-50 transition"
             >
               Login
             </Link>
@@ -89,7 +89,7 @@ const Navbar = () => {
                 background:
                   "linear-gradient(44deg, #017AFF 37.44%, #61BDFF 67.11%)",
               }}
-              className=" text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+              className=" text-white px-8 py-3 rounded hover:bg-blue-700 transition"
             >
               Register
             </Link>

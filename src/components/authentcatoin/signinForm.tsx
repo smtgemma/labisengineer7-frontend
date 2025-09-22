@@ -57,9 +57,15 @@ export default function SigninForm() {
         reset();
       }
     } catch (error: any) {
-      console.log(error);
-      toast.error(error?.data.message);
+      console.log("error:", error);
+      const errorMessage =
+        error?.data?.message ||
+        error?.error ||
+        "Something went wrong. Please try again.";
+
+      toast.error(errorMessage);
     }
+
   };
 
   // google login working for functonalti

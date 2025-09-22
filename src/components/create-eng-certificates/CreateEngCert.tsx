@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import AIExtractionFour from "./Extraction";
 import FinalSteps from "./FinaleSteps";
 import TemplateSelectionComponents from "./TemplateSelection";
+import OwnerSelectionFour from "./OwnerSelection";
 
 const workflowSteps = [
     { id: 1, title: "Upload Documents" },
@@ -83,7 +84,7 @@ const WorkflowDemo: React.FC = () => {
                 );
             case 3:
                 //same
-                return <OwnerSelection
+                return <OwnerSelectionFour
                     currentStep={currentStep}
                     nextStep={nextStep}
                 />;

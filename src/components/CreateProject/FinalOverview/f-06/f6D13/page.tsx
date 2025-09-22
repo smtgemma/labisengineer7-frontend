@@ -29,6 +29,7 @@ interface FormData {
 interface Owner {
     firstName: string
     lastName: string
+    specialty: string
 }
 
 interface FormData {
@@ -42,7 +43,7 @@ export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId } = allData || {}
+    const { id, createdById, serviceId, specialty } = allData || {}
 
 
 
@@ -200,7 +201,7 @@ export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
                             </p>
                             {/* <p>Name/ surname Engineer</p> */}
                             <p>{engineers?.firstName} {engineers?.lasttName}</p>
-                            <p>Speciality</p>
+                            <p>{specialty || "N/A"}</p>
                             <p>Α.Μ. ΤΕΕ: 123456
                             </p>
                         </div>

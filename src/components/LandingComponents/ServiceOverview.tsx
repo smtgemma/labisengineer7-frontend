@@ -63,7 +63,7 @@ const ServicesOverview: React.FC = () => {
 
   return (
     <Container>
-      <div className="w-full  my-14 px-4 py-12  ">
+      <div className="w-full  my-14 px-4 py-12  sm:px-6 ">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-5xl font-bold text-[#017AFF] mb-4">
@@ -84,8 +84,8 @@ const ServicesOverview: React.FC = () => {
     bg-gradient-to-br from-white-50 via-blue-50 to-blue-300
     rounded-2xl p-6 lg:p-8 cursor-pointer
     transition-all duration-500 ease-in-out
-    hover:shadow-2xl hover:scale-[1.01]
-
+    hover:shadow-2xl 
+  
     ${
       isLightCard
         ? "border border-blue-200"
@@ -133,11 +133,8 @@ const ServicesOverview: React.FC = () => {
                 {/* Button */}
                 <button
                   onClick={() => handleServiceClick(service.title)}
-                  className={`inline-flex items-center px-6 py-3 ${
-                    isLightCard
-                      ? " text-[#017AFF] hover:text-white border-2 border-blue-300 hover:bg-blue-500 focus:ring-blue-500  shadow-md"
-                      : "bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 focus:ring-white/50 border border-white/30 shadow-lg"
-                  } font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2`}
+                  className="relative  border-[#61BDFF] inline-flex items-center justify-center px-6 py-3 border font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#61BDFF]
+            hover:bg-[linear-gradient(44deg,#017AFF_37.44%,#61BDFF_67.11%)]   hover:text-white  p-[2px] cursor-pointer"
                   type="button"
                   aria-label={`Start ${service.title} service`}
                 >

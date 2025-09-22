@@ -371,7 +371,6 @@ interface allDataProps {
   owners: any[]
   allDescriptionTasks: any[]
   technical_description: string
-  Horizontal_property_name: string
   projectDescription: string
   id: string
   createdById: string
@@ -392,7 +391,6 @@ export default function F6D2({ allData, setIsModalOpen }: F6D5Props) {
 
   const owner = allData?.owners?.[0] || {}
   const allDescriptionTasks = allData?.allDescriptionTasks || []
-  const { technical_description } = allData || {}
   const { Horizontal_property_name } = allData || {}
   const {id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
 

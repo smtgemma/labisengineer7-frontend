@@ -23,13 +23,14 @@ interface allDataProps {
     owners: any[]
     allDescriptionTasks: any[]
     technical_description: string
-    Horizontal_property_name: string
+    horizontalPropertyName: string
     projectDescription: string
     id: string
     createdById: string
     propertyPostalCode: string
     propertyAddress: string
     propertyPlace: string
+    createdAt: string
 }
 
 type F6D5Props = {
@@ -321,7 +322,7 @@ export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyPlace", { required: "Address is required" })}
+                                            {...register("propertyAddress", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input

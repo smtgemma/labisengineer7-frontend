@@ -17,7 +17,6 @@ import F6D4 from "./f-06/f6D4/page";
 import F6D7 from "./f-06/f6D7/page";
 import F6D8 from "./f-06/f6D8/page";
 import F6D9 from "./f-06/f6D9/page";
-import F10D1 from "./f-10/f10D1/page";
 
 import {
   useDownloadTemplatePdfQuery,
@@ -97,6 +96,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const id = stepByStepData?.projectIdCode;
   const projectId = stepByStepData?.projectIdCode?.result.id;
   const userId = dataAllFIled?.createdById;
+  console.log(subCategoryData, "..........................................")
 
   console.log(stepByStepData)
   console.log(stepByStepData?.projectIdCode?.id)
@@ -515,6 +515,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F5D17 allData={allData} /> // 12
               )}
 
+
+
               {/* file 6======== */}
               {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
                 <F6D8 allData={allData} /> // 1
@@ -563,6 +565,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
                 <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 15
               )}
+              
               {/* {selected === "Autofill (προαιρετικό add-on)" && (
                 <div>Autofill (προαιρετικό add-on)</div> 
               )} */}

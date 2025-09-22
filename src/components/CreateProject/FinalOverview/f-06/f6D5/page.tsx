@@ -38,6 +38,7 @@ interface allDataProps {
     createdAt: string
     id: string
     createdById: string
+    specialty: string
 }
 
 type F6D5Props = {
@@ -286,7 +287,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
 
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΙΔΙΟΚΤΗΤΗΣ :</span>
-                            <span className="flex-1  font-bold">{owner?.firstName || "N/A"}</span>
+                            <span className="flex-1  font-bold">{owner?.firstName || "N/A"}, {owner?.lastName || "N/A"}</span>
                         </div>
                         <div className="flex justify-between">
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
