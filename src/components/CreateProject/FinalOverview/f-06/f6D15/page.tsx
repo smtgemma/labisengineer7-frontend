@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import StampComponent from "../../shared/signture/signture"
-import { format } from "date-fns";
+import { format } from "date-fns"
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -31,6 +31,7 @@ interface allDataProps {
     propertyAddress: string
     propertyPlace: string
     createdAt: string
+    horizontalPropertyName: string
 }
 
 type F6D5Props = {
@@ -44,7 +45,7 @@ export default function F6D15({ allData, setIsModalOpen }: F6D5Props) {
 
     const owner = allData?.owners?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, horizontalPropertyName, createdAt } = allData || {}
+    const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
     const { id, createdById } = allData || {}
 
 
@@ -292,7 +293,7 @@ export default function F6D15({ allData, setIsModalOpen }: F6D5Props) {
 
                         <div className="text-center">
                             <p>Ημερομηνία :</p>
-                            <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</p>
+                            <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</p>
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>

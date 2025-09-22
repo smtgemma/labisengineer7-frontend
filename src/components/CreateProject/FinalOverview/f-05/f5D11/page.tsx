@@ -4,8 +4,7 @@
 "use client"
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
-
-import { format } from "date-fns";
+import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -40,8 +39,8 @@ interface allDataProps {
     horizontalPropertyName: string;
     id: string;
     createdById: string;
-    serviceId: string;
     createdAt: string;
+    serviceId?: string;
 }
 
 
@@ -264,7 +263,9 @@ export default function F5D11({ allData }: { allData: allDataProps }) {
                                     <div className="text-right space-y-2">
                                         <div className="flex items-center gap-4">
                                             <span className="text-sm">Ημερομηνία :</span>
-                                            <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+                                            <span className="text-sm font-medium">{createdAt
+                                                ? format(new Date(createdAt), "dd/MM/yyyy")
+                                                : "N/A"}</span>
                                         </div>
                                         <div className="text-sm mt-8 text-center">
                                             <div>( Υπογραφή )</div>

@@ -5,30 +5,35 @@ import { FaRegEdit } from "react-icons/fa";
 // for editing 
 import { useForm } from "react-hook-form"
 import { useState } from "react";
+import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+
 
 interface FormData {
-    owner_name: string
     projectDescription: string
     propertyAddress: string
-    propertyPlace: string
     propertyPostalCode: string
+    propertyPlace: string
 }
 // end editing 
 
 interface allDataProps {
     owners: any[];
     allDescriptionTasks: any[]
-    propertyPlace: string
-    propertyAddress: string
     propertyPostalCode: string
     projectDescription: string
+    propertyPlace: string
+    propertyAddress: string
+    id: string
+    serviceId: string
+    createdAt: string
+    createdById: string
 }
 function F5D16({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
-    const { allDescriptionTasks } = allData || {}
-    const { propertyPlace, propertyAddress, propertyPostalCode, projectDescription } = allData || {};
+    const allDescriptionTasks = allData?.allDescriptionTasks || {};
+    const { projectDescription, propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
 
 
     // for editing data 
@@ -39,10 +44,27 @@ function F5D16({ allData }: { allData: allDataProps }) {
         formState: { errors },
     } = useForm<FormData>({})
 
-    const onSubmit = (data: FormData) => {
+    const [updateProject] = useUpdateProjectMutation()
+
+    const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
+        const addNewData = {
+            serviceId: serviceId,
+            ...data
+        }
+        const formData = new FormData()
+        formData.append("data", JSON.stringify(addNewData))
+
+        try {
+            const responsive = await updateProject({ projectId: id, userId: createdById, formData }).unwrap()
+            console.log(responsive)
+        } catch (error) {
+            console.log(error)
+        }
+
         reset()
         setIsEditModalOpen(false)
+        // setIsModalOpen(false)
     }
     return (
         <div>
@@ -67,7 +89,7 @@ function F5D16({ allData }: { allData: allDataProps }) {
                             <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
                                 <label className="col-span-2">Έργο:</label>
                                 <div className="col-span-10">
-                                    {/* {project_description || "N/A"} */}
+                                    {projectDescription || "N/A"}
                                 </div>
                             </div>
 
@@ -93,16 +115,16 @@ function F5D16({ allData }: { allData: allDataProps }) {
 
                             {/* Works from Technical Description Section */}
                             <div className="mt-4">
-                                <div className="mb-4">
-                                    {
-                                        allDescriptionTasks ? (allDescriptionTasks?.map((task: any, index: number) => (
+                                {/* <div className="mb-4">[WORKS/TASKS FROM CHOISE USER)</div>
+                     */}
+                                <div className="my-6">
+                                    {Array.isArray(allDescriptionTasks) &&
+                                        allDescriptionTasks.map((task: any, index: number) => (
                                             <div key={index}>
                                                 <h3 className="text-sm font-bold">● {task?.id}</h3>
                                                 <p className="text-sm">{task?.description}</p>
                                             </div>
-                                        ))) : (
-                                            <h2 className="text-3xl font-bold">Data not found</h2>
-                                        )
+                                        ))
                                     }
                                 </div>
                                 <p className="text-sm ">
@@ -155,22 +177,11 @@ function F5D16({ allData }: { allData: allDataProps }) {
                                             onSubmit={handleSubmit(onSubmit)}
                                             className="space-y-4 p-4 border rounded-lg bg-white shadow-md"
                                         >
-                                            {/* Employer */}
-                                            <div className="flex items-center gap-4">
-                                                <label className="font-medium w-1/4">Εργοδότες *:</label>
-                                                <input
-                                                    placeholder={owner?.firstName || "owner_name"}
-                                                    type="text"
-                                                    {...register("owner_name", { required: "This field is required" })}
-                                                    className="flex-1 border p-2 rounded text-sm"
-                                                />
-                                            </div>
-
                                             {/* Project */}
                                             <div className="flex items-center gap-4">
                                                 <label className="font-medium w-1/4">Έργο *:</label>
                                                 <input
-                                                    defaultValue={projectDescription || "Project description"}
+                                                    defaultValue={projectDescription || "projectDescription"}
                                                     type="text"
                                                     {...register("projectDescription", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
@@ -179,29 +190,28 @@ function F5D16({ allData }: { allData: allDataProps }) {
 
                                             {/* Address */}
                                             <div className="flex items-center gap-4">
-                                                <label className="font-medium w-1/4">Διεύθυνση Έργου *:</label>
+                                                <label className="font-medium w-1/4">Θέση*:</label>
                                                 <div className="flex-1 grid grid-cols-3 gap-2">
                                                     <input
                                                         type="text"
-                                                        placeholder={propertyAddress || "Address"}
+                                                        defaultValue={propertyAddress || "propertyAddress"}
                                                         {...register("propertyAddress", { required: "Address is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
-                                                        placeholder={propertyPlace || "City"}
-                                                        {...register("propertyPlace", { required: "City is required" })}
+                                                        defaultValue={propertyPostalCode || "propertyPostalCode"}
+                                                        {...register("propertyPostalCode", { required: "City is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
-                                                        placeholder={propertyPostalCode || "Postal Code"}
-                                                        {...register("propertyPostalCode", { required: "Postal code is required" })}
+                                                        defaultValue={propertyPlace || "propertyPlace"}
+                                                        {...register("propertyPlace", { required: "Postal code is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                 </div>
                                             </div>
-
                                             {/* Submit */}
                                             <div className="flex justify-end">
                                                 <button

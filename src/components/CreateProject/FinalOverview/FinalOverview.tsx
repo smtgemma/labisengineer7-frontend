@@ -476,61 +476,43 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F4D11 allData={allData} />
               )} */}
 
-              {/* file 5======== */}
-              {/* {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ" && (
-                <F5D1 allData={allData} />
-              )}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ" && (
-                <F5D2 allData={allData} />
-              )}
-              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_53" && (
-                <F5D3 allData={allData} />
-              )}
-              {selected === "ΦΕΡΟΝΤΑΣ ΟΡΓΑΝΙΣΜΟΣ_ΔΙΑΤΑΞΕΙΣ" && (
-                <F5D4 allData={allData} />
-              )}
-
-              {selected === "ΠΙΝΑΚΑΣ 3_" && (
-                <F5D5 allData={allData} />
-              )} */}
-
 
               {/* file 5======== */}
               {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
-                <F5D6 allData={allData} /> //1
+                <F5D6 allData={allData} /> // 1
               )}
               {selected === "Ενημερωτικό Σημείωμα Σχεδίων Όψεων" && (
-                <F5D7 allData={allData} /> //2
+                <F5D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
               )}
               {selected === "Πίνακας 3(ΙΚΑ)" && (
-                <F5D8 allData={allData} /> //3
+                <F5D8 allData={allData} /> // 3
               )}
               {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
-                <F5D9 allData={allData} /> //4
+                <F5D9 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
               )}
               {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
-                <F5D10 allData={allData} /> //5
+                <F5D10 allData={allData} /> // 5
               )}
               {selected === "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη" && (
-                <F5D11 allData={allData} /> //6
+                <F5D11 allData={allData} /> // 6
               )}
               {selected === "ΥΔ Ανάθεσης Ιδιοκτήτη" && (
-                <F5D12 allData={allData} /> //7
+                <F5D12 allData={allData} /> // 7
               )}
               {selected === "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού" && (
-                <F5D13 allData={allData} /> //8
+                <F5D13 allData={allData} /> // 8
               )}
               {selected === "ΥΔ Ανάληψης Έργου Μηχανικού" && (
-                <F5D14 allData={allData} /> //9
+                <F5D14 allData={allData} /> // 9
               )}
               {selected === "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού" && (
-                <F5D15 allData={allData} /> //10
+                <F5D15 allData={allData} /> // 10
               )}
               {selected === "Υπόδειγμα Συναίνεσης Συνιδιοκτητών" && (
-                <F5D16 allData={allData} /> //11
+                <F5D16 allData={allData} /> // 11
               )}
               {selected === "Τεχνική Έκθεση / Βεβαίωση Μηχανικού" && (
-                <F5D17 allData={allData} /> //12
+                <F5D17 allData={allData} /> // 12
               )}
 
 
@@ -547,9 +529,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 "YΔ Φέροντα Οργανισμού" && (
                   <F6D10 allData={allData} /> // 3
                 )}
-              {selected === "YΔ Συνιδιοκτητών" && (
-                <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
-              )}
+              {/* {selected === "YΔ Συνιδιοκτητών" && (
+                <F6D4 allData={allData} /> no need this // 4
+              )} */}
               {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
                 <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
               )}
@@ -583,7 +565,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
                 <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 15
               )}
-              
+
               {/* {selected === "Autofill (προαιρετικό add-on)" && (
                 <div>Autofill (προαιρετικό add-on)</div> 
               )} */}
