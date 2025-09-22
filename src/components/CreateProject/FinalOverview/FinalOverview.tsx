@@ -57,6 +57,9 @@ import F10D12 from "./f-10/f10D12/page";
 import F10D13 from "./f-10/f10D13/page";
 import F10D14 from "./f-10/f10D14/page";
 import F10D15 from "./f-10/f10D15/page";
+import Test from "@/app/test/page";
+import F7D1 from "./f-07/f7D1/page";
+import F7D2 from "./f-10/f7D2/page";
 
 export interface UserData {
   id: string;
@@ -613,8 +616,38 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F10D15 allData={allData} /> // 12
               )}
 
-
-
+              {/* file seven  */}
+              {selected === "seven_one" && (
+                <F7D1 allData={allData} /> // 1
+              )}
+              {selected === "seven_two" && (
+                <F7D2 allData={allData} /> // 2
+              )}
+              {selected === "seven_three" && (
+                <F10D15 allData={allData} /> // 3
+              )}
+              {selected === "seven_four" && (
+                <F10D15 allData={allData} /> // 4
+              )}
+              {selected === "seven_five" && (
+                <F10D15 allData={allData} /> // 5
+              )}
+              {selected === "seven_six" && (
+                <F10D15 allData={allData} /> // 6
+              )}
+              {selected === "seven_seven" && (
+                <F10D15 allData={allData} /> // 7
+              )}
+              {selected === "seven_eight" && (
+                <F10D15 allData={allData} /> // 8
+              )}
+              {selected === "seven_nine" && (
+                <F10D15 allData={allData} /> // 9
+              )}
+              {selected === "seven_ten" && (
+                <F10D15 allData={allData} /> // 10
+              )}
+              
               {/* file 7======== */}
               {/* {selected ===
                 "ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ ΔΙΑΤΑΞΕΩΝ" && (

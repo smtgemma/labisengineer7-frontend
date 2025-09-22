@@ -1151,7 +1151,7 @@ export default function F10D4({ allData }: { allData: allDataProps }) {
         <div className="flex justify-between items-start">
           <div className="flex items-center justify-between gap-2">
             <span className="">Ημερομηνία :</span>
-            <span className="ml-30">6/25/2025</span>
+            <span className="ml-30">{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</span>
           </div>
           <div className="">
             <h3 className="text-center mb-4">Ο Συντάξας Μηχανικός</h3>

@@ -15,43 +15,38 @@
 // import F5D16 from '@/components/CreateProject/FinalOverview/f-05/f5D16/page'
 // import F5D17 from '@/components/CreateProject/FinalOverview/f-05/f5D17/page'
 
-// function Test(allData : any) {
-//   return (
-//     <div>
-//         {/* <F5D2 allData={allData}/>
-//         <F5D3 allData={allData}/>
-//         <F5D4 allData={allData}/> */}
+import F7D1 from '@/components/CreateProject/FinalOverview/f-07/f7D1/page'
+import F7D2 from '@/components/CreateProject/FinalOverview/f-10/f7D2/page'
 
-//         <F5D6 allData={allData}/>
-//         <F5D7 allData={allData}/>
-//         <F5D8 allData={allData}/>
-//         <F5D9 allData={allData}/>
-//         <F5D10 allData={allData}/>
-//         <F5D11 allData={allData}/>
-//         <F5D12 allData={allData}/>
-//         <F5D13 allData={allData}/>
-//         <F5D14 allData={allData}/>
-//         <F5D15 allData={allData}/>
-//         <F5D16 allData={allData}/>
-//         <F5D17 allData={allData}/>
-
-//     </div>
-//   )
-// }
-
-// export default Test
-
-
-import React from 'react'
-
-function Test() {
+function Test(allData : any) {
   return (
-    <div>Test</div>
+    <div>
+        {/* <F5D2 allData={allData}/>
+        <F5D3 allData={allData}/>
+        <F5D4 allData={allData}/> */}
+
+        {/* <F5D6 allData={allData}/>
+        <F5D7 allData={allData}/>
+        <F5D8 allData={allData}/>
+        <F5D9 allData={allData}/>
+        <F5D10 allData={allData}/>
+        <F5D11 allData={allData}/>
+        <F5D12 allData={allData}/>
+        <F5D13 allData={allData}/>
+        <F5D14 allData={allData}/>
+        <F5D15 allData={allData}/>
+        <F5D16 allData={allData}/>
+        <F5D17 allData={allData}/> */}
+
+        {/* <F7D1 allData={allData}/> */}
+        <F7D2 allData={allData}/>
+
+
+    </div>
   )
 }
 
 export default Test
-
 
 
 // "use client";
