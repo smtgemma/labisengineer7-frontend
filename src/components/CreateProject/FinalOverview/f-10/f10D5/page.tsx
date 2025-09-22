@@ -6,15 +6,20 @@ import { FaRegEdit } from "react-icons/fa";
 import { format } from "date-fns";
 
 // for editing 
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
+import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 import { useState } from "react";
 
+
 interface FormData {
-    owner_name: string
-    project_description: string
-    owner_address: string
-    owner_city: string
-    owner_postal_code: string
+    projectDescription: string;
+    propertyAddress: string;
+    propertyPlace: string;
+    propertyPostalCode: string;
+    owners: {
+        firstName: string;
+        lastName: string;
+    }[];
 }
 // end editing 
 interface allDataProps {
@@ -27,28 +32,61 @@ interface allDataProps {
     propertyPlace: string;
     createdAt: string;
 }
+type F6D5Props = {
+    allData: any;
+    setIsModalOpen: (value: boolean) => void;
+};
 
-export default function F10D5({ allData }: { allData: allDataProps }) {
+export default function F10D5({ allData, setIsModalOpen }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
-    const {allDescriptionTasks} = allData || {}
-    const { horizontalPropertyName, propertyPostalCode, propertyAddress, propertyPlace, projectDescription, createdAt } = allData || {};
-    console.log(allDescriptionTasks)
+    const { allDescriptionTasks } = allData || {}
+    const { horizontalPropertyName, propertyPostalCode, propertyAddress, propertyPlace, projectDescription, createdAt, serviceId, id, createdById } = allData || {};
 
 
+    const [updateProject] = useUpdateProjectMutation()
     // for editing data 
     const {
         register,
         handleSubmit,
+        control,
         reset,
         formState: { errors },
-    } = useForm<FormData>({})
+    } = useForm<FormData>({
+        defaultValues: {
+            projectDescription: allData?.projectDescription || "",
+            propertyAddress: allData?.propertyAddress || "",
+            propertyPlace: allData?.propertyPlace || "",
+            propertyPostalCode: allData?.propertyPostalCode || "",
+            owners: [
+                {
+                    firstName: allData?.owners?.[0]?.firstName || "",
+                    lastName: allData?.owners?.[0]?.lastName || "",
+                },
+            ],
+        },
+    })
 
-    const onSubmit = (data: FormData) => {
+    const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
+        const addNewData = {
+            serviceId: serviceId,
+            ...data
+        }
+        const formData = new FormData()
+        formData.append("data", JSON.stringify(addNewData))
+
+        try {
+            const responsive = await updateProject({ projectId: id, userId: createdById, formData }).unwrap()
+            console.log(responsive)
+        } catch (error) {
+            console.log(error)
+        }
+
         reset()
         setIsEditModalOpen(false)
+        setIsModalOpen(false)
     }
 
 
@@ -184,52 +222,68 @@ export default function F10D5({ allData }: { allData: allDataProps }) {
                                 onSubmit={handleSubmit(onSubmit)}
                                 className="space-y-4 p-4 border rounded-lg bg-white shadow-md"
                             >
-                                {/* Employer */}
-                                <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Εργοδότες *:</label>
-                                    <input
-                                        placeholder={owner?.firstName || "owner_name"}
-                                        type="text"
-                                        {...register("owner_name", { required: "This field is required" })}
-                                        className="flex-1 border p-2 rounded text-sm"
-                                    />
-                                </div>
-
                                 {/* Project */}
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Έργο *:</label>
                                     <input
-                                        // placeholder={project_description || "Project description"}
+                                        defaultValue={projectDescription || "Project Description "}
                                         type="text"
-                                        {...register("project_description", { required: "This field is required" })}
+                                        {...register("projectDescription", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
 
                                 {/* Address */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Διεύθυνση Έργου *:</label>
+                                    <label className="font-medium w-1/4">Θέση*:</label>
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <input
                                             type="text"
-                                            placeholder={owner?.address || "Address"}
-                                            {...register("owner_address", { required: "Address is required" })}
+                                            defaultValue={propertyAddress || "propertyAddress"}
+                                            {...register("propertyAddress", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner?.city || "City"}
-                                            {...register("owner_city", { required: "City is required" })}
+                                            defaultValue={propertyPlace || "propertyPlace"}
+                                            {...register("propertyPlace", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            placeholder={owner?.postalCode || "Postal Code"}
-                                            {...register("owner_postal_code", { required: "Postal code is required" })}
+                                            defaultValue={propertyPostalCode || "propertyPostalCode"}
+                                            {...register("propertyPostalCode", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>
                                 </div>
+                                {/* Address */}
+                                {/* First Name */}
+                                <Controller
+                                    name="owners.0.firstName"
+                                    control={control}
+                                    rules={{ required: "First name is required" }}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            placeholder="First Name"
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    )}
+                                />
+                                {/* Last Name */}
+                                <Controller
+                                    name="owners.0.lastName"
+                                    control={control}
+                                    rules={{ required: "Last name is required" }}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            placeholder="Last Name"
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    )}
+                                />
 
                                 {/* Submit */}
                                 <div className="flex justify-end">

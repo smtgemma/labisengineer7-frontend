@@ -47,6 +47,15 @@ export default function F10D15({ allData,
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
     const { id, createdById, serviceId, specialty } = allData || {}
 
+    const { projectDescription,
+        propertyAddress,
+        propertyNumber,
+        municipalityCommunity,
+        propertyPostalCode,
+        createdAt,
+        technicalDescription,
+        technicalDescriptionTwo,
+    } = allData || {};
 
 
     const {
@@ -62,26 +71,9 @@ export default function F10D15({ allData,
         },
     })
 
-
-    const { projectDescription,
-        propertyAddress,
-        propertyNumber,
-        municipalityCommunity,
-        propertyPostalCode,
-        createdAt,
-        technicalDescription,
-        technicalDescriptionTwo,
-    } = allData || {};
-
     const [updateProject] = useUpdateProjectMutation()
 
     // for editing data 
-
-
-
-
-
-
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {

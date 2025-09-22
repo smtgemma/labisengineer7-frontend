@@ -45,6 +45,18 @@ import F5D14 from "./f-05/f5D14/page";
 import F5D15 from "./f-05/f5D15/page";
 import F5D16 from "./f-05/f5D16/page";
 import F5D17 from "./f-05/f5D17/page";
+import F10D4 from "./f-10/f10D4/page";
+import F10D5 from "./f-10/f10D5/page";
+import F10D6 from "./f-10/f10D6/page";
+import F10D7 from "./f-10/f10D7/page";
+import F10D8 from "./f-10/f10D8/page";
+import F10D9 from "./f-10/f10D9/page";
+import F10D10 from "./f-10/f10D10/page";
+import F10D11 from "./f-10/f10D11/page";
+import F10D12 from "./f-10/f10D12/page";
+import F10D13 from "./f-10/f10D13/page";
+import F10D14 from "./f-10/f10D14/page";
+import F10D15 from "./f-10/f10D15/page";
 
 export interface UserData {
   id: string;
@@ -529,46 +541,77 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 "YΔ Φέροντα Οργανισμού" && (
                   <F6D10 allData={allData} /> // 3
                 )}
-              {/* {selected === "YΔ Συνιδιοκτητών" && (
-                <F6D4 allData={allData} /> no need this // 4
-              )} */}
               {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
-                <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
+                <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
               )}
               {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
-                <F6D1 allData={allData} /> // 6
+                <F6D1 allData={allData} /> // 5
               )}
               {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
-                <F6D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 7
+                <F6D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 6
               )}
               {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
-                <F6D6 allData={allData} /> // 8
+                <F6D6 allData={allData} /> // 7
               )}
               {selected === "Πίνακας 3" && (
-                <F6D12 allData={allData} /> // 9
+                <F6D12 allData={allData} /> // 8
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
-                <F6D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
+                <F6D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 9
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
-                <F6D14 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
+                <F6D14 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
-                <F6D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
+                <F6D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
-                <F6D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 13
+                <F6D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
-                <F6D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 14
+                <F6D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 13
               )}
               {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
-                <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 15
+                <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 14
               )}
               
-              {/* {selected === "Autofill (προαιρετικό add-on)" && (
-                <div>Autofill (προαιρετικό add-on)</div> 
-              )} */}
+              {/* file 10======== */}
+              {selected === "ten_one" && (
+                <F10D4 allData={allData} /> // 1
+              )}
+              {selected === "ten_two" && (
+                <F10D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
+              )}
+              {selected === "ten_three" && (
+                <F10D6 allData={allData} /> // 3
+              )}
+              {selected === "ten_four" && (
+                <F10D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
+              )}
+              {selected === "ten_five" && (
+                <F10D8 allData={allData} /> // 5
+              )}
+              {selected === "ten_six" && (
+                <F10D9 allData={allData} /> // 6
+              )}
+              {selected === "ten_seven" && (
+                <F10D10 allData={allData} /> // 7
+              )}
+              {selected === "ten_eight" && (
+                <F10D11 allData={allData} /> // 8
+              )}
+              {selected === "ten_nine" && (
+                <F10D12 allData={allData} /> // 9
+              )}
+              {selected === "ten_ten" && (
+                <F10D13 allData={allData} /> // 10
+              )}
+              {selected === "ten_eleven" && (
+                <F10D14 allData={allData} /> // 11
+              )}
+              {selected === "ten_tweleve" && (
+                <F10D15 allData={allData} /> // 12
+              )}
 
 
 
