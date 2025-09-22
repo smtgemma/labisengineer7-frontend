@@ -16,7 +16,7 @@
 // import F5D17 from '@/components/CreateProject/FinalOverview/f-05/f5D17/page'
 
 import F7D1 from '@/components/CreateProject/FinalOverview/f-07/f7D1/page'
-import F7D2 from '@/components/CreateProject/FinalOverview/f-10/f7D2/page'
+import F7D2 from '@/components/CreateProject/FinalOverview/f-07/f7D2/page'
 
 function Test(allData : any) {
   return (
