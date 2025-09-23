@@ -56,6 +56,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     if (serviceTitle === "service-2") {
       router.push("/building-permit");
     }
+    if (serviceTitle === "service-3") {
+      router.push("/htk");
+    }
     // // services -2
     // else if (id === "68c56689d5f94c3ac153e67a") {
     //   router.push("/create-project-two");
