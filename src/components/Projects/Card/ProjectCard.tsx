@@ -45,18 +45,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     );
 
     console.log("image", serviceTitle);
-    if (serviceTitle === "service-1") {
+    if (serviceTitle.toLocaleLowerCase() === "service-1") {
       router.push("/service/sub-category");
       console.log(serviceTitle)
     }
 
-    if (serviceTitle === "service-4") {
+    if (serviceTitle.toLocaleLowerCase() === "service-4") {
       router.push("/description-task-for-eng");
     }
-    if (serviceTitle === "service-2") {
+    if (serviceTitle.toLocaleLowerCase() === "service-2") {
       router.push("/building-permit");
     }
-    if (serviceTitle === "service-3") {
+    if (serviceTitle.toLocaleLowerCase() === "service-3") {
       router.push("/htk");
     }
     // // services -2
