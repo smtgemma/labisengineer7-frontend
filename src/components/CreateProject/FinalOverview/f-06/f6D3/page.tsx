@@ -138,7 +138,7 @@ export default function F6D3({ allData, setIsModalOpen }: F6D5Props) {
                 <p>
                     Στο ακίνητο{" "}
                     <span className="font-semibold">
-                        Description for building/ { horizontalPropertyName || "N/A"}
+                        Description for building/ {horizontalPropertyName || "N/A"}
                     </span>
                     επί της οδού <br />{" "}
                     <span className="font-semibold">

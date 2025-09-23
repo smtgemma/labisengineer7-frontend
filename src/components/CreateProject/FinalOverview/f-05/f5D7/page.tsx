@@ -36,8 +36,8 @@ interface allDataProps {
     serviceId: string
 }
 type F6D5Props = {
-  allData: any;
-  setIsModalOpen: (value: boolean) => void;
+    allData: any;
+    setIsModalOpen: (value: boolean) => void;
 };
 
 export default function F5D7({ allData, setIsModalOpen }: F6D5Props) {

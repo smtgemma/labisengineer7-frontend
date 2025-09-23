@@ -378,7 +378,7 @@ interface allDataProps {
   propertyAddress: string
   propertyPlace: string
   createdAt: string
-    horizontalPropertyName: string
+  horizontalPropertyName: string
 }
 
 type F6D5Props = {
@@ -392,7 +392,7 @@ export default function F6D2({ allData, setIsModalOpen }: F6D5Props) {
   const owner = allData?.owners?.[0] || {}
   const allDescriptionTasks = allData?.allDescriptionTasks || []
   const { Horizontal_property_name } = allData || {}
-  const {id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
+  const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
 
   const [updateProject] = useUpdateProjectMutation()
   // for editing data 
@@ -479,7 +479,7 @@ export default function F6D2({ allData, setIsModalOpen }: F6D5Props) {
         <p>
           Στο ακίνητο{" "}
           <span className="font-semibold">
-            Description for building/ { horizontalPropertyName || "N/A"}
+            Description for building/ {horizontalPropertyName || "N/A"}
           </span>
           επί της οδού <br />{" "}
           <span className="font-semibold">

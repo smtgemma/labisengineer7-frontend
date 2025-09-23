@@ -29,7 +29,7 @@ interface FormData {
 interface Owner {
     firstName: string
     lastName: string
-    specialty:string
+    specialty: string
 }
 
 interface FormData {
@@ -45,7 +45,7 @@ export default function F5D17({ allData,
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId,specialty } = allData || {}
+    const { id, createdById, serviceId, specialty } = allData || {}
     const { projectDescription,
         propertyAddress,
         propertyNumber,

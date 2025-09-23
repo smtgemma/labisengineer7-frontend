@@ -111,6 +111,7 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
     const [selectedViolations, setSelectedViolations] = useState<string[]>([]);
     const [violationSuggestions, setViolationSuggestions] = useState<string[]>([]);
     const [showViolationSuggestions, setShowViolationSuggestions] = useState<boolean>(false);
+    const [editingViolation, setEditingViolation] = useState<string>("");
 
     const [selectedAge, setSelectedAge] = useState<string>("");
     const [isAgeDropdownOpen, setIsAgeDropdownOpen] = useState<boolean>(false);
@@ -165,6 +166,7 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
         setSelectedViolations([]);
         setViolationInput("");
         setShowViolationSuggestions(false);
+        setEditingViolation("");
 
         if (!categoriesWithOtherViolation.includes(category)) {
             setShowOtherViolation(false);
@@ -192,6 +194,7 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
 
     const handleViolationInputChange = (value: string) => {
         setViolationInput(value);
+        setEditingViolation(value);
 
         if (value.trim()) {
             const database = getViolationDatabase();
@@ -206,15 +209,28 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
     };
 
     const handleViolationSelect = (violation: string) => {
-        if (!selectedViolations.includes(violation)) {
-            setSelectedViolations([...selectedViolations, violation]);
-        }
-        setViolationInput("");
+        setViolationInput(violation);
+        setEditingViolation(violation);
         setShowViolationSuggestions(false);
+    };
+
+    const addViolation = () => {
+        if (violationInput.trim() && !selectedViolations.includes(violationInput.trim())) {
+            setSelectedViolations([...selectedViolations, violationInput.trim()]);
+            setViolationInput("");
+            setEditingViolation("");
+            setShowViolationSuggestions(false);
+        }
     };
 
     const removeViolation = (idx: number) => {
         setSelectedViolations(selectedViolations.filter((_, i) => i !== idx));
+    };
+
+    const editViolation = (violation: string) => {
+        setViolationInput(violation);
+        setEditingViolation(violation);
+        setSelectedViolations(selectedViolations.filter(v => v !== violation));
     };
 
     const handleRemainingViolationsChange = (checked: boolean) => {
@@ -222,6 +238,14 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
         // setSelectedViolations([]);
         setViolationInput("");
         setShowViolationSuggestions(false);
+        setEditingViolation("");
+    };
+
+    const handleKeyPress = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            addViolation();
+        }
     };
 
     return (
@@ -299,6 +323,7 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                                 // setSelectedViolations([]);
                                 setViolationInput("");
                                 setShowViolationSuggestions(false);
+                                setEditingViolation("");
                             }}
                             className="w-4 h-4 text-blue-600 border-gray-300 rounded"
                         />
@@ -351,47 +376,65 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                                     key={idx}
                                     className="flex items-center justify-between bg-blue-50 border border-blue-200 rounded-md px-3 py-2"
                                 >
-                                    <span className="text-sm text-blue-800">{violation}</span>
-                                    <button
-                                        type="button"
-                                        onClick={() => removeViolation(idx)}
-                                        className="text-blue-600 hover:text-blue-800"
-                                    >
-                                        <X size={16} />
-                                    </button>
+                                    <span className="text-sm text-blue-800 flex-1">{violation}</span>
+                                    <div className="flex space-x-2">
+                                        <button
+                                            type="button"
+                                            onClick={() => editViolation(violation)}
+                                            className="text-blue-600 hover:text-blue-800 text-sm"
+                                        >
+                                            Επεξεργασία
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => removeViolation(idx)}
+                                            className="text-red-600 hover:text-red-800"
+                                        >
+                                            <X size={16} />
+                                        </button>
+                                    </div>
                                 </div>
                             ))}
                         </div>
                     )}
 
-                    <div className="relative">
-                        <input
-                            type="text"
-                            value={violationInput}
-                            onChange={(e) => handleViolationInputChange(e.target.value)}
-                            placeholder="Αρχίστε να πληκτρολογείτε..."
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                            disabled={!selectedCategory}
-                        />
+                    <div className="flex space-x-2">
+                        <div className="relative flex-1">
+                            <input
+                                type="text"
+                                value={violationInput}
+                                onChange={(e) => handleViolationInputChange(e.target.value)}
+                                onKeyPress={handleKeyPress}
+                                placeholder="Αρχίστε να πληκτρολογείτε ή επιλέξτε από τις προτάσεις..."
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                disabled={!selectedCategory}
+                            />
 
-                        {showViolationSuggestions && violationSuggestions.length > 0 && (
-                            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-48 overflow-y-auto">
-                                {violationSuggestions.map((suggestion, idx) => (
-                                    <button
-                                        key={idx}
-                                        type="button"
-                                        onClick={() => handleViolationSelect(suggestion)}
-                                        className="w-full px-3 py-2 text-left text-sm hover:bg-blue-50"
-                                    >
-                                        {suggestion}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
+                            {showViolationSuggestions && violationSuggestions.length > 0 && (
+                                <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-48 overflow-y-auto">
+                                    {violationSuggestions.map((suggestion, idx) => (
+                                        <button
+                                            key={idx}
+                                            type="button"
+                                            onClick={() => handleViolationSelect(suggestion)}
+                                            className="w-full px-3 py-2 text-left text-sm hover:bg-blue-50 border-b border-gray-100 last:border-b-0"
+                                        >
+                                            {suggestion}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        <button
+                            type="button"
+                            onClick={addViolation}
+                            disabled={!violationInput.trim() || !selectedCategory}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                        >
+                            Προσθήκη
+                        </button>
                     </div>
                 </div>
-
-
 
                 {/* Age dropdown */}
                 <div className="space-y-2">
