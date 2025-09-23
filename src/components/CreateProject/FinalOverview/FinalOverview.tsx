@@ -69,6 +69,18 @@ import F7D8 from "./f-07/f7D8/page";
 import F7D9 from "./f-07/f7D9/page";
 import F7D10 from "./f-07/f7D10/page";
 import F7D11 from "./f-07/f7D11/page";
+import F14D1 from "./f-14/f14D1/page";
+import F14D2 from "./f-14/f14D2/page";
+import F14D3 from "./f-14/f14D3/page";
+import F14D4 from "./f-14/f14D4/page";
+import F14D5 from "./f-14/f14D5/page";
+import F14D6 from "./f-14/f14D6/page";
+import F14D7 from "./f-14/f14D7/page";
+import F14D9 from "./f-14/f14D8/page";
+import F14D8 from "./f-14/f14D8/page";
+import F14D10 from "./f-14/f14D10/page";
+import F14D11 from "./f-14/f14D11/page";
+import F14D12 from "./f-14/f14D12/page";
 
 export interface UserData {
   id: string;
@@ -421,86 +433,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 ✕
               </button>
 
-              {/* building-modifications */}
-              {/* file 1======== */}
-              {/* {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ_4495_2017" && (
-                <F1D1 allData={allData} />
-              )}
-              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ" && (
-                <F1D2 allData={allData} />
-              )}
-              {selected === "ΣΑΥ_ΦΑΥ" && <F1D3 allData={allData} />}
-              {selected === "ΣΔΑ ΕΡΓΟΥ" && <F1D4 allData={allData} />}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΑΛΛΑΓΗ ΧΡΗΣΗΣ_15" && (
-                <F1D5 allData={allData} />
-              )}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_16" && (
-                <F1D6 allData={allData} />
-              )}
-              {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
-                <F1D7 allData={allData} />
-              )}
-              {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ" && (
-                <F1D8 allData={allData} />
-              )}
-              {selected === "ΥΔ ΦΕΡΟΝΤΑ ΟΡΓΑΝΙΣΜΟΥ" && (
-                <F1D9 allData={allData} />
-              )} */}
-
-              {/* file 2======= */}
-              {/* {selected === "Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020" && (
-                <F2D1 allData={allData} />
-              )}
-              {selected === "ΑΝΑΚΑΤΑΣΚΕΥΗ ΣΤΕΓΗΣ" && <F2D2 allData={allData} />}
-              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_23" && (
-                <F2D3 allData={allData} />
-              )} */}
-
-              {/* energy-systems  */}
-              {/* file 3======== */}
-              {/* {selected === "ΑΝΤΛΙΑ ΘΕΡΜΟΤΗΤΑΣ" && <F3D1 allData={allData} />}
-              {selected === "άρθρο 4 της ΥΑ ΦΕΚ Β’ 1843_2020" && (
-                <F3D2 allData={allData} />
-              )}
-              {selected === "άρθρο 4 της ΥΑ ΦΕ" && <F3D3 allData={allData} />}
-              {selected === "ΛΕΒΗΤΑΣ Φ.Α" && <F3D4 allData={allData} />}
-              {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΠΙΒΛΕΨΗΣ ΕΡΓΟΥ" && (
-                <F3D5 allData={allData} />
-              )}
-              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && (
-                <F3D6 allData={allData} />
-              )} */}
-
-              {/* file 4======== */}
-              {/* {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜΟΣ" && (
-                <F4D1 allData={allData} />
-              )}
-              {selected === "_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ" && (
-                <F4D2 allData={allData} />
-              )}
-              {selected ===
-                "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && (
-                <F4D3 allData={allData} />
-              )}
-              {selected ===
-                "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ" && (
-                <F4D6 allData={allData} />
-              )}
-              {selected ===
-                "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΔΙΑΧΩΡΙΣΜΟΣ ΟΡΙΖΟΝΤΙΑΣ ΙΔΙΟΚΤΗΣΙΑΣ" && (
-                <F4D7 allData={allData} />
-              )}
-              {selected === "_ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
-                <F4D8 allData={allData} />
-              )}
-              {selected === "_ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
-                <F4D9 allData={allData} />
-              )}
-              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ" && (
-                <F4D11 allData={allData} />
-              )} */}
-
-
               {/* file 5======== */}
               {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
                 <F5D6 allData={allData} /> // 1
@@ -660,100 +592,43 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 <F7D11 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
               )}
               
-              {/* file 7======== */}
-              {/* {selected ===
-                "ΒΕΒΑΙΩΣΗ_ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΤΗΡΗΣΗ ΟΨΕΩΝ ΚΑΙ ΠΟΛΕΟΔΟΜΙΚΩΝ ΔΙΑΤΑΞΕΩΝ" && (
-                <F7D1 allData={allData} />
+              {/* file fourteen  */}
+              {selected === "fourteen_one" && (
+                <F14D1 allData={allData} /> // 1
               )}
-              
-              {selected ===
-                "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
-                <F7D2 allData={allData} />
+              {selected === "fourteen_two" && (
+                <F14D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
               )}
-              {selected === "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_73" && (
-                <F7D3 allData={allData} />
+              {selected === "fourteen_three" && (
+                <F14D3 allData={allData} /> // 3
               )}
-              {selected === "_ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_74" && (
-                <F7D4 allData={allData} />
+              {selected === "fourteen_four" && (
+                <F14D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
               )}
-              {selected === "_ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
-                <F7D5 allData={allData} />
-              )}  */}
-
-              {/* file 8======== */}
-              {/* {selected === "_ΚΟΠΗ ΠΕΥΚΩΝ" && <F8D1 allData={allData} />}
-              {selected === "ΥΔ ΜΗ ΥΠΑΡΞΗΣ ΑΕΚΚ_ΣΔΑ_" && (
-                <F8D2 allData={allData} />
+              {selected === "fourteen_five" && (
+                <F14D5 allData={allData} /> // 5
               )}
-              {selected === "ΥΠΟΔΕΙΓΜΑ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ_" && (
-                <F8D3 allData={allData} />
-              )} */}
-
-              {/* file 9======== */}
-              {/* {selected === "ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΥΠΟΛΟΓΙΣΜ" && (
-                <F9D1 allData={allData} />
+              {selected === "fourteen_six" && (
+                <F14D6 allData={allData} /> // 6
               )}
-              {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣ" && (
-                <F9D2 allData={allData} />
+              {selected === "fourteen_seven" && (
+                <F14D7 allData={allData} /> // 7
               )}
-              {selected === "Ιδιωτική Σύμβαση " && <F9D3 />} */}
-
-              {/* file 10=== */}
-              {/* {selected === "ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΣΧΕΔΙΩΝ ΟΨΕΩΝ_" && (
-                <F10D1 allData={allData} />
-              )} */}
-              {/* {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_102" && (
-                <F10D2 allData={allData} />
-              )} */}
-              {/* {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ ΦΕΡΟΝΤΑΣ ΟΡ" && (
-                <F10D3 allData={allData} />
-              )} */}
-
-              {/* file 11  */}
-              {/* {selected === "ΠΕΡΙΤΟΙΧΗΣΗΣ Π" && <F11D1 allData={allData} />}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΑΠΟΣΤΑΣΗ ΑΝΩ ΤΩΝ" && (
-                <F11D2 allData={allData} />
-              )} */}
-
-              {/* file 12  */}
-              {/* {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_121" && (
-                <F12D1 allData={allData} />
+              {selected === "fourteen_eight" && (
+                <F14D8 allData={allData} /> // 8
               )}
-              {selected === "ΣΤΕΓΕΣ" && <F12D2 allData={allData} />} */}
-
-              {/* file 13  */}
-              {/* {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_ΠΙΣΙΝΑ COMPACT ΕΩΣ" && (
-                <F13D1 allData={allData} />
+              {selected === "fourteen_nine" && (
+                <F14D9 allData={allData} /> // 9
               )}
-              {selected === "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ_132" && (
-                <F13D2 allData={allData} />
+              {selected === "fourteen_ten" && (
+                <F14D10 allData={allData} /> // 10
               )}
-              {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ_133" && (
-                <F13D3 allData={allData} />
+              {selected === "fourteen_eleven" && (
+                <F14D11 allData={allData} /> // 11
               )}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ Η_Μ ΑΣΦΑΛΕΙΑ" && (
-                <F13D4 allData={allData} />
+              {selected === "fourteen_tweleve" && (
+                <F14D12 allData={allData} /> // 12
               )}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ ΓΙΑ ΣΤΑΤΙΚΗ ΑΣΦΑΛΕΙΑ" && (
-                <F13D5 allData={allData} />
-              )}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_άρθρου 4 ΥΑ ΦΕΚ Β" && (
-                <F13D6 allData={allData} />
-              )} */}
-
-              {/* file 14  */}
-              {/* {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_141" && (
-                <F14D1 allData={allData} />
-              )}
-              {selected === "ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ_142" && (
-                <F14D2 allData={allData} />
-              )}
-              {selected === "ΥΔ ΜΗΧΑΝΙΚΟΥ_ΣΤΑΤΙΚΟΣ ΦΟΡΕΑΣ ΚΤΙΡΙΟΥ" && (
-                <F14D3 allData={allData} />
-              )} */}
-
-              {/* file 15  */}
-              {/* {selected === "ΙΚΡΙΩΜΑΤΑ" && <F15D1 allData={allData} />} */}
             </div>
           </div>
         )}

@@ -171,7 +171,7 @@ export const templateName1: Record<string, TemplateName[]> = {
             price: 1,
         },
     ],
-    
+
     // subcategory 10
     ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10: [
         {
@@ -237,6 +237,7 @@ export const templateName1: Record<string, TemplateName[]> = {
 
     ],
 
+    // subcategory 7
     ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΡΜΟΠΡΟΖΩΗΣ_7: [
         {
             id: "71",
@@ -291,6 +292,71 @@ export const templateName1: Record<string, TemplateName[]> = {
         {
             id: "711",
             title: "seven_eleven",
+            price: 0.5,
+        },
+
+    ],
+
+    // subcategory 14
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14: [
+        {
+            id: "141",
+            title: "fourteen_one",
+            price: 0.5,
+        },
+        {
+            id: "142",
+            title: "fourteen_two",
+            price: 0.5,
+        },
+        {
+            id: "143",
+            title: "fourteen_three",
+            price: 0.5,
+        },
+        {
+            id: "144",
+            title: "fourteen_four",
+            price: 0.5,
+        },
+        {
+            id: "145",
+            title: "fourteen_five",
+            price: 0.5,
+        },
+        {
+            id: "146",
+            title: "fourteen_six",
+            price: 0.5,
+        },
+        {
+            id: "147",
+            title: "fourteen_seven",
+            price: 0.5,
+        },
+        {
+            id: "148",
+            title: "fourteen_eight",
+            price: 0.5,
+        },
+        {
+            id: "149",
+            title: "fourteen_nine",
+            price: 0.5,
+        },
+        {
+            id: "1410",
+            title: "fourteen_ten",
+            price: 0.5,
+        },
+        {
+            id: "1411",
+            title: "fourteen_eleven",
+            price: 0.5,
+        },
+        {
+            id: "1412",
+            title: "fourteen_tweleve",
             price: 0.5,
         },
 
