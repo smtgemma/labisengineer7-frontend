@@ -82,9 +82,7 @@ export default function SimpleTemplatesTable() {
           <div className="bg-primary px-6 rounded-t-lg">
             <div className="grid grid-cols-12 gap-4 py-3 text-white text-sm lg:text-xl">
               <div className="col-span-2 flex items-center">Template </div>
-              <div className="col-span-2  flex items-center">
-                Service <CgArrowsV className="my-auto" />
-              </div>
+
               <div className="col-span-2  flex items-center">
                 Last Modified <CgArrowsV className="my-auto" />
               </div>
@@ -109,7 +107,7 @@ export default function SimpleTemplatesTable() {
               >
                 <div className="grid grid-cols-12 gap-4 items-center text-sm md:text-[16px] text-info">
                   <div className="col-span-2">{row.serviceName}</div>
-                  <div className="col-span-2">{row.serviceType}</div>
+
                   <div className="col-span-2">
                     {moment(row.updatedAt).format("LL")}
                   </div>

@@ -150,13 +150,13 @@ const Category = () => {
       prevCategories.map((category) =>
         category.id === categoryId
           ? {
-            ...category,
-            options: category.options.map((option) =>
-              option.id === optionId
-                ? { ...option, selected: !option.selected }
-                : option
-            ),
-          }
+              ...category,
+              options: category.options.map((option) =>
+                option.id === optionId
+                  ? { ...option, selected: !option.selected }
+                  : option
+              ),
+            }
           : category
       )
     );
@@ -179,8 +179,8 @@ const Category = () => {
     navigate.push("/description-task");
   };
   const aiExtractData = useSelector((state: RootState) => state.aiData);
-  console.log("Redux Data", aiExtractData, "....................")
-  console.log(categories, "==========================category")
+  console.log("Redux Data", aiExtractData, "....................");
+  console.log(categories, "==========================category");
 
   return (
     <div className={`bg-[#F1F5F9] py-8 min-h-screen`}>

@@ -6,36 +6,6 @@ import { useGetAllsubmissionLogsQuery } from "@/redux/features/adminOverView/adm
 import tokenCatch from "@/lib/token";
 import Loading from "@/components/Others/Loading";
 
-const aiLogData = [
-  {
-    id: 1,
-    timestamp: "Jun 30, 2025 | 10:45 AM",
-    userName: "Rafiq Islam",
-    projectName: "Skyline Tower",
-    action: "AI Extracted FloorPlan.pdf",
-    status: "Success",
-    notes: "No issues found.",
-  },
-  {
-    id: 2,
-    timestamp: "Jun 30, 2025 | 09:10 AM",
-    userName: "Nusrat Jahan",
-    projectName: "Green Valley",
-    action: "AI Extraction Failed",
-    status: "Failed",
-    notes: "Unsupported file format.",
-  },
-  {
-    id: 3,
-    timestamp: "Jun 29, 2025 | 03:33 PM",
-    userName: "Tanvir Hasan",
-    projectName: "Bridge Point",
-    action: "Updated certificate via AI",
-    status: "Success",
-    notes: "Manually reviewed post-extraction.",
-  },
-];
-
 const StatusBadge = ({ status }: { status: string }) => {
   const isSuccess = status === "Success";
   const bg = isSuccess ? "bg-green-100" : "bg-red-100";
@@ -93,9 +63,9 @@ export default function SimpleAILogTable() {
               <div className="col-span-2 flex items-center">
                 User <CgArrowsV className="my-auto ml-1" />
               </div>
-              <div className="col-span-2 flex items-center">
+              {/* <div className="col-span-2 flex items-center">
                 Project <CgArrowsV className="my-auto ml-1" />
-              </div>
+              </div> */}
               <div className="col-span-2 flex items-center">
                 Action <CgArrowsV className="my-auto ml-1" />
               </div>
@@ -118,7 +88,7 @@ export default function SimpleAILogTable() {
                 <div className="grid grid-cols-12 gap-4 items-center text-sm md:text-[16px] text-info">
                   <div className="col-span-2">{row.timestamp}</div>
                   <div className="col-span-2">{row.userName}</div>
-                  <div className="col-span-2">{row.projectName}</div>
+                  {/* <div className="col-span-2">{row.projectName}</div> */}
                   <div className="col-span-2">{row.action}</div>
                   <div className="col-span-2">
                     <StatusBadge status={row.status} />
