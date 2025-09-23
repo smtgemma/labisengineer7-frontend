@@ -26,7 +26,7 @@ interface allDataProps {
     id: string;
     createdById: string;
 }
-function F10D14({ allData }: { allData: allDataProps }) {
+function F14D11({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
@@ -234,4 +234,4 @@ function F10D14({ allData }: { allData: allDataProps }) {
     )
 }
 
-export default F10D14
+export default F14D11

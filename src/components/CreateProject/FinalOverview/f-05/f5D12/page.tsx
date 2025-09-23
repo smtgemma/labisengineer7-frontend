@@ -41,6 +41,7 @@ interface allDataProps {
     createdById: string;
     serviceId: string;
     createdAt: string;
+    specialty: string;
 }
 
 
@@ -49,7 +50,7 @@ export default function F5D12({ allData }: { allData: allDataProps }) {
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = allData?.engineers || {};
-    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, createdAt } = allData || {};
+    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, createdAt, specialty } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
     // for editing data 

@@ -327,13 +327,13 @@ export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPlace || "propertyNumber"}
+                                            defaultValue={propertyPlace || "propertyPlace"}
                                             {...register("propertyPlace", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPostalCode || "municipalityCommunity"}
+                                            defaultValue={propertyPostalCode || "propertyPostalCode"}
                                             {...register("propertyPostalCode", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />

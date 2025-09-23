@@ -381,7 +381,7 @@ export default function F10D6({ allData }: { allData: allDataProps }) {
       <div className="mb-6 space-y-4">
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Εργοδότες *:</span>
-          <h3 className="flex-1 text-black text-sm">{owner?.firstName || "N/A"}</h3>
+          <h3 className="flex-1 text-black text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>

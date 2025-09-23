@@ -3,8 +3,8 @@
 
 "use client"
 import { useState } from "react";
-import StampComponent from "../../shared/signture/signture";
-import { format } from "date-fns"
+// import StampComponent from "../../shared/signture/signture";
+import { format } from "date-fns";
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -39,13 +39,14 @@ interface allDataProps {
     horizontalPropertyName: string;
     id: string;
     createdById: string;
+    serviceId: string;
     createdAt: string;
-    serviceId?: string;
-    specialty?: string;
+    createspecialtydAt: string;
+    specialty: string;
 }
 
 
-export default function F5D11({ allData }: { allData: allDataProps }) {
+export default function F14D6({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
@@ -252,10 +253,11 @@ export default function F5D11({ allData }: { allData: allDataProps }) {
 
                             {/* Additional disclaimer text */}
                             <div className="space-y-4 text-sm m p-4">
-                                <p>την επίβλεψη των προβλεπόμενων εργασιών που πρόκειται να εκτελεστούν στο ανωτέρω ακίνητο, στο πλαίσιο της διαδικασίας έκδοσης Έγκρισης
-                                    Εργασιών Μικρής Κλίμακας, σύμφωνα με τις ισχύουσες πολεοδομικές διατάξεις και ειδικότερα τις προβλέψεις του άρθρου 29 του Ν.4495/2017.</p>
-                                <p>Η παρούσα ανάθεση αφορά την τεχνική καθοδήγηση και εποπτεία των εργασιών κατά την υλοποίησή τους, την τήρηση των σχετικών κανονισμών ασφαλείας,
-                                    καθώς και την ευθύνη για την πιστή εφαρμογή του εγκεκριμένου περιεχομένου της άδειας.</p>
+                                <p>
+                                    τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
+                                <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>
+                                <p>●Την κατάρτιση και υποβολή του φακέλου στην αρμόδια υπηρεσία (e-Άδειες / ΥΔΟΜ )</p>
+                                <p>●Τη συνεργασία με άλλους ειδικούς/μελετητές, όπου απαιτείται</p>
                             </div>
 
                             {/* Signature section */}
@@ -264,9 +266,7 @@ export default function F5D11({ allData }: { allData: allDataProps }) {
                                     <div className="text-right space-y-2">
                                         <div className="flex items-center gap-4">
                                             <span className="text-sm">Ημερομηνία :</span>
-                                            <span className="text-sm font-medium">{createdAt
-                                                ? format(new Date(createdAt), "dd/MM/yyyy")
-                                                : "N/A"}</span>
+                                            <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
                                         </div>
                                         <div className="text-sm mt-8 text-center">
                                             <div>( Υπογραφή )</div>
@@ -276,9 +276,9 @@ export default function F5D11({ allData }: { allData: allDataProps }) {
                                 </div>
                             </div>
                             {/* common component  */}
-                            <div className="flex items-center justify-end mt-6 p-4">
+                            {/* <div className="flex items-center justify-end mt-6 p-4">
                                 <StampComponent />
-                            </div>
+                            </div> */}
                         </div>
                         {/* EDIT MODAL */}
                         {isEditModalOpen && selectedOwnerIndex !== null && (
@@ -489,11 +489,15 @@ export default function F5D11({ allData }: { allData: allDataProps }) {
                         )}
                     </div>
                 </div>
-            ))) : (
+            ))): (
                 <h2 className="text-3xl font-bold p-10">Data not found</h2>
-            )}
+            )} 
         </div>
     )
 
 }
+
+
+
+
 

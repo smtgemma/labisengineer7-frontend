@@ -273,7 +273,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΕΡΓΟ :</span>
-                            <span className="flex-1  font-bold">{projectDescription || "N/A"}</span>
+                            <span className="flex-1 text-sm">{projectDescription || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
@@ -435,7 +435,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΕΡΓΟ :</span>
-                            <span className="flex-1 font-bold">{projectDescription || "N/A"}</span>
+                            <span className="flex-1 text-sm">{projectDescription || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">

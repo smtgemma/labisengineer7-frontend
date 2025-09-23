@@ -45,7 +45,7 @@ interface allDataProps {
 
 
 
-export default function F7D2({ allData }: { allData: allDataProps }) {
+export default function F14D8({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
@@ -243,17 +243,18 @@ export default function F7D2({ allData }: { allData: allDataProps }) {
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
 
-                            <p className="mb-2">για το οικοδομικό έργο με τίτλο :</p>
+                            <p className="mb-2">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις <span className="text-sm font-bold">αναλαμβάνω</span> για το έργο</p>
                             <p className=" mb-6">{projectDescription || "N/A"}</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
                             <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
-                            <p>Δεν υφίσταται αλλοίωση των εξωτερικών όψεων του κτιρίου·</p>
-                            <p>Δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία τόσο των όψεων όσο και του συνολικού φέροντος οργανισμού·</p>
-                            <p>Οι προβλεπόμενες εργασίες είναι συμβατές με τις ισχύουσες πολεοδομικές διατάξεις και δεν παραβιάζουν καθορισμένα πολεοδομικά μεγέθη (ύψος, κάλυψη, δόμηση κ.λπ.).</p>
-                            <p>Η παρούσα βεβαίωση εκδίδεται για κάθε νόμιμη χρήση στο πλαίσιο των διατάξεων του Ν.4495/2017 και της κείμενης πολεοδομικής νομοθεσίας.</p>
+                            <p>
+                                τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
+                            <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>
+                            <p>●Την κατάρτιση και υποβολή του φακέλου στην αρμόδια υπηρεσία (e-Άδειες / ΥΔΟΜ )</p>
+                            <p>●Τη συνεργασία με άλλους ειδικούς/μελετητές, όπου απαιτείται</p>
                         </div>
 
                         {/* Signature section */}

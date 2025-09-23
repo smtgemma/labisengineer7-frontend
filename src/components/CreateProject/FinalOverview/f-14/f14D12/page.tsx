@@ -37,7 +37,7 @@ interface FormData {
 }
 
 
-export default function F10D15({ allData,
+export default function F14D12({ allData,
     //  setIsModalOpen 
 }: F6D13Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);

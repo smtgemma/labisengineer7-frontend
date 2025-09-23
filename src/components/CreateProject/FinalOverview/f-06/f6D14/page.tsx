@@ -24,7 +24,6 @@ interface allDataProps {
     owners: any[]
     allDescriptionTasks: any[]
     technical_description: string
-    horizontalPropertyName: string
     projectDescription: string
     id: string
     createdById: string

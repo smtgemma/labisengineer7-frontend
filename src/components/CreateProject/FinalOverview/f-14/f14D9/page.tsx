@@ -45,7 +45,7 @@ interface allDataProps {
 
 
 
-export default function F7D2({ allData }: { allData: allDataProps }) {
+export default function F14D9({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
@@ -250,10 +250,9 @@ export default function F7D2({ allData }: { allData: allDataProps }) {
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
                             <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
-                            <p>Δεν υφίσταται αλλοίωση των εξωτερικών όψεων του κτιρίου·</p>
-                            <p>Δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία τόσο των όψεων όσο και του συνολικού φέροντος οργανισμού·</p>
-                            <p>Οι προβλεπόμενες εργασίες είναι συμβατές με τις ισχύουσες πολεοδομικές διατάξεις και δεν παραβιάζουν καθορισμένα πολεοδομικά μεγέθη (ύψος, κάλυψη, δόμηση κ.λπ.).</p>
-                            <p>Η παρούσα βεβαίωση εκδίδεται για κάθε νόμιμη χρήση στο πλαίσιο των διατάξεων του Ν.4495/2017 και της κείμενης πολεοδομικής νομοθεσίας.</p>
+                            <p>
+                                <span className="font-bold">δεν προβλέπεται η παραγωγή αποβλήτων τύπου ΑΕΚΚ </span>(Απόβλητα Εκσκαφών, Κατασκευών και Κατεδαφίσεων), καθώς
+                                οι προβλεπόμενες εργασίες δεν περιλαμβάνουν καθαιρέσεις, εκσκαφές ή κατασκευαστικές επεμβάσεις που να παράγουν απόβλητα ΑΕΚΚ.</p>
                         </div>
 
                         {/* Signature section */}
@@ -262,7 +261,7 @@ export default function F7D2({ allData }: { allData: allDataProps }) {
                                 <div className="text-right space-y-2">
                                     <div className="flex items-center gap-4">
                                         <span className="text-sm">Ημερομηνία :</span>
-                                         <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
                                     </div>
                                     <div className="text-sm mt-8 text-center">
                                         <div>( Υπογραφή )</div>

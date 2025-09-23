@@ -11,7 +11,7 @@ import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplate
 
 type F6D13Props = {
     allData: any;
-    //   setIsModalOpen: (value: boolean) => void;
+      setIsModalOpen: (value: boolean) => void;
 };
 
 interface FormData {
@@ -37,8 +37,8 @@ interface FormData {
 }
 
 
-export default function F10D15({ allData,
-    //  setIsModalOpen 
+export default function F7D11({ allData,
+     setIsModalOpen 
 }: F6D13Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -92,7 +92,7 @@ export default function F10D15({ allData,
 
         reset()
         setIsEditModalOpen(false)
-        // setIsModalOpen(false)
+        setIsModalOpen(false)
     }
 
 
@@ -135,7 +135,6 @@ export default function F10D15({ allData,
                     <h3 className="text-sm font-bold mb-2">1. Εισαγωγή – Περιγραφή Έργου</h3>
                     <p className="text-sm mb-5">Η παρούσα Τεχνική Έκθεση συντάσσεται στο πλαίσιο της διαδικασίας έκδοσης Άδειας Μικρής Κλίμακας, σύμφωνα με τις διατάξεις του άρθρου 29 του Ν.4495/2017, καθώς και των σχετικών Υπουργικών Αποφάσεων, όπως η ΥΑ ΥΠΕΝ/ΔΑΟΚΑ/69701/4461/2018 και η ΥΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020
                         (ΦΕΚ 1843/Β/2020).
-
                     </p>
                     <p className="text-sm">
                         Το αντικείμενο της παρούσας αφορά ήπιες τεχνικές επεμβάσεις, χωρίς καμία τροποποίηση στον φέροντα οργανισμό ή στα στατικά στοιχεία του κτιρίου.
@@ -148,7 +147,8 @@ export default function F10D15({ allData,
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold mb-2">3. Αναλυτική Περιγραφή Εργασιών</h3>
+                    <h3 className="text-sm font-bold mb-2">3. Αναλυτική Περιγραφή Εργασιών
+                    </h3>
                     <p className="text-sm">Οι εργασίες που θα πραγματοποιηθούν είναι οι εξής: </p>
 
                     {Array.isArray(allDescriptionTasks) &&
@@ -167,7 +167,7 @@ export default function F10D15({ allData,
                     {technicalDescriptionTwo || "N/A"}
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold mb-2">5. Οικονομικά Στοιχεία – Προϋπολογισμός Έργου</h3>
+                    <h3 className="text-sm font-bold mb-2">5.Οικονομικά Στοιχεία – Προϋπολογισμός Έργου</h3>
                     <p className="text-sm mb-5">Ο συνολικός προϋπολογισμός των προβλεπόμενων <span className="text-sm font-bold">εργασιών είναι μικρότερος του ποσού των είκοσι πέντε χιλιάδων ευρώ (25.000 €),</span>
                         και δεν απαιτείται τεκμηρίωση υπέρβασης βάσει της παραγράφου 2 του άρθρου 29 του Ν.4495/2017.
                     </p>

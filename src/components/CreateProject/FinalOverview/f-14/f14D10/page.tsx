@@ -3,6 +3,7 @@
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
 import { format } from "date-fns"
+
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -30,6 +31,7 @@ interface FormInputs {
 }
 // end editing 
 
+
 interface allDataProps {
     engineers: any[];
     projectDescription?: string;
@@ -45,7 +47,7 @@ interface allDataProps {
 
 
 
-export default function F7D2({ allData }: { allData: allDataProps }) {
+export default function F14D10({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
@@ -53,6 +55,7 @@ export default function F7D2({ allData }: { allData: allDataProps }) {
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
     const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
+
 
     const [updateProject] = useUpdateProjectMutation()
     // for editing data 
@@ -104,7 +107,7 @@ export default function F7D2({ allData }: { allData: allDataProps }) {
     return (
         <div>
             {engineers.length > 0 ? (engineers?.map((engineer: any, index: number) => (
-                <div key={index} className="max-w-[796px] mx-auto bg-white">
+                <div className="max-w-[796px] mx-auto bg-white">
                     <div className="text-right -mt-3">
                         <button
                             className="px-4 py-1"
@@ -202,7 +205,7 @@ export default function F7D2({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                                <div className=" p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
+                                <div className="w-20 p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
                                 <div className="w-24 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
@@ -243,17 +246,21 @@ export default function F7D2({ allData }: { allData: allDataProps }) {
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
 
-                            <p className="mb-2">για το οικοδομικό έργο με τίτλο :</p>
+                            <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
                             <p className=" mb-6">{projectDescription || "N/A"}</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
-                            <p>Δεν υφίσταται αλλοίωση των εξωτερικών όψεων του κτιρίου·</p>
-                            <p>Δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία τόσο των όψεων όσο και του συνολικού φέροντος οργανισμού·</p>
-                            <p>Οι προβλεπόμενες εργασίες είναι συμβατές με τις ισχύουσες πολεοδομικές διατάξεις και δεν παραβιάζουν καθορισμένα πολεοδομικά μεγέθη (ύψος, κάλυψη, δόμηση κ.λπ.).</p>
-                            <p>Η παρούσα βεβαίωση εκδίδεται για κάθε νόμιμη χρήση στο πλαίσιο των διατάξεων του Ν.4495/2017 και της κείμενης πολεοδομικής νομοθεσίας.</p>
+                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
+                            <p className="mb-4">
+                                <span className="text-sm font-bold">ΔΕΝ επηρεάζεται, δεν τροποποιείται και δεν θίγεται,</span> καθ’ οιονδήποτε τρόπο ο φέρων οργανισμός (στατικός φορέας) του κτιρίου, και οι εργασίες δεν επιφέρουν καμία επιβάρυνση
+                                ή αλλαγή στα στατικά ή γεωμετρικά χαρακτηριστικά του φέροντος οργανισμού, όπως αυτά υφίστανται σύμφωνα με την υφιστάμενη Οικοδομική Άδεια.
+                            </p>
+                            <p>
+                                Οι εργασίες θα εκτελεστούν σύμφωνα με τις ισχύουσες τεχνικές προδιαγραφές, τις ελάχιστες απαιτήσεις ασφάλειας και υγείας,
+                                καθώς και με πλήρη συμμόρφωση προς τις πολεοδομικές και λοιπές σχετικές διατάξεις.
+                            </p>
                         </div>
 
                         {/* Signature section */}
@@ -262,7 +269,7 @@ export default function F7D2({ allData }: { allData: allDataProps }) {
                                 <div className="text-right space-y-2">
                                     <div className="flex items-center gap-4">
                                         <span className="text-sm">Ημερομηνία :</span>
-                                         <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
                                     </div>
                                     <div className="text-sm mt-8 text-center">
                                         <div>( Υπογραφή )</div>
@@ -489,6 +496,5 @@ export default function F7D2({ allData }: { allData: allDataProps }) {
                 <h2 className="text-3xl font-bold p-10">Data not found</h2>
             )}
         </div>
-
     )
 }

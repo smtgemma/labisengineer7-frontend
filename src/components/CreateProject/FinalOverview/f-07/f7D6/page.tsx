@@ -12,7 +12,7 @@
        createdAt: string;
    }
    
-   export default function F10D8({ allData }: { allData: AllDataProps }) {
+   export default function F7D6({ allData }: { allData: AllDataProps }) {
        const { projectDescription, createdAt, ydom } = allData || {};
    
        const [formData, setFormData] = useState({

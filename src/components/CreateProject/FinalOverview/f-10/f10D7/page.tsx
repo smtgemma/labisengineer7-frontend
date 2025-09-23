@@ -43,12 +43,12 @@ interface allDataProps {
 
 type F6D5Props = {
     allData: any;
-    //   setIsModalOpen: (value: boolean) => void;
+      setIsModalOpen: (value: boolean) => void;
 };
 
 
 
-export default function F10D7({ allData,
+export default function F10D7({ allData, setIsModalOpen
     //  setIsModalOpen 
 }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -231,7 +231,7 @@ export default function F10D7({ allData,
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
-            serviceId: "68c7d2cc94994d27e3fa0148",
+            serviceId: serviceId,
             ...data
         }
         const formData = new FormData()
@@ -246,7 +246,7 @@ export default function F10D7({ allData,
 
         reset()
         setIsEditModalOpen(false)
-        // setIsModalOpen(false)
+        setIsModalOpen(false)
     }
 
     return (
@@ -275,7 +275,7 @@ export default function F10D7({ allData,
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΕΡΓΟ :</span>
-                            <span className="flex-1  font-bold">{projectDescription || "N/A"}</span>
+                            <span className="flex-1 text-sm">{projectDescription || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
@@ -437,7 +437,7 @@ export default function F10D7({ allData,
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΕΡΓΟ :</span>
-                            <span className="flex-1 font-bold">{projectDescription || "N/A"}</span>
+                            <span className="flex-1 text-sm">{projectDescription || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
