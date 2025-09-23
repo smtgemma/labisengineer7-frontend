@@ -33,7 +33,7 @@ export default function RootLayout({
         </StoreProvider>
       </body>
       {/* Screenshot detection script */}
-      <Script id="detect-screenshot" strategy="afterInteractive">
+      {/* <Script id="detect-screenshot" strategy="afterInteractive">
         {`
             document.addEventListener("keyup", function(e) {
               if (e.key === "PrintScreen") {
@@ -47,7 +47,7 @@ export default function RootLayout({
               }
             });
           `}
-      </Script>
+      </Script> */}
     </html>
   );
 }
