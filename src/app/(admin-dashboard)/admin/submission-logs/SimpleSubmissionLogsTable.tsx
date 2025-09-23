@@ -60,9 +60,9 @@ export default function SimpleSubmissionLogsTable() {
                 User
                 <CgArrowsV className="my-auto ml-1" />
               </div>
-              <div className="col-span-2  flex items-center">
+              {/* <div className="col-span-2  flex items-center">
                 Project <CgArrowsV className="my-auto ml-1" />
-              </div>
+              </div> */}
               <div className="col-span-3  flex items-center ">
                 Action <CgArrowsV className="my-auto ml-1" />
               </div>
@@ -86,7 +86,7 @@ export default function SimpleSubmissionLogsTable() {
                     {moment(log.timestamp).format("LT")}
                   </div>
                   <div className="col-span-2">{log.userName}</div>
-                  <div className="col-span-2">{log.projectName}</div>
+                  {/* <div className="col-span-2">{log.projectName}</div> */}
                   <div className="col-span-3">{log.action}</div>
                   <div className="col-span-2">
                     <StatusBadge status={log.status} />

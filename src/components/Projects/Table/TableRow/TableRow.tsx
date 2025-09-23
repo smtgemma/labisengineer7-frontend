@@ -22,10 +22,12 @@ const TableRow = ({ data, handleUserDelete }: any) => {
       <td className="text-sm text-gray-900 px-6 py-4">
         {moment(data?.createdAt).format("l")}
       </td>
-      <td className="text-sm text-gray-900 px-6 py-4">
+      {/* <td className="text-sm text-gray-900 px-6 py-4">
+        {data?.service?.serviceName}
+      </td> */}
+      <td className="text-sm text-gray-600 px-6 py-4">
         {data?.service?.serviceName}
       </td>
-      <td className="text-sm text-gray-600 px-6 py-4">{data?.type}</td>
       <td className="text-sm px-6 py-4">
         <Link
           href={`/projects/${data?.id}`}
@@ -36,11 +38,9 @@ const TableRow = ({ data, handleUserDelete }: any) => {
       </td>
       <td className="text-sm px-6 py-4">
         <span
-          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(
-            data?.status
-          )}`}
+          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium border p-2   text-green-500 border-green-500 bg-green-50 `}
         >
-          {data?.status}
+          success
         </span>
       </td>
       <td className="px-6 py-4">

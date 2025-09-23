@@ -18,6 +18,7 @@ export default function UsersAccountsTable() {
   const token = tokenCatch();
 
   const { data, isLoading, refetch } = useGetAllUserStatusQuery(token);
+  console.log(data);
   const [updateStatus, { isLoading: statusChangLoading }] =
     useUserStatusChangeMutation();
   const [deleteAccount, { isLoading: deleteLoading }] = useUserDeleteMutation();
