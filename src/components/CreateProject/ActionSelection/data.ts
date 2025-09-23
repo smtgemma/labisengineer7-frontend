@@ -361,6 +361,51 @@ export const templateName1: Record<string, TemplateName[]> = {
         },
 
     ],
+    // subcategory 2
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2: [
+        {
+            id: "21",
+            title: "two_one",
+            price: 0.5,
+        },
+        {
+            id: "22",
+            title: "two_two",
+            price: 0.5,
+        },
+        {
+            id: "23",
+            title: "two_three",
+            price: 0.5,
+        },
+        {
+            id: "24",
+            title: "two_four",
+            price: 0.5,
+        },
+        {
+            id: "25",
+            title: "two_five",
+            price: 0.5,
+        },
+        {
+            id: "26",
+            title: "two_six",
+            price: 0.5,
+        },
+        {
+            id: "27",
+            title: "two_seven",
+            price: 0.5,
+        },
+        {
+            id: "28",
+            title: "two_eight",
+            price: 0.5,
+        },
+
+    ],
+    // subcategory 
 };
 
 

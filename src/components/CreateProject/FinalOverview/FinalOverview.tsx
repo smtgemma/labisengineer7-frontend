@@ -81,6 +81,15 @@ import F14D8 from "./f-14/f14D8/page";
 import F14D10 from "./f-14/f14D10/page";
 import F14D11 from "./f-14/f14D11/page";
 import F14D12 from "./f-14/f14D12/page";
+import F2D1 from "./f-02/f2D1/page";
+import F2D2 from "./f-02/f2D2/page";
+import F2D3 from "./f-02/f2D3/page";
+import F4D4 from "./f-04/f4D4/page";
+import F2D4 from "./f-02/f2D4/page";
+import F2D5 from "./f-02/f2D5/page";
+import F2D6 from "./f-02/f2D6/page";
+import F2D7 from "./f-02/f2D7/page";
+import F2D8 from "./f-02/f2D8/page";
 
 export interface UserData {
   id: string;
@@ -434,201 +443,236 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               </button>
 
               {/* file 5======== */}
-              {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
-                <F5D6 allData={allData} /> // 1
-              )}
-              {selected === "Ενημερωτικό Σημείωμα Σχεδίων Όψεων" && (
-                <F5D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
-              )}
-              {selected === "Πίνακας 3(ΙΚΑ)" && (
-                <F5D8 allData={allData} /> // 3
-              )}
-              {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
-                <F5D9 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
-              )}
-              {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
-                <F5D10 allData={allData} /> // 5
-              )}
-              {selected === "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη" && (
-                <F5D11 allData={allData} /> // 6
-              )}
-              {selected === "ΥΔ Ανάθεσης Ιδιοκτήτη" && (
-                <F5D12 allData={allData} /> // 7
-              )}
-              {selected === "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού" && (
-                <F5D13 allData={allData} /> // 8
-              )}
-              {selected === "ΥΔ Ανάληψης Έργου Μηχανικού" && (
-                <F5D14 allData={allData} /> // 9
-              )}
-              {selected === "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού" && (
-                <F5D15 allData={allData} /> // 10
-              )}
-              {selected === "Υπόδειγμα Συναίνεσης Συνιδιοκτητών" && (
-                <F5D16 allData={allData} /> // 11
-              )}
-              {selected === "Τεχνική Έκθεση / Βεβαίωση Μηχανικού" && (
-                <F5D17 allData={allData} /> // 12
-              )}
-
-
+              <div>
+                {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
+                  <F5D6 allData={allData} /> // 1
+                )}
+                {selected === "Ενημερωτικό Σημείωμα Σχεδίων Όψεων" && (
+                  <F5D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
+                )}
+                {selected === "Πίνακας 3(ΙΚΑ)" && (
+                  <F5D8 allData={allData} /> // 3
+                )}
+                {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
+                  <F5D9 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
+                )}
+                {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
+                  <F5D10 allData={allData} /> // 5
+                )}
+                {selected === "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη" && (
+                  <F5D11 allData={allData} /> // 6
+                )}
+                {selected === "ΥΔ Ανάθεσης Ιδιοκτήτη" && (
+                  <F5D12 allData={allData} /> // 7
+                )}
+                {selected === "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού" && (
+                  <F5D13 allData={allData} /> // 8
+                )}
+                {selected === "ΥΔ Ανάληψης Έργου Μηχανικού" && (
+                  <F5D14 allData={allData} /> // 9
+                )}
+                {selected === "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού" && (
+                  <F5D15 allData={allData} /> // 10
+                )}
+                {selected === "Υπόδειγμα Συναίνεσης Συνιδιοκτητών" && (
+                  <F5D16 allData={allData} /> // 11
+                )}
+                {selected === "Τεχνική Έκθεση / Βεβαίωση Μηχανικού" && (
+                  <F5D17 allData={allData} /> // 12
+                )}
+              </div>
 
               {/* file 6======== */}
-              {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
-                <F6D8 allData={allData} /> // 1
-              )}
-              {selected ===
-                "YΔ Ανάληψης Έργου Μηχανικού" && (
-                  <F6D9 allData={allData} />// 2
+              <div>
+                {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
+                  <F6D8 allData={allData} /> // 1
                 )}
-              {selected ===
-                "YΔ Φέροντα Οργανισμού" && (
-                  <F6D10 allData={allData} /> // 3
+                {selected ===
+                  "YΔ Ανάληψης Έργου Μηχανικού" && (
+                    <F6D9 allData={allData} />// 2
+                  )}
+                {selected ===
+                  "YΔ Φέροντα Οργανισμού" && (
+                    <F6D10 allData={allData} /> // 3
+                  )}
+                {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
+                  <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
                 )}
-              {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
-                <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
-              )}
-              {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
-                <F6D1 allData={allData} /> // 5
-              )}
-              {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
-                <F6D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 6
-              )}
-              {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
-                <F6D6 allData={allData} /> // 7
-              )}
-              {selected === "Πίνακας 3" && (
-                <F6D12 allData={allData} /> // 8
-              )}
-              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
-                <F6D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 9
-              )}
-              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
-                <F6D14 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
-              )}
-              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
-                <F6D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
-              )}
-              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
-                <F6D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
-              )}
-              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
-                <F6D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 13
-              )}
-              {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
-                <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 14
-              )}
-              
+                {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
+                  <F6D1 allData={allData} /> // 5
+                )}
+                {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
+                  <F6D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 6
+                )}
+                {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
+                  <F6D6 allData={allData} /> // 7
+                )}
+                {selected === "Πίνακας 3" && (
+                  <F6D12 allData={allData} /> // 8
+                )}
+                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
+                  <F6D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 9
+                )}
+                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
+                  <F6D14 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
+                )}
+                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
+                  <F6D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
+                )}
+                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
+                  <F6D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
+                )}
+                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
+                  <F6D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 13
+                )}
+                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
+                  <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 14
+                )}
+              </div>
+
               {/* file 10======== */}
-              {selected === "ten_one" && (
-                <F10D4 allData={allData} /> // 1
-              )}
-              {selected === "ten_two" && (
-                <F10D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
-              )}
-              {selected === "ten_three" && (
-                <F10D6 allData={allData} /> // 3
-              )}
-              {selected === "ten_four" && (
-                <F10D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
-              )}
-              {selected === "ten_five" && (
-                <F10D8 allData={allData} /> // 5
-              )}
-              {selected === "ten_six" && (
-                <F10D9 allData={allData} /> // 6
-              )}
-              {selected === "ten_seven" && (
-                <F10D10 allData={allData} /> // 7
-              )}
-              {selected === "ten_eight" && (
-                <F10D11 allData={allData} /> // 8
-              )}
-              {selected === "ten_nine" && (
-                <F10D12 allData={allData} /> // 9
-              )}
-              {selected === "ten_ten" && (
-                <F10D13 allData={allData} /> // 10
-              )}
-              {selected === "ten_eleven" && (
-                <F10D14 allData={allData} /> // 11
-              )}
-              {selected === "ten_tweleve" && (
-                <F10D15 allData={allData} /> // 12
-              )}
+              <div>
+                {selected === "ten_one" && (
+                  <F10D4 allData={allData} /> // 1
+                )}
+                {selected === "ten_two" && (
+                  <F10D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
+                )}
+                {selected === "ten_three" && (
+                  <F10D6 allData={allData} /> // 3
+                )}
+                {selected === "ten_four" && (
+                  <F10D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
+                )}
+                {selected === "ten_five" && (
+                  <F10D8 allData={allData} /> // 5
+                )}
+                {selected === "ten_six" && (
+                  <F10D9 allData={allData} /> // 6
+                )}
+                {selected === "ten_seven" && (
+                  <F10D10 allData={allData} /> // 7
+                )}
+                {selected === "ten_eight" && (
+                  <F10D11 allData={allData} /> // 8
+                )}
+                {selected === "ten_nine" && (
+                  <F10D12 allData={allData} /> // 9
+                )}
+                {selected === "ten_ten" && (
+                  <F10D13 allData={allData} /> // 10
+                )}
+                {selected === "ten_eleven" && (
+                  <F10D14 allData={allData} /> // 11
+                )}
+                {selected === "ten_tweleve" && (
+                  <F10D15 allData={allData} /> // 12
+                )}
+              </div>
 
               {/* file seven  */}
-              {selected === "seven_one" && (
-                <F7D1 allData={allData} /> // 1
-              )}
-              {selected === "seven_two" && (
-                <F7D2 allData={allData} /> // 2
-              )}
-              {selected === "seven_three" && (
-                <F7D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 3
-              )}
-              {selected === "seven_four" && (
-                <F7D4 allData={allData} /> // 4
-              )}
-              {selected === "seven_five" && (
-                <F7D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
-              )}
-              {selected === "seven_six" && (
-                <F7D6 allData={allData} /> // 6
-              )}
-              {selected === "seven_seven" && (
-                <F7D7 allData={allData} /> // 7
-              )}
-              {selected === "seven_eight" && (
-                <F7D8 allData={allData} /> // 8
-              )}
-              {selected === "seven_nine" && (
-                <F7D9 allData={allData} /> // 9
-              )}
-              {selected === "seven_ten" && (
-                <F7D10 allData={allData} /> // 10
-              )}
-              {selected === "seven_eleven" && (
-                <F7D11 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
-              )}
-              
+              <div>
+                {selected === "seven_one" && (
+                  <F7D1 allData={allData} /> // 1
+                )}
+                {selected === "seven_two" && (
+                  <F7D2 allData={allData} /> // 2
+                )}
+                {selected === "seven_three" && (
+                  <F7D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 3
+                )}
+                {selected === "seven_four" && (
+                  <F7D4 allData={allData} /> // 4
+                )}
+                {selected === "seven_five" && (
+                  <F7D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
+                )}
+                {selected === "seven_six" && (
+                  <F7D6 allData={allData} /> // 6
+                )}
+                {selected === "seven_seven" && (
+                  <F7D7 allData={allData} /> // 7
+                )}
+                {selected === "seven_eight" && (
+                  <F7D8 allData={allData} /> // 8
+                )}
+                {selected === "seven_nine" && (
+                  <F7D9 allData={allData} /> // 9
+                )}
+                {selected === "seven_ten" && (
+                  <F7D10 allData={allData} /> // 10
+                )}
+                {selected === "seven_eleven" && (
+                  <F7D11 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
+                )}
+              </div>
+
               {/* file fourteen  */}
-              {selected === "fourteen_one" && (
-                <F14D1 allData={allData} /> // 1
-              )}
-              {selected === "fourteen_two" && (
-                <F14D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
-              )}
-              {selected === "fourteen_three" && (
-                <F14D3 allData={allData} /> // 3
-              )}
-              {selected === "fourteen_four" && (
-                <F14D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
-              )}
-              {selected === "fourteen_five" && (
-                <F14D5 allData={allData} /> // 5
-              )}
-              {selected === "fourteen_six" && (
-                <F14D6 allData={allData} /> // 6
-              )}
-              {selected === "fourteen_seven" && (
-                <F14D7 allData={allData} /> // 7
-              )}
-              {selected === "fourteen_eight" && (
-                <F14D8 allData={allData} /> // 8
-              )}
-              {selected === "fourteen_nine" && (
-                <F14D9 allData={allData} /> // 9
-              )}
-              {selected === "fourteen_ten" && (
-                <F14D10 allData={allData} /> // 10
-              )}
-              {selected === "fourteen_eleven" && (
-                <F14D11 allData={allData} /> // 11
-              )}
-              {selected === "fourteen_tweleve" && (
-                <F14D12 allData={allData} /> // 12
-              )}
+              <div>
+                {selected === "fourteen_one" && (
+                  <F14D1 allData={allData} /> // 1
+                )}
+                {selected === "fourteen_two" && (
+                  <F14D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
+                )}
+                {selected === "fourteen_three" && (
+                  <F14D3 allData={allData} /> // 3
+                )}
+                {selected === "fourteen_four" && (
+                  <F14D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
+                )}
+                {selected === "fourteen_five" && (
+                  <F14D5 allData={allData} /> // 5
+                )}
+                {selected === "fourteen_six" && (
+                  <F14D6 allData={allData} /> // 6
+                )}
+                {selected === "fourteen_seven" && (
+                  <F14D7 allData={allData} /> // 7
+                )}
+                {selected === "fourteen_eight" && (
+                  <F14D8 allData={allData} /> // 8
+                )}
+                {selected === "fourteen_nine" && (
+                  <F14D9 allData={allData} /> // 9
+                )}
+                {selected === "fourteen_ten" && (
+                  <F14D10 allData={allData} /> // 10
+                )}
+                {selected === "fourteen_eleven" && (
+                  <F14D11 allData={allData} /> // 11
+                )}
+                {selected === "fourteen_tweleve" && (
+                  <F14D12 allData={allData} /> // 12
+                )}
+              </div>
+              {/* file two  */}
+              <div>
+                {selected === "two_one" && (
+                  <F2D1 allData={allData} /> // 1
+                )}
+                {selected === "two_two" && (
+                  <F2D2 allData={allData} /> // 2
+                )}
+                {selected === "two_three" && (
+                  <F2D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 3
+                )}
+                {selected === "two_four" && (
+                  <F2D4 allData={allData} /> // 4
+                )}
+                {selected === "two_five" && (
+                  <F2D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
+                )}
+                {selected === "two_six" && (
+                  <F2D6 allData={allData} /> // 6
+                )}
+                {selected === "two_seven" && (
+                  <F2D7 allData={allData} /> // 7
+                )}
+                {selected === "two_eight" && (
+                  <F2D8 allData={allData} /> // 8
+                )}
+              </div>
             </div>
           </div>
         )}
