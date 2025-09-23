@@ -1,9 +1,10 @@
+import MainHtkTwo from '@/components/lawDeclarations/htkTwo/Main';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-            Htk 2
+            <MainHtkTwo />
         </div>
     );
 };
