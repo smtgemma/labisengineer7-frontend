@@ -137,559 +137,563 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
     }, [currentStep]);
 
     return (
-        <div >
-            <div>
+        <div className="relative">
+            <div className="relative">
+                <div id="secret" className="absolute w-full h-full ">
 
-            </div>
-            <div className="">
-                <h2 className="text-[#333333] text-5xl font-semibold">
-                    AI Extraction Data
-                </h2>
-                <p className=" text-[#777777] mt-3">
-                    Here is the extracted information. Please review and confirm.
-                </p>
-            </div>
-            <form
-                onSubmit={handleSubmit(onSubmitAiDataSend)}
-                className="max-w-6xl mx-auto   rounded-xl mt-13"
-            >
-                <div>
-                    <div className="max-w-6xl mx-auto bg-white shadow-md rounded-xl p-8  ">
-                        <div className="flex justify-between items-center ">
-                            <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
-                                Project & Property Information( Στοιχεία Έργου & Ιδιοκτησίας)
-                            </h2>
-                            <div>
-                                <button
-                                    type="button"
-                                    onClick={() => setOwnerInfoShow(!ownerInfoShow)}
-                                >
-                                    {" "}
-                                    {!ownerInfoShow ? (
-                                        <>
-                                            <IoIosArrowDown className="text-2xl" />
-                                        </>
-                                    ) : (
-                                        <>
-                                            <IoIosArrowUp className="text-2xl" />
-                                        </>
-                                    )}
-                                </button>
-                            </div>
-                        </div>
-
-                        {ownerInfoShow && (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-5">
-                                <div className="col-span-full">
-                                    <label className="block text-sm font-medium mb-1">
-                                        Περιγραφή Έργου (1)
-                                    </label>
-                                    <textarea
-                                        {...register("projectDescription")}
-                                        className={`${inputStyle} h-[100px] `}
-                                        readOnly
-                                        defaultValue={description[0]?.value || "N/A"}
-                                    />
-                                </div>
-
-                                <div className="cursor-not-allowed">
-                                    <label className="block text-sm font-medium mb-1">
-                                        ΑΕΚ Ακινήτου
-                                    </label>
-                                    <input
-                                        {...register("kaekProperty")}
-                                        className={`${inputStyle} cursor-not-allowed`}
-                                        readOnly
-
-                                        defaultValue={allExtreactData?.kaek_property}
-                                    // defaultValue={dataShowExtreact?.cadastral_code_kaek}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Title_area (Εμβαδόν Ιδιοκτησίας)
-                                    </label>
-                                    <input
-                                        {...register("titleArea")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData?.title_area}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Floor_property (Όροφος Ακινήτου)
-                                    </label>
-                                    <input
-                                        {...register("floorProperty")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData?.floor_property}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Place_property (Αριθμός Ακινήτου)
-                                    </label>
-                                    <input
-                                        {...register("propertyPlace")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData?.property_place}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        property_number (Αριθμός Διεύθυνσης Ακινήτου)
-                                    </label>
-                                    <input
-                                        {...register("propertyNumber")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData?.property_number}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Property_address (Διεύθυνση Ακινήτου)
-                                    </label>
-                                    <input
-                                        {...register("propertyAddress")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData?.property_address}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Municipality_community (Δήμος/Κοινότητα Ακινήτου)
-                                    </label>
-                                    <input
-                                        {...register("municipalityCommunity")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData?.municipality_community}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Property_postal_code (Ταχυδρομικός Κώδικας Ακινήτου)
-                                    </label>
-                                    <input
-                                        {...register("propertyPostalCode")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData?.property_postal_code}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Horizontal_property_name (Οριζόντια Ιδιοκτησία 1)
-                                    </label>
-                                    <input
-                                        {...register("horizontalPropertyName")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData?.horizontal_property_name}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Horizontal_property_name_two (Οριζόντια Ιδιοκτησία 2)
-                                    </label>
-                                    <input
-                                        {...register("horizontalPropertyNameTwo")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData?.horizontal_property_name_two}
-                                    />
-                                </div>
-                            </div>
-                        )}
-                    </div>
                 </div>
-
-                {fields.map((field, index) => (
-                    <div key={field.id} className="mt-10">
-                        <div className="p-6 md:p-8 bg-white rounded-xl">
-                            <div className="flex justify-between items-center">
-                                <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
-                                    Information of Owner ({index + 1})
+                <div className="">
+                    <h2 className="text-[#333333] text-5xl font-semibold">
+                        AI Extraction Data
+                    </h2>
+                    <p className=" text-[#777777] mt-3">
+                        Here is the extracted information. Please review and confirm.
+                    </p>
+                </div>
+                <form
+                    onSubmit={handleSubmit(onSubmitAiDataSend)}
+                    className="max-w-6xl mx-auto   rounded-xl mt-13"
+                >
+                    <div>
+                        <div className="max-w-6xl mx-auto bg-white shadow-md rounded-xl p-8  ">
+                            <div className="flex justify-between items-center ">
+                                <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
+                                    Project & Property Information( Στοιχεία Έργου & Ιδιοκτησίας)
                                 </h2>
                                 <div>
                                     <button
                                         type="button"
-                                        // NEED TO WORK HERE
-                                        // Tahsin
-
-                                        onClick={() => setOwnerInfoShow2(index)}
+                                        onClick={() => setOwnerInfoShow(!ownerInfoShow)}
                                     >
-                                        {!ownerInfoShow2 ? (
-                                            <IoIosArrowDown className="text-2xl" />
+                                        {" "}
+                                        {!ownerInfoShow ? (
+                                            <>
+                                                <IoIosArrowDown className="text-2xl" />
+                                            </>
                                         ) : (
-                                            <IoIosArrowUp className="text-2xl" />
+                                            <>
+                                                <IoIosArrowUp className="text-2xl" />
+                                            </>
                                         )}
                                     </button>
                                 </div>
                             </div>
 
-                            {ownerInfoShow2 === index && (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">
-                                    {/* First Name */}
-                                    <div>
+                            {ownerInfoShow && (
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-5">
+                                    <div className="col-span-full">
                                         <label className="block text-sm font-medium mb-1">
-                                            First_name (Όνομα)
+                                            Περιγραφή Έργου (1)
                                         </label>
-                                        <input
-                                            {...register(`owners.${index}.firstName`)}
-                                            defaultValue={field.first_name}
-                                            className={`${inputStyle} `}
+                                        <textarea
+                                            {...register("projectDescription")}
+                                            className={`${inputStyle} h-[100px] `}
                                             readOnly
+                                            defaultValue={description[0]?.value || "N/A"}
                                         />
                                     </div>
 
-                                    {/* Last Name */}
-                                    <div>
+                                    <div className="cursor-not-allowed">
                                         <label className="block text-sm font-medium mb-1">
-                                            Last_name (Επώνυμο)
+                                            ΑΕΚ Ακινήτου
                                         </label>
                                         <input
-                                            {...register(`owners.${index}.lastName`)}
-                                            defaultValue={field.last_name}
-                                            className={inputStyle}
+                                            {...register("kaekProperty")}
+                                            className={`${inputStyle} cursor-not-allowed`}
                                             readOnly
+
+                                            defaultValue={allExtreactData?.kaek_property}
+                                        // defaultValue={dataShowExtreact?.cadastral_code_kaek}
                                         />
                                     </div>
 
-                                    {/* Father Full Name */}
                                     <div>
                                         <label className="block text-sm font-medium mb-1">
-                                            Father_first_last_name (Όνοματεπώνυμο Πατρός)
+                                            Title_area (Εμβαδόν Ιδιοκτησίας)
                                         </label>
                                         <input
-                                            {...register(`owners.${index}.fatherFirstLastName`)}
-                                            defaultValue={field.father_first_last_name}
+                                            {...register("titleArea")}
                                             className={inputStyle}
                                             readOnly
+                                            defaultValue={allExtreactData?.title_area}
                                         />
                                     </div>
 
-                                    {/* Mother Full Name */}
                                     <div>
                                         <label className="block text-sm font-medium mb-1">
-                                            Mothers_first_last_name (Όνοματεπώνυμο Μητρός)
+                                            Floor_property (Όροφος Ακινήτου)
                                         </label>
                                         <input
-                                            {...register(`owners.${index}.mothersFirstLastName`)}
-                                            defaultValue={field.mothers_first_last_name}
+                                            {...register("floorProperty")}
                                             className={inputStyle}
                                             readOnly
+                                            defaultValue={allExtreactData?.floor_property}
                                         />
                                     </div>
 
-                                    {/* Date of Birth */}
                                     <div>
                                         <label className="block text-sm font-medium mb-1">
-                                            Date_of_birth (Ημερομηνία Γέννησης)
+                                            Place_property (Αριθμός Ακινήτου)
                                         </label>
                                         <input
-                                            type="text"
-                                            {...register(`owners.${index}.dateOfBirth`)}
-                                            defaultValue={field.date_of_birth}
+                                            {...register("propertyPlace")}
                                             className={inputStyle}
                                             readOnly
+                                            defaultValue={allExtreactData?.property_place}
                                         />
                                     </div>
 
-                                    {/* Place of Birth */}
                                     <div>
                                         <label className="block text-sm font-medium mb-1">
-                                            Place_of_birth (Τόπος Γέννησης)
+                                            property_number (Αριθμός Διεύθυνσης Ακινήτου)
                                         </label>
                                         <input
-                                            {...register(`owners.${index}.placeOfBirth`)}
-                                            defaultValue={field.place_of_birth}
+                                            {...register("propertyNumber")}
                                             className={inputStyle}
                                             readOnly
+                                            defaultValue={allExtreactData?.property_number}
                                         />
                                     </div>
 
-                                    {/* Owner Address */}
                                     <div>
                                         <label className="block text-sm font-medium mb-1">
-                                            Owner_address (Διεύθυνση Ιδιοκτήτη)
+                                            Property_address (Διεύθυνση Ακινήτου)
                                         </label>
                                         <input
-                                            {...register(`owners.${index}.ownerAddress`)}
-                                            defaultValue={field.owner_address}
+                                            {...register("propertyAddress")}
                                             className={inputStyle}
                                             readOnly
+                                            defaultValue={allExtreactData?.property_address}
                                         />
                                     </div>
 
-                                    {/* Address Number */}
                                     <div>
                                         <label className="block text-sm font-medium mb-1">
-                                            Address_number (Αριθμός Διεύθυνσης Ιδιοκτήτη)
+                                            Municipality_community (Δήμος/Κοινότητα Ακινήτου)
                                         </label>
                                         <input
-                                            {...register(`owners.${index}.addressNumber`)}
-                                            defaultValue={field.address_number}
+                                            {...register("municipalityCommunity")}
                                             className={inputStyle}
                                             readOnly
+                                            defaultValue={allExtreactData?.municipality_community}
                                         />
                                     </div>
 
-                                    {/* City */}
                                     <div>
                                         <label className="block text-sm font-medium mb-1">
-                                            City (Πόλη)
+                                            Property_postal_code (Ταχυδρομικός Κώδικας Ακινήτου)
                                         </label>
                                         <input
-                                            {...register(`owners.${index}.city`)}
-                                            defaultValue={field.city}
+                                            {...register("propertyPostalCode")}
                                             className={inputStyle}
                                             readOnly
+                                            defaultValue={allExtreactData?.property_postal_code}
                                         />
                                     </div>
 
-                                    {/* Postal Code */}
                                     <div>
                                         <label className="block text-sm font-medium mb-1">
-                                            Postal_code (Ταχυδρομικός Κώδικας)
+                                            Horizontal_property_name (Οριζόντια Ιδιοκτησία 1)
                                         </label>
                                         <input
-                                            {...register(`owners.${index}.postal_code`)}
-                                            defaultValue={field.postal_code}
+                                            {...register("horizontalPropertyName")}
                                             className={inputStyle}
                                             readOnly
+                                            defaultValue={allExtreactData?.horizontal_property_name}
                                         />
                                     </div>
 
-                                    {/* ID Number */}
                                     <div>
                                         <label className="block text-sm font-medium mb-1">
-                                            Id_number (Α.Δ.Τ)
+                                            Horizontal_property_name_two (Οριζόντια Ιδιοκτησία 2)
                                         </label>
                                         <input
-                                            {...register(`owners.${index}.idNumber`)}
-                                            defaultValue={field.id_number}
+                                            {...register("horizontalPropertyNameTwo")}
                                             className={inputStyle}
                                             readOnly
-                                        />
-                                    </div>
-
-                                    {/* Tax Identification Number */}
-                                    <div>
-                                        <label className="block text-sm font-medium mb-1">
-                                            Tax_identification_number (ΑΦΜ)
-                                        </label>
-                                        <input
-                                            {...register(`owners.${index}.taxIdentificationNumber`)}
-                                            defaultValue={field.tax_identification_number}
-                                            className={inputStyle}
-                                            readOnly
-                                        />
-                                    </div>
-
-                                    {/* Email */}
-                                    <div>
-                                        <label className="block text-sm font-medium mb-1">
-                                            Email
-                                        </label>
-                                        <input
-                                            type="email"
-                                            {...register(`owners.${index}.email`)}
-                                            defaultValue={field.email}
-                                            className={inputStyle}
-                                            readOnly
-                                        />
-                                    </div>
-
-                                    {/* Mobile */}
-                                    <div>
-                                        <label className="block text-sm font-medium mb-1">
-                                            Mobile (Τηλέφωνο)
-                                        </label>
-                                        <input
-                                            {...register(`owners.${index}.mobile`)}
-                                            defaultValue={field.mobile}
-                                            className={inputStyle}
-                                            readOnly
+                                            defaultValue={allExtreactData?.horizontal_property_name_two}
                                         />
                                     </div>
                                 </div>
                             )}
                         </div>
                     </div>
-                ))}
 
-                {/* owner part  */}
+                    {fields.map((field, index) => (
+                        <div key={field.id} className="mt-10">
+                            <div className="p-6 md:p-8 bg-white rounded-xl">
+                                <div className="flex justify-between items-center">
+                                    <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
+                                        Information of Owner ({index + 1})
+                                    </h2>
+                                    <div>
+                                        <button
+                                            type="button"
+                                            // NEED TO WORK HERE
+                                            // Tahsin
 
-                {/* License & Legal Data  */}
-                <div className="mt-10">
-                    <div className="bg-white p-6 rounded-xl shadow-md w-full">
-                        <div className="flex justify-between items-center ">
-                            <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
-                                ολεοδομικά Μεγέθη-Άδεια Οικοδομής-Νομιμοποιήσεις
-                            </h2>
-                            <div>
-                                <button
-                                    type="button"
-                                    // NEED TO WORK HERE
-                                    // Tahsin
-                                    onClick={() => setOwnerInfoShow3(!ownerInfoShow3)}
-                                >
-                                    {" "}
-                                    {!ownerInfoShow3 ? (
-                                        <>
-                                            <IoIosArrowDown className="text-2xl" />
-                                        </>
-                                    ) : (
-                                        <>
-                                            <IoIosArrowUp className="text-2xl" />
-                                        </>
-                                    )}
-                                </button>
+                                            onClick={() => setOwnerInfoShow2(index)}
+                                        >
+                                            {!ownerInfoShow2 ? (
+                                                <IoIosArrowDown className="text-2xl" />
+                                            ) : (
+                                                <IoIosArrowUp className="text-2xl" />
+                                            )}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {ownerInfoShow2 === index && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">
+                                        {/* First Name */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                First_name (Όνομα)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.firstName`)}
+                                                defaultValue={field.first_name}
+                                                className={`${inputStyle} `}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* Last Name */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Last_name (Επώνυμο)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.lastName`)}
+                                                defaultValue={field.last_name}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* Father Full Name */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Father_first_last_name (Όνοματεπώνυμο Πατρός)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.fatherFirstLastName`)}
+                                                defaultValue={field.father_first_last_name}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* Mother Full Name */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Mothers_first_last_name (Όνοματεπώνυμο Μητρός)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.mothersFirstLastName`)}
+                                                defaultValue={field.mothers_first_last_name}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* Date of Birth */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Date_of_birth (Ημερομηνία Γέννησης)
+                                            </label>
+                                            <input
+                                                type="text"
+                                                {...register(`owners.${index}.dateOfBirth`)}
+                                                defaultValue={field.date_of_birth}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* Place of Birth */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Place_of_birth (Τόπος Γέννησης)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.placeOfBirth`)}
+                                                defaultValue={field.place_of_birth}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* Owner Address */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Owner_address (Διεύθυνση Ιδιοκτήτη)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.ownerAddress`)}
+                                                defaultValue={field.owner_address}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* Address Number */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Address_number (Αριθμός Διεύθυνσης Ιδιοκτήτη)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.addressNumber`)}
+                                                defaultValue={field.address_number}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* City */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                City (Πόλη)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.city`)}
+                                                defaultValue={field.city}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* Postal Code */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Postal_code (Ταχυδρομικός Κώδικας)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.postal_code`)}
+                                                defaultValue={field.postal_code}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* ID Number */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Id_number (Α.Δ.Τ)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.idNumber`)}
+                                                defaultValue={field.id_number}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* Tax Identification Number */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Tax_identification_number (ΑΦΜ)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.taxIdentificationNumber`)}
+                                                defaultValue={field.tax_identification_number}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* Email */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Email
+                                            </label>
+                                            <input
+                                                type="email"
+                                                {...register(`owners.${index}.email`)}
+                                                defaultValue={field.email}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+
+                                        {/* Mobile */}
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Mobile (Τηλέφωνο)
+                                            </label>
+                                            <input
+                                                {...register(`owners.${index}.mobile`)}
+                                                defaultValue={field.mobile}
+                                                className={inputStyle}
+                                                readOnly
+                                            />
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
+                    ))}
 
-                        {ownerInfoShow3 && (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        plot_area (Εμβαδόν Οικοπέδου)
-                                    </label>
-                                    <input
-                                        {...register("plotArea")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData.plot_area}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        withinOutsideCityPlan (Εντός/Εκτός Σχεδίου Πόλης)
-                                    </label>
-                                    <input
-                                        {...register("withinOutsideCityPlan")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData.within_outside_city_plan}
-                                    />
-                                </div>
+                    {/* owner part  */}
 
+                    {/* License & Legal Data  */}
+                    <div className="mt-10">
+                        <div className="bg-white p-6 rounded-xl shadow-md w-full">
+                            <div className="flex justify-between items-center ">
+                                <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
+                                    ολεοδομικά Μεγέθη-Άδεια Οικοδομής-Νομιμοποιήσεις
+                                </h2>
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        permitNumber (Αριθμός Οικοδομικής Άδειας){" "}
-                                    </label>
-                                    <input
-                                        {...register("permitNumber")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData.permit_number}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Issuing_authority (Εκδούσα Αρχή)
-                                    </label>
-                                    <input
-                                        {...register("issuingAuthority")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData.issuing_authority}
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Legalization_statement_number (Αριθμός Δήλωσης Νομ)
-                                    </label>
-                                    <input
-                                        {...register("legalizationStatementNumber")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData.legalization_statement_number}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Engineer_full_name (Στοιχεία Μηχανικού)
-                                    </label>
-                                    <input
-                                        {...register("engineerFullName")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData.engineer_full_name}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Electronic_code (Ηλεκτρονικός Κωδικός Δήλωσης)
-                                    </label>
-                                    <input
-                                        {...register("electronicCode")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData.electronic_code}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Tee_registration_number (Αριθμός Μητρώου ΤΕΕ)
-                                    </label>
-                                    <input
-                                        {...register("teeRegistrationNumber")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData.tee_registration_number}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Specialty (Ειδικότητα Μηχανικού)
-                                    </label>
-                                    <input
-                                        {...register("specialty")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData.specialty}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium mb-1">
-                                        Inclusion_date_legalization (Ημερομηνία Ένταξης
-                                        Νομιμοποίησης)
-                                    </label>
-                                    <input
-                                        {...register("inclusionDateLegalization")}
-                                        className={inputStyle}
-                                        readOnly
-                                        defaultValue={allExtreactData?.inclusion_date_legalization}
-                                    />
+                                    <button
+                                        type="button"
+                                        // NEED TO WORK HERE
+                                        // Tahsin
+                                        onClick={() => setOwnerInfoShow3(!ownerInfoShow3)}
+                                    >
+                                        {" "}
+                                        {!ownerInfoShow3 ? (
+                                            <>
+                                                <IoIosArrowDown className="text-2xl" />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <IoIosArrowUp className="text-2xl" />
+                                            </>
+                                        )}
+                                    </button>
                                 </div>
                             </div>
-                        )}
+
+                            {ownerInfoShow3 && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                                    <div>
+                                        <label className="block text-sm font-medium mb-1">
+                                            plot_area (Εμβαδόν Οικοπέδου)
+                                        </label>
+                                        <input
+                                            {...register("plotArea")}
+                                            className={inputStyle}
+                                            readOnly
+                                            defaultValue={allExtreactData.plot_area}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium mb-1">
+                                            withinOutsideCityPlan (Εντός/Εκτός Σχεδίου Πόλης)
+                                        </label>
+                                        <input
+                                            {...register("withinOutsideCityPlan")}
+                                            className={inputStyle}
+                                            readOnly
+                                            defaultValue={allExtreactData.within_outside_city_plan}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium mb-1">
+                                            permitNumber (Αριθμός Οικοδομικής Άδειας){" "}
+                                        </label>
+                                        <input
+                                            {...register("permitNumber")}
+                                            className={inputStyle}
+                                            readOnly
+                                            defaultValue={allExtreactData.permit_number}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium mb-1">
+                                            Issuing_authority (Εκδούσα Αρχή)
+                                        </label>
+                                        <input
+                                            {...register("issuingAuthority")}
+                                            className={inputStyle}
+                                            readOnly
+                                            defaultValue={allExtreactData.issuing_authority}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium mb-1">
+                                            Legalization_statement_number (Αριθμός Δήλωσης Νομ)
+                                        </label>
+                                        <input
+                                            {...register("legalizationStatementNumber")}
+                                            className={inputStyle}
+                                            readOnly
+                                            defaultValue={allExtreactData.legalization_statement_number}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium mb-1">
+                                            Engineer_full_name (Στοιχεία Μηχανικού)
+                                        </label>
+                                        <input
+                                            {...register("engineerFullName")}
+                                            className={inputStyle}
+                                            readOnly
+                                            defaultValue={allExtreactData.engineer_full_name}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium mb-1">
+                                            Electronic_code (Ηλεκτρονικός Κωδικός Δήλωσης)
+                                        </label>
+                                        <input
+                                            {...register("electronicCode")}
+                                            className={inputStyle}
+                                            readOnly
+                                            defaultValue={allExtreactData.electronic_code}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium mb-1">
+                                            Tee_registration_number (Αριθμός Μητρώου ΤΕΕ)
+                                        </label>
+                                        <input
+                                            {...register("teeRegistrationNumber")}
+                                            className={inputStyle}
+                                            readOnly
+                                            defaultValue={allExtreactData.tee_registration_number}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium mb-1">
+                                            Specialty (Ειδικότητα Μηχανικού)
+                                        </label>
+                                        <input
+                                            {...register("specialty")}
+                                            className={inputStyle}
+                                            readOnly
+                                            defaultValue={allExtreactData.specialty}
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-medium mb-1">
+                                            Inclusion_date_legalization (Ημερομηνία Ένταξης
+                                            Νομιμοποίησης)
+                                        </label>
+                                        <input
+                                            {...register("inclusionDateLegalization")}
+                                            className={inputStyle}
+                                            readOnly
+                                            defaultValue={allExtreactData?.inclusion_date_legalization}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
-            </form>
-            {currentStep < 6 && (
-                <div className="flex justify-end mt-4 w-fit ml-auto" >
+                </form>
+
+
+            </div>
+            {currentStep < 8 && (
+                <div className="flex justify-end mt-4 w-fit ml-auto z-50" >
                     <PrimaryButton
                         onClick={nextStep}
                         // disabled={canProceed()}

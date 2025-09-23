@@ -41,7 +41,7 @@ interface allDataProps {
     id: string;
     createdById: string;
     serviceId: string;
-    createdAt: string;
+    createdAt: string
 }
 
 
@@ -268,7 +268,7 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
                                 <div className="text-right space-y-2">
                                     <div className="flex items-center gap-4">
                                         <span className="text-sm">Ημερομηνία :</span>
-                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+                                        <span className="text-sm font-medium">{createdAt ? format(new Date(createdAt), "dd/MM/yyyy") : "N/A"}</span>
                                     </div>
                                     <div className="text-sm mt-8 text-center">
                                         <div>( Υπογραφή )</div>

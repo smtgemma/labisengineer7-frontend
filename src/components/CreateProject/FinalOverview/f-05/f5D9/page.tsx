@@ -42,15 +42,15 @@ interface allDataProps {
 }
 
 type F6D5Props = {
-  allData: any;
-//   setIsModalOpen: (value: boolean) => void;
+    allData: any;
+    setIsModalOpen: (value: boolean) => void;
 };
 
 
 
 export default function F5D9({ allData,
-    //  setIsModalOpen 
-    }: F6D5Props) {
+    setIsModalOpen
+}: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers?.[0] || {}
@@ -231,7 +231,7 @@ export default function F5D9({ allData,
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
-            serviceId: "68c7d2cc94994d27e3fa0148",
+            serviceId: serviceId,
             ...data
         }
         const formData = new FormData()
@@ -246,7 +246,7 @@ export default function F5D9({ allData,
 
         reset()
         setIsEditModalOpen(false)
-        // setIsModalOpen(false)
+        setIsModalOpen(false)
     }
 
     return (
@@ -313,7 +313,7 @@ export default function F5D9({ allData,
                                 allDescriptionTasks.map((task: any, index: number) => (
                                     <div key={index}>
                                         <h3 className="text-sm font-bold">● {task?.id}</h3>
-                                        <p className="text-sm">{task?.description}</p>
+                                        <p className="text-sm mb-6">{task?.description}</p>
                                     </div>
                                 ))
                             }
@@ -469,7 +469,7 @@ export default function F5D9({ allData,
                                 allDescriptionTasks.map((task: any, index: number) => (
                                     <div key={index}>
                                         <h3 className="text-sm font-bold">● {task?.id}</h3>
-                                        <p className="text-sm">{task?.description}</p>
+                                        <p className="text-sm mb-6">{task?.description}</p>
                                     </div>
                                 ))
                             }
@@ -651,18 +651,18 @@ export default function F5D9({ allData,
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyPlace", { required: "Address is required" })}
+                                            {...register("propertyAddress", { required: "Address is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPlace || "propertyNumber"}
+                                            defaultValue={propertyPlace || "propertyPlace"}
                                             {...register("propertyPlace", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPostalCode || "municipalityCommunity"}
+                                            defaultValue={propertyPostalCode || "propertyPostalCode"}
                                             {...register("propertyPostalCode", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />

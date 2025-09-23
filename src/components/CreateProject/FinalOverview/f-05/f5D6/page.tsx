@@ -2,9 +2,8 @@
 "use client"
 import { useState } from "react"
 import StampComponent from "../../shared/signture/signture"
-import { FaRegEdit } from "react-icons/fa";
-
-import { format } from "date-fns";
+// import { FaRegEdit } from "react-icons/fa";
+import { format } from "date-fns"
 
 // for editing 
 import { useForm } from "react-hook-form"
@@ -22,8 +21,8 @@ interface allDataProps {
   owners: any[]
   projectDescription: string
   propertyPostalCode: string
-  propertyAddress: string
   propertyPlace: string
+  propertyAddress: string
   createdAt: string
 }
 
@@ -46,8 +45,7 @@ interface BudgetCategory {
 export default function F5D6({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const owner = allData?.owners?.[0] || {}
-  const projectDescription = allData?.projectDescription || "";
-  const {propertyPostalCode, propertyAddress, propertyPlace, createdAt} = allData || {}
+  const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt } = allData || "";
   console.log(allData)
 
   const [formData, setFormData] = useState({
@@ -1045,14 +1043,14 @@ export default function F5D6({ allData }: { allData: allDataProps }) {
 
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white">
-      <div className="text-right -mt-7">
+      {/* <div className="text-right -mt-7">
         <button
           className="mt-1 px-4 py-1"
           onClick={() => setIsEditModalOpen(true)}
         >
           <FaRegEdit className="text-black text-2xl cursor-pointer" />
         </button>
-      </div>
+      </div> */}
       {/* Header */}
       <div className="text-center mb-6">
         <h1 className="text-xl font-bold mb-2">ΣΥΝΤΑΞΗ ΑΝΑΛΥΤΙΚΟΥ ΠΡΟΫΠΟΛΟΓΙΣΜΟΥ ΕΡΓΟΥ</h1>
@@ -1152,7 +1150,7 @@ export default function F5D6({ allData }: { allData: allDataProps }) {
         <div className="flex justify-between items-start">
           <div className="flex items-center justify-between gap-2">
             <span className="">Ημερομηνία :</span>
-            <span className="ml-30">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+            <span className="ml-30">{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</span>
           </div>
           <div className="">
             <h3 className="text-center mb-4">Ο Συντάξας Μηχανικός</h3>
@@ -1218,7 +1216,7 @@ export default function F5D6({ allData }: { allData: allDataProps }) {
 
                   <label className="font-medium w-1/4">Έργο *:</label>
                   <input
-                  placeholder={projectDescription || "Project description"}
+                    placeholder={projectDescription || "Project description"}
                     type="text"
                     {...register("project_description", { required: "This field is required" })}
                     className="flex-1 border p-2 rounded text-sm"

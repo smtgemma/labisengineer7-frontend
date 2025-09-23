@@ -5,13 +5,13 @@ import { FaRegEdit } from "react-icons/fa";
 // for editing 
 import { useForm } from "react-hook-form"
 import { useState } from "react";
+import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormData {
-    owner_name: string
     projectDescription: string
     propertyAddress: string
-    propertyPlace: string
     propertyPostalCode: string
+    propertyPlace: string
 }
 // end editing 
 
@@ -22,27 +22,46 @@ interface allDataProps {
     propertyAddress: string
     propertyPlace: string
     propertyPostalCode: string
+    serviceId: string;
+    id: string;
+    createdById: string;
 }
 function F10D14({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
     const { allDescriptionTasks } = allData || {}
-    const { propertyPlace, propertyAddress, propertyPostalCode, projectDescription } = allData || {};
+    const { propertyPlace, propertyAddress, propertyPostalCode, projectDescription, serviceId, id, createdById } = allData || {};
 
-
-    // for editing data 
     const {
         register,
         handleSubmit,
+        control,
         reset,
         formState: { errors },
     } = useForm<FormData>({})
+    const [updateProject] = useUpdateProjectMutation()
 
-    const onSubmit = (data: FormData) => {
+    // for editing data 
+    const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
+        const addNewData = {
+            serviceId: serviceId,
+            ...data
+        }
+        const formData = new FormData()
+        formData.append("data", JSON.stringify(addNewData))
+
+        try {
+            const responsive = await updateProject({ projectId: id, userId: createdById, formData }).unwrap()
+            console.log(responsive)
+        } catch (error) {
+            console.log(error)
+        }
+
         reset()
         setIsEditModalOpen(false)
+        // setIsModalOpen(false)
     }
     return (
         <div>
@@ -66,7 +85,7 @@ function F10D14({ allData }: { allData: allDataProps }) {
                             {/* Project Row */}
                             <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
                                 <label className="col-span-2">Έργο:</label>
-                                <div className="col-span-10">
+                                <div className="col-span-10 text-sm">
                                     {projectDescription || "N/A"}
                                 </div>
                             </div>
@@ -155,22 +174,12 @@ function F10D14({ allData }: { allData: allDataProps }) {
                                             onSubmit={handleSubmit(onSubmit)}
                                             className="space-y-4 p-4 border rounded-lg bg-white shadow-md"
                                         >
-                                            {/* Employer */}
-                                            <div className="flex items-center gap-4">
-                                                <label className="font-medium w-1/4">Εργοδότες *:</label>
-                                                <input
-                                                    placeholder={owner?.firstName || "owner_name"}
-                                                    type="text"
-                                                    {...register("owner_name", { required: "This field is required" })}
-                                                    className="flex-1 border p-2 rounded text-sm"
-                                                />
-                                            </div>
 
                                             {/* Project */}
                                             <div className="flex items-center gap-4">
                                                 <label className="font-medium w-1/4">Έργο *:</label>
                                                 <input
-                                                    placeholder={projectDescription || "Project description"}
+                                                    defaultValue={projectDescription || "projectDescription"}
                                                     type="text"
                                                     {...register("projectDescription", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
@@ -183,19 +192,19 @@ function F10D14({ allData }: { allData: allDataProps }) {
                                                 <div className="flex-1 grid grid-cols-3 gap-2">
                                                     <input
                                                         type="text"
-                                                        placeholder={propertyAddress || "Address"}
+                                                        defaultValue={propertyAddress || "propertyAddress"}
                                                         {...register("propertyAddress", { required: "Address is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
-                                                        placeholder={propertyPlace || "City"}
+                                                        defaultValue={propertyPlace || "propertyPlace"}
                                                         {...register("propertyPlace", { required: "City is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
-                                                        placeholder={propertyPostalCode || "Postal Code"}
+                                                        defaultValue={propertyPostalCode || "propertyPostalCode"}
                                                         {...register("propertyPostalCode", { required: "Postal code is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import StampComponent from "../../shared/signture/signture"
-import { format } from "date-fns";
+import { format } from "date-fns"
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -43,6 +43,8 @@ interface allDataProps {
     owners: any[];
     allDescriptionTasks: any[]
     projectDescription: string;
+    horizontalPropertyName: string
+    createdAt: string
 }
 
 export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
@@ -50,7 +52,7 @@ export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
 
     const owner = allData?.owners?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, horizontalPropertyName, createdAt } = allData || {}
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
 
     const [updateProject] = useUpdateProjectMutation()
     // for editing data 
@@ -267,7 +269,7 @@ export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
 
                         <div className="text-center">
                             <p>Ημερομηνία :</p>
-                            <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</p>
+                            <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</p>
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>
@@ -325,13 +327,13 @@ export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPlace || "propertyNumber"}
+                                            defaultValue={propertyPlace || "propertyPlace"}
                                             {...register("propertyPlace", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPostalCode || "municipalityCommunity"}
+                                            defaultValue={propertyPostalCode || "propertyPostalCode"}
                                             {...register("propertyPostalCode", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />

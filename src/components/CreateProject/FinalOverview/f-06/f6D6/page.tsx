@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react";
-import { FaRegEdit } from "react-icons/fa";
+// import { FaRegEdit } from "react-icons/fa";
 import { format } from "date-fns"
 
 interface AllDataProps {

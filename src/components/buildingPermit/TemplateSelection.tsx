@@ -4,45 +4,13 @@ import {
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { RootState } from "@/redux/store";
 import { AlertTriangle, CheckCircle, CreditCard, Loader2 } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Loading from "@/components/Others/Loading";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
 import { TemplateName } from "../CreateProject/ActionSelection/data";
-
-export const templateName: TemplateName[] = [
-    {
-        id: "template_1",
-        title: "Αναλυτικός Προϋπολογισμούς 4495/2017",
-        price: 0.5,
-    },
-    {
-        id: "template_2",
-        title: "Τεχνική Έκθεση 4495/2017",
-        price: 0.5,
-    },
-    {
-        id: "template_3",
-        title: " ΥΔ Ανάθεσης Ιδιοκτήτη 4495/2017 Owner 1 {name + surname}",
-        price: 0.5,
-    },
-    {
-        id: "template_3",
-        title: " ΥΔ Ανάθεσης Ιδιοκτήτη 4495/2017 Owner 2 {name + surname}",
-        price: 0.5,
-    },
-
-    //same for teh 4
-    {
-        id: "template_4",
-        title: "ΥΔ Αυθαιρέτων Ιδιοκτήτη 4495/2017",
-        price: 0.5,
-    },
-
-    //also add autofill 1 credit
-];
 
 interface ActionSelectionProps {
     selectedActions: string[];
@@ -56,34 +24,54 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
     canProceed,
     nextStep,
 }) => {
-
-
-    const [selected, setSelected] = useState<string[]>(["technical", "engineer"]); // default selected
-    const [template, setTemplate] = useState<any[]>([]);
+    const [selected, setSelected] = useState<string[]>([]); // initially empty
+    const [template, setTemplate] = useState<TemplateName[]>([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
 
-    const { data: remainingCredit } = useRemainingCreditQuery("");
-    const [useCredit] = useUseCreditsMutation();
     const dispatch = useDispatch();
     const stepByStepData: any = useSelector((state: RootState) => state.aiData);
     const id = stepByStepData?.projectId?.id;
 
+    const { data: remainingCredit } = useRemainingCreditQuery("");
+    const [useCredit] = useUseCreditsMutation();
     const { data, isLoading } = useGetCreditServiceQuery(id || "", { skip: !id });
 
-    console.log("Credit Service Data:", data);
+    // Create templates including owner templates without mutating exported array
+    const allTemplates: TemplateName[] = useMemo(() => {
+        const baseTemplates: TemplateName[] = [
+            { id: "template_1", title: "Αναλυτικός Προϋπολογισμούς 4495/2017", price: 0.5 },
+            { id: "template_2", title: "Τεχνική Έκθεση 4495/2017", price: 0.5 },
+            { id: "autofill_1", title: "Autofill 1 Credit", price: 1 },
+        ];
+
+        stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+            baseTemplates.push({
+                id: `template_3_owner_${index + 1}`,
+                title: `Ανάθεσης Ιδιοκτήτη 4495/2017 ${owner.first_name} ${owner.last_name}`,
+                price: 0.5,
+            });
+            baseTemplates.push({
+                id: `template_4_owner_${index + 1}`,
+                title: `Αυθαιρέτων Ιδιοκτήτη 4495/2017 ${owner.first_name} ${owner.last_name}`,
+                price: 0.5,
+            });
+        });
+
+        return baseTemplates;
+    }, [stepByStepData.ownerBaseData]);
 
     // Compute subtotal
-    const subtotal = templateName
+    const subtotal = allTemplates
         .filter((s) => selected.includes(s.id))
         .reduce((acc, s) => acc + s.price, 0);
 
-    // Update template list when selections change
+    // Update selected templates
     useEffect(() => {
-        const filtered = templateName.filter((s) => selected.includes(s.id));
+        const filtered = allTemplates.filter((s) => selected.includes(s.id));
         setTemplate(filtered);
-    }, [selected]);
+    }, [selected, allTemplates]);
 
     // Sync selected templates with Redux
     useEffect(() => {
@@ -95,7 +83,7 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
         dispatch(setActionSelectName(selected));
     }, [selected, dispatch]);
 
-    // Handle template selection toggle
+    // Toggle selection
     const toggleSelect = (id: string) => {
         if (selected.includes(id)) {
             setSelected(selected.filter((s) => s !== id));
@@ -104,7 +92,7 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
         }
     };
 
-    // Handle checkout & continue
+    // Handle checkout
     const handleCheckout = async () => {
         if (subtotal === 0) {
             setError("Please select at least one template.");
@@ -124,9 +112,7 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
             const res: any = await useCredit({ totalCredits: subtotal }).unwrap();
             if (res.success) {
                 setSuccess("Credit deducted successfully! Proceeding...");
-                setTimeout(() => {
-                    nextStep();
-                }, 1500);
+                setTimeout(() => nextStep(), 1500);
             } else {
                 setError(res.message || "Failed to deduct credits. Please try again.");
             }
@@ -137,9 +123,7 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
         }
     };
 
-    if (isLoading) {
-        return <Loading />;
-    }
+    if (isLoading) return <Loading />;
 
     return (
         <div className="space-y-8 max-w-7xl mx-auto">
@@ -156,9 +140,9 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
             <div className="grid lg:grid-cols-3 gap-8">
                 {/* Template Selection Panel */}
                 <div className="lg:col-span-2 space-y-4">
-                    {templateName.map((tem, i) => (
+                    {allTemplates.map((tem) => (
                         <div
-                            key={i}
+                            key={tem.id}
                             className={`cursor-pointer border rounded-xl px-6 py-4 transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5 ${selected.includes(tem.id)
                                 ? "border-blue-500 bg-blue-50 shadow-md ring-2 ring-blue-200"
                                 : "border-gray-200 bg-white hover:border-blue-300"
@@ -169,19 +153,10 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
                                 <div className="flex-1">
                                     <h3 className="text-base font-medium flex items-center gap-2 text-gray-800">
                                         {tem.title}
-                                        {tem.required && (
-                                            <span className="text-xs border border-red-700 bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-medium">
-                                                Required
-                                            </span>
-                                        )}
                                     </h3>
-                                    {/* <p className="text-sm text-gray-600 mt-1">{tem.description}</p> */}
                                 </div>
                                 <div className="flex flex-col items-end">
                                     <span className="text-lg font-semibold text-gray-900">{tem.price} credits</span>
-                                    {tem.required && (
-                                        <span className="text-xs text-gray-400 mt-1">Mandatory</span>
-                                    )}
                                 </div>
                             </div>
                         </div>

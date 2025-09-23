@@ -1,95 +1,179 @@
 "use client"
 
+import { useState } from "react"
 import StampComponent from "../../shared/signture/signture"
+import { format } from "date-fns"
+// for editing 
+import { useForm, Controller } from "react-hook-form"
+import { FaRegEdit } from "react-icons/fa"
+import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 
-interface allDataProps {
-  owner_address: string;
-  owner_city: string;
-  owner_name: string;
-  owner_postal_code: string;
-  project_description?: string;
+
+interface FormData {
+    projectDescription: string;
+    propertyAddress: string;
+    propertyPlace: string;
+    propertyPostalCode: string;
+    owners: {
+        firstName: string;
+        lastName: string;
+    }[];
 }
 
-export default function F7D3({ allData }: { allData: allDataProps }) {
-    
-  const {
-    owner_address,
-    owner_city,
-    owner_name,
-    owner_postal_code,
-    project_description,
-  } = allData;
+interface allDataProps {
+    owners: any[]
+    allDescriptionTasks: any[]
+    technical_description: string
+    projectDescription: string
+    id: string
+    createdById: string
+    propertyPostalCode: string
+    propertyAddress: string
+    propertyPlace: string
+    createdAt: string
+    horizontalPropertyName: string
+}
+
+type F6D5Props = {
+    allData: any;
+    setIsModalOpen: (value: boolean) => void;
+};
+// end editing 
+
+export default function F7D3({ allData, setIsModalOpen }: F6D5Props) {
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+    const owner = allData?.owners?.[0] || {}
+    const allDescriptionTasks = allData?.allDescriptionTasks || {};
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
+
+    const [updateProject] = useUpdateProjectMutation()
+
+    // for editing data 
+    const {
+        register,
+        handleSubmit,
+        control,
+        reset,
+        formState: { errors },
+    } = useForm<FormData>({
+        defaultValues: {
+            projectDescription: allData?.projectDescription || "",
+            propertyAddress: allData?.propertyAddress || "",
+            propertyPlace: allData?.propertyPlace || "",
+            propertyPostalCode: allData?.propertyPostalCode || "",
+            owners: [
+                {
+                    firstName: allData?.owners?.[0]?.firstName || "",
+                    lastName: allData?.owners?.[0]?.lastName || "",
+                },
+            ],
+        },
+    })
+
+    const onSubmit = async (data: FormData) => {
+        console.log("Updated Data:", data)
+        const addNewData = {
+            serviceId: serviceId,
+            ...data
+        }
+        const formData = new FormData()
+        formData.append("data", JSON.stringify(addNewData))
+
+        try {
+            const responsive = await updateProject({ projectId: id, userId: createdById, formData }).unwrap()
+            console.log(responsive)
+        } catch (error) {
+            console.log(error)
+        }
+
+        reset()
+        setIsEditModalOpen(false)
+        setIsModalOpen(false)
+    }
 
     return (
         <div className="max-w-[794px] mx-auto p-6 bg-white">
+            <div className="text-right -mt-9">
+                <button
+                    className="mt-1 px-4 py-1"
+                    onClick={() => setIsEditModalOpen(true)}
+                >
+                    <FaRegEdit className="text-black text-2xl cursor-pointer" />
+                </button>
+            </div>
             {/* Title */}
             <h2 className="text-center font-semibold underline text-sm mb-2">
-                ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ - ΒΕΒΑΙΩΣΗ ΜΗΧΑΝΙΚΟΥ
+                ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
             </h2>
 
             {/* Project Information */}
             <div className="mb-8 space-y-4">
                 <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    <h3 className=" text-sm">{project_description || "N/A"}</h3>
+                    <h3 className=" text-sm">{projectDescription || "N/A"}</h3>
                 </div>
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{owner_address || "N/A"}, {owner_city || "N/A"}, {owner_postal_code || "N/A"} ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">
+                        {propertyAddress || "N/A"}, {propertyPlace || "N/A"},
+                        {propertyPostalCode || "N/A"} ( FOR BUILDING)
+                    </h3>
                 </div>
 
                 <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
                     <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">{owner_name || "N/A"}</h3>
+                    <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
                 </div>
             </div>
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">Description for building/ horiontal property</span> επί της οδού <br /> <span className="font-semibold">Address,Town/Area , postal code ( FOR BUILDING),</span>
+                <p>Στο ακίνητο <span className="font-semibold">Description for building/ {horizontalPropertyName || "N/A"} </span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city} , {owner?.postal_code} ( FOR BUILDING),</span>
                     πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
 
             <div className="space-y-6 ml-10">
+
+                {Array.isArray(allDescriptionTasks) &&
+                    allDescriptionTasks.map((task: any, index: number) => (
+                        <div key={index}>
+                            <h3 className="text-sm font-bold">● {task?.id}</h3>
+                            <p className="text-sm">{task?.description}</p>
+                        </div>
+                    ))
+                }
+
                 <div>
-                    <h3 className="text-sm font-bold">
-                        ● Ολοκληρωμένο Σύστημα Εξωτερικής Θερμομόνωσης με διογκωμένη πολυστερίνη και οργανικά έτοιμα επιχρίσματα
-                    </h3>
-                    <p className="text-sm">Το Ολοκληρωμένο Σύστημα Εξωτερικής Θερμομόνωσης αποτελείται από:
+                    <p className="text-sm mb-6">
+                        <span className="text-sm font-bold">Βάσει των ισχυουσών πολεοδομικών και αστικών διατάξεων</span> για τις προβλεπόμενες εργασίες που πρόκειται
+                        να υλοποιηθούν στη συγκεκριμένη ιδιοκτησία, <span className="text-sm font-bold">δεν απαιτείται η συναίνεση των λοιπών συνιδιοκτητών της πολυκατοικίας.</span>
                     </p>
-                    <p className="text-sm">Πιστοποιημένες θερμομονωτικές πλάκες γραφιτούχας διογκωμένης πολυστερίνης,(με συντελεστή θερμικής αγωγιμότητας λ=....... W/mK) και πάχους .... εκ. βάσει της μελέτης Ενεργειακής Απόδοσης του κτιρίου, για χρήση σε συστήματα εξωτερικής θερμομόνωσης. Οι θερμομονωτικές πλάκες πρέπει να εφαρμόζονται σε επίπεδη και καθαρή επιφάνεια απαλλαγμένη από σκόνες, βρωμιές και λίπη τοποθετημένες σταυρωτά (όπως η τουβλοδομή) εφαρμοσμένες στα δομικά στοιχεία με κόλλα υψηλής συγκολλητικής ικανότητας, κατάλληλης για ανόργανα υποστρώματα σύμφωνα με τις προδιαγραφές του συστήματος. Σε παλαιές βαμμένες επιφάνειες ή επιφάνειες ξηράς δόμησης η συγκόλληση επιτυγχάνεται με οργανική κόλλα ενδεικτικού τύπου
-                    </p>
-                    <p className="text-sm">Σε κάθε σημείο του κτιρίου όπου σταματά η θερμομόνωση (π.χ. στους λαμπάδες και τα πρέκια των κουφωμάτων, ποδιές παραθύρων κλπ.) χρησιμοποιείται η αυτοδιογκούμενη ταινία στεγάνωσης για να εξασφαλιστεί η στεγάνωση του συστήματος στα σημεία αυτά. Η ταινία τοποθετείται επί του σταθερού στοιχείου σύμφωνα με τα προβλεπόμενα από την μελέτη και πιέζεται επ' αυτού με την θερμομονωτική πλάκα. Για τη στερέωση και τη συγκράτηση του συστήματος της εξωτερικής θερμομόνωσης (θερμοπρόσοψη) με άλλα οικοδομικά στοιχεία θα απαιτηθούν ειδικές διατάξεις και ειδικά εξαρτήματα. Όλα τα προσκομιζόμενα υλικά θα είναι συσκευασμένα με σήμανση όπως προβλέπουν τα σχετικά πρότυπα και θα συνοδεύονται από επίσημα πιστοποιητικά συμμόρφωσης - επίδοσης από Διαπιστευμένο Φορέα.
-                    </p>
-                    <p className="text-sm">Σε κάθε σημείο του κτιρίου όπου σταματά η θερμομόνωση (π.χ. στους λαμπάδες και τα πρέκια των κουφωμάτων, ποδιές παραθύρων κλπ.) χρησιμοποιείται η αυτοδιογκούμενη ταινία στεγάνωσης για να εξασφαλιστεί η στεγάνωση του συστήματος στα σημεία αυτά. Η ταινία τοποθετείται επί του σταθερού στοιχείου σύμφωνα με τα προβλεπόμενα από την μελέτη και πιέζεται επ' αυτού με την θερμομονωτική πλάκα. Για τη στερέωση και τη συγκράτηση του συστήματος της εξωτερικής θερμομόνωσης (θερμοπρόσοψη) με άλλα οικοδομικά στοιχεία θα απαιτηθούν ειδικές διατάξεις και ειδικά εξαρτήματα. Όλα τα προσκομιζόμενα υλικά θα είναι συσκευασμένα με σήμανση όπως προβλέπουν τα σχετικά πρότυπα και θα συνοδεύονται από επίσημα πιστοποιητικά συμμόρφωσης - επίδοσης από Διαπιστευμένο Φορέα.
-                    </p>
-                    <p className="text-sm my-6">Οι θερμομονωτικές πλάκες θα πρέπει να είναι εναρμονισμένα με το πρότυπο ΕΝ 13163 : 2012 "Θερμομονωτικά προϊόντα κτιρίων Βιομηχανικά παραγόμενα προϊόντα από διογκωμένη ΤΕΧΝΙΚΗ ΠΕΡΙΓΡΑΦΗ 61 πολυστερίνη (xps)- προδιαγραφή". Ο συντελεστής θερμικής αγωγιμότητας λ της διογκωμένης πολυστερίνης θα πρέπει να αναγράφεται στην ετικέτα του προϊόντος.
-                    </p>
-                    <p className="text-sm">Οργανικός έτοιμος προς χρήση σοβάς σε μορφή πάστας, με πιστοποίηση CE σύμφωνα με το πρότυπο EN 15824, κλάσης A2 σε αντίδραση στη φωτιά βάσει ΕΝ 13501, υψηλής ελαστικότητας, χωρίς τσιμέντο, με υψηλή αντοχή στις μηχανικές καταπονήσεις που επιτρέπει τον εμποτισμό υαλοπλέγματος για την πλήρη αντιρρηγματική προστασία του συστήματος με κατανάλωση ~2,8kg/m², ο οποίος απλώνεται ομοιόμορφα στο σύνολο της επιφάνειας των θερμομονωτικών πλακών και εντός του οποίου όσο είναι ακόμα υγρός εμβαπτίζεται υαλόπλεγμα, ανθεκτικό στα αλκάλια, σταθερών διαστάσεων, με μεγάλη ικανότητα απορρόφησης τάσεων (1700N/50mm), με επικάλυψη 10εκ στο σημείο συνάντησης των λωρίδων σύμφωνα με τις προδιαγραφές του συστήματος.
-                    </p>
-                    <p className="text-sm">Προετοιμασία λείας τελικής επικάλυψης, εφαρμόζοντας οργανικό έτοιμο προς χρήση σοβά χρωματισμένου στην μάζα του σύμφωνα με τις απαιτήσεις της μελέτης, εμπλουτισμένο με πρόσθετα για προστασία ενάντια σε άλγη και μύκητες, με πιστοποίηση CE σύμφωνα με το πρότυπο EN 15824, σε κατανάλωση ~1,8kg/m².
-                    </p>
-                    <p className="text-sm">Ο τελικός σοβάς είναι ιδιαίτερα ελαστικός, ανθεκτικός σε μηχανικές καταπονήσεις, εξαιρετικά ανθεκτικός σε μικροοργανισμούς, με πιστοποίηση CE σύμφωνα με το πρότυπο EN 15824 και κλάσης A2 σε αντίδραση στη φωτιά βάσει ΕΝ 13501, υψηλής υδρατμοδιαπερατότητας και υδροφοβίας.
-                    </p>
-                    <p className="text-sm">Τελική επικάλυψη με οργανικό λεπτόκοκκο έτοιμο προς χρήση σοβά σε κατανάλωση ~1,4 kg/m²., για δημιουργία λείων τελικών επιφανειών σε συστήματα εξωτερικής θερμομόνωσης, χρωματισμένο στην μάζα του σύμφωνα με τις απαιτήσεις της μελέτης, εμπλουτισμένο με πρόσθετα για προστασία ενάντια σε άλγη και μύκητες, με πιστοποίηση CE σύμφωνα με το πρότυπο EN 15824 και κλάσης A2 σε αντίδραση στη φωτιά βάσει ΕΝ 13501..</p>
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold">● Εφαρμογή Παθητικών Ηλιακών Συστημάτων
-                    </h3>
-                    <p className="text-sm">Στο πλαίσιο της βελτίωσης της ενεργειακής απόδοσης και της θερμικής άνεσης, προβλέπεται η εφαρμογή παθητικών ηλιακών συστημάτων όπως:
+                    <p className="text-sm">Ο λόγος είναι ότι:</p>
+                    <p className="text-sm mt-5">● Το σύνολο των εργασιών πρόκειται να εκτελεστεί αποκλειστικά εντός του περιγράμματος της ιδιοκτησίας, χωρίς επέμβαση σε κοινόχρηστους ή κοινόκτητους χώρους.</p>
+                    <p className="text-sm">● Δεν υφίσταται επέμβαση σε στατικά, φέροντα ή κοινόχρηστα δομικά στοιχεία του κτιρίου.</p>
+                    <p className="text-sm">● Δεν πραγματοποιούνται επεμβάσεις σε δίκτυα ή υποδομές που εξυπηρετούν άλλες ιδιοκτησίες (όπως δίκτυα θέρμανσης, ύδρευσης ή πυρασφάλειας κοινόχρηστων χώρων).
                     </p>
-                    <p className="my-6 text-sm">-Τοποθέτηση σταθερών σκιάστρων (μεταλλικών ή ξύλινων) στις όψεις του κτιρίου.
-                    </p>
-                    <p className="my-6 text-sm">-Εφαρμογή ανακλαστικών επιστρώσεων σε δομικά στοιχεία ή σε υαλοστάσια (όπου απαιτείται).</p>
                 </div>
+                <div>
+                    <p className="text-sm font-bold underline">Συνεπώς, δεν απαιτείται σύγκληση ή απόφαση γενικής συνέλευσης ή άλλη μορφή συναίνεσης των υπολοίπων συνιδιοκτητών, για την εκτέλεση των εν λόγω εργασιών.</p>
+                </div>
+                <div>
+                    <p className="text-sm mb-6">
+                        Η παρούσα δήλωση αποτελεί στοιχείο τεκμηρίωσης για τον φάκελο του έργου, σύμφωνα και με το ισχύον νομικό πλαίσιο (Ν. 4495/2017).
+                    </p>
+                </div>
+
                 {/* {/* Signature Section */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
                     <div className="max-w-[300px]">
 
                         <div className="text-center">
                             <p>Ημερομηνία :</p>
-                            <p>6/25/2025</p>
+                            <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</p>
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>
@@ -105,8 +189,103 @@ export default function F7D3({ allData }: { allData: allDataProps }) {
                         </div>
                     </div>
                 </div>
-
             </div>
+
+            {/* EDIT MODAL */}
+            {isEditModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                    <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
+                        {/* Close button */}
+                        <button
+                            className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
+                            onClick={() => setIsEditModalOpen(false)}
+                        >
+                            ✕
+                        </button>
+
+                        <h2 className="text-lg font-bold mb-4">✍️ Edit Data</h2>
+                        <div>
+                            <form
+                                onSubmit={handleSubmit(onSubmit)}
+                                className="space-y-4 p-4 border rounded-lg bg-white shadow-md"
+                            >
+                                {/* Project */}
+                                <div className="flex items-center gap-4">
+                                    <label className="font-medium w-1/4">Έργο *:</label>
+                                    <input
+                                        defaultValue={projectDescription || "Project Description "}
+                                        type="text"
+                                        {...register("projectDescription", { required: "This field is required" })}
+                                        className="flex-1 border p-2 rounded text-sm"
+                                    />
+                                </div>
+
+                                {/* Address */}
+                                <div className="flex items-center gap-4">
+                                    <label className="font-medium w-1/4">Θέση*:</label>
+                                    <div className="flex-1 grid grid-cols-3 gap-2">
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyAddress || "propertyAddress"}
+                                            {...register("propertyAddress", { required: "Address is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyPlace || "propertyNumber"}
+                                            {...register("propertyPlace", { required: "City is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyPostalCode || "municipalityCommunity"}
+                                            {...register("propertyPostalCode", { required: "Postal code is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                    </div>
+                                </div>
+                                {/* Address */}
+                                {/* First Name */}
+                                <Controller
+                                    name="owners.0.firstName"
+                                    control={control}
+                                    rules={{ required: "First name is required" }}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            placeholder="First Name"
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    )}
+                                />
+                                {/* Last Name */}
+                                <Controller
+                                    name="owners.0.lastName"
+                                    control={control}
+                                    rules={{ required: "Last name is required" }}
+                                    render={({ field }) => (
+                                        <input
+                                            {...field}
+                                            placeholder="Last Name"
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    )}
+                                />
+
+                                {/* Submit */}
+                                <div className="flex justify-end">
+                                    <button
+                                        type="submit"
+                                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm cursor-pointer"
+                                    >
+                                        Update
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

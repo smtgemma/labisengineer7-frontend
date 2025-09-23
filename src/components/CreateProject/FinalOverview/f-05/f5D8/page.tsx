@@ -17,11 +17,16 @@ interface FormData {
 // end editing 
 
 interface allDataProps {
-    owners: any[];
-    projectDescription: string;
-    propertyPostalCode: string;
-    propertyAddress: string;
-    propertyPlace: string;
+  owners: any[];
+  projectDescription: string
+  id: string
+  createdById: string
+  serviceId: string
+  propertyPostalCode: string
+  propertyPlace: string
+  propertyAddress: string
+  createdAt: string
+  horizontalPropertyName: string
 }
 
 interface BudgetItem {
@@ -43,7 +48,8 @@ export default function F5D8({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const owner = allData?.owners?.[0] || {};
-  const {projectDescription, propertyAddress, propertyPostalCode, propertyPlace} = allData || {}
+  const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress } = allData || {}
+
 
   const [formData, setFormData] = useState({
     employer: "",
@@ -537,7 +543,7 @@ export default function F5D8({ allData }: { allData: allDataProps }) {
                 <div className="flex items-center gap-4">
                   <label className="font-medium w-1/4">Εργοδότες *:</label>
                   <input
-                     placeholder={owner?.firstName || "owner_name"}
+                    placeholder={owner?.firstName || "owner_name"}
                     type="text"
                     {...register("owner_name", { required: "This field is required" })}
                     className="flex-1 border p-2 rounded text-sm"

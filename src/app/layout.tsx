@@ -8,6 +8,7 @@ import { Toaster } from "sonner";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import StoreProvider from "@/redux/StoreProvider";
 import GoogleTranslateProvider from "@/components/googleTranslation/GoogleLang";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Labis-Engineer 7",
@@ -31,6 +32,22 @@ export default function RootLayout({
           </GoogleTranslateProvider>
         </StoreProvider>
       </body>
+      {/* Screenshot detection script */}
+      <Script id="detect-screenshot" strategy="afterInteractive">
+        {`
+            document.addEventListener("keyup", function(e) {
+              if (e.key === "PrintScreen") {
+        //           const el = document.getElementById("secret");
+        // if (el) {
+        //   el.style.backgroundColor = "black";
+        // }
+        console.log("User taking screenSHot")
+                alert("Screenshot attempt detected!");
+                navigator.clipboard.writeText("");
+              }
+            });
+          `}
+      </Script>
     </html>
   );
 }

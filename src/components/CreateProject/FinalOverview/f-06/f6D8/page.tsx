@@ -4,7 +4,7 @@
 "use client"
 import { useState } from "react";
 import StampComponent from "../../shared/signture/signture";
-import { format } from "date-fns";
+import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -265,7 +265,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                                     <div className="text-right space-y-2">
                                         <div className="flex items-center gap-4">
                                             <span className="text-sm">Ημερομηνία :</span>
-                                            <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+                                            <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</span>
                                         </div>
                                         <div className="text-sm mt-8 text-center">
                                             <div>( Υπογραφή )</div>
@@ -488,197 +488,10 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                         )}
                     </div>
                 </div>
-            ))): (
+            ))) : (
                 <h2 className="text-3xl font-bold p-10">Data not found</h2>
-            )} 
+            )}
         </div>
     )
 
 }
-
-
-
-
-
-
-
-// "use client"
-// import { useState } from "react";
-// import { useForm } from "react-hook-form"
-// import { FaRegEdit } from "react-icons/fa"
-// import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
-
-// interface FormInputs {
-//     firstName?: string;
-//     lastName?: string;
-//     fatherFirstLastName?: string;
-//     mothersFirstLastName?: string;
-//     dateOfBirth?: string;
-//     placeOfBirth?: string;
-//     idNumber?: string;
-//     phone?: string;
-//     city?: string;
-//     ownerAddress?: string;
-//     addressNumber?: string;
-//     postalCode?: string;
-//     email?: string;
-//     taxIdentificationNumber?: string;
-//     projectDescription?: string;
-//     serviceId?: string;
-// }
-
-// interface AllDataProps {
-//     owners: any[];
-//     engineers: any[];
-//     projectDescription: string;
-//     ydom: string;
-//     horizontalPropertyName: string;
-//     id: string;
-//     createdById: string;
-//     serviceId: string;
-// }
-
-// export default function F6D8({ allData }: { allData: AllDataProps }) {
-//     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-//     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
-
-//     const { projectDescription, ydom, id, createdById, serviceId } = allData || {};
-//     const [updateProject] = useUpdateProjectMutation();
-
-//     const { register, handleSubmit, reset } = useForm<FormInputs>({})
-
-//     // Submit handler
-//     const onSubmit = async (data: FormInputs) => {
-//         if (selectedOwnerIndex === null) return;
-
-//         // পুরানো owners কপি
-//         const updatedOwners = [...allData.owners];
-
-//         // ওই index এর owner replace
-//         updatedOwners[selectedOwnerIndex] = {
-//             ...updatedOwners[selectedOwnerIndex],
-//             ...data
-//         };
-
-//         // FormData তৈরি
-//         const formData = new FormData();
-//         formData.append('data', JSON.stringify({
-//             owners: updatedOwners,
-//             projectDescription: data.projectDescription || allData.projectDescription,
-//             serviceId: serviceId
-//         }));
-
-//         try {
-//             await updateProject({
-//                 projectId: id,
-//                 userId: createdById,
-//                 formData: formData // ✅ FormData পাঠানো হচ্ছে
-//             }).unwrap();
-
-//             reset();
-//             setIsEditModalOpen(false);
-//             setSelectedOwnerIndex(null);
-//         } catch (err) {
-//             console.error("Update failed:", err);
-//         }
-//     }
-
-//     return (
-//         <div>
-//             {/* Owners List */}
-//             {allData?.owners?.map((owner, index) => (
-//                 <div key={index} className="max-w-[796px] mx-auto bg-white mb-6 p-4 border rounded-lg">
-//                     <div className="text-right mb-2">
-//                         <button
-//                             className="px-4 py-1"
-//                             onClick={() => {
-//                                 setSelectedOwnerIndex(index);
-//                                 setIsEditModalOpen(true);
-//                             }}
-//                         >
-//                             <FaRegEdit className="text-black text-2xl cursor-pointer" />
-//                         </button>
-//                     </div>
-
-//                     <div className="border border-gray-300 p-2 rounded">
-//                         <div className="flex mb-1">
-//                             <div className="w-32 font-bold">Όνομα:</div>
-//                             <div className="flex-1">{owner.firstName || "N/A"}</div>
-//                         </div>
-//                         <div className="flex mb-1">
-//                             <div className="w-32 font-bold">Επώνυμο:</div>
-//                             <div className="flex-1">{owner.lastName || "N/A"}</div>
-//                         </div>
-//                         <div className="flex mb-1">
-//                             <div className="w-32 font-bold">Πόλη:</div>
-//                             <div className="flex-1">{owner.city || "N/A"}</div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             ))}
-
-//             {/* Edit Modal */}
-//             {isEditModalOpen && selectedOwnerIndex !== null && (
-//                 <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-//                     <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
-//                         <button
-//                             className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
-//                             onClick={() => setIsEditModalOpen(false)}
-//                         >
-//                             ✕
-//                         </button>
-
-//                         <h2 className="text-lg font-bold mb-4">✍️ Edit Owner</h2>
-//                         <form
-//                             onSubmit={handleSubmit(onSubmit)}
-//                             className="grid grid-cols-1 md:grid-cols-2 gap-4"
-//                         >
-//                             {/* First Name */}
-//                             <div className="flex flex-col gap-2">
-//                                 <label className="font-medium">Όνομα:</label>
-//                                 <input
-//                                     type="text"
-//                                     {...register("firstName")}
-//                                     className="border p-2 rounded text-sm"
-//                                     defaultValue={allData.owners[selectedOwnerIndex]?.firstName || ""}
-//                                 />
-//                             </div>
-
-//                             {/* Last Name */}
-//                             <div className="flex flex-col gap-2">
-//                                 <label className="font-medium">Επώνυμο:</label>
-//                                 <input
-//                                     type="text"
-//                                     {...register("lastName")}
-//                                     className="border p-2 rounded text-sm"
-//                                     defaultValue={allData.owners[selectedOwnerIndex]?.lastName || ""}
-//                                 />
-//                             </div>
-
-//                             {/* City */}
-//                             <div className="flex flex-col gap-2">
-//                                 <label className="font-medium">Πόλη:</label>
-//                                 <input
-//                                     type="text"
-//                                     {...register("city")}
-//                                     className="border p-2 rounded text-sm"
-//                                     defaultValue={allData.owners[selectedOwnerIndex]?.city || ""}
-//                                 />
-//                             </div>
-
-//                             {/* Submit Button */}
-//                             <div className="flex justify-end md:col-span-2">
-//                                 <button
-//                                     type="submit"
-//                                     className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm"
-//                                 >
-//                                     Update
-//                                 </button>
-//                             </div>
-//                         </form>
-//                     </div>
-//                 </div>
-//             )}
-//         </div>
-//     )
-// }

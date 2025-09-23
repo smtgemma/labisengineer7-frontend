@@ -79,7 +79,7 @@ export default function RoleForm() {
                 Select Role
               </option>
               <option value="engineer">Engineer</option>
-              <option value="company">Company</option>
+              {/* <option value="company">Company</option> */}
             </select>
             {errors.userType && (
               <p className="error-text">{errors.userType.message}</p>

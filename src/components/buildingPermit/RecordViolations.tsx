@@ -55,14 +55,14 @@ const violationsDatabase = {
     ],
 
     // Category 3 remaining violations
-    category3Remaining: [
+    otherViolations: [
         'Αλλαγή διαστάσεων εξωστών με υπέρβαση επιφανείας άνω του 20%',
         'Επέκταση εξώστη – αύξηση προβολής ή επιφάνειας εξώστη',
         'Κατασκευή νέου εξώστη- αυθαίρετη προσθήκη',
         'Κατασκευή νέων ανοιγμάτων επί των όψεων',
         'Κατασκευή νέας εστίας τζακιού με καπνοδόχο',
         'Κατασκευή εξωτερικής μεταλλικής κλίμακας',
-        'Κаτασκευή εξωτερικής κλίμακας από σκυρόδεμα',
+        'Κατασκευή εξωτερικής κλίμακας από σκυρόδεμα',
         'Επέκταση υφιστάμενης κλίμακας',
         'Τοποθέτηση ηλιακού συλλέκτη – εγκατάσταση σε στέγη ή δώμα',
         'Κατασκευή νέας εστίας τζακιού – δημιουργία τζακιού με καπνοδόχο',
@@ -116,10 +116,6 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
     const [isAgeDropdownOpen, setIsAgeDropdownOpen] = useState<boolean>(false);
 
     const [showOtherViolation, setShowOtherViolation] = useState<boolean>(false);
-    const [otherViolationInput, setOtherViolationInput] = useState<string>("");
-    const [otherViolationSuggestions, setOtherViolationSuggestions] = useState<string[]>([]);
-    const [showOtherViolationSuggestions, setShowOtherViolationSuggestions] = useState<boolean>(false);
-
     const [showRemainingViolations, setShowRemainingViolations] = useState<boolean>(false);
 
     const categories: string[] = ["1", "2", "3", "4", "5"];
@@ -141,7 +137,7 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                 formId: index,
                 category: selectedCategory,
                 violations: selectedViolations,
-                otherViolation: showOtherViolation ? otherViolationInput : null,
+                otherViolation: showOtherViolation,
                 age: selectedAge,
                 showRemainingViolations: selectedCategory === "3" ? showRemainingViolations : null
             };
@@ -155,12 +151,12 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                 formId: index,
                 category: selectedCategory,
                 violations: selectedViolations,
-                otherViolation: showOtherViolation ? otherViolationInput : null,
+                otherViolation: showOtherViolation,
                 age: selectedAge,
                 showRemainingViolations: selectedCategory === "3" ? showRemainingViolations : null
             });
         }
-    }, [selectedCategory, selectedViolations, otherViolationInput, selectedAge, showRemainingViolations]);
+    }, [selectedCategory, selectedViolations, showOtherViolation, selectedAge, showRemainingViolations]);
 
     const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
@@ -172,7 +168,6 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
 
         if (!categoriesWithOtherViolation.includes(category)) {
             setShowOtherViolation(false);
-            setOtherViolationInput("");
         }
 
         if (category !== "3") {
@@ -183,9 +178,15 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
     const getViolationDatabase = (): string[] => {
         if (selectedCategory === "3") {
             return showRemainingViolations
-                ? violationsDatabase.category3Remaining
+                ? violationsDatabase.otherViolations
                 : violationsDatabase.category3Basic;
         }
+
+        // For categories 1, 2, 4, 5, use otherViolations if showOtherViolation is checked
+        if (categoriesWithOtherViolation.includes(selectedCategory) && showOtherViolation) {
+            return violationsDatabase.otherViolations;
+        }
+
         return violationsDatabase.general;
     };
 
@@ -216,28 +217,9 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
         setSelectedViolations(selectedViolations.filter((_, i) => i !== idx));
     };
 
-    const handleOtherViolationInputChange = (value: string) => {
-        setOtherViolationInput(value);
-
-        if (value.trim()) {
-            const filtered = violationsDatabase.general.filter((violation) =>
-                violation.toLowerCase().includes(value.toLowerCase())
-            );
-            setOtherViolationSuggestions(filtered);
-            setShowOtherViolationSuggestions(true);
-        } else {
-            setShowOtherViolationSuggestions(false);
-        }
-    };
-
-    const handleOtherViolationSelect = (violation: string) => {
-        setOtherViolationInput(violation);
-        setShowOtherViolationSuggestions(false);
-    };
-
     const handleRemainingViolationsChange = (checked: boolean) => {
         setShowRemainingViolations(checked);
-        setSelectedViolations([]);
+        // setSelectedViolations([]);
         setViolationInput("");
         setShowViolationSuggestions(false);
     };
@@ -304,6 +286,48 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                         )}
                     </div>
                 </div>
+
+                {/* Other Violation Checkbox for categories 1, 2, 4, 5 */}
+                {categoriesWithOtherViolation.includes(selectedCategory) && (
+                    <div className="flex items-center space-x-3">
+                        <input
+                            type="checkbox"
+                            id={`other-violation-${index}`}
+                            checked={showOtherViolation}
+                            onChange={(e) => {
+                                setShowOtherViolation(e.target.checked);
+                                // setSelectedViolations([]);
+                                setViolationInput("");
+                                setShowViolationSuggestions(false);
+                            }}
+                            className="w-4 h-4 text-blue-600 border-gray-300 rounded"
+                        />
+                        <label
+                            htmlFor={`other-violation-${index}`}
+                            className="text-sm font-medium cursor-pointer"
+                        >
+                            Λοιπή Παράβαση
+                        </label>
+                    </div>
+                )}
+                {/* Category 3 toggle */}
+                {selectedCategory === "3" && (
+                    <div className="flex items-center space-x-3">
+                        <input
+                            type="checkbox"
+                            id={`remaining-violations-${index}`}
+                            checked={showRemainingViolations}
+                            onChange={(e) => handleRemainingViolationsChange(e.target.checked)}
+                            className="w-4 h-4 text-blue-600 border-gray-300 rounded"
+                        />
+                        <label
+                            htmlFor={`remaining-violations-${index}`}
+                            className="text-sm font-medium cursor-pointer"
+                        >
+                            Λοιπές Παραβάσεις Κατηγορίας 3
+                        </label>
+                    </div>
+                )}
                 {/* Violations autocomplete */}
                 <div className="space-y-2">
                     <label className="text-sm font-medium block">
@@ -311,6 +335,11 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                         {selectedCategory === "3" && (
                             <span className="text-xs text-gray-500 ml-2">
                                 ({showRemainingViolations ? "Λοιπές" : "Βασικές"})
+                            </span>
+                        )}
+                        {categoriesWithOtherViolation.includes(selectedCategory) && (
+                            <span className="text-xs text-gray-500 ml-2">
+                                ({showOtherViolation ? "Λοιπές" : "Κύριες"})
                             </span>
                         )}
                     </label>
@@ -361,73 +390,6 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                         )}
                     </div>
                 </div>
-                {/* Category 3 toggle */}
-                {selectedCategory === "3" && (
-                    <div className="flex items-center space-x-3">
-                        <input
-                            type="checkbox"
-                            id={`remaining-violations-${index}`}
-                            checked={showRemainingViolations}
-                            onChange={(e) => handleRemainingViolationsChange(e.target.checked)}
-                            className="w-4 h-4 text-blue-600 border-gray-300 rounded"
-                        />
-                        <label
-                            htmlFor={`remaining-violations-${index}`}
-                            className="text-sm font-medium cursor-pointer"
-                        >
-                            Λοιπές Παραβάσεις Κατηγορίας 3
-                        </label>
-                    </div>
-                )}
-
-                {/* Other Violation */}
-                {categoriesWithOtherViolation.includes(selectedCategory) && (
-                    <div className="space-y-3">
-                        <div className="flex items-center space-x-3">
-                            <input
-                                type="checkbox"
-                                id={`other-violation-${index}`}
-                                checked={showOtherViolation}
-                                onChange={(e) => setShowOtherViolation(e.target.checked)}
-                                className="w-4 h-4 text-blue-600 border-gray-300 rounded"
-                            />
-                            <label
-                                htmlFor={`other-violation-${index}`}
-                                className="text-sm font-medium cursor-pointer"
-                            >
-                                Λοιπή Παράβαση
-                            </label>
-                        </div>
-
-                        {showOtherViolation && (
-                            <div className="relative ml-7">
-                                <input
-                                    type="text"
-                                    value={otherViolationInput}
-                                    onChange={(e) => handleOtherViolationInputChange(e.target.value)}
-                                    placeholder="Περιγραφή λοιπής παράβασης..."
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                                />
-
-                                {showOtherViolationSuggestions &&
-                                    otherViolationSuggestions.length > 0 && (
-                                        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-48 overflow-y-auto">
-                                            {otherViolationSuggestions.map((suggestion, idx) => (
-                                                <button
-                                                    key={idx}
-                                                    type="button"
-                                                    onClick={() => handleOtherViolationSelect(suggestion)}
-                                                    className="w-full px-3 py-2 text-left text-sm hover:bg-blue-50"
-                                                >
-                                                    {suggestion}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    )}
-                            </div>
-                        )}
-                    </div>
-                )}
 
 
 
