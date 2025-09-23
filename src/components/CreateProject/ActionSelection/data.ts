@@ -406,6 +406,44 @@ export const templateName1: Record<string, TemplateName[]> = {
 
     ],
     // subcategory 
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΚΟΙΝΗ_ΔΡΑΣΗ_ΕΝΤΟΣ_ΟΙΚΟΠΕΔΟΥ_8:[
+        {
+            id: "81",
+            title: "eight_one",
+            price: 0.5,
+        },
+        {
+            id: "82",
+            title: "eight_two",
+            price: 0.5,
+        },
+        {
+            id: "83",
+            title: "eight_three",
+            price: 0.5,
+        },
+        {
+            id: "84",
+            title: "eight_four",
+            price: 0.5,
+        },
+        {
+            id: "85",
+            title: "eight_five",
+            price: 0.5,
+        },
+        {
+            id: "86",
+            title: "eight_six",
+            price: 0.5,
+        },
+        {
+            id: "87",
+            title: "eight_seven",
+            price: 0.5,
+        },
+
+    ],
 };
 
 

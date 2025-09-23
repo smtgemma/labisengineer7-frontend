@@ -90,6 +90,13 @@ import F2D5 from "./f-02/f2D5/page";
 import F2D6 from "./f-02/f2D6/page";
 import F2D7 from "./f-02/f2D7/page";
 import F2D8 from "./f-02/f2D8/page";
+import F8D1 from "./f-08/f8D1/page";
+import F8D2 from "./f-08/f8D2/page";
+import F8D3 from "./f-08/f8D3/page";
+import F8D4 from "./f-08/f8D4/page";
+import F8D5 from "./f-08/f8D5/page";
+import F8D6 from "./f-08/f8D6/page";
+import F8D7 from "./f-08/f8D7/page";
 
 export interface UserData {
   id: string;
@@ -671,6 +678,30 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 )}
                 {selected === "two_eight" && (
                   <F2D8 allData={allData} /> // 8
+                )}
+              </div>
+              {/* file eight  */}
+              <div>
+                {selected === "eight_one" && (
+                  <F8D1 allData={allData} /> // 1
+                )}
+                {selected === "eight_two" && (
+                  <F8D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
+                )}
+                {selected === "eight_three" && (
+                  <F8D3 allData={allData} /> // 3
+                )}
+                {selected === "eight_four" && (
+                  <F8D4 allData={allData} /> // 4
+                )}
+                {selected === "eight_five" && (
+                  <F8D5 allData={allData} /> // 5
+                )}
+                {selected === "eight_six" && (
+                  <F8D6 allData={allData} /> // 6
+                )}
+                {selected === "eight_seven" && (
+                  <F8D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 7
                 )}
               </div>
             </div>
