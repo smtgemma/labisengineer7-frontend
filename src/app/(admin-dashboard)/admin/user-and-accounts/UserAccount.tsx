@@ -18,6 +18,7 @@ export default function UsersAccountsTable() {
   const token = tokenCatch();
 
   const { data, isLoading, refetch } = useGetAllUserStatusQuery(token);
+  console.log(data);
   const [updateStatus, { isLoading: statusChangLoading }] =
     useUserStatusChangeMutation();
   const [deleteAccount, { isLoading: deleteLoading }] = useUserDeleteMutation();
@@ -124,12 +125,12 @@ export default function UsersAccountsTable() {
               )}
             </button>
 
-            <button
+            {/* <button
               onClick={() => handleUserDelete(rowData.id)}
               className="text-red-600 hover:bg-red-500 hover:text-white  font-medium py-2 px-3 rounded text-left"
             >
               Delete Account
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

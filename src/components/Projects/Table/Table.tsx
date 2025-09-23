@@ -74,9 +74,9 @@ const Table: React.FC<TableProps> = ({ data }) => {
             <th className="text-left text-sm font-medium px-6 py-3">
               Created On
             </th>
-            <th className="text-left text-sm font-medium px-6 py-3">
+            {/* <th className="text-left text-sm font-medium px-6 py-3">
               Project Name
-            </th>
+            </th> */}
             <th className="text-left text-sm font-medium px-6 py-3">Type</th>
             <th className="text-left text-sm font-medium px-6 py-3">
               Document
