@@ -29,27 +29,6 @@ export default function S4D1({ formData, setFormData }: {
     formData: FormData, setFormData: Dispatch<SetStateAction<FormData>>
 }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    // const [formData, setFormData] = useState<FormData>({
-    //     recipient: "ydom",
-    //     name: "Name Owner",
-    //     surname: "Surname Owner",
-    //     fatherName: "Fathers name and surname Owner",
-    //     motherName: "Mothers name and surname Owner",
-    //     birthDate: "Born date Owner",
-    //     birthTown: "Born Town owner",
-    //     idNumber: "ID",
-    //     mobile: "mobile",
-    //     town: "Town",
-    //     address: "Address",
-    //     addressNumber: "Number",
-    //     postalCode: "postal code",
-    //     email: "email owner",
-    //     vat: "VAT owner",
-    //     projectDescription: "PROJECT DESCRIPTION",
-    //     date: "8/18/2025"
-    // });
-
-    // Initialize the form
     const {
         register,
         handleSubmit,
@@ -69,6 +48,8 @@ export default function S4D1({ formData, setFormData }: {
         reset(formData);
         setIsEditModalOpen(false);
     };
+
+    console.log(formData, "form data ,,,,,,,,,,,,,,,,,,,,,,,,,,,,")
 
     return (
         <div>

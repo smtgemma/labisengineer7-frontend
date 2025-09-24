@@ -488,7 +488,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F5D17 allData={allData} /> // 12
                 )}
               </div>
-
               {/* file 6======== */}
               <div>
                 {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
@@ -536,7 +535,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 14
                 )}
               </div>
-
               {/* file 10======== */}
               <div>
                 {selected === "ten_one" && (
@@ -576,7 +574,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F10D15 allData={allData} /> // 12
                 )}
               </div>
-
               {/* file seven  */}
               <div>
                 {selected === "seven_one" && (
@@ -613,7 +610,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F7D11 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
                 )}
               </div>
-
               {/* file fourteen  */}
               <div>
                 {selected === "fourteen_one" && (

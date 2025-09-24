@@ -68,11 +68,11 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const id = stepByStepData?.projectIdCode;
     const projectId = stepByStepData?.projectIdCode?.result.id;
     const userId = dataAllFIled?.createdById;
-
+    
     const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
-
+    
     const allData = allTemplateData?.data || {};
     // const buildingMods = subCategoryData["building-modifications"] || [];
     // const energy = subCategoryData["energy-systems"] || [];

@@ -65,14 +65,18 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const allTemplate = stepByStepData.selectTemplate;
     const projectCodeId = stepByStepData.projectIdCode;
     const id = stepByStepData?.projectIdCode;
+    // const projectId = stepByStepData?.projectIdCode?.result.id;
     const projectId = stepByStepData?.projectIdCode?.result.id;
     const userId = dataAllFIled?.createdById;
 
     const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
+    console.log(allTemplateData, "alltemplate data====")
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
-
+    
     const allData = allTemplateData?.data || {};
+    const allDescriptionTasks = allTemplateData?.data?.allDescriptionTasks || [];
+    console.log(allData, "finalstep ================finalstep")
     // const buildingMods = subCategoryData["building-modifications"] || [];
     // const energy = subCategoryData["energy-systems"] || [];
     // const fencing = subCategoryData["fencing"] || [];
@@ -89,7 +93,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const modalContentRef = useRef<HTMLDivElement>(null);
 
     const userData = useSelector((state: any) => state.user.userData);
-
+console.log(stepByStepData)
     console.log(userData, "projectCodeId:", projectCodeId?.result?.projectCode)
     //2. DOWNLOAD CSV FILE
     const downloadCSV = () => {
@@ -264,34 +268,36 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
 
             {/* Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div
-                    onClick={handleCopy}
-                    className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
-                >
-                    <div
-                        title="The click copy user id"
-                        className="flex items-center space-x-4 mb-4"
-                    >
-                        <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                            {/* <FileText className="w-6 h-6 text-yellow-600" /> */}
-                            <FaRegCopy className="w-6 h-6 text-yellow-600" />
+                {allTemplate &&
+                    allTemplate.find((item: { title: string }) => item.title === "Autofill (προαιρετικό add-on)") && (
+                        <div
+                            onClick={handleCopy}
+                            className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
+                        >
+                            <div
+                                title="The click copy user id"
+                                className="flex items-center space-x-4 mb-4"
+                            >
+                                <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                    {/* <FileText className="w-6 h-6 text-yellow-600" /> */}
+                                    <FaRegCopy className="w-6 h-6 text-yellow-600" />
+                                </div>
+                                <div className=" relative ">
+                                    <h3 className="text-lg font-semibold text-gray-900">
+                                        Auto-Fill Government Form
+                                    </h3>
+                                    <p className="text-sm text-gray-500">User and Project id</p>
+                                    {projectHexCode && (
+                                        <p className="text-gray-600 text-sm mt-2 absolute left-0 top-12 ">
+                                            <button className="bg-blue-400 text-white px-4 py-1  rounded hover:bg-blue-700 cursor-pointer">
+                                                {`Id: ${projectHexCode}`}
+                                            </button>
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
                         </div>
-                        <div className=" relative ">
-                            <h3 className="text-lg font-semibold text-gray-900">
-                                Auto-Fill Government Form
-                            </h3>
-                            <p className="text-sm text-gray-500">User and Project id</p>
-                            {projectHexCode && (
-                                <p className="text-gray-600 text-sm mt-2 absolute left-0 top-12 ">
-                                    <button className="bg-blue-400 text-white px-4 py-1  rounded hover:bg-blue-700 cursor-pointer">
-                                        {`Id: ${projectHexCode}`}
-                                    </button>
-                                </p>
-                            )}
-                        </div>
-                    </div>
-                </div>
-
+                    )}
                 {/* fdf */}
 
                 <div

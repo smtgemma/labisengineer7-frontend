@@ -1069,7 +1069,7 @@ export default function F5D6({ allData }: { allData: allDataProps }) {
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className="flex-1 text-black text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} (FOR BUILDING)</h3>
+          <h3 className="flex-1 text-black text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"}</h3>
         </div>
       </div>
       {/* Budget Title */}
