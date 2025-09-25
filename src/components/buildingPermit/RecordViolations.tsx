@@ -183,7 +183,9 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                 ? violationsDatabase.otherViolations
                 : violationsDatabase.category3Basic;
         }
-
+        if (selectedCategory === "1") {
+            return [...violationsDatabase.otherViolations, ...violationsDatabase.category3Basic]
+        }
         // For categories 1, 2, 4, 5, use otherViolations if showOtherViolation is checked
         if (categoriesWithOtherViolation.includes(selectedCategory) && showOtherViolation) {
             return violationsDatabase.otherViolations;
