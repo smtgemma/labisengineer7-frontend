@@ -1,23 +1,24 @@
 "use client";
 
 import FileUpload from "@/components/CreateProject/FileUpload/FileUpload";
-import OwnerSelection from "@/components/CreateProject/OwnerSelection/OwnerSelection";
 import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
 import AIExtractionDataInPut from "@/components/CreateProject/aAIExtractionData/AIExtractionData";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import DescriptionSelectionFour from "./DescriptionSelections";
 import AIExtractionFour from "./Extraction";
 import FinalSteps from "./FinaleSteps";
-import TemplateSelectionComponents from "./TemplateSelection";
 import OwnerSelectionFour from "./OwnerSelection";
+import TemplateSelectionComponents from "./TemplateSelection";
 
 const workflowSteps = [
     { id: 1, title: "Upload Documents" },
     { id: 2, title: "AI Data Extraction" },
     { id: 3, title: "Select Owner(s)" },
-    { id: 4, title: "AI Extraction Data" },
-    { id: 5, title: "Select Actions" },
-    { id: 6, title: "Final Overview" },
+    { id: 4, title: "Selects Descriptions" },
+    { id: 5, title: "AI Extraction Data" },
+    { id: 6, title: "Select Actions" },
+    { id: 7, title: "Final Overview" },
 ];
 
 const WorkflowDemo: React.FC = () => {
@@ -90,10 +91,16 @@ const WorkflowDemo: React.FC = () => {
                 />;
             case 4:
                 //same
-                return <AIExtractionDataInPut currentStep={currentStep}
+                return <DescriptionSelectionFour
+                    currentStep={currentStep}
                     nextStep={nextStep}
                 />;
             case 5:
+                //same
+                return <AIExtractionDataInPut currentStep={currentStep}
+                    nextStep={nextStep}
+                />;
+            case 6:
                 //need to work
                 return (
                     <TemplateSelectionComponents
@@ -104,7 +111,7 @@ const WorkflowDemo: React.FC = () => {
                         nextStep={nextStep}
                     />
                 );
-            case 6:
+            case 7:
                 return (
                     //need to work
                     <FinalSteps

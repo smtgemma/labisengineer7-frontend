@@ -7,6 +7,7 @@ import FinalOverview from "@/components/CreateProject/FinalOverview/FinalOvervie
 import OwnerSelection from "@/components/CreateProject/OwnerSelection/OwnerSelection";
 import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
 import AIExtractionDataInPut from "@/components/CreateProject/aAIExtractionData/AIExtractionData";
+import DescriptionSelection from "@/components/CreateProject/descriptionSelections/DescriptionSelections";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -14,9 +15,10 @@ const workflowSteps = [
   { id: 1, title: "Upload Documents" },
   { id: 2, title: "AI Data Extraction" },
   { id: 3, title: "Select Owner(s)" },
-  { id: 4, title: "AI Extraction Data" },
-  { id: 5, title: "Select Actions" },
-  { id: 6, title: "Final Overview" },
+  { id: 4, title: "Description Selections" },
+  { id: 5, title: "AI Extraction Data" },
+  { id: 6, title: "Select Actions" },
+  { id: 7, title: "Final Overview" },
 ];
 
 const WorkflowDemo: React.FC = () => {
@@ -87,10 +89,15 @@ const WorkflowDemo: React.FC = () => {
           nextStep={nextStep}
         />;
       case 4:
-        return <AIExtractionDataInPut currentStep={currentStep}
+        return <DescriptionSelection
+          currentStep={currentStep}
           nextStep={nextStep}
         />;
       case 5:
+        return <AIExtractionDataInPut currentStep={currentStep}
+          nextStep={nextStep}
+        />;
+      case 6:
         return (
           <ActionSelection
             selectedActions={selectedActions}
@@ -100,7 +107,7 @@ const WorkflowDemo: React.FC = () => {
             nextStep={nextStep}
           />
         );
-      case 6:
+      case 7:
         return (
           <FinalOverview
             files={uploadedFiles}

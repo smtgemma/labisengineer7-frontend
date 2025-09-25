@@ -79,11 +79,16 @@ interface AiExtractState {
   subcategory?: any[];
   descriptionTask?: any[];
   description?: any[];
+  horizontal?: {
+    ydom: string;
+    horizontal: string
+  };
   multiFiles?: FileMeta[]; // Store file metadata instead of File objects
   aiInputData?: any;
   actionSelection?: any[];
   selectTemplate?: any[];
   projectIdCode?: string | null;
+
 }
 
 const initialState: AiExtractState = {
@@ -95,6 +100,7 @@ const initialState: AiExtractState = {
   selectTemplate: [],
   multiFiles: [],
   description: [],
+  horizontal: { ydom: "", horizontal: "" },
   aiInputData: null,
   actionSelection: [],
   projectIdCode: null,
@@ -128,6 +134,13 @@ const aiExtractDataSlice = createSlice({
     setMultipleDescription: (state, action) => {
       state.description = action.payload;
     },
+    setMultipleHorizontalDescription: (state, action) => {
+      state.horizontal = {
+        ydom: action.payload.ydom,
+        horizontal: action.payload.horizontal
+      };
+    },
+
     // Updated to handle FileMeta objects instead of File objects
     setImageFile: (state, action) => {
       state.multiFiles = action.payload;
@@ -154,6 +167,7 @@ export const {
   setMultipleDescriptionTask,
   setMultipleDescription,
   setSelectTemplate,
+  setMultipleHorizontalDescription,
   resetAiExtractState
 } = aiExtractDataSlice.actions;
 
