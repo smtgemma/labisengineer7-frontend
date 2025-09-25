@@ -101,7 +101,7 @@ export default function F5D11({ allData }: { allData: allDataProps }) {
 
     return (
         <div>
-            {allData?.owners ? (allData?.owners?.map((owner: any, index: number) => (
+            {allData?.owners && allData.owners.length > 0 ? (allData?.owners?.map((owner: any, index: number) => (
                 <div key={index} className="max-w-[796px] mx-auto bg-white mb-16">
                     <div className="max-w-[796px] mx-auto bg-white">
                         <div className="text-right -mt-3">

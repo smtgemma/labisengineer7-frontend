@@ -18,7 +18,7 @@ const DescriptionSelectionFour = ({ currentStep, nextStep }: {
     const dispatch = useDispatch();
     const ownerData = useSelector((state: any) => state.aiData.aiDataState);
 
-
+    console.log(ownerData)
     // Generate descriptions from project_descriptions
     const description1 = ownerData?.project_descriptions
         ?.filter((_: any, i: number) => i % 2 === 0)
@@ -67,6 +67,9 @@ const DescriptionSelectionFour = ({ currentStep, nextStep }: {
             description: !descriptionValid ? "Please select exactly one property description." : "",
         });
     }, [selectedProperty]); // Only re-run when these change
+
+    console.log("astechi")
+
     return (
         <div className="space-y-8">
             {/* Header */}
@@ -108,8 +111,9 @@ const DescriptionSelectionFour = ({ currentStep, nextStep }: {
                     )}
                 </div>
             )}
+
             {/* Next Button */}
-            {currentStep < 6 && (
+            {currentStep < 7 && (
                 <div className="flex justify-end w-fit ml-auto">
                     <PrimaryButton
 
