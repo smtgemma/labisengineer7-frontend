@@ -16,6 +16,7 @@ import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "sonner";
 import S4D1 from "../CreateProject/FinalOverview/srv-4t/s4D1/page";
 import S4D2 from "../CreateProject/FinalOverview/srv-4t/s4D2/page";
+import S4D3 from "../CreateProject/FinalOverview/srv-4t/s4D3/page";
 import { FormDataOne, FormDataTwo } from "./template";
 export interface UserData {
     id: string;
@@ -73,9 +74,8 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     console.log(allTemplateData, "alltemplate data====")
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
-    
+
     const allData = allTemplateData?.data || {};
-    const allDescriptionTasks = allTemplateData?.data?.allDescriptionTasks || [];
     console.log(allData, "finalstep ================finalstep")
     // const buildingMods = subCategoryData["building-modifications"] || [];
     // const energy = subCategoryData["energy-systems"] || [];
@@ -93,7 +93,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const modalContentRef = useRef<HTMLDivElement>(null);
 
     const userData = useSelector((state: any) => state.user.userData);
-console.log(stepByStepData)
+    console.log(stepByStepData)
     console.log(userData, "projectCodeId:", projectCodeId?.result?.projectCode)
     //2. DOWNLOAD CSV FILE
     const downloadCSV = () => {
@@ -374,14 +374,21 @@ console.log(stepByStepData)
 
                             {/* file 6======== */}
                             {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
-                                <S4D1 formData={formData} setFormData={setFormData} />
+                                // <S4D1 formData={formData} setFormData={setFormData} />
+                                <S4D1 allData={allData} />
                             )}
                             {selected ===
                                 "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
                                     <div>
-                                        {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)}
+                                        {/* {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)} */}
+                                        {<S4D2 allData={allData} />}
                                     </div>
-
+                                )}
+                            {selected ===
+                                "Αρχιτεκτονική Συστήματος" && (
+                                    <div>
+                                        {<S4D3 allData={allData} setIsModalOpen={setIsModalOpen} />}
+                                    </div>
                                 )}
                         </div>
                     </div>
