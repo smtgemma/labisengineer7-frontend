@@ -90,12 +90,15 @@ const WorkflowDemo: React.FC = () => {
                     nextStep={nextStep}
                 />;
             case 4:
+                console.log(currentStep)
+                console.log("fROM FOUR")
                 //same
                 return <DescriptionSelectionFour
                     currentStep={currentStep}
                     nextStep={nextStep}
                 />;
             case 5:
+                console.log(currentStep)
                 //same
                 return <AIExtractionDataInPut currentStep={currentStep}
                     nextStep={nextStep}
