@@ -152,7 +152,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   console.log(stepByStepData)
   console.log(stepByStepData?.projectIdCode?.id)
-  console.log(projectId)
+  console.log(stepByStepData, ",skfld,,,,,,,,,,,,,,,,,,,,,,,,,,,,,--------,,,,,,,,,,,,,,,")
 
   const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");

@@ -368,18 +368,20 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                             </button>
 
                             {/* file 6======== */}
-                            {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
+                            {selected === "Αναλυτικός Προϋπολογισμούς 4495/2017" && (
                                 // <S4D1 formData={formData} setFormData={setFormData} />
                                 <h1>template one</h1>
                             )}
                             {selected ===
-                                "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
+                                "Τεχνική Έκθεση 4495/2017" && (
                                     <div>
                                         <h1>template two</h1>
                                         {/* {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)} */}
                                     </div>
-
                                 )}
+                                {selected === "Autofill 1 Credit" && (
+                                <h1>template one</h1>
+                            )}
                         </div>
                     </div>
                 )}
