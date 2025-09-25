@@ -35,7 +35,7 @@ export default function Footer() {
                   background:
                     "linear-gradient(44deg, #017AFF 37.44%, #61BDFF 67.11%)",
                 }}
-                className="absolute  top-1/2 md:top-[77px] right-2 cursor-pointer text-white transform -translate-y-1/2 bg-primary text-block px-5 py-3 rounded-md hover:bg-blue-800 transition"
+                className="absolute  top-[70px] md:top-[77px] right-2 cursor-pointer text-white transform -translate-y-1/2 bg-primary text-block px-5 py-3 rounded-md hover:bg-blue-800 transition"
               >
                 Subscribe Now
               </button>

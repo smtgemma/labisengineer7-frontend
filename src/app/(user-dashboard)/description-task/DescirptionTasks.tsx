@@ -224,19 +224,19 @@ const DescriptionTask = () => {
   const navigate = useRouter();
   const dispatch = useDispatch();
   const aiExtractData = useSelector((state: RootState) => state.aiData);
-  console.log("Redux Data", aiExtractData, "....................")
+  console.log("sub ", aiExtractData);
   const toggleOption = (categoryId: string, optionId: string) => {
     setDescription((prevCategories) =>
       prevCategories.map((category) =>
         category.id === categoryId
           ? {
-            ...category,
-            options: category.options.map((option) =>
-              option.id === optionId
-                ? { ...option, selected: !option.selected }
-                : option
-            ),
-          }
+              ...category,
+              options: category.options.map((option) =>
+                option.id === optionId
+                  ? { ...option, selected: !option.selected }
+                  : option
+              ),
+            }
           : category
       )
     );
@@ -333,11 +333,7 @@ const DescriptionTask = () => {
 
       {/* Save Button */}
       <div className="flex justify-end mt-8 w-fit ml-auto">
-        <PrimaryButton
-          label="Save & Continue"
-          onClick={handleSave}
-
-        />
+        <PrimaryButton label="Save & Continue" onClick={handleSave} />
       </div>
     </div>
   );

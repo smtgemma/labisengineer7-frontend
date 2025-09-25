@@ -9,6 +9,7 @@ import { Menu, X } from "lucide-react"; // Optional icons
 import Logo from "../Logo";
 import Container from "../Container/Container";
 import "./navbar.css";
+import PrimaryButton from "../primaryButton/PrimaryButton";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +21,7 @@ const Navbar = () => {
     { name: "Service", href: "#service" },
     { name: "How it Works", href: "#works" },
     { name: "Testimonials", href: "#testimonials" },
+    { name: "Tutorials", href: "/tutorials" },
   ];
 
   useEffect(() => {
@@ -123,11 +125,8 @@ const Navbar = () => {
               >
                 Login
               </Link>
-              <Link
-                href="/signUp"
-                className="bg-blue-600 text-white px-4 py-2 rounded text-center"
-              >
-                Register
+              <Link href="/signUp" className="">
+                <PrimaryButton>Register</PrimaryButton>
               </Link>
             </div>
           </div>

@@ -81,7 +81,7 @@ const ServicesOverview: React.FC = () => {
               <div
                 key={index}
                 className={`
-    bg-gradient-to-br from-white-50 via-blue-50 to-blue-300
+    bg-gradient-to-br from-white-50 via-blue-50 to-blue-100
     rounded-2xl p-6 lg:p-8 cursor-pointer
     transition-all duration-500 ease-in-out
     hover:shadow-2xl 
