@@ -136,7 +136,7 @@ export const templateName1: Record<string, TemplateName[]> = {
             price: 0.5,
         },
         {
-            id: "611",
+            id: "610",
             title:
                 "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας",
             price: 0.5,
