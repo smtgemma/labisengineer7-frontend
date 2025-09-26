@@ -45,7 +45,7 @@ interface allDataProps {
 }
 
 
-export default function F8D3({ allData }: { allData: allDataProps }) {
+export default function F2D6({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 

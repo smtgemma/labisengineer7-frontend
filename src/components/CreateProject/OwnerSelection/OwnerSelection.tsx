@@ -1,8 +1,9 @@
 import {
   setAiExtractCatchWonerData,
   setMultipleDescription,
+  setMultipleHorizontalDescription,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { Edit3, Plus } from "lucide-react";
+import { Edit, Edit3, Plus } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiEdit2 } from "react-icons/fi";
@@ -30,9 +31,9 @@ const OwnerSelection = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedOwners, setSelectedOwners] = useState<Owner[]>([]);
-  const [selectedProperty, setSelectedProperty] = useState<SelectedProperty[]>(
-    []
-  );
+  const [selectedProperty, setSelectedProperty] = useState<
+    { id: number; description: string }[]
+  >([]);
   const [ydomModalOpen, setYdomModalOpen] = useState(false);
   const [validationError, setValidationError] = useState<{
     description: string;
@@ -44,19 +45,40 @@ const OwnerSelection = ({
 
   const dispatch = useDispatch();
   const ownerData = useSelector((state: any) => state.aiData.aiDataState);
-
   const [isOwner, setIsOwner] = useState<Owner[]>(ownerData.owners || []);
   const [ydom, setYdom] = useState<string>(ownerData?.ydom || "");
+  const [temp, setTemp] = useState<string>("");
 
+  const [descriptionModal, setDescriptionModal] = useState<number | null>(null);
+  const [horizontalDescription, setHorizontalDescription] = useState<
+    { id: number; description: string }[]
+  >([]);
+  const horizontal_property_name = ownerData?.horizontal_property_name || "";
+  const horizontal_property_name_two =
+    ownerData?.horizontal_property_name_two || "";
+
+  console.log(
+    "Horizontal",
+    horizontal_property_name,
+    horizontal_property_name_two
+  );
   // Generate descriptions from project_descriptions
-  const description1 = ownerData?.project_descriptions
-    ?.filter((_: any, i: number) => i % 2 === 0)
-    .join(" & ");
-  const description2 = ownerData?.project_descriptions
-    ?.filter((_: any, i: number) => i % 2 === 1)
-    .join(" & ");
+  //here previously was description but now it will be horizontal property but the naming is same
+  const description1 = horizontal_property_name;
+  const description2 = horizontal_property_name_two;
 
-  const descriptionShow = [description1, description2].filter((desc) => desc);
+  useEffect(() => {
+    setHorizontalDescription([
+      {
+        id: 1,
+        description: description1,
+      },
+      {
+        id: 2,
+        description: description2,
+      },
+    ]);
+  }, [ownerData]);
 
   const {
     register,
@@ -112,18 +134,14 @@ const OwnerSelection = ({
 
   // Handle property selection — enforce single selection only
   const togglePropertySelection = (index: number, value: string) => {
-    const alreadySelected = selectedProperty.find(
-      (item) => item.index === index
-    );
+    const alreadySelected = selectedProperty.find((item) => item.id === index);
 
     if (alreadySelected) {
       // Deselect if already selected
-      setSelectedProperty((prev) =>
-        prev.filter((item) => item.index !== index)
-      );
+      setSelectedProperty((prev) => prev.filter((item) => item.id !== index));
     } else {
       // Select this one and deselect all others
-      setSelectedProperty([{ index, value }]);
+      setSelectedProperty([{ id: index, description: value }]);
     }
 
     // Clear validation error when a selection is made
@@ -193,10 +211,32 @@ const OwnerSelection = ({
   const handleYdomSave = () => {
     setYdomModalOpen(false);
   };
+  const handleHorizontalDesSave = (id: number) => {
+    setHorizontalDescription((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, description: temp } : item
+      )
+    );
+
+    // If that property is already selected, update it in selectedProperty too
+    setSelectedProperty((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, description: temp } : item
+      )
+    );
+
+    setDescriptionModal(null); // close modal
+    setTemp(""); // clear temp
+  };
 
   // Update Redux store when selections change
   useEffect(() => {
-    dispatch(setMultipleDescription({ description: selectedProperty, ydom }));
+    dispatch(
+      setMultipleHorizontalDescription({
+        horizontal: selectedProperty,
+        ydom: ydom,
+      })
+    );
   }, [selectedProperty, ydom]);
 
   useEffect(() => {
@@ -217,11 +257,13 @@ const OwnerSelection = ({
 
     setValidationError({
       description: !descriptionValid
-        ? "Please select exactly one property description."
+        ? "Please select exactly one property Horizontal description"
         : "",
       owner: !ownerValid ? "Please select at least one owner." : "",
     });
   }, [selectedProperty, selectedOwners]); // Only re-run when these change
+
+  console.log(selectedProperty);
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -242,27 +284,68 @@ const OwnerSelection = ({
       </div>
 
       {/* Property Descriptions */}
-      {descriptionShow.length > 0 && (
+      {horizontalDescription.length > 0 && (
         <div>
           <p className="mb-4 font-medium">
-            Please select a property description:
+            Please select a property Horizontal description:
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            {descriptionShow.map((property: string, index: number) => (
-              <div
-                onClick={() => togglePropertySelection(index, property)}
-                key={index}
-                className={`p-6 rounded-lg relative cursor-pointer  transition-all duration-200 border-2 
+            {horizontalDescription.map((property) => (
+              <div className="relative">
+                <div
+                  onClick={() =>
+                    togglePropertySelection(property.id, property.description)
+                  }
+                  key={property.id}
+                  className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
                   ${
-                    selectedProperty.some((item) => item.index === index)
-                      ? "border-blue-700 bg-blue-50 shadow-md"
-                      : "  border-primary/70 bg-white hover:border-blue-300"
+                    selectedProperty.some((item) => item.id === property.id)
+                      ? "border-blue-600 bg-blue-50 shadow-md"
+                      : "border-gray-200 bg-white hover:border-blue-300"
                   }`}
-              >
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  Description {index + 1}
-                </h3>
-                <p className="text-gray-700">{property}</p>
+                >
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Horizontal Description {property.id}
+                  </h3>
+                  <p className="text-gray-700">{property.description}</p>
+                </div>
+                <div
+                  onClick={() => setDescriptionModal(property.id)}
+                  className="absolute top-3 right-3 text-gray-500 hover:text-blue-500 cursor-pointer"
+                >
+                  <FiEdit2 />
+                </div>
+
+                {descriptionModal === property?.id && (
+                  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 min-h-screen">
+                    <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
+                      <h2 className="text-lg font-semibold mb-4">
+                        Edit YDOM {property.description}
+                      </h2>
+                      <textarea
+                        value={temp}
+                        onChange={(e) => setTemp(e.target.value)}
+                        className="w-full border rounded-lg p-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        rows={4}
+                        placeholder="Enter YDOM description..."
+                      />
+                      <div className="flex justify-end gap-2 mt-4">
+                        <button
+                          onClick={() => setDescriptionModal(null)}
+                          className="px-4 py-2 rounded-lg border hover:bg-gray-100"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          onClick={() => handleHorizontalDesSave(property.id)}
+                          className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600"
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -359,7 +442,7 @@ const OwnerSelection = ({
                     onClick={(e) => openEditModalOwner(e, owner, index)}
                     className="hover:text-gray-600 cursor-pointer"
                   >
-                    <Edit3 className="w-4 h-4" />
+                    <FiEdit2 className="w-4 h-4" />
                   </button>
 
                   <button
