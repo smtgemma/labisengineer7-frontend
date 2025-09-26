@@ -3,7 +3,7 @@ import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import tokenCatch from "@/lib/token";
 import {
   setAiExtreactAndInputData,
-  setTheProjectCode
+  setTheProjectCode,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { usePosAiAllDataSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import { RootState } from "@/redux/store";
@@ -14,14 +14,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { FormValues } from "./types";
 
-
-
 const inputStyle =
   "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
 
-const AIExtractionDataInPut = ({ currentStep, nextStep }: {
-  currentStep: number
-  nextStep: () => void
+const AIExtractionDataInPut = ({
+  currentStep,
+  nextStep,
+}: {
+  currentStep: number;
+  nextStep: () => void;
 }) => {
   const [ownerInfoShow, setOwnerInfoShow] = useState<boolean>(true);
   const [ownerInfoShow2, setOwnerInfoShow2] = useState<number | null>(0);
@@ -35,10 +36,12 @@ const AIExtractionDataInPut = ({ currentStep, nextStep }: {
       owners: stepByStepData.ownerBaseData.map((owner: any) => ({
         first_name: owner.first_name || "", // Όνομα
         last_name: owner.last_name || "", // Επώνυμο
-        father_first_last_name: `${owner.father_first_name || ""} ${owner.father_last_name || ""
-          }`, // Πατέρας
-        mothers_first_last_name: `${owner.mother_first_name || ""} ${owner.mother_last_name || ""
-          }`, // Μητέρα
+        father_first_last_name: `${owner.father_first_name || ""} ${
+          owner.father_last_name || ""
+        }`, // Πατέρας
+        mothers_first_last_name: `${owner.mother_first_name || ""} ${
+          owner.mother_last_name || ""
+        }`, // Μητέρα
         date_of_birth: owner.date_of_birth || "", // Ημερομηνία Γέννησης
         place_of_birth: owner.place_of_birth || "", // Τόπος Γέννησης
         owner_address: owner.owner_address || "", // Διεύθυνση Ιδιοκτήτη
@@ -52,7 +55,6 @@ const AIExtractionDataInPut = ({ currentStep, nextStep }: {
       })),
     },
   });
-
 
   const dispatch = useDispatch();
   const hasSubmittedRef = useRef(false);
@@ -131,7 +133,7 @@ const AIExtractionDataInPut = ({ currentStep, nextStep }: {
   useEffect(() => {
     if (currentStep === 4 && filesData?.length && !hasSubmittedRef.current) {
       hasSubmittedRef.current = true; // lock it
-      // create-project 
+      // create-project
       handleSubmit(onSubmitAiDataSend)();
     }
   }, [currentStep]);
@@ -151,7 +153,7 @@ const AIExtractionDataInPut = ({ currentStep, nextStep }: {
         className="max-w-6xl mx-auto   rounded-xl mt-13"
       >
         <div>
-          <div className="max-w-6xl mx-auto bg-white shadow-md rounded-xl p-8  ">
+          <div className="max-w-6xl mx-auto border  border-primary bg-white shadow-md rounded-xl p-8  ">
             <div className="flex justify-between items-center ">
               <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
                 Project & Property Information( Στοιχεία Έργου & Ιδιοκτησίας)
@@ -198,7 +200,7 @@ const AIExtractionDataInPut = ({ currentStep, nextStep }: {
                     className={inputStyle}
                     readOnly
                     defaultValue={allExtreactData?.kaek_property}
-                  // defaultValue={dataShowExtreact?.cadastral_code_kaek}
+                    // defaultValue={dataShowExtreact?.cadastral_code_kaek}
                   />
                 </div>
 
@@ -316,7 +318,7 @@ const AIExtractionDataInPut = ({ currentStep, nextStep }: {
 
         {fields.map((field, index) => (
           <div key={field.id} className="mt-10">
-            <div className="p-6 md:p-8 bg-white rounded-xl">
+            <div className="p-6 md:p-8 bg-white border-primary border  rounded-xl">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
                   Information of Owner ({index + 1})
@@ -533,7 +535,7 @@ const AIExtractionDataInPut = ({ currentStep, nextStep }: {
 
         {/* License & Legal Data  */}
         <div className="mt-10">
-          <div className="bg-white p-6 rounded-xl shadow-md w-full">
+          <div className="bg-white p-6 border-primary border  rounded-xl shadow-md w-full">
             <div className="flex justify-between items-center ">
               <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
                 ολεοδομικά Μεγέθη-Άδεια Οικοδομής-Νομιμοποιήσεις
@@ -685,7 +687,7 @@ const AIExtractionDataInPut = ({ currentStep, nextStep }: {
         </div>
       </form>
       {currentStep < 6 && (
-        <div className="flex justify-end mt-4 w-fit ml-auto" >
+        <div className="flex justify-end mt-4 w-fit ml-auto">
           <PrimaryButton
             onClick={nextStep}
             // disabled={canProceed()}
@@ -699,12 +701,13 @@ const AIExtractionDataInPut = ({ currentStep, nextStep }: {
 
 export default AIExtractionDataInPut;
 
+// trash
 
-
-// trash 
-
-{/* "Energy Performance Certificate (EPC)"  */ }
-{/* <div className="mt-10">
+{
+  /* "Energy Performance Certificate (EPC)"  */
+}
+{
+  /* <div className="mt-10">
           <div className="bg-gray-50 rounded-xl p-6 shadow-sm w-full">
             <div className="flex justify-between items-center ">
               <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
@@ -813,10 +816,14 @@ export default AIExtractionDataInPut;
               </div>
             )}
           </div>
-        </div> */}
+        </div> */
+}
 
-{/* "others option  */ }
-{/* <div className="mt-10">
+{
+  /* "others option  */
+}
+{
+  /* <div className="mt-10">
           <div className="bg-gray-50 rounded-xl p-6 shadow-sm w-full">
             <div className="flex justify-between items-center ">
               <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
@@ -880,4 +887,5 @@ export default AIExtractionDataInPut;
               </div>
             )}
           </div>
-        </div> */}
+        </div> */
+}

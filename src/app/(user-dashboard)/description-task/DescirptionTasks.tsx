@@ -279,11 +279,14 @@ const DescriptionTask = () => {
       <h2 className="text-3xl text-black font-semibold">Description Task</h2>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-4">
         {/* Left Column */}
-        <div className="space-y-2">
+        <div className="space-y-6">
           {description
             .slice(0, Math.ceil(description.length / 2))
             .map((category) => (
-              <div key={category.id} className=" rounded-lg p-2">
+              <div
+                key={category.id}
+                className=" rounded-lg p-2 bg-white border  border-primary"
+              >
                 <div className="flex items-center gap-3 mb-4">
                   <h2 className="text-lg font-semibold text-gray-900">
                     {category.title}
@@ -309,7 +312,10 @@ const DescriptionTask = () => {
           {description
             .slice(Math.ceil(description.length / 2))
             .map((category) => (
-              <div key={category.id} className=" rounded-lg p-2">
+              <div
+                key={category.id}
+                className=" rounded-lg p-2 bg-white border  border-primary"
+              >
                 <div className="flex items-center gap-3 mb-4">
                   <h2 className="text-lg font-semibold text-gray-900">
                     {category.title}
