@@ -46,7 +46,7 @@ const ResetPasswordForm: React.FC = () => {
 
   return (
     <>
-      <div className="mt-[100px] p-5">
+      <div className="mt-[100px] p-5 m-5">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="max-w-xl mx-auto p-8 space-y-4 border border-gray-300  rounded-xl shadow"
@@ -139,6 +139,10 @@ const ResetPasswordForm: React.FC = () => {
           </div>
 
           <button
+            style={{
+              background:
+                "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+            }}
             type="submit"
             className="w-full cursor-pointer text-base font-medium bg-primary text-white py-3 px-6 rounded-lg hover:bg-green-700 transition"
           >

@@ -10,14 +10,19 @@ interface BillingHistoryProps {
 
 const BillingHistory: React.FC<BillingHistoryProps> = ({ className = "" }) => {
   const token = tokenCatch();
-  console.log(token);
 
   const { data } = useGetBuilingHistoryQuery(token);
-  console.log(data);
+
   return (
     <section className="overflow-auto rounded-lg border border-gray-200 mt-6">
       <table className="w-full">
-        <thead className="bg-[#017AFF]">
+        <thead
+          style={{
+            background:
+              "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+          }}
+          className=""
+        >
           <tr className="*:text-nowrap">
             <th className="px-6 py-3 text-left text-sm font-medium text-white">
               Date

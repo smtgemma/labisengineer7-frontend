@@ -1,7 +1,7 @@
 import {
   setAiExtractCatchWonerData,
   setMultipleDescription,
-  setMultipleHorizontalDescription
+  setMultipleHorizontalDescription,
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { Edit, Edit3, Plus } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -10,22 +10,37 @@ import { FiEdit2 } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { EditingOwnerType, Owner, OwnerFormInputs, SelectedProperty } from "./types";
+import {
+  EditingOwnerType,
+  Owner,
+  OwnerFormInputs,
+  SelectedProperty,
+} from "./types";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 
-const OwnerSelection = ({ currentStep, nextStep }: {
-  currentStep: number
-  nextStep: () => void
+const OwnerSelection = ({
+  currentStep,
+  nextStep,
+}: {
+  currentStep: number;
+  nextStep: () => void;
 }) => {
-  const [editingOwner, setEditingOwner] = useState<EditingOwnerType | null>(null);
+  const [editingOwner, setEditingOwner] = useState<EditingOwnerType | null>(
+    null
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedOwners, setSelectedOwners] = useState<Owner[]>([]);
-  const [selectedProperty, setSelectedProperty] = useState<{ id: number, description: string }[]>([]);
+  const [selectedProperty, setSelectedProperty] = useState<
+    { id: number; description: string }[]
+  >([]);
   const [ydomModalOpen, setYdomModalOpen] = useState(false);
-  const [validationError, setValidationError] = useState<{ description: string; owner: string }>({
+  const [validationError, setValidationError] = useState<{
+    description: string;
+    owner: string;
+  }>({
     description: "",
-    owner: ""
+    owner: "",
   });
 
   const dispatch = useDispatch();
@@ -35,32 +50,35 @@ const OwnerSelection = ({ currentStep, nextStep }: {
   const [temp, setTemp] = useState<string>("");
 
   const [descriptionModal, setDescriptionModal] = useState<number | null>(null);
-  const [horizontalDescription, setHorizontalDescription] = useState<{ id: number, description: string }[]>([])
-  const horizontal_property_name = ownerData?.horizontal_property_name || ""
-  const horizontal_property_name_two = ownerData?.horizontal_property_name_two || ""
+  const [horizontalDescription, setHorizontalDescription] = useState<
+    { id: number; description: string }[]
+  >([]);
+  const horizontal_property_name = ownerData?.horizontal_property_name || "";
+  const horizontal_property_name_two =
+    ownerData?.horizontal_property_name_two || "";
 
-  console.log("Horizontal", horizontal_property_name, horizontal_property_name_two)
+  console.log(
+    "Horizontal",
+    horizontal_property_name,
+    horizontal_property_name_two
+  );
   // Generate descriptions from project_descriptions
   //here previously was description but now it will be horizontal property but the naming is same
-  const description1 = horizontal_property_name
-  const description2 = horizontal_property_name_two
-
-
+  const description1 = horizontal_property_name;
+  const description2 = horizontal_property_name_two;
 
   useEffect(() => {
-    setHorizontalDescription(
-      [{
+    setHorizontalDescription([
+      {
         id: 1,
         description: description1,
       },
       {
         id: 2,
         description: description2,
-      }]
-    )
-  }, [ownerData])
-
-
+      },
+    ]);
+  }, [ownerData]);
 
   const {
     register,
@@ -88,7 +106,7 @@ const OwnerSelection = ({ currentStep, nextStep }: {
       mobile: "",
     };
 
-    setIsOwner(prev => [...prev, newOwner]);
+    setIsOwner((prev) => [...prev, newOwner]);
     reset();
     setIsModalOpen(false);
   };
@@ -116,12 +134,11 @@ const OwnerSelection = ({ currentStep, nextStep }: {
 
   // Handle property selection — enforce single selection only
   const togglePropertySelection = (index: number, value: string) => {
-
-    const alreadySelected = selectedProperty.find(item => item.id === index);
+    const alreadySelected = selectedProperty.find((item) => item.id === index);
 
     if (alreadySelected) {
       // Deselect if already selected
-      setSelectedProperty(prev => prev.filter(item => item.id !== index));
+      setSelectedProperty((prev) => prev.filter((item) => item.id !== index));
     } else {
       // Select this one and deselect all others
       setSelectedProperty([{ id: index, description: value }]);
@@ -129,42 +146,55 @@ const OwnerSelection = ({ currentStep, nextStep }: {
 
     // Clear validation error when a selection is made
     if (validationError.description) {
-      setValidationError(prev => ({ ...prev, description: "" }));
+      setValidationError((prev) => ({ ...prev, description: "" }));
     }
   };
 
   // Handle owner selection
   const toggleOwnerSelection = (index: number) => {
     const owner = isOwner[index];
-    const alreadySelected = selectedOwners.some(o => o.first_name === owner.first_name);
+    const alreadySelected = selectedOwners.some(
+      (o) => o.first_name === owner.first_name
+    );
 
     if (alreadySelected) {
-      setSelectedOwners(prev => prev.filter(o => o.first_name !== owner.first_name));
+      setSelectedOwners((prev) =>
+        prev.filter((o) => o.first_name !== owner.first_name)
+      );
     } else {
-      setSelectedOwners(prev => [...prev, { ...owner, selected: true }]);
+      setSelectedOwners((prev) => [...prev, { ...owner, selected: true }]);
     }
 
     // Clear validation error when a selection is made
     if (validationError.owner) {
-      setValidationError(prev => ({ ...prev, owner: "" }));
+      setValidationError((prev) => ({ ...prev, owner: "" }));
     }
   };
 
   // Delete owner
   const handleDeleteOwner = (index: number) => {
-    setIsOwner(prev => prev.filter((_, i) => i !== index));
+    setIsOwner((prev) => prev.filter((_, i) => i !== index));
     // Also remove from selected if it was selected
     const deletedOwner = isOwner[index];
-    setSelectedOwners(prev => prev.filter(o => o.first_name !== deletedOwner.first_name));
+    setSelectedOwners((prev) =>
+      prev.filter((o) => o.first_name !== deletedOwner.first_name)
+    );
 
     // Clear validation error if owner was selected
     if (validationError.owner && selectedOwners.length === 0) {
-      setValidationError(prev => ({ ...prev, owner: "Please select at least one owner." }));
+      setValidationError((prev) => ({
+        ...prev,
+        owner: "Please select at least one owner.",
+      }));
     }
   };
 
   // Open edit modal for owner
-  const openEditModalOwner = (e: React.MouseEvent, owner: Owner, index: number) => {
+  const openEditModalOwner = (
+    e: React.MouseEvent,
+    owner: Owner,
+    index: number
+  ) => {
     e.stopPropagation(); // Prevent triggering selection
     setEditingOwner({ owner, index });
     // Pre-populate form with current values
@@ -201,7 +231,12 @@ const OwnerSelection = ({ currentStep, nextStep }: {
 
   // Update Redux store when selections change
   useEffect(() => {
-    dispatch(setMultipleHorizontalDescription({ horizontal: selectedProperty, ydom: ydom }));
+    dispatch(
+      setMultipleHorizontalDescription({
+        horizontal: selectedProperty,
+        ydom: ydom,
+      })
+    );
   }, [selectedProperty, ydom]);
 
   useEffect(() => {
@@ -221,12 +256,14 @@ const OwnerSelection = ({ currentStep, nextStep }: {
     const ownerValid = selectedOwners.length >= 1;
 
     setValidationError({
-      description: !descriptionValid ? "Please select exactly one property Horizontal description" : "",
-      owner: !ownerValid ? "Please select at least one owner." : ""
+      description: !descriptionValid
+        ? "Please select exactly one property Horizontal description"
+        : "",
+      owner: !ownerValid ? "Please select at least one owner." : "",
     });
   }, [selectedProperty, selectedOwners]); // Only re-run when these change
 
-  console.log(selectedProperty)
+  console.log(selectedProperty);
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -249,18 +286,23 @@ const OwnerSelection = ({ currentStep, nextStep }: {
       {/* Property Descriptions */}
       {horizontalDescription.length > 0 && (
         <div>
-          <p className="mb-4 font-medium">Please select a property Horizontal description:</p>
+          <p className="mb-4 font-medium">
+            Please select a property Horizontal description:
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {horizontalDescription.map((property) => (
               <div className="relative">
                 <div
-                  onClick={() => togglePropertySelection(property.id, property.description)}
+                  onClick={() =>
+                    togglePropertySelection(property.id, property.description)
+                  }
                   key={property.id}
                   className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
-                  ${selectedProperty.some(item => item.id === property.id)
+                  ${
+                    selectedProperty.some((item) => item.id === property.id)
                       ? "border-blue-600 bg-blue-50 shadow-md"
                       : "border-gray-200 bg-white hover:border-blue-300"
-                    }`}
+                  }`}
                 >
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     Horizontal Description {property.id}
@@ -269,14 +311,17 @@ const OwnerSelection = ({ currentStep, nextStep }: {
                 </div>
                 <div
                   onClick={() => setDescriptionModal(property.id)}
-                  className="absolute top-3 right-3 text-gray-500 hover:text-blue-500 cursor-pointer">
+                  className="absolute top-3 right-3 text-gray-500 hover:text-blue-500 cursor-pointer"
+                >
                   <FiEdit2 />
                 </div>
 
                 {descriptionModal === property?.id && (
                   <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 min-h-screen">
                     <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
-                      <h2 className="text-lg font-semibold mb-4">Edit YDOM {property.description}</h2>
+                      <h2 className="text-lg font-semibold mb-4">
+                        Edit YDOM {property.description}
+                      </h2>
                       <textarea
                         value={temp}
                         onChange={(e) => setTemp(e.target.value)}
@@ -297,7 +342,6 @@ const OwnerSelection = ({ currentStep, nextStep }: {
                         >
                           Save
                         </button>
-
                       </div>
                     </div>
                   </div>
@@ -308,14 +352,16 @@ const OwnerSelection = ({ currentStep, nextStep }: {
 
           {/* Validation Error for Property */}
           {validationError.description && (
-            <p className="text-red-500 text-sm mt-2">{validationError.description}</p>
+            <p className="text-red-500 text-sm mt-2">
+              {validationError.description}
+            </p>
           )}
         </div>
       )}
 
       {/* YDOM Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm relative">
+        <div className="border-2  border-primary rounded-lg p-4 bg-white shadow-sm relative">
           <div className="flex justify-end items-start mb-4">
             <button
               onClick={() => setYdomModalOpen(true)}
@@ -336,13 +382,13 @@ const OwnerSelection = ({ currentStep, nextStep }: {
 
       {/* YDOM Modal */}
       {ydomModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 min-h-screen">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <div className="bg-white border  border-primary rounded-lg p-6 w-full max-w-md shadow-lg">
             <h2 className="text-lg font-semibold mb-4">Edit YDOM</h2>
             <textarea
               value={ydom}
               onChange={(e) => setYdom(e.target.value)}
-              className="w-full border rounded-lg p-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full border-2 rounded-lg p-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
               rows={4}
               placeholder="Enter YDOM description..."
             />
@@ -383,9 +429,12 @@ const OwnerSelection = ({ currentStep, nextStep }: {
                 onClick={() => toggleOwnerSelection(index)}
                 key={index}
                 className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
-                  ${selectedOwners.some(o => o.first_name === owner.first_name)
-                    ? "border-blue-600 bg-blue-50 shadow-md"
-                    : "border-gray-200 bg-white hover:border-blue-300"
+                  ${
+                    selectedOwners.some(
+                      (o) => o.first_name === owner.first_name
+                    )
+                      ? "border-blue-600 bg-blue-50 shadow-md"
+                      : "border-blue-400 bg-white hover:border-blue-300"
                   }`}
               >
                 <div className="flex gap-2 absolute top-4 right-4 text-gray-400">
@@ -413,21 +462,27 @@ const OwnerSelection = ({ currentStep, nextStep }: {
 
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <label className="text-gray-700 font-medium">First Name:</label>
+                    <label className="text-gray-700 font-medium">
+                      First Name:
+                    </label>
                     <span className="text-gray-900 font-medium">
                       {owner.first_name || "Not set"}
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <label className="text-gray-700 font-medium">Surname:</label>
+                    <label className="text-gray-700 font-medium">
+                      Surname:
+                    </label>
                     <span className="text-gray-900 font-medium">
                       {owner.last_name || "Not set"}
                     </span>
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <label className="text-gray-700 font-medium">Father's Name:</label>
+                    <label className="text-gray-700 font-medium">
+                      Father's Name:
+                    </label>
                     <span className="text-gray-900 font-medium">
                       {owner.father_first_name || "Not set"}
                     </span>
@@ -454,7 +509,7 @@ const OwnerSelection = ({ currentStep, nextStep }: {
       {/* Add Owner Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 w-full max-w-md mx-4">
+          <div className="bg-white border-2  border-primary rounded-lg p-8 w-full max-w-md mx-4">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-xl font-semibold text-gray-900">Add Owner</h3>
               <button
@@ -473,12 +528,16 @@ const OwnerSelection = ({ currentStep, nextStep }: {
                   </label>
                   <input
                     type="text"
-                    {...register("firstName", { required: "First name is required" })}
+                    {...register("firstName", {
+                      required: "First name is required",
+                    })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Giannis"
                   />
                   {errors.firstName && (
-                    <span className="text-red-500 text-sm">{errors.firstName.message}</span>
+                    <span className="text-red-500 text-sm">
+                      {errors.firstName.message}
+                    </span>
                   )}
                 </div>
 
@@ -488,12 +547,16 @@ const OwnerSelection = ({ currentStep, nextStep }: {
                   </label>
                   <input
                     type="text"
-                    {...register("surname", { required: "Surname is required" })}
+                    {...register("surname", {
+                      required: "Surname is required",
+                    })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Papadopoulos"
                   />
                   {errors.surname && (
-                    <span className="text-red-500 text-sm">{errors.surname.message}</span>
+                    <span className="text-red-500 text-sm">
+                      {errors.surname.message}
+                    </span>
                   )}
                 </div>
               </div>
@@ -504,12 +567,16 @@ const OwnerSelection = ({ currentStep, nextStep }: {
                 </label>
                 <input
                   type="text"
-                  {...register("fatherName", { required: "Father's name is required" })}
+                  {...register("fatherName", {
+                    required: "Father's name is required",
+                  })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Nikos"
                 />
                 {errors.fatherName && (
-                  <span className="text-red-500 text-sm">{errors.fatherName.message}</span>
+                  <span className="text-red-500 text-sm">
+                    {errors.fatherName.message}
+                  </span>
                 )}
               </div>
 
@@ -524,7 +591,9 @@ const OwnerSelection = ({ currentStep, nextStep }: {
                   placeholder="VAT-12213484"
                 />
                 {errors.vatNo && (
-                  <span className="text-red-500 text-sm">{errors.vatNo.message}</span>
+                  <span className="text-red-500 text-sm">
+                    {errors.vatNo.message}
+                  </span>
                 )}
               </div>
 
@@ -544,9 +613,11 @@ const OwnerSelection = ({ currentStep, nextStep }: {
       {/* Edit Owner Modal */}
       {isEditModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 w-full max-w-md mx-4">
+          <div className="bg-white border-2  border-primary rounded-lg p-8 w-full max-w-md mx-4">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-semibold text-gray-900">Edit Owner</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Edit Owner
+              </h3>
               <button
                 onClick={() => setIsEditModalOpen(false)}
                 className="text-gray-400 hover:text-gray-600"
@@ -563,12 +634,16 @@ const OwnerSelection = ({ currentStep, nextStep }: {
                   </label>
                   <input
                     type="text"
-                    {...register("firstName", { required: "First name is required" })}
+                    {...register("firstName", {
+                      required: "First name is required",
+                    })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Giannis"
                   />
                   {errors.firstName && (
-                    <span className="text-red-500 text-sm">{errors.firstName.message}</span>
+                    <span className="text-red-500 text-sm">
+                      {errors.firstName.message}
+                    </span>
                   )}
                 </div>
 
@@ -578,12 +653,16 @@ const OwnerSelection = ({ currentStep, nextStep }: {
                   </label>
                   <input
                     type="text"
-                    {...register("surname", { required: "Surname is required" })}
+                    {...register("surname", {
+                      required: "Surname is required",
+                    })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Papadopoulos"
                   />
                   {errors.surname && (
-                    <span className="text-red-500 text-sm">{errors.surname.message}</span>
+                    <span className="text-red-500 text-sm">
+                      {errors.surname.message}
+                    </span>
                   )}
                 </div>
               </div>
@@ -594,12 +673,16 @@ const OwnerSelection = ({ currentStep, nextStep }: {
                 </label>
                 <input
                   type="text"
-                  {...register("fatherName", { required: "Father's name is required" })}
+                  {...register("fatherName", {
+                    required: "Father's name is required",
+                  })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Nikos"
                 />
                 {errors.fatherName && (
-                  <span className="text-red-500 text-sm">{errors.fatherName.message}</span>
+                  <span className="text-red-500 text-sm">
+                    {errors.fatherName.message}
+                  </span>
                 )}
               </div>
 
@@ -614,7 +697,9 @@ const OwnerSelection = ({ currentStep, nextStep }: {
                   placeholder="VAT-12213484"
                 />
                 {errors.vatNo && (
-                  <span className="text-red-500 text-sm">{errors.vatNo.message}</span>
+                  <span className="text-red-500 text-sm">
+                    {errors.vatNo.message}
+                  </span>
                 )}
               </div>
 
@@ -634,7 +719,6 @@ const OwnerSelection = ({ currentStep, nextStep }: {
       {currentStep < 6 && (
         <div className="flex justify-end w-fit ml-auto">
           <PrimaryButton
-
             onClick={() => {
               if (isValid) {
                 nextStep();
@@ -642,7 +726,6 @@ const OwnerSelection = ({ currentStep, nextStep }: {
             }}
             label="Save and Continue"
             disabled={!isValid}
-
           />
         </div>
       )}

@@ -244,7 +244,7 @@ const AdminProfile = () => {
           {/* Left Column */}
           <div className="space-y-8">
             {/* Admin Information */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="bg-white rounded-lg p-6 border border-blue-400 shadow-sm">
               <h2 className="text-lg font-semibold text-gray-900 mb-6">
                 {user?.role} Information
               </h2>
@@ -377,6 +377,10 @@ const AdminProfile = () => {
                 {profileLoading ? (
                   <>
                     <button
+                      style={{
+                        background:
+                          "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+                      }}
                       type="submit"
                       className="bg-blue-500 cursor-p hover:bg-blue-600 text-white px-10 py-2 rounded-md font-medium transition-colors"
                     >
@@ -387,6 +391,10 @@ const AdminProfile = () => {
                   <>
                     <button
                       type="submit"
+                      style={{
+                        background:
+                          "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+                      }}
                       className="bg-blue-500 cursor-p hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
                     >
                       Save Changes
@@ -397,7 +405,7 @@ const AdminProfile = () => {
             </div>
 
             {/* User Information */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="bg-white rounded-lg p-6 border border-blue-400 shadow-sm">
               <h2 className="text-lg font-semibold text-gray-900 mb-6">
                 User Information
               </h2>
@@ -629,6 +637,10 @@ const AdminProfile = () => {
                 {/* Submit */}
                 <div className="text-end mt-5">
                   <button
+                    style={{
+                      background:
+                        "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+                    }}
                     type="submit"
                     className="px-6 py-2 bg-blue-600 text-white rounded-sm hover:bg-blue-700"
                   >
@@ -648,7 +660,7 @@ const AdminProfile = () => {
           {/* Right Column */}
           <div className="space-y-8">
             {/* Login Info */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="bg-white border border-blue-400 rounded-lg p-6 shadow-sm">
               <h2 className="text-lg font-semibold text-gray-900 mb-6">
                 Login Info
               </h2>
@@ -676,7 +688,7 @@ const AdminProfile = () => {
             </div>
 
             {/* Change Password */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="bg-white rounded-lg border border-blue-400 p-6 shadow-sm">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">
                 Change Password:
               </h2>
@@ -772,8 +784,12 @@ const AdminProfile = () => {
                 {/* Submit */}
                 <div className="flex justify-end">
                   <button
+                    style={{
+                      background:
+                        "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+                    }}
                     type="submit"
-                    className="bg-blue-500 cursor-p hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
+                    className=" cursor-pointer hover:bg-blue-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
                   >
                     {upPasswordLoading ? (
                       <>
@@ -788,7 +804,7 @@ const AdminProfile = () => {
             </div>
 
             {/* Subscription Plan */}
-            <div className="bg-white rounded-lg p-6 shadow-sm">
+            <div className="bg-white rounded-lg border border-blue-400 p-6 shadow-sm">
               <h2 className="text-lg font-semibold text-gray-900 mb-6">
                 Subscription Plan
               </h2>

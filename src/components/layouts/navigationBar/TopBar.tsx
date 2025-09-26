@@ -23,7 +23,7 @@ export default function TopBar({
   dark?: boolean;
 }) {
   const profile = useSelector((state: any) => state.user.userData);
-  console.log("User form topbar", profile)
+  console.log("User form topbar", profile);
   const token = tokenCatch();
   const decoded: any = jwtDecode(token || " ");
   const id = decoded.id;
@@ -37,8 +37,9 @@ export default function TopBar({
       <div className="flex items-center justify-between px-4 py-3">
         {/* Left Section: Toggle Button (Mobile) */}
         <button
-          className={`lg:hidden p-2 rounded-md  transition-colors ${dark ? "bg-black " : "hover:bg-gray-100"
-            }`}
+          className={`lg:hidden p-2 rounded-md  transition-colors ${
+            dark ? "bg-black " : "hover:bg-gray-100"
+          }`}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -56,8 +57,9 @@ export default function TopBar({
         {/* Left Section: Welcome Message (Desktop) */}
         <div className="items-center gap-2 ">
           <span
-            className={` text-sm font-medium ${dark ? "text-white " : "text-gray-700"
-              }`}
+            className={` text-sm font-medium ${
+              dark ? "text-white " : "text-gray-700"
+            }`}
           >
             Welcome Back,{" "}
             {!profile
@@ -83,7 +85,13 @@ export default function TopBar({
             </>
           ) : (
             <>
-              <div className="w-11 h-11 flex justify-center items-center rounded-full bg-blue-600">
+              <div
+                style={{
+                  background:
+                    "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+                }}
+                className="w-11 h-11 flex justify-center items-center rounded-full "
+              >
                 <h2 className="text-3xl font-bold text-white">{firstChar1}</h2>
               </div>
             </>

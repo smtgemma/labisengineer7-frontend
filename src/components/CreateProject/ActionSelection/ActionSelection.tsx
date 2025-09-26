@@ -523,14 +523,14 @@
 //                   </p>
 //                 </div>
 //               </div>
-       
+
 //             </div>
 //           ))}
 //         </div> */
 // }
 
 // {
-//   /* 
+//   /*
 // THIS IS THE DYNAMIC TEMPLATE NAME SECTION
 // DO NOT CHNAGE EXCEPT DEDIGN
 // THAISN */
@@ -541,10 +541,6 @@
 // // );
 
 // // dispatch(setActionSelectName(selectedActionsValue));
-
-
-
-
 
 import {
   setActionSelectName,
@@ -557,7 +553,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Loading from "@/components/Others/Loading";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
-import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
+import {
+  useRemainingCreditQuery,
+  useUseCreditsMutation,
+} from "@/redux/features/credit/creditSlice";
 import { templateName1 } from "./data";
 
 interface ActionSelectionProps {
@@ -578,8 +577,6 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     "Create Technical Description",
   ];
 
-  
-
   const [selected, setSelected] = useState<string[]>(["technical", "engineer"]); // default selected
   const [template, setTemplate] = useState<any[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -593,18 +590,17 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   const id = stepByStepData?.projectId?.id;
   const subcategoryTitle = stepByStepData.subcategory;
 
+  const allSubmergedArray = Object.values(subcategoryTitle).flat();
 
-const { data, isLoading } = useGetCreditServiceQuery(id || "", { skip: !id });
-const allSubmergedArray = Object.values(subcategoryTitle).flat();
-
-
-  console.log(allSubmergedArray, "this mergedArray")
-  console.log(templateName1, "this templateName")
+  console.log(allSubmergedArray, "this mergedArray");
+  console.log(templateName1, "this templateName");
 
   // const objectsArray = [templateName1];
 
-const combinedArrayTemplateName = allSubmergedArray.flatMap((key:any) => templateName1[key] || []);
-console.log(combinedArrayTemplateName)
+  const combinedArrayTemplateName = allSubmergedArray.flatMap(
+    (key: any) => templateName1[key] || []
+  );
+  console.log(combinedArrayTemplateName);
 
   // Compute subtotal
   const subtotal = combinedArrayTemplateName
@@ -613,7 +609,9 @@ console.log(combinedArrayTemplateName)
 
   // Update template list when selections change
   useEffect(() => {
-    const filtered = combinedArrayTemplateName.filter((s: any) => selected.includes(s.id));
+    const filtered = combinedArrayTemplateName.filter((s: any) =>
+      selected.includes(s.id)
+    );
     setTemplate(filtered);
   }, [selected]);
 
@@ -674,10 +672,6 @@ console.log(combinedArrayTemplateName)
     }
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
       {/* Header */}
@@ -697,10 +691,11 @@ console.log(combinedArrayTemplateName)
           {combinedArrayTemplateName.map((tem: any, i: any) => (
             <div
               key={i}
-              className={`cursor-pointer border rounded-xl px-6 py-4 transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5 ${selected.includes(tem.id)
-                ? "border-blue-500 bg-blue-50 shadow-md ring-2 ring-blue-200"
-                : "border-gray-200 bg-white hover:border-blue-300"
-                }`}
+              className={`cursor-pointer border border-primary/50 rounded-lg px-6 py-4 transition-all duration-200 hover:shadow-md transform hover:-translate-y-0.5 ${
+                selected.includes(tem.id)
+                  ? "border-blue-700 bg-blue-50 shadow-md ring-2 ring-blue-200"
+                  : "border-blue-200 bg-white hover:border-blue-300"
+              }`}
               onClick={() => toggleSelect(tem.id)}
             >
               <div className="flex justify-between items-start">
@@ -731,7 +726,7 @@ console.log(combinedArrayTemplateName)
         </div>
 
         {/* Order Summary Panel */}
-        <div className="lg:col-span-1 bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sticky top-26 h-fit">
+        <div className="lg:col-span-1 bg-white rounded-2xl shadow-lg border border-primary p-6 sticky top-26 h-fit">
           <div className="flex items-center mb-6">
             <CreditCard className="w-6 h-6 text-blue-600 mr-2" />
             <h3 className="text-lg font-bold text-gray-800">Credit Summary</h3>

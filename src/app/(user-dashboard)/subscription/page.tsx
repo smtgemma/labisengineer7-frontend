@@ -1,6 +1,7 @@
 "use client";
 import Loading from "@/components/Others/Loading";
 import BillingHistory from "@/components/Subscription/Billing/BillingHistory/BillingHistory";
+import PricingCards from "@/components/Subscription/PricingCard/NewPricing";
 import PricingCard from "@/components/Subscription/PricingCard/PricingCard";
 import { useGetThePlanQuery } from "@/redux/features/subscription/subscripionPlanSlice";
 import { Header } from "antd/es/layout/layout";
@@ -9,7 +10,7 @@ import React from "react";
 interface PricingPlan {
   id: string;
   price: string;
-  period: string;
+  credits: string;
   planName: string;
   planType: string;
   permissions: string[];
@@ -81,9 +82,9 @@ const subscription: React.FC = () => {
   const pricingPlans = data?.data;
 
   return (
-    <section className="bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen">
+    <section className="bg-[#F1F5F9] py-2 px-4 md:px-8 min-h-screen">
       <div>
-        <Header title="Subscription" />
+        <h2 className="my-5 font-medium text-3xl">Subscription</h2>
 
         <div className="flex flex-wrap gap-6 mt-6">
           {pricingPlans?.map((plan: any) => (
@@ -91,7 +92,7 @@ const subscription: React.FC = () => {
               key={plan.id}
               id={plan.id}
               price={plan.amount}
-              period={plan.interval}
+              credits={plan.credits}
               planName={plan.planName}
               planType={plan.planType}
               permissions={plan.features}
@@ -104,7 +105,7 @@ const subscription: React.FC = () => {
         </div>
 
         <div className="mt-12">
-          <Header title="Billing History" />
+          <h2 className="my-5 font-medium text-3xl">Billing History</h2>
           <BillingHistory />
         </div>
       </div>

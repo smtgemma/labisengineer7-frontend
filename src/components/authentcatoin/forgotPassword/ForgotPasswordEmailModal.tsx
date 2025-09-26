@@ -47,8 +47,8 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
   return (
     isModalOpen && (
       <>
-        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg w-[500px] p-6 shadow-lg">
+        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 ">
+          <div className="bg-white rounded-lg w-[500px] p-6 shadow-lg m-5">
             <h2 className="text-lg font-semibold mb-4 text-center">
               Forgot Password
             </h2>
@@ -78,6 +78,10 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
               </div>
 
               <button
+                style={{
+                  background:
+                    "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+                }}
                 type="submit"
                 className="w-full cursor-pointer bg-blue-500 hover:bg-blue-600 text-white py-2 rounded font-medium"
               >

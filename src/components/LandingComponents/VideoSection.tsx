@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import videoImage from "../../assets/landing-page/videoImage.png";
+import PrimaryButton from "../shared/primaryButton/PrimaryButton";
+import Link from "next/link";
 
 export default function VideoSeciton() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -53,6 +55,19 @@ export default function VideoSeciton() {
             className="w-full h-auto"
           />
         )}
+      </div>
+      <div className="mt-16">
+        <Link
+          href="/tutorials"
+          className={`px-8 py-3 w-full text-white font-medium shadow-sm transition-colors rounded-lg
+       `}
+          style={{
+            background:
+              "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+          }}
+        >
+          View All Tutorials
+        </Link>
       </div>
     </section>
   );

@@ -67,13 +67,19 @@ const DocumentTable = () => {
 
       <div className={`rounded-lg shadow-sm overflow-auto my-6 `}>
         <table className="w-full">
-          <thead className="bg-[#017AFF]">
+          <thead
+            style={{
+              background:
+                "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+            }}
+            className=""
+          >
             <tr>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">
                 File Name
               </th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">
-                Project Name
+                Project Code
               </th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">
                 Type
