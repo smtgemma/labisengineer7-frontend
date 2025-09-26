@@ -554,7 +554,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "@/components/Others/Loading";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import {
-  useGetCreditServiceQuery,
   useRemainingCreditQuery,
   useUseCreditsMutation,
 } from "@/redux/features/credit/creditSlice";
@@ -591,7 +590,6 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   const id = stepByStepData?.projectId?.id;
   const subcategoryTitle = stepByStepData.subcategory;
 
-  const { data, isLoading } = useGetCreditServiceQuery(id || "", { skip: !id });
   const allSubmergedArray = Object.values(subcategoryTitle).flat();
 
   console.log(allSubmergedArray, "this mergedArray");
@@ -673,10 +671,6 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
       setIsProcessing(false);
     }
   };
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto">

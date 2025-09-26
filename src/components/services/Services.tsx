@@ -5,11 +5,9 @@ import Header from "@/components/shared/Header/Header";
 import { useGetTheServiceQuery } from "@/redux/features/projectService/projectServiceSlice";
 export default function MainServices() {
   const { data, isLoading } = useGetTheServiceQuery("");
-
   if (isLoading) {
     return <Loading />;
   }
-
   const projects = data?.data;
   console.log(projects);
 

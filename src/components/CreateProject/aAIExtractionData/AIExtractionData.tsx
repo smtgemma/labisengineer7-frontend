@@ -131,7 +131,7 @@ const AIExtractionDataInPut = ({
   };
 
   useEffect(() => {
-    if (currentStep === 4 && filesData?.length && !hasSubmittedRef.current) {
+    if (currentStep === 5 && filesData?.length && !hasSubmittedRef.current) {
       hasSubmittedRef.current = true; // lock it
       // create-project
       handleSubmit(onSubmitAiDataSend)();
