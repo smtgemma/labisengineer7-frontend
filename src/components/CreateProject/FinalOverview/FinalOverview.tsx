@@ -148,25 +148,20 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const id = stepByStepData?.projectIdCode;
   const projectId = stepByStepData?.projectIdCode?.result.id;
   const userId = dataAllFIled?.createdById;
-  console.log(subCategoryData, "..........................................")
+  
 
-  console.log(stepByStepData)
+  console.log(stepByStepData, "all data for template ==========================")
   console.log(stepByStepData?.projectIdCode?.id)
-  console.log(stepByStepData, ",skfld,,,,,,,,,,,,,,,,,,,,,,,,,,,,,--------,,,,,,,,,,,,,,,")
 
   const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
   const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
   const allData = allTemplateData?.data || {};
-  console.log(allTemplateData, "===============================");
-  console.log(allData, "all data for all template===================================================================")
 
 
   console.log("pdf", pdfdownload);
   console.log("execl", execlDownload);
-
-  console.log("======================allTemplate,", allTemplate);
 
   const buildingMods = subCategoryData["building-modifications"] || [];
   const energy = subCategoryData["energy-systems"] || [];
