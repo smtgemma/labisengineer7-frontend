@@ -224,19 +224,19 @@ const DescriptionTask = () => {
   const navigate = useRouter();
   const dispatch = useDispatch();
   const aiExtractData = useSelector((state: RootState) => state.aiData);
-  console.log("Redux Data", aiExtractData, "....................")
+  console.log("sub ", aiExtractData);
   const toggleOption = (categoryId: string, optionId: string) => {
     setDescription((prevCategories) =>
       prevCategories.map((category) =>
         category.id === categoryId
           ? {
-            ...category,
-            options: category.options.map((option) =>
-              option.id === optionId
-                ? { ...option, selected: !option.selected }
-                : option
-            ),
-          }
+              ...category,
+              options: category.options.map((option) =>
+                option.id === optionId
+                  ? { ...option, selected: !option.selected }
+                  : option
+              ),
+            }
           : category
       )
     );
@@ -279,11 +279,14 @@ const DescriptionTask = () => {
       <h2 className="text-3xl text-black font-semibold">Description Task</h2>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-4">
         {/* Left Column */}
-        <div className="space-y-2">
+        <div className="space-y-6">
           {description
             .slice(0, Math.ceil(description.length / 2))
             .map((category) => (
-              <div key={category.id} className=" rounded-lg p-2">
+              <div
+                key={category.id}
+                className=" rounded-lg p-2 bg-white border  border-primary"
+              >
                 <div className="flex items-center gap-3 mb-4">
                   <h2 className="text-lg font-semibold text-gray-900">
                     {category.title}
@@ -309,7 +312,10 @@ const DescriptionTask = () => {
           {description
             .slice(Math.ceil(description.length / 2))
             .map((category) => (
-              <div key={category.id} className=" rounded-lg p-2">
+              <div
+                key={category.id}
+                className=" rounded-lg p-2 bg-white border  border-primary"
+              >
                 <div className="flex items-center gap-3 mb-4">
                   <h2 className="text-lg font-semibold text-gray-900">
                     {category.title}
@@ -333,11 +339,7 @@ const DescriptionTask = () => {
 
       {/* Save Button */}
       <div className="flex justify-end mt-8 w-fit ml-auto">
-        <PrimaryButton
-          label="Save & Continue"
-          onClick={handleSave}
-
-        />
+        <PrimaryButton label="Save & Continue" onClick={handleSave} />
       </div>
     </div>
   );

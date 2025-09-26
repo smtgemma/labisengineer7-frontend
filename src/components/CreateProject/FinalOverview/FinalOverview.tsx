@@ -148,11 +148,11 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const id = stepByStepData?.projectIdCode;
   const projectId = stepByStepData?.projectIdCode?.result.id;
   const userId = dataAllFIled?.createdById;
-  console.log(subCategoryData, "..........................................")
+  console.log(subCategoryData, "..........................................");
 
-  console.log(stepByStepData)
-  console.log(stepByStepData?.projectIdCode?.id)
-  console.log(projectId)
+  console.log(stepByStepData);
+  console.log(stepByStepData?.projectIdCode?.id);
+  console.log(projectId);
 
   const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
@@ -160,8 +160,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const allData = allTemplateData?.data || {};
   console.log(allTemplateData, "===============================");
-  console.log(allData, "all data for all template===================================================================")
-
+  console.log(
+    allData,
+    "all data for all template==================================================================="
+  );
 
   console.log("pdf", pdfdownload);
   console.log("execl", execlDownload);
@@ -186,7 +188,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const userData = useSelector((state: any) => state.user.userData);
 
-  console.log(userData, "projectCodeId:", projectCodeId?.result?.projectCode)
+  console.log(userData, "projectCodeId:", projectCodeId?.result?.projectCode);
   //2. DOWNLOAD CSV FILE
   const downloadCSV = () => {
     const headers = ["First Name", "Surname", "Father Name", "VAT No"];
@@ -294,7 +296,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   // };
   // 🔹 Click outside handler
 
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -322,8 +323,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       name: "F6D3.pdf",
       component: <F6D8 allData={allData} />,
     },
-
-  ]
+  ];
 
   console.log(selected, "selected==================");
 
@@ -340,9 +340,11 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* aufil groverment */}
-        {
-          allTemplate &&
-          allTemplate.find((item: { title: string }) => item.title === "Autofill (προαιρετικό add-on)") && (
+        {allTemplate &&
+          allTemplate.find(
+            (item: { title: string }) =>
+              item.title === "Autofill (προαιρετικό add-on)"
+          ) && (
             <div
               onClick={handleCopy}
               className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
@@ -370,8 +372,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 </div>
               </div>
             </div>
-          )
-        }
+          )}
         {/* fdf */}
 
         <div
@@ -412,27 +413,25 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
       <div ref={printRef} className="space-y-3">
         <div className="flex items-center flex-wrap gap-3">
-          {
-            allTemplate?.length > 0 ? (
-              allTemplate.map((template: any) => (
-                <div key={template.id}>
-                  {template.id !== "autofill_16" && (
-                    <button
-                      className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                      onClick={() => {
-                        setSelected(template.title);
-                        setIsModalOpen(true);
-                      }}
-                    >
-                      {template.title}
-                    </button>
-                  )}
-                </div>
-              ))
-            ) : (
-              <p>No available</p>
-            )
-          }
+          {allTemplate?.length > 0 ? (
+            allTemplate.map((template: any) => (
+              <div key={template.id}>
+                {template.id !== "autofill_16" && (
+                  <button
+                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected(template.title);
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    {template.title}
+                  </button>
+                )}
+              </div>
+            ))
+          ) : (
+            <p>No available</p>
+          )}
         </div>
         {/* Modal */}
         {isModalOpen && (
@@ -460,7 +459,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "Πίνακας 3(ΙΚΑ)" && (
                   <F5D8 allData={allData} /> // 3
                 )}
-                {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
+                {selected ===
+                  "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
                   <F5D9 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
                 )}
                 {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
@@ -494,21 +494,20 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
                   <F6D8 allData={allData} /> // 1
                 )}
-                {selected ===
-                  "YΔ Ανάληψης Έργου Μηχανικού" && (
-                    <F6D9 allData={allData} />// 2
-                  )}
-                {selected ===
-                  "YΔ Φέροντα Οργανισμού" && (
-                    <F6D10 allData={allData} /> // 3
-                  )}
+                {selected === "YΔ Ανάληψης Έργου Μηχανικού" && (
+                  <F6D9 allData={allData} /> // 2
+                )}
+                {selected === "YΔ Φέροντα Οργανισμού" && (
+                  <F6D10 allData={allData} /> // 3
+                )}
                 {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
                   <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
                 )}
                 {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
                   <F6D1 allData={allData} /> // 5
                 )}
-                {selected === "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
+                {selected ===
+                  "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
                   <F6D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 6
                 )}
                 {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
@@ -517,22 +516,28 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "Πίνακας 3" && (
                   <F6D12 allData={allData} /> // 8
                 )}
-                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
+                {selected ===
+                  "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
                   <F6D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 9
                 )}
-                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
+                {selected ===
+                  "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
                   <F6D14 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
                 )}
-                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
+                {selected ===
+                  "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
                   <F6D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
                 )}
-                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
+                {selected ===
+                  "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
                   <F6D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
                 )}
-                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
+                {selected ===
+                  "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
                   <F6D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 13
                 )}
-                {selected === "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
+                {selected ===
+                  "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
                   <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 14
                 )}
               </div>

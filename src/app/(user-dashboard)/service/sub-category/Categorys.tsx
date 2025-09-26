@@ -194,7 +194,10 @@ const Category = () => {
           {categories
             .slice(0, Math.ceil(categories.length / 2))
             .map((category) => (
-              <div key={category.id} className=" rounded-lg p-6 ">
+              <div
+                key={category.id}
+                className=" rounded-lg p-6 bg-white border  border-primary"
+              >
                 <div className="flex items-center gap-3 mb-4">
                   {category.icon}
                   <h2 className="text-lg font-semibold text-gray-900">
@@ -224,7 +227,10 @@ const Category = () => {
           {categories
             .slice(Math.ceil(categories.length / 2))
             .map((category) => (
-              <div key={category.id} className=" rounded-lg p-6 ">
+              <div
+                key={category.id}
+                className=" rounded-lg p-6  bg-white border  border-primary"
+              >
                 <div className="flex items-center gap-3 mb-4">
                   {category.icon}
                   <h2 className="text-lg font-semibold text-gray-900">

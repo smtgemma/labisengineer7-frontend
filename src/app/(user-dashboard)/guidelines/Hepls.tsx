@@ -92,7 +92,10 @@ const FAQSection = () => {
             {faqData.slice(0, Math.ceil(faqData.length / 2)).map((item) => {
               const isExpanded = expandedItems.has(item.id);
               return (
-                <div key={item.id} className="bg-white rounded-lg shadow-sm">
+                <div
+                  key={item.id}
+                  className="bg-white border border-primary/50 rounded-lg shadow-sm"
+                >
                   <button
                     onClick={() => toggleExpanded(item.id)}
                     className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
@@ -129,7 +132,10 @@ const FAQSection = () => {
             {faqData.slice(Math.ceil(faqData.length / 2)).map((item) => {
               const isExpanded = expandedItems.has(item.id);
               return (
-                <div key={item.id} className="bg-white rounded-lg shadow-sm">
+                <div
+                  key={item.id}
+                  className="bg-white border-primary/50  border rounded-lg shadow-sm"
+                >
                   <button
                     onClick={() => toggleExpanded(item.id)}
                     className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"

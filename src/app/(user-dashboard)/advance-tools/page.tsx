@@ -99,7 +99,7 @@ function ToolCard({ tool, isMobile }: any) {
   return (
     <div
       onClick={() => handleToolsSelect(tool.id)}
-      className="bg-[#F8F8F8] rounded-xl shadow-sm hover:shadow-md cursor-pointer overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:border-blue-500 active:translate-y-0 h-full flex flex-col border border-gray-100"
+      className="bg-[#F8F8F8] rounded-xl shadow-sm hover:shadow-md border-primary/50 cursor-pointer overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:border-blue-500 active:translate-y-0 h-full flex flex-col border 0"
     >
       <div className="p-6 flex-grow">
         <div className="relative  mb-4">

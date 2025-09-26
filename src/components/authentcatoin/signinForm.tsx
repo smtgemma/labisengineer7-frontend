@@ -65,7 +65,6 @@ export default function SigninForm() {
 
       toast.error(errorMessage);
     }
-
   };
 
   // google login working for functonalti
@@ -159,6 +158,10 @@ export default function SigninForm() {
           </button>
 
           <button
+            style={{
+              background:
+                "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+            }}
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition"
           >
