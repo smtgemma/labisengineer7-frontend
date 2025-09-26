@@ -8,7 +8,7 @@ const page = () => {
   return (
     <div>
       <AiStatsCards />
-      <AiExtractionChart title="AI usage over time" />
+      <AiExtractionChart />
       <SimpleAILogTable />
     </div>
   );

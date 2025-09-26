@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
+"use client"
 import {
-  ChevronDown,
-  TrendingUp,
-  Users,
   Briefcase,
-  FileText,
+  ChevronDown,
   Cpu,
-  Calendar,
+  FileText,
+  TrendingUp,
+  Users
 } from "lucide-react";
+import { useState } from "react";
+import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 // Chart data
 const chartData = [
@@ -124,21 +124,19 @@ const AiExtractionChart: React.FC = () => {
             <div className="flex items-center space-x-3">
               <button
                 onClick={() => setSelectedPeriod("last 7 days")}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  selectedPeriod === "last 7 days"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${selectedPeriod === "last 7 days"
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  }`}
               >
                 last 7 days
               </button>
               <button
                 onClick={() => setSelectedPeriod("last 30 days")}
-                className={`flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  selectedPeriod === "last 30 days"
-                    ? "bg-blue-600 text-white"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
+                className={`flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${selectedPeriod === "last 30 days"
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  }`}
               >
                 <span>last 30 days</span>
                 <ChevronDown className="w-4 h-4" />

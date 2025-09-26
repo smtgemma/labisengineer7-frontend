@@ -38,6 +38,7 @@ export type ProjectData = {
 
 export interface LicenseLegalFormData {
     plotArea: string;
+    number_property: string;
     withinOutsideCityPlan: string;
     permitNumber: string;
     issuingAuthority: string;
@@ -47,6 +48,19 @@ export interface LicenseLegalFormData {
     teeRegistrationNumber: string;
     specialty: string;
     inclusionDateLegalization: string;
+    percentage_co_ownership_parcel: string;
+    license_number_revision: String;
+    date_issuance_building_permit: String;
+    details_issuing_authority: String;
+    date_issue_building_permit_revision: String;
+    project_title_description_license: String;
+    completion_declaration_3843_number: String;
+    description_validations_3843: String;
+    issuing_authority_3843: String;
+    date_issue_completion_declaration_3843: String;
+    number_establishment_horizontal_ownership: string;
+    reviews_numbers_establishment_horizontal_ownership: string;
+    notary_establishment_horizontal_ownership: string;
 }
 
 export interface EPCFormValues {
