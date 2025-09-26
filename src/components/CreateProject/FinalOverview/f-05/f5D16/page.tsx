@@ -67,7 +67,7 @@ function F5D16({ allData }: { allData: allDataProps }) {
         // setIsModalOpen(false)
     }
     return (
-        <div>
+        <div className="arial">
             {
                 owner ? (
                     <div className="max-w-[794px] mx-auto">

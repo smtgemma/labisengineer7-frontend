@@ -248,7 +248,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
     }
 
     return (
-        <div className="max-w-[794px] mx-auto p-4 bg-white space-y-8">
+        <div className="max-w-[794px] mx-auto p-4 bg-white space-y-8 arial">
             <div className="text-right -mt-6">
                 <button
                     className="mt-1 px-4 py-1"
