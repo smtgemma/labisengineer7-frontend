@@ -6,13 +6,13 @@ import { ArrowRight } from "lucide-react";
 export default function Banner() {
   return (
     <main
-      className="h-[770px] bg-left bg-no-repeat bg-[100% 100%]"
+      className="h-[400px] lg:h-[770px] bg-left bg-no-repeat bg-[100% 100%]"
       style={{
         backgroundImage: `url(${banner.src})`,
       }}
     >
       <Container>
-        <div className="flex items-center h-[770px] ">
+        <div className="flex items-center justify-center lg:justify-start h-[400px] lg:h-[770px] ">
           {/* Left Content (center vertically in grid) */}
           <div className="  space-y-4 md:space-y-6 text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">

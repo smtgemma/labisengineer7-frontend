@@ -1,178 +1,210 @@
-"use client";
-
-import ButtonGlobal from "@/components/shared/GlobalButton";
-import tokenCatch from "@/lib/token";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Legend,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import axios from "axios";
+  ChevronDown,
+  TrendingUp,
+  Users,
+  Briefcase,
+  FileText,
+  Cpu,
+  Calendar,
+} from "lucide-react";
 
-interface ArrowDotProps {
-  cx?: number;
-  cy?: number;
-  index?: number;
-  dataLength?: number;
-}
+// Chart data
+const chartData = [
+  { day: "Sun", value: 230 },
+  { day: "Mon", value: 245 },
+  { day: "Tue", value: 210 },
+  { day: "Wed", value: 300 },
+  { day: "Thu", value: 290 },
+  { day: "Fri", value: 350 },
+  { day: "Sat", value: 270 },
+];
 
-const ArrowDot: React.FC<ArrowDotProps> = ({ cx, cy, index, dataLength }) => {
-  if (index === dataLength! - 1) {
-    return (
-      <g>
-        <circle
-          cx={cx}
-          cy={cy}
-          r={4}
-          stroke="#2563eb"
-          strokeWidth={2}
-          fill="white"
-        />
-        <polygon
-          points={`${cx! + 8},${cy} ${cx! + 18},${cy! - 4} ${cx! + 18},${
-            cy! + 4
-          }`}
-          fill="#2563eb"
-          stroke="#2563eb"
-          strokeWidth={1}
-        />
-      </g>
-    );
-  } else if (index === 0) {
-    return (
-      <circle
-        cx={cx}
-        cy={cy}
-        r={4}
-        stroke="#2563eb"
-        strokeWidth={2}
-        fill="white"
-      />
-    );
-  }
-  return null;
-};
+// Status cards data
+const statusCards = [
+  {
+    title: "Joining Engineer",
+    value: "1,200",
+    change: "+2.8%",
+    icon: TrendingUp,
+    bgColor: "bg-yellow-50",
+    iconColor: "text-yellow-600",
+  },
+  {
+    title: "Joining Company",
+    value: "600",
+    change: "+2.8%",
+    icon: Users,
+    bgColor: "bg-blue-50",
+    iconColor: "text-blue-600",
+  },
+  {
+    title: "Active Projects",
+    value: "1,252",
+    change: "+3.8%",
+    icon: Briefcase,
+    bgColor: "bg-green-50",
+    iconColor: "text-green-600",
+  },
+  {
+    title: "Documents Generated",
+    value: "09",
+    change: "+2.8%",
+    icon: FileText,
+    bgColor: "bg-orange-50",
+    iconColor: "text-orange-600",
+  },
+  {
+    title: "AI Extractions Processed",
+    value: "12",
+    change: "+2.8%",
+    icon: Cpu,
+    bgColor: "bg-purple-50",
+    iconColor: "text-purple-600",
+  },
+];
 
-export default function AiExtractionChart({ title }: { title: string }) {
-  const [isClient, setIsClient] = useState(false);
-  const [chartData, setChartData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setIsClient(true);
-
-    const fetchMetrics = async () => {
-      try {
-        const token = tokenCatch();
-        const res = await axios.get(
-          "https://api.buildai.gr/api/v1/ai/usage-graph",
-          {
-            headers: { Authorization: token },
-          }
-        );
-        const grap = res?.data?.data;
-        setChartData(grap?.data || []);
-      } catch (error) {
-        console.error("Error fetching chart data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMetrics();
-  }, []);
-
-  if (!isClient || loading) {
-    return (
-      <div className="w-full h-[561px] p-4 flex items-center justify-center bg-gray-50 rounded-lg">
-        <div className="text-gray-500">Loading chart...</div>
-      </div>
-    );
-  }
+const AiExtractionChart: React.FC = () => {
+  const [selectedPeriod, setSelectedPeriod] = useState("last 30 days");
+  const [selectedChart, setSelectedChart] = useState("AI Extraction Activity");
 
   return (
-    <div className="w-full h-96 p-6 rounded-lg bg-white mt-6">
-      {title !== "AI usage over time" ? (
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4 md:gap-0">
-          <select
-            id="activityType"
-            className="md:text-2xl font-semibold focus:outline-none"
-          >
-            <option value="AI Extraction Activity">
-              AI Extraction Activity
-            </option>
-            <option value="User Signups">User Signups</option>
-            <option value="Documents by Service Type">
-              Documents by Service Type
-            </option>
-          </select>
-          <ButtonGlobal title="Last 30 days" />
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Status Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
+          {statusCards.map((card, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className={`p-3 rounded-lg ${card.bgColor}`}>
+                  <card.icon className={`w-6 h-6 ${card.iconColor}`} />
+                </div>
+                <span className="text-sm text-green-600 bg-green-50 px-2 py-1 rounded-full font-medium">
+                  {card.change}
+                </span>
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-2xl font-bold text-gray-900">
+                  {card.value}
+                </h3>
+                <p className="text-sm text-gray-600 leading-tight">
+                  {card.title}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
-      ) : (
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4 md:gap-0">
-          <h1 className="md:text-2xl font-semibold">{title}</h1>
-          <select
-            id="activityType"
-            className="font-semibold focus:outline-none"
-          >
-            <option value="Last 7 days">Last 7 days</option>
-            <option value="Last 30 days">Last 30 days</option>
-            <option value="Last 60 days">Last 60 days</option>
-          </select>
-        </div>
-      )}
 
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart
-          data={chartData}
-          margin={{ top: 20, right: 50, bottom: 20, left: 20 }}
-        >
-          <CartesianGrid horizontal vertical={false} stroke="#e5e7eb" />
-          <XAxis
-            dataKey="name"
-            axisLine={false}
-            tickLine={false}
-            tick={{ fontSize: 12, fill: "#6b7280" }}
-          />
-          <YAxis
-            axisLine={false}
-            tickLine={false}
-            tick={{ fontSize: 12, fill: "#6b7280" }}
-            domain={[0, 500]}
-            ticks={[100, 200, 300, 400, 500]}
-          />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: "white",
-              border: "1px solid #e5e7eb",
-              borderRadius: "6px",
-              boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
-            }}
-          />
-          <Legend align="right" wrapperStyle={{ paddingTop: "20px" }} />
-          <Line
-            type="monotone"
-            dataKey="uv"
-            stroke="#2563eb"
-            strokeWidth={3}
-            dot={(props) => (
-              <ArrowDot {...props} dataLength={chartData.length} />
-            )}
-            activeDot={{
-              r: 6,
-              stroke: "#2563eb",
-              strokeWidth: 2,
-              fill: "white",
-            }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
+        {/* Chart Section */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          {/* Chart Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 space-y-4 sm:space-y-0">
+            <div className="flex items-center space-x-2">
+              <h2 className="text-lg font-semibold text-gray-900">
+                {selectedChart}
+              </h2>
+              <button
+                onClick={() =>
+                  setSelectedChart(
+                    selectedChart === "AI Extraction Activity"
+                      ? "Processing Activity"
+                      : "AI Extraction Activity"
+                  )
+                }
+                className="flex items-center space-x-1 text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={() => setSelectedPeriod("last 7 days")}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  selectedPeriod === "last 7 days"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
+              >
+                last 7 days
+              </button>
+              <button
+                onClick={() => setSelectedPeriod("last 30 days")}
+                className={`flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  selectedPeriod === "last 30 days"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
+              >
+                <span>last 30 days</span>
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Chart Container */}
+          <div className="w-full" style={{ height: "400px" }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                data={chartData}
+                margin={{
+                  top: 20,
+                  right: 30,
+                  left: 20,
+                  bottom: 20,
+                }}
+              >
+                <XAxis
+                  dataKey="day"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 12, fill: "#6B7280" }}
+                  dy={10}
+                />
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 12, fill: "#6B7280" }}
+                  domain={["dataMin - 20", "dataMax + 20"]}
+                  tickCount={6}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="value"
+                  stroke="#3B82F6"
+                  strokeWidth={3}
+                  dot={false}
+                  activeDot={{
+                    r: 6,
+                    fill: "#3B82F6",
+                    strokeWidth: 2,
+                    stroke: "#fff",
+                  }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Chart Footer */}
+          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+            <div className="flex items-center space-x-2 text-sm text-gray-500">
+              <div className="flex items-center space-x-1">
+                <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+                <span>Time Duration</span>
+              </div>
+            </div>
+            <button className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors">
+              View Details →
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default AiExtractionChart;

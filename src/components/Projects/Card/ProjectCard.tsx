@@ -45,9 +45,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     );
 
     console.log("image", serviceTitle);
-    if (serviceTitle.toLocaleLowerCase() === "service-1") {
+    if (serviceTitle === "Service-1") {
       router.push("/service/sub-category");
-      console.log(serviceTitle)
+      console.log(serviceTitle);
     }
 
     if (serviceTitle.toLocaleLowerCase() === "service-4") {
@@ -103,8 +103,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
     <div
       className={`
-    border border-blue-200
-    bg-gradient-to-br from-white via-blue-50 to-blue-200
+    border-2 border-blue-300 hover:border-blue-600 hover:border-2
+    bg-gradient-to-br from-white via-white to-blue-100 
     rounded-2xl p-6 lg:p-8 cursor-pointer
     transform  transition-transform hover:duration-1000 hover:transition-transform duration-1000 
   `}

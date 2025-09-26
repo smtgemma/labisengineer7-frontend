@@ -69,7 +69,13 @@ const Table: React.FC<TableProps> = ({ data }) => {
     <div className="w-full overflow-auto rounded-lg shadow-sm">
       <table className="w-full">
         {/* Table Header */}
-        <thead className="bg-[#017AFF] text-white">
+        <thead
+          style={{
+            background:
+              "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+          }}
+          className=" text-white"
+        >
           <tr className="*:text-nowrap">
             <th className="text-left text-sm font-medium px-6 py-3">
               Created On
