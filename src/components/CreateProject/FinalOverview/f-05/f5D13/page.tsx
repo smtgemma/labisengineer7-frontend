@@ -104,7 +104,7 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
     }
 
     return (
-        <div>
+        <div className="arial">
             {engineers.length > 0 ? (engineers?.map((engineer: any, index: number) => (
                 <div className="max-w-[796px] mx-auto bg-white">
                     <div className="text-right -mt-3">

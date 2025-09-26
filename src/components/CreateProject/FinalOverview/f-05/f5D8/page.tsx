@@ -374,7 +374,7 @@ export default function F5D8({ allData }: { allData: allDataProps }) {
   }
 
   return (
-    <div className="max-w-[794px] mx-auto p-4 bg-white">
+    <div className="max-w-[794px] mx-auto p-4 bg-white arial">
       {/* <div className="text-right -mt-7">
         <button
           className="mt-1 px-4 py-1"
@@ -396,7 +396,7 @@ export default function F5D8({ allData }: { allData: allDataProps }) {
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
           <h3 className="flex-1 text-black text-sm">
-            {propertyAddress || "N/A"},  {propertyPlace || "N/A"},  {propertyPostalCode || "N/A"}(FOR BUILDING)
+            {propertyAddress || "N/A"},  {propertyPlace || "N/A"},  {propertyPostalCode || "N/A"}
           </h3>
         </div>
       </div>

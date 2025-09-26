@@ -370,12 +370,14 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
 
                             {/* file 6======== */}
                             {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
-                                <S4D1 formData={formData} setFormData={setFormData} />
+                                // <S4D1 formData={formData} setFormData={setFormData} />
+                                <h1>template 1</h1>
                             )}
                             {selected ===
                                 "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
                                     <div>
-                                        {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)}
+                                        <h1>template 2</h1>
+                                        {/* {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)} */}
                                     </div>
 
                                 )}

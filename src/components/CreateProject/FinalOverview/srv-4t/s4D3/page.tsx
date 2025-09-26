@@ -11,7 +11,7 @@ import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplate
 
 type F6D13Props = {
     allData: any;
-    //   setIsModalOpen: (value: boolean) => void;
+    setIsModalOpen: (value: boolean) => void;
 };
 
 interface FormData {
@@ -37,15 +37,17 @@ interface FormData {
 }
 
 
-export default function F5D17({ allData,
-    //  setIsModalOpen 
+export default function F4D3({ allData,
+    setIsModalOpen
 }: F6D13Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
+    console.log(allDescriptionTasks, "alldescription task-------------------alldescription")
     const { id, createdById, serviceId, specialty } = allData || {}
+
     const { projectDescription,
         propertyAddress,
         propertyNumber,
@@ -69,10 +71,10 @@ export default function F5D17({ allData,
             owners: allData?.owners || [{ firstName: "", lastName: "" }],
         },
     })
+
     const [updateProject] = useUpdateProjectMutation()
 
     // for editing data 
-
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
@@ -91,13 +93,13 @@ export default function F5D17({ allData,
 
         reset()
         setIsEditModalOpen(false)
-        // setIsModalOpen(false)
+        setIsModalOpen(false)
     }
 
 
 
     return (
-        <div className="max-w-[794px] mx-auto p-6 bg-white arial">
+        <div className="max-w-[794px] mx-auto p-6 bg-white">
             <div className="text-right -mt-9">
                 <button
                     className="mt-1 px-4 py-1"
@@ -131,12 +133,12 @@ export default function F5D17({ allData,
             </div>
             <div className="space-y-6 ml-10">
                 <div>
-                    <h3 className="text-sm font-bold mb-2">1. Εισαγωγή – Περιγραφή Έργου</h3>
-                    <p className="text-sm mb-5">Η παρούσα Τεχνική Έκθεση συντάσσεται στο πλαίσιο της διαδικασίας έκδοσης Άδειας Μικρής Κλίμακας, σύμφωνα με τις διατάξεις του άρθρου 29 του Ν.4495/2017, καθώς και των σχετικών Υπουργικών Αποφάσεων, όπως η ΥΑ ΥΠΕΝ/ΔΑΟΚΑ/69701/4461/2018 και η ΥΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020
-                        (ΦΕΚ 1843/Β/2020).
+                    <h3 className="text-sm font-bold mb-2">1. Εισαγωγή</h3>
+                    <p className="text-sm mb-5">Η παρούσα Τεχνική Έκθεση – Βεβαίωση συντάσσεται σύμφωνα με τις διατάξεις του άρθρου 30 του Ν.4495/2017,
+                        το οποίο καθορίζει τις κατηγορίες εργασιών που εκτελούνται χωρίς την απαίτηση έκδοσης οικοδομικής άδειας ή άδειας μικρής κλίμακας.
                     </p>
                     <p className="text-sm">
-                        Το αντικείμενο της παρούσας αφορά ήπιες τεχνικές επεμβάσεις, χωρίς καμία τροποποίηση στον φέροντα οργανισμό ή στα στατικά στοιχεία του κτιρίου.
+                        Οι εργασίες που περιγράφονται είναι ήπιες, αφορούν τη συντήρηση και επισκευή χώρων και δεν επηρεάζουν τον φέροντα οργανισμό ή τα στατικά στοιχεία του κτιρίου.
                     </p>
                 </div>
                 <div>
@@ -146,37 +148,22 @@ export default function F5D17({ allData,
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold mb-2">3. Αναλυτική Περιγραφή Εργασιών</h3>
-                    <p className="text-sm">Οι εργασίες που θα πραγματοποιηθούν είναι οι εξής:</p>
+                    <h3 className="text-sm font-bold mb-2">3. Περιγραφή Εργασιών (Άρθρο 30)
+                    </h3>
+                    <p className="text-sm">Οι εργασίες που θα εκτελεστούν εντάσσονται στις προβλεπόμενες από το άρθρο 30 του Ν.4495/2017. Ενδεικτικά αναφέρονται: </p>
 
                     {Array.isArray(allDescriptionTasks) &&
                         allDescriptionTasks.map((task: any, index: number) => (
                             <div key={index}>
-                                <h3 className="text-sm font-bold">● {task?.id}</h3>
+                                <h3 className="text-sm font-bold">● {task?.label}</h3>
                                 <p className="text-sm mb-6">{task?.description}</p>
                             </div>
                         ))
                     }
-
-                    <p className="text-sm my-6">Οι εργασίες θα υλοποιηθούν σύμφωνα με τους ισχύοντες κανονισμούς και δεν επηρεάζουν τον φέροντα οργανισμό, τα δομικά στοιχεία ή την ενεργή χρήση του ακινήτου.</p>
                 </div>
                 <div>
                     <h3 className="text-sm font-bold mb-2">4. Νομιμότητα / Πολεοδομική Υπόσταση</h3>
                     {technicalDescriptionTwo || "N/A"}
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold mb-2">5. Οικονομικά Στοιχεία – Προϋπολογισμός Έργου</h3>
-                    <p className="text-sm mb-5">Ο συνολικός προϋπολογισμός των προβλεπόμενων <span className="text-sm font-bold">εργασιών είναι μικρότερος του ποσού των είκοσι πέντε χιλιάδων ευρώ (25.000 €),</span>
-                        και δεν απαιτείται τεκμηρίωση υπέρβασης βάσει της παραγράφου 2 του άρθρου 29 του Ν.4495/2017.
-                    </p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold mb-2">6. Συμπεράσματα – Συνοπτική Εκτίμηση</h3>
-                    <p className="text-sm mb-5">Η παρούσα έκθεση συνοδεύει φάκελο έκδοσης Άδειας Μικρής Κλίμακας για εσωτερικές, ήπιες επεμβάσεις, χωρίς στατικές, φέρουσες ή μορφολογικές επιπτώσεις. Το έργο είναι απολύτως συμβατό με το ισχύον νομικό και
-                        τεχνικό πλαίσιο, τεκμηριώνεται πλήρως και η υλοποίησή του εξυπηρετεί σκοπούς συντήρησης, λειτουργικότητας και ενεργειακής αναβάθμισης..
-                    </p>
-                    <p className="text-sm mb-5">Κατόπιν των ανωτέρω, πληρούνται όλες οι προϋποθέσεις έκδοσης Άδειας Μικρής Κλίμακας, σύμφωνα με την κείμενη πολεοδομική νομοθεσία.
-                    </p>
                 </div>
 
                 {/* {/* Signature Section */}

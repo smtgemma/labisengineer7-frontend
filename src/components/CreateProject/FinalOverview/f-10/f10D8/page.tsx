@@ -37,7 +37,7 @@
        };
    
        return (
-           <div className="max-w-[794px] mx-auto bg-[#99cc00] pb-35 p-5">
+           <div className="max-w-[794px] mx-auto bg-[#99cc00] pb-35 p-5 arial">
                {/* <div className="text-right -mt-6">
                    <button
                        className="mt-1 px-4 py-1"

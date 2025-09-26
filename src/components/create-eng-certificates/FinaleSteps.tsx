@@ -16,6 +16,7 @@ import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "sonner";
 import S4D1 from "../CreateProject/FinalOverview/srv-4t/s4D1/page";
 import S4D2 from "../CreateProject/FinalOverview/srv-4t/s4D2/page";
+import S4D3 from "../CreateProject/FinalOverview/srv-4t/s4D3/page";
 import { FormDataOne, FormDataTwo } from "./template";
 export interface UserData {
     id: string;
@@ -65,14 +66,17 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const allTemplate = stepByStepData.selectTemplate;
     const projectCodeId = stepByStepData.projectIdCode;
     const id = stepByStepData?.projectIdCode;
+    // const projectId = stepByStepData?.projectIdCode?.result.id;
     const projectId = stepByStepData?.projectIdCode?.result.id;
     const userId = dataAllFIled?.createdById;
 
     const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
+    console.log(allTemplateData, "alltemplate data====")
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
     const allData = allTemplateData?.data || {};
+    console.log(allData, "finalstep ================finalstep")
     // const buildingMods = subCategoryData["building-modifications"] || [];
     // const energy = subCategoryData["energy-systems"] || [];
     // const fencing = subCategoryData["fencing"] || [];
@@ -89,7 +93,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const modalContentRef = useRef<HTMLDivElement>(null);
 
     const userData = useSelector((state: any) => state.user.userData);
-
+    console.log(stepByStepData)
     console.log(userData, "projectCodeId:", projectCodeId?.result?.projectCode)
     //2. DOWNLOAD CSV FILE
     const downloadCSV = () => {
@@ -264,34 +268,36 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
 
             {/* Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div
-                    onClick={handleCopy}
-                    className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
-                >
-                    <div
-                        title="The click copy user id"
-                        className="flex items-center space-x-4 mb-4"
-                    >
-                        <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                            {/* <FileText className="w-6 h-6 text-yellow-600" /> */}
-                            <FaRegCopy className="w-6 h-6 text-yellow-600" />
+                {allTemplate &&
+                    allTemplate.find((item: { title: string }) => item.title === "Autofill (προαιρετικό add-on)") && (
+                        <div
+                            onClick={handleCopy}
+                            className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
+                        >
+                            <div
+                                title="The click copy user id"
+                                className="flex items-center space-x-4 mb-4"
+                            >
+                                <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                    {/* <FileText className="w-6 h-6 text-yellow-600" /> */}
+                                    <FaRegCopy className="w-6 h-6 text-yellow-600" />
+                                </div>
+                                <div className=" relative ">
+                                    <h3 className="text-lg font-semibold text-gray-900">
+                                        Auto-Fill Government Form
+                                    </h3>
+                                    <p className="text-sm text-gray-500">User and Project id</p>
+                                    {projectHexCode && (
+                                        <p className="text-gray-600 text-sm mt-2 absolute left-0 top-12 ">
+                                            <button className="bg-blue-400 text-white px-4 py-1  rounded hover:bg-blue-700 cursor-pointer">
+                                                {`Id: ${projectHexCode}`}
+                                            </button>
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
                         </div>
-                        <div className=" relative ">
-                            <h3 className="text-lg font-semibold text-gray-900">
-                                Auto-Fill Government Form
-                            </h3>
-                            <p className="text-sm text-gray-500">User and Project id</p>
-                            {projectHexCode && (
-                                <p className="text-gray-600 text-sm mt-2 absolute left-0 top-12 ">
-                                    <button className="bg-blue-400 text-white px-4 py-1  rounded hover:bg-blue-700 cursor-pointer">
-                                        {`Id: ${projectHexCode}`}
-                                    </button>
-                                </p>
-                            )}
-                        </div>
-                    </div>
-                </div>
-
+                    )}
                 {/* fdf */}
 
                 <div
@@ -368,14 +374,21 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
 
                             {/* file 6======== */}
                             {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
-                                <S4D1 formData={formData} setFormData={setFormData} />
+                                // <S4D1 formData={formData} setFormData={setFormData} />
+                                <S4D1 allData={allData} />
                             )}
                             {selected ===
                                 "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
                                     <div>
-                                        {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)}
+                                        {/* {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)} */}
+                                        {<S4D2 allData={allData} />}
                                     </div>
-
+                                )}
+                            {selected ===
+                                "Αρχιτεκτονική Συστήματος" && (
+                                    <div>
+                                        {<S4D3 allData={allData} setIsModalOpen={setIsModalOpen} />}
+                                    </div>
                                 )}
                         </div>
                     </div>

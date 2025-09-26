@@ -68,11 +68,11 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const id = stepByStepData?.projectIdCode;
     const projectId = stepByStepData?.projectIdCode?.result.id;
     const userId = dataAllFIled?.createdById;
-
+    
     const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
-
+    
     const allData = allTemplateData?.data || {};
     // const buildingMods = subCategoryData["building-modifications"] || [];
     // const energy = subCategoryData["energy-systems"] || [];
@@ -368,16 +368,20 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                             </button>
 
                             {/* file 6======== */}
-                            {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
-                                <S4D1 formData={formData} setFormData={setFormData} />
+                            {selected === "Αναλυτικός Προϋπολογισμούς 4495/2017" && (
+                                // <S4D1 formData={formData} setFormData={setFormData} />
+                                <h1>template one</h1>
                             )}
                             {selected ===
-                                "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
+                                "Τεχνική Έκθεση 4495/2017" && (
                                     <div>
-                                        {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)}
+                                        <h1>template two</h1>
+                                        {/* {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)} */}
                                     </div>
-
                                 )}
+                                {selected === "Autofill 1 Credit" && (
+                                <h1>template one</h1>
+                            )}
                         </div>
                     </div>
                 )}
