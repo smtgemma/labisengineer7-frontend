@@ -531,40 +531,40 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               </div>
               {/* file 10======== */}
               <div>
-                {selected === "ten_one" && (
+                {selected === "101" && (
                   <F10D4 allData={allData} /> // 1
                 )}
-                {selected === "ten_two" && (
+                {selected === "102" && (
                   <F10D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
                 )}
-                {selected === "ten_three" && (
+                {selected === "103" && (
                   <F10D6 allData={allData} /> // 3
                 )}
-                {selected === "ten_four" && (
+                {selected === "104" && (
                   <F10D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
                 )}
-                {selected === "ten_five" && (
+                {selected === "105" && (
                   <F10D8 allData={allData} /> // 5
                 )}
-                {selected === "ten_six" && (
+                {selected === "106" && (
                   <F10D9 allData={allData} /> // 6
                 )}
-                {selected === "ten_seven" && (
+                {selected === "107" && (
                   <F10D10 allData={allData} /> // 7
                 )}
-                {selected === "ten_eight" && (
+                {selected === "108" && (
                   <F10D11 allData={allData} /> // 8
                 )}
-                {selected === "ten_nine" && (
+                {selected === "109" && (
                   <F10D12 allData={allData} /> // 9
                 )}
-                {selected === "ten_ten" && (
+                {selected === "1010" && (
                   <F10D13 allData={allData} /> // 10
                 )}
-                {selected === "ten_eleven" && (
+                {selected === "1011" && (
                   <F10D14 allData={allData} /> // 11
                 )}
-                {selected === "ten_tweleve" && (
+                {selected === "1012" && (
                   <F10D15 allData={allData} /> // 12
                 )}
               </div>
@@ -707,7 +707,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
           Save & Continue
         </button>
       </div>
-      {/* <Test allData={allData}/> */}
     </div>
   );
 };

@@ -102,7 +102,7 @@ export default function F8D4({ allData }: { allData: allDataProps }) {
     }
 
     return (
-        <div>
+        <div className="arial">
             {engineers.length > 0 ? (engineers?.map((engineer: any, index: number) => (
                 <div key={index} className="max-w-[796px] mx-auto bg-white">
                     <div className="text-right -mt-3">

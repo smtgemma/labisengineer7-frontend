@@ -43,7 +43,7 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
         const baseTemplates: TemplateName[] = [
             { id: "template_1", title: "Αναλυτικός Προϋπολογισμούς 4495/2017", price: 0.5 },
             { id: "template_2", title: "Τεχνική Έκθεση 4495/2017", price: 0.5 },
-            { id: "autofill_1", title: "Autofill 1 Credit", price: 1 },
+            { id: "autofill", title: "Autofill 1 Credit", price: 1 },
         ];
 
         stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {

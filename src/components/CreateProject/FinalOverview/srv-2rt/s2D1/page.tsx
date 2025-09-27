@@ -21,8 +21,8 @@ interface allDataProps {
   owners: any[]
   projectDescription: string
   propertyPostalCode: string
-  propertyAddress: string
   propertyPlace: string
+  propertyAddress: string
   createdAt: string
 }
 
@@ -42,11 +42,10 @@ interface BudgetCategory {
   subtotal: number
 }
 
-export default function F2D1({ allData }: { allData: allDataProps }) {
+export default function S2D1({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const owner = allData?.owners?.[0] || {}
-  const projectDescription = allData?.projectDescription || "";
-  const { propertyPostalCode, propertyAddress, propertyPlace, createdAt} = allData || {}
+  const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt } = allData || "";
   console.log(allData)
 
   const [formData, setFormData] = useState({
@@ -1217,7 +1216,7 @@ export default function F2D1({ allData }: { allData: allDataProps }) {
 
                   <label className="font-medium w-1/4">Έργο *:</label>
                   <input
-                  placeholder={projectDescription || "Project description"}
+                    placeholder={projectDescription || "Project description"}
                     type="text"
                     {...register("project_description", { required: "This field is required" })}
                     className="flex-1 border p-2 rounded text-sm"
