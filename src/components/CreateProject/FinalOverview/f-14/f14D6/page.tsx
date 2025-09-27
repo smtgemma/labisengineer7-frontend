@@ -3,12 +3,11 @@
 
 "use client"
 import { useState } from "react";
-// import StampComponent from "../../shared/signture/signture";
 import { format } from "date-fns";
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     firstName?: string;
@@ -54,6 +53,8 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
     const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, createdAt, specialty } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -275,10 +276,10 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                     </div>
                                 </div>
                             </div>
-                            {/* common component  */}
-                            {/* <div className="flex items-center justify-end mt-6 p-4">
-                                <StampComponent />
-                            </div> */}
+                            {/* signature  */}
+                            <div className="flex items-center justify-end p-4">
+                                <img src={signature} alt="" />
+                            </div>
                         </div>
                         {/* EDIT MODAL */}
                         {isEditModalOpen && selectedOwnerIndex !== null && (
@@ -489,9 +490,9 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                         )}
                     </div>
                 </div>
-            ))): (
+            ))) : (
                 <h2 className="text-3xl font-bold p-10">Data not found</h2>
-            )} 
+            )}
         </div>
     )
 

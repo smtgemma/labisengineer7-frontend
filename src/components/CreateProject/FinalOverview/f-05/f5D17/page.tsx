@@ -4,9 +4,8 @@ import { useState } from "react"
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import StampComponent from "../../shared/signture/signture"
 import { format } from "date-fns"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 
 
 type F6D13Props = {
@@ -70,6 +69,8 @@ export default function F5D17({ allData,
         },
     })
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
 
     // for editing data 
 
@@ -121,7 +122,7 @@ export default function F5D17({ allData,
 
                 <div className="flex items-center justify-center gap-5">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyNumber || "N/A"}, {municipalityCommunity || "N/A"} {propertyPostalCode || "N/A"}). ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyNumber || "N/A"}, {municipalityCommunity || "N/A"} {propertyPostalCode || "N/A"})</h3>
                 </div>
 
                 <div className="flex items-center justify-center text-sm gap-5">
@@ -201,8 +202,8 @@ export default function F5D17({ allData,
                     </div>
                 </div>
                 {/* Signature */}
-                <div className="mt-6 text-right flex items-center justify-center p-5">
-                    <StampComponent />
+                <div className="mt-2 text-right flex items-center justify-center p-5">
+                    <img src={signature} alt="" />
                 </div>
             </div>
             {/* EDIT MODAL */}

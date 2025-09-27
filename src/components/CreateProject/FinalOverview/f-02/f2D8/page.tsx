@@ -4,9 +4,8 @@ import { useState } from "react"
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import StampComponent from "../../shared/signture/signture"
 import { format } from "date-fns"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 
 
 type F6D13Props = {
@@ -41,6 +40,8 @@ export default function F2D8({ allData,
     //  setIsModalOpen 
 }: F6D13Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
 
     const owner = allData?.owners?.[0] || {}
     const engineers = allData?.engineers || {}
@@ -205,7 +206,7 @@ export default function F2D8({ allData,
                 </div>
                 {/* Signature */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
-                    <StampComponent />
+                    <img src={signature} alt="" />
                 </div>
             </div>
             {/* EDIT MODAL */}

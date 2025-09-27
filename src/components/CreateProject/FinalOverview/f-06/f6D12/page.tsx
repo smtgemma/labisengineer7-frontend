@@ -1,11 +1,10 @@
 "use client"
 import { useState } from "react"
-import StampComponent from "../../shared/signture/signture"
 
-import { FaRegEdit } from "react-icons/fa";
 
 // for editing 
 import { useForm } from "react-hook-form"
+import { useGetMeQuery } from "@/redux/features/templates/allTemplateSlice"
 
 interface FormData {
   owner_name: string
@@ -17,11 +16,11 @@ interface FormData {
 // end editing 
 
 interface allDataProps {
-    owners: any[];
-    projectDescription: string
-    propertyPlace: string
-    propertyAddress: string
-    propertyPostalCode: string
+  owners: any[];
+  projectDescription: string
+  propertyPlace: string
+  propertyAddress: string
+  propertyPostalCode: string
 }
 
 interface BudgetItem {
@@ -43,7 +42,10 @@ export default function F6D12({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const owner = allData?.owners?.[0] || {};
-  const {projectDescription, propertyAddress, propertyPlace, propertyPostalCode} = allData || {}
+  const { projectDescription, propertyAddress, propertyPlace, propertyPostalCode } = allData || {}
+
+  const { data: userData } = useGetMeQuery()
+  const signature = userData?.data?.signature
 
   const [formData, setFormData] = useState({
     employer: "",
@@ -390,7 +392,7 @@ export default function F6D12({ allData }: { allData: allDataProps }) {
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
           <h3 className="flex-1 text-black text-sm">
-            {propertyAddress || "N/A"},  {propertyPlace || "N/A"},  {propertyPostalCode || "N/A"}(FOR BUILDING)
+            {propertyAddress || "N/A"},  {propertyPlace || "N/A"},  {propertyPostalCode || "N/A"}
           </h3>
         </div>
       </div>
@@ -505,11 +507,7 @@ export default function F6D12({ allData }: { allData: allDataProps }) {
         </div>
       </div>
       <div className="flex flex-col items-end">
-        {/* Dashed Border Box = common component */}
-        <StampComponent
-          title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
-          instructions={["Με δεξί κλικ", "Αλλαγή εικόνας", " Βάζετε την σφραγίδα σας"]}
-        />
+        <img src={signature} alt="" className="mb-4" />
         <div>
           <p className="text-center">Ο Συντάξας</p>
         </div>
@@ -537,7 +535,7 @@ export default function F6D12({ allData }: { allData: allDataProps }) {
                 <div className="flex items-center gap-4">
                   <label className="font-medium w-1/4">Εργοδότες *:</label>
                   <input
-                     placeholder={owner?.firstName || "owner_name"}
+                    placeholder={owner?.firstName || "owner_name"}
                     type="text"
                     {...register("owner_name", { required: "This field is required" })}
                     className="flex-1 border p-2 rounded text-sm"

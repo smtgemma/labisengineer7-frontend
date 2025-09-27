@@ -1,12 +1,11 @@
 "use client"
 
 import { useState } from "react";
-import StampComponent from "../../shared/signture/signture";
 import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     bornDate?: string;
@@ -55,6 +54,8 @@ export default function F2D7({ allData }: { allData: allDataProps }) {
     const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -274,7 +275,7 @@ export default function F2D7({ allData }: { allData: allDataProps }) {
                         </div>
                         {/* common component  */}
                         <div className="flex items-center justify-end mt-6 p-4">
-                            <StampComponent />
+                            <img src={signature} alt="" />
                         </div>
                     </div>
                     {/* EDIT MODAL */}

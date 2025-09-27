@@ -1,12 +1,11 @@
 "use client"
 
 import { useState } from "react";
-import StampComponent from "../../shared/signture/signture";
 import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     bornDate?: string;
@@ -55,6 +54,8 @@ export default function F14D8({ allData }: { allData: allDataProps }) {
     const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -263,7 +264,7 @@ export default function F14D8({ allData }: { allData: allDataProps }) {
                                 <div className="text-right space-y-2">
                                     <div className="flex items-center gap-4">
                                         <span className="text-sm">Ημερομηνία :</span>
-                                         <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
                                     </div>
                                     <div className="text-sm mt-8 text-center">
                                         <div>( Υπογραφή )</div>
@@ -272,9 +273,9 @@ export default function F14D8({ allData }: { allData: allDataProps }) {
                                 </div>
                             </div>
                         </div>
-                        {/* common component  */}
-                        <div className="flex items-center justify-end mt-6 p-4">
-                            <StampComponent />
+                        {/* signature  */}
+                        <div className="flex items-center justify-end p-4">
+                            <img src={signature} alt="" />
                         </div>
                     </div>
                     {/* EDIT MODAL */}

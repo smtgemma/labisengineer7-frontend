@@ -3,12 +3,11 @@
 "use client"
 
 import { useState } from "react";
-import StampComponent from "../../shared/signture/signture"
 import { format } from "date-fns"
 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormData {
     projectDescription: string;
@@ -201,6 +200,8 @@ export default function F5D9({ allData,
         },
     ]
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
     const {
         register,
         handleSubmit,
@@ -275,27 +276,26 @@ export default function F5D9({ allData,
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΕΡΓΟ :</span>
-                            <span className="flex-1  font-bold">{projectDescription || "N/A"}</span>
+                            <span className="flex-1 ">{projectDescription || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΔΙΕΥΘΥΝΣΗ :</span>
-                            <span className=" font-bold">{propertyAddress || "N/A"}</span>
-                            <span className=" font-bold">, {propertyPlace || "N/A"}</span>
+                            <span className=" ">{propertyAddress || "N/A"}</span>
+                            <span className=" ">, {propertyPlace || "N/A"}</span>
                             {/* <span className=" font-bold">, TOWN</span> */}
-                            <span className=" font-bold">, {propertyPostalCode || "N/A"}</span>
-                            <span className=" font-bold">FOR BUILDING</span>
+                            <span className=" ">{propertyPostalCode || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΙΔΙΟΚΤΗΤΗΣ :</span>
-                            <span className="flex-1  font-bold">{owner?.firstName || "N/A"} {owner?.lastName}</span>
+                            <span className="flex-1  ">{owner?.firstName || "N/A"} {owner?.lastName}</span>
                         </div>
                         <div className="flex justify-between">
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-center justify-center">
-                                <span className="flex-1  font-bold">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1  font-bold">{specialty || "N/A"}</span>
+                                <span className="flex-1  ">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
+                                <span className="flex-1  ">{specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -400,15 +400,10 @@ export default function F5D9({ allData,
                         <div className="flex justify-start items-start gap-30">
                             <div className="">
                                 <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
-                                {/* Dashed Border Box = common component*/}
-                                <StampComponent
-                                    title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
-                                    instructions={[
-                                        "Με δεξί κλικ",
-                                        "Αλλαγή εικόνας",
-                                        " Βάζετε την σφραγίδα σας",
-                                    ]}
-                                />
+
+                                <div className="flex items-center justify-end p-4">
+                                    <img src={signature} alt="" />
+                                </div>
                             </div>
                             <div className="flex items-center justify-center gap-2">
                                 <span className=" ">Ημερομηνία :</span>
@@ -437,23 +432,22 @@ export default function F5D9({ allData,
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΕΡΓΟ :</span>
-                            <span className="flex-1 font-bold">{projectDescription || "N/A"}</span>
+                            <span className="flex-1">{projectDescription || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΔΙΕΥΘΥΝΣΗ :</span>
-                            <span className=" font-bold">{propertyAddress || "N/A"}</span>
-                            <span className=" font-bold">, {propertyPlace || "N/A"}</span>
+                            <span className=" ">{propertyAddress || "N/A"}</span>
+                            <span className=" ">, {propertyPlace || "N/A"}</span>
                             {/* <span className=" font-bold">, TOWN</span> */}
-                            <span className=" font-bold">, {propertyPostalCode || "N/A"}</span>
-                            <span className=" font-bold">FOR BUILDING</span>
+                            <span className=" ">, {propertyPostalCode || "N/A"}</span>
                         </div>
 
                         <div className="flex justify-start gap-12">
                             <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-start justify-center">
-                                <span className="flex-1  font-bold">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1 font-bold">{specialty || "N/A"}</span>
+                                <span className="flex-1 ">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
+                                <span className="flex-1">{specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -596,15 +590,10 @@ export default function F5D9({ allData,
                     <div className="flex justify-start items-start gap-30">
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
-                            {/* Dashed Border Box = common component*/}
-                            <StampComponent
-                                title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
-                                instructions={[
-                                    "Με δεξί κλικ",
-                                    "Αλλαγή εικόνας",
-                                    " Βάζετε την σφραγίδα σας",
-                                ]}
-                            />
+
+                            <div className="flex items-center justify-end p-4">
+                                <img src={signature} alt="" />
+                            </div>
                         </div>
                         <div className="flex items-center justify-center gap-2">
                             <span className=" ">Ημερομηνία :</span>

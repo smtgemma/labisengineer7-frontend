@@ -6,7 +6,7 @@ import { format } from "date-fns"
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 
 
 interface FormData {
@@ -48,6 +48,8 @@ export default function F2D5({ allData, setIsModalOpen }: F6D5Props) {
     const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
 
     // for editing data 
     const {
@@ -109,7 +111,7 @@ export default function F2D5({ allData, setIsModalOpen }: F6D5Props) {
 
             {/* Project Information */}
             <div className="mb-8 space-y-4">
-                <div className="flex items-start justify-between">
+                <div className="flex items-start gap-24">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
                     <h3 className=" text-sm">{projectDescription || "N/A"}</h3>
                 </div>
@@ -182,15 +184,10 @@ export default function F2D5({ allData, setIsModalOpen }: F6D5Props) {
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>
-                            {/* Dashed Border Box = common component*/}
-                            <StampComponent
-                                title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
-                                instructions={[
-                                    "Με δεξί κλικ",
-                                    "Αλλαγή εικόνας",
-                                    " Βάζετε την σφραγίδα σας",
-                                ]}
-                            />
+                            {/* signature  */}
+                            <div className="flex items-center justify-end p-4">
+                                <img src={signature} alt="" />
+                            </div>
                         </div>
                     </div>
                 </div>

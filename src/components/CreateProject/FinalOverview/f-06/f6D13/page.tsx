@@ -4,14 +4,13 @@ import { useState } from "react"
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import StampComponent from "../../shared/signture/signture"
 import { format } from "date-fns"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 
 
 type F6D13Props = {
-  allData: any;
-  setIsModalOpen: (value: boolean) => void;
+    allData: any;
+    setIsModalOpen: (value: boolean) => void;
 };
 
 interface FormData {
@@ -72,6 +71,8 @@ export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
     } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
 
     // for editing data 
 
@@ -90,7 +91,7 @@ export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
         formData.append("data", JSON.stringify(addNewData))
 
         try {
-            const responsive = await updateProject({projectId: id, userId: createdById, formData}).unwrap()
+            const responsive = await updateProject({ projectId: id, userId: createdById, formData }).unwrap()
             console.log(responsive)
         } catch (error) {
             console.log(error)
@@ -128,7 +129,7 @@ export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
 
                 <div className="flex items-center justify-center gap-5">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyNumber || "N/A"}, {municipalityCommunity || "N/A"} {propertyPostalCode || "N/A"}). ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyNumber || "N/A"}, {municipalityCommunity || "N/A"} {propertyPostalCode || "N/A"})</h3>
                 </div>
 
                 <div className="flex items-center justify-center text-sm gap-5">
@@ -209,7 +210,7 @@ export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
                 </div>
                 {/* Signature */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
-                    <StampComponent />
+                    <img src={signature} alt="" />
                 </div>
             </div>
             {/* EDIT MODAL */}

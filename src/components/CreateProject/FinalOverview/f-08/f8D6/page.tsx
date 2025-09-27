@@ -94,7 +94,7 @@ function F8D6({ allData }: { allData: allDataProps }) {
                             <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
                                 <label className="col-span-2 ">Θέση:</label>
                                 <div className="col-span-10">
-                                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING)</h3>
+                                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"}</h3>
                                 </div>
                             </div>
 
@@ -104,7 +104,7 @@ function F8D6({ allData }: { allData: allDataProps }) {
                                     Εμείς οι κάτωθι υπογεγραμμένοι, συνιδιοκτήτες της πολυκατοικίας επί της οδού
                                 </p>
                                 <h3>
-                                    <span className="text-sm font-semibold">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING)</span>
+                                    <span className="text-sm font-semibold">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"}</span>
                                 </h3>
                                 <p>
                                     δηλώνουμε υπεύθυνα και ρητά συναινούμε στην εκτέλεση των παρακάτω εργασιών:</p>

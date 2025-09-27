@@ -1,12 +1,11 @@
 "use client"
 
-import StampComponent from "../../shared/signture/signture"
 import { format } from "date-fns"
 
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 import { useState } from "react";
 
 interface FormData {
@@ -50,6 +49,8 @@ export default function F5D7({ allData, setIsModalOpen }: F6D5Props) {
 
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
 
     // for editing data 
     const {
@@ -121,7 +122,7 @@ export default function F5D7({ allData, setIsModalOpen }: F6D5Props) {
                     <span className=" text-sm">Θέση:</span>
                     <h3 className=" text-sm">
                         {propertyAddress || "N/A"}, {propertyPlace || "N/A"},
-                        {propertyPostalCode || "N/A"} ( FOR BUILDING)
+                        {propertyPostalCode || "N/A"} 
                     </h3>
                 </div>
 
@@ -199,15 +200,9 @@ export default function F5D7({ allData, setIsModalOpen }: F6D5Props) {
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>
-                            {/* Dashed Border Box = common component*/}
-                            <StampComponent
-                                title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
-                                instructions={[
-                                    "Με δεξί κλικ",
-                                    "Αλλαγή εικόνας",
-                                    " Βάζετε την σφραγίδα σας",
-                                ]}
-                            />
+                            <div className="flex items-center justify-end p-4">
+                                <img src={signature} alt="" />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,11 +1,9 @@
 "use client"
 import { useState } from "react"
-import StampComponent from "../../shared/signture/signture"
-
-import { FaRegEdit } from "react-icons/fa";
 
 // for editing 
 import { useForm } from "react-hook-form"
+import { useGetMeQuery } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormData {
   owner_name: string
@@ -50,6 +48,8 @@ export default function F5D8({ allData }: { allData: allDataProps }) {
   const owner = allData?.owners?.[0] || {};
   const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress } = allData || {}
 
+  const { data: userData } = useGetMeQuery()
+  const signature = userData?.data?.signature
 
   const [formData, setFormData] = useState({
     employer: "",
@@ -511,11 +511,10 @@ export default function F5D8({ allData }: { allData: allDataProps }) {
         </div>
       </div>
       <div className="flex flex-col items-end">
-        {/* Dashed Border Box = common component */}
-        <StampComponent
-          title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
-          instructions={["Με δεξί κλικ", "Αλλαγή εικόνας", " Βάζετε την σφραγίδα σας"]}
-        />
+
+        <div className="flex items-center justify-end p-4">
+          <img src={signature} alt="" />
+        </div>
         <div>
           <p className="text-center">Ο Συντάξας</p>
         </div>

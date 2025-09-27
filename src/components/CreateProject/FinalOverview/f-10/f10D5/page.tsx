@@ -1,13 +1,12 @@
 "use client"
 
-import StampComponent from "../../shared/signture/signture"
 import { FaRegEdit } from "react-icons/fa";
 
 import { format } from "date-fns";
 
 // for editing 
 import { useForm, Controller } from "react-hook-form"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 import { useState } from "react";
 
 
@@ -46,6 +45,8 @@ export default function F10D5({ allData, setIsModalOpen }: F6D5Props) {
 
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -114,7 +115,7 @@ export default function F10D5({ allData, setIsModalOpen }: F6D5Props) {
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"}</h3>
                 </div>
 
                 <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
@@ -125,7 +126,7 @@ export default function F10D5({ allData, setIsModalOpen }: F6D5Props) {
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">Description for building/ {horizontalPropertyName || "N/A"}</span> επί της οδού <br /> <span className="font-semibold">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING),</span>
+                <p>Στο ακίνητο <span className="font-semibold">Description for building/ {horizontalPropertyName || "N/A"}</span> επί της οδού <br /> <span className="font-semibold">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"}</span>
                     πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
 
@@ -191,15 +192,10 @@ export default function F10D5({ allData, setIsModalOpen }: F6D5Props) {
                         </div>
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>
-                            {/* Dashed Border Box = common component*/}
-                            <StampComponent
-                                title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
-                                instructions={[
-                                    "Με δεξί κλικ",
-                                    "Αλλαγή εικόνας",
-                                    " Βάζετε την σφραγίδα σας",
-                                ]}
-                            />
+
+                            <div className="flex items-center justify-end p-4">
+                                <img src={signature} alt="" />
+                            </div>
                         </div>
                     </div>
                 </div>

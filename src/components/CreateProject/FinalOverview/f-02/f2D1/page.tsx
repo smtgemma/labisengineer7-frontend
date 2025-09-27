@@ -1,12 +1,11 @@
 
 "use client"
 import { useState } from "react"
-import StampComponent from "../../shared/signture/signture"
-// import { FaRegEdit } from "react-icons/fa";
 import { format } from "date-fns"
 
 // for editing 
 import { useForm } from "react-hook-form"
+import { useGetMeQuery } from "@/redux/features/templates/allTemplateSlice"
 
 interface FormData {
   owner_name: string
@@ -46,7 +45,7 @@ export default function F2D1({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const owner = allData?.owners?.[0] || {}
   const projectDescription = allData?.projectDescription || "";
-  const { propertyPostalCode, propertyAddress, propertyPlace, createdAt} = allData || {}
+  const { propertyPostalCode, propertyAddress, propertyPlace, createdAt } = allData || {}
   console.log(allData)
 
   const [formData, setFormData] = useState({
@@ -1028,6 +1027,9 @@ export default function F2D1({ allData }: { allData: allDataProps }) {
   const grandTotal = categories.reduce((sum, category) => sum + category.subtotal, 0)
   const finalTotal = grandTotal + formData.unforeseen
 
+  const { data: userData } = useGetMeQuery()
+  const signature = userData?.data?.signature
+
   // for editing data 
   const {
     register,
@@ -1070,7 +1072,7 @@ export default function F2D1({ allData }: { allData: allDataProps }) {
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className="flex-1 text-black text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} (FOR BUILDING)</h3>
+          <h3 className="flex-1 text-black text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"}</h3>
         </div>
       </div>
       {/* Budget Title */}
@@ -1172,16 +1174,9 @@ export default function F2D1({ allData }: { allData: allDataProps }) {
         </div>
       </div>
 
-      <div className="flex flex-col items-end">
-        {/* Dashed Border Box = common component */}
-        <StampComponent
-          title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
-          instructions={[
-            "Με δεξί κλικ",
-            "Αλλαγή εικόνας",
-            " Βάζετε την σφραγίδα σας",
-          ]}
-        />
+      {/* signature  */}
+      <div className="flex items-center justify-end p-4">
+        <img src={signature} alt="" />
       </div>
       {/* EDIT MODAL */}
       {isEditModalOpen && (
@@ -1217,7 +1212,7 @@ export default function F2D1({ allData }: { allData: allDataProps }) {
 
                   <label className="font-medium w-1/4">Έργο *:</label>
                   <input
-                  placeholder={projectDescription || "Project description"}
+                    placeholder={projectDescription || "Project description"}
                     type="text"
                     {...register("project_description", { required: "This field is required" })}
                     className="flex-1 border p-2 rounded text-sm"

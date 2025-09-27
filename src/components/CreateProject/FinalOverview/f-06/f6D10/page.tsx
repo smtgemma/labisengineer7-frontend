@@ -1,12 +1,11 @@
 "use client"
 
 import { useState } from "react";
-import StampComponent from "../../shared/signture/signture";
 import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     bornDate?: string;
@@ -57,6 +56,8 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
 
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -251,7 +252,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
+                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"}</p>
                             <p>
                                 από την ανάλυση του συνόλου των προβλεπόμενων εργασιών προκύπτει <span className="font-bold">ότι δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία του οργανισμού του κτιρίου.</span>
                                 Οι εργασίες περιορίζονται αποκλειστικά σε μη φέροντα στοιχεία και δεν επηρεάζουν καθ’ οποιονδήποτε τρόπο την ευστάθεια, φέρουσα ικανότητα ή δομική λειτουργία του κτιρίου.
@@ -274,9 +275,9 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                 </div>
                             </div>
                         </div>
-                        {/* common component  */}
-                        <div className="flex items-center justify-end mt-6 p-4">
-                            <StampComponent />
+                        {/* signature  */}
+                        <div className="flex items-center justify-end p-4">
+                            <img src={signature} alt="" />
                         </div>
                     </div>
                     {/* EDIT MODAL */}
