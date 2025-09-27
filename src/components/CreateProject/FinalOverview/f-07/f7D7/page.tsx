@@ -7,8 +7,7 @@ import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
-// import StampComponent from "../../../shared/signture/signture";
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     firstName?: string;
@@ -53,6 +52,8 @@ export default function F7D7({ allData }: { allData: allDataProps }) {
     const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -118,9 +119,7 @@ export default function F7D7({ allData }: { allData: allDataProps }) {
                         {/* Header with coat of arms */}
                         <div className="text-center mb-6">
                             <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
-                                <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-                                    <div className="w-8 h-8 bg-white rounded-sm"></div>
-                                </div>
+                                <img src="/templateLogo/templateLogo.jpg" alt="Template Logo" />
                             </div>
                             <h1 className="text-xl font-bold mb-2">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ</h1>
                             <p className="text-sm">(άρθρο 8 Ν.1599/1986)</p>
@@ -276,7 +275,7 @@ export default function F7D7({ allData }: { allData: allDataProps }) {
                             </div>
                             {/* common component  */}
                             <div className="flex items-center justify-end mt-6 p-4">
-                                {/* <StampComponent /> */}
+                                <img src={signature} alt="" />
                             </div>
                         </div>
                         {/* EDIT MODAL */}

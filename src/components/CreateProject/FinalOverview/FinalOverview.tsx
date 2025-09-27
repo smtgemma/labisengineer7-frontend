@@ -26,7 +26,6 @@ import {
 
 import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "sonner";
-import F6D11 from "./f-06/f6D11/page";
 import F6D12 from "./f-06/f6D12/page";
 import F6D5 from "./f-06/f6D5/page";
 import F6D6 from "./f-06/f6D6/page";
@@ -76,8 +75,6 @@ import F14D4 from "./f-14/f14D4/page";
 import F14D5 from "./f-14/f14D5/page";
 import F14D6 from "./f-14/f14D6/page";
 import F14D7 from "./f-14/f14D7/page";
-import F14D9 from "./f-14/f14D8/page";
-import F14D8 from "./f-14/f14D8/page";
 import F14D10 from "./f-14/f14D10/page";
 import F14D11 from "./f-14/f14D11/page";
 import F14D12 from "./f-14/f14D12/page";
@@ -97,6 +94,8 @@ import F8D4 from "./f-08/f8D4/page";
 import F8D5 from "./f-08/f8D5/page";
 import F8D6 from "./f-08/f8D6/page";
 import F8D7 from "./f-08/f8D7/page";
+import F14D8 from "./f-14/f14D8/page";
+import F14D9 from "./f-14/f14D9/page";
 
 export interface UserData {
   id: string;

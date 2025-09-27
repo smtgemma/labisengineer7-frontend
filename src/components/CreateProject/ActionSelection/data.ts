@@ -176,52 +176,52 @@ export const templateName1: Record<string, TemplateName[]> = {
     ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10: [
         {
             id: "101",
-            title: "ten_one",
+            title: "Αναλυτικός Προϋπολογισμός Εργασιών",
             price: 0.5,
         },
         {
             id: "102",
-            title: "ten_two",
+            title: "Πίνακας 3 (ΙΚΑ)",
             price: 0.5,
         },
         {
             id: "103",
-            title: "ten_three",
+            title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
             price: 0.5,
         },
         {
             id: "104",
-            title: "ten_four",
+            title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
             price: 0.5,
         },
         {
             id: "105",
-            title: "ten_five",
+            title: "ΥΔ Ανάθεσης Ιδιοκτήτη",
             price: 0.5,
         },
         {
             id: "106",
-            title: "ten_six",
+            title: "ΥΔ Ανάληψης Έργου Μηχανικού",
             price: 0.5,
         },
         {
             id: "107",
-            title: "ten_seven",
+            title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού",
             price: 0.5,
         },
         {
             id: "108",
-            title: "ten_eight",
+            title: "ΥΔ Μηχανικού Φέρων Οργανισμού",
             price: 0.5,
         },
         {
             id: "109",
-            title: "ten_nine",
+            title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών",
             price: 0.5,
         },
         {
             id: "1010",
-            title: "ten_ten",
+            title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού",
             price: 0.5,
         },
         {
@@ -232,6 +232,11 @@ export const templateName1: Record<string, TemplateName[]> = {
         {
             id: "1012",
             title: "ten_tweleve",
+            price: 0.5,
+        },
+        {
+            id: "autofill",
+            title: "Autofill (προαιρετικό add-on)",
             price: 0.5,
         },
 

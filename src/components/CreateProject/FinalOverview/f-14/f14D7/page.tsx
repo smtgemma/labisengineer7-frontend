@@ -123,9 +123,7 @@ export default function F14D7({ allData }: { allData: allDataProps }) {
                     {/* Header with coat of arms */}
                     <div className="text-center mb-6">
                         <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
-                            <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-                                <div className="w-8 h-8 bg-white rounded-sm"></div>
-                            </div>
+                            <img src="/templateLogo/templateLogo.jpg" alt="Template Logo" />
                         </div>
                         <h1 className="text-xl font-bold mb-2">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ</h1>
                         <p className="text-sm">(άρθρο 8 Ν.1599/1986)</p>

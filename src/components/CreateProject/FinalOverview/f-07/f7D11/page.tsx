@@ -4,14 +4,13 @@ import { useState } from "react"
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import StampComponent from "../../shared/signture/signture"
 import { format } from "date-fns"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 
 
 type F6D13Props = {
     allData: any;
-      setIsModalOpen: (value: boolean) => void;
+    setIsModalOpen: (value: boolean) => void;
 };
 
 interface FormData {
@@ -38,7 +37,7 @@ interface FormData {
 
 
 export default function F7D11({ allData,
-     setIsModalOpen 
+    setIsModalOpen
 }: F6D13Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -72,6 +71,8 @@ export default function F7D11({ allData,
     })
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
 
     // for editing data 
     const onSubmit = async (data: FormData) => {
@@ -205,7 +206,7 @@ export default function F7D11({ allData,
                 </div>
                 {/* Signature */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
-                    <StampComponent />
+                    <img src={signature} alt="" />
                 </div>
             </div>
             {/* EDIT MODAL */}
