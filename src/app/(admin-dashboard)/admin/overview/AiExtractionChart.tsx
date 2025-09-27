@@ -1,5 +1,13 @@
+"use client";
 import React, { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  ResponsiveContainer,
+  ReferenceLine,
+} from "recharts";
 import {
   ChevronDown,
   TrendingUp,
@@ -7,7 +15,6 @@ import {
   Briefcase,
   FileText,
   Cpu,
-  Calendar,
 } from "lucide-react";
 
 // Chart data
@@ -70,8 +77,8 @@ const AiExtractionChart: React.FC = () => {
   const [selectedChart, setSelectedChart] = useState("AI Extraction Activity");
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="py-6">
+      <div>
         {/* Status Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
           {statusCards.map((card, index) => (
@@ -172,6 +179,15 @@ const AiExtractionChart: React.FC = () => {
                   domain={["dataMin - 20", "dataMax + 20"]}
                   tickCount={6}
                 />
+
+                {/* Horizontal Reference Lines */}
+                <ReferenceLine y={190} stroke="#D1D5DB" strokeDasharray="4 4" />
+                <ReferenceLine y={230} stroke="#D1D5DB" strokeDasharray="4 4" />
+                <ReferenceLine y={270} stroke="#D1D5DB" strokeDasharray="4 4" />
+                <ReferenceLine y={310} stroke="#D1D5DB" strokeDasharray="4 4" />
+                <ReferenceLine y={350} stroke="#D1D5DB" strokeDasharray="4 4" />
+                <ReferenceLine y={370} stroke="#D1D5DB" strokeDasharray="4 4" />
+
                 <Line
                   type="monotone"
                   dataKey="value"
