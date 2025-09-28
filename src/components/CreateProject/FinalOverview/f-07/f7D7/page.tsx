@@ -100,7 +100,7 @@ export default function F7D7({ allData }: { allData: allDataProps }) {
     }
 
     return (
-        <div>
+        <div className="arial">
             {allData?.owners ? (allData?.owners?.map((owner: any, index: number) => (
                 <div key={index} className="max-w-[796px] mx-auto bg-white mb-16">
                     <div className="max-w-[796px] mx-auto bg-white">

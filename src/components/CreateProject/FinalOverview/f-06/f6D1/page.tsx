@@ -1042,7 +1042,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
   }
 
   return (
-    <div className="max-w-[794px] mx-auto p-4 bg-white">
+    <div className="max-w-[794px] mx-auto p-4 bg-white arial">
       {/* <div className="text-right -mt-7">
         <button
           className="mt-1 px-4 py-1"

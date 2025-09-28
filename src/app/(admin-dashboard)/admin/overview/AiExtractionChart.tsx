@@ -8,14 +8,9 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
-import {
-  ChevronDown,
-  TrendingUp,
-  Users,
-  Briefcase,
-  FileText,
-  Cpu,
-} from "lucide-react";
+import { Briefcase, ChevronDown, Cpu } from "lucide-react";
+import { useState } from "react";
+import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 import Loading from "@/components/Others/Loading";
 import {

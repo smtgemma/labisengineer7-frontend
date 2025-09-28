@@ -51,7 +51,7 @@ export const templateName1: Record<string, TemplateName[]> = {
             price: 0.5,
         },
         {
-            id: "77",
+            id: "57",
             title: "ΥΔ Ανάθεσης Ιδιοκτήτη",
             price: 0.5,
         },
@@ -81,7 +81,7 @@ export const templateName1: Record<string, TemplateName[]> = {
             price: 0.5,
         },
         {
-            id: "autofill_16",
+            id: "autofill",
             title: "Autofill (προαιρετικό add-on)",
             price: 1,
         },
@@ -105,68 +105,68 @@ export const templateName1: Record<string, TemplateName[]> = {
             price: 0.5,
         },
         {
-            id: "65",
+            id: "64",
             title: "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου",
             price: 1,
         },
         {
-            id: "66",
+            id: "65",
             title: "Αναλυτικός Προϋπολογισμός Εργασιών",
             price: 0.5,
         },
         {
-            id: "67",
+            id: "66",
             title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
             price: 1,
         },
         {
-            id: "68",
+            id: "67",
             title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
             price: 0.5,
         },
         {
-            id: "69",
+            id: "68",
             title: "Πίνακας 3",
             price: 0.5,
         },
         {
-            id: "610",
+            id: "69",
             title:
                 "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας",
             price: 0.5,
         },
         {
-            id: "611",
+            id: "610",
             title:
                 "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας",
             price: 0.5,
         },
         {
-            id: "612",
+            id: "611",
             title:
                 "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων",
             price: 0.5,
         },
         {
-            id: "613",
+            id: "612",
             title:
                 "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης",
             price: 0.5,
         },
         {
-            id: "614",
+            id: "613",
             title:
                 "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης",
             price: 0.5,
         },
         {
-            id: "615",
+            id: "614",
             title:
                 "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών",
             price: 0.5,
         },
         {
-            id: "autofill_16",
+            id: "autofill",
             title: "Autofill (προαιρετικό add-on)",
             price: 1,
         },
@@ -241,57 +241,62 @@ export const templateName1: Record<string, TemplateName[]> = {
     ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΕΡΜΟΠΡΟΖΩΗΣ_7: [
         {
             id: "71",
-            title: "seven_one",
+            title: "Αναλυτικός Προϋπολογισμός Εργασιών",
             price: 0.5,
         },
         {
             id: "72",
-            title: "seven_two",
+            title: "Βεβαίωση-ΥΔ Μηχανικού Για Τήρηση Όψεων Και Πολεοδομικών Διατάξεων",
             price: 0.5,
         },
         {
             id: "73",
-            title: "seven_three",
+            title: "Ενημερωτικό Σημείωμα Μη Απαίτησης Συναίνεσης Συνιδιοκτητών",
             price: 0.5,
         },
         {
             id: "74",
-            title: "seven_four",
+            title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων",
             price: 0.5,
         },
         {
             id: "75",
-            title: "seven_five",
+            title: "Πίνακας 3 (ΙΚΑ)",
             price: 0.5,
         },
         {
             id: "76",
-            title: "seven_six",
+            title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
             price: 0.5,
         },
         {
             id: "77",
-            title: "seven_seven",
+            title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
             price: 0.5,
         },
         {
             id: "78",
-            title: "seven_eight",
+            title: "ΥΔ Ανάθεσης Ιδιοκτήτη",
             price: 0.5,
         },
         {
             id: "79",
-            title: "seven_nine",
+            title: "ΥΔ Ανάληψης Έργου Μηχανικού",
             price: 0.5,
         },
         {
             id: "710",
-            title: "seven_ten",
+            title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού",
             price: 0.5,
         },
         {
             id: "711",
-            title: "seven_eleven",
+            title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών",
+            price: 0.5,
+        },
+        {
+            id: "autofill",
+            title: "Autofill (προαιρετικό add-on)",
             price: 0.5,
         },
 
@@ -301,145 +306,165 @@ export const templateName1: Record<string, TemplateName[]> = {
     ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14: [
         {
             id: "141",
-            title: "fourteen_one",
+            title: "Αναλυτικός Προϋπολογισμός Εργασιών",
             price: 0.5,
         },
         {
             id: "142",
-            title: "fourteen_two",
+            title: "Πίνακας 3 (ΙΚΑ)",
             price: 0.5,
         },
         {
             id: "143",
-            title: "fourteen_three",
+            title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
             price: 0.5,
         },
         {
             id: "144",
-            title: "fourteen_four",
+            title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
             price: 0.5,
         },
         {
             id: "145",
-            title: "fourteen_five",
+            title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη",
             price: 0.5,
         },
         {
             id: "146",
-            title: "fourteen_six",
+            title: "ΥΔ Ανάθεσης Ιδιοκτήτη",
             price: 0.5,
         },
         {
             id: "147",
-            title: "fourteen_seven",
+            title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού",
             price: 0.5,
         },
         {
             id: "148",
-            title: "fourteen_eight",
+            title: "ΥΔ Ανάληψης Έργου Μηχανικού",
             price: 0.5,
         },
         {
             id: "149",
-            title: "fourteen_nine",
+            title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού",
             price: 0.5,
         },
         {
             id: "1410",
-            title: "fourteen_ten",
+            title: "ΥΔ Μηχανικού Φέρων Οργανισμού",
             price: 0.5,
         },
         {
             id: "1411",
-            title: "fourteen_eleven",
+            title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών",
             price: 0.5,
         },
         {
             id: "1412",
-            title: "fourteen_tweleve",
+            title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού",
             price: 0.5,
         },
+        {
+            id: "autofill",
+            title: "Autofill (προαιρετικό add-on)",
+            price: 0.5,
+        },
+
+
+
+
+
 
     ],
     // subcategory 2
     ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2: [
         {
             id: "21",
-            title: "two_one",
+            title: "Αναλυτικός Προϋπολογισμός Εργασιών",
             price: 0.5,
         },
         {
             id: "22",
-            title: "two_two",
+            title: "Πίνακας 3 (ΙΚΑ)",
             price: 0.5,
         },
         {
             id: "23",
-            title: "two_three",
+            title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
             price: 0.5,
         },
         {
             id: "24",
-            title: "two_four",
+            title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)",
             price: 0.5,
         },
         {
             id: "25",
-            title: "two_five",
+            title: "Τεχνική Έκθεση_ Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020",
             price: 0.5,
         },
         {
             id: "26",
-            title: "two_six",
+            title: "ΥΔ Ανάθεσης Ιδιοκτήτη",
             price: 0.5,
         },
         {
             id: "27",
-            title: "two_seven",
+            title: "ΥΔ Ανάληψης Έργου Μηχανικού",
             price: 0.5,
         },
         {
             id: "28",
-            title: "two_eight",
+            title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού",
+            price: 0.5,
+        },
+        {
+            id: "autofill",
+            title: "Autofill (προαιρετικό add-on)",
             price: 0.5,
         },
 
     ],
-    // subcategory 
-    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΚΟΙΝΗ_ΔΡΑΣΗ_ΕΝΤΟΣ_ΟΙΚΟΠΕΔΟΥ_8:[
+    // subcategory 8
+    ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΚΟΙΝΗ_ΔΡΑΣΗ_ΕΝΤΟΣ_ΟΙΚΟΠΕΔΟΥ_8: [
         {
             id: "81",
-            title: "eight_one",
+            title: "Πίνακας 3 (ΙΚΑ)",
             price: 0.5,
         },
         {
             id: "82",
-            title: "eight_two",
+            title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)",
             price: 0.5,
         },
         {
             id: "83",
-            title: "eight_three",
+            title: "ΥΔ Ανάθεσης Ιδιοκτήτη",
             price: 0.5,
         },
         {
             id: "84",
-            title: "eight_four",
+            title: "ΥΔ Ανάληψης Έργου Μηχανικού",
             price: 0.5,
         },
         {
             id: "85",
-            title: "eight_five",
+            title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού",
             price: 0.5,
         },
         {
             id: "86",
-            title: "eight_six",
+            title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών",
             price: 0.5,
         },
         {
             id: "87",
-            title: "eight_seven",
+            title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού",
+            price: 0.5,
+        },
+        {
+            id: "autofill",
+            title: "Autofill (προαιρετικό add-on)",
             price: 0.5,
         },
 

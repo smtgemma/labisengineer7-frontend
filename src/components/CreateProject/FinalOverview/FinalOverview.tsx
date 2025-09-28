@@ -148,28 +148,20 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const id = stepByStepData?.projectIdCode;
   const projectId = stepByStepData?.projectIdCode?.result.id;
   const userId = dataAllFIled?.createdById;
-  console.log(subCategoryData, "..........................................");
+  
 
-  console.log(stepByStepData);
-  console.log(stepByStepData?.projectIdCode?.id);
-  console.log(projectId);
+  console.log(stepByStepData, "all data for template ==========================")
+  console.log(stepByStepData?.projectIdCode?.id)
 
   const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
   const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
   const allData = allTemplateData?.data || {};
-  console.log(allTemplateData, "===============================");
-  console.log(
-    allData,
-    "all data for all template==================================================================="
-  );
+
 
   console.log("pdf", pdfdownload);
   console.log("execl", execlDownload);
-  // console.log(dataAllFIled, "======================dataAllFiled");
-
-  console.log("======================allTemplate,", allTemplate);
 
   const buildingMods = subCategoryData["building-modifications"] || [];
   const energy = subCategoryData["energy-systems"] || [];
@@ -188,7 +180,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const userData = useSelector((state: any) => state.user.userData);
 
-  console.log(userData, "projectCodeId:", projectCodeId?.result?.projectCode);
+  console.log(userData, "projectCodeId:", projectCodeId?.result?.projectCode)
   //2. DOWNLOAD CSV FILE
   const downloadCSV = () => {
     const headers = ["First Name", "Surname", "Father Name", "VAT No"];
@@ -296,6 +288,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   // };
   // 🔹 Click outside handler
 
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -323,7 +316,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       name: "F6D3.pdf",
       component: <F6D8 allData={allData} />,
     },
-  ];
+
+  ]
 
   console.log(selected, "selected==================");
 
@@ -340,11 +334,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* aufil groverment */}
-        {allTemplate &&
-          allTemplate.find(
-            (item: { title: string }) =>
-              item.title === "Autofill (προαιρετικό add-on)"
-          ) && (
+        {
+          allTemplate &&
+          allTemplate.find((item: { id: string }) => item.id === "autofill") && (
             <div
               onClick={handleCopy}
               className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
@@ -372,7 +364,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 </div>
               </div>
             </div>
-          )}
+          )
+        }
         {/* fdf */}
 
         <div
@@ -413,25 +406,27 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
       <div ref={printRef} className="space-y-3">
         <div className="flex items-center flex-wrap gap-3">
-          {allTemplate?.length > 0 ? (
-            allTemplate.map((template: any) => (
-              <div key={template.id}>
-                {template.id !== "autofill_16" && (
-                  <button
-                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                    onClick={() => {
-                      setSelected(template.title);
-                      setIsModalOpen(true);
-                    }}
-                  >
-                    {template.title}
-                  </button>
-                )}
-              </div>
-            ))
-          ) : (
-            <p>No available</p>
-          )}
+          {
+            allTemplate?.length > 0 ? (
+              allTemplate.map((template: any) => (
+                <div key={template.id}>
+                  {template.id !== "autofill" && (
+                    <button
+                      className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                      onClick={() => {
+                        setSelected(template.id);
+                        setIsModalOpen(true);
+                      }}
+                    >
+                      {template.title}
+                    </button>
+                  )}
+                </div>
+              ))
+            ) : (
+              <p>No available</p>
+            )
+          }
         </div>
         {/* Modal */}
         {isModalOpen && (
@@ -450,98 +445,90 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
               {/* file 5======== */}
               <div>
-                {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
+                {selected === "51" && (
                   <F5D6 allData={allData} /> // 1
                 )}
-                {selected === "Ενημερωτικό Σημείωμα Σχεδίων Όψεων" && (
+                {selected === "52" && (
                   <F5D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
                 )}
-                {selected === "Πίνακας 3(ΙΚΑ)" && (
+                {selected === "53" && (
                   <F5D8 allData={allData} /> // 3
                 )}
-                {selected ===
-                  "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
+                {selected === "54" && (
                   <F5D9 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
                 )}
-                {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
+                {selected === "55" && (
                   <F5D10 allData={allData} /> // 5
                 )}
-                {selected === "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη" && (
+                {selected === "56" && (
                   <F5D11 allData={allData} /> // 6
                 )}
-                {selected === "ΥΔ Ανάθεσης Ιδιοκτήτη" && (
+                {selected === "57" && (
                   <F5D12 allData={allData} /> // 7
                 )}
-                {selected === "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού" && (
+                {selected === "58" && (
                   <F5D13 allData={allData} /> // 8
                 )}
-                {selected === "ΥΔ Ανάληψης Έργου Μηχανικού" && (
+                {selected === "59" && (
                   <F5D14 allData={allData} /> // 9
                 )}
-                {selected === "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού" && (
+                {selected === "510" && (
                   <F5D15 allData={allData} /> // 10
                 )}
-                {selected === "Υπόδειγμα Συναίνεσης Συνιδιοκτητών" && (
+                {selected === "511" && (
                   <F5D16 allData={allData} /> // 11
                 )}
-                {selected === "Τεχνική Έκθεση / Βεβαίωση Μηχανικού" && (
+                {selected === "512" && (
                   <F5D17 allData={allData} /> // 12
                 )}
               </div>
-
               {/* file 6======== */}
               <div>
-                {selected === "YΔ Ανάθεσης Ιδιοκτήτη" && (
+                {selected === "61" && (
                   <F6D8 allData={allData} /> // 1
                 )}
-                {selected === "YΔ Ανάληψης Έργου Μηχανικού" && (
-                  <F6D9 allData={allData} /> // 2
-                )}
-                {selected === "YΔ Φέροντα Οργανισμού" && (
-                  <F6D10 allData={allData} /> // 3
-                )}
-                {selected === "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου" && (
+                {selected ===
+                  "62" && (
+                    <F6D9 allData={allData} />// 2
+                  )}
+                {selected ===
+                  "63" && (
+                    <F6D10 allData={allData} /> // 3
+                  )}
+                {selected === "64" && (
                   <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
                 )}
-                {selected === "Αναλυτικός Προϋπολογισμός Εργασιών" && (
+                {selected === "65" && (
                   <F6D1 allData={allData} /> // 5
                 )}
-                {selected ===
-                  "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)" && (
+                {selected === "66" && (
                   <F6D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 6
                 )}
-                {selected === "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)" && (
+                {selected === "67" && (
                   <F6D6 allData={allData} /> // 7
                 )}
-                {selected === "Πίνακας 3" && (
+                {selected === "68" && (
                   <F6D12 allData={allData} /> // 8
                 )}
-                {selected ===
-                  "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας" && (
+                {selected === "69" && (
                   <F6D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 9
                 )}
-                {selected ===
-                  "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας" && (
+                {selected === "610" && (
                   <F6D14 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
                 )}
-                {selected ===
-                  "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων" && (
+                {selected === "611" && (
                   <F6D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
                 )}
-                {selected ===
-                  "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ύδρευσης/Αποχέτευσης" && (
+                {selected === "612" && (
                   <F6D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
                 )}
-                {selected ===
-                  "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης" && (
+                {selected === "613" && (
                   <F6D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 13
                 )}
-                {selected ===
-                  "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών" && (
+                {selected === "614" && (
                   <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 14
                 )}
               </div>
-
               {/* file 10======== */}
               <div>
                 {selected === "ten_one" && (
@@ -581,131 +568,129 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F10D15 allData={allData} /> // 12
                 )}
               </div>
-
-              {/* file seven  */}
+              {/* file 7  */}
               <div>
-                {selected === "seven_one" && (
+                {selected === "71" && (
                   <F7D1 allData={allData} /> // 1
                 )}
-                {selected === "seven_two" && (
+                {selected === "72" && (
                   <F7D2 allData={allData} /> // 2
                 )}
-                {selected === "seven_three" && (
+                {selected === "73" && (
                   <F7D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 3
                 )}
-                {selected === "seven_four" && (
+                {selected === "74" && (
                   <F7D4 allData={allData} /> // 4
                 )}
-                {selected === "seven_five" && (
+                {selected === "75" && (
                   <F7D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
                 )}
-                {selected === "seven_six" && (
+                {selected === "76" && (
                   <F7D6 allData={allData} /> // 6
                 )}
-                {selected === "seven_seven" && (
+                {selected === "77" && (
                   <F7D7 allData={allData} /> // 7
                 )}
-                {selected === "seven_eight" && (
+                {selected === "78" && (
                   <F7D8 allData={allData} /> // 8
                 )}
-                {selected === "seven_nine" && (
+                {selected === "79" && (
                   <F7D9 allData={allData} /> // 9
                 )}
-                {selected === "seven_ten" && (
+                {selected === "710" && (
                   <F7D10 allData={allData} /> // 10
                 )}
-                {selected === "seven_eleven" && (
-                  <F7D11 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
+                {selected === "711" && (
+                  <F7D11 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
                 )}
               </div>
-
-              {/* file fourteen  */}
+              {/* file 14  */}
               <div>
-                {selected === "fourteen_one" && (
+                {selected === "141" && (
                   <F14D1 allData={allData} /> // 1
                 )}
-                {selected === "fourteen_two" && (
+                {selected === "142" && (
                   <F14D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
                 )}
-                {selected === "fourteen_three" && (
+                {selected === "143" && (
                   <F14D3 allData={allData} /> // 3
                 )}
-                {selected === "fourteen_four" && (
+                {selected === "144" && (
                   <F14D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
                 )}
-                {selected === "fourteen_five" && (
+                {selected === "145" && (
                   <F14D5 allData={allData} /> // 5
                 )}
-                {selected === "fourteen_six" && (
+                {selected === "146" && (
                   <F14D6 allData={allData} /> // 6
                 )}
-                {selected === "fourteen_seven" && (
+                {selected === "147" && (
                   <F14D7 allData={allData} /> // 7
                 )}
-                {selected === "fourteen_eight" && (
+                {selected === "148" && (
                   <F14D8 allData={allData} /> // 8
                 )}
-                {selected === "fourteen_nine" && (
+                {selected === "149" && (
                   <F14D9 allData={allData} /> // 9
                 )}
-                {selected === "fourteen_ten" && (
+                {selected === "1410" && (
                   <F14D10 allData={allData} /> // 10
                 )}
-                {selected === "fourteen_eleven" && (
+                {selected === "1411" && (
                   <F14D11 allData={allData} /> // 11
                 )}
-                {selected === "fourteen_tweleve" && (
+                {selected === "1412" && (
                   <F14D12 allData={allData} /> // 12
                 )}
               </div>
-              {/* file two  */}
+              {/* file 2  */}
               <div>
-                {selected === "two_one" && (
+                {selected === "21" && (
                   <F2D1 allData={allData} /> // 1
                 )}
-                {selected === "two_two" && (
+                {selected === "22" && (
                   <F2D2 allData={allData} /> // 2
                 )}
-                {selected === "two_three" && (
+                {selected === "23" && (
                   <F2D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 3
                 )}
-                {selected === "two_four" && (
+                {selected === "24" && (
                   <F2D4 allData={allData} /> // 4
                 )}
-                {selected === "two_five" && (
+                {selected === "25" && (
                   <F2D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
                 )}
-                {selected === "two_six" && (
+                {selected === "26" && (
                   <F2D6 allData={allData} /> // 6
                 )}
-                {selected === "two_seven" && (
+                {selected === "27" && (
                   <F2D7 allData={allData} /> // 7
                 )}
-                {selected === "two_eight" && (
+                {selected === "28" && (
                   <F2D8 allData={allData} /> // 8
                 )}
               </div>
-              {/* file eight  */}
+              {/* file 8  */}
               <div>
-                {selected === "eight_one" && (
+                {selected === "81" && (
                   <F8D1 allData={allData} /> // 1
                 )}
-                {selected === "eight_two" && (
+                {selected === "82" && (
                   <F8D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
                 )}
-                {selected === "eight_three" && (
+                {selected === "83" && (
                   <F8D3 allData={allData} /> // 3
                 )}
-                {selected === "eight_four" && (
+                {selected === "84" && (
                   <F8D4 allData={allData} /> // 4
                 )}
-                {selected === "eight_five" && (
+                {selected === "85" && (
                   <F8D5 allData={allData} /> // 5
                 )}
-                {selected === "eight_six" && (
+                {selected === "86" && (
                   <F8D6 allData={allData} /> // 6
                 )}
-                {selected === "eight_seven" && (
+                {selected === "87" && (
                   <F8D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 7
                 )}
               </div>

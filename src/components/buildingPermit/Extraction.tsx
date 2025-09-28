@@ -52,23 +52,21 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
 
 
 
-    // Timer
-    // const timerControling = () => {
-    //   if (time >= 120) return;
-    //   const timer = setInterval(() => {
-    //     setTime((prev) => prev + 1);
-    //   }, 1000);
 
-    //   return () => clearInterval(timer);
-    // };
+    // const project_descriptions = ["ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ A-4 ΤΟΥ Α' ΟΡΟΦΟΥ", "ΑΛΛΑΓΗ ΧΡΗΣΗΣ ΑΠΟ ΚΑΤΑΣΤΗΜΑ ΣΕ ΚΑΤΟΙΚΙΑ ΣΤΟ A-4"]
 
-    // const minutes = Math.floor(time / 60);
-    // const seconds = time % 60;
-    // const horizontal_property_name = "Εργασίες βάσει του άρθρου 30 του ν.4495 / 2017 στην {{Horizontal_property_name}}"
+    const technical_description = `Πρόκειται για την "horizontal_property_name":, που βρίσκεται σε πολυκατοικία, επί της οδού "property_address","property_number":, στη περιοχή: "property_place" του Δήμου "municipality_community": Χαλάνδρι, ΤΚ "property _postal_code", και έχει υπαχθεί στις περί οριζοντίου ιδιοκτησίας διατάξεις με την υπ΄ αριθμό "number_of_establishment_of_horizontal_ownership" πράξη σύστασης του Συμβολαιογράφου "notary_place / municipality" "notary_establishment_of_horizontal_ownership", σε συνδυασμό με την με αριθμό "reviews_numbers_of_establishment_of_horizontal_ownership": πράξη τροποποίησης Σ.Ο.Ι του Συμβολαιογράφου("notary_reviews_numbers_of_establishment_of_horizontal_ownership": "`
 
-    const technical_description = "Το ακίνητο βρίσκεται {{Within_outside_city_plan}}, συνολικής επιφάνειας {{Area_plot}} τ.μ., είναι καταχωρημένο στο Εθνικό Κτηματολόγιο με ΚΑΕΚ {{Kaek_property}}, στην οδό {{Property_address}} {{Property_number}}, στη θέση {{Place_property}}, στο Δήμο {{Municipality_community}}, με Τ.Κ. {{Property_postal_code}}.Πρόκειται για {{Horizontal_property_name}}, επιφανείας {{Title_area}} τ.μ., η οποία αποτελεί αυτοτελή οριζόντια ιδιοκτησία κατά τις διατάξεις του Ν.3741/1929 και του Ν.Δ. 1024/1971."
+    const technical_description_two = `Η οικοδομή έχει ανεγερθεί σύμφωνα με την υπ΄αριθμόν "permit_number": οικοδομική άδεια της "issuing_authority", και σύμφωνα με την υπ΄ αριθμόν "license_number_revision" αναθεώρηση αυτής, σε οικόπεδο , "within_outside_city_plan", συνολικής επιφάνειας Ε= "plot_area":. Η ως άνω "horizontal_property_name" αποτελεί ιδιοκτησία σε ποσοστό "ownership percentage of the owner "και είδος ιδιοκτησίας, "Owner's type of ownership" κυριότητα, τον "last_name owner 1" "first_name owner 1":  και σε ποσοστό "ownership percentage of the owner "και είδος ιδιοκτησίας "Owner's type of ownership" κυριότητα, την "last_name owner 2" "first_name owner 2" και έχει δηλωθεί στο κτηματολόγιο με αριθμό ΚΑΕΚ "ΚΑΕΚ Property"`
 
-    // const technical_description_two = "Οι περιγραφόμενες εργασίες υπάγονται στις ρητά προβλεπόμενες περιπτώσεις του άρθρου 30 του Ν.4495/2017 και, ως εκ τούτου, δεν απαιτείται έκδοση οικοδομικής άδειας ή άδειας μικρής κλίμακας.Βεβαιώνεται επίσης,  ότι το ακίνητο δεν εμπίπτει σε ειδικό καθεστώς προστασίας, σύμφωνα με τη παρ.2 του άρθρου 30 του Ν.4495/2017, όπως:παραδοσιακό οικισμό, σε χαρακτηρισμένο διατηρητέο κτίριο, σε αρχαιολογική ζώνη, σε δασική έκταση ή σε περιοχή Natura."
+    //     Εγω ο/η (Surname-Name Owner) ο/η οποίος/οποία έχω στην ιδιοκτησία μου την αυτοτελή διηρημένη οριζόντια 
+    // ιδιοκτησία «Horizontal property name/descripsion», που βρίσκεται στον (floor) όροφο πολυκατοικίας στην οδό
+    // (Adrees Property), στο οικοδομικό τετράγωνο (Ο.Τ. Number), στα/στην/στον (Place Property) , του Δήμου (Municipality-City Property)---, με είδος 
+    // ιδιοκτησίας (Owner's type of ownership) ΚΥΡΙΟΤΗΤΑΣ ΚΑΤΑ (
+    // Property ownership percentage )στη διηρημένη ιδιοκτησία, στην οποία αναλογεί 
+    // (percentage of co-ownership of the plot)/1000 ποσοστό συνιδιοκτησίας εξ αδιαιρέτου στο σύνολο του οικοπέδου, εξουσιοδοτώ
+    // τον /την (Surname and Name Engineer User)-(Professional specialty Engineers User) με ΑΜ ΤΕΕ (TEE NUMBER),
+    // create nre var and sent it 
 
 
     const startExtraction = async () => {
@@ -82,23 +80,15 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
         setIsProcessing(true);
         setProgress(0);
         setIsCompleted(false);
-        // timerControling();
-
-        const ktimatologio = uploadedFiles[0];
-        const contract = uploadedFiles[1];
-        const permit = uploadedFiles[2];
-        const Law = uploadedFiles[3];
-
 
         const formData = new FormData();
-        if (ktimatologio) formData.append("file1", ktimatologio);
-        if (contract) formData.append("file2", contract);
-        if (permit) formData.append("file3", permit);
-        if (Law) formData.append("file4", Law);
+        uploadedFiles.forEach((file, index) => {
+            formData.append(`file${index + 1}`, file);
+        });
 
-        // formData.append("horizontal_property_name", JSON.stringify(horizontal_property_name));
+        // formData.append("project_descriptions", JSON.stringify(project_descriptions));
         formData.append("technical_description", JSON.stringify(technical_description));
-        // formData.append("technical_description_two", JSON.stringify(technical_description_two));
+        formData.append("technical_description_two", JSON.stringify(technical_description_two));
 
         try {
             const res = await aiFileUpload(formData).unwrap();
@@ -195,3 +185,20 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
 };
 
 export default AIExtractionFour;
+
+
+// trash
+
+
+// Timer
+// const timerControling = () => {
+//   if (time >= 120) return;
+//   const timer = setInterval(() => {
+//     setTime((prev) => prev + 1);
+//   }, 1000);
+
+//   return () => clearInterval(timer);
+// };
+
+// const minutes = Math.floor(time / 60);
+// const seconds = time % 60;

@@ -24,6 +24,11 @@ export const templateName: TemplateName[] = [
         title: "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ",
         price: 0.5,
     },
+    {
+        id: "technical_assumption_3",
+        title: "Αρχιτεκτονική Συστήματος",
+        price: 0.5,
+    },
 ]
 interface ActionSelectionProps {
     selectedActions: string[];
