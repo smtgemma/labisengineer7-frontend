@@ -6,7 +6,7 @@ export default function page() {
   return (
     <main className="">
       <div className="">
-        <OverviewCards />
+        <SimpleActivityFeedTable />
         <AiExtractionChart />
         <SimpleActivityFeedTable />
       </div>

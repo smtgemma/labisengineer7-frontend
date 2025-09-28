@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import PrimaryButton from '../shared/primaryButton/PrimaryButton';
+import { RootState } from '@/redux/store';
+import { useSelector, useDispatch } from "react-redux";
+import { setQuestionsAnswer } from '@/redux/features/AI-intrigratoin/aiFileDataSlice';
 
 interface Question {
     id: number;
@@ -20,10 +23,10 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
             id: 1,
             text: 'Υπάρχουν αυθαίρετες παραβάσεις/κατασκευές επί κοινοχρήστων χώρων/τμημάτων;',
             options: [
-                { id: '1a', text: 'Ναι, είναι άνω του 2 % και υφίσταται από την ανέγερση της οικοδομής, είναι εντός νομίμου όγκου, έχει παρέλθει δεκαετία μέχρι την έναρξη ισχύος του ν.4495/2017,και δεν έχει εκδοθεί αμετάκλητη δικαστική απόφαση που να διατάσσει την κατεδάφιση.' },
-                { id: '1b', text: 'Ναι, ωστόσο το περίγραμμα της ιδιοκτησίας ταυτίζεται με αυτό της σύστασης οριζοντίου ιδιοκτησίας (Σ.Ο.Ι)' },
-                { id: '1c', text: 'Όχι, είναι κάτω του 2 % ,και συντρέχουν οι προϋποθέσεις του άρθρου 16 παρ. 1 του ν. 5142/2024.' },
-                { id: '1d', text: 'Όχι, δεν υπάρχουν' }
+                { id: 'a', text: 'Ναι, είναι άνω του 2 % και υφίσταται από την ανέγερση της οικοδομής, είναι εντός νομίμου όγκου, έχει παρέλθει δεκαετία μέχρι την έναρξη ισχύος του ν.4495/2017,και δεν έχει εκδοθεί αμετάκλητη δικαστική απόφαση που να διατάσσει την κατεδάφιση.' },
+                { id: 'b', text: 'Ναι, ωστόσο το περίγραμμα της ιδιοκτησίας ταυτίζεται με αυτό της σύστασης οριζοντίου ιδιοκτησίας (Σ.Ο.Ι)' },
+                { id: 'c', text: 'Όχι, είναι κάτω του 2 % ,και συντρέχουν οι προϋποθέσεις του άρθρου 16 παρ. 1 του ν. 5142/2024.' },
+                { id: 'd', text: 'Όχι, δεν υπάρχουν' }
             ],
             selectedOption: null
         },
@@ -31,10 +34,10 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
             id: 2,
             text: 'Υπάρχουν αυθαίρετες παραβάσεις/κατασκευές επί τμημάτων όπου ανήκουν/ ή βρίσκονται σε αποκλειστική χρήση της ιδιοκτησίας και επιφέρουν αύξηση της επιφάνειας άνω του 2% ;',
             options: [
-                { id: '2a', text: 'Ναι, είναι άνω του 2 % και υφίσταται από την ανέγερση της οικοδομής, είναι εντός νομίμου όγκου, έχει παρέλθει δεκαετία μέχρι την έναρξη ισχύος του ν.4495/2017,και δεν έχει εκδοθεί αμετάκλητη δικαστική απόφαση που να διατάσσει την κατεδάφιση.' },
-                { id: '2b', text: 'Ναι, ωστόσο είναι κάτω του 2 % ,και συντρέχουν οι προϋποθέσεις του άρθρου 16 παρ. 1 του ν. 5142/2024.' },
-                { id: '2c', text: 'Ναι, ωστόσο το περίγραμμα της ιδιοκτησίας ταυτίζεται με αυτό της σύστασης οριζοντίου ιδιοκτησίας (Σ.Ο.Ι)' },
-                { id: '2d', text: 'Όχι, δεν υπάρχουν' }
+                { id: 'a', text: 'Ναι, είναι άνω του 2 % και υφίσταται από την ανέγερση της οικοδομής, είναι εντός νομίμου όγκου, έχει παρέλθει δεκαετία μέχρι την έναρξη ισχύος του ν.4495/2017,και δεν έχει εκδοθεί αμετάκλητη δικαστική απόφαση που να διατάσσει την κατεδάφιση.' },
+                { id: 'b', text: 'Ναι, ωστόσο είναι κάτω του 2 % ,και συντρέχουν οι προϋποθέσεις του άρθρου 16 παρ. 1 του ν. 5142/2024.' },
+                { id: 'c', text: 'Ναι, ωστόσο το περίγραμμα της ιδιοκτησίας ταυτίζεται με αυτό της σύστασης οριζοντίου ιδιοκτησίας (Σ.Ο.Ι)' },
+                { id: 'd', text: 'Όχι, δεν υπάρχουν' }
             ],
             selectedOption: null
         },
@@ -42,10 +45,10 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
             id: 3,
             text: 'Υπάρχουν αυθαίρετες παραβάσεις/κατασκευές επί όμορων ιδιοκτησιών;',
             options: [
-                { id: '3a', text: 'Ναι, είναι άνω του 2 % και το περίγραμμα της ιδιοκτησίας δεν ταυτίζεται με αυτό της σύστασης οριζοντίου ιδιοκτησίας (Σ.Ο.Ι)' },
-                { id: '3b', text: 'Ναι, ωστόσο είναι κάτω του 2 % ,και συντρέχουν οι προϋποθέσεις του άρθρου 16 παρ. 1 του ν. 5142/2024.' },
-                { id: '3c', text: 'Ναι, ωστόσο το περίγραμμα της ιδιοκτησίας ταυτίζεται με αυτό της σύστασης οριζοντίου ιδιοκτησίας (Σ.Ο.Ι).' },
-                { id: '3d', text: 'Όχι, δεν υπάρχουν' }
+                { id: 'a', text: 'Ναι, είναι άνω του 2 % και το περίγραμμα της ιδιοκτησίας δεν ταυτίζεται με αυτό της σύστασης οριζοντίου ιδιοκτησίας (Σ.Ο.Ι)' },
+                { id: 'b', text: 'Ναι, ωστόσο είναι κάτω του 2 % ,και συντρέχουν οι προϋποθέσεις του άρθρου 16 παρ. 1 του ν. 5142/2024.' },
+                { id: 'c', text: 'Ναι, ωστόσο το περίγραμμα της ιδιοκτησίας ταυτίζεται με αυτό της σύστασης οριζοντίου ιδιοκτησίας (Σ.Ο.Ι).' },
+                { id: 'd', text: 'Όχι, δεν υπάρχουν' }
             ],
             selectedOption: null
         },
@@ -53,13 +56,15 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
             id: 4,
             text: 'Απαιτείται Μελέτη Στατικής Επάρκειας σύμφωνα με την Υπουργική απόφαση ΥΠΕΝ/ΔΑΟΚΑ/19409/1507/2017 (ΦΕΚ Β 1643/11.05.2018) ;',
             options: [
-                { id: '4a', text: 'Ναι, απαιτείται' },
-                { id: '4b', text: 'Όχι, δεν απαιτείται' }
+                { id: 'a', text: 'Ναι, απαιτείται' },
+                { id: 'b', text: 'Όχι, δεν απαιτείται' }
             ],
             selectedOption: null
         }
     ]);
-
+    const violations = useSelector((state: RootState) => state.aiData.violations);
+    const dispatch = useDispatch();
+    console.log(violations)
     const handleOptionChange = (questionId: number, optionId: string) => {
         setQuestions(prev => prev.map(question => {
             if (question.id === questionId) {
@@ -75,15 +80,15 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
     const handleSaveAndContinue = () => {
         // Create simplified data structure with only question and answer
         const simplifiedData = questions.map(question => ({
-            question: question.text,
+            question: question.id,
             answer: question.selectedOption
-                ? question.options.find(opt => opt.id === question.selectedOption)?.text
+                ? question.options.find(opt => opt.id === question.selectedOption)?.id
                 : null
         }));
 
         // Log the simplified data to console
         console.log("Question Answers Data:", simplifiedData);
-
+        dispatch(setQuestionsAnswer(simplifiedData));
         // Continue to next step
         nextStep();
     };

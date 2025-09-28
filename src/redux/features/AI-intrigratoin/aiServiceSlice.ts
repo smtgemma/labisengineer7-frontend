@@ -61,6 +61,26 @@ const aiServiceApi = baseUrlApi.injectEndpoints({
         },
       }),
     }),
+    posAiAllDataForTwoToSave: build.mutation({
+      query: ({ formData, accessToken }) => ({
+        url: "/project2/create-with-files",
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }),
+    }),
+    postRecordViolation: build.mutation({
+      query: ({ payload, accessToken, id }) => ({
+        url: `/project2/createViolationRecord/${id}`,
+        method: "POST",
+        body: payload,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -72,4 +92,6 @@ export const {
   usePfdToFdfMergeMutation,
   usePosAiAllDataSaveMutation,
   usePostSecondFileAiDataExtractMutation,
+  usePosAiAllDataForTwoToSaveMutation,
+  usePostRecordViolationMutation
 } = aiServiceApi;

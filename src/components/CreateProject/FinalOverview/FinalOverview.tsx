@@ -147,17 +147,18 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const id = stepByStepData?.projectIdCode;
   const projectId = stepByStepData?.projectIdCode?.result.id;
   const userId = dataAllFIled?.createdById;
-  
 
-  console.log(stepByStepData, "all data for template ==========================")
-  console.log(stepByStepData?.projectIdCode?.id)
+  console.log(
+    stepByStepData,
+    "all data for template =========================="
+  );
+  console.log(stepByStepData?.projectIdCode?.id);
 
   const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
   const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
   const allData = allTemplateData?.data || {};
-
 
   console.log("pdf", pdfdownload);
   console.log("execl", execlDownload);
@@ -179,7 +180,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
   const userData = useSelector((state: any) => state.user.userData);
 
-  console.log(userData, "projectCodeId:", projectCodeId?.result?.projectCode)
+  console.log(userData, "projectCodeId:", projectCodeId?.result?.projectCode);
   //2. DOWNLOAD CSV FILE
   const downloadCSV = () => {
     const headers = ["First Name", "Surname", "Father Name", "VAT No"];
@@ -287,7 +288,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   // };
   // 🔹 Click outside handler
 
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -315,8 +315,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       name: "F6D3.pdf",
       component: <F6D8 allData={allData} />,
     },
-
-  ]
+  ];
 
   console.log(selected, "selected==================");
 
@@ -333,9 +332,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* aufil groverment */}
-        {
-          allTemplate &&
-          allTemplate.find((item: { id: string }) => item.id === "autofill") && (
+        {allTemplate &&
+          allTemplate.find(
+            (item: { id: string }) => item.id === "autofill"
+          ) && (
             <div
               onClick={handleCopy}
               className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
@@ -363,13 +363,12 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 </div>
               </div>
             </div>
-          )
-        }
+          )}
         {/* fdf */}
 
         <div
           onClick={handleDownloadPdf}
-          className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
+          className="bg-white border border-blue-400  p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
           <div className="flex items-center space-x-4 mb-4">
             <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
@@ -389,7 +388,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
         <div
           onClick={handleDownloadExecl}
-          className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
+          className="bg-white border border-blue-400 p-6 rounded-lg cursor-pointer hover:shadow-md"
         >
           <div className="flex items-center space-x-4 mb-4">
             <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
@@ -405,33 +404,31 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
       </div>
       <div ref={printRef} className="space-y-3">
         <div className="flex items-center flex-wrap gap-3">
-          {
-            allTemplate?.length > 0 ? (
-              allTemplate.map((template: any) => (
-                <div key={template.id}>
-                  {template.id !== "autofill" && (
-                    <button
-                      className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                      onClick={() => {
-                        setSelected(template.id);
-                        setIsModalOpen(true);
-                      }}
-                    >
-                      {template.title}
-                    </button>
-                  )}
-                </div>
-              ))
-            ) : (
-              <p>No available</p>
-            )
-          }
+          {allTemplate?.length > 0 ? (
+            allTemplate.map((template: any) => (
+              <div key={template.id}>
+                {template.id !== "autofill" && (
+                  <button
+                    className="bg-white border border-blue-400 px-4 py-2 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      setSelected(template.id);
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    {template.title}
+                  </button>
+                )}
+              </div>
+            ))
+          ) : (
+            <p>No available</p>
+          )}
         </div>
         {/* Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
             <div
-              className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-4xl max-h-[80vh] overflow-y-auto relative"
+              className="bg-white p-6 rounded-xl   shadow-lg w-11/12 max-w-4xl max-h-[80vh] overflow-y-auto relative"
               ref={modalContentRef}
             >
               {/* Close Button */}
@@ -486,14 +483,12 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "61" && (
                   <F6D8 allData={allData} /> // 1
                 )}
-                {selected ===
-                  "62" && (
-                    <F6D9 allData={allData} />// 2
-                  )}
-                {selected ===
-                  "63" && (
-                    <F6D10 allData={allData} /> // 3
-                  )}
+                {selected === "62" && (
+                  <F6D9 allData={allData} /> // 2
+                )}
+                {selected === "63" && (
+                  <F6D10 allData={allData} /> // 3
+                )}
                 {selected === "64" && (
                   <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
                 )}
@@ -701,6 +696,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
 
       <div className="flex justify-end">
         <button
+          style={{
+            background:
+              "linear-gradient(46deg, #017AFF 37.44%, #61BDFF 67.11%)",
+          }}
           onClick={onComplete}
           className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
         >

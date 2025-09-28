@@ -1,14 +1,14 @@
 "use client";
 import SimpleAILogTable from "./SimpleAILogTable";
-import AiExtractionChart from "../overview/AiExtractionChart";
 
 import AiStatsCards from "./MonitorCard";
+import AiMertrics from "./AiMeritics";
 
 const page = () => {
   return (
     <div>
       <AiStatsCards />
-      <AiExtractionChart title="AI usage over time" />
+      <AiMertrics />
       <SimpleAILogTable />
     </div>
   );

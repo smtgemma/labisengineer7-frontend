@@ -1,7 +1,12 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import { ChevronDown, FileText, Plus, X } from 'lucide-react';
+import { ChevronDown, Plus, X } from 'lucide-react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import PrimaryButton from '../shared/primaryButton/PrimaryButton';
-
+import { setViolations } from '@/redux/features/AI-intrigratoin/aiFileDataSlice';
+import { usePostRecordViolationMutation } from '@/redux/features/AI-intrigratoin/aiServiceSlice';
+import tokenCatch from '@/lib/token';
+import { toast } from 'sonner';
+import { RootState } from '@/redux/store';
 // Enhanced violations database based on categories
 const violationsDatabase = {
     // Categories 1, 2, 4, 5
@@ -490,7 +495,12 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
 function RecordViolations({ currentStep = 1, nextStep = () => { } }) {
     const [forms, setForms] = useState([{ id: 0 }]);
     const formRefs = React.useRef<Array<{ getFormData: () => any } | null>>([]);
-
+    const [postviolations] = usePostRecordViolationMutation()
+    const accessToken = tokenCatch();
+    const dispatch = useDispatch();
+    const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+    const projectId = stepByStepData?.projectIdCode?.id;
+    console.log(stepByStepData)
     const addForm = () => {
         const newId = forms.length > 0 ? Math.max(...forms.map(f => f.id)) + 1 : 0;
         setForms([...forms, { id: newId }]);
@@ -502,7 +512,7 @@ function RecordViolations({ currentStep = 1, nextStep = () => { } }) {
         }
     };
 
-    const handleSaveAndContinue = () => {
+    const handleSaveAndContinue = async () => {
         // Collect data from all forms
         const allFormData = formRefs.current
             .filter(ref => ref !== null)
@@ -510,9 +520,18 @@ function RecordViolations({ currentStep = 1, nextStep = () => { } }) {
 
         // Log the data to console
         console.log("All Form Data:", allFormData);
-
         // Continue to next step
-        nextStep();
+        try {
+            const res = await postviolations({ payload: allFormData, accessToken, id: projectId }).unwrap();
+            console.log("resposive", res);
+            if (res?.success) {
+                dispatch(setViolations(res?.data));
+                nextStep();
+            }
+        } catch (error: any) {
+            toast.error(error.data.message);
+            console.log(error);
+        }
     };
 
     return (

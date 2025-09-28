@@ -71,6 +71,23 @@ interface Data {
   failed_extractions: number;
   formatted_data: FormattedData;
 }
+interface Question {
+  id: number;
+  text: string;
+  options: {
+    id: string;
+    text: string;
+  }[];
+  selectedOption: string | null;
+}
+interface ViolationRecord {
+  age: string;
+  category: string;
+  formId: number;
+  otherViolation: boolean;
+  showRemainingViolations: string | null;
+  violations: string[];
+}
 
 interface AiExtractState {
   aiDataState?: any;
@@ -88,6 +105,8 @@ interface AiExtractState {
   actionSelection?: any[];
   selectTemplate?: any[];
   projectIdCode?: string | null;
+  violations?: ViolationRecord[]; // 👈 added here
+  question?: ViolationRecord[]; // 👈 added here
 
 }
 
@@ -104,6 +123,8 @@ const initialState: AiExtractState = {
   aiInputData: null,
   actionSelection: [],
   projectIdCode: null,
+  violations: [], // 👈 initialized
+  question: [], // 👈 initialized
 };
 
 const aiExtractDataSlice = createSlice({
@@ -151,6 +172,12 @@ const aiExtractDataSlice = createSlice({
     setAiExtreactAndInputData: (state, action) => {
       state.aiInputData = action.payload;
     },
+    setViolations: (state, action) => {
+      state.violations = action.payload
+    },
+    setQuestionsAnswer: (state, action) => {
+      state.question = action.payload
+    },
     resetAiExtractState: () => initialState,
   },
 });
@@ -168,7 +195,9 @@ export const {
   setMultipleDescription,
   setSelectTemplate,
   setMultipleHorizontalDescription,
-  resetAiExtractState
+  resetAiExtractState,
+  setViolations,
+  setQuestionsAnswer
 } = aiExtractDataSlice.actions;
 
 export default aiExtractDataSlice.reducer;

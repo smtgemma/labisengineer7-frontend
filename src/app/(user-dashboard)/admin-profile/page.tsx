@@ -138,7 +138,7 @@ const AdminProfile = () => {
 
   const { data: planGet } = useGetPlanQuery(token);
 
-  console.log("engreer", engData?.data);
+  console.log("engreer", planGet);
   const engneerData = engData?.data;
 
   useEffect(() => {
@@ -812,7 +812,7 @@ const AdminProfile = () => {
               <div className="flex justify-between items-center">
                 <span className="text-sm font-medium text-gray-700">Plan:</span>
                 <button className="text-primary hover:text-blue-800 text-sm underline">
-                  {planGet?.data?.planName || "No Subscription"}
+                  {planGet?.data?.plan?.planName || "No Subscription"}
                 </button>
               </div>
             </div>

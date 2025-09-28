@@ -7,6 +7,7 @@ import {
   useGetAllUserStatusQuery,
   useUserStatusChangeMutation,
   useUserDeleteMutation,
+  useGetAllUserDashboardQuery,
 } from "@/redux/features/adminOverView/adminUserSlice";
 import Loading from "@/components/Others/Loading";
 import { toast } from "sonner";
@@ -17,10 +18,11 @@ import tokenCatch from "@/lib/token";
 export default function UsersAccountsTable() {
   const token = tokenCatch();
 
-  const { data, isLoading, refetch } = useGetAllUserStatusQuery(token);
+  const { data, isLoading, refetch } = useGetAllUserDashboardQuery(token);
   console.log(data);
   const [updateStatus, { isLoading: statusChangLoading }] =
     useUserStatusChangeMutation();
+
   const [deleteAccount, { isLoading: deleteLoading }] = useUserDeleteMutation();
   const [users, setUsers] = useState([]);
 

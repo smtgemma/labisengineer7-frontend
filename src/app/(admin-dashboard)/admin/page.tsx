@@ -2,15 +2,14 @@ import React from "react";
 import AiStatsCards from "./monitoring/MonitorCard";
 import AiExtractionChart from "./overview/AiExtractionChart";
 import SimpleAILogTable from "./monitoring/SimpleAILogTable";
+import ActivityFeed from "./overview/ActivityFeed";
 
 const page = () => {
   return (
     <div>
-      <AiStatsCards />
-      <AiExtractionChart title="AI usage over time" />
-      <SimpleAILogTable />
+      <AiExtractionChart />
+      <ActivityFeed />
     </div>
   );
 };
-
 export default page;

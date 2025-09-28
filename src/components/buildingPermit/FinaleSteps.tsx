@@ -14,8 +14,8 @@ import {
 
 import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "sonner";
-import { FormDataOne, FormDataTwo } from "./template";
 import PrimaryButton from "../shared/primaryButton/PrimaryButton";
+import { FormDataOne, FormDataTwo } from "./template";
 import S2D1 from "../CreateProject/FinalOverview/srv-2rt/s2D1/page";
 import S2D2 from "../CreateProject/FinalOverview/srv-2rt/s2D2/page";
 export interface UserData {
@@ -58,20 +58,21 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     onComplete,
 }) => {
     const printRef = React.useRef(null);
-    const contentRef = useRef<HTMLDivElement>(null);
     const stepByStepData: any = useSelector((state: RootState) => state.aiData);
-    const allTempate = stepByStepData.actionSelection;
-    const dataAllFIled = stepByStepData.aiInputData;
-    const subCategoryData = stepByStepData.subcategory;
-    const allTemplate = stepByStepData.selectTemplate;
-    const projectCodeId = stepByStepData.projectIdCode;
-    const id = stepByStepData?.projectIdCode;
-    const projectId = stepByStepData?.projectIdCode?.result.id;
-    const userId = dataAllFIled?.createdById;
+    const projectId = stepByStepData?.projectIdCode?.result?.id;
+    const allTempate = stepByStepData?.actionSelection;
+    const violations = stepByStepData?.violations;
+    const question = stepByStepData?.question;
+    const allTemplate = stepByStepData?.selectTemplate;
+    const projectCodeId = stepByStepData?.projectIdCode;
 
     const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
+
+
+
+    console.log(question, violations)
 
     const allData = allTemplateData?.data || {};
     console.log(allData, "======================allData===============allData")
