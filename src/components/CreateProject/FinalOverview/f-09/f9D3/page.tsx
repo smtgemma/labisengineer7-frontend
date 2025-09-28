@@ -1,7 +1,5 @@
 "use client"
 
-import StampComponent from "../../shared/signture/signture"
-
 export default function F9D3() {
 
   return (

@@ -225,16 +225,6 @@ export const templateName1: Record<string, TemplateName[]> = {
             price: 0.5,
         },
         {
-            id: "1011",
-            title: "ten_eleven",
-            price: 0.5,
-        },
-        {
-            id: "1012",
-            title: "ten_tweleve",
-            price: 0.5,
-        },
-        {
             id: "autofill",
             title: "Autofill (προαιρετικό add-on)",
             price: 0.5,

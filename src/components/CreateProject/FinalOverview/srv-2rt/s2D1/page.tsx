@@ -7,6 +7,7 @@ import { format } from "date-fns"
 
 // for editing 
 import { useForm } from "react-hook-form"
+import { useGetMeQuery } from "@/redux/features/templates/allTemplateSlice"
 
 interface FormData {
   owner_name: string
@@ -47,6 +48,10 @@ export default function S2D1({ allData }: { allData: allDataProps }) {
   const owner = allData?.owners?.[0] || {}
   const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt } = allData || "";
   console.log(allData)
+
+
+  const { data: userData } = useGetMeQuery()
+  const signature = userData?.data?.signature
 
   const [formData, setFormData] = useState({
     employer: "",
@@ -1154,7 +1159,10 @@ export default function S2D1({ allData }: { allData: allDataProps }) {
           </div>
           <div className="">
             <h3 className="text-center mb-4">Ο Συντάξας Μηχανικός</h3>
-            <h3 className="text-center mb-4">SIGN ENGINEER</h3>
+            {/* signature  */}
+            <div className="flex items-center justify-end p-4">
+              <img src={signature} alt="" />
+            </div>
           </div>
         </div>
       </div>
@@ -1169,18 +1177,6 @@ export default function S2D1({ allData }: { allData: allDataProps }) {
             stamp and signature of an engineer, he should save it in his profile and display it there or if he doesn't want it for personal data reasons, we put a picture and he changes it
           </p>
         </div>
-      </div>
-
-      <div className="flex flex-col items-end">
-        {/* Dashed Border Box = common component */}
-        <StampComponent
-          title="ΣΦΡΑΓΙΔΑ ΜΗΧΑΝΙΚΟΥ"
-          instructions={[
-            "Με δεξί κλικ",
-            "Αλλαγή εικόνας",
-            " Βάζετε την σφραγίδα σας",
-          ]}
-        />
       </div>
       {/* EDIT MODAL */}
       {isEditModalOpen && (

@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { FormDataOne, FormDataTwo } from "./template";
 import PrimaryButton from "../shared/primaryButton/PrimaryButton";
 import S2D1 from "../CreateProject/FinalOverview/srv-2rt/s2D1/page";
+import S2D2 from "../CreateProject/FinalOverview/srv-2rt/s2D2/page";
 export interface UserData {
     id: string;
     firstName: string;
@@ -73,6 +74,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
     const allData = allTemplateData?.data || {};
+    console.log(allData, "======================allData===============allData")
     // const buildingMods = subCategoryData["building-modifications"] || [];
     // const energy = subCategoryData["energy-systems"] || [];
     // const fencing = subCategoryData["fencing"] || [];
@@ -346,7 +348,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                                         <button
                                             className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                                             onClick={() => {
-                                                setSelected(template.title);
+                                                setSelected(template.id);
                                                 setIsModalOpen(true);
                                             }}
                                         >
@@ -375,20 +377,26 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                                 ✕
                             </button>
 
-                            {selected === "Αναλυτικός Προϋπολογισμούς 4495/2017" && (
+                            {selected === "template_1" && (
                                 <S2D1 allData={allData}/>
                             )}
                             {selected ===
-                                "Τεχνική Έκθεση 4495/2017" && (
+                                "template_2" && (
                                     <div>
-                                        <h1>template two</h1>
+                                       <S2D2 allData={allData}/>
                                     </div>
                                 )}
-                            {selected === "Ανάθεσης Ιδιοκτήτη 4495/2017" && (
-                                <h1>template one</h1>
+                            {selected === "template_3_owner_1" && (
+                                <h1>template_3_owner_1</h1>
                             )}
-                            {selected === "Αυθαιρέτων Ιδιοκτήτη 4495/2017" && (
-                                <h1>template one</h1>
+                            {selected === "template_4_owner_1" && (
+                                <h1>template_4_owner_1</h1>
+                            )}
+                            {selected === "template_3_owner_2" && (
+                                <h1>template_3_owner_2</h1>
+                            )}
+                            {selected === "template_4_owner_2" && (
+                                <h1>template_4_owner_2</h1>
                             )}
                         </div>
                     </div>
