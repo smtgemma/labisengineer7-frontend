@@ -297,11 +297,11 @@ const OwnerSelection = ({
                     togglePropertySelection(property.id, property.description)
                   }
                   key={property.id}
-                  className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
+                  className={`p-6 rounded-lg relative cursor-pointer  transition-all duration-200 border-2 
                   ${
                     selectedProperty.some((item) => item.id === property.id)
-                      ? "border-blue-600 bg-blue-50 shadow-md"
-                      : "border-gray-200 bg-white hover:border-blue-300"
+                      ? "border-blue-700 bg-blue-50 shadow-md"
+                      : "border-blue-400 bg-white hover:border-blue-300"
                   }`}
                 >
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
