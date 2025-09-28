@@ -3,23 +3,17 @@ import { baseUrlApi } from "@/redux/api/baseUrlApi";
 const adminUserApi = baseUrlApi.injectEndpoints({
   endpoints: (build) => ({
     getAllUserStatus: build.query({
-      query: (token) => ({
-        url: "/users",
+      query: () => ({
+        url: "/admin/summary",
         method: "get",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       }),
     }),
 
     // update status and account spent
     userStatusChange: build.mutation({
       query: ({ id, token }) => ({
-        url: `/users/suspend/${id}`,
+        url: `/admin/suspend/${id}`,
         method: "PATCH",
-        headers: {
-          Authorization: `${token}`,
-        },
       }),
     }),
     // delete account
@@ -35,19 +29,16 @@ const adminUserApi = baseUrlApi.injectEndpoints({
 
     // delete account
     getAllUserDashboard: build.query({
-      query: (token) => ({
-        url: `/ai/dashboard`,
+      query: () => ({
+        url: `/admin`,
         method: "get",
-        headers: {
-          Authorization: `${token}`,
-        },
       }),
     }),
 
     // submit logs account
     getAllsubmissionLogs: build.query({
       query: (token) => ({
-        url: `/ai/logs`,
+        url: `/admin/logs`,
         method: "get",
         headers: {
           Authorization: `${token}`,
@@ -66,12 +57,31 @@ const adminUserApi = baseUrlApi.injectEndpoints({
     }),
 
     getMetricsData: build.query({
-      query: (token) => ({
-        url: `/ai/usage-graph`,
+      query: () => ({
+        url: `/admin/last-7-days`,
         method: "get",
-        headers: {
-          Authorization: `${token}`,
-        },
+      }),
+    }),
+
+    // the get activity feed data
+    getActivityFeedData: build.query({
+      query: () => ({
+        url: `/admin/getFeedBack`,
+        method: "get",
+      }),
+    }),
+    // AI/API Monitoring
+    getMonitoringMertricsData: build.query({
+      query: () => ({
+        url: `/admin/aiMonitoring`,
+        method: "get",
+      }),
+    }),
+
+    getAiStatusCard: build.query({
+      query: () => ({
+        url: `/admin/aimonitoringSummary`,
+        method: "get",
       }),
     }),
   }),
@@ -85,4 +95,7 @@ export const {
   useGetMyDocumentPointQuery,
   useGetAllsubmissionLogsQuery,
   useGetMetricsDataQuery,
+  useGetMonitoringMertricsDataQuery,
+  useGetAiStatusCardQuery,
+  useGetActivityFeedDataQuery,
 } = adminUserApi;

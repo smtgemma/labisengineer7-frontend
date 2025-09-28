@@ -57,7 +57,6 @@ const DocumentTable = () => {
   console.log(document);
 
   const handleDownload = (fileUrl: string, fileName: string) => {
-    console.log(fileUrl);
     saveAs(fileUrl, fileName);
   };
 
@@ -88,7 +87,7 @@ const DocumentTable = () => {
                 Uploaded On
               </th>
               <th className="px-4 py-3 text-left text-sm font-medium text-white">
-                Invoice
+                Flie Download
               </th>
             </tr>
           </thead>

@@ -2,7 +2,10 @@
 
 import Loading from "@/components/Others/Loading";
 import tokenCatch from "@/lib/token";
-import { useGetAllUserDashboardQuery } from "@/redux/features/adminOverView/adminUserSlice";
+import {
+  useGetAiStatusCardQuery,
+  useGetAllUserDashboardQuery,
+} from "@/redux/features/adminOverView/adminUserSlice";
 
 type StatCard = {
   title: string;
@@ -10,16 +13,29 @@ type StatCard = {
   percentage: string;
 };
 
-const stats: StatCard[] = [
-  { title: "AI Extractions (Today)", value: "312", percentage: "+2.98%" },
-  { title: "GPT Usage (Tokens)", value: "54,120", percentage: "+2.98%" },
-  { title: "OCR Conversions", value: "178", percentage: "+2.98%" },
-  { title: "Failed AI Tasks", value: "6", percentage: "+2.98%" },
-];
-
 export default function AiStatsCards() {
-  const accessToken = tokenCatch();
-  const { data, isLoading } = useGetAllUserDashboardQuery(accessToken);
+  const { data: StatusData, isLoading } = useGetAiStatusCardQuery("u");
+  if (isLoading) {
+    return <Loading />;
+  }
+  console.log("StatusData", StatusData);
+  const { ocrConversions, gptUsageTokens, failedAITasks, aiExtractions } =
+    StatusData?.data;
+
+  const stats: StatCard[] = [
+    {
+      title: "AI Extractions (Today)",
+      value: aiExtractions,
+      percentage: "+2.98%",
+    },
+    {
+      title: "GPT Usage (Tokens)",
+      value: gptUsageTokens,
+      percentage: "+2.98%",
+    },
+    { title: "OCR Conversions", value: ocrConversions, percentage: "+2.98%" },
+    { title: "Failed AI Tasks", value: failedAITasks, percentage: "+2.98%" },
+  ];
 
   if (isLoading) {
     return <Loading />;
@@ -27,7 +43,7 @@ export default function AiStatsCards() {
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {data?.data.map((card: any, index: number) => (
+      {stats.map((card: any, index: number) => (
         <div
           key={index}
           className="bg-white  p-5 rounded-xl shadow border border-zinc-200"

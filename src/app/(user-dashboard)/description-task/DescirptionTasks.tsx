@@ -285,7 +285,7 @@ const DescriptionTask = () => {
             .map((category) => (
               <div
                 key={category.id}
-                className=" rounded-lg p-2 bg-white border  border-primary"
+                className=" rounded-lg  bg-white border p-5 border-primary"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <h2 className="text-lg font-semibold text-gray-900">
@@ -314,7 +314,7 @@ const DescriptionTask = () => {
             .map((category) => (
               <div
                 key={category.id}
-                className=" rounded-lg p-2 bg-white border  border-primary"
+                className=" rounded-lg p-5 bg-white border  border-primary"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <h2 className="text-lg font-semibold text-gray-900">
