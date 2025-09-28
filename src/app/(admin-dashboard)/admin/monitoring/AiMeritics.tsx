@@ -7,6 +7,8 @@ import {
   YAxis,
   ResponsiveContainer,
   ReferenceLine,
+  Tooltip,
+  CartesianGrid, // ✅ Added
 } from "recharts";
 import {
   ChevronDown,
@@ -18,74 +20,23 @@ import {
 } from "lucide-react";
 
 import Loading from "@/components/Others/Loading";
-import {
-  useGetAllUserStatusQuery,
-  useGetMetricsDataQuery,
-} from "@/redux/features/adminOverView/adminUserSlice";
+import { useGetMonitoringMertricsDataQuery } from "@/redux/features/adminOverView/adminUserSlice";
 
-const AiExtractionChart: React.FC = () => {
+const AiMertrics: React.FC = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("last 30 days");
   const [selectedChart, setSelectedChart] = useState("AI Extraction Activity");
 
-  const { data, isLoading } = useGetAllUserStatusQuery("u");
-  const { data: metrics } = useGetMetricsDataQuery("u");
+  const { data: metrics, isLoading } = useGetMonitoringMertricsDataQuery("u");
 
   if (isLoading) {
     return <Loading />;
   }
 
-  const { documentsGenerated, activeProjects, totalCompanies, totalEngineers } =
-    data?.data || {};
-
-  // Update status cards with live values
-  const statusCards = [
-    {
-      title: "Joining Engineer",
-      value: totalEngineers,
-      change: "+2.8%",
-      icon: TrendingUp,
-      bgColor: "bg-yellow-50",
-      iconColor: "text-yellow-600",
-    },
-    {
-      title: "Joining Company",
-      value: totalCompanies,
-      change: "+2.8%",
-      icon: Users,
-      bgColor: "bg-blue-50",
-      iconColor: "text-blue-600",
-    },
-    {
-      title: "Active Projects",
-      value: activeProjects,
-      change: "+3.8%",
-      icon: Briefcase,
-      bgColor: "bg-green-50",
-      iconColor: "text-green-600",
-    },
-    {
-      title: "Documents Generated",
-      value: documentsGenerated,
-      change: "+2.8%",
-      icon: FileText,
-      bgColor: "bg-orange-50",
-      iconColor: "text-orange-600",
-    },
-    {
-      title: "AI Extractions Processed",
-      value: "12",
-      change: "+2.8%",
-      icon: Cpu,
-      bgColor: "bg-purple-50",
-      iconColor: "text-purple-600",
-    },
-  ];
-
   // ---- Dynamic Reference Lines Setup ----
   const values = metrics?.data?.map((d: any) => d.value) || [];
   const min = Math.min(...values, 0);
   const max = Math.max(...values, 100);
-  const lineCount = 7; // number of reference lines you want
+  const lineCount = 7; // number of reference lines
   const step = (max - min) / (lineCount - 1);
   const referenceLines = Array.from(
     { length: lineCount },
@@ -95,33 +46,6 @@ const AiExtractionChart: React.FC = () => {
   return (
     <div className="py-6">
       <div>
-        {/* Status Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8">
-          {statusCards.map((card, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div className={`p-3 rounded-lg ${card.bgColor}`}>
-                  <card.icon className={`w-6 h-6 ${card.iconColor}`} />
-                </div>
-                <span className="text-sm text-green-600 bg-green-50 px-2 py-1 rounded-full font-medium">
-                  {card.change}
-                </span>
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-2xl font-bold text-gray-900">
-                  {card.value}
-                </h3>
-                <p className="text-sm text-gray-600 leading-tight">
-                  {card.title}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Chart Section */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
           {/* Chart Header */}
@@ -170,6 +94,8 @@ const AiExtractionChart: React.FC = () => {
                   bottom: 0,
                 }}
               >
+                <CartesianGrid stroke="#E5E7EB" strokeDasharray="4 4" />{" "}
+                {/* ✅ Horizontal & vertical grid lines */}
                 <XAxis
                   dataKey="day"
                   axisLine={true}
@@ -183,18 +109,16 @@ const AiExtractionChart: React.FC = () => {
                   tick={{ fontSize: 12, fill: "#6B7280" }}
                   domain={["dataMin - 0", "dataMax + 20"]}
                   tickCount={6}
+                  tickFormatter={(value) => `${Math.round(value)}m`}
                 />
-
-                {/* Dynamic Reference Lines */}
-                {referenceLines.map((y, idx) => (
-                  <ReferenceLine
-                    key={idx}
-                    y={y}
-                    stroke="#D1D5DB"
-                    strokeDasharray="4 4"
-                  />
-                ))}
-
+                <Tooltip
+                  formatter={(value: number) => [
+                    `${Math.round(value)}m`,
+                    "Value",
+                  ]}
+                  labelStyle={{ color: "#374151", fontWeight: "bold" }}
+                  contentStyle={{ borderRadius: "8px", borderColor: "#E5E7EB" }}
+                />
                 <Line
                   type="monotone"
                   dataKey="value"
@@ -230,4 +154,4 @@ const AiExtractionChart: React.FC = () => {
   );
 };
 
-export default AiExtractionChart;
+export default AiMertrics;

@@ -45,13 +45,13 @@ const subscriptionPlanApi = baseUrlApi.injectEndpoints({
       }),
     }),
 
-    // // get builing history
-    // getBuilingHistory: build.query({
-    //   query: () => ({
-    //     url: "/subscriptions/billing-info",
-    //     method: "get",
-    //   }),
-    // }),
+    // get builing history
+    getBuilingHistoryInvoice: build.query({
+      query: () => ({
+        url: "/subscriptions/my-subscription",
+        method: "get",
+      }),
+    }),
 
     // package by user
     getPlan: build.query({
@@ -70,6 +70,6 @@ export const {
   useGetThePlanQuery,
   useCreateSubscirptionPlansMutation,
   useCreateBllingIngfoMutation,
-  useGetBuilingHistoryQuery,
+  useGetBuilingHistoryInvoiceQuery,
   useGetPlanQuery,
 } = subscriptionPlanApi;

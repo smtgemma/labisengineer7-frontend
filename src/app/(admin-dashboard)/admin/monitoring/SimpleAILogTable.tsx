@@ -37,7 +37,7 @@ export default function SimpleAILogTable() {
   console.log();
   const logsData = overview?.data.logs;
   return (
-    <div className="md:px-12 min-h-screen mt-9">
+    <div className=" mt-9">
       {/* Table Title */}
       <div className="py-4 border-gray-200 flex justify-between">
         <h2 className="text-lg md:text-[32px] font-semibold text-gray-900">

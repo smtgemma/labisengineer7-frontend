@@ -1,6 +1,9 @@
 import React from "react";
 import { Download } from "lucide-react";
 import moment from "moment";
+import { useGetBuilingHistoryInvoiceQuery } from "@/redux/features/subscription/subscripionPlanSlice";
+import Loading from "@/components/Others/Loading";
+import { saveAs } from "file-saver";
 
 // export interface BillingData {
 //   id: string;
@@ -25,55 +28,57 @@ interface BillingTableBodyProps {
   data: BillingData[];
 }
 
-const BillingTableBody: React.FC<BillingTableBodyProps> = ({ data }) => {
-  const getStatusStyles = (status: BillingData["paymentStatus"]) => {
-    switch (status) {
-      case "COMPLETED":
-        return "bg-green-100 text-green-800 border-green-200";
-      case "PENDING":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      case "FAILED":
-        return "bg-red-100 text-red-800 border-red-200";
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
-    }
+const BillingTableBody = () => {
+  const { data, isLoading } = useGetBuilingHistoryInvoiceQuery("u");
+  console.log(data);
+  if (isLoading) {
+    return <Loading />;
+  }
+  const { pdfUrl, paymentStatus, plan } = data?.data;
+  console.log(plan);
+
+  const handleDownload = (fileUrl: string) => {
+    console.log(fileUrl);
+    saveAs(fileUrl, "invoice");
   };
 
   return (
     <tbody className="bg-white divide-y divide-gray-100">
-      {data?.map((row, index) => (
-        <tr
-          key={index}
-          className={`*:text-nowrap ${
-            index % 2 === 0 ? "bg-white" : "bg-gray-50"
-          }`}
-        >
-          <td className="px-6 py-4 text-sm text-gray-900">
-            {moment(row.createdAt).format("ll")}
-          </td>
-          <td className="px-6 py-4 text-sm text-gray-900">
-            {row.plan.planName}
-          </td>
-          <td className="px-6 py-4 text-sm font-medium text-gray-900">
-            €{row.amount}
-          </td>
-          <td className="px-6 py-4">
-            <span
-              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusStyles(
-                row.paymentStatus
-              )}`}
-            >
-              {row.paymentStatus}
-            </span>
-          </td>
-          <td className="px-6 py-4 text-sm text-gray-900">
-            {moment(row.createdAt).format("ll")}
-          </td>
-          <td className="px-6 py-4">
-            <span className="inline-flex items-center ">{row.credits}</span>
-          </td>
-        </tr>
-      ))}
+      <tr className={`*:text-nowrap bg-gray-50`}>
+        <td className="px-6 py-4 text-sm text-gray-900">
+          {/* {moment(row.createdAt).format("ll")} 23/34/2032 */}
+          {moment(plan?.createdAt).format("ll")}
+        </td>
+        <td className="px-6 py-4 text-sm text-gray-900">{plan.planName}</td>
+        <td className="px-6 py-4 text-sm font-medium text-gray-900">
+          €{plan?.amount}
+        </td>
+
+        <td className="px-6 py-4">
+          <span
+            className={`inline-flex items-center  border px-3 border-green-200 rounded ${
+              paymentStatus === "COMPLETED"
+                ? "text-green-700 border-green-200 bg-green-50"
+                : "text-yellow-500 border-yellow-200 bg-yellow-50"
+            } hover:bg-green-100 transition-colors`}
+          >
+            {paymentStatus}
+          </span>
+        </td>
+        <td className="px-6 py-4">
+          <span className="inline-flex items-center ">{plan?.credits}</span>
+        </td>
+
+        <td className="px-6 py-4 text-sm text-gray-900">
+          <button
+            onClick={() => handleDownload(pdfUrl)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-green-700 bg-green-50 border border-green-200 rounded hover:bg-green-100 transition-colors"
+          >
+            <Download size={12} />
+            PDF
+          </button>
+        </td>
+      </tr>
     </tbody>
   );
 };
