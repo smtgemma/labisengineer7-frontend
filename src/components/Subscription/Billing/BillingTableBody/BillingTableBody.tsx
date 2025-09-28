@@ -35,7 +35,7 @@ const BillingTableBody = () => {
     return <Loading />;
   }
   const { pdfUrl, paymentStatus, plan } = data?.data;
-  console.log(plan);
+  console.log(data);
 
   const handleDownload = (fileUrl: string) => {
     console.log(fileUrl);
@@ -49,7 +49,7 @@ const BillingTableBody = () => {
           {/* {moment(row.createdAt).format("ll")} 23/34/2032 */}
           {moment(plan?.createdAt).format("ll")}
         </td>
-        <td className="px-6 py-4 text-sm text-gray-900">{plan.planName}</td>
+        <td className="px-6 py-4 text-sm text-gray-900">{plan?.planName}</td>
         <td className="px-6 py-4 text-sm font-medium text-gray-900">
           €{plan?.amount}
         </td>

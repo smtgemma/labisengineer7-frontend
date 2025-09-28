@@ -14,9 +14,6 @@ const adminUserApi = baseUrlApi.injectEndpoints({
       query: ({ id, token }) => ({
         url: `/admin/suspend/${id}`,
         method: "PATCH",
-        headers: {
-          Authorization: `${token}`,
-        },
       }),
     }),
     // delete account
@@ -32,12 +29,9 @@ const adminUserApi = baseUrlApi.injectEndpoints({
 
     // delete account
     getAllUserDashboard: build.query({
-      query: (token) => ({
-        url: `/ai/dashboard`,
+      query: () => ({
+        url: `/admin`,
         method: "get",
-        headers: {
-          Authorization: `${token}`,
-        },
       }),
     }),
 
@@ -68,6 +62,14 @@ const adminUserApi = baseUrlApi.injectEndpoints({
         method: "get",
       }),
     }),
+
+    // the get activity feed data
+    getActivityFeedData: build.query({
+      query: () => ({
+        url: `/admin/getFeedBack`,
+        method: "get",
+      }),
+    }),
     // AI/API Monitoring
     getMonitoringMertricsData: build.query({
       query: () => ({
@@ -95,4 +97,5 @@ export const {
   useGetMetricsDataQuery,
   useGetMonitoringMertricsDataQuery,
   useGetAiStatusCardQuery,
+  useGetActivityFeedDataQuery,
 } = adminUserApi;
