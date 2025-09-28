@@ -5,7 +5,7 @@ import {
     setAiExtreactAndInputData,
     setTheProjectCode
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { usePosAiAllDataForTwoToSaveMutation, usePosAiAllDataSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
+import { usePosAiAllDataForTwoToSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import { RootState } from "@/redux/store";
 import { useEffect, useRef, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";

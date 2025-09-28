@@ -24,8 +24,8 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
 }) => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [isCompleted, setIsCompleted] = useState<boolean>(false);
-    const [progress, setProgress] = useState(0);
-    const [time, setTime] = useState(0);
+    // const [progress, setProgress] = useState(0);
+    // const [time, setTime] = useState(0);
     const [errorMsg, setErrorMsg] = useState(""); // ✅ Error message state
     const dispatch = useDispatch();
 
@@ -78,7 +78,7 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
         }
 
         setIsProcessing(true);
-        setProgress(0);
+        // setProgress(0);
         setIsCompleted(false);
 
         const formData = new FormData();
@@ -96,17 +96,17 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
                 dispatch(setAiExtractCatchData(res));
 
                 // simulate progress
-                const interval = setInterval(() => {
-                    setProgress((prev) => {
-                        if (prev >= 100) {
-                            clearInterval(interval);
-                            setIsCompleted(true);
-                            setIsProcessing(false);
-                            return 100;
-                        }
-                        return prev + Math.random() * 15;
-                    });
-                }, 200);
+                // const interval = setInterval(() => {
+                //     setProgress((prev) => {
+                //         if (prev >= 100) {
+                //             clearInterval(interval);
+                //             setIsCompleted(true);
+                //             setIsProcessing(false);
+                //             return 100;
+                //         }
+                //         return prev + Math.random() * 15;
+                //     });
+                // }, 200);
 
                 nextStep();
             }

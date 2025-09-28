@@ -14,10 +14,8 @@ import {
 
 import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "sonner";
-import S4D1 from "../CreateProject/FinalOverview/srv-4t/s4D1/page";
-import S4D2 from "../CreateProject/FinalOverview/srv-4t/s4D2/page";
-import { FormDataOne, FormDataTwo } from "./template";
 import PrimaryButton from "../shared/primaryButton/PrimaryButton";
+import { FormDataOne, FormDataTwo } from "./template";
 export interface UserData {
     id: string;
     firstName: string;
@@ -58,21 +56,22 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     onComplete,
 }) => {
     const printRef = React.useRef(null);
-    const contentRef = useRef<HTMLDivElement>(null);
     const stepByStepData: any = useSelector((state: RootState) => state.aiData);
-    const allTempate = stepByStepData.actionSelection;
-    const dataAllFIled = stepByStepData.aiInputData;
-    const subCategoryData = stepByStepData.subcategory;
-    const allTemplate = stepByStepData.selectTemplate;
-    const projectCodeId = stepByStepData.projectIdCode;
-    const id = stepByStepData?.projectIdCode;
-    const projectId = stepByStepData?.projectIdCode?.result.id;
-    const userId = dataAllFIled?.createdById;
-    
+    const projectId = stepByStepData?.projectIdCode?.result?.id;
+    const allTempate = stepByStepData?.actionSelection;
+    const violations = stepByStepData?.violations;
+    const question = stepByStepData?.question;
+    const allTemplate = stepByStepData?.selectTemplate;
+    const projectCodeId = stepByStepData?.projectIdCode;
+
     const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
-    
+
+
+
+    console.log(question, violations)
+
     const allData = allTemplateData?.data || {};
     // const buildingMods = subCategoryData["building-modifications"] || [];
     // const energy = subCategoryData["energy-systems"] || [];
@@ -379,7 +378,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                                         {/* {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)} */}
                                     </div>
                                 )}
-                                {selected === "Autofill 1 Credit" && (
+                            {selected === "Autofill 1 Credit" && (
                                 <h1>template one</h1>
                             )}
                         </div>
