@@ -1,16 +1,21 @@
 "use client";
-import React, { useState } from "react";
 import {
-  LineChart,
+  Briefcase,
+  ChevronDown,
+  Cpu,
+  FileText,
+  TrendingUp,
+  Users,
+} from "lucide-react";
+import { useState } from "react";
+import {
   Line,
+  LineChart,
+  ReferenceLine,
+  ResponsiveContainer,
   XAxis,
   YAxis,
-  ResponsiveContainer,
-  ReferenceLine,
 } from "recharts";
-import { Briefcase, ChevronDown, Cpu } from "lucide-react";
-import { useState } from "react";
-import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 import Loading from "@/components/Others/Loading";
 import {
