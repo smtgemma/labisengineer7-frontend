@@ -5,7 +5,7 @@ import {
     setAiExtreactAndInputData,
     setTheProjectCode
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { usePosAiAllDataSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
+import { usePosAiAllDataForTwoToSaveMutation, usePosAiAllDataSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import { RootState } from "@/redux/store";
 import { useEffect, useRef, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -173,7 +173,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
     // console.log("ydom:", ydom);
     console.log("allExtreactData:", descriptonAndYdom);
 
-    const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
+    const [postDataAll, { isLoading }] = usePosAiAllDataForTwoToSaveMutation();
 
     const accessToken = tokenCatch();
 
@@ -204,8 +204,8 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
             JSON.stringify({
                 serviceId: projectData?.id,
                 // createdById: user?.userId,
-                subCategories: subCategoryData,
-                descrptionTasks: descrptionTasks,
+                // subCategories: subCategoryData,
+                // descrptionTasks: descrptionTasks,
                 ydom: descriptonAndYdom?.ydom,
                 technicalDescription: allExtreactData?.technical_description,
                 technicalDescriptionTwo: allExtreactData?.technical_description_two,
@@ -321,7 +321,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             number_property (Εμβαδόν Ιδιοκτησίας)
                                         </label>
                                         <input
-                                            {...register("number_property")}
+                                            {...register("numberProperty")}
                                             className={inputStyle}
                                             readOnly
                                             defaultValue={allExtreactData?.number_property}
@@ -404,7 +404,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             percentage_co_ownership_parcel (Ταχυδρομικός Κώδικας Ακινήτου)
                                         </label>
                                         <input
-                                            {...register("percentage_co_ownership_parcel")}
+                                            {...register("percentageCoOwnershipParcel")}
                                             className={inputStyle}
                                             readOnly
                                             defaultValue={allExtreactData?.percentage_co_ownership_parcel}
@@ -565,7 +565,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 ownership_percentage_owner (Διεύθυνση Ιδιοκτήτη)
                                             </label>
                                             <input
-                                                {...register(`owners.${index}.ownership_percentage_owner`)}
+                                                {...register(`owners.${index}.ownershipPercentageOwner`)}
                                                 defaultValue={field.ownership_percentage_owner}
                                                 className={inputStyle}
                                                 readOnly
@@ -576,7 +576,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 owner_type_ownership (Διεύθυνση Ιδιοκτήτη)
                                             </label>
                                             <input
-                                                {...register(`owners.${index}.owner_type_ownership`)}
+                                                {...register(`owners.${index}.ownerTypeOwnership`)}
                                                 defaultValue={field.owner_type_ownership}
                                                 className={inputStyle}
                                                 readOnly
@@ -614,7 +614,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 Postal_code (Ταχυδρομικός Κώδικας)
                                             </label>
                                             <input
-                                                {...register(`owners.${index}.postal_code`)}
+                                                {...register(`owners.${index}.postalCode`)}
                                                 defaultValue={field.postal_code}
                                                 className={inputStyle}
                                                 readOnly
@@ -786,7 +786,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 license_number_revision (Στοιχεία Μηχανικού)
                                             </label>
                                             <input
-                                                {...register("license_number_revision")}
+                                                {...register("licenseNumberRevision")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.license_number_revision}
@@ -797,7 +797,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 date_issuance_building_permit (Στοιχεία Μηχανικού)
                                             </label>
                                             <input
-                                                {...register("date_issuance_building_permit")}
+                                                {...register("dateIssuanceBuildingPermit")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.date_issuance_building_permit}
@@ -808,7 +808,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 details_issuing_authority (Στοιχεία Μηχανικού)
                                             </label>
                                             <input
-                                                {...register("details_issuing_authority")}
+                                                {...register("detailsIssuingAuthority")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.details_issuing_authority}
@@ -819,7 +819,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 date_issue_building_permit_revision (Στοιχεία Μηχανικού)
                                             </label>
                                             <input
-                                                {...register("date_issue_building_permit_revision")}
+                                                {...register("dateIssueBuildingPermitRevision")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.date_issue_building_permit_revision}
@@ -830,18 +830,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 project_title_description_license (Στοιχεία Μηχανικού)
                                             </label>
                                             <input
-                                                {...register("project_title_description_license")}
-                                                className={inputStyle}
-                                                readOnly
-                                                defaultValue={allExtreactData.project_title_description_license}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium mb-1">
-                                                project_title_description_license (Στοιχεία Μηχανικού)
-                                            </label>
-                                            <input
-                                                {...register("project_title_description_license")}
+                                                {...register("projectTitleDescriptionLicense")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.project_title_description_license}
@@ -852,7 +841,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 completion_declaration_3843_number (Στοιχεία Μηχανικού)
                                             </label>
                                             <input
-                                                {...register("completion_declaration_3843_number")}
+                                                {...register("completionDeclaration3843Number")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.completion_declaration_3843_number}
@@ -863,18 +852,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 description_validations_3843 (Στοιχεία Μηχανικού)
                                             </label>
                                             <input
-                                                {...register("description_validations_3843")}
-                                                className={inputStyle}
-                                                readOnly
-                                                defaultValue={allExtreactData.description_validations_3843}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium mb-1">
-                                                description_validations_3843 (Στοιχεία Μηχανικού)
-                                            </label>
-                                            <input
-                                                {...register("description_validations_3843")}
+                                                {...register("descriptionValidations3843")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.description_validations_3843}
@@ -885,7 +863,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 issuing_authority_3843 (Στοιχεία Μηχανικού)
                                             </label>
                                             <input
-                                                {...register("issuing_authority_3843")}
+                                                {...register("issuingAuthority3843")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.issuing_authority_3843}
@@ -896,7 +874,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 date_issue_completion_declaration_3843 (Στοιχεία Μηχανικού)
                                             </label>
                                             <input
-                                                {...register("date_issue_completion_declaration_3843")}
+                                                {...register("dateIssueCompletionDeclaration3843")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.date_issue_completion_declaration_3843}
@@ -998,7 +976,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 number_establishment_horizontal_ownership (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
-                                                {...register("number_establishment_horizontal_ownership")}
+                                                {...register("numberEstablishmentHorizontalOwnership")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.number_establishment_horizontal_ownership}
@@ -1009,7 +987,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 Reviews Numbers of establishment of horizontal ownership (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
-                                                {...register("reviews_numbers_establishment_horizontal_ownership")}
+                                                {...register("reviewsNumbersEstablishmentHorizontalOwnership")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.reviews_numbers_establishment_horizontal_ownership}
@@ -1020,7 +998,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 notary_establishment_horizontal_ownership (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
-                                                {...register("notary_establishment_horizontal_ownership")}
+                                                {...register("notaryEstablishmentHorizontalOwnership")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData.notary_establishment_horizontal_ownership}

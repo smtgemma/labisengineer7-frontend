@@ -61,6 +61,16 @@ const aiServiceApi = baseUrlApi.injectEndpoints({
         },
       }),
     }),
+    posAiAllDataForTwoToSave: build.mutation({
+      query: ({ formData, accessToken }) => ({
+        url: "/project2/create-with-files",
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -72,4 +82,5 @@ export const {
   usePfdToFdfMergeMutation,
   usePosAiAllDataSaveMutation,
   usePostSecondFileAiDataExtractMutation,
+  usePosAiAllDataForTwoToSaveMutation
 } = aiServiceApi;
