@@ -12,5 +12,4 @@ const page = () => {
     </div>
   );
 };
-k
 export default page;
