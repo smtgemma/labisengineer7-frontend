@@ -62,7 +62,7 @@ export default function S2D2({ allData, question }: { allData: allDataProps, que
                 <div className="flex items-center justify-center gap-12">
                     <h4 className="text-sm">Ιδιοκτήτης</h4>
                     <p className="text-sm">
-                        {owner?.firstName || "N/A"} {owner?.lastName || "N/A"}
+                        {owner?.firstName || owner?.first_name || "N/A"} {owner?.lastName || owner?.last_name || "N/A"}
                     </p>
                 </div>
             </div>

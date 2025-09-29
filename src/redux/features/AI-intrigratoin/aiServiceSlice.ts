@@ -81,6 +81,16 @@ const aiServiceApi = baseUrlApi.injectEndpoints({
         },
       }),
     }),
+    postQuestionsAndAnswer: build.mutation({
+      query: ({ payload, accessToken, id }) => ({
+        url: `/project2/creatAnswer/${id}`,
+        method: "POST",
+        body: { answers: payload },
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -93,5 +103,6 @@ export const {
   usePosAiAllDataSaveMutation,
   usePostSecondFileAiDataExtractMutation,
   usePosAiAllDataForTwoToSaveMutation,
-  usePostRecordViolationMutation
+  usePostRecordViolationMutation,
+  usePostQuestionsAndAnswerMutation
 } = aiServiceApi;

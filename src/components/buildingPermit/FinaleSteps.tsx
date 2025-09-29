@@ -501,13 +501,6 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
 
     const allData = allTemplateData?.data || {};
     console.log(allData, "======================allData===============allData")
-    // const buildingMods = subCategoryData["building-modifications"] || [];
-    // const energy = subCategoryData["energy-systems"] || [];
-    // const fencing = subCategoryData["fencing"] || [];
-    // const landscaping = subCategoryData["landscaping-2"] || [];
-    // const operational = subCategoryData["operational-space"] || [];
-    // const property = subCategoryData["property-documentation"] || [];
-    // const small = subCategoryData["small-construction"] || [];
 
     // const store = makeStore();
     const [selected, setSelected] = useState<string | null>(null);
@@ -530,72 +523,6 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
         const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
         saveAs(blob, "owners.csv");
     };
-
-    const [formData, setFormData] = useState<FormDataOne>({
-        recipient: "ydom",
-        name: "Name Owner",
-        surname: "Surname Owner",
-        fatherName: "Fathers name and surname Owner",
-        motherName: "Mothers name and surname Owner",
-        birthDate: "Born date Owner",
-        birthTown: "Born Town owner",
-        idNumber: "ID",
-        mobile: "mobile",
-        town: "Town",
-        address: "Address",
-        addressNumber: "Number",
-        postalCode: "postal code",
-        email: "email owner",
-        vat: "VAT owner",
-        projectDescription: "PROJECT DESCRIPTION",
-        date: "8/18/2025"
-    });
-
-    const [secondData, setSecondData] = useState<FormDataTwo>({
-        recipient: "ydom",
-        name: "Name Engineer",
-        surname: "Surname Engineer",
-        fatherName: "Fathers name and surname Engineer",
-        motherName: "Mothers name and surname Engineer",
-        birthDate: "Born date Engineer",
-        birthTown: "Born Town Engineer",
-        idNumber: "ID",
-        mobile: "mobile",
-        town: "Town",
-        address: "Address",
-        addressNumber: "Number",
-        postalCode: "postal code",
-        email: "email Engineer",
-        vat: "VAT Engineer",
-        projectDescription: "PROJECT DESCRIPTION",
-        date: "8/18/2025"
-    });
-
-    console.log("..............Ownert", allData)
-
-    useEffect(() => {
-        setFormData(prev => ({
-            ...prev,
-            name: `${allData?.engineers?.[0]?.firstName ?? ""}`,
-            surname: allData?.engineers?.[0]?.lastName ?? "",
-            fatherName: allData?.engineers?.[0]?.fatherName ?? "",
-            motherName: allData?.engineers?.[0]?.motherName ?? "",
-            birthDate: allData?.engineers?.[0]?.motherName.bornDate,
-            birthTown: allData?.engineers?.[0]?.bornTown,
-            idNumber: allData?.engineers?.[0]?.motherName.idCardNumber,
-            mobile: "mobile",
-            town: "Town",
-            address: "Address",
-            addressNumber: "Number",
-            postalCode: "postalCode",
-            email: "email owner",
-            vat: "VAT owner",
-            projectDescription: "PROJECT DESCRIPTION",
-            date: "8/18/2025"
-        }));
-    }, [allTemplateData])
-
-
     const projectAndUserHexCode =
         userData?.hexToken + `-${projectCodeId?.result?.projectCode}`;
 
@@ -612,7 +539,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const handleDownloadPdf = async () => {
         console.log("download clicked");
         try {
-            const response = await fetch("https://api.buildai.gr/generated-files/generated_pdf_files.zip");
+            const response = await fetch(`https://api.buildai.gr/generated-files/generated_files_1.zip`);
 
             if (!response.ok) throw new Error("Network response was not ok");
 

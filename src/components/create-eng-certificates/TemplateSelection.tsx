@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Loading from "@/components/Others/Loading";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
-import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
+import { useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
 import { TemplateName } from "../CreateProject/ActionSelection/data";
 
 
@@ -56,9 +56,9 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
     const stepByStepData: any = useSelector((state: RootState) => state.aiData);
     const id = stepByStepData?.projectId?.id;
 
-    const { data, isLoading } = useGetCreditServiceQuery(id || "", { skip: !id });
+    // const { data, isLoading } = useGetCreditServiceQuery(id || "", { skip: !id });
 
-    console.log("Credit Service Data:", data);
+    // console.log("Credit Service Data:", data);
 
     // Compute subtotal
     const subtotal = templateName
@@ -122,10 +122,6 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
             setIsProcessing(false);
         }
     };
-
-    if (isLoading) {
-        return <Loading />;
-    }
 
     return (
         <div className="space-y-8 max-w-7xl mx-auto">
