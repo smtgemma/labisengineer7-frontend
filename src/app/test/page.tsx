@@ -47,14 +47,3 @@ function Test(allData: any) {
 }
 
 export default Test
-
-
-import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
-
-const { data: userData } = useGetMeQuery()
-const signature = userData?.data?.signature
-
-{/* signature  */ }
-<div className="flex items-center justify-end p-4">
-  <img src={signature} alt="" />
-</div>

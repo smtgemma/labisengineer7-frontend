@@ -18,6 +18,7 @@ import PrimaryButton from "../shared/primaryButton/PrimaryButton";
 import { FormDataOne, FormDataTwo } from "./template";
 import S2D1 from "../CreateProject/FinalOverview/srv-2rt/s2D1/page";
 import S2D2 from "../CreateProject/FinalOverview/srv-2rt/s2D2/page";
+import S2D3 from "../CreateProject/FinalOverview/srv-2rt/s2D3/page";
 export interface UserData {
     id: string;
     firstName: string;
@@ -72,7 +73,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
 
 
 
-    console.log(question, violations)
+    console.log(question, violations, "===========================")
 
     const allData = allTemplateData?.data || {};
     console.log(allData, "======================allData===============allData")
@@ -388,7 +389,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                                     </div>
                                 )}
                             {selected === "template_3_owner_1" && (
-                                <h1>template_3_owner_1</h1>
+                                <S2D3 allData={allData}/>
                             )}
                             {selected === "template_4_owner_1" && (
                                 <h1>template_4_owner_1</h1>
