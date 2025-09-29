@@ -298,11 +298,10 @@ const OwnerSelection = ({
                   }
                   key={property.id}
                   className={`p-6 rounded-lg relative cursor-pointer  transition-all duration-200 border-2 
-                  ${
-                    selectedProperty.some((item) => item.id === property.id)
+                  ${selectedProperty.some((item) => item.id === property.id)
                       ? "border-blue-700 bg-blue-50 shadow-md"
                       : "border-blue-400 bg-white hover:border-blue-300"
-                  }`}
+                    }`}
                 >
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     Horizontal Description {property.id}
@@ -310,7 +309,10 @@ const OwnerSelection = ({
                   <p className="text-gray-700">{property.description}</p>
                 </div>
                 <div
-                  onClick={() => setDescriptionModal(property.id)}
+                  onClick={() => {
+                    setDescriptionModal(property.id)
+                    setTemp(property.description)
+                  }}
                   className="absolute top-3 right-3 text-gray-500 hover:text-blue-500 cursor-pointer"
                 >
                   <FiEdit2 />
@@ -429,12 +431,11 @@ const OwnerSelection = ({
                 onClick={() => toggleOwnerSelection(index)}
                 key={index}
                 className={`p-6 rounded-lg relative cursor-pointer transition-all duration-200 border-2 
-                  ${
-                    selectedOwners.some(
-                      (o) => o.first_name === owner.first_name
-                    )
-                      ? "border-blue-600 bg-blue-50 shadow-md"
-                      : "border-blue-400 bg-white hover:border-blue-300"
+                  ${selectedOwners.some(
+                  (o) => o.first_name === owner.first_name
+                )
+                    ? "border-blue-600 bg-blue-50 shadow-md"
+                    : "border-blue-400 bg-white hover:border-blue-300"
                   }`}
               >
                 <div className="flex gap-2 absolute top-4 right-4 text-gray-400">

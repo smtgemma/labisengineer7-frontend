@@ -16,27 +16,30 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
     nextStep: () => void
 }) => {
     const [editingOwner, setEditingOwner] = useState<EditingOwnerType | null>(null);
+    const [editingDescription, setEditingDescription] = useState<{ index: number, value: string } | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isEditDescriptionModalOpen, setIsEditDescriptionModalOpen] = useState(false);
     const [selectedOwners, setSelectedOwners] = useState<Owner[]>([]);
     const [selectedProperty, setSelectedProperty] = useState<SelectedProperty[]>([]);
-    const [ydomModalOpen, setYdomModalOpen] = useState(false);
     const [validationError, setValidationError] = useState<{ description: string; owner: string }>({
         description: "",
         owner: ""
     });
+    const [descriptionText, setDescriptionText] = useState("");
 
     const dispatch = useDispatch();
     const ownerData = useSelector((state: any) => state.aiData?.aiDataState);
 
     const [isOwner, setIsOwner] = useState<Owner[]>(ownerData?.owners || []);
-    const [ydom, setYdom] = useState<string>(ownerData?.ydom || "");
+    const [descriptions, setDescriptions] = useState<string[]>([]);
 
-    // Generate descriptions from project_descriptions
-    const description1 = ownerData?.horizontal_property_name;
-    const description2 = ownerData?.horizontal_property_name_two;
-
-    const descriptionShow = [description1, description2].filter(desc => desc);
+    // Initialize descriptions from project_descriptions
+    useEffect(() => {
+        const description1 = ownerData?.horizontal_property_name;
+        const description2 = ownerData?.horizontal_property_name_two;
+        setDescriptions([description1, description2].filter(desc => desc));
+    }, [ownerData]);
 
     const {
         register,
@@ -87,6 +90,27 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
             reset();
             setEditingOwner(null);
             setIsEditModalOpen(false);
+        }
+    };
+
+    // Edit description
+    const onEditDescriptionSubmit = () => {
+        if (editingDescription !== null) {
+            const updatedDescriptions = [...descriptions];
+            updatedDescriptions[editingDescription.index] = descriptionText;
+            setDescriptions(updatedDescriptions);
+
+            // Update selected property if it was the one being edited
+            const updatedSelectedProperty = selectedProperty.map(item =>
+                item.index === editingDescription.index
+                    ? { ...item, value: descriptionText }
+                    : item
+            );
+            setSelectedProperty(updatedSelectedProperty);
+
+            setDescriptionText("");
+            setEditingDescription(null);
+            setIsEditDescriptionModalOpen(false);
         }
     };
 
@@ -152,15 +176,18 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
         setIsEditModalOpen(true);
     };
 
-    // Handle YDOM save
-    const handleYdomSave = () => {
-        setYdomModalOpen(false);
+    // Open edit modal for description
+    const openEditDescriptionModal = (e: React.MouseEvent, description: string, index: number) => {
+        e.stopPropagation(); // Prevent triggering selection
+        setEditingDescription({ index, value: description });
+        setDescriptionText(description);
+        setIsEditDescriptionModalOpen(true);
     };
 
     // Update Redux store when selections change
     useEffect(() => {
-        dispatch(setMultipleDescription({ description: selectedProperty, ydom }));
-    }, [selectedProperty, ydom]);
+        dispatch(setMultipleDescription({ description: selectedProperty }));
+    }, [selectedProperty]);
 
     useEffect(() => {
         dispatch(setAiExtractCatchWonerData(selectedOwners));
@@ -183,6 +210,7 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
             owner: !ownerValid ? "Please select at least one owner." : ""
         });
     }, [selectedProperty, selectedOwners]); // Only re-run when these change
+
     return (
         <div className="space-y-8">
             {/* Header */}
@@ -203,11 +231,11 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
             </div>
 
             {/* Property Descriptions */}
-            {descriptionShow.length > 0 && (
+            {descriptions.length > 0 && (
                 <div>
                     <p className="mb-4 font-medium">Please select a property description:</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                        {descriptionShow.map((property: string, index: number) => (
+                        {descriptions.map((property: string, index: number) => (
                             <div
                                 onClick={() => togglePropertySelection(index, property)}
                                 key={index}
@@ -217,6 +245,15 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
                                         : "border-gray-200 bg-white hover:border-blue-300"
                                     }`}
                             >
+                                <div className="flex gap-2 absolute top-4 right-4 text-gray-400">
+                                    <button
+                                        onClick={(e) => openEditDescriptionModal(e, property, index)}
+                                        className="hover:text-gray-600 cursor-pointer"
+                                    >
+                                        <Edit3 className="w-4 h-4" />
+                                    </button>
+                                </div>
+
                                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                                     Description {index + 1}
                                 </h3>
@@ -231,57 +268,6 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
                     )}
                 </div>
             )}
-
-            {/* YDOM Section */}
-            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm relative">
-                    <div className="flex justify-end items-start mb-4">
-                        <button
-                            onClick={() => setYdomModalOpen(true)}
-                            className="text-gray-500 hover:text-blue-500 cursor-pointer"
-                        >
-                            <FiEdit2 />
-                        </button>
-                    </div>
-
-                    <div className="flex justify-between items-start mb-2">
-                        <h3 className="font-semibold text-lg">YDOM:</h3>
-                        <p className="text-sm text-gray-700 whitespace-pre-line">
-                            {ydom || "N/A"}
-                        </p>
-                    </div>
-                </div>
-            </div> */}
-
-            {/* YDOM Modal */}
-            {/* {ydomModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-                    <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
-                        <h2 className="text-lg font-semibold mb-4">Edit YDOM</h2>
-                        <textarea
-                            value={ydom}
-                            onChange={(e) => setYdom(e.target.value)}
-                            className="w-full border rounded-lg p-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            rows={4}
-                            placeholder="Enter YDOM description..."
-                        />
-                        <div className="flex justify-end gap-2 mt-4">
-                            <button
-                                onClick={() => setYdomModalOpen(false)}
-                                className="px-4 py-2 rounded-lg border hover:bg-gray-100"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                onClick={handleYdomSave}
-                                className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600"
-                            >
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )} */}
 
             {/* Owners Section */}
             <div>
@@ -549,11 +535,51 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
                     </div>
                 </div>
             )}
+
+            {/* Edit Description Modal */}
+            {isEditDescriptionModalOpen && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg p-8 w-full max-w-2xl mx-4">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-xl font-semibold text-gray-900">Edit Description</h3>
+                            <button
+                                onClick={() => setIsEditDescriptionModalOpen(false)}
+                                className="text-gray-400 hover:text-gray-600"
+                            >
+                                <IoClose className="w-5 h-5" />
+                            </button>
+                        </div>
+
+                        <div className="space-y-6">
+                            <div>
+                                <label className="block text-gray-700 font-medium mb-2">
+                                    Description:
+                                </label>
+                                <textarea
+                                    value={descriptionText}
+                                    onChange={(e) => setDescriptionText(e.target.value)}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px]"
+                                    placeholder="Enter property description"
+                                />
+                            </div>
+
+                            <div className="flex justify-end mt-8">
+                                <button
+                                    onClick={onEditDescriptionSubmit}
+                                    className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-200 font-medium"
+                                >
+                                    Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Next Button */}
             {currentStep < 6 && (
                 <div className="flex justify-end w-fit ml-auto">
                     <PrimaryButton
-
                         onClick={() => {
                             if (isValid) {
                                 nextStep();
@@ -561,7 +587,6 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
                         }}
                         label="Save and Continue"
                         disabled={!isValid}
-
                     />
                 </div>
             )}
