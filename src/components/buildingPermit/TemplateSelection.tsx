@@ -7,9 +7,8 @@ import { AlertTriangle, CheckCircle, CreditCard, Loader2 } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Loading from "@/components/Others/Loading";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
-import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
+import { useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
 import { TemplateName } from "../CreateProject/ActionSelection/data";
 
 interface ActionSelectionProps {
@@ -36,7 +35,7 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
 
     const { data: remainingCredit } = useRemainingCreditQuery("");
     const [useCredit] = useUseCreditsMutation();
-    const { data, isLoading } = useGetCreditServiceQuery(id || "", { skip: !id });
+
 
     // Create templates including owner templates without mutating exported array
     const allTemplates: TemplateName[] = useMemo(() => {
@@ -123,7 +122,6 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
         }
     };
 
-    if (isLoading) return <Loading />;
 
     return (
         <div className="space-y-8 max-w-7xl mx-auto">

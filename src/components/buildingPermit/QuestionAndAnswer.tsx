@@ -3,6 +3,9 @@ import PrimaryButton from '../shared/primaryButton/PrimaryButton';
 import { RootState } from '@/redux/store';
 import { useSelector, useDispatch } from "react-redux";
 import { setQuestionsAnswer } from '@/redux/features/AI-intrigratoin/aiFileDataSlice';
+import { toast } from 'sonner';
+import { usePostQuestionsAndAnswerMutation } from '@/redux/features/AI-intrigratoin/aiServiceSlice';
+import tokenCatch from '@/lib/token';
 
 interface Question {
     id: number;
@@ -18,6 +21,9 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
     currentStep: number
     nextStep: () => void
 }) => {
+    const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+    const projectId = stepByStepData?.projectIdCode?.id;
+    const [postQnA] = usePostQuestionsAndAnswerMutation()
     const [questions, setQuestions] = useState<Question[]>([
         {
             id: 1,
@@ -65,6 +71,7 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
     const violations = useSelector((state: RootState) => state.aiData.violations);
     const dispatch = useDispatch();
     console.log(violations)
+    const accessToken = tokenCatch();
     const handleOptionChange = (questionId: number, optionId: string) => {
         setQuestions(prev => prev.map(question => {
             if (question.id === questionId) {
@@ -77,7 +84,7 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
         }));
     };
 
-    const handleSaveAndContinue = () => {
+    const handleSaveAndContinue = async () => {
         // Create simplified data structure with only question and answer
         const simplifiedData = questions.map(question => ({
             question: question.id,
@@ -88,9 +95,19 @@ const QuestionAnswers = ({ currentStep, nextStep }: {
 
         // Log the simplified data to console
         console.log("Question Answers Data:", simplifiedData);
-        dispatch(setQuestionsAnswer(simplifiedData));
+
         // Continue to next step
-        nextStep();
+        try {
+            const res = await postQnA({ payload: simplifiedData, accessToken, id: projectId }).unwrap();
+            console.log("resposive", res);
+            if (res?.success) {
+                dispatch(setQuestionsAnswer(simplifiedData));
+                nextStep();
+            }
+        } catch (error: any) {
+            toast.error(error.data.message);
+            console.log(error);
+        }
     };
 
     return (

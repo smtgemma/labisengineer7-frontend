@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Loading from "@/components/Others/Loading";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
-import { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
+import { useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
 import { TemplateName } from "@/components/CreateProject/ActionSelection/data";
 
 
@@ -37,7 +37,7 @@ const HtkOneTemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
 
     const { data: remainingCredit } = useRemainingCreditQuery("");
     const [useCredit] = useUseCreditsMutation();
-    const { data, isLoading } = useGetCreditServiceQuery(id || "", { skip: !id });
+    // const { data, isLoading } = useGetCreditServiceQuery(id || "", { skip: !id });
 
     // Create templates including owner templates without mutating exported array
     const allTemplates: TemplateName[] = useMemo(() => {
@@ -118,8 +118,6 @@ const HtkOneTemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
             setIsProcessing(false);
         }
     };
-
-    if (isLoading) return <Loading />;
 
     return (
         <div className="space-y-8 max-w-7xl mx-auto">
