@@ -1,3 +1,147 @@
+// "use client";
+
+// import logo from "@/assets/landing-page/main-logo.png";
+
+// import Image from "next/image";
+// import Link from "next/link";
+// import { useEffect, useState } from "react";
+// import { Menu, X } from "lucide-react"; // Optional icons
+// import Logo from "../Logo";
+// import Container from "../Container/Container";
+// import "./navbar.css";
+// import PrimaryButton from "../primaryButton/PrimaryButton";
+
+// const Navbar = () => {
+//   const [isOpen, setIsOpen] = useState(false);
+//   const [scroll, setScroll] = useState(false);
+//   const [openNav, setOpenNav] = useState(false);
+
+//   const navLinks = [
+//     { name: "About Us", href: "#about" },
+//     { name: "Service", href: "#service" },
+//     { name: "How it Works", href: "#works" },
+//     { name: "Testimonials", href: "#testimonials" },
+//     { name: "Tutorials", href: "/tutorials" },
+//   ];
+
+//   useEffect(() => {
+//     window.addEventListener("scroll", () => {
+//       setScroll(window.scrollY > 400);
+//     });
+//   });
+
+//   const handleWindowResize = () =>
+//     window.innerWidth >= 960 && setOpenNav(false);
+
+//   useEffect(() => {
+//     window.addEventListener("resize", handleWindowResize);
+
+//     return () => {
+//       window.removeEventListener("resize", handleWindowResize);
+//     };
+//   }, []);
+
+//   // return (
+//   //   <div
+//   //     className={` bg-camp-primary ${
+//   //       scroll ? "sticky w-full bg-camp-primary " : ""
+//   //     }`}
+//   //   ></div>
+
+//   return (
+//     <nav
+//       className={`w-full px-4 py-6 bg-white shadow-sm border-b border-gray-100  top-0 z-50 bg-camp-primary ${
+//         scroll ? "sticky-navbar w-full bg-camp-primary " : ""
+//       }`}
+//     >
+//       <Container>
+//         <div className=" mx-auto flex items-center justify-between">
+//           {/* Logo */}
+//           <div className="flex-shrink-0">
+//             <Link href="/">
+//               <Logo />
+//             </Link>
+//           </div>
+
+//           {/* Desktop Nav */}
+//           <div className="hidden lg:flex space-x-6">
+//             {navLinks.map((link) => (
+//               <Link
+//                 key={link.name}
+//                 href={link.href}
+//                 className="text-gray-700 hover:text-blue-600 transition"
+//               >
+//                 {link.name}
+//               </Link>
+//             ))}
+//           </div>
+
+//           {/* Buttons */}
+//           <div className="hidden lg:flex space-x-4">
+//             <Link
+//               href="/signIn"
+//               className="border border-blue-600 text-blue-600 px-8 py-3 rounded hover:bg-blue-50 transition"
+//             >
+//               Login
+//             </Link>
+//             <Link
+//               href="/signUp"
+//               style={{
+//                 borderRadius: "6px",
+//                 background:
+//                   "linear-gradient(44deg, #017AFF 37.44%, #61BDFF 67.11%)",
+//               }}
+//               className=" text-white px-8 py-3 rounded hover:bg-blue-700 transition"
+//             >
+//               Register
+//             </Link>
+//           </div>
+
+//           {/* Mobile Menu Toggle */}
+//           <div className="lg:hidden">
+//             <button onClick={() => setIsOpen(!isOpen)}>
+//               {isOpen ? <X size={24} /> : <Menu size={24} />}
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* Mobile Menu */}
+//         {isOpen && (
+//           <div className="lg:hidden mt-3 space-y-4 px-4 pb-4">
+//             {navLinks.map((link) => (
+//               <Link
+//                 key={link.name}
+//                 href={link.href}
+//                 className="block text-gray-700 hover:text-blue-600"
+//                 onClick={() => setIsOpen(false)}
+//               >
+//                 {link.name}
+//               </Link>
+//             ))}
+//             <div className="flex flex-col space-y-2 pt-2">
+//               <Link
+//                 href="/signIn"
+//                 className="border border-blue-600 text-blue-600 px-4 py-2 rounded text-center"
+//               >
+//                 Login
+//               </Link>
+//               <Link href="/signUp" className="">
+//                 <PrimaryButton>Register</PrimaryButton>
+//               </Link>
+//             </div>
+//           </div>
+//         )}
+//       </Container>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
+
+
+
+
+
 "use client";
 
 import logo from "@/assets/landing-page/main-logo.png";
@@ -10,11 +154,16 @@ import Logo from "../Logo";
 import Container from "../Container/Container";
 import "./navbar.css";
 import PrimaryButton from "../primaryButton/PrimaryButton";
+import Cookies from "js-cookie";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
   const [openNav, setOpenNav] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter()
 
   const navLinks = [
     { name: "About Us", href: "#about" },
@@ -23,6 +172,20 @@ const Navbar = () => {
     { name: "Testimonials", href: "#testimonials" },
     { name: "Tutorials", href: "/tutorials" },
   ];
+
+  // check login status on mount 
+  useEffect(() => {
+    const token = Cookies.get("accessToken")
+    console.log(token, "========================token")
+    setIsLoggedIn(!!token)
+  })
+
+  const handleLogout = () => {
+    Cookies.remove("accessToken")
+    setIsLoggedIn(false);
+    toast.success("Logged out successfully");
+    router.push("/signIn");
+  }
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -50,9 +213,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`w-full px-4 py-6 bg-white shadow-sm border-b border-gray-100  top-0 z-50 bg-camp-primary ${
-        scroll ? "sticky-navbar w-full bg-camp-primary " : ""
-      }`}
+      className={`w-full px-4 py-6 bg-white shadow-sm border-b border-gray-100  top-0 z-50 bg-camp-primary ${scroll ? "sticky-navbar w-full bg-camp-primary " : ""
+        }`}
     >
       <Container>
         <div className=" mx-auto flex items-center justify-between">
@@ -78,12 +240,23 @@ const Navbar = () => {
 
           {/* Buttons */}
           <div className="hidden lg:flex space-x-4">
-            <Link
-              href="/signIn"
-              className="border border-blue-600 text-blue-600 px-8 py-3 rounded hover:bg-blue-50 transition"
-            >
-              Login
-            </Link>
+            {
+              isLoggedIn ? (
+                <Link
+                  href="/services"
+                  className="border border-blue-600 text-blue-600 px-8 py-3 rounded hover:bg-blue-50 transition cursor-pointer"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  href="/signIn"
+                  className="border border-blue-600 text-blue-600 px-8 py-3 rounded hover:bg-blue-50 transition"
+                >
+                  Login
+                </Link>
+              )
+            }
             <Link
               href="/signUp"
               style={{
@@ -119,12 +292,23 @@ const Navbar = () => {
               </Link>
             ))}
             <div className="flex flex-col space-y-2 pt-2">
-              <Link
-                href="/signIn"
-                className="border border-blue-600 text-blue-600 px-4 py-2 rounded text-center"
-              >
-                Login
-              </Link>
+              {
+                isLoggedIn ? (
+                  <Link
+                    href="/services"
+                    className="border border-blue-600 text-blue-600 px-8 py-3 rounded hover:bg-blue-50 transition cursor-pointer text-center"
+                  >
+                    Dashboard
+                  </Link>
+                ) : (
+                  <Link
+                    href="/signIn"
+                    className="border border-blue-600 text-blue-600 px-8 py-3 rounded hover:bg-blue-50 transition text-center"
+                  >
+                    Login
+                  </Link>
+                )
+              }
               <Link href="/signUp" className="">
                 <PrimaryButton>Register</PrimaryButton>
               </Link>
@@ -137,3 +321,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

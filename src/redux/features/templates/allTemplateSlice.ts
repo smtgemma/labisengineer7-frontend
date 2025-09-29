@@ -46,9 +46,18 @@ import { baseUrlApi } from "@/redux/api/baseUrlApi";
 
 const allTemplatesApi = baseUrlApi.injectEndpoints({
   endpoints: (build) => ({
+    
     getOwnerTemplate: build.query({
       query: (ownerId) => ({
         url: `/projects/${ownerId}/templete-two`,
+        method: "GET",
+      }),
+      providesTags: ["Templates"], 
+    }),
+
+     getProject2: build.query({
+      query: (prjectId) => ({
+        url: `/project2/getProject2/${prjectId}`,
         method: "GET",
       }),
       providesTags: ["Templates"], 
@@ -87,6 +96,7 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
 
 export const {
   useGetOwnerTemplateQuery,
+  useGetProject2Query,
   useUpdateProjectMutation,
   useDownloadTemplatePdfQuery,
   useExeclDownloadTemplateQuery,
