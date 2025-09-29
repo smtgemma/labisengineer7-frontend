@@ -7,7 +7,7 @@ import { IoPeopleOutline } from "react-icons/io5";
 import { LiaCanadianMapleLeaf, LiaClipboardListSolid } from "react-icons/lia";
 import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { PiNewspaperThin } from "react-icons/pi";
-import { RiDashboardFill } from "react-icons/ri";
+import { RiDashboardFill, RiLinksLine } from "react-icons/ri";
 import { VscServerProcess } from "react-icons/vsc";
 import { HiOutlineClipboardDocumentList } from "react-icons/hi2";
 import { FaSackDollar } from "react-icons/fa6";
@@ -144,7 +144,11 @@ export const DashBoardLink = [
     href: "/document",
     icon: PiNewspaperThin,
   },
-
+  {
+    name: "Useful Links ",
+    href: "/useful-links",
+    icon: RiLinksLine,
+  },
   {
     name: "Help/Guides",
     href: "/guidelines",
@@ -155,4 +159,5 @@ export const DashBoardLink = [
     href: "/admin-profile ",
     icon: IoSettingsOutline,
   },
+
 ];
