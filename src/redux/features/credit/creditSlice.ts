@@ -25,10 +25,17 @@ const creditApi = baseUrlApi.injectEndpoints({
       },
       invalidatesTags: ["Credit"],
     }),
-
-
-
   }),
 });
 
 export const { useGetCreditServiceQuery, useRemainingCreditQuery, useUseCreditsMutation } = creditApi;
+
+
+// 1.e-adeies(Εγκριση Εργασιών Μικρής Κλίμακας)
+
+// Νόμος 4495 / 2017
+
+// ΗΤΚ(Ηλεκτρονική Ταυτότητα Ακινήτου
+
+//    Βεβαίωση Εργασιών άρθρου 30
+

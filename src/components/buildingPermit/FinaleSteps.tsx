@@ -742,15 +742,6 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                             {selected === "template_3_owner_1" && (
                                 <S2D3 allData={allData} />
                             )}
-                            {selected === "template_4_owner_1" && (
-                                <h1>template_4_owner_1</h1>
-                            )}
-                            {selected === "template_3_owner_2" && (
-                                <h1>template_3_owner_2</h1>
-                            )}
-                            {selected === "template_4_owner_2" && (
-                                <h1>template_4_owner_2</h1>
-                            )}
                         </div>
                     </div>
                 )}
