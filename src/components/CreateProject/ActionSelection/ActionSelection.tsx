@@ -41,6 +41,8 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
+  console.log(selected, "sdjfldskjfldskjf -----------id")
+
   const { data: remainingCredit } = useRemainingCreditQuery("");
   const [useCredit] = useUseCreditsMutation();
   const dispatch = useDispatch();

@@ -736,7 +736,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                             {selected ===
                                 "template_2" && (
                                     <div>
-                                        <S2D2 allData={allData} question={question} />
+                                        <S2D2 allData={allData} question={question} violations={violations} />
                                     </div>
                                 )}
                             {selected === "template_3_owner_1" && (

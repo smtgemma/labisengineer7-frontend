@@ -27,8 +27,20 @@ type questionProps = {
     question: string;
     answer: string;
 };
+type violationsProps = {
+    age: string;
+    category: string;
+    createdAt: string;   // ISO date string
+    formId: number;
+    id: string;
+    otherViolation: boolean;
+    projectId: string;
+    showRemainingViolations: boolean;
+    updatedAt: string;   // ISO date string
+    violations: string[];
+};
 
-export default function S2D2({ allData, question }: { allData: allDataProps, question: questionProps[] }) {
+export default function S2D2({ allData, question, violations }: { allData: allDataProps, question: questionProps[], violations: violationsProps[] }) {
 
     const { projectDescription, horizontalPropertyName, propertyPostalCode, municipalityCommunity,
         propertyNumber, propertyAddress, propertyPlace, issuingAuthority, kaekProperty, permitNumber, createdAt, lastName, firstName, specialty, } = allData || {}
@@ -131,17 +143,37 @@ export default function S2D2({ allData, question }: { allData: allDataProps, que
             </div>
             <div className="p-6 border-b-2 space-y-6">
                 {/* If category 3 is selected, add the following text: */}
-                <p>Φ.Κ. # 4. Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96, του Ν.4495/17 ,Κατηγορία 3,Έτος κατασκευής: από 1/1/2004 μέχρι 28/7/2011.
-                    ( (The date that selected from user at sheet 1). (Descripsions valitation from Sheet 4) . Comment from Sheet 4
-                </p>
+                {
+                    violations.map((violation) => {
+                        if (violation.category === "3") {
+                            return <div>
+                                <p>Φ.Κ. # 4. Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96, του Ν.4495/17 ,Κατηγορία 3,Έτος κατασκευής: από 1/1/2004 μέχρι 28/7/2011.
+                                    ( (The date that selected from user at sheet 1). (Descripsions valitation from Sheet 4) . Comment from Sheet 4
+                                </p>
+                            </div>
+                        }
+                        return null;
+                    })
+                }
                 {/* If the user checks the box with other violations, add this text */}
-                <p>
-                    Φ.Κ. # 5. Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του Ν.4495/2017 - (Descripsions valitation from Sheet 5), Comment from Sheet 5 και σύμφωνα με το Παράρτημα Β
-                    του Ν.4495/2017 ορίζονται ως (1) Πολεοδομική παράβαση. (επισυνάπτεται αναλυτικός προυπολογισμός).
-                </p>
+                {
+                    violations.map((violation, index) => {
+                        if (violation.otherViolation) {
+                            return (
+                                <div key={index}>
+                                    <p>
+                                        Φ.Κ. # 5. Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του Ν.4495/2017 - (Descripsions valitation from Sheet 5), Comment from Sheet 5 και σύμφωνα με το Παράρτημα Β
+                                        του Ν.4495/2017 ορίζονται ως (1) Πολεοδομική παράβαση. (επισυνάπτεται αναλυτικός προυπολογισμός).
+                                    </p>
+                                </div>
+                            );
+                        }
+                        return null;
+                    })
+                }
 
                 {/* question answer  */}
-                <QuestionAnswer question={question}/>
+                <QuestionAnswer question={question} />
 
             </div>
             <div className="flex flex-col justify-center items-center">

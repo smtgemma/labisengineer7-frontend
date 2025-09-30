@@ -9,7 +9,7 @@ function QuestionAnswer({ question }: { question: questionProps[] }) {
     return (
         <div>
             {/* question answer  */}
-            <div className="p-6 border-b-2 space-y-6">
+            <div className="border-b-2 space-y-6">
                 {question.map((item: { answer: string; question: string }) => {
                     //    question ---1 
                     {/* If on Question (1) the user selected a) add this text */ }
