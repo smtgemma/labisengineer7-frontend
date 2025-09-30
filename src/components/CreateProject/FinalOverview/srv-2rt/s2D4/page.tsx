@@ -43,17 +43,36 @@ interface allDataProps {
     propertyPlace: string;
     firstName: string;
     lastName: string;
-    floorProperty: string;
+    propertyNumber: string;
+    propertyPostalCode: string;
+    permitNumber: string;
+    issuingAuthority: string;
 }
 
+type ViolationData = {
+    age: string;
+    category: string;
+    createdAt: string;
+    formId: number;
+    id: string;
+    otherViolation: boolean;
+    projectId: string;
+    showRemainingViolations: boolean;
+    updatedAt: string;
+    violations: string[];
+};
 
-export default function S2D3({ allData, owner }: { allData: allDataProps, owner: any }) {
+
+
+export default function S2D4({ allData, owner, violations }: { allData: allDataProps, owner: any, violations: ViolationData[] }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
+    console.log(violations, "=========================> violations")
+
     const engineers = allData?.engineers?.[0] || {};
     // Removed duplicate 'owner' declaration
-    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt, propertyAddress, propertyPlace, firstName, lastName, floorProperty } = allData || {};
+    const { id, createdById, serviceId, ydom, specialty, createdAt, propertyAddress, propertyPlace, firstName, lastName, propertyNumber, propertyPostalCode, permitNumber, issuingAuthority } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
     const { data: userData } = useGetMeQuery()
@@ -236,45 +255,38 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                         {/* Declaration text */}
                         <div className="p-4 text-sm">
                             <p className="mb-4">
-                                Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
+                                Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις (3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν. 1599/1986,
+                                δηλώνω ότι σχετικά με το δηλωθέν ακίνητό στην στην οδό {propertyAddress || "N/A"} {propertyNumber || "N/A"} περιοχή City/Place/Municipality Property με Τ.Κ.{propertyPostalCode || "N/A"} στο οποίο ως ιδιοκτήτης με ποσοστό  Owner Percent Property % ισχύουν τα εξής:
                             </p>
                             <p className="mb-1">
-                                Εγω ο/η ({owner?.last_name || "N/A"}) ο/η οποίος/οποία έχω στην ιδιοκτησία μου την αυτοτελή διηρημένη οριζόντια
+                                Αριθμός Οικοδομικής Άδειας: {permitNumber || "N/A"} Ημερομηνία Έκδοσης: {createdAt && format(new Date(createdAt), "dd/MM/yyyy")} {permitNumber || "N/A"} Πολεοδομική Υπηρεσία: {issuingAuthority || "N/A"}
                             </p>
                             <p className="mb-1">
-                                ιδιοκτησία «{horizontalPropertyName || "N/A"}/descripsion», που βρίσκεται στον ({floorProperty || "N/A"}) όροφο πολυκατοικίας στην οδό
+                                Περιγραφή Αυθαίρετων Κατασκευών ή/και Χρήσεων:
                             </p>
-                            <p className="mb-1">
-                                ({propertyAddress || "N/A"}), στο οικοδομικό τετράγωνο (Ο.Τ. Number), στα/στην/στον ({propertyPlace || "N/A"}) , του Δήμου (Municipality-City Property)---, με είδος
-                            </p>
-                            <p className="mb-1">
-                                ιδιοκτησίας (Owner's type of ownership) ΚΥΡΙΟΤΗΤΑΣ ΚΑΤΑ (
-                                Property ownership percentage )στη διηρημένη ιδιοκτησία, στην οποία αναλογεί
-                            </p>
-                            <p className="mb-1">
-                                (percentage of co-ownership of the plot)/1000 ποσοστό συνιδιοκτησίας εξ αδιαιρέτου στο σύνολο του οικοπέδου, εξουσιοδοτώ
-                            </p>
-                            <p className="mb-1">
-                                τον /την ({engineers?.lastName || "N/A"} {engineers?.firstName || "N/A"})-({specialty || "N/A"}) με ΑΜ ΤΕΕ (TEE NUMBER),
-                            </p>
-                            <p className="mb-1">
-                                για να προβεί σε όλες τις απαραίτητες ενέργειες σχετικά με τη ρύθμιση αυθαίρετων κατασκευών, όπως αυτές περιγράφονται στο κεφάλαιο ΦΕΚ 167Α/3-11-2017 του Ν.4495/2017.
-                            </p>
-                        </div>
-
-                        {/* Additional disclaimer text */}
-                        <div className="flex justify-between p-5">
-                            <div>
-                                <p>Βεβαιώνεται το γνήσιο της υπογραφής </p>
-                            </div>
-                            <div>
-                                <div>
-                                    <div className="flex justify-center gap-10">
-                                        <p>Ημερομηνία: </p>
-                                        <p>- 20</p>
-                                    </div>
-                                    <p className="text-center mt-6"> Ο – Η Δηλ.</p>
-                                </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
+                                {
+                                violations && violations?.map((item: any, index: number) => {
+                                    return (
+                                        <div key={index}>
+                                            <p>Age: {item.age}</p>
+                                            <p>Category: {item.category}</p>
+                                            <p>CreatedAt: {item.createdAt && format(new Date(item.createdAt), "dd/MM/yyyy")}</p>
+                                            <p>FormId: {item.formId}</p>
+                                            <p>Id: {item.id}</p>
+                                            <p>OtherViolation: {item.otherViolation}</p>
+                                            <p>ProjectId: {item.projectId}</p>
+                                            <p>ShowRemainingViolations: {item.showRemainingViolations}</p>
+                                            <p>UpdatedAt: {item.updatedAt && format(new Date(item.updatedAt), "dd/MM/yyyy")}</p>
+                                            <p>Violations: {item?.violations && item?.violations?.map((v: string, index: number) => {
+                                                return <div key={index}>
+                                                    <p>{v}</p>
+                                                </div>
+                                            })}</p>
+                                        </div>
+                                    )
+                                })
+                            }
                             </div>
                         </div>
                     </div>
