@@ -47,13 +47,13 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
 
         stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
             baseTemplates.push({
-                id: `template_3_owner_${index + 1}`,
-                title: `Ανάθεσης Ιδιοκτήτη 4495/2017 ${owner.first_name} ${owner.last_name}`,
+                id: `template3_${index}`,
+                title: `Ανάθεσης Ιδιοκτήτη 4495/2017 3 ${owner.first_name} ${owner.last_name}`,
                 price: 0.5,
             });
             baseTemplates.push({
-                id: `template_4_owner_${index + 1}`,
-                title: `Αυθαιρέτων Ιδιοκτήτη 4495/2017 ${owner.first_name} ${owner.last_name}`,
+                id: `template4_${index}`,
+                title: `Αυθαιρέτων Ιδιοκτήτη 4495/2017 4 ${owner.first_name} ${owner.last_name}`,
                 price: 0.5,
             });
         });
