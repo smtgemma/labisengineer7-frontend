@@ -5,7 +5,7 @@ import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProject2Mutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     firstName?: string;
@@ -15,7 +15,7 @@ interface FormInputs {
     dateOfBirth?: string;
     placeOfBirth?: string;
     idNumber?: string;
-    phone?: string;
+    mobile?: string;
     city?: string;
     ownerAddress?: string;
     addressNumber?: string;
@@ -46,18 +46,22 @@ interface allDataProps {
     floorProperty: string;
 }
 
+type modalFnProps = {
+    setIsModalOpen: (value: boolean) => void;
+}
+
 
 export default function S2D3({ allData, owner }: { allData: allDataProps, owner: any }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = allData?.engineers?.[0] || {};
     // Removed duplicate 'owner' declaration
-    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt, propertyAddress, propertyPlace, firstName, lastName, floorProperty } = allData || {};
-
-    const [updateProject] = useUpdateProjectMutation()
-    const { data: userData } = useGetMeQuery()
-    const signature = userData?.data?.signature
+    const { id, createdById, serviceId, horizontalPropertyName, ydom, specialty, propertyAddress, propertyPlace, floorProperty } = allData || {};
+    console.log(id, createdById, "==========================id, createById")
+    console.log(owner, "============dsfds===============")
+    const [updateProject2] = useUpdateProject2Mutation()
+    // const { data: userData } = useGetMeQuery()
+    // const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -67,28 +71,31 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
 
     // Submit handler
     const onSubmit = async (data: FormInputs) => {
-        if (selectedOwnerIndex === null) return;
-
-        // old owner copy
-        const updatedOwners = [...allData.owners];
-
-        //    owner replace of old owner 
-        updatedOwners[selectedOwnerIndex] = {
-            ...updatedOwners[selectedOwnerIndex],
-            ...data
-        };
-
+        console.log(data, "============data")
         // make formData 
         const formData = new FormData();
         formData.append("data", JSON.stringify({
-            owners: updatedOwners,
-            projectDescription: data.projectDescription || allData.projectDescription,
+            serviceId: serviceId,
             ydom: data.ydom || allData.ydom,
-            serviceId: serviceId
+            firstName: data.firstName || owner?.first_name,
+            lastName: data.lastName || owner?.last_name,
+            fatherFirstLastName: data.fatherFirstLastName || owner?.father_first_last_name,
+            mothersFirstLastName: data.mothersFirstLastName || owner?.mothers_first_last_name,
+            dateOfBirth: data.dateOfBirth || owner?.date_of_birth,
+            placeOfBirth: data.placeOfBirth || owner?.place_of_birth,
+            idNumber: data.idNumber || owner?.id_number,
+            mobile: data.mobile || owner?.mobile,
+            city: data.city || owner?.city,
+            ownerAddress: data.ownerAddress || owner?.owner_address,
+            addressNumber: data.addressNumber || owner?.address_number,
+            postalCode: data.postalCode || owner?.postal_code,
+            email: data.email || owner?.email,
+            taxIdentificationNumber: data.taxIdentificationNumber || owner?.tax_identification_number,
+
         }));
 
         try {
-            await updateProject({
+            await updateProject2({
                 projectId: id,
                 userId: createdById,
                 formData: formData,
@@ -96,7 +103,6 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
 
             reset();
             setIsEditModalOpen(false)
-            setSelectedOwnerIndex(null)
 
         } catch (error) {
             console.error("Update failed", error)
@@ -107,6 +113,14 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
     return (
         <div className="arial">
             <div className="max-w-[796px] mx-auto bg-white mb-16">
+                <div className="text-right -mt-3">
+                    <button
+                        className="mt-1 px-4 py-1"
+                        onClick={() => setIsEditModalOpen(true)}
+                    >
+                        <FaRegEdit className="text-black text-2xl cursor-pointer" />
+                    </button>
+                </div>
                 <div className="max-w-[796px] mx-auto bg-white">
                     {/* Header with coat of arms */}
                     <div className="text-center mb-6">
@@ -132,7 +146,7 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                         <div className="border-b border-gray-400 bg-gray-50">
                             <div className="flex">
                                 <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-                                <div className="flex-1 p-2  font-bold">{ydom || "N/A"}</div>
+                                <div className="flex-1 p-2  font-bold">ΥΠ.ΕΝ</div>
                             </div>
                         </div>
 
@@ -279,6 +293,200 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                         </div>
                     </div>
                     {/* EDIT MODAL */}
+                    {isEditModalOpen && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                            <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
+                                {/* Close button */}
+                                <button
+                                    className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
+                                    onClick={() => setIsEditModalOpen(false)}
+                                >
+                                    ✕
+                                </button>
+
+                                <h2 className="text-lg font-bold mb-4">✍️ Edit Data</h2>
+                                <div>
+                                    <form
+                                        onSubmit={handleSubmit(onSubmit)}
+                                        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                                    >
+                                        {/* ydom */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">ΠΡΟΣ *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("ydom", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={ydom || ""}
+                                            />
+                                        </div>
+                                        {/* Name */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Όνομα *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("firstName", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.first_name || ""}
+                                            />
+                                        </div>
+
+                                        {/* Surname */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Επώνυμο *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("lastName", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.last_name || ""}
+                                            />
+                                        </div>
+
+                                        {/* Father's Name */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Όνομα Πατρός *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("fatherFirstLastName", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.father_first_last_name || ""}
+                                            />
+                                        </div>
+
+                                        {/* Mother's Name */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Όνομα Μητρός *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("mothersFirstLastName", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.mothers_first_last_name || ""}
+                                            />
+                                        </div>
+
+                                        {/* Birth Date */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Ημερομηνία Γέννησης *:</label>
+                                            <input
+                                                type="date"
+                                                {...register("dateOfBirth", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.date_of_birth || ""}
+                                            />
+                                        </div>
+
+                                        {/* Birth Place */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Τόπος Γέννησης *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("placeOfBirth", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.place_of_birth || ""}
+                                            />
+                                        </div>
+
+                                        {/* ID */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Αριθμός Ταυτότητας *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("idNumber", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.id_number || ""}
+                                            />
+                                        </div>
+
+                                        {/* Phone */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Τηλέφωνο *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("mobile", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.mobile || ""}
+                                            />
+                                        </div>
+
+                                        {/* City */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Πόλη *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("city", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.city || ""}
+                                            />
+                                        </div>
+
+                                        {/* Address */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Διεύθυνση *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("ownerAddress", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.owner_address || ""}
+                                            />
+                                        </div>
+
+                                        {/* Address Number */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Αριθμός Διεύθυνσης *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("addressNumber", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.address_number || ""}
+                                            />
+                                        </div>
+
+                                        {/* Postal Code */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Ταχυδρομικός Κώδικας *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("postalCode", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.postal_code || ""}
+                                            />
+                                        </div>
+
+                                        {/* Email */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Email *:</label>
+                                            <input
+                                                type="email"
+                                                {...register("email", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.email || ""}
+                                            />
+                                        </div>
+
+                                        {/* AFM */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Α.Φ.Μ. *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("taxIdentificationNumber", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={owner?.tax_identification_number || ""}
+                                            />
+                                        </div>
+                                        {/* Submit */}
+                                        <div className="flex justify-end md:col-span-2">
+                                            <button
+                                                type="submit"
+                                                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm cursor-pointer"
+                                            >
+                                                Update
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

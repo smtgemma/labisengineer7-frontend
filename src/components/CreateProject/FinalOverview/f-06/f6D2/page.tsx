@@ -107,7 +107,7 @@ export default function F6D2({ allData, setIsModalOpen }: F6D5Props) {
       </div>
       {/* Title */}
       <h2 className="text-center font-semibold underline text-sm mb-2">
-        ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ ΕΡΓΑΣΙΩΝ - ΒΕΒΑΙΩΣΗ ΜΗΧΑΝΙΚΟΥ
+        ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ
       </h2>
 
       {/* Project Information */}

@@ -151,7 +151,7 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
                         <div className="border-b border-gray-400 bg-gray-50">
                             <div className="flex">
                                 <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
-                                <div className="flex-1 p-2  font-bold">{ydom || "N/A"}</div>
+                                <div className="flex-1 p-2  font-bold">ΥΠ.ΕΝ</div>
                             </div>
                         </div>
 

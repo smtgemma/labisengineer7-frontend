@@ -46,21 +46,21 @@ import { baseUrlApi } from "@/redux/api/baseUrlApi";
 
 const allTemplatesApi = baseUrlApi.injectEndpoints({
   endpoints: (build) => ({
-    
+
     getOwnerTemplate: build.query({
       query: (ownerId) => ({
         url: `/projects/${ownerId}/templete-two`,
         method: "GET",
       }),
-      providesTags: ["Templates"], 
+      providesTags: ["Templates"],
     }),
 
-     getProject2: build.query({
+    getProject2: build.query({
       query: (prjectId) => ({
         url: `/project2/getProject2/${prjectId}`,
         method: "GET",
       }),
-      providesTags: ["Templates"], 
+      providesTags: ["Templates"],
     }),
 
     getMe: build.query<any, void>({
@@ -73,7 +73,15 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
         method: "PATCH",
         body: formData,
       }),
-      invalidatesTags: ["Templates"], 
+      invalidatesTags: ["Templates"],
+    }),
+
+    updateProject2: build.mutation({
+      query: ({ projectId, userId, formData }) => ({
+        url: `project2/update-project/${projectId}/${userId}`,
+        method: "PATCH",
+        body: formData,
+      }),
     }),
 
     downloadTemplatePdf: build.query({
@@ -98,6 +106,7 @@ export const {
   useGetOwnerTemplateQuery,
   useGetProject2Query,
   useUpdateProjectMutation,
+  useUpdateProject2Mutation,
   useDownloadTemplatePdfQuery,
   useExeclDownloadTemplateQuery,
   useGetMeQuery,
