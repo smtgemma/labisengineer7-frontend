@@ -50,63 +50,62 @@
 // export default Test
 
 
-
 "use client"
 
-import { useState } from "react"
+import { useState } from "react";
 import { format } from "date-fns"
 // for editing 
-import { useForm, Controller } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
-interface FormData {
-    projectDescription: string;
-    propertyAddress: string;
-    propertyPlace: string;
-    propertyPostalCode: string;
-    owners: {
-        firstName: string;
-        lastName: string;
-    }[];
+interface FormInputs {
+    bornDate?: string;
+    bornTown?: string;
+    email?: string;
+    engVatNumber?: string;
+    fatherName?: string;
+    firstName?: string;
+    idCardNumber?: string;
+    lastName?: string;
+    motherName?: string;
+    phone?: string;
+    postalCode?: string;
+    signature?: string;
+    streetAddress?: string;
+    streetNumber?: string;
+    town?: string;
+    projectDescription?: string;
+    ydom?: string;
+    serviceId?: string;
 }
-
-interface allDataProps {
-    owners: any[]
-    allDescriptionTasks: any[]
-    technical_description: string
-    horizontalPropertyName: string
-    projectDescription: string
-    id: string
-    createdById: string
-    propertyPostalCode: string
-    propertyAddress: string
-    propertyPlace: string
-    createdAt: string
-}
-
-type F6D5Props = {
-    allData: any;
-    setIsModalOpen: (value: boolean) => void;
-};
 // end editing 
 
+
 interface allDataProps {
-    owners: any[];
-    allDescriptionTasks: any[]
-    projectDescription: string;
-    horizontalPropertyName: string
-    createdAt: string
-    municipalityCommunity: string
+    engineers: any[];
+    projectDescription?: string;
+    ydom?: string;
+    propertyPostalCode?: string;
+    propertyAddress?: string;
+    propertyPlace?: string;
+    id: string;
+    createdById: string;
+    serviceId: string;
+    createdAt: string;
 }
 
-export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owner = allData?.owners || []
-    const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName, propertyNumber, municipalityCommunity } = allData || {}
-    console.log(allData, "alldata========")
+
+export default function F6D10({ allData }: { allData: allDataProps }) {
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
+
+    const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
+    const projectDescription = allData?.projectDescription || "";
+    const { ydom } = allData || {};
+    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
+
 
     const [updateProject] = useUpdateProjectMutation()
     const { data: userData } = useGetMeQuery()
@@ -115,62 +114,468 @@ export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
     const {
         register,
         handleSubmit,
-        control,
         reset,
-        formState: { errors },
-    } = useForm<FormData>({
-        defaultValues: {
-            projectDescription: allData?.projectDescription || "",
-            propertyAddress: allData?.propertyAddress || "",
-            propertyPlace: allData?.propertyPlace || "",
-            propertyPostalCode: allData?.propertyPostalCode || "",
-            owners: [
-                {
-                    firstName: allData?.owners?.[0]?.firstName || "",
-                    lastName: allData?.owners?.[0]?.lastName || "",
-                },
-            ],
-        },
-    })
+    } = useForm<FormInputs>({})
 
-    const onSubmit = async (data: FormData) => {
-        console.log("Updated Data:", data)
-        const addNewData = {
-            serviceId: serviceId,
+    // Submit handler
+    const onSubmit = async (data: FormInputs) => {
+        if (selectedOwnerIndex === null) return;
+
+        // old owner copy
+        const updatedOwners = [...allData.engineers];
+
+        //    owner replace of old owner 
+        updatedOwners[selectedOwnerIndex] = {
+            ...updatedOwners[selectedOwnerIndex],
             ...data
-        }
-        const formData = new FormData()
-        formData.append("data", JSON.stringify(addNewData))
+        };
+
+        // make formData 
+        const formData = new FormData();
+        formData.append("data", JSON.stringify({
+            engineers: updatedOwners,
+            projectDescription: data.projectDescription || allData.projectDescription,
+            ydom: data.ydom || allData.ydom,
+            serviceId: serviceId
+        }));
 
         try {
-            const responsive = await updateProject({ projectId: id, userId: createdById, formData }).unwrap()
-            console.log(responsive)
+            await updateProject({
+                projectId: id,
+                userId: createdById,
+                formData: formData,
+            }).unwrap()
+
+            reset();
+            setIsEditModalOpen(false)
+            setSelectedOwnerIndex(null)
+
         } catch (error) {
-            console.log(error)
+            console.error("Update failed", error)
         }
 
-        reset()
-        setIsEditModalOpen(false)
-        setIsModalOpen(false)
     }
 
     return (
-        <div className="max-w-[794px] mx-auto p-6 bg-white arial">
-            <div className="text-right -mt-9">
-                <button
-                    className="mt-1 px-4 py-1"
-                    onClick={() => setIsEditModalOpen(true)}
-                >
-                    <FaRegEdit className="text-black text-2xl cursor-pointer" />
-                </button>
-            </div>
-            {/* Title */}
-            <h2 className="text-center font-semibold underline text-sm mb-2">
-                ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΣΗΣ ΣΥΝΑΙΝΕΣΗΣ ΣΥΝΙΔΙΟΚΤΗΤΩΝ
-            </h2>
+        <div className="arial">
+            {engineers.length > 0 ? (engineers?.map((engineer: any, index: number) => (
+                <div className="max-w-[796px] mx-auto bg-white">
+                    <div className="text-right -mt-3">
+                        <button
+                            className="px-4 py-1"
+                            onClick={() => {
+                                setSelectedOwnerIndex(index);
+                                setIsEditModalOpen(true);
+                            }}
+                        >
+                            <FaRegEdit className="text-black text-2xl cursor-pointer" />
+                        </button>
+                    </div>
+                    {/* Header with coat of arms */}
+                    <div className="text-center mb-6">
+                        <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
+                            <img src="/templateLogo/templateLogo.jpg" alt="Template Logo" />
+                        </div>
+                        <h1 className="text-xl font-bold mb-2">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ</h1>
+                        <p className="text-sm">(άρθρο 8 Ν.1599/1986)</p>
+                    </div>
 
-            {/* Project Information */}
-            <div className="mb-8 space-y-4">
+                    {/* Subtitle */}
+                    <div className="text-center mb-6 text-sm">
+                        <p>
+                            Η ακρίβεια των στοιχείων που υποβάλλονται με αυτή τη δήλωση μπορεί να ελεγχθεί με βάση το αρχείο άλλων
+                            υπηρεσιών
+                        </p>
+                        <p>(άρθρο 8 παρ. 4 Ν.1599/1986)</p>
+                    </div>
+
+                    {/* Form table */}
+                    <div className="border border-gray-400">
+                        {/* ΠΡΟΣ row */}
+                        <div className="border-b border-gray-400 bg-gray-50">
+                            <div className="flex">
+                                <div className="w-20 p-2 border-r border-gray-400 font-bold text-sm">ΠΡΟΣ(1):</div>
+                                <div className="flex-1 p-2  font-bold">{ydom || "N/A"}</div>
+                            </div>
+                        </div>
+
+                        {/* Name Owner row */}
+                        <div className="border-b border-gray-400">
+                            <div className="flex">
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
+                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{engineer?.firstName || "N/A"}</div>
+                                <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
+                                <div className="flex-1 p-2  font-bold">{engineer?.lastName || "N/A"}</div>
+                            </div>
+                        </div>
+
+                        {/* Father's name row */}
+                        <div className="border-b border-gray-400">
+                            <div className="flex">
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
+                                <div className="flex-1 p-2 font-bold">{engineer?.fatherName || "N/A"}</div>
+                            </div>
+                        </div>
+
+                        {/* Mother's name row */}
+                        <div className="border-b border-gray-400">
+                            <div className="flex">
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
+                                <div className="flex-1 p-2 font-bold">{engineer?.motherName || "N/A"}</div>
+                            </div>
+                        </div>
+
+                        {/* Birth date row */}
+                        <div className="border-b border-gray-400">
+                            <div className="flex">
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
+                                <div className="flex-1 p-2 font-bold">{engineer?.bornDate && format(new Date(engineer?.bornDate), "dd/MM/yyyy") || "N/A"}</div>
+                            </div>
+                        </div>
+
+                        {/* Birth town row */}
+                        <div className="border-b border-gray-400">
+                            <div className="flex">
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
+                                <div className="flex-1 p-2 font-bold">{engineer?.bornTown || "N/A"}</div>
+                            </div>
+                        </div>
+
+                        {/* ID and mobile row */}
+                        <div className="border-b border-gray-400">
+                            <div className="flex">
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
+                                <div className="w-72 p-2 border-r border-gray-400 font-bold">{engineer?.idCardNumber || "N/A"}</div>
+                                <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
+                                <div className="flex-1 p-2 font-bold">{engineer?.phone || "N/A"}</div>
+                            </div>
+                        </div>
+
+                        {/* Address row */}
+                        <div className="border-b border-gray-400">
+                            <div className="flex">
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
+                                <div className="w-50 p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
+                                <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
+                                <div className="w-50 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress || "N/A"}</div>
+                                <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
+                                <div className="w-12 p-2 border-r border-gray-400 font-bold ">{engineer?.streetNumber || "N/A"}</div>
+                                <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
+                                <div className="w-25 p-2 font-bold">{engineer?.postalCode || "N/A"}</div>
+                            </div>
+                        </div>
+
+                        {/* Contact details row */}
+                        <div className="border-b border-gray-400">
+                            <div className="flex">
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Αρ. Τηλεομοιότυπου (Fax):</div>
+                                <div className="flex-1 p-2">
+                                    <div className="text-sm">
+                                        <div>Δ/νση</div>
+                                        <div>Ηλεκτρ.</div>
+                                        <div>Ταχυδρομ</div>
+                                        <div>ίου (Email):</div>
+                                    </div>
+                                </div>
+                                <div className=" p-2 underline ">{engineer?.email || "N/A"}</div>
+                            </div>
+                        </div>
+
+                        {/* VAT row */}
+                        <div className="border-b border-gray-400">
+                            <div className="flex">
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
+                                <div className="w-72 p-2 font-bold">{engineer?.engVatNumber || "N/A"}</div>
+                                <div className="w-32 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
+                            </div>
+                        </div>
+
+                        {/* Declaration text */}
+                        <div className="p-4 text-sm">
+                            <p className="mb-4">
+                                Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
+                            </p>
+
+                            <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
+                            <p className=" mb-6">{projectDescription || "N/A"}</p>
+                        </div>
+
+                        {/* Additional disclaimer text */}
+                        <div className="space-y-4 text-sm m p-4">
+                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"}</p>
+                            <p>
+                                από την ανάλυση του συνόλου των προβλεπόμενων εργασιών προκύπτει <span className="font-bold">ότι δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία του οργανισμού του κτιρίου.</span>
+                                Οι εργασίες περιορίζονται αποκλειστικά σε μη φέροντα στοιχεία και δεν επηρεάζουν καθ’ οποιονδήποτε τρόπο την ευστάθεια, φέρουσα ικανότητα ή δομική λειτουργία του κτιρίου.
+                                Η παρούσα δήλωση τεκμηριώνεται σύμφωνα με τις διατάξεις του άρθρου 29 του Ν.4495/2017.
+                            </p>
+                        </div>
+
+                        {/* Signature section */}
+                        <div className="flex justify-end">
+                            <div className="flex justify-end p-4">
+                                <div className="text-right space-y-2">
+                                    <div className="flex items-center gap-4">
+                                        <span className="text-sm">Ημερομηνία :</span>
+                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</span>
+                                    </div>
+                                    <div className="text-sm mt-8 text-center">
+                                        <div>( Υπογραφή )</div>
+                                        <div className="mt-4">Ο/Η/ Δηλών/ούσα</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* signature  */}
+                        <div className="flex items-center justify-end p-4">
+                            <img src={signature} alt="" />
+                        </div>
+                        <div className="text-xs p-6">
+                            <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
+                            <p>(2) Αναγράφεται ολογράφως.</p>
+                            <p> (3) «Όποιος εν γνώσει του δηλώνει ψευδή γεγονότα ή αρνείται ή αποκρύπτει τα αληθινά με έγγραφη υπεύθυνη δήλωση του άρθρου 8 τιμωρείται με φυλάκιση τουλάχιστον τριών μηνών. Εάν ο υπαίτιος αυτών των πράξεων σκόπευε να προσπορίσει στον εαυτόν του ή σε άλλον περιουσιακό όφελος βλάπτοντας τρίτον ή σκόπευε να βλάψει άλλον, τιμωρείται με κάθειρξη μέχρι 10 ετών.</p>
+                            <p>(4) Σε περίπτωση ανεπάρκειας χώρου η δήλωση συνεχίζεται στην πίσω όψη της και υπογράφεται από τον δηλούντα ή την δηλούσα.</p>
+                        </div>
+                    </div>
+                    {/* EDIT MODAL */}
+                    {isEditModalOpen && selectedOwnerIndex !== null && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                            <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
+                                {/* Close button */}
+                                <button
+                                    className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
+                                    onClick={() => setIsEditModalOpen(false)}
+                                >
+                                    ✕
+                                </button>
+
+                                <h2 className="text-lg font-bold mb-4">✍️ Edit Data</h2>
+                                <div>
+                                    <form
+                                        onSubmit={handleSubmit(onSubmit)}
+                                        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                                    >
+                                        {/* ydom */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">ΠΡΟΣ *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("ydom", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData?.ydom || ""}
+                                            />
+                                        </div>
+
+                                        {/* Name */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Όνομα *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("firstName", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.firstName || ""}
+                                            />
+                                        </div>
+
+                                        {/* Surname */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Επώνυμο *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("lastName", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.lastName || ""}
+                                            />
+                                        </div>
+
+                                        {/* Father's Name */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Όνομα Πατρός *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("fatherName", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.fatherName || ""}
+                                            />
+                                        </div>
+
+                                        {/* Mother's Name */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Όνομα Μητρός *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("motherName", { required: "This field is required" })}
+                                                className="flex-1 border motherName-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.motherName || ""}
+                                            />
+                                        </div>
+
+                                        {/* Birth Date */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Ημερομηνία Γέννησης *:</label>
+                                            <input
+                                                type="date"
+                                                {...register("bornDate", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.bornDate || ""}
+                                            />
+                                        </div>
+
+                                        {/* Birth Place */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Τόπος Γέννησης *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("bornTown", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.bornTown || ""}
+                                            />
+                                        </div>
+
+                                        {/* ID */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Αριθμός Ταυτότητας *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("idCardNumber", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.idCardNumber || ""}
+                                            />
+                                        </div>
+
+                                        {/* Phone */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Τηλέφωνο *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("phone", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.phone || ""}
+                                            />
+                                        </div>
+
+                                        {/* City */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Πόλη *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("town", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.town || ""}
+                                            />
+                                        </div>
+
+                                        {/* Address */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Διεύθυνση *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("streetAddress", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.streetAddress || ""}
+                                            />
+                                        </div>
+
+                                        {/* Address Number */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Αριθμός Διεύθυνσης *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("streetNumber", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.streetNumber || ""}
+                                            />
+                                        </div>
+
+                                        {/* Postal Code */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Ταχυδρομικός Κώδικας *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("postalCode", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.postalCode || ""}
+                                            />
+                                        </div>
+
+                                        {/* Email */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Email *:</label>
+                                            <input
+                                                type="email"
+                                                {...register("email", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.email || ""}
+                                            />
+                                        </div>
+
+                                        {/* AFM */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Α.Φ.Μ. *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("engVatNumber", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.engineers[selectedOwnerIndex]?.engVatNumber || ""}
+                                            />
+                                        </div>
+
+                                        {/* Project Description */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Περιγραφή Έργου *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("projectDescription", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.projectDescription || ""}
+                                            />
+                                        </div>
+
+                                        {/* Submit */}
+                                        <div className="flex justify-end md:col-span-2">
+                                            <button
+                                                type="submit"
+                                                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm cursor-pointer"
+                                            >
+                                                Update
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            ))) : (
+                <h2 className="text-3xl font-bold p-10">Data not found</h2>
+            )}
+        </div>
+    )
+}
+
+
+
+
+
+
+
+{/* <h3 className=" text-sm">
+    {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+    ΤΚ {propertyPostalCode || "N/A"}
+</h3> */}
+
+{/* <div className="flex items-center justify-center gap-2">
+    {
+        owner?.map((e: any, i: number) => (
+            <h3 key={i} className="text-sm">
+                {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+            </h3>
+        ))
+    }
+</div> */}
+
+
+{/* <div className="mb-8 space-y-4">
                 <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
                     <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
@@ -184,7 +589,6 @@ export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
                         ΤΚ {propertyPostalCode || "N/A"}
                     </h3>
                 </div>
-
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className="text-sm">Ιδιοκτήτης:</span>
                     <div className="flex items-center justify-center gap-2">
@@ -197,174 +601,7 @@ export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
                         }
                     </div>
                 </div>
-            </div>
-
-            {/* Main Description */}
-            <div className="text-sm mb-4 ml-10">
-                <div>
-                    <span className="font-semibold">
-
-                        <span className="mr-1">Στο ακίνητο {horizontalPropertyName || "N/A"} </span>
-                    </span>
-                    επί της οδού
-                    <span className="">
-                        <span className="ml-1">{propertyAddress || "N/A"} </span>{propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-                        <span className="mr-1">ΤΚ {propertyPostalCode || "N/A"}</span>
-                    </span>
-                    πρόκειται να <br />εκτελεσθούν οι παρακάτω εργασίες :
-                </div>
-            </div>
-
-            <div className="space-y-6 ml-10">
-
-                {Array.isArray(allDescriptionTasks) &&
-                    allDescriptionTasks.map((task: any, index: number) => (
-                        <div key={index}>
-                            <h3 className="text-sm font-bold">● {task?.id}</h3>
-                            <p className="text-sm">{task?.description}</p>
-                        </div>
-                    ))
-                }
-                <div>
-                    <p className="text-sm mb-6">
-                        <span className="font-bold">Βάσει των ισχυουσών πολεοδομικών και αστικών διατάξεων</span> για τις προβλεπόμενες εργασίες που πρόκειται να υλοποιηθούν στη συγκεκριμένη ιδιοκτησία, <span className="font-bold">δεν απαιτείται η συναίνεση των λοιπών συνιδιοκτητών της πολυκατοικίας.</span></p>
-                    <p className="text-sm mb-6">Ο λόγος είναι ότι:
-                    </p>
-                    <p className="text-sm">● Το σύνολο των εργασιών πρόκειται να εκτελεστεί αποκλειστικά εντός του περιγράμματος της ιδιοκτησίας, χωρίς επέμβαση σε κοινόχρηστους ή κοινόκτητους χώρους.
-                    </p>
-                    <p className="text-sm">● Δεν υφίσταται επέμβαση σε στατικά, φέροντα ή κοινόχρηστα δομικά στοιχεία του κτιρίου.
-                    </p>
-                    <p className="text-sm mb-6">● Δεν πραγματοποιούνται επεμβάσεις σε δίκτυα ή υποδομές που εξυπηρετούν άλλες ιδιοκτησίες (όπως δίκτυα θέρμανσης, ύδρευσης ή πυρασφάλειας κοινόχρηστων χώρων).
-                    </p>
-                    <p className="text-sm mb-6 font-bold underline">Συνεπώς, δεν απαιτείται σύγκληση ή απόφαση γενικής συνέλευσης ή άλλη μορφή συναίνεσης των υπολοίπων συνιδιοκτητών, για την εκτέλεση των εν λόγω εργασιών.
-                    </p>
-                    <p className="text-sm">Η παρούσα δήλωση αποτελεί στοιχείο τεκμηρίωσης για τον φάκελο του έργου, σύμφωνα και με το ισχύον νομικό πλαίσιο (Ν. 4495/2017).</p>
-                </div>
-
-                {/* {/* Signature Section */}
-                <div className="mt-6 text-right flex items-center justify-center p-5">
-                    <div className="max-w-[300px]">
-
-                        <div className="text-center">
-                            <p>Ημερομηνία :</p>
-                            <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</p>
-                        </div>
-                        <div className="">
-                            <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>
-                            <div className="flex items-center justify-end p-4">
-                                <img src={signature} alt="" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {/* EDIT MODAL */}
-            {isEditModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-                    <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
-                        {/* Close button */}
-                        <button
-                            className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
-                            onClick={() => setIsEditModalOpen(false)}
-                        >
-                            ✕
-                        </button>
-
-                        <h2 className="text-lg font-bold mb-4">✍️ Edit Data</h2>
-                        <div>
-                            <form
-                                onSubmit={handleSubmit(onSubmit)}
-                                className="space-y-4 p-4 border rounded-lg bg-white shadow-md"
-                            >
-                                {/* Project */}
-                                <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Έργο *:</label>
-                                    <input
-                                        defaultValue={projectDescription || "Project Description "}
-                                        type="text"
-                                        {...register("projectDescription", { required: "This field is required" })}
-                                        className="flex-1 border p-2 rounded text-sm"
-                                    />
-                                </div>
-
-                                {/* Address */}
-                                <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Θέση*:</label>
-                                    <div className="flex-1 grid grid-cols-3 gap-2">
-                                        <input
-                                            type="text"
-                                            defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyAddress", { required: "Address is required" })}
-                                            className="border p-2 rounded text-sm"
-                                        />
-                                        <input
-                                            type="text"
-                                            defaultValue={propertyPlace || "propertyPlace"}
-                                            {...register("propertyPlace", { required: "City is required" })}
-                                            className="border p-2 rounded text-sm"
-                                        />
-                                        <input
-                                            type="text"
-                                            defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                            {...register("propertyPostalCode", { required: "Postal code is required" })}
-                                            className="border p-2 rounded text-sm"
-                                        />
-                                    </div>
-                                </div>
-                                {/* Address */}
-                                {/* First Name */}
-                                <Controller
-                                    name="owners.0.firstName"
-                                    control={control}
-                                    rules={{ required: "First name is required" }}
-                                    render={({ field }) => (
-                                        <input
-                                            {...field}
-                                            placeholder="First Name"
-                                            className="border p-2 rounded text-sm w-full"
-                                        />
-                                    )}
-                                />
-                                {/* Last Name */}
-                                <Controller
-                                    name="owners.0.lastName"
-                                    control={control}
-                                    rules={{ required: "Last name is required" }}
-                                    render={({ field }) => (
-                                        <input
-                                            {...field}
-                                            placeholder="Last Name"
-                                            className="border p-2 rounded text-sm w-full"
-                                        />
-                                    )}
-                                />
-
-                                {/* Submit */}
-                                <div className="flex justify-end">
-                                    <button
-                                        type="submit"
-                                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm cursor-pointer"
-                                    >
-                                        Update
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </div>
-    )
-}
-
-
-
-
-
-
-
-
+            </div> */}
 
 
 

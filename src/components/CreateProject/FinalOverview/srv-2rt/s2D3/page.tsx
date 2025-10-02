@@ -57,8 +57,6 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
     const engineers = allData?.engineers?.[0] || {};
     // Removed duplicate 'owner' declaration
     const { id, createdById, serviceId, horizontalPropertyName, ydom, specialty, propertyAddress, propertyPlace, floorProperty } = allData || {};
-    console.log(id, createdById, "==========================id, createById")
-    console.log(owner, "============dsfds===============")
     const [updateProject2] = useUpdateProject2Mutation()
     // const { data: userData } = useGetMeQuery()
     // const signature = userData?.data?.signature
@@ -196,7 +194,7 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                <div className=" p-2 border-r border-gray-400 font-bold">{owner?.id_number || "N/A"}</div>
+                                <div className="w-72 p-2 border-r border-gray-400 font-bold">{owner?.id_number || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
                                 <div className="flex-1 p-2 font-bold">{owner?.mobile || "N/A"}</div>
                             </div>
@@ -205,14 +203,14 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                         {/* Address row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-full p-2 text-center border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                                <div className="w-full p-2 text-center border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
-                                <div className="w-full p-2 text-center border-r border-gray-400 text-sm">Οδός</div>
-                                <div className="w-full p-2 text-center border-r border-gray-400 font-bold ">{owner?.owner_address || "N/A"}</div>
-                                <div className="w-full p-2 text-center border-r border-gray-400 text-sm">Αριθ</div>
-                                <div className="w-full p-2 text-center border-r border-gray-400 font-bold ">{owner?.address_number || "N/A"}</div>
-                                <div className="w-full p-2 text-center border-r border-gray-400 text-sm">ΤΚ</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
+                                <div className="w-32 p-2 text-center border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
+                                <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
+                                <div className="w-16 p-2 text-center border-r border-gray-400 text-sm">Οδός</div>
+                                <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.owner_address || "N/A"}</div>
+                                <div className="w-16 p-2 text-center border-r border-gray-400 text-sm">Αριθ</div>
+                                <div className="w-12 p-2 text-center border-r border-gray-400 font-bold ">{owner?.address_number || "N/A"}</div>
+                                <div className="w-12 p-2 text-center border-r border-gray-400 text-sm">ΤΚ</div>
+                                <div className="w-25 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
                             </div>
                         </div>
 

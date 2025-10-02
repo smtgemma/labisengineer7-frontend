@@ -191,7 +191,7 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                    <div className=" p-2 border-r border-gray-400 font-bold">{owner?.idNumber || owner?.id_number || "N/A"}</div>
+                                    <div className="w-72 p-2 border-r border-gray-400 font-bold">{owner?.idNumber || owner?.id_number || "N/A"}</div>
                                     <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
                                     <div className="flex-1 p-2 font-bold">{owner?.phone || "N/A"}</div>
                                 </div>
@@ -201,13 +201,13 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                                    <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
+                                    <div className="w-50 p-2 border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
                                     <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
-                                    <div className="w-24 p-2 border-r border-gray-400 font-bold ">{owner?.ownerAddress || owner?.owner_address || "N/A"}</div>
+                                    <div className="w-50 p-2 border-r border-gray-400 font-bold ">{owner?.ownerAddress || owner?.owner_address || "N/A"}</div>
                                     <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
-                                    <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner?.addressNumber || owner?.address_number || "N/A"}</div>
+                                    <div className="w-12 p-2 border-r border-gray-400 font-bold ">{owner?.addressNumber || owner?.address_number || "N/A"}</div>
                                     <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
+                                    <div className="w-25 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -276,6 +276,12 @@ export default function F6D8({ allData }: { allData: allDataProps }) {
                             {/* signature  */}
                             <div className="flex items-center justify-end p-4">
                                 <img src={signature} alt="" />
+                            </div>
+                            <div className="text-xs p-6">
+                                <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
+                                <p>(2) Αναγράφεται ολογράφως.</p>
+                                <p> (3) «Όποιος εν γνώσει του δηλώνει ψευδή γεγονότα ή αρνείται ή αποκρύπτει τα αληθινά με έγγραφη υπεύθυνη δήλωση του άρθρου 8 τιμωρείται με φυλάκιση τουλάχιστον τριών μηνών. Εάν ο υπαίτιος αυτών των πράξεων σκόπευε να προσπορίσει στον εαυτόν του ή σε άλλον περιουσιακό όφελος βλάπτοντας τρίτον ή σκόπευε να βλάψει άλλον, τιμωρείται με κάθειρξη μέχρι 10 ετών.</p>
+                                <p>(4) Σε περίπτωση ανεπάρκειας χώρου η δήλωση συνεχίζεται στην πίσω όψη της και υπογράφεται από τον δηλούντα ή την δηλούσα.</p>
                             </div>
                         </div>
                         {/* EDIT MODAL */}

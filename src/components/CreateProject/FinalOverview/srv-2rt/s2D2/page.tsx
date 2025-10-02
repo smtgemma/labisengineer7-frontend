@@ -44,7 +44,7 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
 
     const { projectDescription, horizontalPropertyName, propertyPostalCode, municipalityCommunity,
         propertyNumber, propertyAddress, propertyPlace, issuingAuthority, kaekProperty, permitNumber, createdAt, lastName, firstName, specialty, } = allData || {}
-    const owner = allData?.owners?.[0] || {}
+    const owner = allData?.owners || []
     const engineer = allData?.engineers?.[0] || {}
 
 
@@ -65,17 +65,25 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                     <h4 className="text-sm">Έργο</h4>
                     <p className="text-sm">{projectDescription || "N/A"} = {horizontalPropertyName || "N/A"}</p>
                 </div>
-                <div className="flex items-center justify-center gap-12">
-                    <h4 className="text-sm">Θέση</h4>
-                    <p className="text-sm">
-                        {propertyAddress || "N/A"}, {propertyNumber || "N/A"}, {municipalityCommunity || "N/A"} {propertyPostalCode || "N/A"}).
-                    </p>
+                <div className="flex items-start justify-between gap-4 max-w-xl">
+                    <span className=" text-sm">Θέση:</span>
+                    <h3 className=" text-sm">
+                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                        ΤΚ {propertyPostalCode || "N/A"}
+                    </h3>
                 </div>
-                <div className="flex items-center justify-center gap-12">
-                    <h4 className="text-sm">Ιδιοκτήτης</h4>
-                    <p className="text-sm">
-                        {owner?.firstName || owner?.first_name || "N/A"} {owner?.lastName || owner?.last_name || "N/A"}
-                    </p>
+                <div className="flex items-start justify-between gap-4 max-w-xl">
+                    <span className="text-sm">Ιδιοκτήτης:</span>
+                    <div className="flex items-center justify-center gap-2">
+                        {
+                            owner?.map((e: any, i: number) => (
+                                <h3 key={i} className="text-sm">
+                                    {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                                </h3>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
             <div className="border-b-2 mb-4 p-6">

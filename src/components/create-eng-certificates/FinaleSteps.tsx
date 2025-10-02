@@ -77,15 +77,9 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
 
     const allData = allTemplateData?.data || {};
     console.log(allData, "finalstep ================finalstep")
-    // const buildingMods = subCategoryData["building-modifications"] || [];
-    // const energy = subCategoryData["energy-systems"] || [];
-    // const fencing = subCategoryData["fencing"] || [];
-    // const landscaping = subCategoryData["landscaping-2"] || [];
-    // const operational = subCategoryData["operational-space"] || [];
-    // const property = subCategoryData["property-documentation"] || [];
-    // const small = subCategoryData["small-construction"] || [];
 
     // const store = makeStore();
+    const [ownerIndex, setOwnerIndex] = useState<number | null>(null)
     const [selected, setSelected] = useState<string | null>(null);
     const [projectHexCode, setProjectHexCode] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -256,6 +250,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
         };
     }, [isModalOpen]);
 
+
     return (
         <div className="space-y-8">
             {/* Header */}
@@ -269,7 +264,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
             {/* Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {allTemplate &&
-                    allTemplate.find((item: { title: string }) => item.title === "Autofill (προαιρετικό add-on)") && (
+                    allTemplate.find((item: { id: string }) => item.id === "autofill") && (
                         <div
                             onClick={handleCopy}
                             className="bg-white border border-gray-300 p-6 rounded-lg cursor-pointer hover:shadow-md"
@@ -342,15 +337,21 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                     {allTemplate?.length > 0 ? (
                         allTemplate.map((template: any) => (
                             <div key={template.id}>
-                                <button
-                                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                                    onClick={() => {
-                                        setSelected(template.title);
-                                        setIsModalOpen(true);
-                                    }}
-                                >
-                                    {template.title}
-                                </button>
+                                {template.id !== "autofill" && (
+                                    <button
+                                        className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                                        onClick={() => {
+                                            if (template.id.startsWith(template.id)) {
+                                                const index = Number(template.id.split("_")[1]);
+                                                setOwnerIndex(index)
+                                            }
+                                            setSelected(template.id);
+                                            setIsModalOpen(true);
+                                        }}
+                                    >
+                                        {template.title}
+                                    </button>
+                                )}
                             </div>
                         ))
                     ) : (
@@ -372,22 +373,20 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                                 ✕
                             </button>
 
-                            {/* file 6======== */}
-                            {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
-                                // <S4D1 formData={formData} setFormData={setFormData} />
-                                <S4D1 allData={allData} />
+                            {/* four service ======== */}
+                            {selected?.startsWith("owner2_") && ownerIndex !== null && (
+                                <S4D1
+                                    allData={allData}
+                                    owner={allData?.owners?.[ownerIndex]}
+                                />
+                            )}
+                            {selected === "engineer_assumption_2" && (
+                                <S4D2 allData={allData} />
                             )}
                             {selected ===
-                                "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
+                                "technical_assumption_3" && (
                                     <div>
-                                        {/* {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)} */}
-                                        {<S4D2 allData={allData} />}
-                                    </div>
-                                )}
-                            {selected ===
-                                "Αρχιτεκτονική Συστήματος" && (
-                                    <div>
-                                        {<S4D3 allData={allData} setIsModalOpen={setIsModalOpen} />}
+                                        <S4D3 allData={allData} setIsModalOpen={setIsModalOpen} />
                                     </div>
                                 )}
                         </div>
