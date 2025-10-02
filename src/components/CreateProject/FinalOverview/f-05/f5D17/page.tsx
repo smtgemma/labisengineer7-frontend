@@ -96,7 +96,6 @@ export default function F5D17({ allData,
     }
 
 
-
     return (
         <div className="max-w-[794px] mx-auto p-6 bg-white arial">
             <div className="text-right -mt-9">

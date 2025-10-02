@@ -42,13 +42,12 @@ type F6D5Props = {
 export default function F6D2({ allData, setIsModalOpen }: F6D5Props) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
-  const owner = allData?.owners?.[0] || {}
-  const allDescriptionTasks = allData?.allDescriptionTasks || []
-  const { Horizontal_property_name } = allData || {}
-  const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
+  const owner = allData?.owners || []
+  const allDescriptionTasks = allData?.allDescriptionTasks || {}
+  const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName, propertyNumber, municipalityCommunity } = allData || {}
 
   const [updateProject] = useUpdateProjectMutation()
-  
+
   const { data: userData } = useGetMeQuery()
   const signature = userData?.data?.signature
 
@@ -106,7 +105,7 @@ export default function F6D2({ allData, setIsModalOpen }: F6D5Props) {
         </button>
       </div>
       {/* Title */}
-      <h2 className="text-center font-semibold underline text-sm mb-2">
+      <h2 className="text-center font-semibold underline text-xl mb-2">
         ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΤΗΣΗΣ ΜΕΛΕΤΗΣ ΕΝΕΡΓΗΤΙΚΗΣ ΠΥΡΟΠΡΟΣΤΑΣΙΑΣ
       </h2>
 
@@ -114,36 +113,46 @@ export default function F6D2({ allData, setIsModalOpen }: F6D5Props) {
       <div className="mb-8 space-y-4">
         <div className="flex items-start justify-between">
           <span className=" min-w-[80px] text-sm">Έργο:</span>
-          <h3 className=" text-sm">{projectDescription || "N/A"}</h3>
+          <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
         </div>
 
         <div className="flex items-start justify-between gap-4 max-w-xl">
           <span className=" text-sm">Θέση:</span>
           <h3 className=" text-sm">
-            {propertyAddress || "N/A"}, {propertyPlace || "N/A"},
-            {propertyPostalCode || "N/A"}
+            {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+            ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+            ΤΚ {propertyPostalCode || "N/A"}
           </h3>
         </div>
-
-        <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
-          <span className="">Ιδιοκτήτης:</span>
-          <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
+        <div className="flex items-start justify-between gap-4 max-w-xl">
+          <span className="text-sm">Ιδιοκτήτης:</span>
+          <div className="flex items-center justify-center gap-2">
+            {
+              owner?.map((e: any, i: number) => (
+                <h3 key={i} className="text-sm">
+                  {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                </h3>
+              ))
+            }
+          </div>
         </div>
       </div>
 
       {/* Main Description */}
       <div className="text-sm mb-4 ml-10">
-        <p>
-          Στο ακίνητο{" "}
+        <div>
           <span className="font-semibold">
-            Description for building/ {horizontalPropertyName || "N/A"}
+
+            <span className="mr-1">Στο ακίνητο {horizontalPropertyName || "N/A"} </span>
           </span>
-          επί της οδού <br />{" "}
-          <span className="font-semibold">
-            {propertyAddress || "N/A"},{propertyPlace || "N/A"} , {propertyPostalCode || "N/A"},
+          επί της οδού
+          <span className="">
+            <span className="ml-1">{propertyAddress || "N/A"} </span>{propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+            ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+            <span className="mr-1">ΤΚ {propertyPostalCode || "N/A"}</span>
           </span>
-          πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :
-        </p>
+          πρόκειται να <br />εκτελεσθούν οι παρακάτω εργασίες :
+        </div>
       </div>
 
       <div className="space-y-6 ml-10">

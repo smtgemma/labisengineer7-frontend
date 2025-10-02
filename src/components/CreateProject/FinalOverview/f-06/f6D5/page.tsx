@@ -49,154 +49,11 @@ type F6D5Props = {
 
 export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const owner = allData?.owners?.[0] || {}
+    const owner = allData?.owners || []
     const engineers = allData?.engineers?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, technicalDescription, technicalDescriptionTwo, createdAt, specialty } = allData || {};
-    const descriptions = [
-        {
-            "id": 1,
-            "description": "Technical Description 1 of the project"
-        },
-        {
-            "id": 2,
-            "description": "Technical Description 2 of the project"
-        },
-        {
-            "id": 3,
-            "description": "Technical Description 3 of the project"
-        },
-        {
-            "id": 4,
-            "description": "Technical Description 4 of the project"
-        },
-        {
-            "id": 5,
-            "description": "Technical Description 5 of the project"
-        },
-        {
-            "id": 6,
-            "description": "Technical Description 6 of the project"
-        },
-        {
-            "id": 7,
-            "description": "Technical Description 7 of the project"
-        },
-        {
-            "id": 8,
-            "description": "Technical Description 8 of the project"
-        },
-        {
-            "id": 9,
-            "description": "Technical Description 9 of the project"
-        },
-        {
-            "id": 10,
-            "description": "Technical Description 10 of the project"
-        },
-        {
-            "id": 11,
-            "description": "Technical Description 11 of the project"
-        },
-        {
-            "id": 12,
-            "description": "Technical Description 12 of the project"
-        },
-        {
-            "id": 13,
-            "description": "Technical Description 13 of the project"
-        },
-        {
-            "id": 14,
-            "description": "Technical Description 14 of the project"
-        },
-        {
-            "id": 15,
-            "description": "Technical Description 15 of the project"
-        },
-        {
-            "id": 16,
-            "description": "Technical Description 16 of the project"
-        },
-        {
-            "id": 17,
-            "description": "Technical Description 17 of the project"
-        },
-        {
-            "id": 18,
-            "description": "Technical Description 18 of the project"
-        },
-        {
-            "id": 19,
-            "description": "Technical Description 19 of the project"
-        },
-        {
-            "id": 20,
-            "description": "Technical Description 20 of the project"
-        },
-        {
-            "id": 21,
-            "description": "Technical Description 21 of the project"
-        },
-        {
-            "id": 22,
-            "description": "Technical Description 22 of the project"
-        }
-    ]
-    const descriptions2 = [
-        {
-            "id": 1,
-            "description": "Technical Description 1 of the project"
-        },
-        {
-            "id": 2,
-            "description": "Technical Description 2 of the project"
-        },
-        {
-            "id": 3,
-            "description": "Technical Description 3 of the project"
-        },
-        {
-            "id": 4,
-            "description": "Technical Description 4 of the project"
-        },
-        {
-            "id": 5,
-            "description": "Technical Description 5 of the project"
-        },
-        {
-            "id": 6,
-            "description": "Technical Description 6 of the project"
-        },
-        {
-            "id": 7,
-            "description": "Technical Description 7 of the project"
-        },
-        {
-            "id": 8,
-            "description": "Technical Description 8 of the project"
-        },
-        {
-            "id": 9,
-            "description": "Technical Description 9 of the project"
-        },
-        {
-            "id": 10,
-            "description": "Technical Description 10 of the project"
-        },
-        {
-            "id": 11,
-            "description": "Technical Description 11 of the project"
-        },
-        {
-            "id": 12,
-            "description": "Technical Description 12 of the project"
-        },
-        {
-            "id": 13,
-            "description": "Technical Description 13 of the project"
-        },
-    ]
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, propertyNumber, createdAt, specialty, municipalityCommunity } = allData || {};
+
     const [updateProject] = useUpdateProjectMutation()
     const { data: userData } = useGetMeQuery()
     const signature = userData?.data?.signature
@@ -259,7 +116,6 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                     <FaRegEdit className="text-black text-2xl cursor-pointer" />
                 </button>
             </div>
-            {/* ΦΑΚΕΛΟΣ ΑΣΦΑΛΕΙΑΣ ΚΑΙ ΥΓΕΙΑΣ first stp=========================*/}
             <div className="border border-black">
                 {/* Header */}
                 <div className="text-center p-4">
@@ -279,22 +135,31 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                         </div>
 
                         <div className="flex items-center gap-2">
-                            <span className="font-medium">ΔΙΕΥΘΥΝΣΗ :</span>
-                            <span className=" ">{propertyAddress || "N/A"}</span>
-                            <span className=" ">, {propertyPlace || "N/A"}</span>
-                            {/* <span className=" font-bold">, TOWN</span> */}
-                            <span className=" ">, {propertyPostalCode || "N/A"}</span>
+                            <span className="text-sm">ΔΙΕΥΘΥΝΣΗ :</span>
+                            <h3 className=" text-sm">
+                                {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                ΤΚ {propertyPostalCode || "N/A"}
+                            </h3>
                         </div>
 
                         <div className="flex items-center gap-2">
-                            <span className="font-medium">ΙΔΙΟΚΤΗΤΗΣ :</span>
-                            <span className="flex-1 ">{owner?.firstName || "N/A"}, {owner?.lastName || "N/A"}</span>
+                            <span className="text-sm">ΙΔΙΟΚΤΗΤΗΣ :</span>
+                            <div className="flex items-center justify-center gap-2">
+                                {
+                                    owner?.map((e: any, i: number) => (
+                                        <h3 key={i} className="text-sm">
+                                            {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                                        </h3>
+                                    ))
+                                }
+                            </div>
                         </div>
                         <div className="flex justify-between">
-                            <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
+                            <span className="text-sm">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-center justify-center">
-                                <span className="flex-1">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1">{specialty || "N/A"}</span>
+                                <span className="flex-1 text-sm">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
+                                <span className="flex-1 text-sm">{specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -430,23 +295,28 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
 
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
-                            <span className="font-medium">ΕΡΓΟ :</span>
+                            <span className="text-sm">ΕΡΓΟ :</span>
                             <span className="flex-1 text-sm">{projectDescription || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
-                            <span className="font-medium">ΔΙΕΥΘΥΝΣΗ :</span>
-                            <span className="">{propertyAddress || "N/A"}</span>
-                            <span className="">, {propertyPlace || "N/A"}</span>
-                            {/* <span className=" font-bold">, TOWN</span> */}
-                            <span className="">, {propertyPostalCode || "N/A"}</span>
+                            <span className="text-sm">ΔΙΕΥΘΥΝΣΗ :</span>
+                            <div className="flex items-center justify-center gap-2">
+                        {
+                            owner?.map((e: any, i: number) => (
+                                <h3 key={i} className="text-sm">
+                                    {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                                </h3>
+                            ))
+                        }
+                    </div>
                         </div>
 
                         <div className="flex justify-start gap-12">
-                            <span className="font-medium">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
+                            <span className="text-sm">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-start justify-center">
-                                <span className="flex-1 ">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1">{specialty || "N/A"}</span>
+                                <span className="flex-1 text-sm">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
+                                <span className="flex-1 text-sm">{specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
