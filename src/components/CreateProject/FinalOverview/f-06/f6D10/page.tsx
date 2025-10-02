@@ -41,6 +41,8 @@ interface allDataProps {
     createdById: string;
     serviceId: string;
     createdAt: string;
+    municipalityCommunity: string;
+    propertyNumber: string;
 }
 
 
@@ -52,7 +54,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
-    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
+    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt, propertyNumber, municipalityCommunity } = allData || {};
 
 
     const [updateProject] = useUpdateProjectMutation()
@@ -250,7 +252,11 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"}</p>
+                            <h3 className=" text-sm"> <span className="mr-1">επί της οδού</span>
+                                {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                ΤΚ {propertyPostalCode || "N/A"}
+                            </h3>
                             <p>
                                 από την ανάλυση του συνόλου των προβλεπόμενων εργασιών προκύπτει <span className="font-bold">ότι δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία του οργανισμού του κτιρίου.</span>
                                 Οι εργασίες περιορίζονται αποκλειστικά σε μη φέροντα στοιχεία και δεν επηρεάζουν καθ’ οποιονδήποτε τρόπο την ευστάθεια, φέρουσα ικανότητα ή δομική λειτουργία του κτιρίου.

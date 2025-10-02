@@ -6,7 +6,7 @@ import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
 import StampComponent from "../../shared/signture/signture"
 import { format } from "date-fns"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
 
 
 type F6D13Props = {
@@ -42,10 +42,9 @@ export default function F4D3({ allData,
 }: F6D13Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owner = allData?.owners?.[0] || {}
+    const owner = allData?.owners || []
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    console.log(allDescriptionTasks, "alldescription task-------------------alldescription")
     const { id, createdById, serviceId, specialty } = allData || {}
 
     const { projectDescription,
@@ -56,6 +55,7 @@ export default function F4D3({ allData,
         createdAt,
         technicalDescription,
         technicalDescriptionTwo,
+        propertyPlace,
     } = allData || {};
 
 
@@ -73,6 +73,8 @@ export default function F4D3({ allData,
     })
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
 
     // for editing data 
     const onSubmit = async (data: FormData) => {
@@ -109,26 +111,37 @@ export default function F4D3({ allData,
                 </button>
             </div>
             {/* Title */}
-            <h2 className="text-center font-semibold underline text-sm mb-2">
+            <h2 className="text-center font-semibold underline text-xl mb-2">
                 ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ -ΒΕΒΑΙΩΣΗ ΜΗΧΑΝΙΚΟΥ
             </h2>
             <p className="text-center text-sm mb-5">Για την έκδοση Άδειας Μικρής Κλίμακας σύμφωνα με το άρθρο 29 του Ν.4495/2017</p>
 
             {/* Project Information */}
             <div className="mb-8 space-y-4">
-                <div className="flex items-center justify-center gap-5">
-                    <span className=" text-sm">Έργο:</span>
-                    <h3 className=" text-sm text-center">{projectDescription}</h3>
+                <div className="flex items-start justify-between">
+                    <span className=" min-w-[80px] text-sm">Έργο:</span>
+                    <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
                 </div>
 
-                <div className="flex items-center justify-center gap-5">
+                <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyNumber || "N/A"}, {municipalityCommunity || "N/A"} {propertyPostalCode || "N/A"}). ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">
+                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                        ΤΚ {propertyPostalCode || "N/A"}
+                    </h3>
                 </div>
-
-                <div className="flex items-center justify-center text-sm gap-5">
-                    <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
+                <div className="flex items-start justify-between gap-4 max-w-xl">
+                    <span className="text-sm">Ιδιοκτήτης:</span>
+                    <div className="flex items-center justify-center gap-2">
+                        {
+                            owner?.map((e: any, i: number) => (
+                                <h3 key={i} className="text-sm">
+                                    {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                                </h3>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
             <div className="space-y-6 ml-10">
@@ -179,7 +192,6 @@ export default function F4D3({ allData,
                         <div className="text-center space-y-1">
                             <p>Ο Συντάξας Μηχανικός
                             </p>
-                            {/* <p>Name/ surname Engineer</p> */}
                             <p>{engineers?.firstName} {engineers?.lasttName}</p>
                             <p>{specialty || "N/A"}</p>
                             <p>Α.Μ. ΤΕΕ: 123456
@@ -189,7 +201,7 @@ export default function F4D3({ allData,
                 </div>
                 {/* Signature */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
-                    <StampComponent />
+                    <img src={signature} alt="" />
                 </div>
             </div>
             {/* EDIT MODAL */}

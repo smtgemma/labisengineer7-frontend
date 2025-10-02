@@ -40,6 +40,8 @@ interface allDataProps {
     createdById: string;
     serviceId: string;
     createdAt: string;
+    propertyNumber: string;
+    municipalityCommunity: string;
 }
 
 
@@ -51,7 +53,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
-    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
+    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt, municipalityCommunity, propertyNumber } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
     const { data: userData } = useGetMeQuery()
@@ -248,7 +250,11 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"}</p>
+                            <h3 className=" text-sm"> <span className="mr-1">επί της οδού</span>
+                                {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                ΤΚ {propertyPostalCode || "N/A"}
+                            </h3>
                             <p>
                                 τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
                             <p>●Την εκπόνηση και υποβολή των απαραίτητων μελετών (στατικών, αρχιτεκτονικών, τεχνικών, περιβαλλοντικών κ.ά.) όπου απαιτείται.</p>
