@@ -377,7 +377,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                             {selected?.startsWith("owner2_") && ownerIndex !== null && (
                                 <S4D1
                                     allData={allData}
-                                    owner={allData?.owners?.[ownerIndex]}
+                                    ownerIndex={ownerIndex}
                                 />
                             )}
                             {selected === "engineer_assumption_2" && (

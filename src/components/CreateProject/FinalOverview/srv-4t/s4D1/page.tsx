@@ -43,12 +43,14 @@ interface allDataProps {
 }
 
 
-export default function s4D1({ allData, owner }: { allData: allDataProps, owner: any }) {
+export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, ownerIndex: number }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = allData?.engineers || {};
+    const owner = allData?.owners?.[ownerIndex]
     const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt } = allData || {};
+
+    console.log(ownerIndex, "================ownerIndex ===================")
 
     const [updateProject] = useUpdateProjectMutation()
     // for editing data 
@@ -60,14 +62,14 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
 
     // Submit handler
     const onSubmit = async (data: FormInputs) => {
-        if (selectedOwnerIndex === null) return;
+        if (ownerIndex === null) return;
 
         // old owner copy
         const updatedOwners = [...allData.owners];
 
         //    owner replace of old owner 
-        updatedOwners[selectedOwnerIndex] = {
-            ...updatedOwners[selectedOwnerIndex],
+        updatedOwners[ownerIndex] = {
+            ...updatedOwners[ownerIndex],
             ...data
         };
 
@@ -89,7 +91,6 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
 
             reset();
             setIsEditModalOpen(false)
-            setSelectedOwnerIndex(null)
 
         } catch (error) {
             console.error("Update failed", error)
@@ -267,13 +268,9 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                 </div>
                             </div>
                         </div>
-                        {/* common component  */}
-                        {/* <div className="flex items-center justify-end mt-6 p-4">
-                                <StampComponent />
-                            </div> */}
                     </div>
                     {/* EDIT MODAL */}
-                    {isEditModalOpen && selectedOwnerIndex !== null && (
+                    {isEditModalOpen && ownerIndex !== null && (
                         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
                             <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
                                 {/* Close button */}
@@ -307,7 +304,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("firstName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.firstName || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.firstName || ""}
                                             />
                                         </div>
 
@@ -318,7 +315,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("lastName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.lastName || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.lastName || ""}
                                             />
                                         </div>
 
@@ -329,7 +326,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("fatherFirstLastName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.fatherFirstLastName || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.fatherFirstLastName || ""}
                                             />
                                         </div>
 
@@ -340,7 +337,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("mothersFirstLastName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.mothersFirstLastName || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.mothersFirstLastName || ""}
                                             />
                                         </div>
 
@@ -351,7 +348,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="date"
                                                 {...register("dateOfBirth", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.dateOfBirth || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.dateOfBirth || ""}
                                             />
                                         </div>
 
@@ -362,7 +359,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("placeOfBirth", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.placeOfBirth || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.placeOfBirth || ""}
                                             />
                                         </div>
 
@@ -373,7 +370,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("idNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.idNumber || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.idNumber || ""}
                                             />
                                         </div>
 
@@ -384,7 +381,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("phone", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.phone || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.phone || ""}
                                             />
                                         </div>
 
@@ -395,7 +392,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("city", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.city || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.city || ""}
                                             />
                                         </div>
 
@@ -406,7 +403,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("ownerAddress", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.ownerAddress || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.ownerAddress || ""}
                                             />
                                         </div>
 
@@ -417,7 +414,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("addressNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.addressNumber || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.addressNumber || ""}
                                             />
                                         </div>
 
@@ -428,7 +425,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("postalCode", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.postalCode || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.postalCode || ""}
                                             />
                                         </div>
 
@@ -439,7 +436,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="email"
                                                 {...register("email", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.email || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.email || ""}
                                             />
                                         </div>
 
@@ -450,7 +447,7 @@ export default function s4D1({ allData, owner }: { allData: allDataProps, owner:
                                                 type="text"
                                                 {...register("taxIdentificationNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[selectedOwnerIndex]?.taxIdentificationNumber || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.taxIdentificationNumber || ""}
                                             />
                                         </div>
 
