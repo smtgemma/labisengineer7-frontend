@@ -267,7 +267,6 @@ import { AlertTriangle, CheckCircle, CreditCard, Loader2 } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Loading from "@/components/Others/Loading";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
 import { TemplateName } from "../CreateProject/ActionSelection/data";
@@ -300,22 +299,29 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
     const id = stepByStepData?.projectId?.id;
 
     const templateName: TemplateName[] = useMemo(() => {
-        const baseTemplatesOwner4: TemplateName[] = [
-            { id: "engineer_assumption_2", title: "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ", price: 0.5, },
-            { id: "technical_assumption_3", title: "Αρχιτεκτονική Συστήματος", price: 0.5, },
-            { id: "autofill", title: "Autofill 1 Credit", price: 1 },
-        ];
+        const baseTemplatesOwner4: TemplateName[] = [];
 
-        stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
-            baseTemplatesOwner4.push({
-                id: `owner2_${index}`,
-                title: `ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ ${owner.first_name} ${owner.last_name}`,
-                price: 0.5,
-            });
-        });
+        stepByStepData.ownerBaseData?.forEach(
+            (owner: { first_name: string; last_name: string }, index: number) => {
+                baseTemplatesOwner4.push({
+                    id: `owner2_${index}`,
+                    title: `YΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+                    price: 0.5,
+                });
+            }
+        );
+
+        baseTemplatesOwner4.push(
+            { id: "engineer_assumption_2", title: "ΥΔ Ανάληψης Μηχανικού", price: 0.5 },
+            { id: "technical_assumption_3", title: "Τεχνική Έκθεση Β30 μη Απαίτησης Εγκρίσεων", price: 0.5 },
+            { id: "technical_assumption_2", title: "Τεχνική Έκθεση Β30 Απαίτησης Εγκρίσεων", price: 0.5 },
+            { id: "autofill", title: "Autofill 1 Credit", price: 1 }
+        );
 
         return baseTemplatesOwner4;
     }, [stepByStepData.ownerBaseData]);
+
+
 
     // Compute subtotal
     const subtotal = templateName
