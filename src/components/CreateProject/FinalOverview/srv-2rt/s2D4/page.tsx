@@ -5,7 +5,7 @@ import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProject2Mutation} from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     firstName?: string;
@@ -64,17 +64,15 @@ type ViolationData = {
 
 
 
-export default function S2D4({ allData, owner, violations }: { allData: allDataProps, owner: any, violations: ViolationData[] }) {
+export default function S2D4({ allData, violations, ownerIndex }: { allData: allDataProps, violations: ViolationData[], ownerIndex: number }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
-
-    console.log(violations, "=========================> violations")
 
     const engineers = allData?.engineers?.[0] || {};
+     const owner = allData?.owners?.[ownerIndex]
     // Removed duplicate 'owner' declaration
     const { id, createdById, serviceId, ydom, specialty, createdAt, propertyAddress, propertyPlace, firstName, lastName, propertyNumber, propertyPostalCode, permitNumber, issuingAuthority } = allData || {};
 
-    const [updateProject] = useUpdateProjectMutation()
+    const [updateProject2] = useUpdateProject2Mutation()
     const { data: userData } = useGetMeQuery()
     const signature = userData?.data?.signature
     // for editing data 
@@ -86,28 +84,27 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
 
     // Submit handler
     const onSubmit = async (data: FormInputs) => {
-        if (selectedOwnerIndex === null) return;
+        if (ownerIndex === null) return;
 
-        // old owner copy
+        // // old owner copy
         const updatedOwners = [...allData.owners];
 
-        //    owner replace of old owner 
-        updatedOwners[selectedOwnerIndex] = {
-            ...updatedOwners[selectedOwnerIndex],
+        // //    owner replace of old owner 
+        updatedOwners[ownerIndex] = {
+            ...updatedOwners[ownerIndex],
             ...data
         };
 
-        // make formData 
+        // // make formData 
         const formData = new FormData();
         formData.append("data", JSON.stringify({
             owners: updatedOwners,
             projectDescription: data.projectDescription || allData.projectDescription,
-            ydom: data.ydom || allData.ydom,
             serviceId: serviceId
         }));
 
         try {
-            await updateProject({
+            await updateProject2({
                 projectId: id,
                 userId: createdById,
                 formData: formData,
@@ -115,7 +112,7 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
 
             reset();
             setIsEditModalOpen(false)
-            setSelectedOwnerIndex(null)
+            // setSelectedOwnerIndex(null)
 
         } catch (error) {
             console.error("Update failed", error)
@@ -128,11 +125,19 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
             <div className="max-w-[796px] mx-auto bg-white mb-16">
                 <div className="max-w-[796px] mx-auto bg-white">
                     {/* Header with coat of arms */}
+                    <div className="text-right -mt-3">
+                        <button
+                            className="mt-1 px-4 py-1"
+                            onClick={() => setIsEditModalOpen(true)}
+                        >
+                            <FaRegEdit className="text-black text-2xl cursor-pointer" />
+                        </button>
+                    </div>
                     <div className="text-center mb-6">
                         <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
                             <img src="/templateLogo/templateLogo.jpg" alt="Template Logo" />
                         </div>
-                        <h1 className="text-xl font-bold mb-2">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ</h1>
+                        <h1 className="text-xl font-bold mb-2">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ====</h1>
                         <p className="text-sm">(άρθρο 8 Ν.1599/1986)</p>
                     </div>
 
@@ -159,9 +164,9 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.first_name || "N/A"}</div>
+                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.first_name || owner?.firstName || "N/A"}</div>
                                 <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-                                <div className="flex-1 p-2  font-bold">{owner?.last_name || "N/A"}</div>
+                                <div className="flex-1 p-2  font-bold">{owner?.last_name || owner?.lastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -169,7 +174,7 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.father_first_last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.father_first_last_name || owner?.fatherFirstLastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -177,7 +182,7 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mothers_first_last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.motherFirstName || owner?.mothersFirstLastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -185,7 +190,7 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.date_of_birth || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.date_of_birth || owner?.dateOfBirth || "N/A"}</div>
                             </div>
                         </div>
 
@@ -193,7 +198,7 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.place_of_birth || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.place_of_birth || owner?.placeOfBirth || "N/A"}</div>
                             </div>
                         </div>
 
@@ -201,23 +206,23 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                <div className="w-72 p-2 border-r border-gray-400 font-bold">{owner?.id_number || "N/A"}</div>
+                                <div className="w-72 p-2 border-r border-gray-400 font-bold">{owner?.id_number || owner?.idNumber || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mobile || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.mobile || owner?.phone || "N/A"}</div>
                             </div>
                         </div>
 
                         {/* Address row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 text-center border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                                <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
+                                <div className="w-35 p-2 text-center border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
+                                <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.city || owner?.city || "N/A"}</div>
                                 <div className="w-16 p-2 text-center border-r border-gray-400 text-sm">Οδός</div>
-                                <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.owner_address || "N/A"}</div>
+                                <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.owner_address || owner?.ownerAddress || "N/A"}</div>
                                 <div className="w-16 p-2 text-center border-r border-gray-400 text-sm">Αριθ</div>
-                                <div className="w-12 p-2 text-center border-r border-gray-400 font-bold ">{owner?.address_number || "N/A"}</div>
+                                <div className="w-12 p-2 text-center border-r border-gray-400 font-bold ">{owner?.address_number || owner?.addressNumber || "N/A"}</div>
                                 <div className="w-12 p-2 text-center border-r border-gray-400 text-sm">ΤΚ</div>
-                                <div className="w-25 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
+                                <div className="w-34 p-2 font-bold">{owner?.postal_code || owner?.postalCode || "N/A"}</div>
                             </div>
                         </div>
 
@@ -233,7 +238,7 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
                                         <div>ίου (Email):</div>
                                     </div>
                                 </div>
-                                <div className="p-2 underline ">{owner?.email || "N/A"}</div>
+                                <div className="p-2 underline ">{owner?.email || owner?.email || "N/A"}</div>
                             </div>
                         </div>
 
@@ -243,8 +248,8 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">
                                     Α.Φ.Μ.:
                                 </div>
-                                <div className="flex-1 p-2 font-bold">
-                                    {owner?.tax_identification_number || "N/A"}
+                                <div className="w-24 p-2 font-bold">
+                                    {owner?.tax_identification_number || owner?.taxIdentificationNumber || "N/A"}
                                 </div>
                                 <div className="w-32 p-2 border-l border-gray-400 text-sm">
                                     {/* Δ.Ο.Υ.: */}
@@ -266,31 +271,237 @@ export default function S2D4({ allData, owner, violations }: { allData: allDataP
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
                                 {
-                                violations && violations?.map((item: any, index: number) => {
-                                    return (
-                                        <div key={index}>
-                                            <p>Age: {item.age}</p>
-                                            <p>Category: {item.category}</p>
-                                            <p>CreatedAt: {item.createdAt && format(new Date(item.createdAt), "dd/MM/yyyy")}</p>
-                                            <p>FormId: {item.formId}</p>
-                                            <p>Id: {item.id}</p>
-                                            <p>OtherViolation: {item.otherViolation}</p>
-                                            <p>ProjectId: {item.projectId}</p>
-                                            <p>ShowRemainingViolations: {item.showRemainingViolations}</p>
-                                            <p>UpdatedAt: {item.updatedAt && format(new Date(item.updatedAt), "dd/MM/yyyy")}</p>
-                                            <p>Violations: {item?.violations && item?.violations?.map((v: string, index: number) => {
-                                                return <div key={index}>
-                                                    <p>{v}</p>
-                                                </div>
-                                            })}</p>
-                                        </div>
-                                    )
-                                })
-                            }
+                                    violations && violations?.map((item: any, index: number) => {
+                                        return (
+                                            <div key={index}>
+                                                <p>Age: {item.age}</p>
+                                                <p>Category: {item.category}</p>
+                                                <p>CreatedAt: {item.createdAt && format(new Date(item.createdAt), "dd/MM/yyyy")}</p>
+                                                <p>FormId: {item.formId}</p>
+                                                <p>Id: {item.id}</p>
+                                                <p>OtherViolation: {item.otherViolation}</p>
+                                                <p>ProjectId: {item.projectId}</p>
+                                                <p>ShowRemainingViolations: {item.showRemainingViolations}</p>
+                                                <p>UpdatedAt: {item.updatedAt && format(new Date(item.updatedAt), "dd/MM/yyyy")}</p>
+                                                <p>Violations: {item?.violations && item?.violations?.map((v: string, index: number) => {
+                                                    return <div key={index}>
+                                                        <p>{v}</p>
+                                                    </div>
+                                                })}</p>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
                     {/* EDIT MODAL */}
+                    {isEditModalOpen && ownerIndex !== null && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                            <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
+                                {/* Close button */}
+                                <button
+                                    className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
+                                    onClick={() => setIsEditModalOpen(false)}
+                                >
+                                    ✕
+                                </button>
+
+                                <h2 className="text-lg font-bold mb-4">✍️ Edit Data</h2>
+                                <div>
+                                    <form
+                                        onSubmit={handleSubmit(onSubmit)}
+                                        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                                    >
+                                        {/* ydom */}
+                                        {/* <div className="flex flex-col gap-2">
+                                            <label className="font-medium">ΠΡΟΣ *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("ydom", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData?.ydom || ""}
+                                            />
+                                        </div> */}
+                                        {/* Name */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Όνομα *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("firstName", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.firstName ||  ""}
+                                            />
+                                        </div>
+
+                                        {/* Surname */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Επώνυμο *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("lastName", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.lastName || ""}
+                                            />
+                                        </div>
+
+                                        {/* Father's Name */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Όνομα Πατρός *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("fatherFirstLastName", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.fatherFirstLastName || ""}
+                                            />
+                                        </div>
+
+                                        {/* Mother's Name */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Όνομα Μητρός *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("mothersFirstLastName", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.mothersFirstLastName || ""}
+                                            />
+                                        </div>
+
+                                        {/* Birth Date */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Ημερομηνία Γέννησης *:</label>
+                                            <input
+                                                type="date"
+                                                {...register("dateOfBirth", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.dateOfBirth || ""}
+                                            />
+                                        </div>
+
+                                        {/* Birth Place */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Τόπος Γέννησης *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("placeOfBirth", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.placeOfBirth || ""}
+                                            />
+                                        </div>
+
+                                        {/* ID */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Αριθμός Ταυτότητας *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("idNumber", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.idNumber || ""}
+                                            />
+                                        </div>
+
+                                        {/* Phone */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Τηλέφωνο *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("phone", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.phone || ""}
+                                            />
+                                        </div>
+
+                                        {/* City */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Πόλη *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("city", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.city || ""}
+                                            />
+                                        </div>
+
+                                        {/* Address */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Διεύθυνση *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("ownerAddress", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.ownerAddress || ""}
+                                            />
+                                        </div>
+
+                                        {/* Address Number */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Αριθμός Διεύθυνσης *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("addressNumber", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.addressNumber || ""}
+                                            />
+                                        </div>
+
+                                        {/* Postal Code */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Ταχυδρομικός Κώδικας *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("postalCode", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.postalCode || ""}
+                                            />
+                                        </div>
+
+                                        {/* Email */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Email *:</label>
+                                            <input
+                                                type="email"
+                                                {...register("email", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.email || ""}
+                                            />
+                                        </div>
+
+                                        {/* AFM */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Α.Φ.Μ. *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("taxIdentificationNumber", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.owners[ownerIndex]?.taxIdentificationNumber || ""}
+                                            />
+                                        </div>
+
+                                        {/* Project Description */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="font-medium">Περιγραφή Έργου *:</label>
+                                            <input
+                                                type="text"
+                                                {...register("projectDescription", { required: "This field is required" })}
+                                                className="flex-1 border p-2 rounded text-sm"
+                                                defaultValue={allData.projectDescription || ""}
+                                            />
+                                        </div>
+
+                                        {/* Submit */}
+                                        <div className="flex justify-end md:col-span-2">
+                                            <button
+                                                type="submit"
+                                                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm cursor-pointer"
+                                            >
+                                                Update
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

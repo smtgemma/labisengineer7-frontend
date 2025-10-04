@@ -236,11 +236,11 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">
                                     Α.Φ.Μ.:
                                 </div>
-                                <div className="flex-1 p-2 font-bold">
+                                <div className="w-54 p-2 font-bold">
                                     {owner?.tax_identification_number || "N/A"}
                                 </div>
                                 <div className="w-32 p-2 border-l border-gray-400 text-sm">
-                                    {/* Δ.Ο.Υ.: */}
+                                    Δ.Ο.Υ.:
                                 </div>
                             </div>
                         </div>

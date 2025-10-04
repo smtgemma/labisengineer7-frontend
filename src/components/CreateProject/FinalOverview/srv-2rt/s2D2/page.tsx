@@ -63,7 +63,7 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
             <div className="text-center space-y-4">
                 <div className="flex items-center justify-center gap-12">
                     <h4 className="text-sm">Έργο</h4>
-                    <p className="text-sm">{projectDescription || "N/A"} = {horizontalPropertyName || "N/A"}</p>
+                    <p className="text-sm uppercase">{projectDescription || "N/A"}</p>
                 </div>
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
@@ -73,7 +73,7 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                         ΤΚ {propertyPostalCode || "N/A"}
                     </h3>
                 </div>
-                <div className="flex items-start justify-between gap-4 max-w-xl">
+                <div className="flex items-start justify-between gap-4 max-w-[470px]">
                     <span className="text-sm">Ιδιοκτήτης:</span>
                     <div className="flex items-center justify-center gap-2">
                         {
@@ -191,11 +191,6 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                         ? format(new Date(createdAt), "dd/MM/yyyy")
                         : "N/A"}</p></p>
                     <h3>Ο Συντάξας Μηχανικός</h3>
-                </div>
-                <div className="text-center">
-                    <h3>{engineer?.firstName || "N/A"} {engineer?.lastName || "N/A"}</h3>
-                    <p>{specialty || "N/A"}</p>
-                    <p>Α.Μ. ΤΕΕ: 123456</p>
                 </div>
                 {/* signature  */}
                 <div className="flex items-center justify-end p-4">

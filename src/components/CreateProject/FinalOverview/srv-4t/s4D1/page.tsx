@@ -6,7 +6,7 @@ import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     firstName?: string;
@@ -39,6 +39,11 @@ interface allDataProps {
     createdById: string;
     serviceId: string;
     specialty: string;
+    municipalityCommunity: string;
+    propertyPostalCode: string;
+    propertyPlace: string;
+    propertyNumber: string;
+    propertyAddress: string;
     createdAt: string;
 }
 
@@ -48,11 +53,12 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
 
     const engineers = allData?.engineers || {};
     const owner = allData?.owners?.[ownerIndex]
-    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt } = allData || {};
+    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt, municipalityCommunity, propertyPostalCode, propertyPlace, propertyNumber, propertyAddress } = allData || {};
 
-    console.log(ownerIndex, "================ownerIndex ===================")
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -99,7 +105,7 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
     }
 
     return (
-        <div>
+        <div className="arial">
             <div className="max-w-[796px] mx-auto bg-white mb-16">
                 <div className="max-w-[796px] mx-auto bg-white">
                     <div className="text-right -mt-3">
@@ -198,14 +204,14 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
                         {/* Address row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
+                                <div className="w-35 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
                                 <div className="w-50 p-2 border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
                                 <div className="w-50 p-2 border-r border-gray-400 font-bold ">{owner?.ownerAddress || owner?.owner_address || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
                                 <div className="w-12 p-2 border-r border-gray-400 font-bold ">{owner?.addressNumber || owner?.address_number || "N/A"}</div>
                                 <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-                                <div className="25 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
+                                <div className="w-24 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
                             </div>
                         </div>
 
@@ -229,7 +235,7 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.taxIdentificationNumber || owner?.tax_identification_number || "N/A"}</div>
+                                <div className=" w-54 p-2 font-bold">{owner?.taxIdentificationNumber || owner?.tax_identification_number || "N/A"}</div>
                                 <div className="w-32 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
                             </div>
                         </div>
@@ -240,11 +246,14 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
                             <p className="mb-4">
-                                ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού([{owner?.ownerAddress || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
+                                ως κύριος/ιδιοκτήτης του ακινήτου <span className="font-bold">{horizontalPropertyName || "N/A"} </span> που βρίσκεται επί της οδού <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                    ΤΚ {propertyPostalCode || "N/A"}</span> αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
                             </p>
 
+
                             <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
-                            <p className=" mb-6">{projectDescription || "N/A"}</p>
+                            <p className=" mb-6 font-bold">{projectDescription || "N/A"}</p>
                         </div>
 
                         {/* Additional disclaimer text */}
@@ -267,6 +276,16 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="flex items-center justify-end p-4">
+                            <img src={signature} alt="" />
+                        </div>
+
+                        <div className="text-xs p-6">
+                            <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
+                            <p>(2) Αναγράφεται ολογράφως.</p>
+                            <p> (3) «Όποιος εν γνώσει του δηλώνει ψευδή γεγονότα ή αρνείται ή αποκρύπτει τα αληθινά με έγγραφη υπεύθυνη δήλωση του άρθρου 8 τιμωρείται με φυλάκιση τουλάχιστον τριών μηνών. Εάν ο υπαίτιος αυτών των πράξεων σκόπευε να προσπορίσει στον εαυτόν του ή σε άλλον περιουσιακό όφελος βλάπτοντας τρίτον ή σκόπευε να βλάψει άλλον, τιμωρείται με κάθειρξη μέχρι 10 ετών.</p>
+                            <p>(4) Σε περίπτωση ανεπάρκειας χώρου η δήλωση συνεχίζεται στην πίσω όψη της και υπογράφεται από τον δηλούντα ή την δηλούσα.</p>
                         </div>
                     </div>
                     {/* EDIT MODAL */}

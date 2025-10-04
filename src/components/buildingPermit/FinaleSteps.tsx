@@ -87,8 +87,6 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const [projectHexCode, setProjectHexCode] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    console.log(selected, "======================selected")
-
     // modal close click outside
     const modalContentRef = useRef<HTMLDivElement>(null);
 
@@ -335,7 +333,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                             {selected?.startsWith("template4_") && ownerIndex !== null && (
                                 <S2D4
                                 allData={allData}
-                                owner={allData?.owners?.[ownerIndex]}
+                                ownerIndex={ownerIndex}
                                 violations={violations}
                                 />
                             )}

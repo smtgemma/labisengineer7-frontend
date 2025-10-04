@@ -7,7 +7,7 @@ import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     bornDate?: string;
@@ -44,6 +44,7 @@ interface allDataProps {
     createdAt: string;
     municipalityCommunity: string;
     propertyNumber: string;
+    horizontalPropertyName: string;
 }
 
 
@@ -55,9 +56,12 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
-    const { id, createdById, serviceId, createdAt, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber } = allData || {};
+    const { id, createdById, serviceId, createdAt, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber, horizontalPropertyName } = allData || {};
+    console.log(allData, "=====allData")
 
     const [updateProject] = useUpdateProjectMutation()
+    const { data: userData } = useGetMeQuery()
+    const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -105,7 +109,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
     }
 
     return (
-        <div>
+        <div className="arial">
             {engineers.length > 0 ? (engineers?.map((engineer: any, index: number) => (
                 <div key={index} className="max-w-[796px] mx-auto bg-white">
                     <div className="text-right -mt-3">
@@ -235,7 +239,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-                                <div className="flex-1 p-2 font-bold">{engineer?.engVatNumber || "N/A"}</div>
+                                <div className="w-54 p-2 font-bold">{engineer?.engVatNumber || "N/A"}</div>
                                 <div className="w-32 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
                             </div>
                         </div>
@@ -245,20 +249,16 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                             <p className="mb-4">
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
-                            <p className="text-sm">
-                                ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ horiontal property που βρίσκεται επί της οδού ([{engineer.streetAddress}, {engineer.streetNumber}, {engineer.town}, {engineer.postalCode}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineer.lastName}  ,  {engineer.firstName}, Specialty Engineer AM TEE)
+                            <p className="mt-4 mb-2">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις <span className="text-sm font-bold">αναλαμβάνω</span> για το έργο:</p>
+
+                            <p className=" mb-3 font-bold">"{projectDescription || "N/A"}"</p>
+                            <p className="mb-4">
+                                επί της οδού <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"}, {municipalityCommunity || "N/A"} TK {propertyPostalCode || "N/A"}</span>
                             </p>
-                            <p className="mt-4">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις <span className="text-sm font-bold">αναλαμβάνω</span> για το έργο</p>
-                            <p className=" mb-6">{projectDescription || "N/A"}</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="p-4">
-                            <h3 className=" text-sm"> <span className="mr-1">επί της οδού</span>
-                                {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-                                ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-                                ΤΚ {propertyPostalCode || "N/A"}
-                            </h3>
                             <p className="text-sm">
                                 τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
                             <p className="text-sm mb-4">● τη σύνταξη και υπογραφή της Τεχνικής Έκθεσης – Βεβαίωσης Μηχανικού για εργασίες του άρθρου 30 του ν.4495/2017</p>
@@ -279,6 +279,17 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div className="flex items-center justify-end p-4">
+                            <img src={signature} alt="" />
+                        </div>
+
+                        <div className="text-xs p-6">
+                            <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
+                            <p>(2) Αναγράφεται ολογράφως.</p>
+                            <p> (3) «Όποιος εν γνώσει του δηλώνει ψευδή γεγονότα ή αρνείται ή αποκρύπτει τα αληθινά με έγγραφη υπεύθυνη δήλωση του άρθρου 8 τιμωρείται με φυλάκιση τουλάχιστον τριών μηνών. Εάν ο υπαίτιος αυτών των πράξεων σκόπευε να προσπορίσει στον εαυτόν του ή σε άλλον περιουσιακό όφελος βλάπτοντας τρίτον ή σκόπευε να βλάψει άλλον, τιμωρείται με κάθειρξη μέχρι 10 ετών.</p>
+                            <p>(4) Σε περίπτωση ανεπάρκειας χώρου η δήλωση συνεχίζεται στην πίσω όψη της και υπογράφεται από τον δηλούντα ή την δηλούσα.</p>
                         </div>
                     </div>
                     {/* EDIT MODAL */}

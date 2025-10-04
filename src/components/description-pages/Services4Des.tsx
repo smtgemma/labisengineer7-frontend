@@ -11,6 +11,8 @@ import { toast } from "sonner";
 interface Item {
     label: string;
     descriptions?: string;
+    miniDescription1: string;
+    miniDescription2: string;
     selected?: boolean;
 }
 
@@ -41,13 +43,15 @@ const Services4Des = () => {
 
     const handleSave = () => {
         const selectedOptions: {
-            [category: string]: { label: string; description?: string }[];
+            [category: string]: { label: string; description?: string; 
+                    miniDescription1: string; miniDescription2: string }[];
         } = {};
 
         categories.forEach((cat) => {
             const selected = cat.items
                 .filter((item) => item.selected)
-                .map((item) => ({ label: item.label, description: item.descriptions }));
+                .map((item) => ({ label: item.label, description: item.descriptions, 
+                    miniDescription1: item.miniDescription1, miniDescription2: item.miniDescription2 }));
             if (selected.length > 0) {
                 selectedOptions[cat.category] = selected;
             }

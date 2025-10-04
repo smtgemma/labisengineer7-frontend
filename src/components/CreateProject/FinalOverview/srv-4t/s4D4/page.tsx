@@ -36,7 +36,7 @@ interface FormData {
 }
 
 
-export default function F4D3({ allData,
+export default function F4D4({ allData,
     setIsModalOpen
 }: F6D13Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -45,7 +45,7 @@ export default function F4D3({ allData,
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
     const { id, createdById, serviceId, specialty } = allData || {}
-    console.log(allDescriptionTasks, "all descripton task ==============================")
+    console.log(allDescriptionTasks, "all descripton task ========================")
 
     const { projectDescription,
         propertyAddress,
@@ -170,7 +170,10 @@ export default function F4D3({ allData,
                                 <div key={index} className="mt-6">
                                     <h3 className="text-sm font-bold">● {task?.label}</h3>
                                     <p className="text-sm my-4">{task?.description}</p>
-                                    <p className="italic text-sm">{task?.miniDescription}</p>
+                                    <div className="italic text-sm flex items-center gap-1">
+                                        <span className="text-sm font-bold">{task?.miniDescription1}</span>
+                                        <span className="text-sm">{task?.miniDescription2}</span>
+                                    </div>
                                 </div>
                             ))
                         }
@@ -180,8 +183,14 @@ export default function F4D3({ allData,
                     <h3 className="text-sm font-bold mb-2">4. Συμπέρασμα – Υπαγωγή των Εργασιών στις Διατάξεις του Άρθρου 30 του Ν.4495/2017</h3>
                     <p className="text-sm">
                         Οι περιγραφόμενες εργασίες υπάγονται στις ρητά προβλεπόμενες περιπτώσεις του άρθρου 30 του Ν.4495/2017 και, ως εκ τούτου, δεν απαιτείται έκδοση οικοδομικής άδειας ή άδειας μικρής κλίμακας.
-                        Βεβαιώνεται επίσης,  ότι το ακίνητο δεν εμπίπτει σε ειδικό καθεστώς προστασίας, σύμφωνα με τη παρ.2 του άρθρου 30 του Ν.4495/2017, όπως:
-                        παραδοσιακό οικισμό, σε χαρακτηρισμένο διατηρητέο κτίριο, σε αρχαιολογική ζώνη, σε δασική έκταση ή σε περιοχή Natura.
+                        Βεβαιώνεται επίσης, ότι έχουν ληφθεί οι απαιτούμενες εγκρίσεις ,για το σύνολο των παραπάνω εργασιών ,δεδομένου ότι το ακίνητο εμπίπτει σε ειδικό καθεστώς προστασίας, σύμφωνα με τη παρ.2 του άρθρου 30 του Ν.4495/2017, όπως:
+                        <ul className="list-disc pl-6 space-y-1">
+                            <li>Συμβούλιο Αρχιτεκτονικής (ΣΑ) για παραδοσιακούς οικισμούς και διατηρητέα</li>
+                            <li>Υπουργείο Πολιτισμού / Εφορεία Αρχαιοτήτων για αρχαιολογικούς χώρους και μνημεία</li>
+                            <li>Δασαρχείο για δασικές εκτάσεις</li>
+                            <li>Υπουργείο Περιβάλλοντος για περιοχές Natura</li>
+                            <li>ΥΔΟΜ για κτίρια χαρακτηρισμένα ως διατηρητέα ή με ειδικούς όρους δόμησης</li>
+                        </ul>
                     </p>
                 </div>
 

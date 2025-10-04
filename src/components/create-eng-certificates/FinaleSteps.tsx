@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import S4D1 from "../CreateProject/FinalOverview/srv-4t/s4D1/page";
 import S4D2 from "../CreateProject/FinalOverview/srv-4t/s4D2/page";
 import S4D3 from "../CreateProject/FinalOverview/srv-4t/s4D3/page";
+import S4D4 from "../CreateProject/FinalOverview/srv-4t/s4D4/page";
 import { FormDataOne, FormDataTwo } from "./template";
 export interface UserData {
     id: string;
@@ -68,6 +69,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const id = stepByStepData?.projectIdCode;
     // const projectId = stepByStepData?.projectIdCode?.result.id;
     const projectId = stepByStepData?.projectIdCode?.result.id;
+    console.log(dataAllFIled, "alldata from ai===============")
     const userId = dataAllFIled?.createdById;
 
     const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
@@ -387,6 +389,12 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                                 "technical_assumption_3" && (
                                     <div>
                                         <S4D3 allData={allData} setIsModalOpen={setIsModalOpen} />
+                                    </div>
+                                )}
+                            {selected ===
+                                "technical_assumption_2" && (
+                                    <div>
+                                        <S4D4 allData={allData} setIsModalOpen={setIsModalOpen} />
                                     </div>
                                 )}
                         </div>
