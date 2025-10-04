@@ -7,6 +7,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SelectedProperty } from "./ownerTypes";
 import { IoClose } from "react-icons/io5";
+import { RootState } from "@/redux/store";
 
 const DescriptionSelectionFour = ({ currentStep, nextStep }: {
     currentStep: number
@@ -20,7 +21,9 @@ const DescriptionSelectionFour = ({ currentStep, nextStep }: {
     const [isEditDescriptionModalOpen, setIsEditDescriptionModalOpen] = useState(false);
     const [descriptionText, setDescriptionText] = useState("");
     const [descriptions, setDescriptions] = useState<string[]>([]);
+    const horizontal: any = useSelector((state: RootState) => state.aiData.horizontal);
 
+    console.log("horizontal", horizontal.horizontal, "................................")
     const dispatch = useDispatch();
     const aiData = useSelector((state: any) => state.aiData.aiDataState);
 
@@ -28,11 +31,14 @@ const DescriptionSelectionFour = ({ currentStep, nextStep }: {
 
     // Initialize descriptions
     useEffect(() => {
-        const description1 = aiData?.technical_description;
-        const description2 = aiData?.technical_description_two;
-        setDescriptions([description1, description2].filter(desc => desc));
+        const descriptions =
+            horizontal?.horizontal?.map((item: { id: number; description: string }) => `Εργασίες βάσει του άρθρου 30 του ν.4495 / 2017 στην ${item.description}`) || [];
+
+        setDescriptions(descriptions.filter((desc: any) => desc));
     }, [aiData]);
 
+
+    console.log("new descriptions", descriptions, "....")
     // Edit description
     const onEditDescriptionSubmit = () => {
         if (editingDescription !== null) {
@@ -119,7 +125,7 @@ const DescriptionSelectionFour = ({ currentStep, nextStep }: {
                 <div>
                     <p className="mb-4 font-medium">Please select a property description:</p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                        {descriptions.map((property: string, index: number) => (
+                        {descriptions.map((property: any, index: number) => (
                             <div
                                 onClick={() => togglePropertySelection(index, property)}
                                 key={index}
