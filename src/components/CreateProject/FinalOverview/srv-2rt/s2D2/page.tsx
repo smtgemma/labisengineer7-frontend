@@ -45,7 +45,7 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
     const { projectDescription, horizontalPropertyName, propertyPostalCode, municipalityCommunity,
         propertyNumber, propertyAddress, propertyPlace, issuingAuthority, kaekProperty, permitNumber, createdAt, lastName, firstName, specialty, } = allData || {}
     const owner = allData?.owners || []
-    const engineer = allData?.engineers?.[0] || {}
+    console.log(violations, "=======================violations======")
 
 
     const { data: userData } = useGetMeQuery()
@@ -73,16 +73,18 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                         ΤΚ {propertyPostalCode || "N/A"}
                     </h3>
                 </div>
-                <div className="flex items-start justify-between gap-4 max-w-[470px]">
-                    <span className="text-sm">Ιδιοκτήτης:</span>
-                    <div className="flex items-center justify-center gap-2">
-                        {
-                            owner?.map((e: any, i: number) => (
-                                <h3 key={i} className="text-sm">
-                                    {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
-                                </h3>
-                            ))
-                        }
+                <div className="flex">
+                    <span className="text-sm">Ιδιοκτήτης: </span>
+                    <div className="flex-1">
+                        <div className="flex items-center justify-center gap-2">
+                            {
+                                owner?.map((e: any, i: number) => (
+                                    <h3 key={i} className="text-sm">
+                                        {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                                    </h3>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,7 +94,8 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                     στη περιοχή: "{propertyPlace || "N/A"}" του Δήμου {municipalityCommunity || "N/A"}: Χαλάνδρι, ΤΚ {propertyPostalCode || "N/A"}, και έχει υπαχθεί στις περί
                     οριζοντίου ιδιοκτησίας διατάξεις με την υπ΄ αριθμό "number_of_establishment_of_horizontal_ownership" πράξη σύστασης του Συμβολαιογράφου
                     "notary_place/municipality" "notary_establishment_of_horizontal_ownership", σε συνδυασμό με την με αριθμό "reviews_numbers_of_establishment_of_horizontal_ownership": πράξη τροποποίησης Σ.Ο.Ι του Συμβολαιογράφου
-                    ("notary_reviews_numbers_of_establishment_of_horizontal_ownership": " ,-🡪 this data you will add it when a notary have different name from previous)
+                    ("notary_reviews_numbers_of_establishment_of_horizontal_ownership": " ,
+                    {/* -🡪 this data you will add it when a notary have different name from previous) */}
                 </p>
                 {/* -🡪 this data you will add it when a notary have different name from previous) */}
                 <p className="mt-4">
@@ -114,73 +117,65 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                     {permitNumber || "N/A"} οικοδομικής αδείας και "license_number_revision": αναθεώρησης αυτής,
                     διαπιστώθηκαν οι παρακάτω πολεοδομικές παραβάσεις που τακτοποιούνται με την παρούσα δήλωση :
                 </p>
-                {/* sheet 1  */}
-                <p className="mt-2">
-                    Φ.Κ. # 1 (Descripsions valitation from Sheet 1) ….. – Category 1,2,4,5 (The category that selected from user at sheet 1) ,
-                    Έτος κατασκευής: από 1/1/2004 μέχρι 28/7/2011
-                    (The date that selected from user at sheet 1). Comment from Sheet 1
-                </p>
-                {/* sheet 2 */}
-                <p className="mt-2">
-                    Φ.Κ. # 2. (Descripsions valitation from Sheet 2) ….. – Category 1,2,4,5 (The category that selected from user at sheet 2) ,
-                    Έτος κατασκευής: από 1/1/2004 μέχρι 28/7/2011
-                    (The date that selected from user at sheet 2). Comment from Sheet 1
-                </p>
-                {/* sheet 3  */}
-                <p className="mt-2">
-                    Φ.Κ. # 3. (Descripsions valitation from Sheet 3) ….. – Category 1,2,4,5 (The category that selected from user at sheet 3) ,
-                    Έτος κατασκευής: από 1/1/2004 μέχρι 28/7/2011 (The date that selected from user at sheet 3). Comment from Sheet 3.
-                </p>
-                <p>
-                    Ο χρόνος κατασκευής των ανωτέρω αυθαίρετων κατασκευών τεκμηριώνεται από τα προσκομισθέντα στοιχεία, τα οποία επιβεβαιώνουν ότι
-                    οι κατασκευές προϋπήρχαν της 28.07.2011.
-                </p>
-                <p>Συγκεκριμένα, χρησιμοποιήθηκαν:</p>
-                <p>
-                    Αεροφωτογραφίες έτους
-                    {/* {{evidence.aerial_year}}, */}
-                    στις οποίες διακρίνονται οι αυθαίρετες επεμβάσεις.
-                </p>
-                <p>
-                    Υπεύθυνη Δήλωση Ιδιοκτήτη ,στην οποία δηλώνεται ο χρόνος εκτέλεσης των εργασιών.
-                </p>
-                <p>
-                    Με βάση τα ανωτέρω, τεκμαίρεται ότι οι κατασκευές υφίστανται πριν την κρίσιμη ημερομηνία
-                    της 28/07/2011, και συνεπώς είναι επιλέξιμες για υπαγωγή στις διατάξεις του Ν.4495/20
-                </p>
-            </div>
-            <div className="p-6 border-b-2 space-y-6">
-                {/* If category 3 is selected, add the following text: */}
-                {
-                    violations.map((violation) => {
-                        if (violation.category === "3") {
-                            return <div>
-                                <p>Φ.Κ. # 4. Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96, του Ν.4495/17 ,Κατηγορία 3,Έτος κατασκευής: από 1/1/2004 μέχρι 28/7/2011.
-                                    ( (The date that selected from user at sheet 1). (Descripsions valitation from Sheet 4) . Comment from Sheet 4
-                                </p>
-                            </div>
-                        }
-                        return null;
-                    })
-                }
-                {/* If the user checks the box with other violations, add this text */}
-                {
-                    violations.map((violation, index) => {
-                        if (violation.otherViolation) {
-                            return (
-                                <div key={index}>
-                                    <p>
-                                        Φ.Κ. # 5. Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του Ν.4495/2017 - (Descripsions valitation from Sheet 5), Comment from Sheet 5 και σύμφωνα με το Παράρτημα Β
-                                        του Ν.4495/2017 ορίζονται ως (1) Πολεοδομική παράβαση. (επισυνάπτεται αναλυτικός προυπολογισμός).
-                                    </p>
-                                </div>
-                            );
-                        }
-                        return null;
-                    })
-                }
+                <div className="mt-10">
+                    {/* Step 1 — Show categories 1,2,4,5 */}
+                    {violations
+                        .filter((item) => String(item.category) !== "3")
+                        .map((item, index) => (
+                            <p key={item.id || index} className="mt-2">
+                                Φ.Κ. #{index + 1}. (Descriptions validation from Sheet {index + 1}) ….. –
+                                Category {item.category || "N/A"} (The category that selected from user at sheet
+                                {index + 1}), Έτος κατασκευής: {item.age || "N/A"} (The date that selected from
+                                user at sheet {index + 1}). Comment from Sheet {index + 1}
+                            </p>
+                        ))}
 
-                {/* question answer  */}
+                    {/* Step 2 — If category 3 exists */}
+                    {violations.some((item) => String(item.category) === "3") && (() => {
+                        // find the category 3 violation
+                        const sheetIndex = violations.findIndex((item) => String(item.category) === "3") + 1;
+
+                        return (
+                            <p className="mt-2">
+                                Φ.Κ. # {sheetIndex}. Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96,
+                                του Ν.4495/17, Κατηγορία 3, Έτος κατασκευής: από 1/1/2004 μέχρι 28/7/2011 (The date that selected from user at sheet {sheetIndex}).
+                                (Descriptions validation from Sheet {sheetIndex}). Comment from Sheet {sheetIndex}.
+                            </p>
+                        );
+                    })()}
+
+                    {/* Step 3 — If user checked “otherViolation” */}
+                    {violations.some((item) => item.otherViolation) && (
+                        <p className="mt-2">
+                            Φ.Κ. # {violations.length + 2}. Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του
+                            Ν.4495/2017 – (Descriptions validation from Sheet 5), Comment from Sheet 5 και
+                            σύμφωνα με το Παράρτημα Β του Ν.4495/2017 ορίζονται ως (1) Πολεοδομική παράβαση.
+                            (επισυνάπτεται αναλυτικός προϋπολογισμός).
+                        </p>
+                    )}
+
+                    {/* Step 4 — Common ending text */}
+                    <div className="mt-4">
+                        <p>
+                            Ο χρόνος κατασκευής των ανωτέρω αυθαίρετων κατασκευών τεκμηριώνεται από τα
+                            προσκομισθέντα στοιχεία, τα οποία επιβεβαιώνουν ότι οι κατασκευές προϋπήρχαν της
+                            28.07.2011.
+                        </p>
+                        <p className="mt-2">
+                            Συγκεκριμένα, χρησιμοποιήθηκαν: Αεροφωτογραφίες έτους{" "}
+
+                            {/* {evidence?.aerial_year || "N/A"}, */}
+                            στις οποίες διακρίνονται οι αυθαίρετες επεμβάσεις.
+                            Υπεύθυνη Δήλωση Ιδιοκτήτη, στην οποία δηλώνεται ο χρόνος εκτέλεσης των εργασιών.
+                        </p>
+                        <p className="mt-2">
+                            Με βάση τα ανωτέρω, τεκμαίρεται ότι οι κατασκευές υφίστανται πριν την κρίσιμη
+                            ημερομηνία της 28/07/2011, και συνεπώς είναι επιλέξιμες για υπαγωγή στις διατάξεις
+                            του Ν.4495/2017.
+                        </p>
+                    </div>
+                </div>
+
                 <QuestionAnswer question={question} />
 
             </div>

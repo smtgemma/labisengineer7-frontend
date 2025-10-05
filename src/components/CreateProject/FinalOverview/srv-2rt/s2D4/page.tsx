@@ -5,7 +5,7 @@ import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useGetMeQuery, useUpdateProject2Mutation} from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProject2Mutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     firstName?: string;
@@ -68,7 +68,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const engineers = allData?.engineers?.[0] || {};
-     const owner = allData?.owners?.[ownerIndex]
+    const owner = allData?.owners?.[ownerIndex]
     // Removed duplicate 'owner' declaration
     const { id, createdById, serviceId, ydom, specialty, createdAt, propertyAddress, propertyPlace, firstName, lastName, propertyNumber, propertyPostalCode, permitNumber, issuingAuthority } = allData || {};
 
@@ -137,7 +137,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                         <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
                             <img src="/templateLogo/templateLogo.jpg" alt="Template Logo" />
                         </div>
-                        <h1 className="text-xl font-bold mb-2">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ====</h1>
+                        <h1 className="text-xl font-bold mb-2">ΥΠΕΥΘΥΝΗ ΔΗΛΩΣΗ</h1>
                         <p className="text-sm">(άρθρο 8 Ν.1599/1986)</p>
                     </div>
 
@@ -222,23 +222,23 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                 <div className="w-16 p-2 text-center border-r border-gray-400 text-sm">Αριθ</div>
                                 <div className="w-12 p-2 text-center border-r border-gray-400 font-bold ">{owner?.address_number || owner?.addressNumber || "N/A"}</div>
                                 <div className="w-12 p-2 text-center border-r border-gray-400 text-sm">ΤΚ</div>
-                                <div className="w-34 p-2 font-bold">{owner?.postal_code || owner?.postalCode || "N/A"}</div>
+                                <div className="w-25 p-2 font-bold">{owner?.postal_code || owner?.postalCode || "N/A"}</div>
                             </div>
                         </div>
 
                         {/* Contact details row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Αρ. Τηλεομοιότυπου (Fax):</div>
-                                <div className="flex-1 p-2">
+                                <div className="w-55 p-2 border-r border-gray-400 text-sm flex items-center">Αρ. Τηλεομοιότυπου (Fax):</div>
+                                <div className="w-31 p-2 border-r border-gray-400 text-sm flex items-center">-</div>
+                                <div className="w-52 p-2 border-r border-gray-400 text-sm flex items-center">
                                     <div className="text-sm">
-                                        <div>Δ/νση</div>
-                                        <div>Ηλεκτρ.</div>
+                                        <div>Δ/νση Ηλεκτρ.</div>
                                         <div>Ταχυδρομ</div>
                                         <div>ίου (Email):</div>
                                     </div>
                                 </div>
-                                <div className="p-2 underline ">{owner?.email || owner?.email || "N/A"}</div>
+                                <div className="p-2 underline flex items-center ">{owner?.email || "N/A"}</div>
                             </div>
                         </div>
 
@@ -248,11 +248,11 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">
                                     Α.Φ.Μ.:
                                 </div>
-                                <div className="w-24 p-2 font-bold">
-                                    {owner?.tax_identification_number || owner?.taxIdentificationNumber || "N/A"}
+                                <div className="w-54 p-2 font-bold">
+                                    {owner?.tax_identification_number || "N/A"}
                                 </div>
                                 <div className="w-32 p-2 border-l border-gray-400 text-sm">
-                                    {/* Δ.Ο.Υ.: */}
+                                    Δ.Ο.Υ.:
                                 </div>
                             </div>
                         </div>
@@ -293,6 +293,12 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                     })
                                 }
                             </div>
+                            <div className="text-xs p-6">
+                                <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
+                                <p>(2) Αναγράφεται ολογράφως.</p>
+                                <p> (3) «Όποιος εν γνώσει του δηλώνει ψευδή γεγονότα ή αρνείται ή αποκρύπτει τα αληθινά με έγγραφη υπεύθυνη δήλωση του άρθρου 8 τιμωρείται με φυλάκιση τουλάχιστον τριών μηνών. Εάν ο υπαίτιος αυτών των πράξεων σκόπευε να προσπορίσει στον εαυτόν του ή σε άλλον περιουσιακό όφελος βλάπτοντας τρίτον ή σκόπευε να βλάψει άλλον, τιμωρείται με κάθειρξη μέχρι 10 ετών.</p>
+                                <p>(4) Σε περίπτωση ανεπάρκειας χώρου η δήλωση συνεχίζεται στην πίσω όψη της και υπογράφεται από τον δηλούντα ή την δηλούσα.</p>
+                            </div>
                         </div>
                     </div>
                     {/* EDIT MODAL */}
@@ -330,7 +336,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("firstName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.firstName ||  ""}
+                                                defaultValue={allData.owners[ownerIndex]?.firstName || ""}
                                             />
                                         </div>
 

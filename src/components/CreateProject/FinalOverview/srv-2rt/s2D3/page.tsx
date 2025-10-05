@@ -203,7 +203,7 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                         {/* Address row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 text-center border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
+                                <div className="w-35 p-2 text-center border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
                                 <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
                                 <div className="w-16 p-2 text-center border-r border-gray-400 text-sm">Οδός</div>
                                 <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.owner_address || "N/A"}</div>
@@ -217,16 +217,16 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                         {/* Contact details row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Αρ. Τηλεομοιότυπου (Fax):</div>
-                                <div className="flex-1 p-2">
+                                <div className="w-55 p-2 border-r border-gray-400 text-sm flex items-center">Αρ. Τηλεομοιότυπου (Fax):</div>
+                                <div className="w-31 p-2 border-r border-gray-400 text-sm flex items-center">-</div>
+                                <div className="w-52 p-2 border-r border-gray-400 text-sm flex items-center">
                                     <div className="text-sm">
-                                        <div>Δ/νση</div>
-                                        <div>Ηλεκτρ.</div>
+                                        <div>Δ/νση Ηλεκτρ.</div>
                                         <div>Ταχυδρομ</div>
                                         <div>ίου (Email):</div>
                                     </div>
                                 </div>
-                                <div className="p-2 underline ">{owner?.email || "N/A"}</div>
+                                <div className="p-2 underline flex items-center ">{owner?.email || "N/A"}</div>
                             </div>
                         </div>
 
@@ -288,6 +288,12 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                                     <p className="text-center mt-6"> Ο – Η Δηλ.</p>
                                 </div>
                             </div>
+                        </div>
+                        <div className="text-xs p-6">
+                            <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
+                            <p>(2) Αναγράφεται ολογράφως.</p>
+                            <p> (3) «Όποιος εν γνώσει του δηλώνει ψευδή γεγονότα ή αρνείται ή αποκρύπτει τα αληθινά με έγγραφη υπεύθυνη δήλωση του άρθρου 8 τιμωρείται με φυλάκιση τουλάχιστον τριών μηνών. Εάν ο υπαίτιος αυτών των πράξεων σκόπευε να προσπορίσει στον εαυτόν του ή σε άλλον περιουσιακό όφελος βλάπτοντας τρίτον ή σκόπευε να βλάψει άλλον, τιμωρείται με κάθειρξη μέχρι 10 ετών.</p>
+                            <p>(4) Σε περίπτωση ανεπάρκειας χώρου η δήλωση συνεχίζεται στην πίσω όψη της και υπογράφεται από τον δηλούντα ή την δηλούσα.</p>
                         </div>
                     </div>
                     {/* EDIT MODAL */}
