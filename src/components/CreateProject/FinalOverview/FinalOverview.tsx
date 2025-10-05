@@ -148,10 +148,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const projectId = stepByStepData?.projectIdCode?.result.id;
   const userId = dataAllFIled?.createdById;
 
-  console.log(
-    stepByStepData,
-    "all data for template =========================="
-  );
   console.log(stepByStepData?.projectIdCode?.id);
 
   const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
@@ -159,6 +155,16 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
   const allData = allTemplateData?.data || {};
+
+
+  console.log(
+    stepByStepData,
+    "all data for template from stepBySteData =========================="
+  );
+  console.log(
+    allData,
+    "allData from database by api=========================="
+  );
 
   console.log("pdf", pdfdownload);
   console.log("execl", execlDownload);
@@ -172,6 +178,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const small = subCategoryData["small-construction"] || [];
 
   // const store = makeStore();
+  const [ownerIndex, setOwnerIndex] = useState<number | null>(null)
   const [selected, setSelected] = useState<string | null>(null);
   const [projectHexCode, setProjectHexCode] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -201,6 +208,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   //     component: <FileOneDesignEleven />,
   //   },
   // ];
+
 
   const projectAndUserHexCode =
     userData?.hexToken + `-${projectCodeId?.result?.projectCode}`;
@@ -309,13 +317,13 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
     };
   }, [isModalOpen]);
 
-  const templates = [
-    {
-      id: "template3",
-      name: "F6D3.pdf",
-      component: <F6D8 allData={allData} />,
-    },
-  ];
+  // const templates = [
+  //   {
+  //     id: "template3",
+  //     name: "F6D3.pdf",
+  //     component: <F6D8 allData={allData} />,
+  //   },
+  // ];
 
   console.log(selected, "selected==================");
 
@@ -411,6 +419,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <button
                     className="bg-white border border-blue-400 px-4 py-2 rounded-lg cursor-pointer"
                     onClick={() => {
+                      if (template.id.startsWith(template.id)) {
+                        const index = Number(template.id.split("_")[1]);
+                        setOwnerIndex(index)
+                      }
                       setSelected(template.id);
                       setIsModalOpen(true);
                     }}
@@ -480,8 +492,11 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
               </div>
               {/* file 6======== */}
               <div>
-                {selected === "61" && (
-                  <F6D8 allData={allData} /> // 1
+                {selected?.startsWith("template1_") && ownerIndex !== null && (
+                  <F6D8
+                    allData={allData}
+                    owner={allData?.owners?.[ownerIndex]}
+                  />
                 )}
                 {selected === "62" && (
                   <F6D9 allData={allData} /> // 2
@@ -529,19 +544,19 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F10D4 allData={allData} /> // 1
                 )}
                 {selected === "102" && (
-                  <F10D6 allData={allData} /> 
+                  <F10D6 allData={allData} />
                   // <F10D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
                 )}
                 {selected === "103" && (
-                  <F10D7 allData={allData} setIsModalOpen={setIsModalOpen} /> 
+                  <F10D7 allData={allData} setIsModalOpen={setIsModalOpen} />
                   // <F10D6 allData={allData} /> // 3
                 )}
                 {selected === "104" && (
-                  <F10D8 allData={allData} /> 
+                  <F10D8 allData={allData} />
                   // <F10D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
                 )}
                 {selected === "105" && (
-                   <F10D10 allData={allData} />
+                  <F10D10 allData={allData} />
                   // <F10D8 allData={allData} /> // 5
                 )}
                 {selected === "106" && (
@@ -555,7 +570,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F10D11 allData={allData} /> // 8
                 )}
                 {selected === "109" && (
-                  <F10D14 allData={allData} /> 
+                  <F10D14 allData={allData} />
                   // <F10D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 9
                 )}
                 {selected === "1010" && (
