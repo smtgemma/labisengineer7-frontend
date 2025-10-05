@@ -147,7 +147,7 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                     {/* Step 3 — If user checked “otherViolation” */}
                     {violations.some((item) => item.otherViolation) && (
                         <p className="mt-2">
-                            Φ.Κ. # {violations.length + 2}. Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του
+                            Φ.Κ. # {violations.length + 1}. Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του
                             Ν.4495/2017 – (Descriptions validation from Sheet 5), Comment from Sheet 5 και
                             σύμφωνα με το Παράρτημα Β του Ν.4495/2017 ορίζονται ως (1) Πολεοδομική παράβαση.
                             (επισυνάπτεται αναλυτικός προϋπολογισμός).
