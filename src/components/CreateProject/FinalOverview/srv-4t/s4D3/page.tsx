@@ -168,9 +168,12 @@ export default function F4D3({ allData,
                         {Array.isArray(allDescriptionTasks) &&
                             allDescriptionTasks.map((task: any, index: number) => (
                                 <div key={index} className="mt-6">
-                                    <h3 className="text-sm font-bold">● {task?.label}</h3>
+                                    <h3 className="text-[15px] font-bold">● {task?.label}</h3>
                                     <p className="text-sm my-4">{task?.description}</p>
-                                    <p className="italic text-sm">{task?.miniDescription}</p>
+                                    <div className="italic text-sm">
+                                        <span className="font-bold mr-1">{task?.miniDescription1}</span>
+                                        <span>{task?.miniDescription2}</span>
+                                    </div>
                                 </div>
                             ))
                         }

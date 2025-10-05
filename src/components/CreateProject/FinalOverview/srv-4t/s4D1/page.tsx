@@ -211,23 +211,23 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
                                 <div className="w-12 p-2 border-r border-gray-400 font-bold ">{owner?.addressNumber || owner?.address_number || "N/A"}</div>
                                 <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-                                <div className="w-24 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
+                                <div className="w-25 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
                             </div>
                         </div>
 
                         {/* Contact details row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Αρ. Τηλεομοιότυπου (Fax):</div>
-                                <div className="flex-1 p-2">
+                                <div className="w-55 p-2 border-r border-gray-400 text-sm flex items-center">Αρ. Τηλεομοιότυπου (Fax):</div>
+                                <div className="w-31 p-2 border-r border-gray-400 text-sm flex items-center">-</div>
+                                <div className="w-52 p-2 border-r border-gray-400 text-sm flex items-center">
                                     <div className="text-sm">
-                                        <div>Δ/νση</div>
-                                        <div>Ηλεκτρ.</div>
+                                        <div>Δ/νση Ηλεκτρ.</div>
                                         <div>Ταχυδρομ</div>
                                         <div>ίου (Email):</div>
                                     </div>
                                 </div>
-                                <div className="p-2 underline ">{owner?.email || "N/A"}</div>
+                                <div className="p-2 underline flex items-center ">{owner?.email || "N/A"}</div>
                             </div>
                         </div>
 

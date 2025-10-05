@@ -57,7 +57,6 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
     const { id, createdById, serviceId, createdAt, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber, horizontalPropertyName } = allData || {};
-    console.log(allData, "=====allData")
 
     const [updateProject] = useUpdateProjectMutation()
     const { data: userData } = useGetMeQuery()
@@ -208,7 +207,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         {/* Address row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
+                                <div className="w-35 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
                                 <div className="w-50 p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
                                 <div className="w-50 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress || "N/A"}</div>
@@ -222,16 +221,16 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         {/* Contact details row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Αρ. Τηλεομοιότυπου (Fax):</div>
-                                <div className="flex-1 p-2">
+                                <div className="w-55 p-2 border-r border-gray-400 text-sm flex items-center">Αρ. Τηλεομοιότυπου (Fax):</div>
+                                <div className="w-31 p-2 border-r border-gray-400 text-sm flex items-center">-</div>
+                                <div className="w-52 p-2 border-r border-gray-400 text-sm flex items-center">
                                     <div className="text-sm">
-                                        <div>Δ/νση</div>
-                                        <div>Ηλεκτρ.</div>
+                                        <div>Δ/νση Ηλεκτρ.</div>
                                         <div>Ταχυδρομ</div>
                                         <div>ίου (Email):</div>
                                     </div>
                                 </div>
-                                <div className=" p-2 underline ">{engineer?.email || "N/A"}</div>
+                                <div className=" p-2 underline flex items-center">{engineer?.email || "N/A"}</div>
                             </div>
                         </div>
 
