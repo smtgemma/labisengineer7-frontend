@@ -40,7 +40,7 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
     // Create templates including owner templates without mutating exported array
     const allTemplates: TemplateName[] = useMemo(() => {
         const baseTemplates: TemplateName[] = [
-            { id: "template_1", title: "Αναλυτικός Προϋπολογισμούς 4495/2017", price: 0.5 },
+            { id: "template_1", title: "Αναλυτικός Προϋπολογισμός 4495/2017", price: 0.5 },
             { id: "template_2", title: "Τεχνική Έκθεση 4495/2017", price: 0.5 },
             { id: "autofill", title: "Autofill 1 Credit", price: 1 },
         ];
