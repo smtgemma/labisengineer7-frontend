@@ -131,9 +131,10 @@ export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
                         ΤΚ {propertyPostalCode || "N/A"}
                     </h3>
                 </div>
-                <div className="flex items-start justify-between gap-4 max-w-xl">
+                <div className="flex">
                     <span className="text-sm">Ιδιοκτήτης:</span>
-                    <div className="flex items-center justify-center gap-2">
+                    <div className="flex-1">
+                        <div className="flex items-center justify-center gap-2">
                         {
                             owner?.map((e: any, i: number) => (
                                 <h3 key={i} className="text-sm">
@@ -141,6 +142,7 @@ export default function F6D4({ allData, setIsModalOpen }: F6D5Props) {
                                 </h3>
                             ))
                         }
+                    </div>
                     </div>
                 </div>
             </div>

@@ -495,7 +495,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected?.startsWith("template1_") && ownerIndex !== null && (
                   <F6D8
                     allData={allData}
-                    owner={allData?.owners?.[ownerIndex]}
+                    ownerIndex={ownerIndex}
                   />
                 )}
                 {selected === "62" && (

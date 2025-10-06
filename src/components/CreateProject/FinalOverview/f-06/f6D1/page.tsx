@@ -44,7 +44,6 @@ interface BudgetCategory {
 }
 
 export default function F6D1({ allData }: { allData: allDataProps }) {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const owner = allData?.owners || []
   const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, propertyNumber, municipalityCommunity } = allData || "";
   console.log(allData)
@@ -1042,7 +1041,6 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
   const onSubmit = (data: FormData) => {
     console.log("Updated Data:", data)
     reset()
-    setIsEditModalOpen(false)
   }
 
   return (
@@ -1054,29 +1052,33 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
 
       {/* Project Info */}
       <div className="mb-6 space-y-4">
-        <div className="flex items-center gap-4">
+        <div className="flex">
           <span className="font-medium w-1/4">Εργοδότες *:</span>
-          <div className="flex items-center justify-center gap-2">
-            {
-              owner?.map((e: any, i: number) => (
-                <h3 key={i} className="text-sm">
-                  {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
-                </h3>
-              ))
-            }
+          <div className="flex-1">
+            <div className="flex items-center justify-center gap-2">
+              {
+                owner?.map((e: any, i: number) => (
+                  <h3 key={i} className="text-sm">
+                    {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                  </h3>
+                ))
+              }
+            </div>
           </div>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>
-          <h3 className="flex-1 text-black text-sm">{projectDescription || "N/A"}</h3>
+          <h3 className="flex-1 text-black text-sm text-center">{projectDescription || "N/A"}</h3>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className=" text-sm">
+          <div className="flex-1">
+            <h3 className=" text-sm flex items-center justify-center">
             {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
             ΔΗΜΟΣ {municipalityCommunity || "N/A"},
             ΤΚ {propertyPostalCode || "N/A"}
           </h3>
+          </div>
         </div>
       </div>
       {/* Budget Title */}
