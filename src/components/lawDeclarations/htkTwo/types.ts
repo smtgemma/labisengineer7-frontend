@@ -34,6 +34,8 @@ export type ProjectData = {
     permitNumber: string;
     titleArea: string;
     floorProperty: string;
+    numberProperty: string;
+    percentageCoOwnershipParcel: string;
 };
 
 export interface LicenseLegalFormData {
@@ -47,6 +49,14 @@ export interface LicenseLegalFormData {
     teeRegistrationNumber: string;
     specialty: string;
     inclusionDateLegalization: string;
+    licenseNumberRevision: string;
+    dateIssuanceBuildingPermit: string;
+    detailsIssuingAuthority: string;
+    dateIssueBuildingPermitRevision: string;
+    completionDeclaration3843Number: string;
+    descriptionValidations3843: string;
+    issuingAuthority3843: string;
+    dateIssueCompletionDeclaration3843: string;
 }
 
 export interface EPCFormValues {
@@ -57,6 +67,9 @@ export interface EPCFormValues {
     primaryEnergy: string;
     co2Emissions: string;
     zonePrice: string;
+    reviewsNumbersEstablishmentHorizontalOwnership: string;
+    numberEstablishmentHorizontalOwnership: string;
+    notaryEstablishmentHorizontalOwnership: string;
 }
 
 export type OtherOpation = {

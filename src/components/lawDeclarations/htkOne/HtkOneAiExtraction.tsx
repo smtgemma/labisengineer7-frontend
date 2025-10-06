@@ -84,17 +84,12 @@ const HtkOneAiExtraction: React.FC<AIExtractionProps> = ({
         setIsCompleted(false);
         // timerControling();
 
-        const ktimatologio = uploadedFiles[0];
-        const contract = uploadedFiles[1];
-        const permit = uploadedFiles[2];
-        const Law = uploadedFiles[3];
-
-
         const formData = new FormData();
-        if (ktimatologio) formData.append("file1", ktimatologio);
-        if (contract) formData.append("file2", contract);
-        if (permit) formData.append("file3", permit);
-        if (Law) formData.append("file4", Law);
+
+        uploadedFiles.forEach((file, index) => {
+            if (file) formData.append(`file${index + 1}`, file);
+        });
+
 
         // formData.append("horizontal_property_name", JSON.stringify(horizontal_property_name));
         formData.append("technical_description", JSON.stringify(technical_description));
