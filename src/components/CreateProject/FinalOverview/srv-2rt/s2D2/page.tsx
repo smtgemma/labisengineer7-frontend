@@ -134,12 +134,13 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                     {violations.some((item) => String(item.category) === "3") && (() => {
                         // find the category 3 violation
                         const sheetIndex = violations.findIndex((item) => String(item.category) === "3") + 1;
+                        
 
                         return (
                             <p className="mt-2">
                                 Φ.Κ. # {sheetIndex}. Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96,
-                                του Ν.4495/17, Κατηγορία 3, Έτος κατασκευής: από 1/1/2004 μέχρι 28/7/2011 (The date that selected from user at sheet {sheetIndex}).
-                                (Descriptions validation from Sheet {sheetIndex}). Comment from Sheet {sheetIndex}.
+                                του Ν.4495/17, Κατηγορία 3, Έτος κατασκευής: i have to add here age 
+                                {/* i have to add here {violations} */} 
                             </p>
                         );
                     })()}

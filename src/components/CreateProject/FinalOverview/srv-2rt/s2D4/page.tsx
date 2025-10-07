@@ -47,6 +47,10 @@ interface allDataProps {
     propertyPostalCode: string;
     permitNumber: string;
     issuingAuthority: string;
+    municipalityCommunity: string;
+    ownership_percentage_owner: string;
+    dateIssuanceBuildingPermit: string;
+    owner_type_ownership: string;
 }
 
 type ViolationData = {
@@ -70,7 +74,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
     const engineers = allData?.engineers?.[0] || {};
     const owner = allData?.owners?.[ownerIndex]
     // Removed duplicate 'owner' declaration
-    const { id, createdById, serviceId, ydom, specialty, createdAt, propertyAddress, propertyPlace, firstName, lastName, propertyNumber, propertyPostalCode, permitNumber, issuingAuthority } = allData || {};
+    const { municipalityCommunity, owner_type_ownership, ownership_percentage_owner, dateIssuanceBuildingPermit, id, createdById, serviceId, ydom, specialty, createdAt, propertyAddress, propertyPlace, firstName, lastName, propertyNumber, propertyPostalCode, permitNumber, issuingAuthority } = allData || {};
 
     const [updateProject2] = useUpdateProject2Mutation()
     const { data: userData } = useGetMeQuery()
@@ -259,39 +263,69 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
 
                         {/* Declaration text */}
                         <div className="p-4 text-sm">
-                            <p className="mb-4">
-                                Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις (3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν. 1599/1986,
-                                δηλώνω ότι σχετικά με το δηλωθέν ακίνητό στην στην οδό {propertyAddress || "N/A"} {propertyNumber || "N/A"} περιοχή City/Place/Municipality Property με Τ.Κ.{propertyPostalCode || "N/A"} στο οποίο ως ιδιοκτήτης με ποσοστό  Owner Percent Property % ισχύουν τα εξής:
-                            </p>
-                            <p className="mb-1">
-                                Αριθμός Οικοδομικής Άδειας: {permitNumber || "N/A"} Ημερομηνία Έκδοσης: {createdAt && format(new Date(createdAt), "dd/MM/yyyy")} {permitNumber || "N/A"} Πολεοδομική Υπηρεσία: {issuingAuthority || "N/A"}
-                            </p>
-                            <p className="mb-1">
-                                Περιγραφή Αυθαίρετων Κατασκευών ή/και Χρήσεων:
-                            </p>
-                            <div className="grid grid-cols-1 md:grid-cols-2 mt-6">
-                                {
-                                    violations && violations?.map((item: any, index: number) => {
-                                        return (
-                                            <div key={index}>
-                                                <p>Age: {item.age}</p>
-                                                <p>Category: {item.category}</p>
-                                                <p>CreatedAt: {item.createdAt && format(new Date(item.createdAt), "dd/MM/yyyy")}</p>
-                                                <p>FormId: {item.formId}</p>
-                                                <p>Id: {item.id}</p>
-                                                <p>OtherViolation: {item.otherViolation}</p>
-                                                <p>ProjectId: {item.projectId}</p>
-                                                <p>ShowRemainingViolations: {item.showRemainingViolations}</p>
-                                                <p>UpdatedAt: {item.updatedAt && format(new Date(item.updatedAt), "dd/MM/yyyy")}</p>
-                                                <p>Violations: {item?.violations && item?.violations?.map((v: string, index: number) => {
-                                                    return <div key={index}>
-                                                        <p>{v}</p>
-                                                    </div>
-                                                })}</p>
-                                            </div>
-                                        )
-                                    })
-                                }
+                            <div className="border border-b-0 mb-10">
+                                <div className="">
+                                    <p className="mb-1 p-2">
+                                    Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις (3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν. 1599/1986,
+                                    δηλώνω ότι σχετικά με το δηλωθέν ακίνητό στην στην οδό <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}</span> περιοχή <span className="font-bold">{propertyPlace || "N/A"}</span> στον Δήμο <span className="font-bold">{municipalityCommunity || "N/A"}</span> με <span className="font-bold">Τ.Κ.{propertyPostalCode || "N/A"}</span> στο οποίο ως ιδιοκτήτης με ποσοστό  <span className="font-bold">{owner?.ownership_percentage_owner || "N/A"}</span> ισχύουν τα εξής:
+                                </p>
+                                <div className="border-b border-dashed p-0"></div>
+                                <p className="my-3 p-2">
+                                    Αριθμός Οικοδομικής Άδειας: <span className="font-bold">{permitNumber || "N/A"}</span> Ημερομηνία Έκδοσης: <span className="font-bold">{dateIssuanceBuildingPermit || "N/A"}</span> Πολεοδομική Υπηρεσία: <span className="font-bold">{issuingAuthority || "N/A"}</span>
+                                </p>
+                                <div className="border-b border-dashed"></div>
+                                <p className="mb-2 font-bold p-2">
+                                    Περιγραφή Αυθαίρετων Κατασκευών ή/και Χρήσεων:
+                                </p>
+                                <div className="grid grid-cols-1 md:grid-cols-2 my-6 p-2">
+                                    {
+                                        violations && violations?.map((item: any, index: number) => {
+                                            return (
+                                                <div key={index}>
+                                                    <p>Age: {item.age}</p>
+                                                    <p>Category: {item.category}</p>
+                                                    <p>CreatedAt: {item.createdAt && format(new Date(item.createdAt), "dd/MM/yyyy")}</p>
+                                                    <p>FormId: {item.formId}</p>
+                                                    <p>Id: {item.id}</p>
+                                                    <p>OtherViolation: {item.otherViolation}</p>
+                                                    <p>ProjectId: {item.projectId}</p>
+                                                    <p>ShowRemainingViolations: {item.showRemainingViolations}</p>
+                                                    <p>UpdatedAt: {item.updatedAt && format(new Date(item.updatedAt), "dd/MM/yyyy")}</p>
+                                                    <p>Violations: {item?.violations && item?.violations?.map((v: string, index: number) => {
+                                                        return <div key={index}>
+                                                            <p>{v}</p>
+                                                        </div>
+                                                    })}</p>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                </div>
+                                <div className="border-t border-dashed"></div>
+                            </div>
+                            <div className="border border-t-0">
+                                <div className="border-b border-dashed"></div>
+                                <div className="">
+                                    <p className="my-2 font-bold p-2">Ημερομηνία Ολοκλήρωσης ή Εγκατάστασης Αυθαίρετων Κατασκευών: </p>
+                                    <div><span className="font-bold p-2">Έγγραφο Παλαιότητας:</span> Αεροφωτογραφία από Ελληνικό Κτηματολόγιο, Συμβόλαιο ιδιοκτησίας</div>
+                                    <div className="border-b border-dashed my-2 px-2"></div>
+                                    <p className="font-bold px-2">Κατηγορία Χρήσης:</p>
+                                    <div className="border-b border-dashed my-2"></div>
+                                    <p className="font-bold px-2">Τιμή Ζώνης: - <span className="ml-10">Ποσοστό  και Είδος Ιδιοκτησίας:</span> <span className="ml-2">{owner?.ownership_percentage_owner || "N/A"}</span> <span>{owner?.owner_type_ownership || "N/A"}</span> <span className="ml-5">Χρήση Γής: Αμιγής / Γενική Κατοικία</span>
+                                    </p>
+                                    <div className="border-b border-dashed my-2"> </div>
+                                    <p className="p-2">Δηλώνω ρητά ότι δεν εμπίπτει σε καμία από τις περιπτώσεις του άρθρου 89 του Ν. 4495/17 και ότι οι ως άνω παραβάσεις είχαν ολοκληρωθεί προ της 28.07.2011 και σύμφωνα με το άρθρο 96 του Ν. 4495/17</p>
+                                </div>
+                            </div>
+                            <div className="my-3">
+                                <div className="w-[90%] mx-left">
+                                    <div className="flex justify-between items-center mb-3">
+                                        <p>Βεβαιώνεται το γνήσιο της υπογραφής</p>
+                                        <p> Ημερομηνία:</p>
+                                    </div>
+                                </div>
+                                <p className="text-right">Ο – Η Δηλ.</p>
                             </div>
                             <div className="text-xs py-5">
                                 <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>

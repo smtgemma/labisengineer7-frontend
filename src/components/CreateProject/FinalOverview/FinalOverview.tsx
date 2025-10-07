@@ -96,6 +96,7 @@ import F8D6 from "./f-08/f8D6/page";
 import F8D7 from "./f-08/f8D7/page";
 import F14D8 from "./f-14/f14D8/page";
 import F14D9 from "./f-14/f14D9/page";
+import F7D12 from "./f-07/f7D12/page";
 
 export interface UserData {
   id: string;
@@ -495,7 +496,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected?.startsWith("template1_") && ownerIndex !== null && (
                   <F6D8
                     allData={allData}
-                    owner={allData?.owners?.[ownerIndex]}
+                    ownerIndex={ownerIndex}
                   />
                 )}
                 {selected === "62" && (
@@ -598,8 +599,14 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "76" && (
                   <F7D6 allData={allData} /> // 6
                 )}
-                {selected === "77" && (
+                {/* {selected === "77" && (
                   <F7D7 allData={allData} /> // 7
+                )} */}
+                {selected?.startsWith("owner7_") && ownerIndex !== null && (
+                  <F7D7
+                    allData={allData}
+                    ownerIndex={ownerIndex}
+                  />
                 )}
                 {selected === "78" && (
                   <F7D8 allData={allData} /> // 8
@@ -612,6 +619,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 )}
                 {selected === "711" && (
                   <F7D11 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
+                )}
+                {selected === "712" && (
+                  <F7D12 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
                 )}
               </div>
               {/* file 14  */}
@@ -626,7 +636,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F14D3 allData={allData} /> // 3
                 )}
                 {selected === "144" && (
-                  <F14D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
+                  <F14D4 allData={allData} /> // 4
                 )}
                 {selected === "145" && (
                   <F14D5 allData={allData} /> // 5

@@ -48,7 +48,7 @@ export default function S2D1({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const owner = allData?.owners || []
   const { municipalityCommunity, propertyNumber, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt } = allData || "";
-  console.log(allData)
+  console.log(allData, "==================>>")
 
 
   const { data: userData } = useGetMeQuery()
@@ -1070,7 +1070,7 @@ export default function S2D1({ allData }: { allData: allDataProps }) {
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>
-          <h3 className="flex-1 text-black text-sm">{projectDescription || "N/A"}</h3>
+          <h3 className="flex-1 text-black text-sm uppercase">{projectDescription || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>

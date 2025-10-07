@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
 import { format } from "date-fns"
+
 // for editing 
 import { useForm, Controller } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice"
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useState } from "react";
 
 interface FormData {
     projectDescription: string;
@@ -17,11 +18,12 @@ interface FormData {
         lastName: string;
     }[];
 }
-
+// end editing 
 interface allDataProps {
     owners: any[]
     allDescriptionTasks: any[]
     technical_description: string
+    Horizontal_property_name: string
     projectDescription: string
     id: string
     createdById: string
@@ -30,20 +32,20 @@ interface allDataProps {
     propertyPlace: string
     createdAt: string
     horizontalPropertyName: string
+    serviceId: string
 }
-
 type F6D5Props = {
     allData: any;
     setIsModalOpen: (value: boolean) => void;
 };
-// end editing 
 
-export default function F6D15({ allData, setIsModalOpen }: F6D5Props) {
+export default function F7D12({ allData, setIsModalOpen }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owner = allData?.owners || []
-    const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName, propertyNumber, municipalityCommunity } = allData || {}
+    const owner = allData?.owners?.[0] || {};
+    const { allDescriptionTasks } = allData || {}
+    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
+    console.log(allDescriptionTasks)
 
 
     const [updateProject] = useUpdateProjectMutation()
@@ -75,7 +77,7 @@ export default function F6D15({ allData, setIsModalOpen }: F6D5Props) {
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
-            serviceId: "68c7d2cc94994d27e3fa0148",
+            serviceId: serviceId,
             ...data
         }
         const formData = new FormData()
@@ -93,9 +95,10 @@ export default function F6D15({ allData, setIsModalOpen }: F6D5Props) {
         setIsModalOpen(false)
     }
 
+
     return (
         <div className="max-w-[794px] mx-auto p-6 bg-white arial">
-            <div className="text-right -mt-9">
+            <div className="text-right -mt-7">
                 <button
                     className="mt-1 px-4 py-1"
                     onClick={() => setIsEditModalOpen(true)}
@@ -104,112 +107,89 @@ export default function F6D15({ allData, setIsModalOpen }: F6D5Props) {
                 </button>
             </div>
             {/* Title */}
-            <h2 className="text-center font-semibold underline text-xl mb-2">
-                ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΣΗΣ ΜΕΛΕΤΗΣ ΥΔΡΕΥΣΗΣ & ΑΠΟΧΕΤΕΥΣΗΣ
+            <h2 className="text-center font-semibold underline text-sm mb-2">
+                ΕΝΗΜΕΡΩΤΙΚΟ ΣΗΜΕΙΩΜΑ ΜΗ ΑΠΑΙΤΗΣΗΣ ΣΧΕΔΙΩΝ ΟΨΕΩΝ
             </h2>
 
             {/* Project Information */}
             <div className="mb-8 space-y-4">
                 <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
+                    <h3 className=" text-sm">{projectDescription || "N/A"}</h3>
                 </div>
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
                     <h3 className=" text-sm">
-                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-                        ΤΚ {propertyPostalCode || "N/A"}
+                        {propertyAddress || "N/A"}, {propertyPlace || "N/A"},
+                        {propertyPostalCode || "N/A"} 
                     </h3>
                 </div>
-                <div className="flex">
-                    <span className="text-sm">Ιδιοκτήτης:</span>
-                    <div className="flex-1">
-                        <div className="flex items-center justify-center gap-2">
-                        {
-                            owner?.map((e: any, i: number) => (
-                                <h3 key={i} className="text-sm">
-                                    {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
-                                </h3>
-                            ))
-                        }
-                    </div>
-                    </div>
+
+                <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
+                    <span className="">Ιδιοκτήτης:</span>
+                    <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
                 </div>
             </div>
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <div>
-                    <span className="font-semibold">
-
-                        <span className="mr-1">Στο ακίνητο {horizontalPropertyName || "N/A"} </span>
-                    </span>
-                    επί της οδού
-                    <span className="">
-                        <span className="ml-1">{propertyAddress || "N/A"} </span>{propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-                        <span className="mr-1">ΤΚ {propertyPostalCode || "N/A"}</span>
-                    </span>
-                    πρόκειται να <br />εκτελεσθούν οι παρακάτω εργασίες :
-                </div>
+                <p>Στο ακίνητο <span className="font-semibold">Description for building/ {horizontalPropertyName || "N/A"} </span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city} , {owner?.postal_code},</span>
+                    πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
             </div>
 
             <div className="space-y-6 ml-10">
+                {/* <div>
+                    <h3 className="text-sm font-bold">● Τοποθέτηση ικριωμάτων επί των όψεων του κτιρίου
+                    </h3>
+                    <p className="text-sm mb-6">Περιλαμβάνεται η εγκατάσταση μεταλλικών ικριωμάτων κατά μήκος των όψεων του κτιρίου, σύμφωνα με την ισχύουσα νομοθεσία περί μέτρων ασφαλείας. Η τοποθέτηση διασφαλίζει ασφαλή και πλήρη πρόσβαση στα σημεία επέμβασης για τις εργασίες αποκατάστασης και χρωματισμού των εξωτερικών επιφανειών.</p>
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold">● Μικρές οικοδομικές εργασίες – Σοβατίσματα – Στοκαρίσματα τοιχοποιιών
+                    </h3>
+                    <p className="text-sm mb-6">Αφορά την αποκατάσταση φθαρμένων ή αποσαθρωμένων επιχρισμάτων εξωτερικής τοιχοποιίας. Περιλαμβάνονται καθαίρεση σαθρών επιχρισμάτων, εφαρμογή νέου σοβά, στοκάρισμα ρωγμών και λείανση επιφανειών, χωρίς επέμβαση στον φέροντα οργανισμό ή στη γεωμετρία του κτιρίου.</p>
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold">● Εξωτερικοί χρωματισμοί επί των όψεων
+                    </h3>
+                    <p className="text-sm mb-6">Προβλέπεται η πλήρης προετοιμασία και βαφή των εξωτερικών επιφανειών του κτιρίου με ακρυλικό ή σιλικονούχο χρώμα υψηλής αντοχής. Περιλαμβάνει καθαρισμό, αστάρωμα και εφαρμογή δύο στρώσεων τελικού χρώματος, με κατάλληλο υλικό και μέθοδο ανάλογα με τις απαιτήσεις του υποστρώματος.</p>
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold">● Επισκευή και στερέωση μαρμάρινων στοιχείων( π.χ περβαζιών, στηθαίων)
+                    </h3>
+                    <p className="text-sm mb-6">Προβλέπεται η επαναστερέωση ή αντικατάσταση φθαρμένων ή αποκολλημένων μαρμάρινων επιστρώσεων στις όψεις, με χρήση αγκυρίων ή κόλλας κατάλληλης για εξωτερική χρήση. Οι αρμοί θα σφραγιστούν με σιλικονούχα ή πολυουρεθανική μαστίχη για αποτροπή εισροής υγρασίας.</p>
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold">● Αποκατάσταση στοιχείων απορροής όμβριων και μεταλλικών εξαρτημάτων
+                    </h3>
+                    <p className="text-sm mb-6">Περιλαμβάνεται ο έλεγχος και η αποκατάσταση ή αντικατάσταση φθαρμένων υδρορροών, στομίων, καναλιών ή σταγονόδρομων από λαμαρίνα ή συνθετικά υλικά. Στόχος είναι η αποκατάσταση της λειτουργικής απορροής όμβριων και η προστασία των όψεων από φθορές λόγω υγρασίας.</p>
+                </div>
+                <div>
+                    <h3 className="text-sm font-bold">● Χρωματισμός μεταλλικών κιγκλιδωμάτων (σιδηρών στοιχείων)
+                    </h3>
+                    <p className="text-sm mb-6">Προβλέπεται ο καθαρισμός, αποσκουριάσμα και βαφή των μεταλλικών κιγκλιδωμάτων (κάγκελα, εξώστες, αυλόπορτες) με εφαρμογή αντιδιαβρωτικού υποστρώματος και τελικής βαφής δύο στρώσεων με χρώμα μετάλλου εξωτερικής χρήσης. Η εργασία αφορά υφιστάμενα στοιχεία και δεν μεταβάλλει τη μορφή ή τον χαρακτήρα του κτιρίου</p>
+                </div> */}
 
-
-                {Array.isArray(allDescriptionTasks) &&
-                    allDescriptionTasks.map((task: any, index: number) => (
+                {
+                    allDescriptionTasks ? (allDescriptionTasks?.map((task: any, index: number) => (
                         <div key={index}>
                             <h3 className="text-sm font-bold">● {task?.id}</h3>
                             <p className="text-sm">{task?.description}</p>
                         </div>
-                    ))
+                    ))) : (
+                        <h2 className="text-3xl font-bold">Data not found</h2>
+                    )
                 }
-
                 <div>
-                    <p className="text-sm mb-6">
-                        Σύμφωνα με την{" "}
-                        <span className="text-sm font-bold">
-                            Απόφαση ΥΠΕΝ/ΔΑΟΚΑ/69701/4461/18 (ΦΕΚ 4520 Β/16.10.2018),
-                        </span>{" "}
-                        και ειδικότερα με το{" "}
-                        <span className="text-sm font-bold">άρθρο 2, παράγραφος Ιζ),</span>{" "}
-                        αναφέρεται ότι για την πραγματοποίηση εσωτερικών διαρρυθμίσεων εντός
-                        υφιστάμενου κτιρίου, απαιτείται η υποβολή σχεδίου κάτοψης σε
-                        κλίμακα 1:100 ή 1:50,{" "}
-                        <span className="underline">
-                            μόνο στην περίπτωση που από τις διαρρυθμίσεις αυτές προκύπτει
-                            ανάγκη τροποποίησης υφιστάμενων μελετών του κτιρίου.
-                        </span>
+                    <p className="text-sm mb-6">Για το σύνολο των προβλεπόμενων εργασιών <span className="text-sm font-bold">δεν απαιτείται η υποβολή αρχιτεκτονικών όψεων,</span> καθώς:</p>
+                    <p className="text-sm mb-6">● Οι εργασίες δεν τροποποιούν το αρχιτεκτονικό περίγραμμα ή τα γεωμετρικά χαρακτηριστικά των όψεων (όπως ανοίγματα, εξώστες, μορφολογικά στοιχεία).
                     </p>
-                </div>
-                <div>
-                    <p className="text-sm">Ενδεικτικά, τέτοιες μελέτες μπορεί να είναι:</p>
-                    <p className="text-sm">• Μελέτη ηλεκτρομηχανολογικών εγκαταστάσεων (Η/Μ)</p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold underline">
-                        Ωστόσο, στη συγκεκριμένη περίπτωση, για το σύνολο των προβλεπόμενων
-                        εργασιών, διαπιστώνεται ότι οι διαρρυθμίσεις δεν τροποποιούν τις
-                        εγκεκριμένες μελέτες του κτιρίου και ιδίως δεν επηρεάζουν:
-                    </h3>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold mb-6">
-                        Τη μελέτη Ύδρευσης/Αποχέτευσης
-                    </h3>
-                    <p className="text-sm mb-6">
-                        Ως εκ τούτου, δεν απαιτείται η κατάθεση νέων ή τροποποιημένων
-                        μελετών για την ενημέρωση του φακέλου της οικοδομικής άδειας. Το
-                        παραπάνω επιβεβαιώνεται και από τις διατάξεις της παρ. 10 του άρθρου
-                        42 του Ν.4495/2017, σύμφωνα με τις οποίες δεν απαιτείται
-                        επικαιροποίηση μελετών για διαρρυθμίσεις που δεν επηρεάζουν τα
-                        συστήματα πυροπροστασίας ή τις Η/Μ εγκαταστάσεις.
+                    <p className="text-sm mb-6">● Δεν πραγματοποιούνται επεμβάσεις που θα είχαν ως αποτέλεσμα την αισθητική ή λειτουργική αλλοίωση των υφιστάμενων όψεων.
                     </p>
+                    <p className="text-sm mb-6">● Οι εργασίες αφορούν συντηρήσεις, επισκευές ή επαναχρωματισμούς επί των όψεων, με χρήση υλικών παρόμοιων ή ταυτόσημων με τα υφιστάμενα.
+                    </p>
+                    <p className="text-sm mb-6">Η μορφή και η εικόνα του κτιρίου παραμένει αμετάβλητη, συνεπώς δεν απαιτείται η υποβολή όψεων σύμφωνα με τις διατάξεις του άρθρου 29 του Ν.4495/2017 και τις σχετικές ερμηνευτικές εγκυκλίους.</p>
                 </div>
-
                 {/* {/* Signature Section */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
                     <div className="max-w-[300px]">
@@ -227,7 +207,6 @@ export default function F6D15({ allData, setIsModalOpen }: F6D5Props) {
                     </div>
                 </div>
             </div>
-
             {/* EDIT MODAL */}
             {isEditModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
@@ -250,7 +229,7 @@ export default function F6D15({ allData, setIsModalOpen }: F6D5Props) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Έργο *:</label>
                                     <input
-                                        defaultValue={projectDescription || "Project Description "}
+                                        defaultValue={projectDescription || "projectDescription"}
                                         type="text"
                                         {...register("projectDescription", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
@@ -269,13 +248,13 @@ export default function F6D15({ allData, setIsModalOpen }: F6D5Props) {
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPlace || "propertyNumber"}
+                                            defaultValue={propertyPlace || "propertyPlace"}
                                             {...register("propertyPlace", { required: "City is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPostalCode || "municipalityCommunity"}
+                                            defaultValue={propertyPostalCode || "propertyPostalCode"}
                                             {...register("propertyPostalCode", { required: "Postal code is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
