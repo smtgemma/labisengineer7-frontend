@@ -42,6 +42,9 @@ export interface LicenseLegalFormData {
     plotArea: string;
     withinOutsideCityPlan: string;
     permitNumber: string;
+    dateIssueBuildingPermitRevisionTwo: string; //new
+    dateOfIssuanceEemk: string; //new
+    dateOfIssueBuildingPermitRevisioneemk: string; //new
     issuingAuthority: string;
     legalizationStatementNumber: string;
     engineerFullName: string;
