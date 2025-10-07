@@ -111,7 +111,7 @@ const AIExtractionDataInPut = ({
         // createdById: user?.userId,
         subCategories: subCategoryData,
         descrptionTasks: descrptionTasks,
-        ydom: descriptonAndYdom?.ydom,
+        ydom: ydom,
         technicalDescription: allExtreactData?.technical_description,
         technicalDescriptionTwo: allExtreactData?.technical_description_two,
         ...data,

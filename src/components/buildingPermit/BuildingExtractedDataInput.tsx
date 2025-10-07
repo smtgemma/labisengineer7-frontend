@@ -13,6 +13,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { FormValues } from "./types";
+import { TProjectData } from "@/interfaces/global";
 
 
 
@@ -157,7 +158,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
         name: "owners",
     });
 
-    const allExtreactData = stepByStepData.aiDataState;
+    const allExtreactData: TProjectData = stepByStepData.aiDataState;
     console.log(allExtreactData)
 
     // const ownerData = stepByStepData.ownerBaseData;
@@ -206,7 +207,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                 // createdById: user?.userId,
                 // subCategories: subCategoryData,
                 // descrptionTasks: descrptionTasks,
-                ydom: descriptonAndYdom?.ydom,
+                ydom: ydom,
                 technicalDescription: allExtreactData?.technical_description,
                 technicalDescriptionTwo: allExtreactData?.technical_description_two,
                 ...data,
@@ -277,6 +278,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                 </button>
                             </div>
 
+                            {/* all data are sending properly  */}
                             {collapse === 0 && (
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-5">
                                     <div className="col-span-full">
@@ -300,7 +302,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             className={`${inputStyle} cursor-not-allowed`}
                                             readOnly
 
-                                            defaultValue={allExtreactData?.kaek_property}
+                                            defaultValue={allExtreactData?.kaek_property ?? ""}
                                         // defaultValue={dataShowExtreact?.cadastral_code_kaek}
                                         />
                                     </div>
@@ -313,7 +315,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("titleArea")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.title_area}
+                                            defaultValue={allExtreactData?.title_area ?? ""}
                                         />
                                     </div>
                                     <div>
@@ -324,7 +326,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("numberProperty")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.number_property}
+                                            defaultValue={allExtreactData?.number_property ?? ""}
                                         />
                                     </div>
                                     <div>
@@ -335,7 +337,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("floorProperty")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.floor_property}
+                                            defaultValue={allExtreactData?.floor_property ?? ""}
                                         />
                                     </div>
 
@@ -347,7 +349,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("propertyPlace")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.property_place}
+                                            defaultValue={allExtreactData?.property_place ?? ""}
                                         />
                                     </div>
 
@@ -359,7 +361,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("propertyNumber")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.property_number}
+                                            defaultValue={allExtreactData?.property_number ?? ""}
                                         />
                                     </div>
 
@@ -371,7 +373,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("propertyAddress")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.property_address}
+                                            defaultValue={allExtreactData?.property_address ?? ""}
                                         />
                                     </div>
 
@@ -383,7 +385,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("municipalityCommunity")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.municipality_community}
+                                            defaultValue={allExtreactData?.municipality_community ?? ""}
                                         />
                                     </div>
 
@@ -395,7 +397,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("propertyPostalCode")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.property_postal_code}
+                                            defaultValue={allExtreactData?.property_postal_code ?? ""}
                                         />
                                     </div>
 
@@ -407,7 +409,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("percentageCoOwnershipParcel")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.percentage_co_ownership_parcel}
+                                            defaultValue={allExtreactData?.percentage_co_ownership_parcel ?? ""}
                                         />
                                     </div>
 
@@ -419,7 +421,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("horizontalPropertyName")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.horizontal_property_name}
+                                            defaultValue={allExtreactData?.horizontal_property_name ?? ""}
                                         />
                                     </div>
 
@@ -431,7 +433,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("horizontalPropertyNameTwo")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.horizontal_property_name_two}
+                                            defaultValue={allExtreactData?.horizontal_property_name_two ?? ""}
                                         />
                                     </div>
                                 </div>
@@ -439,6 +441,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                         </div>
                     </div>
 
+                    {/* all data are sending properly  */}
                     {fields.map((field, index) => (
                         <div key={field.id} className="mt-10">
                             <div className="p-6 md:p-8 bg-white rounded-xl">
@@ -720,7 +723,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("plotArea")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.plot_area}
+                                                defaultValue={allExtreactData.plot_area ?? ""} //not-sending
                                             />
                                         </div>
                                         <div>
@@ -731,7 +734,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("withinOutsideCityPlan")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.within_outside_city_plan}
+                                                defaultValue={allExtreactData.within_outside_city_plan ?? ""} //not-sending
                                             />
                                         </div>
 
@@ -743,7 +746,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("permitNumber")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.permit_number}
+                                                defaultValue={allExtreactData.permit_number ?? ""} //not-sending
                                             />
                                         </div>
 
@@ -755,7 +758,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("issuingAuthority")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.issuing_authority}
+                                                defaultValue={allExtreactData.issuing_authority ?? ""} //not-sending
                                             />
                                         </div>
                                         <div>
@@ -766,7 +769,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("legalizationStatementNumber")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.legalization_statement_number}
+                                                defaultValue={allExtreactData.legalization_statement_number ?? ""} //not-sending
                                             />
                                         </div>
 
@@ -778,7 +781,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("engineerFullName")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.engineer_full_name}
+                                                defaultValue={allExtreactData.engineer_full_name ?? ""} //not-sending
                                             />
                                         </div>
                                         <div>
@@ -789,7 +792,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("licenseNumberRevision")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.license_number_revision}
+                                                defaultValue={allExtreactData.license_number_revision ?? ""} //not-sending
                                             />
                                         </div>
                                         <div>
@@ -800,7 +803,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("dateIssuanceBuildingPermit")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.date_issuance_building_permit}
+                                                defaultValue={allExtreactData.date_issuance_building_permit ?? ""} //not-sending
                                             />
                                         </div>
                                         <div>
@@ -811,7 +814,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("detailsIssuingAuthority")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.details_issuing_authority}
+                                                defaultValue={allExtreactData.details_issuing_authority ?? ""} //not-sending
                                             />
                                         </div>
                                         <div>
@@ -822,7 +825,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("dateIssueBuildingPermitRevision")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.date_issue_building_permit_revision}
+                                                defaultValue={allExtreactData.date_issue_building_permit_revision ?? ""} //not-sending
                                             />
                                         </div>
                                         <div>
@@ -833,7 +836,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("projectTitleDescriptionLicense")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.project_title_description_license}
+                                                defaultValue={allExtreactData.project_title_description_license ?? ""} //not-sending
                                             />
                                         </div>
                                         <div>
@@ -844,7 +847,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("completionDeclaration3843Number")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.completion_declaration_3843_number}
+                                                defaultValue={allExtreactData.completion_declaration_3843_number ?? ""} //not-sending
                                             />
                                         </div>
                                         <div>
@@ -855,7 +858,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("descriptionValidations3843")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.description_validations_3843}
+                                                defaultValue={allExtreactData.description_validations_3843 ?? ""} //not-sending
                                             />
                                         </div>
                                         <div>
@@ -866,7 +869,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("issuingAuthority3843")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.issuing_authority_3843}
+                                                defaultValue={allExtreactData.issuing_authority_3843 ?? ""} //not-sending
                                             />
                                         </div>
                                         <div>
@@ -877,7 +880,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("dateIssueCompletionDeclaration3843")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.date_issue_completion_declaration_3843}
+                                                defaultValue={allExtreactData.date_issue_completion_declaration_3843 ?? ""} //not-sending
                                             />
                                         </div>
 
@@ -890,7 +893,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("electronicCode")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.electronic_code}
+                                                defaultValue={allExtreactData.electronic_code ?? ""} //not-sending
                                             />
                                         </div>
 
@@ -902,7 +905,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("teeRegistrationNumber")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.tee_registration_number}
+                                                defaultValue={allExtreactData.tee_registration_number ?? ""} //not-sending
                                             />
                                         </div>
 
@@ -914,7 +917,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("specialty")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.specialty}
+                                                defaultValue={allExtreactData.specialty ?? ""} //not-sending
                                             />
                                         </div>
 
@@ -927,7 +930,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("inclusionDateLegalization")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData?.inclusion_date_legalization}
+                                                defaultValue={allExtreactData?.inclusion_date_legalization ?? ""} //not-sending
                                             />
                                         </div>
                                     </div>
@@ -979,7 +982,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("numberEstablishmentHorizontalOwnership")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.number_establishment_horizontal_ownership}
+                                                defaultValue={allExtreactData.number_establishment_horizontal_ownership ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -990,7 +993,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("reviewsNumbersEstablishmentHorizontalOwnership")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.reviews_numbers_establishment_horizontal_ownership}
+                                                defaultValue={allExtreactData.reviews_numbers_establishment_horizontal_ownership ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -1001,7 +1004,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("notaryEstablishmentHorizontalOwnership")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.notary_establishment_horizontal_ownership}
+                                                defaultValue={allExtreactData.notary_establishment_horizontal_ownership ?? ""}
                                             />
                                         </div>
 
@@ -1012,8 +1015,6 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                         </div>
                     </div>
                 </form>
-
-
             </div>
             {currentStep < 8 && (
                 <div className="flex justify-end mt-4 w-fit ml-auto z-50" >
