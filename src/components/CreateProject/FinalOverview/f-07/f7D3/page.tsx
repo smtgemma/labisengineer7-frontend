@@ -112,7 +112,7 @@ export default function F7D3({ allData, setIsModalOpen }: F6D5Props) {
             <div className="mb-8 space-y-4">
                 <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    <h3 className=" text-sm">{projectDescription || "N/A"}</h3>
+                    <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
                 </div>
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">

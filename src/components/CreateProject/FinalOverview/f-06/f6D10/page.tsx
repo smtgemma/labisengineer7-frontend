@@ -230,8 +230,6 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                 <div className="p-2 underline flex items-center ">{engineer?.email || "N/A"}</div>
                             </div>
                         </div>
-
-
                         {/* VAT row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">

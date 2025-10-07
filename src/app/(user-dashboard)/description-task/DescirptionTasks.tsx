@@ -1361,6 +1361,7 @@ const DescriptionTask = () => {
   ]);
 
   console.log(description, "all description==============")
+  // i have changed here for common title remore and for one time showing the title and set let after change the const for description to reStore
    description = Object.values(
   description.reduce((acc: Record<string, any>, curr) => {
     const title = curr.title.trim(); // normalize title (remove trailing spaces)

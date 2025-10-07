@@ -126,7 +126,7 @@ export default function F6D2({ allData, setIsModalOpen }: F6D5Props) {
         </div>
         <div className="flex">
           <span className="text-sm">Ιδιοκτήτης:</span>
-          <div className="flex">
+          <div className="flex-1">
             <div className="flex items-center justify-center gap-2">
             {
               owner?.map((e: any, i: number) => (

@@ -351,7 +351,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
 
   // Create templates including owner templates without mutating exported array
-  const allTemplates: TemplateName[] = useMemo(() => {
+  let allTemplates: TemplateName[] = useMemo(() => {
     const baseTemplatesOwner1: TemplateName[] = []
 
     const hasSubcategory2 = allSubmergedArray.includes("ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΑΝΑΚΑΤΑΣΚΕΥΗ_ΥΠΕΡΗΧΩΝ_2")
@@ -391,6 +391,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     }
 
     // this subcategory 10
+    if(hasSubcategory10) {
     // stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
     //   baseTemplatesOwner1.push({
     //     id: `template1_${index}`,
@@ -399,30 +400,30 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     //   });
     // });
 
-    // this is subcategory 10
-    // baseTemplatesOwner1.push(
-    //   { id: "101", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
-    //     },
-    //     {id: "102",title: "Πίνακας 3 (ΙΚΑ)",price: 0.5,
-    //     },
-    //     { id: "103", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-    //     },
-    //     { id: "104", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
-    //     },
-    //     { id: "105", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-    //     },
-    //     { id: "106", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-    //     },
-    //     {id: "107", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
-    //     },
-    //     { id: "108", title: "ΥΔ Μηχανικού Φέρων Οργανισμού", price: 0.5,
-    //     },
-    //     { id: "109", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
-    //     },
-    //     { id:"1010", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-    //     },
-    //     {id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5},
-    // )
+    baseTemplatesOwner1.push(
+      { id: "101", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
+        },
+        {id: "102",title: "Πίνακας 3 (ΙΚΑ)",price: 0.5,
+        },
+        { id: "103", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
+        },
+        { id: "104", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
+        },
+        { id: "105", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        },
+        { id: "106", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
+        },
+        {id: "107", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
+        },
+        { id: "108", title: "ΥΔ Μηχανικού Φέρων Οργανισμού", price: 0.5,
+        },
+        { id: "109", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
+        },
+        { id:"1010", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
+        },
+        {id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5},
+    )
+    }
 
     // this is subcategory 7
     if (hasSubcategory7) {
@@ -475,200 +476,179 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         },
       )
     }
-
-    // baseTemplatesOwner1.push(
-    //   {
-    //     id: "141", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
-    //   },
-    //   {
-    //     id: "142", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-    //   },
-    //   {
-    //     id: "143", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων", price: 0.5,
-    //   },
-    //   {
-    //     id: "144", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
-    //   },
-    //   {
-    //     id: "145", title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη", price: 0.5,
-    //   },
-    //   {
-    //     id: "146", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-    //   },
-    //   {
-    //     id: "147", title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "148", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "149", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "1410", title: "ΥΔ Μηχανικού Φέρων Οργανισμού", price: 0.5,
-    //   },
-    //   {
-    //     id: "1411", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
-    //   },
-    //   {
-    //     id: "1412", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
-    //   },
-    // )
+    
+    // this is subcategory 14 
+    if(hasSubcategory14) {
+    baseTemplatesOwner1.push(
+      {
+        id: "141", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
+      },
+      {
+        id: "142", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
+      },
+      {
+        id: "143", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων", price: 0.5,
+      },
+      {
+        id: "144", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
+      },
+      {
+        id: "145", title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη", price: 0.5,
+      },
+      {
+        id: "146", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+      },
+      {
+        id: "147", title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού", price: 0.5,
+      },
+      {
+        id: "148", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
+      },
+      {
+        id: "149", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
+      },
+      {
+        id: "1410", title: "ΥΔ Μηχανικού Φέρων Οργανισμού", price: 0.5,
+      },
+      {
+        id: "1411", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
+      },
+      {
+        id: "1412", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
+      },
+      {
+        id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
+      },
+    )
+    }
 
     // this is subcategory 2
-    // baseTemplatesOwner1.push(
-    //   {
-    //     id: "21", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
-    //   },
-    //   {
-    //     id: "22", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
-    //   },
-    //   {
-    //     id: "23", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-    //   },
-    //   {
-    //     id: "24", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
-    //   },
-    //   {
-    //     id: "25", title: "Τεχνική Έκθεση_ Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020", price: 0.5,
-    //   },
-    //   {
-    //     id: "26", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-    //   },
-    //   {
-    //     id: "27", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "28", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
-    //   },
-    // )
-
-    // this is subcategory 7 
-    // baseTemplatesOwner1.push(
-    // {
-    //   id: "71", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
-    // },
-    // {
-    //   id: "72", title: "Βεβαίωση-ΥΔ Μηχανικού Για Τήρηση Όψεων Και Πολεοδομικών Διατάξεων", price: 0.5,
-    // },
-    // {
-    //   id: "73", title: "Ενημερωτικό Σημείωμα Μη Απαίτησης Συναίνεσης Συνιδιοκτητών", price: 0.5,
-    // },
-    // {
-    //   id: "74", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
-    // },
-    // {
-    //   id: "75", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-    // },
-    // {
-    //   id: "76", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων", price: 0.5,
-    // },
-    // {
-    //   id: "77", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-    // },
-    // {
-    //   id: "78", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-    // },
-    // {
-    //   id: "79", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
-    // },
-    // {
-    //   id: "710", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
-    // },
-    // {
-    //   id: "711", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-    // },
-    // {
-    //   id: "712", title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων", price: 0.5,
-    // },
-    // {
-    //   id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
-    // },
-    // )
+    if(hasSubcategory2) {
+    baseTemplatesOwner1.push(
+      {
+        id: "21", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
+      },
+      {
+        id: "22", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
+      },
+      {
+        id: "23", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
+      },
+      {
+        id: "24", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
+      },
+      {
+        id: "25", title: "Τεχνική Έκθεση_ Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020", price: 0.5,
+      },
+      {
+        id: "26", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+      },
+      {
+        id: "27", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
+      },
+      {
+        id: "28", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
+      },
+      {
+        id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
+      },
+    )
+    }
 
     // this is subcategory 5
-    // baseTemplatesOwner1.push(
-    //   {
-    //     id: "51", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
-    //   },
-    //   {
-    //     id: "52", title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων", price: 0.5,
-    //   },
-    //   {
-    //     id: "53", title: "Πίνακας 3(ΙΚΑ)", price: 0.5,
-    //   },
-    //   {
-    //     id: "54", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-    //   },
-    //   {
-    //     id: "55", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
-    //   },
-    //   {
-    //     id: "56", title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη", price: 0.5,
-    //   },
-    //   {
-    //     id: "57", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-    //   },
-    //   {
-    //     id: "58", title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "59", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "510", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "511", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
-    //   },
-    //   {
-    //     id: "512", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 1,
-    //   },
-    // )
+    if(hasSubcategory5) {
+    baseTemplatesOwner1.push(
+      {
+        id: "51", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
+      },
+      {
+        id: "52", title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων", price: 0.5,
+      },
+      {
+        id: "53", title: "Πίνακας 3(ΙΚΑ)", price: 0.5,
+      },
+      {
+        id: "54", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
+      },
+      {
+        id: "55", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
+      },
+      {
+        id: "56", title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη", price: 0.5,
+      },
+      {
+        id: "57", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+      },
+      {
+        id: "58", title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού", price: 0.5,
+      },
+      {
+        id: "59", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
+      },
+      {
+        id: "510", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
+      },
+      {
+        id: "511", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
+      },
+      {
+        id: "512", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
+      },
+      {
+        id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 1,
+      },
+    )
+    }
 
     // this is subcategory 8 
-    // baseTemplatesOwner1.push(
-    //   {
-    //     id: "81", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
-    //   },
-    //   {
-    //     id: "82", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-    //   },
-    //   {
-    //     id: "83", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-    //   },
-    //   {
-    //     id: "84", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "85", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "86", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
-    //   },
-    //   {
-    //     id: "87", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-    //   },
-    //   {
-    //     id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
-    //   },
-    // )
-
-
-
-
-
+    if(hasSubcategory8) {
+    baseTemplatesOwner1.push(
+      {
+        id: "81", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
+      },
+      {
+        id: "82", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
+      },
+      {
+        id: "83", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+      },
+      {
+        id: "84", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
+      },
+      {
+        id: "85", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
+      },
+      {
+        id: "86", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
+      },
+      {
+        id: "87", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
+      },
+      {
+        id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
+      },
+    )
+    }
     return baseTemplatesOwner1;
   }, [stepByStepData.ownerBaseData]);
+
+  console.log(allTemplates, "allTemplates,,,,,")
+
+// i have changed here for common id remore and for one time showing the title and set let after change the const for allTemplates to reStore
+  allTemplates = Object.values(
+  allTemplates.reduce((acc: Record<string, any>, curr) => {
+    const title = curr.title.trim(); // normalize id (remove trailing spaces)
+    if (!acc[title]) {
+      acc[title] = { ...curr, options: [...curr.id] };
+    } else {
+      // Merge id if same title already exists
+      acc[title].options = [...acc[title].options, ...curr.id];
+    }
+    return acc;
+  }, {})
+);
+
+
 
   // Compute subtotal
   const subtotal = allTemplates

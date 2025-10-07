@@ -85,7 +85,7 @@ function F7D10({ allData }: { allData: allDataProps }) {
                             {/* Project Row */}
                             <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
                                 <label className="col-span-2">Έργο:</label>
-                                <div className="col-span-10 text-sm">
+                                <div className="col-span-10 text-sm text-center">
                                     {projectDescription || "N/A"}
                                 </div>
                             </div>
@@ -94,7 +94,7 @@ function F7D10({ allData }: { allData: allDataProps }) {
                             <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
                                 <label className="col-span-2 ">Θέση:</label>
                                 <div className="col-span-10">
-                                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING)</h3>
+                                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"}</h3>
                                 </div>
                             </div>
 
