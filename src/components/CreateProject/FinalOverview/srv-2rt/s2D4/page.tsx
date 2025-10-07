@@ -266,18 +266,18 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                             <div className="border border-b-0 mb-10">
                                 <div className="">
                                     <p className="mb-1 p-2">
-                                    Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις (3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν. 1599/1986,
-                                    δηλώνω ότι σχετικά με το δηλωθέν ακίνητό στην στην οδό <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}</span> περιοχή <span className="font-bold">{propertyPlace || "N/A"}</span> στον Δήμο <span className="font-bold">{municipalityCommunity || "N/A"}</span> με <span className="font-bold">Τ.Κ.{propertyPostalCode || "N/A"}</span> στο οποίο ως ιδιοκτήτης με ποσοστό  <span className="font-bold">{owner?.ownership_percentage_owner || "N/A"}</span> ισχύουν τα εξής:
-                                </p>
-                                <div className="border-b border-dashed p-0"></div>
-                                <p className="my-3 p-2">
-                                    Αριθμός Οικοδομικής Άδειας: <span className="font-bold">{permitNumber || "N/A"}</span> Ημερομηνία Έκδοσης: <span className="font-bold">{dateIssuanceBuildingPermit || "N/A"}</span> Πολεοδομική Υπηρεσία: <span className="font-bold">{issuingAuthority || "N/A"}</span>
-                                </p>
-                                <div className="border-b border-dashed"></div>
-                                <p className="mb-2 font-bold p-2">
-                                    Περιγραφή Αυθαίρετων Κατασκευών ή/και Χρήσεων:
-                                </p>
-                                <div className="grid grid-cols-1 md:grid-cols-2 my-6 p-2">
+                                        Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις (3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν. 1599/1986,
+                                        δηλώνω ότι σχετικά με το δηλωθέν ακίνητό στην στην οδό <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}</span> περιοχή <span className="font-bold">{propertyPlace || "N/A"}</span> στον Δήμο <span className="font-bold">{municipalityCommunity || "N/A"}</span> με <span className="font-bold">Τ.Κ.{propertyPostalCode || "N/A"}</span> στο οποίο ως ιδιοκτήτης με ποσοστό  <span className="font-bold">{owner?.ownership_percentage_owner || "N/A"}</span> ισχύουν τα εξής:
+                                    </p>
+                                    <div className="border-b border-dashed p-0"></div>
+                                    <p className="my-3 p-2">
+                                        Αριθμός Οικοδομικής Άδειας: <span className="font-bold">{permitNumber || "N/A"}</span> Ημερομηνία Έκδοσης: <span className="font-bold">{dateIssuanceBuildingPermit || "N/A"}</span> Πολεοδομική Υπηρεσία: <span className="font-bold">{issuingAuthority || "N/A"}</span>
+                                    </p>
+                                    <div className="border-b border-dashed"></div>
+                                    <p className="font-bold p-2">
+                                        Περιγραφή Αυθαίρετων Κατασκευών ή/και Χρήσεων:
+                                    </p>
+                                    {/* <div className="grid grid-cols-1 md:grid-cols-2 my-6 p-2">
                                     {
                                         violations && violations?.map((item: any, index: number) => {
                                             return (
@@ -300,14 +300,96 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             )
                                         })
                                     }
-                                </div>
+                                </div> */}
+                                    <div className=" p-2">
+                                        {/* Step 1 — Show categories 1,2,4,5 */}
+                                        {violations.length > 0 && (() => {
+                                            let count = 1; // common counter for all Φ.Κ. numbers
+
+                                            const nonCategory3 = violations.filter((item) => String(item.category) !== "3");
+                                            const category3 = violations.find((item) => String(item.category) === "3");
+                                            const hasOther = violations.some((item) => item.otherViolation);
+
+                                            return (
+                                                <>
+                                                    {violations.some((item) => item.category !== "3" && item.otherViolation === false) && (
+                                                        <>
+                                                            {violations
+                                                                .filter((item) => item.category !== "3" && item.otherViolation === false)
+                                                                .map((item) => (
+                                                                    <p key={item.id || count} className="mt-2">
+                                                                        <span className="font-bold">Φ.Κ. # {count++}</span>{" "}
+                                                                        <span>
+                                                                            {item?.violations?.map((v: string, i: number) => (
+                                                                                <span key={i}>
+                                                                                    {v}
+                                                                                    {i < item.violations.length - 1 && ", "}
+                                                                                </span>
+                                                                            ))}
+                                                                        </span>{" "}
+                                                                        Κατηγορία {item.category || "N/A"}, Έτος κατασκευής: {item.age || "N/A"}.
+                                                                    </p>
+                                                                ))}
+                                                        </>
+                                                    )}
+
+
+                                                    {/* Step 2 — Category 3 (once) */}
+                                                    {category3 && (
+                                                        <p key="category3" className="mt-2">
+                                                            <span className="font-bold">Φ.Κ. # {count++}</span>. Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96,
+                                                            του Ν.4495/17, Κατηγορία 3, Έτος κατασκευής: {category3.age || "N/A"}.{" "}
+                                                            <span>
+                                                                {category3?.violations?.map((v: string, i: number) => (
+                                                                    <span key={i}>
+                                                                        {v}
+                                                                        {i < category3.violations.length - 1 && ", "}
+                                                                    </span>
+                                                                ))}
+                                                            </span>
+                                                        </p>
+                                                    )}
+
+                                                    {/* Step 3 — Other violations */}
+                                                    {hasOther && (() => {
+                                                        const other = violations.find((item) => item.otherViolation);
+                                                        return (
+                                                            <p key="other" className="mt-2">
+                                                                <span className="font-bold">Φ.Κ. #{count++}.</span> Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του Ν.4495/2017 –{" "}
+                                                                <span>
+                                                                    {other?.violations?.map((v: string, i: number) => (
+                                                                        <span key={i}>
+                                                                            {v}
+                                                                            {i < other.violations.length - 1 && ", "}
+                                                                        </span>
+                                                                    ))}
+                                                                </span>{" "}
+                                                                και σύμφωνα με το Παράρτημα Β του Ν.4495/2017 ορίζονται ως (1) Πολεοδομική παράβαση.
+                                                                (επισυνάπτεται αναλυτικός προϋπολογισμός).
+                                                            </p>
+                                                        );
+                                                    })()}
+                                                </>
+                                            );
+                                        })()}
+                                    </div>
+
                                 </div>
                                 <div className="border-t border-dashed"></div>
                             </div>
                             <div className="border border-t-0">
                                 <div className="border-b border-dashed"></div>
                                 <div className="">
-                                    <p className="my-2 font-bold p-2">Ημερομηνία Ολοκλήρωσης ή Εγκατάστασης Αυθαίρετων Κατασκευών: </p>
+                                    <div className="my-2 p-2"><span className="font-bold mr-2">Ημερομηνία Ολοκλήρωσης ή Εγκατάστασης Αυθαίρετων Κατασκευών:</span>
+                                        {
+                                            [...new Set(violations?.map((item) => item.age))].map((uniqueAge, i, arr) => (
+                                                <span key={i}>
+                                                    {uniqueAge}
+                                                    {i < arr.length - 1 && ", "}
+                                                </span>
+                                            ))
+                                        }
+                                    </div>
                                     <div><span className="font-bold p-2">Έγγραφο Παλαιότητας:</span> Αεροφωτογραφία από Ελληνικό Κτηματολόγιο, Συμβόλαιο ιδιοκτησίας</div>
                                     <div className="border-b border-dashed my-2 px-2"></div>
                                     <p className="font-bold px-2">Κατηγορία Χρήσης:</p>

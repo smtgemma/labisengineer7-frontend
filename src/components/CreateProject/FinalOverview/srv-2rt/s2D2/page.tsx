@@ -119,41 +119,91 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                 </p>
                 <div className="mt-10">
                     {/* Step 1 — Show categories 1,2,4,5 */}
-                    {violations
-                        .filter((item) => String(item.category) !== "3")
-                        .map((item, index) => (
-                            <p key={item.id || index} className="mt-2">
-                                Φ.Κ. #{index + 1}. (Descriptions validation from Sheet {index + 1}) ….. –
-                                Category {item.category || "N/A"} (The category that selected from user at sheet
-                                {index + 1}), Έτος κατασκευής: {item.age || "N/A"} (The date that selected from
-                                user at sheet {index + 1}). Comment from Sheet {index + 1}
-                            </p>
-                        ))}
+                    {violations.length > 0 && (() => {
+                        let count = 1; // common counter for all Φ.Κ. numbers
 
-                    {/* Step 2 — If category 3 exists */}
-                    {violations.some((item) => String(item.category) === "3") && (() => {
-                        // find the category 3 violation
-                        const sheetIndex = violations.findIndex((item) => String(item.category) === "3") + 1;
-                        
+                        const nonCategory3 = violations.filter((item) => String(item.category) !== "3");
+                        const category3 = violations.find((item) => String(item.category) === "3");
+                        const hasOther = violations.some((item) => item.otherViolation);
 
                         return (
-                            <p className="mt-2">
-                                Φ.Κ. # {sheetIndex}. Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96,
-                                του Ν.4495/17, Κατηγορία 3, Έτος κατασκευής: i have to add here age 
-                                {/* i have to add here {violations} */} 
-                            </p>
+                            <>
+                                {/* Step 1 — Non-category 3 */}
+                                {/* { !hasOther && nonCategory3.map((item) => (
+                                    <p key={item.id || count} className="mt-2">
+                                        Φ.Κ. #{count++}.{" "}
+                                        <span>
+                                            {item?.violations?.map((v: string, i: number) => (
+                                                <span key={i}>
+                                                    {v}
+                                                    {i < item.violations.length - 1 && ", "}
+                                                </span>
+                                            ))}
+                                        </span>{" "}
+                                        Κατηγορία {item.category || "N/A"}, Έτος κατασκευής: {item.age || "N/A"}.
+                                    </p>
+                                ))} */}
+                                {violations.some((item) => item.category !== "3" && item.otherViolation === false) && (
+                                    <>
+                                        {violations
+                                            .filter((item) => item.category !== "3" && item.otherViolation === false)
+                                            .map((item) => (
+                                                <p key={item.id || count} className="mt-2">
+                                                    Φ.Κ. #{count++}.{" "}
+                                                    <span>
+                                                        {item?.violations?.map((v: string, i: number) => (
+                                                            <span key={i}>
+                                                                {v}
+                                                                {i < item.violations.length - 1 && ", "}
+                                                            </span>
+                                                        ))}
+                                                    </span>{" "}
+                                                    Κατηγορία {item.category || "N/A"}, Έτος κατασκευής: {item.age || "N/A"}.
+                                                </p>
+                                            ))}
+                                    </>
+                                )}
+
+
+                                {/* Step 2 — Category 3 (once) */}
+                                {category3 && (
+                                    <p key="category3" className="mt-2">
+                                        Φ.Κ. #{count++}. Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96,
+                                        του Ν.4495/17, Κατηγορία 3, Έτος κατασκευής: {category3.age || "N/A"}.{" "}
+                                        <span>
+                                            {category3?.violations?.map((v: string, i: number) => (
+                                                <span key={i}>
+                                                    {v}
+                                                    {i < category3.violations.length - 1 && ", "}
+                                                </span>
+                                            ))}
+                                        </span>
+                                    </p>
+                                )}
+
+                                {/* Step 3 — Other violations */}
+                                {hasOther && (() => {
+                                    const other = violations.find((item) => item.otherViolation);
+                                    return (
+                                        <p key="other" className="mt-2">
+                                            Φ.Κ. #{count++}. Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του Ν.4495/2017 –{" "}
+                                            <span>
+                                                {other?.violations?.map((v: string, i: number) => (
+                                                    <span key={i}>
+                                                        {v}
+                                                        {i < other.violations.length - 1 && ", "}
+                                                    </span>
+                                                ))}
+                                            </span>{" "}
+                                            και σύμφωνα με το Παράρτημα Β του Ν.4495/2017 ορίζονται ως (1) Πολεοδομική παράβαση.
+                                            (επισυνάπτεται αναλυτικός προϋπολογισμός).
+                                        </p>
+                                    );
+                                })()}
+                            </>
                         );
                     })()}
 
-                    {/* Step 3 — If user checked “otherViolation” */}
-                    {violations.some((item) => item.otherViolation) && (
-                        <p className="mt-2">
-                            Φ.Κ. # {violations.length + 1}. Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του
-                            Ν.4495/2017 – (Descriptions validation from Sheet 5), Comment from Sheet 5 και
-                            σύμφωνα με το Παράρτημα Β του Ν.4495/2017 ορίζονται ως (1) Πολεοδομική παράβαση.
-                            (επισυνάπτεται αναλυτικός προϋπολογισμός).
-                        </p>
-                    )}
 
                     {/* Step 4 — Common ending text */}
                     <div className="mt-4">
