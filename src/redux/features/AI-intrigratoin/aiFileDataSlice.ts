@@ -1,3 +1,4 @@
+import { TProjectData } from "@/interfaces/global";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface Owner {
@@ -90,7 +91,7 @@ interface ViolationRecord {
 }
 
 interface AiExtractState {
-  aiDataState?: any;
+  aiDataState?: TProjectData | null;
   ownerBaseData?: any[];
   projectId?: {} | undefined;
   subcategory?: any[];

@@ -15,102 +15,33 @@ import { toast } from "sonner";
 import { FormValues } from "./types";
 
 
+// new 
+// date_issue_building_permit_revision_two          permit paper     done
+// date_of_issuance_eemk                          EEMK PAPER
+// date_of_issue_building_permit_revision_eemk                          EEMK PAPER
+// date_of_submission_1337 1337/LAW
+// declaration_number_1337 1337/LAW
+// issuing_authority_1337 1337/LAW
+// declaration_owner_for_4495_2017 
+// issuing_authority_eemk                          EEMK PAPER
+// issuing_authority_loss_certificate LOSS PAPER
+// kaek_plot
+// license_number_eemk                          EEMK PAPER
+// license_number_revision_eemk                          EEMK PAPER
+// license_number_revision_two
+// notary_reviews_establishment_horizontal_ownership     NOTARY
+// pea_estimated_annual_co2_emissions_kg_m2 
+// pea_estimated_annual_primary_energy_consumption_kwh_m2
+// pea_issue_date           n/a
+// pea_protocol_number      n/a
+// pea_security_number    n/a
+// plot_type   n/a
+// project_description_htk_plot
+// project_descriptions
+// project_title_description_eemk    EEMK PAPER
+// protocol_date_loss_certificate    LOSS PAPER
+// protocol_number_loss_certificate  LOSS PAPER
 
-// {
-//=
-//     "project_descriptions": [c
-//         "ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ Α-2 ΤΟΥ Α' ΟΡΟΦΟΥ",
-//         "ΑΛΛΑΓΗ ΧΡΗΣΗΣ ΑΠΟ ΚΑΤΑΣΤΗΜΑ ΣΕ ΚΑΤΟΙΚΙΑ ΣΤΟ Α-2"
-//     ],
-//     "technical_description": "Το ακίνητο βρίσκεται στην Αθήνα, στη θέση Πατήσια, εντός του εγκεκριμένου ρυμοτομικού σχεδίου της πόλης του Δήμου Αθηναίων και επί της Οδού Σκιάθου. Η συνολική επιφάνεια του οικοπέδου ανέρχεται σε [εισαγάγετε επιφάνεια οικοπέδου] τ.μ. Το ακίνητο είναι καταχωρημένο στο Εθνικό Κτηματολόγιο με ΚΑΕΚ 051470203002/0/13 και βρίσκεται στην Οδό Καλβού 4, στο Νέο Χαλάνδρι του Δήμου Χαλανδρίου, με ταχυδρομικό κώδικα 15233.\n\nΠρόκειται για Οριζόντια ιδιοκτησία-Το υπ' αριθμό δύο (2) διαμέρισμα του δευτέρου (Β') πάνω από την πιλοτή ορόφου, επιφανείας 60,30 τ.μ., το οποίο αποτελεί αυτοτελή οριζόντια ιδιοκτησία σύμφωνα με τις διατάξεις του Ν.3741/1929 και του Ν.Δ. 1024/1971. Η πολυκατοικία ανεγέρθηκε βάσει της υπ’ αριθμ. 38/2000 οικοδομικής άδειας, η οποία εκδόθηκε από την Ελληνική Δημοκρατία, Νομαρχιακή Αυτοδιοίκηση Αθηνών - Πειραιώς, Νομαρχία Αθηνών, Διεύθυνση Πολεοδομίας Κεντρικός Τομέας.\n\nΗ ανωτέρω ιδιοκτησία έχει υπαχθεί στις διατάξεις του Ν.3843/2010, Ν.4178/2013 ή Ν.4495/2017, με αριθμό δήλωσης 13356306, ηλεκτρονικό κωδικό 78D8E7E76CA78290 και ημερομηνία υπαγωγής 03/10/2024, από τον Χαράλαμπο Αθανασιάδη, πολιτικό μηχανικό, με αριθμό μητρώου ΤΕΕ 137778.",
-//     "technical_description_two": "Το ακίνητο βρίσκεται στην Αθήνα, στη θέση Πατήσια, εντός του εγκεκριμένου ρυμοτομικού σχεδίου της πόλης του Δήμου Αθηναίων και επί της Οδού Σκιάθου. Βάσει των ισχυουσών πολεοδομικών διατάξεων, το ακίνητο δεν εμπίπτει σε ζώνες απαγόρευσης, όπως δασικές εκτάσεις, αιγιαλούς, ζώνες προστασίας του Υπουργείου Πολιτισμού ή περιοχές Natura, ούτε εντοπίζεται εντός χαρακτηρισμένων παραδοσιακών οικισμών ή διατηρητέων κελυφών. Δηλώνεται ρητώς ότι δεν συντρέχουν οι απαγορευτικές περιπτώσεις του άρθρου 1 του Ν.4495/2017 και δεν απαιτείται η λήψη έγκρισης από άλλες αρμόδιες αρχές.\n\nΤο υφιστάμενο κτίσμα είναι νομίμως υφιστάμενο κατά την έννοια του άρθρου 23 του Ν.4495/2017 και συνοδεύεται από τα απαραίτητα νομιμοποιητικά έγγραφα. Οι προβλεπόμενες εργασίες πληρούν τις προϋποθέσεις του άρθρου 2 της Υπουργικής Απόφασης ΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020, συνεπώς η Άδεια Μικρής Κλίμακας δύναται να εκδοθεί χωρίς να απαιτείται περαιτέρω έγκριση ή έλεγχος από το Συμβούλιο Αρχιτεκτονικής. \n\nΟι περιγραφές των οριζόντιων ιδιοκτησιών διατηρούνται ακριβώς ως έχουν στα επίσημα έγγραφα, όπως για παράδειγμα: \"Οριζόντια ιδιοκτησία-Η θέση στάθμευσης αυτοκινήτων με τον αριθμό 4 (τέσσερα) του Υπογείου\".",
-//     "kaek_property": "051470203002/0/13", c
-//     "title_area": "60.300 Τ.Μ.",
-//     "floor_property": "Α",
-//     "number_property": "2", new // project information
-//     "property_address": "ΚΑΛΒΟΥ",
-//     "property_number": "4",
-//     "property_place": "ΝΕΟ ΧΑΛΑΝΔΡΙ",
-//     "municipality_community": "ΧΑΛΑΝΔΡΙΟΥ",
-//     "property_postal_code": "15233",
-//     "horizontal_property_name": "Οριζόντια ιδιοκτησία-Το υπ' αριθμό δύο (2) διαμέρισμα του δευτέρου (Β') πάνω από την πιλοτή ορόφου",
-//     "horizontal_property_name_two": "Οριζόντια ιδιοκτησία-Η υπό στοιχεία Ρο κεφαλαίο τέσσερα (Ρ4) θέση στάθμευσης αυτοκινήτου",
-//     "owners": [
-//         {
-//             "first_name": "ΜΩΥΣΙΔΟΥ ΑΝΝΑ ΜΑΡΙΑ",
-//             "last_name": "",
-//             "father_first_name": "ΜΩΥΣΙΔΗΣ ΚΩΝΣΤΑΝΤΙΝΟΣ",
-//             "father_last_name": null,
-//             "mother_first_name": "ΜΩΥΣΙΔΟΥ ΜΟΝΙΚ",
-//             "mother_last_name": null,
-//             "date_of_birth": "15/06/1968",
-//             "place_of_birth": "",
-//             "owner_address": "ΠΑΠΑΝΙΚΟΛΗ",
-//             "address_number": "46",
-//             "postal_code": "",
-//             "city": "ΧΑΛΑΝΔΡΙ",
-//             "id_number": "Ν324381",
-//             "tax_identification_number": "028213838",
-//             "ownership_percentage_owner": "100‰", new //ownwr
-//             "owner_type_ownership": "ΠΛΗΡΗΣ" new //ownwr
-//         },
-//         {
-//             "first_name": "ΜΠΡΑΜΗΣ ΒΑΣΙΛΕΙΟΣ",
-//             "last_name": "",
-//             "father_first_name": "ΤΣΑΤΣΟΥΛΗ ΓΕΩΡΓΙΑ",
-//             "father_last_name": null,
-//             "mother_first_name": null,
-//             "mother_last_name": null,
-//             "date_of_birth": "10/02/1988",
-//             "place_of_birth": "ΠΑΤΡΑ",
-//             "owner_address": "ΚΑΛΒΟΥ",
-//             "address_number": "4",
-//             "postal_code": "",
-//             "city": "ΧΑΛΑΝΔΡΙ",
-//             "id_number": "1045417",
-//             "tax_identification_number": "141857967",
-//             "ownership_percentage_owner": "100‰",
-//             "owner_type_ownership": "ΠΛΗΡΗΣ"
-//         }
-//     ],
-//     "plot_area": "277,50 τ.μ.",
-//     "within_outside_city_plan": "βρίσκεται στην Αθήνα, στη θέση Πατήσια μέσα στο εγκεκριμένο σχέδιο της πόλης του Δήμου Αθηναίων και επί της οδού Σκιάθου,",
-//     "permit_number": "38/2000",
-//     "issuing_authority": "ΕΛΛΗΝΙΚΗ ΔΗΜΟΚΡΑΤΙΑ ΝΟΜΑΡΧΙΑΚΗ ΑΥΤΟΔΙΟΙΚΗΣΗ ΑΘΗΝΩΝ - ΠΕΙΡΑΙΩΣ ΝΟΜΑΡΧΙΑ ΑΘΗΝΩΝ ΔΝΣΗ ΠΟΛΕΟΔΟΜΙΑΣ ΚΕΝΤΡΙΚΟΣ ΤΟΜΕΑΣ",
-//     "legalization_statement_number": "13356306",
-//     "electronic_code": "78D8E7E76CA78290",
-//     "engineer_full_name": "ΑΘΑΝΑΣΙΑΔΗΣ ΧΑΡΑΛΑΜΠΟΣ",
-//     "tee_registration_number": "137778",
-//     "specialty": "ΠΟΛΙΤΙΚΟΣ ΜΗΧΑΝΙΚΟΣ",
-//     "inclusion_date_legalization": "03/10/2024",
-//     "ydom_municipality": "ΧΑΛΑΝΔΡΙΟΥ", new+doubt
-//     "ydom": "ΥΔΟΜ ΑΓΙΑΣ ΠΑΡΑΣΚΕΥΗΣ",
-//     "ydom_error": null,
-//     "processed_documents": [
-//         "file1→contract",
-//         "file2→law4495",
-//         "file3→ktimatologio",
-//         "file4→law3843",
-//         "file5→permit"
-//     ],
-//     "processing_status": "Detection: file1→contract | file2→law4495 | file3→ktimatologio | file4→law3843 | file5→permit | Auto-detected and processed: file1→contract, file2→law4495, file3→ktimatologio, file4→law3843, file5→permit",
-//     "percentage_co_ownership_parcel": "115‰", new project info 
-//     "exclusive_use_property": "ανήκει κατ αποκλειστική χρήση η υπό στοιχεία Ρο κεφαλαίο τέσσερα (Ρ4) θέση στάθμευσης αυτοκινήτου η οποία βρίσκεται κατά το μεγαλύτερο μέρος στην πιλοτί και κατά ένα μικρό μέρος στον ακάλυπτο χώρο του οικοπέδου", new  tech
-//     "mini_description_horizontal_property": "κουζίνα-λίβιγκ ρουμ-τραπεζαρία (ενιαίος χώρος), διάδρομο, δύο (2) υπνοδωμάτια, λουτρό και δύο (2) εξώστες, έναν προς την οδό Σκιάθου και έναν προς τον ακάλυπτο χώρο του οικοπέδου", new tech
-//     "number_establishment_horizontal_ownership": "11.827/2005", new new table Notary details
-//     "reviews_numbers_establishment_horizontal_ownership": "['11.914/2005']", new Notary 
-//     "notary_establishment_horizontal_ownership": "ΕΥΣΤΑΘΙΑ ΜΥΖΗΘΡΑ-ΠΟΡΤΟΚΑΛΑΚΗ", new Notary
-//     "establishment_horizontal_ownership": "με την υπ αριθμό 11.827/21-6-2005 σύστασης οριζόντιας ιδιοκτησίας και πράξη μου κανονισμού πολυκατοικίας που έχει μεταγραφεί νόμιμα στα Βιβλία Μεταγραφών του Δήμου Αθηναίων, στον τόμο 4587 και με αύξοντα αριθμό 343, όπως τροποποιήθηκε με την υπ αριθμό 11.914/13-7-2005 πράξη μου, που έχει μεταγραφεί νόμιμα στα ίδια ως άνω Βιβλία στον τόμο 4593 και με αριθμό 196, οι οικοπεδούχοι με τη σύμπραξη του εργολήπτη, υπήγαγαν το παραπάνω οικόπεδο και την πολυκατοικία που ανεγείρεται σ αυτό στις διατάξεις του Ν. 3741/1929, όπως τροποποιήθηκε από το Ν.Δ. 1024/1971 και των άρθρων 1002 και 1117 του Αστικού Κώδικα, δημιούργησαν τις αυτοτελείς και ανεξάρτητες οριζόντιες ιδιοκτησίες της πολυκατοικίας αυτής και κατήρτισαν τον Κανονισμό της, θεσπίζοντας τις διατάξεις που θα ρυθμίζουν τη χρησιμοποίηση, τη λειτουργία και τη συντήρηση της πολυκατοικίας, και τις σχέσεις των ιδιοκτητών και ενοίκων της.", new
-//     "license_number_revision": null, new notary
-//     "date_issuance_building_permit": "17/01/2000", new permit
-//     "details_issuing_authority": "ΔΝΣΗ ΠΟΛΕΟΔΟΜΙΑΣ ΚΕΝΤΡΙΚΟΣ ΤΟΜΕΑΣ", new not include
-//     "date_issue_building_permit_revision": null, new permit paper
-//     "project_title_description_license": "Νέας Αόροφης οικοδομής σε pilotis, με υπόγειο", new permit paper
-//     "completion_declaration_3843_number": "249", new permit paper violations
-//     "description_validations_3843": "ΑΛΛΑΓΗ ΧΡΗΣΗΣ ΗΜΙΥΠΑΙΘΡΙΟΥ ΧΩΡΟΥ ΣΤΟΝ 5ο ΟΡΟΦΟ", new permit paper
-//     "issuing_authority_3843": "ΔΗΜΟΣ ΑΘΗΝΑΙΩΝ ΔΙΕΥΘΥΝΣΗ ΠΟΛΕΟΔΟΜΙΑΣ - ΔΙΟΙΚΗΤΙΚΗ ΥΠΟΣΤΗΡΙΞΗ", new permit paper
-//     "date_issue_completion_declaration_3843": "05/07/2010" new permit paper 
-// }
 
 const inputStyle =
     "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
@@ -120,12 +51,12 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
     nextStep: () => void
 }) => {
     const [collapse, setCollapse] = useState(0)
-    const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+    const stepByStepData = useSelector((state: RootState) => state.aiData);
     // const user: any = useSelector((state: RootState) => state.user.userData);
 
     const { register, control, handleSubmit } = useForm<FormValues>({
         defaultValues: {
-            owners: stepByStepData.ownerBaseData.map((owner: any) => ({
+            owners: stepByStepData?.ownerBaseData?.map((owner: any) => ({
                 first_name: owner.first_name || "", // Όνομα
                 last_name: owner.last_name || "", // Επώνυμο
                 father_first_last_name: `${owner.father_first_name || ""} ${owner.father_last_name || ""
@@ -161,17 +92,17 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
     console.log(allExtreactData)
 
     // const ownerData = stepByStepData.ownerBaseData;
-    const projectData = stepByStepData.projectId;
+    const projectData: any = stepByStepData.projectId;
     const subCategoryData = stepByStepData.subcategory;
     const descrptionTasks = stepByStepData.descriptionTask;
     const filesData = stepByStepData.multiFiles;
-    const descriptonAndYdom = stepByStepData.description;
+    const descriptonAndYdom: any = stepByStepData?.description;
     const description = descriptonAndYdom?.description;
     // const ydom: string[] =
     //   descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
 
     // console.log("ydom:", ydom);
-    console.log("allExtreactData:", descriptonAndYdom);
+    console.log("allExtreactData?:", descriptonAndYdom);
 
     const [postDataAll, { isLoading }] = usePosAiAllDataForTwoToSaveMutation();
 
@@ -196,7 +127,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
         console.log("sever send Data:", DataPost);
 
         const formData = new FormData();
-        filesData.forEach((file: any) => {
+        filesData?.forEach((file: any) => {
             formData.append("files", file);
         });
         formData.append(
@@ -300,7 +231,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             className={`${inputStyle} cursor-not-allowed`}
                                             readOnly
 
-                                            defaultValue={allExtreactData?.kaek_property}
+                                            defaultValue={allExtreactData?.kaek_property ?? ""}
                                         // defaultValue={dataShowExtreact?.cadastral_code_kaek}
                                         />
                                     </div>
@@ -313,7 +244,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("titleArea")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.title_area}
+                                            defaultValue={allExtreactData?.title_area ?? ""}
                                         />
                                     </div>
                                     <div>
@@ -324,7 +255,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("numberProperty")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.number_property}
+                                            defaultValue={allExtreactData?.number_property ?? ""}
                                         />
                                     </div>
                                     <div>
@@ -335,7 +266,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("floorProperty")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.floor_property}
+                                            defaultValue={allExtreactData?.floor_property ?? ""}
                                         />
                                     </div>
 
@@ -347,7 +278,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("propertyPlace")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.property_place}
+                                            defaultValue={allExtreactData?.property_place ?? ""}
                                         />
                                     </div>
 
@@ -359,7 +290,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("propertyNumber")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.property_number}
+                                            defaultValue={allExtreactData?.property_number ?? ""}
                                         />
                                     </div>
 
@@ -371,7 +302,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("propertyAddress")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.property_address}
+                                            defaultValue={allExtreactData?.property_address ?? ""}
                                         />
                                     </div>
 
@@ -383,7 +314,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("municipalityCommunity")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.municipality_community}
+                                            defaultValue={allExtreactData?.municipality_community ?? ""}
                                         />
                                     </div>
 
@@ -395,7 +326,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("propertyPostalCode")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.property_postal_code}
+                                            defaultValue={allExtreactData?.property_postal_code ?? ""}
                                         />
                                     </div>
 
@@ -407,7 +338,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("percentageCoOwnershipParcel")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.percentage_co_ownership_parcel}
+                                            defaultValue={allExtreactData?.percentage_co_ownership_parcel ?? ""}
                                         />
                                     </div>
 
@@ -419,7 +350,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("horizontalPropertyName")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.horizontal_property_name}
+                                            defaultValue={allExtreactData?.horizontal_property_name ?? ""}
                                         />
                                     </div>
 
@@ -431,7 +362,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             {...register("horizontalPropertyNameTwo")}
                                             className={inputStyle}
                                             readOnly
-                                            defaultValue={allExtreactData?.horizontal_property_name_two}
+                                            defaultValue={allExtreactData?.horizontal_property_name_two ?? ""}
                                         />
                                     </div>
                                 </div>
@@ -720,7 +651,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("plotArea")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.plot_area}
+                                                defaultValue={allExtreactData?.plot_area ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -731,7 +662,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("withinOutsideCityPlan")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.within_outside_city_plan}
+                                                defaultValue={allExtreactData?.within_outside_city_plan ?? ""}
                                             />
                                         </div>
 
@@ -743,7 +674,18 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("permitNumber")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.permit_number}
+                                                defaultValue={allExtreactData?.permit_number ?? ""}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                permitNumber (Αριθμός Οικοδομικής Άδειας){" "}
+                                            </label>
+                                            <input
+                                                {...register("dateIssueBuildingPermitRevisionTwo")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.date_issue_building_permit_revision_two ?? ""}
                                             />
                                         </div>
 
@@ -755,7 +697,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("issuingAuthority")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.issuing_authority}
+                                                defaultValue={allExtreactData?.issuing_authority ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -766,7 +708,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("legalizationStatementNumber")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.legalization_statement_number}
+                                                defaultValue={allExtreactData?.legalization_statement_number ?? ""}
                                             />
                                         </div>
 
@@ -778,7 +720,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("engineerFullName")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.engineer_full_name}
+                                                defaultValue={allExtreactData?.engineer_full_name ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -789,7 +731,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("licenseNumberRevision")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.license_number_revision}
+                                                defaultValue={allExtreactData?.license_number_revision ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -800,7 +742,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("dateIssuanceBuildingPermit")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.date_issuance_building_permit}
+                                                defaultValue={allExtreactData?.date_issuance_building_permit ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -811,7 +753,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("detailsIssuingAuthority")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.details_issuing_authority}
+                                                defaultValue={allExtreactData?.details_issuing_authority ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -822,7 +764,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("dateIssueBuildingPermitRevision")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.date_issue_building_permit_revision}
+                                                defaultValue={allExtreactData?.date_issue_building_permit_revision ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -833,7 +775,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("dateIssueBuildingPermitRevision")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.project_title_description_license}
+                                                defaultValue={allExtreactData?.project_title_description_license ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -844,7 +786,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("completionDeclaration3843Number")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.completion_declaration_3843_number}
+                                                defaultValue={allExtreactData?.completion_declaration_3843_number ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -855,7 +797,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("descriptionValidations3843")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.description_validations_3843}
+                                                defaultValue={allExtreactData?.description_validations_3843 ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -866,7 +808,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("issuingAuthority3843")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.issuing_authority_3843}
+                                                defaultValue={allExtreactData?.issuing_authority_3843 ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -877,7 +819,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("dateIssueCompletionDeclaration3843")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.date_issue_completion_declaration_3843}
+                                                defaultValue={allExtreactData?.date_issue_completion_declaration_3843 ?? ""}
                                             />
                                         </div>
 
@@ -890,7 +832,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("electronicCode")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.electronic_code}
+                                                defaultValue={allExtreactData?.electronic_code ?? ""}
                                             />
                                         </div>
 
@@ -902,7 +844,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("teeRegistrationNumber")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.tee_registration_number}
+                                                defaultValue={allExtreactData?.tee_registration_number ?? ""}
                                             />
                                         </div>
 
@@ -914,7 +856,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("specialty")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.specialty}
+                                                defaultValue={allExtreactData?.specialty ?? ""}
                                             />
                                         </div>
 
@@ -927,7 +869,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("inclusionDateLegalization")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData?.inclusion_date_legalization}
+                                                defaultValue={allExtreactData?.inclusion_date_legalization ?? ""}
                                             />
                                         </div>
                                     </div>
@@ -979,7 +921,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("numberEstablishmentHorizontalOwnership")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.number_establishment_horizontal_ownership}
+                                                defaultValue={allExtreactData?.number_establishment_horizontal_ownership ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -990,7 +932,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("reviewsNumbersEstablishmentHorizontalOwnership")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.reviews_numbers_establishment_horizontal_ownership}
+                                                defaultValue={allExtreactData?.reviews_numbers_establishment_horizontal_ownership ?? ""}
                                             />
                                         </div>
                                         <div>
@@ -1001,10 +943,221 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 {...register("notaryEstablishmentHorizontalOwnership")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData.notary_establishment_horizontal_ownership}
+                                                defaultValue={allExtreactData?.notary_establishment_horizontal_ownership ?? ""}
                                             />
                                         </div>
 
+                                    </div>
+                                )}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="mt-10">
+                        <div className="bg-white p-6 rounded-xl w-full">
+                            <div className="flex justify-between items-center ">
+                                <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
+                                    LOSS PAPER
+                                </h2>
+                                <button
+                                    type="button"
+                                    className=" hover:cursor-pointer z-50"
+                                    // NEED TO WORK HERE
+                                    // Tahsin
+                                    onClick={() => setCollapse(4)}
+                                >
+                                    {" "}
+                                    {collapse === 4 ? (
+                                        <>
+                                            <IoIosArrowUp className="text-2xl" />
+
+                                        </>
+                                    ) : (
+                                        <>
+                                            <IoIosArrowDown className="text-2xl" />
+
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+                            <div className={`${collapse === 4 ? "h-full" : "h-0"} transition-transform duration-300 `}>
+                                {collapse === 4 && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                protocol_number_loss_certificate (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("numberEstablishmentHorizontalOwnership")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.protocol_number_loss_certificate ?? ""}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                protocol_date_loss_certificate (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("numberEstablishmentHorizontalOwnership")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.protocol_date_loss_certificate ?? ""}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                issuing_authority_loss_certificate (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("numberEstablishmentHorizontalOwnership")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.issuing_authority_loss_certificate ?? ""}
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div className="mt-10">
+                        <div className="bg-white p-6 rounded-xl w-full">
+                            <div className="flex justify-between items-center ">
+                                <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
+                                    EEMK PAPER
+                                </h2>
+                                <button
+                                    type="button"
+                                    className=" hover:cursor-pointer z-50"
+                                    // NEED TO WORK HERE
+                                    // Tahsin
+                                    onClick={() => setCollapse(5)}
+                                >
+                                    {" "}
+                                    {collapse === 5 ? (
+                                        <>
+                                            <IoIosArrowUp className="text-2xl" />
+
+                                        </>
+                                    ) : (
+                                        <>
+                                            <IoIosArrowDown className="text-2xl" />
+
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+                            <div className={`${collapse === 5 ? "h-full" : "h-0"} transition-transform duration-300 `}>
+                                {collapse === 5 && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                date_of_issuance_eemk (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("dateOfIssuanceEemk")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.date_of_issuance_eemk ?? ""}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                date_of_issue_building_permit_revision_eemk (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("dateOfIssueBuildingPermitRevisioneemk")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.date_of_issue_building_permit_revision_eemk ?? ""}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                Reviews Numbers of establishment of horizontal ownership (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("reviewsNumbersEstablishmentHorizontalOwnership")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.reviews_numbers_establishment_horizontal_ownership ?? ""}
+                                            />
+                                        </div>
+
+                                    </div>
+                                )}
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div className="mt-10">
+                        <div className="bg-white p-6 rounded-xl w-full">
+                            <div className="flex justify-between items-center ">
+                                <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
+                                    1337/LAW
+                                </h2>
+                                <button
+                                    type="button"
+                                    className=" hover:cursor-pointer z-50"
+                                    // NEED TO WORK HERE
+                                    // Tahsin
+                                    onClick={() => setCollapse(6)}
+                                >
+                                    {" "}
+                                    {collapse === 6 ? (
+                                        <>
+                                            <IoIosArrowUp className="text-2xl" />
+
+                                        </>
+                                    ) : (
+                                        <>
+                                            <IoIosArrowDown className="text-2xl" />
+
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+                            <div className={`${collapse === 6 ? "h-full" : "h-0"} transition-transform duration-300 `}>
+                                {collapse === 6 && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                date_of_issuance_eemk (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("dateOfIssuanceEemk")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.date_of_submission_1337 ?? ""}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                declaration_number_1337 (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("dateOfIssuanceEemk")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.declaration_number_1337 ?? ""}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                issuing_authority_1337 (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("dateOfIssuanceEemk")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.issuing_authority_1337 ?? ""}
+                                            />
+                                        </div>
                                     </div>
                                 )}
                             </div>
@@ -1093,7 +1246,7 @@ export default HtkOneAIExtractionDataInPut;
                     {...register("protocolNumber")}
                     className={inputStyle}
                     readOnly
-                    defaultValue={allExtreactData.property_postal_code}
+                    defaultValue={allExtreactData?.property_postal_code}
                   />
                 </div>
                 <div>
