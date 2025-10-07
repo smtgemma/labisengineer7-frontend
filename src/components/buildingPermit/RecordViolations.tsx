@@ -519,7 +519,7 @@ function RecordViolations({ currentStep = 1, nextStep = () => { } }) {
             .map(ref => ref.getFormData());
 
         // Log the data to console
-        console.log("All Form Data:", allFormData);
+        console.log("All Record violation Form Data:", allFormData);
         // Continue to next step
         try {
             const res = await postviolations({ payload: allFormData, accessToken, id: projectId }).unwrap();

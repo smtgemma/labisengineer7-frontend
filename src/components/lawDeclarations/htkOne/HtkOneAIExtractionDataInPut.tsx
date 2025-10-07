@@ -98,6 +98,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
     const filesData = stepByStepData.multiFiles;
     const descriptonAndYdom: any = stepByStepData?.description;
     const description = descriptonAndYdom?.description;
+    const ydom = stepByStepData?.horizontal?.ydom;
     // const ydom: string[] =
     //   descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
 
@@ -116,7 +117,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
             // createdById: user?.userId,/
             subCategories: subCategoryData,
             descrptionTasks: descrptionTasks,
-            ydom: descriptonAndYdom?.ydom,
+            ydom: ydom,
             technicalDescription: allExtreactData?.technical_description,
             technicalDescriptionTwo: allExtreactData?.technical_description_two,
             ...data,
