@@ -599,8 +599,14 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "76" && (
                   <F7D6 allData={allData} /> // 6
                 )}
-                {selected === "77" && (
+                {/* {selected === "77" && (
                   <F7D7 allData={allData} /> // 7
+                )} */}
+                {selected?.startsWith("owner7_") && ownerIndex !== null && (
+                  <F7D7
+                    allData={allData}
+                    ownerIndex={ownerIndex}
+                  />
                 )}
                 {selected === "78" && (
                   <F7D8 allData={allData} /> // 8
@@ -630,7 +636,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F14D3 allData={allData} /> // 3
                 )}
                 {selected === "144" && (
-                  <F14D4 allData={allData } /> // 4
+                  <F14D4 allData={allData} /> // 4
                 )}
                 {selected === "145" && (
                   <F14D5 allData={allData} /> // 5
