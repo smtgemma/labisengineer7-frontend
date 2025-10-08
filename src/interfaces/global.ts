@@ -96,4 +96,7 @@ export type TProjectData = {
     issuing_authority_1337: string | null;
     notary_establishment_horizontal_ownership: string | null;
     date_of_submission_1337: string | null;
+    project_description_htk_plot: string | null;
+    kaek_plot: string | null;
+    plot_type: string | null;
 };
