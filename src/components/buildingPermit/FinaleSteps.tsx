@@ -17,12 +17,11 @@ import {
 
 import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "sonner";
-import PrimaryButton from "../shared/primaryButton/PrimaryButton";
-import { FormDataOne, FormDataTwo } from "./template";
 import S2D1 from "../CreateProject/FinalOverview/srv-2rt/s2D1/page";
 import S2D2 from "../CreateProject/FinalOverview/srv-2rt/s2D2/page";
 import S2D3 from "../CreateProject/FinalOverview/srv-2rt/s2D3/page";
 import S2D4 from "../CreateProject/FinalOverview/srv-2rt/s2D4/page";
+import PrimaryButton from "../shared/primaryButton/PrimaryButton";
 export interface UserData {
     id: string;
     firstName: string;
@@ -282,8 +281,8 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                                         <button
                                             className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                                             onClick={() => {
-                                                if(template.id.startsWith(template.id)) {
-                                                    const index =Number(template.id.split("_")[1]);
+                                                if (template.id.startsWith(template.id)) {
+                                                    const index = Number(template.id.split("_")[1]);
                                                     setOwnerIndex(index)
                                                 }
                                                 setSelected(template.id);
@@ -325,16 +324,16 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                                     </div>
                                 )}
                             {selected?.startsWith("template3_") && ownerIndex !== null && (
-                                <S2D3 
-                                allData={allData} 
-                                owner={allData?.owners?.[ownerIndex]}
+                                <S2D3
+                                    allData={allData}
+                                    owner={allData?.owners?.[ownerIndex]}
                                 />
                             )}
                             {selected?.startsWith("template4_") && ownerIndex !== null && (
                                 <S2D4
-                                allData={allData}
-                                ownerIndex={ownerIndex}
-                                violations={violations}
+                                    allData={allData}
+                                    ownerIndex={ownerIndex}
+                                    violations={violations}
                                 />
                             )}
                         </div>

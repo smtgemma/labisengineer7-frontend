@@ -210,6 +210,13 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                 ydom: ydom,
                 technicalDescription: allExtreactData?.technical_description,
                 technicalDescriptionTwo: allExtreactData?.technical_description_two,
+                technicalDescriptionThree: allExtreactData?.technical_description_three,
+                technicalDescriptionFour: allExtreactData?.technical_description_four,
+                technicalDescriptionFive: allExtreactData?.technical_description_five,
+                technicalDescriptionSix: allExtreactData?.technical_description_six,
+                technicalDescriptionSeven: allExtreactData?.technical_description_seven,
+                technicalDescriptionEight: allExtreactData?.technical_description_eight,
+                technicalDescriptionNine: allExtreactData?.technical_description_nine,
                 ...data,
             })
         );
