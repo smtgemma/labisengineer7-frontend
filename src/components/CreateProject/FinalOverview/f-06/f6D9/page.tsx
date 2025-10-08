@@ -251,15 +251,16 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                             </p>
 
                             <p className="mb-2">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις <span className="text-sm font-bold">αναλαμβάνω</span> για το έργο</p>
-                            <p className=" mb-6">{projectDescription || "N/A"}</p>
+                            <p className=" mb-6 font-bold uppercase">"{projectDescription || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
                             <h3 className=" text-sm"> <span className="mr-1">επί της οδού</span>
+                            <span className="font-bold">
                                 {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
                                 ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-                                ΤΚ {propertyPostalCode || "N/A"}
+                                ΤΚ {propertyPostalCode || "N/A"}</span>
                             </h3>
                             <p>
                                 τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>

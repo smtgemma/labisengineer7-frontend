@@ -44,6 +44,7 @@ interface allDataProps {
     firstName: string;
     lastName: string;
     floorProperty: string;
+    declaration_owner_for_4495_2017: string;
 }
 
 type modalFnProps = {
@@ -56,7 +57,7 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
 
     const engineers = allData?.engineers?.[0] || {};
     // Removed duplicate 'owner' declaration
-    const { id, createdById, serviceId, horizontalPropertyName, ydom, specialty, propertyAddress, propertyPlace, floorProperty } = allData || {};
+    const { id, createdById, serviceId, horizontalPropertyName, ydom, specialty, propertyAddress, propertyPlace, floorProperty, createdAt, declaration_owner_for_4495_2017 } = allData || {};
     const [updateProject2] = useUpdateProject2Mutation()
     // const { data: userData } = useGetMeQuery()
     // const signature = userData?.data?.signature
@@ -249,22 +250,8 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                         <div className="p-4 text-sm">
                             <p className="mb-4">
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
-                            </p>
-                            <p className="mb-1">
-                                Εγω ο/η ({owner?.last_name || "N/A"}) ο/η οποίος/οποία έχω στην ιδιοκτησία μου την αυτοτελή διηρημένη οριζόντια
-                            </p>
-                            <p className="mb-1">
-                                ιδιοκτησία «{horizontalPropertyName || "N/A"}/descripsion», που βρίσκεται στον ({floorProperty || "N/A"}) όροφο πολυκατοικίας στην οδό
-                            </p>
-                            <p className="mb-1">
-                                ({propertyAddress || "N/A"}), στο οικοδομικό τετράγωνο (Ο.Τ. Number), στα/στην/στον ({propertyPlace || "N/A"}) , του Δήμου (Municipality-City Property)---, με είδος
-                            </p>
-                            <p className="mb-1">
-                                ιδιοκτησίας (Owner's type of ownership) ΚΥΡΙΟΤΗΤΑΣ ΚΑΤΑ (
-                                Property ownership percentage )στη διηρημένη ιδιοκτησία, στην οποία αναλογεί
-                            </p>
-                            <p className="mb-1">
-                                (percentage of co-ownership of the plot)/1000 ποσοστό συνιδιοκτησίας εξ αδιαιρέτου στο σύνολο του οικοπέδου, εξουσιοδοτώ
+                            
+                              { declaration_owner_for_4495_2017 || "N/A"}, εξουσιοδοτώ 
                             </p>
                             <p className="mb-1">
                                 τον /την ({engineers?.lastName || "N/A"} {engineers?.firstName || "N/A"})-({specialty || "N/A"}) με ΑΜ ΤΕΕ (TEE NUMBER),
@@ -275,17 +262,15 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                         </div>
 
                         {/* Additional disclaimer text */}
-                        <div className="flex justify-between p-5">
-                            <div>
-                                <p>Βεβαιώνεται το γνήσιο της υπογραφής </p>
-                            </div>
-                            <div>
-                                <div>
-                                    <div className="flex justify-center gap-10">
-                                        <p>Ημερομηνία: </p>
-                                        <p>- 20</p>
+                        <div className="text-sm my-3 ml-5">
+                            <div className="w-[90%] mx-left">
+                                <div className="flex justify-between mb-3">
+                                    <p>Βεβαιώνεται το γνήσιο της υπογραφής</p>
+                                    <div>
+                                        <p> Ημερομηνία: {createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</p>
+                                        <p className="text-center mt-2 ">Ο – Η Δηλ.</p>
                                     </div>
-                                    <p className="text-center mt-6"> Ο – Η Δηλ.</p>
+
                                 </div>
                             </div>
                         </div>

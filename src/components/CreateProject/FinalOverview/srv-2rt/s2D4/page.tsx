@@ -402,14 +402,17 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                             </div>
                             <div className="my-3">
                                 <div className="w-[90%] mx-left">
-                                    <div className="flex justify-between items-center mb-3">
+                                    <div className="flex justify-between mb-3">
                                         <p>Βεβαιώνεται το γνήσιο της υπογραφής</p>
-                                        <p> Ημερομηνία:</p>
+                                        <div>
+                                            <p> Ημερομηνία: {createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</p>
+                                            <p className="text-center mt-2 ">Ο – Η Δηλ.</p>
+                                        </div>
+
                                     </div>
                                 </div>
-                                <p className="text-right">Ο – Η Δηλ.</p>
                             </div>
-                            <div className="text-xs py-5">
+                            <div className="text-xs pt-12 pb-8">
                                 <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
                                 <p>(2) Αναγράφεται ολογράφως.</p>
                                 <p> (3) «Όποιος εν γνώσει του δηλώνει ψευδή γεγονότα ή αρνείται ή αποκρύπτει τα αληθινά με έγγραφη υπεύθυνη δήλωση του άρθρου 8 τιμωρείται με φυλάκιση τουλάχιστον τριών μηνών. Εάν ο υπαίτιος αυτών των πράξεων σκόπευε να προσπορίσει στον εαυτόν του ή σε άλλον περιουσιακό όφελος βλάπτοντας τρίτον ή σκόπευε να βλάψει άλλον, τιμωρείται με κάθειρξη μέχρι 10 ετών.</p>

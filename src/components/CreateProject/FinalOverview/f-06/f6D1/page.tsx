@@ -1046,14 +1046,14 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white arial">
       <div className="text-center mb-6">
-        <h1 className="text-xl font-bold mb-2">ΣΥΝΤΑΞΗ ΑΝΑΛΥΤΙΚΟΥ ΠΡΟΫΠΟΛΟΓΙΣΜΟΥ ΕΡΓΟΥ</h1>
+        <h1 className="text-xl font-bold mb-2 bg-[#D8D8D8] border-1">ΣΥΝΤΑΞΗ ΑΝΑΛΥΤΙΚΟΥ ΠΡΟΫΠΟΛΟΓΙΣΜΟΥ ΕΡΓΟΥ</h1>
         <p className="text-sm ">(σύμφωνα με το Παράρτημα Β' του Ν.4495/17)</p>
       </div>
 
       {/* Project Info */}
       <div className="mb-6 space-y-4">
         <div className="flex">
-          <span className="font-medium w-1/4">Εργοδότες *:</span>
+          <span className="font-medium">Εργοδότες *:</span>
           <div className="flex-1">
             <div className="flex items-center justify-center gap-2">
               {
@@ -1067,11 +1067,11 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <span className="font-medium w-1/4">Έργο *:</span>
+          <span className="font-medium w-1/5">Έργο *:</span>
           <h3 className="flex-1 text-black text-sm text-center">{projectDescription || "N/A"}</h3>
         </div>
         <div className="flex">
-          <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
+          <span className="font-medium">Διεύθυνση Έργου *:</span>
           <div className="flex-1">
             <h3 className=" text-sm flex items-center justify-center">
             {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
@@ -1082,14 +1082,14 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
         </div>
       </div>
       {/* Budget Title */}
-      <div className="text-center bg-white p-2 border border-black border-b-0">
-        <h2 className="text-lg font-bold ">ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ ΒΑΣΕΙ ΠΑΡΑΡΤΗΜΑΤΟΣ Β' Ν.4495/17)</h2>
+      <div className="text-center bg-white border border-black border-b-0">
+        <h2 className="text-lg font-bold bg-[#D8D8D8] p-2">ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ ΒΑΣΕΙ ΠΑΡΑΡΤΗΜΑΤΟΣ Β' Ν.4495/17)</h2>
       </div>
 
       {/* Budget Table */}
       <div className="border border-black">
         {/* Table Header */}
-        <div className="grid grid-cols-12 bg-white border-b border-black font-bold text-sm">
+        <div className="grid grid-cols-12 border-b border-black font-bold text-sm bg-[#F2F2F2]">
           <div className="col-span-1 py-2 border-r border-black text-xs px-1">Κωδικός</div>
           <div className="col-span-5 p-2 border-r border-black text-xs">Εργασία</div>
           <div className="col-span-1 py-2 border-r border-black text-xs px-1">Μονάδα Μέτρησης</div>
@@ -1102,9 +1102,9 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
         {categories.map((category) => (
           <div key={category.id}>
             {/* Category Header */}
-            <div className="grid grid-cols-12 bg-white border-b border-black">
-              <div className="col-span-1 p-2 border-r border-gray-black font-bold ">{category.id}</div>
-              <div className="col-span-9 p-2 border-r border-gray-black font-bold ">{category.title}</div>
+            <div className="grid grid-cols-12 border-b  bg-[#F2F2F2]">
+              <div className="col-span-1 p-2 border-r border-gray-black font-bold bg-[#F2F2F2]  ">{category.id}</div>
+              <div className="col-span-9 p-2 border-r border-gray-black font-bold bg-[#F2F2F2] ">{category.title}</div>
               {/* <div className="col-span-2 p-2 font-bold text-right ">{category.subtotal.toFixed(2)}</div> */}
             </div>
 
@@ -1128,9 +1128,10 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
 
             {/* Category Subtotal */}
             <div className="grid grid-cols-12 bg-white border-b border-black">
-              <div className="col-span-10 p-2 text-right font-bold">Μερικό Σύνολο =</div>
-              <div className="col-span-2 p-2 text-right font-bold ">{category.subtotal.toFixed(2)}</div>
+              <div className="col-span-10 p-2 pl-18 font-bold bg-[#F2F2F2]">Μερικό Σύνολο =</div>
+              <div className="col-span-2 p-2 text-right font-bold bg-[#F2F2F2] ">{category.subtotal.toFixed(2)}</div>
             </div>
+            <div className="p-3 border-b "></div>
           </div>
         ))}
 
