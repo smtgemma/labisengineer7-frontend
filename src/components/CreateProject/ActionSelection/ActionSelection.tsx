@@ -635,18 +635,18 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   console.log(allTemplates, "allTemplates,,,,,")
 
 // i have changed here for common id remore and for one time showing the title and set let after change the const for allTemplates to reStore
-  allTemplates = Object.values(
-  allTemplates.reduce((acc: Record<string, any>, curr) => {
-    const title = curr.title.trim(); // normalize id (remove trailing spaces)
-    if (!acc[title]) {
-      acc[title] = { ...curr, options: [...curr.id] };
-    } else {
-      // Merge id if same title already exists
-      acc[title].options = [...acc[title].options, ...curr.id];
-    }
-    return acc;
-  }, {})
-);
+//   allTemplates = Object.values(
+//   allTemplates.reduce((acc: Record<string, any>, curr) => {
+//     const title = curr.title.trim(); // normalize id (remove trailing spaces)
+//     if (!acc[title]) {
+//       acc[title] = { ...curr, options: [...curr.id] };
+//     } else {
+//       // Merge id if same title already exists
+//       acc[title].options = [...acc[title].options, ...curr.id];
+//     }
+//     return acc;
+//   }, {})
+// );
 
 
 
