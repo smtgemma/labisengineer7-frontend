@@ -94,7 +94,9 @@ const MainHtkOne: React.FC = () => {
                 />;
             case 4:
                 //same
-                return <HtkOneAIExtractionDataInPut currentStep={currentStep}
+                return <HtkOneAIExtractionDataInPut
+                    uploadedFiles={uploadedFiles}
+                    currentStep={currentStep}
                     nextStep={nextStep}
                 />;
             case 5:

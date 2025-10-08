@@ -91,6 +91,16 @@ const aiServiceApi = baseUrlApi.injectEndpoints({
         },
       }),
     }),
+    postHtkOne: build.mutation({
+      query: ({ formData, accessToken }) => ({
+        url: `/project-for-service3/create-with-files`,
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -104,5 +114,6 @@ export const {
   usePostSecondFileAiDataExtractMutation,
   usePosAiAllDataForTwoToSaveMutation,
   usePostRecordViolationMutation,
-  usePostQuestionsAndAnswerMutation
+  usePostQuestionsAndAnswerMutation,
+  usePostHtkOneMutation
 } = aiServiceApi;
