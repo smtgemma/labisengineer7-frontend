@@ -7,6 +7,7 @@ import { usePostRecordViolationMutation } from '@/redux/features/AI-intrigratoin
 import tokenCatch from '@/lib/token';
 import { toast } from 'sonner';
 import { RootState } from '@/redux/store';
+
 // Enhanced violations database based on categories
 const violationsDatabase = {
     // Categories 1, 2, 4, 5
@@ -106,9 +107,10 @@ type ViolationFormProps = {
     index: number;
     onRemove: () => void;
     onFormDataChange: (data: any) => void;
+    showWarnings?: boolean;
 };
 
-const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: ViolationFormProps, ref) => {
+const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange, showWarnings = false }: ViolationFormProps, ref) => {
     const [selectedCategory, setSelectedCategory] = useState<string>("");
     const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState<boolean>(false);
 
@@ -136,7 +138,25 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
 
     const categoriesWithOtherViolation: string[] = ["1", "2", "4", "5"];
 
-    // Expose form data via ref
+    // Validation states
+    const [showCategoryWarning, setShowCategoryWarning] = useState<boolean>(false);
+    const [showViolationsWarning, setShowViolationsWarning] = useState<boolean>(false);
+    const [showAgeWarning, setShowAgeWarning] = useState<boolean>(false);
+
+    // Validate form
+    const validateForm = () => {
+        const hasCategory = !!selectedCategory;
+        const hasViolations = selectedViolations.length > 0;
+        const hasAge = !!selectedAge;
+
+        setShowCategoryWarning(!hasCategory);
+        setShowViolationsWarning(!hasViolations);
+        setShowAgeWarning(!hasAge);
+
+        return hasCategory && hasViolations && hasAge;
+    };
+
+    // Expose form data and validation via ref
     useImperativeHandle(ref, () => ({
         getFormData: () => {
             return {
@@ -147,6 +167,9 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                 age: selectedAge,
                 showRemainingViolations: selectedCategory === "3" ? showRemainingViolations : null
             };
+        },
+        validateForm: () => {
+            return validateForm();
         }
     }));
 
@@ -163,6 +186,32 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
             });
         }
     }, [selectedCategory, selectedViolations, showOtherViolation, selectedAge, showRemainingViolations]);
+
+    // Clear warnings when fields are filled
+    React.useEffect(() => {
+        if (selectedCategory && showCategoryWarning) {
+            setShowCategoryWarning(false);
+        }
+    }, [selectedCategory]);
+
+    React.useEffect(() => {
+        if (selectedViolations.length > 0 && showViolationsWarning) {
+            setShowViolationsWarning(false);
+        }
+    }, [selectedViolations]);
+
+    React.useEffect(() => {
+        if (selectedAge && showAgeWarning) {
+            setShowAgeWarning(false);
+        }
+    }, [selectedAge]);
+
+    // Show warnings when prop changes
+    React.useEffect(() => {
+        if (showWarnings) {
+            validateForm();
+        }
+    }, [showWarnings]);
 
     const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
@@ -242,7 +291,6 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
 
     const handleRemainingViolationsChange = (checked: boolean) => {
         setShowRemainingViolations(checked);
-        // setSelectedViolations([]);
         setViolationInput("");
         setShowViolationSuggestions(false);
         setEditingViolation("");
@@ -256,7 +304,7 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
     };
 
     return (
-        <div className="bg-white rounded-lg shadow-lg mb-6 relative">
+        <div className="bg-white rounded-lg shadow-lg mb-6 relative border-2 border-transparent">
             {index > 0 && (
                 <button
                     type="button"
@@ -272,18 +320,29 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                     <h2 className="text-xl font-semibold">
                         Φύλλο Καταγραφής {String.fromCharCode(65 + index)}
                     </h2>
+                    {(showCategoryWarning || showViolationsWarning || showAgeWarning) && (
+                        <div className="flex items-center space-x-1 text-red-500">
+                            <span className="text-sm font-medium">(Απαιτούμενα πεδία)</span>
+                        </div>
+                    )}
                 </div>
             </div>
 
             <div className="p-6 space-y-6">
                 {/* Category Dropdown */}
                 <div className="space-y-2">
-                    <label className="text-sm font-medium block">Κατηγορία Υπαγωγής</label>
+                    <label className="text-sm font-medium block">
+                        Κατηγορία Υπαγωγής
+                        <span className="text-red-500 ml-1">*</span>
+                    </label>
                     <div className="relative">
                         <button
                             type="button"
                             onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-left focus:outline-none flex items-center justify-between"
+                            className={`w-full px-3 py-2 border rounded-md bg-white text-left focus:outline-none flex items-center justify-between transition-colors ${showCategoryWarning
+                                    ? 'border-red-500 bg-red-50'
+                                    : 'border-gray-300'
+                                }`}
                         >
                             <span className="text-sm">
                                 {selectedCategory || "Επιλέξτε κατηγορία..."}
@@ -295,6 +354,12 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                             />
                         </button>
 
+                        {showCategoryWarning && (
+                            <div className="flex items-center space-x-1 mt-1">
+                                <span className="text-red-500 text-xs">⚠️ Αυτό το πεδίο είναι απαραίτητο</span>
+                            </div>
+                        )}
+
                         {isCategoryDropdownOpen && (
                             <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
                                 {categories.map((category, idx) => (
@@ -303,8 +368,8 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                                         type="button"
                                         onClick={() => handleCategoryChange(category)}
                                         className={`w-full px-3 py-2 text-left text-sm hover:bg-blue-50 ${selectedCategory === category
-                                            ? "bg-blue-100 text-blue-800 font-medium"
-                                            : ""
+                                                ? "bg-blue-100 text-blue-800 font-medium"
+                                                : ""
                                             } ${idx === 0 ? "rounded-t-md" : ""} ${idx === categories.length - 1
                                                 ? "rounded-b-md"
                                                 : "border-b border-gray-200"
@@ -327,7 +392,6 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                             checked={showOtherViolation}
                             onChange={(e) => {
                                 setShowOtherViolation(e.target.checked);
-                                // setSelectedViolations([]);
                                 setViolationInput("");
                                 setShowViolationSuggestions(false);
                                 setEditingViolation("");
@@ -342,6 +406,7 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                         </label>
                     </div>
                 )}
+
                 {/* Category 3 toggle */}
                 {selectedCategory === "3" && (
                     <div className="flex items-center space-x-3">
@@ -360,10 +425,12 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                         </label>
                     </div>
                 )}
+
                 {/* Violations autocomplete */}
                 <div className="space-y-2">
                     <label className="text-sm font-medium block">
-                        Παράβαση{" "}
+                        Παράβαση
+                        <span className="text-red-500 ml-1">*</span>
                         {selectedCategory === "3" && (
                             <span className="text-xs text-gray-500 ml-2">
                                 ({showRemainingViolations ? "Λοιπές" : "Βασικές"})
@@ -413,7 +480,10 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                                 onChange={(e) => handleViolationInputChange(e.target.value)}
                                 onKeyPress={handleKeyPress}
                                 placeholder="Αρχίστε να πληκτρολογείτε ή επιλέξτε από τις προτάσεις..."
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                className={`w-full px-3 py-2 border rounded-md transition-colors ${showViolationsWarning
+                                        ? 'border-red-500 bg-red-50'
+                                        : 'border-gray-300'
+                                    }`}
                                 disabled={!selectedCategory}
                             />
 
@@ -441,16 +511,28 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                             Προσθήκη
                         </button>
                     </div>
+
+                    {showViolationsWarning && (
+                        <div className="flex items-center space-x-1">
+                            <span className="text-red-500 text-xs">⚠️ Πρέπει να προσθέσετε τουλάχιστον μία παράβαση</span>
+                        </div>
+                    )}
                 </div>
 
                 {/* Age dropdown */}
                 <div className="space-y-2">
-                    <label className="text-sm font-medium block">Παλαιότητα</label>
+                    <label className="text-sm font-medium block">
+                        Παλαιότητα
+                        <span className="text-red-500 ml-1">*</span>
+                    </label>
                     <div className="relative">
                         <button
                             type="button"
                             onClick={() => setIsAgeDropdownOpen(!isAgeDropdownOpen)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-left flex items-center justify-between"
+                            className={`w-full px-3 py-2 border rounded-md bg-white text-left flex items-center justify-between transition-colors ${showAgeWarning
+                                    ? 'border-red-500 bg-red-50'
+                                    : 'border-gray-300'
+                                }`}
                         >
                             <span className="text-sm">
                                 {selectedAge || "Επιλέξτε παλαιότητα..."}
@@ -461,6 +543,12 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                                 size={16}
                             />
                         </button>
+
+                        {showAgeWarning && (
+                            <div className="flex items-center space-x-1 mt-1">
+                                <span className="text-red-500 text-xs">⚠️ Αυτό το πεδίο είναι απαραίτητο</span>
+                            </div>
+                        )}
 
                         {isAgeDropdownOpen && (
                             <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
@@ -473,8 +561,8 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
                                             setIsAgeDropdownOpen(false);
                                         }}
                                         className={`w-full px-3 py-2 text-left text-sm hover:bg-blue-50 ${selectedAge === option
-                                            ? "bg-blue-100 text-blue-800 font-medium"
-                                            : ""
+                                                ? "bg-blue-100 text-blue-800 font-medium"
+                                                : ""
                                             } ${idx === 0 ? "rounded-t-md" : ""} ${idx === ageOptions.length - 1
                                                 ? "rounded-b-md"
                                                 : "border-b border-gray-200"
@@ -494,13 +582,14 @@ const ViolationForm = forwardRef(({ index, onRemove, onFormDataChange }: Violati
 
 function RecordViolations({ currentStep = 1, nextStep = () => { } }) {
     const [forms, setForms] = useState([{ id: 0 }]);
-    const formRefs = React.useRef<Array<{ getFormData: () => any } | null>>([]);
+    const formRefs = React.useRef<Array<{ getFormData: () => any; validateForm: () => boolean } | null>>([]);
     const [postviolations] = usePostRecordViolationMutation()
     const accessToken = tokenCatch();
     const dispatch = useDispatch();
     const stepByStepData: any = useSelector((state: RootState) => state.aiData);
     const projectId = stepByStepData?.projectIdCode?.id;
-    console.log(stepByStepData)
+    const [showAllWarnings, setShowAllWarnings] = useState<boolean>(false);
+
     const addForm = () => {
         const newId = forms.length > 0 ? Math.max(...forms.map(f => f.id)) + 1 : 0;
         setForms([...forms, { id: newId }]);
@@ -513,6 +602,19 @@ function RecordViolations({ currentStep = 1, nextStep = () => { } }) {
     };
 
     const handleSaveAndContinue = async () => {
+        // Validate all forms first
+        const allFormsValid = formRefs.current
+            .filter(ref => ref !== null)
+            .every(ref => ref.validateForm());
+
+        if (!allFormsValid) {
+            setShowAllWarnings(true);
+            toast.error("Παρακαλώ συμπληρώστε όλα τα απαιτούμενα πεδία σε όλα τα φύλλα καταγραφής");
+            return;
+        }
+
+        setShowAllWarnings(false);
+
         // Collect data from all forms
         const allFormData = formRefs.current
             .filter(ref => ref !== null)
@@ -520,6 +622,7 @@ function RecordViolations({ currentStep = 1, nextStep = () => { } }) {
 
         // Log the data to console
         console.log("All Record violation Form Data:", allFormData);
+
         // Continue to next step
         try {
             const res = await postviolations({ payload: allFormData, accessToken, id: projectId }).unwrap();
@@ -542,7 +645,6 @@ function RecordViolations({ currentStep = 1, nextStep = () => { } }) {
                     Record Violations
                 </h2>
                 <div className="w-fit ml-auto">
-
                     <PrimaryButton
                         onClick={addForm}
                     >
@@ -554,16 +656,25 @@ function RecordViolations({ currentStep = 1, nextStep = () => { } }) {
                 </div>
             </div>
 
+            {showAllWarnings && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <div className="flex items-center space-x-2 text-red-700">
+                        <span className="text-sm font-medium">⚠️ Παρακαλώ συμπληρώστε όλα τα απαιτούμενα πεδία σε όλα τα φύλλα καταγραφής</span>
+                    </div>
+                </div>
+            )}
+
             <div className="space-y-6">
                 {forms.map((form, index) => (
                     <ViolationForm
                         key={form.id}
-                        ref={el => { formRefs.current[index] = el as { getFormData: () => any } | null; }}
+                        ref={el => { formRefs.current[index] = el as { getFormData: () => any; validateForm: () => boolean } | null; }}
                         index={index}
                         onRemove={() => removeForm(form.id)}
                         onFormDataChange={(data) => {
                             // Optional: handle individual form changes if needed
                         }}
+                        showWarnings={showAllWarnings}
                     />
                 ))}
             </div>
