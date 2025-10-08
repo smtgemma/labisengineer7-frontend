@@ -21,6 +21,10 @@ interface allDataProps {
     lastName: string
     firstName: string
     specialty: string
+    technicalDescriptionThree: string
+    technicalDescriptionFour: string
+    technicalDescriptionFive: string
+    licenseNumberRevision: string
 }
 
 type questionProps = {
@@ -43,7 +47,8 @@ type violationsProps = {
 export default function S2D2({ allData, question, violations }: { allData: allDataProps, question: questionProps[], violations: violationsProps[] }) {
 
     const { projectDescription, horizontalPropertyName, propertyPostalCode, municipalityCommunity,
-        propertyNumber, propertyAddress, propertyPlace, issuingAuthority, kaekProperty, permitNumber, createdAt, lastName, firstName, specialty, } = allData || {}
+        propertyNumber, propertyAddress, propertyPlace, issuingAuthority, kaekProperty, permitNumber,
+        createdAt, lastName, firstName, specialty, technicalDescriptionThree, technicalDescriptionFour, technicalDescriptionFive, licenseNumberRevision, } = allData || {}
     const owner = allData?.owners || []
     console.log(violations, "=======================violations======")
 
@@ -88,36 +93,35 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                     </div>
                 </div>
             </div>
-            <div className="border-b-2 mb-4 p-6">
-                <p className="text-sm">
-                    Πρόκειται για την {horizontalPropertyName || "N/A"}:, που βρίσκεται σε πολυκατοικία, επί της οδού {propertyAddress || "N/A"}, {propertyNumber || "N/A"}:,
-                    στη περιοχή: "{propertyPlace || "N/A"}" του Δήμου {municipalityCommunity || "N/A"}: Χαλάνδρι, ΤΚ {propertyPostalCode || "N/A"}, και έχει υπαχθεί στις περί
-                    οριζοντίου ιδιοκτησίας διατάξεις με την υπ΄ αριθμό "number_of_establishment_of_horizontal_ownership" πράξη σύστασης του Συμβολαιογράφου
-                    "notary_place/municipality" "notary_establishment_of_horizontal_ownership", σε συνδυασμό με την με αριθμό "reviews_numbers_of_establishment_of_horizontal_ownership": πράξη τροποποίησης Σ.Ο.Ι του Συμβολαιογράφου
-                    ("notary_reviews_numbers_of_establishment_of_horizontal_ownership": " ,
-                    {/* -🡪 this data you will add it when a notary have different name from previous) */}
+            <div className="mb-2 mt-6">
+                <p
+                    className="text-sm"
+                    style={{ textIndent: "2em", whiteSpace: "pre-line" }}
+                >
+                    {technicalDescriptionThree || "N/A"}
                 </p>
-                {/* -🡪 this data you will add it when a notary have different name from previous) */}
-                <p className="mt-4">
-                    Η οικοδομή έχει ανεγερθεί σύμφωνα με την υπ΄αριθμόν {permitNumber || "N/A"}: οικοδομική άδεια της {issuingAuthority || "N/A"}, και σύμφωνα με την υπ΄ αριθμόν "license_number_revision"
-                    αναθεώρηση αυτής, σε οικόπεδο , "within_outside_city_plan", συνολικής επιφάνειας Ε= "plot_area":. Η ως άνω "horizontal_property_name" αποτελεί ιδιοκτησία σε ποσοστό "ownership percentage of the owner "και είδος ιδιοκτησίας, "Owner's type of ownership" κυριότητα, τον "last_name owner 1" "first_name owner 1":  και σε ποσοστό "ownership percentage of the owner "και είδος ιδιοκτησίας
-                    "Owner's type of ownership" κυριότητα, την "last_name owner 2" "first_name owner 2" και έχει δηλωθεί στο κτηματολόγιο με αριθμό ΚΑΕΚ {kaekProperty || "N/A"}
+
+                <p
+                    className="text-sm mt-2"
+                    style={{ textIndent: "2em", whiteSpace: "pre-line" }}
+                >
+                    {technicalDescriptionFour || "N/A"}
                 </p>
+
             </div>
-            <div className="border-b-2 p-6">
-                {/* If you extract data from Law 3843/2010, then add this text, otherwise omit it. */}
-                <p className="mt-4">
-                    Στην {horizontalPropertyName || "N/A"}, έχει πραγματοποιηθεί τακτοποίηση σύμφωνα με τις διατάξεις του ν. 3843/2010,
-                    η οποία ολοκληρώθηκε στις "completion_declaration_date_3843_2010"με αριθμό πρωτοκόλλου "completion_declaration_3843_2010_number",
-                    στην αρμόδια issuing_authority_3843_2010.Το σχετικό έγγραφο έχει αναρτηθεί στο πληροφοριακό σύστημα του ΤΕΕ,
-                    στο πεδίο “Έγγραφα ρύθμισης με προηγούμενους νόμους” (Ν. 1337/83, Ν. 3843/10 κ.λπ.).
+            <div>
+                <p
+                    className="text-sm mt-2"
+                    style={{ textIndent: "2em", whiteSpace: "pre-line" }}
+                >
+                    {technicalDescriptionFive || "N/A"}
                 </p>
                 <p className="mt-4">
-                    Σύμφωνα με την σημερινή μας αυτοψία και συγκρίνοντας τα εγκεκριμένα Πολεοδομικά σχέδια της υπ΄αριθμόν
-                    {permitNumber || "N/A"} οικοδομικής αδείας και "license_number_revision": αναθεώρησης αυτής,
+                    <span className="ml-[28px]">Σύμφωνα με την σημερινή μας αυτοψία και συγκρίνοντας τα εγκεκριμένα Πολεοδομικά σχέδια της υπ΄αριθμόν</span>
+                    {permitNumber || "N/A"} οικοδομικής αδείας και "{licenseNumberRevision || "N/A"}": αναθεώρησης αυτής,
                     διαπιστώθηκαν οι παρακάτω πολεοδομικές παραβάσεις που τακτοποιούνται με την παρούσα δήλωση :
                 </p>
-                <div className="mt-10">
+                <div className="mt-5">
                     {/* Step 1 — Show categories 1,2,4,5 */}
                     {violations.length > 0 && (() => {
                         let count = 1; // common counter for all Φ.Κ. numbers
@@ -149,7 +153,7 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                                             .filter((item) => item.category !== "3" && item.otherViolation === false)
                                             .map((item) => (
                                                 <p key={item.id || count} className="mt-2">
-                                                    Φ.Κ. #{count++}.{" "}
+                                                    <span className="ml-[28px]">Φ.Κ. #{count++}.{" "}</span>
                                                     <span>
                                                         {item?.violations?.map((v: string, i: number) => (
                                                             <span key={i}>
@@ -168,7 +172,7 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                                 {/* Step 2 — Category 3 (once) */}
                                 {category3 && (
                                     <p key="category3" className="mt-2">
-                                        Φ.Κ. #{count++}. Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96,
+                                        <span className="ml-[28px]">Φ.Κ. #{count++}.{" "}</span> Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96,
                                         του Ν.4495/17, Κατηγορία 3, Έτος κατασκευής: {category3.age || "N/A"}.{" "}
                                         <span>
                                             {category3?.violations?.map((v: string, i: number) => (
@@ -186,7 +190,7 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                                     const other = violations.find((item) => item.otherViolation);
                                     return (
                                         <p key="other" className="mt-2">
-                                            Φ.Κ. #{count++}. Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του Ν.4495/2017 –{" "}
+                                            <span className="ml-[28px]">Φ.Κ. #{count++}.{" "}</span> Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του Ν.4495/2017 –{" "}
                                             <span>
                                                 {other?.violations?.map((v: string, i: number) => (
                                                     <span key={i}>
@@ -206,20 +210,14 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
 
 
                     {/* Step 4 — Common ending text */}
-                    <div className="mt-4">
+                    <div className="my-2">
                         <p>
-                            Ο χρόνος κατασκευής των ανωτέρω αυθαίρετων κατασκευών τεκμηριώνεται από τα
+                            <span className="ml-[28px]">Ο χρόνος κατασκευής των ανωτέρω αυθαίρετων κατασκευών τεκμηριώνεται από τα </span>
                             προσκομισθέντα στοιχεία, τα οποία επιβεβαιώνουν ότι οι κατασκευές προϋπήρχαν της
                             28.07.2011.
-                        </p>
-                        <p className="mt-2">
                             Συγκεκριμένα, χρησιμοποιήθηκαν: Αεροφωτογραφίες έτους{" "}
-
-                            {/* {evidence?.aerial_year || "N/A"}, */}
                             στις οποίες διακρίνονται οι αυθαίρετες επεμβάσεις.
                             Υπεύθυνη Δήλωση Ιδιοκτήτη, στην οποία δηλώνεται ο χρόνος εκτέλεσης των εργασιών.
-                        </p>
-                        <p className="mt-2">
                             Με βάση τα ανωτέρω, τεκμαίρεται ότι οι κατασκευές υφίστανται πριν την κρίσιμη
                             ημερομηνία της 28/07/2011, και συνεπώς είναι επιλέξιμες για υπαγωγή στις διατάξεις
                             του Ν.4495/2017.
@@ -227,7 +225,7 @@ export default function S2D2({ allData, question, violations }: { allData: allDa
                     </div>
                 </div>
 
-                <QuestionAnswer question={question} />
+                <QuestionAnswer question={question} allData={allData} />
 
             </div>
             <div className="flex flex-col justify-center items-center">

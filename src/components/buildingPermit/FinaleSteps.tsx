@@ -78,6 +78,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     console.log(question, violations, "===========================>>")
 
     const allData = allTemplateData?.data || {};
+    console.log(stepByStepData, "======================aidata===============aidata")
     console.log(allData, "======================allData===============allData")
 
     // const store = makeStore();

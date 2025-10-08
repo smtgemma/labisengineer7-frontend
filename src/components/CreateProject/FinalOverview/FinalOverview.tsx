@@ -469,11 +469,23 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "55" && (
                   <F5D10 allData={allData} /> // 5
                 )}
-                {selected === "56" && (
+                {/* {selected === "56" && (
                   <F5D11 allData={allData} /> // 6
+                )} */}
+                {selected?.startsWith("template56_") && ownerIndex !== null && (
+                  <F5D11
+                    allData={allData}
+                    ownerIndex={ownerIndex}
+                  />
                 )}
-                {selected === "57" && (
+                {/* {selected === "57" && (
                   <F5D12 allData={allData} /> // 7
+                )} */}
+                {selected?.startsWith("template57_") && ownerIndex !== null && (
+                  <F6D8
+                    allData={allData}
+                    ownerIndex={ownerIndex}
+                  />
                 )}
                 {selected === "58" && (
                   <F5D13 allData={allData} /> // 8

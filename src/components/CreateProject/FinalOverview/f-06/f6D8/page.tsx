@@ -7,7 +7,7 @@ import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     firstName?: string;
@@ -41,6 +41,11 @@ interface allDataProps {
     serviceId: string;
     specialty: string;
     createdAt: string;
+    propertyPostalCode: string;
+    municipalityCommunity: string;
+    propertyPlace: string;
+    propertyNumber: string;
+    propertyAddress: string;
 }
 
 
@@ -49,12 +54,10 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = allData?.engineers || {};
-    const owner = allData?.owners?.[ownerIndex]
-    const { id, createdById, serviceId, horizontalPropertyName, ydom, projectDescription, specialty, createdAt } = allData || {};
+    const owner = allData?.owners?.[ownerIndex];
+    const { id, createdById, serviceId, horizontalPropertyName, ydom, projectDescription, specialty, createdAt, propertyPostalCode, municipalityCommunity, propertyPlace, propertyNumber, propertyAddress, } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
-    const { data: userData } = useGetMeQuery()
-    const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -246,12 +249,16 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                             <p className="mb-4">
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
-                            <p className="mb-4">
-                                ως κύριος/ιδιοκτήτης του ακινήτου {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού([{owner?.ownerAddress || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
-                            </p>
+                            <span className="mb-4">
+                                ως κύριος/ιδιοκτήτης του ακινήτου {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού{" "}
+                                <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                ΔΗΜΟΣ {municipalityCommunity || "N/A"}, ΤΚ {propertyPostalCode || "N/A"}{" "}</span>
+                                αναθέτω στον/στην Διπλωματούχο Μηχανικό
+                                ( {engineers[0]?.lastName || "N/A"}, {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
+                            </span>
 
                             <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
-                            <p className=" mb-6">{projectDescription || "N/A"}</p>
+                            <p className=" mb-6 font-bold">"{projectDescription || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
@@ -277,10 +284,6 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {/* signature  */}
-                        <div className="flex items-center justify-end p-4">
-                            <img src={signature} alt="" />
                         </div>
                         <div className="text-xs p-6">
                             <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
