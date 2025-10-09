@@ -12,12 +12,10 @@ import {
     useGetOwnerTemplateQuery,
 } from "@/redux/features/templates/allTemplateSlice";
 
+import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "sonner";
 import { FormDataOne, FormDataTwo } from "./template";
-import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
-import S4D1 from "@/components/CreateProject/FinalOverview/srv-4t/s4D1/page";
-import S4D2 from "@/components/CreateProject/FinalOverview/srv-4t/s4D2/page";
 
 export interface UserData {
     id: string;
@@ -67,8 +65,11 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
     const allTemplate = stepByStepData.selectTemplate;
     const projectCodeId = stepByStepData.projectIdCode;
     const id = stepByStepData?.projectIdCode;
-    const projectId = stepByStepData?.projectIdCode?.result.id;
+    const projectId = stepByStepData?.projectIdCode?.id;
     const userId = dataAllFIled?.createdById;
+    console.log(stepByStepData, "stepByStepDatastepByStepData")
+    console.log(projectId, "projectId")
+
 
     const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
@@ -92,7 +93,7 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
 
     const userData = useSelector((state: any) => state.user.userData);
 
-    console.log(userData, "projectCodeId:", projectCodeId?.result?.projectCode)
+    console.log(userData, "projectCodeId:", projectCodeId?.projectCode)
     //2. DOWNLOAD CSV FILE
     const downloadCSV = () => {
         const headers = ["First Name", "Surname", "Father Name", "VAT No"];
@@ -171,7 +172,7 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
 
 
     const projectAndUserHexCode =
-        userData?.hexToken + `-${projectCodeId?.result?.projectCode}`;
+        userData?.hexToken + `-${projectCodeId?.projectCode}`;
 
     const handleCopy = async () => {
         try {

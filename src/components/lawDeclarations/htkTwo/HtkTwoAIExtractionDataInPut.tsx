@@ -5,7 +5,7 @@ import {
     setAiExtreactAndInputData,
     setTheProjectCode
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { usePosAiAllDataForTwoToSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
+import { usePosAiAllDataForTwoToSaveMutation, usePostHtkOneMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import { RootState } from "@/redux/store";
 import { useEffect, useRef, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -46,9 +46,10 @@ import { FormValues } from "./types";
 const inputStyle =
     "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
 
-const HtkTwoAIExtractionDataInPut = ({ currentStep, nextStep }: {
+const HtkTwoAIExtractionDataInPut = ({ currentStep, nextStep, uploadedFiles }: {
     currentStep: number
-    nextStep: () => void
+    nextStep: () => void,
+    uploadedFiles: File[]
 }) => {
     const [collapse, setCollapse] = useState(0)
     const stepByStepData = useSelector((state: RootState) => state.aiData);
@@ -99,12 +100,13 @@ const HtkTwoAIExtractionDataInPut = ({ currentStep, nextStep }: {
     const descriptonAndYdom: any = stepByStepData?.description;
     const description = descriptonAndYdom?.description;
     const ydom = stepByStepData?.horizontal?.ydom;
+    // const ydom: string[] =
     //   descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
 
     // console.log("ydom:", ydom);
     console.log("allExtreactData?:", descriptonAndYdom);
 
-    const [postDataAll, { isLoading }] = usePosAiAllDataForTwoToSaveMutation();
+    const [postDataAll, { isLoading }] = usePostHtkOneMutation();
 
     const accessToken = tokenCatch();
 
@@ -127,22 +129,95 @@ const HtkTwoAIExtractionDataInPut = ({ currentStep, nextStep }: {
         console.log("sever send Data:", DataPost);
 
         const formData = new FormData();
-        filesData?.forEach((file: any) => {
+        uploadedFiles?.forEach((file: any) => {
             formData.append("files", file);
         });
         formData.append(
             "data",
             JSON.stringify({
                 serviceId: projectData?.id,
-                // createdById: user?.userId,
-                // subCategories: subCategoryData,
-                // descrptionTasks: descrptionTasks,
                 ydom: descriptonAndYdom?.ydom,
-                technicalDescription: allExtreactData?.technical_description,
-                technicalDescriptionTwo: allExtreactData?.technical_description_two,
-                ...data,
+                projectDescriptions: allExtreactData?.project_descriptions ?? "",
+                technicalDescription: allExtreactData?.technical_description ?? "",
+                technicalDescriptionTwo: allExtreactData?.technical_description_two ?? "",
+                technicalDescriptionThree: allExtreactData?.technical_description_three ?? "",
+                technicalDescriptionFour: allExtreactData?.technical_description_four ?? "",
+                technicalDescriptionFive: allExtreactData?.technical_description_five ?? "",
+                technicalDescriptionSix: allExtreactData?.technical_description_six ?? "",
+                technicalDescriptionSeven: allExtreactData?.technical_description_seven ?? "",
+                technicalDescriptionEight: allExtreactData?.technical_description_eight ?? "",
+                technicalDescriptionNine: allExtreactData?.technical_description_nine ?? "",
+
+                declarationOwnerFor44952017: allExtreactData?.declaration_owner_for_4495_2017 ?? "",
+                kaekProperty: allExtreactData?.kaek_property ?? "",
+                titleArea: allExtreactData?.title_area ?? "",
+                floorProperty: allExtreactData?.floor_property ?? "",
+                numberProperty: allExtreactData?.number_property ?? "",
+                propertyAddress: allExtreactData?.property_address ?? "",
+                propertyNumber: allExtreactData?.property_number ?? "",
+                propertyPlace: allExtreactData?.property_place ?? "",
+                municipalityCommunity: allExtreactData?.municipality_community ?? "",
+                propertyPostalCode: allExtreactData?.property_postal_code ?? "",
+                horizontalPropertyName: allExtreactData?.horizontal_property_name ?? "",
+                horizontalPropertyNameTwo: allExtreactData?.horizontal_property_name_two ?? "",
+                owners: allExtreactData?.owners ?? "",
+                plotArea: allExtreactData?.plot_area ?? "",
+                withinOutsideCityPlan: allExtreactData?.within_outside_city_plan ?? "",
+                permitNumber: allExtreactData?.permit_number ?? "",
+                issuingAuthority: allExtreactData?.issuing_authority ?? "",
+                legalizationStatementNumber: allExtreactData?.legalization_statement_number ?? "",
+                electronicCode: allExtreactData?.electronic_code ?? "",
+                engineerFullName: allExtreactData?.engineer_full_name ?? "",
+                teeRegistrationNumber: allExtreactData?.tee_registration_number ?? "",
+                specialty: allExtreactData?.specialty ?? "",
+                inclusionDateLegalization: allExtreactData?.inclusion_date_legalization ?? "",
+                ydomMunicipality: allExtreactData?.ydom_municipality ?? "",
+                ydomError: allExtreactData?.ydom_error ?? "",
+                processedDocuments: allExtreactData?.processed_documents ?? "",
+                processingStatus: allExtreactData?.processing_status ?? "",
+
+                percentageCoOwnershipParcel: allExtreactData?.percentage_co_ownership_parcel ?? "",
+                exclusiveUseProperty: allExtreactData?.exclusive_use_property ?? "",
+                miniDescriptionHorizontalProperty: allExtreactData?.mini_description_horizontal_property ?? "",
+                numberEstablishmentHorizontalOwnership: allExtreactData?.number_establishment_horizontal_ownership ?? "",
+                reviewsNumbersEstablishmentHorizontalOwnership: allExtreactData?.reviews_numbers_establishment_horizontal_ownership ?? "",
+                notaryReviewsEstablishmentHorizontalOwnership: allExtreactData?.notary_reviews_establishment_horizontal_ownership ?? "",
+                licenseNumberRevision: allExtreactData?.license_number_revision ?? "",
+                licenseNumberRevisionTwo: allExtreactData?.license_number_revision_two ?? "",
+                dateIssuanceBuildingPermit: allExtreactData?.date_issuance_building_permit ?? "",
+                detailsIssuingAuthority: allExtreactData?.details_issuing_authority ?? "",
+                dateIssueBuildingPermitRevision: allExtreactData?.date_issue_building_permit_revision ?? "",
+                dateIssueBuildingPermitRevisionTwo: allExtreactData?.date_issue_building_permit_revision_two ?? "",
+                projectTitleDescriptionLicense: allExtreactData?.project_title_description_license ?? "",
+                completionDeclaration3843Number: allExtreactData?.completion_declaration_3843_number ?? "",
+                descriptionValidations3843: allExtreactData?.description_validations_3843 ?? "",
+                issuingAuthority3843: allExtreactData?.issuing_authority_3843 ?? "",
+                dateIssueCompletionDeclaration3843: allExtreactData?.date_issue_completion_declaration_3843 ?? "",
+                tokenUsage: allExtreactData?.token_usage ?? "",
+
+                licenseNumberEemk: allExtreactData?.license_number_eemk ?? "",
+                dateOfIssuanceEemk: allExtreactData?.date_of_issuance_eemk ?? "",
+                issuingAuthorityEemk: allExtreactData?.issuing_authority_eemk ?? "",
+                projectTitleDescriptionEemk: allExtreactData?.project_title_description_eemk ?? "",
+                licenseNumberRevisionEemk: allExtreactData?.license_number_revision_eemk ?? "",
+                dateOfIssueBuildingPermitRevisionEemk: allExtreactData?.date_of_issue_building_permit_revision_eemk ?? "",
+                issuingAuthorityLossCertificate: allExtreactData?.issuing_authority_loss_certificate ?? "",
+                protocolNumberLossCertificate: allExtreactData?.protocol_number_loss_certificate ?? "",
+                protocolDateLossCertificate: allExtreactData?.protocol_date_loss_certificate ?? "",
+                peaIssueDate: allExtreactData?.pea_issue_date ?? "",
+                peaSecurityNumber: allExtreactData?.pea_security_number ?? "",
+                peaProtocolNumber: allExtreactData?.pea_protocol_number ?? "",
+                peaEstimatedAnnualPrimaryEnergyConsumptionKwhM2:
+                    allExtreactData?.pea_estimated_annual_primary_energy_consumption_kwh_m2 ?? "",
+                peaEstimatedAnnualCo2EmissionsKgM2: allExtreactData?.pea_estimated_annual_co2_emissions_kg_m2 ?? "",
+                declarationNumber1337: allExtreactData?.declaration_number_1337 ?? "",
+                dateOfSubmission1337: allExtreactData?.date_of_submission_1337 ?? "",
+                issuingAuthority1337: allExtreactData?.issuing_authority_1337 ?? "",
+                notaryEstablishmentHorizontalOwnership: allExtreactData?.notary_establishment_horizontal_ownership ?? "",
+                projectDescriptionHtkPlot: allExtreactData?.project_description_htk_plot ?? "",
             })
         );
+
 
         try {
             const res = await postDataAll({ formData, accessToken }).unwrap();

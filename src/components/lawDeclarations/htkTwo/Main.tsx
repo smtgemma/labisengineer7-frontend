@@ -4,11 +4,6 @@ import FileUpload from "@/components/CreateProject/FileUpload/FileUpload";
 import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import HtkOneAIExtractionDataInPut from "./HtkTwoAIExtractionDataInPut";
-import HtkOneAiExtraction from "./HtkTwoAiExtraction";
-import HtkOneOwnerSelectionFour from "./HtkTwoOwnerSelectionFour";
-import HtkOneTemplateSelectionComponents from "./HtkTwoTemplateSelectionComponents";
-import HtkOneFinalSteps from "./HtkTwoFinalSteps";
 import HtkTwoAiExtraction from "./HtkTwoAiExtraction";
 import HtkTwoAIExtractionDataInPut from "./HtkTwoAIExtractionDataInPut";
 import HtkTwoFinalSteps from "./HtkTwoFinalSteps";
@@ -99,7 +94,9 @@ const MainHtkTwo: React.FC = () => {
                 />;
             case 4:
                 //same
-                return <HtkTwoAIExtractionDataInPut currentStep={currentStep}
+                return <HtkTwoAIExtractionDataInPut
+                    uploadedFiles={uploadedFiles}
+                    currentStep={currentStep}
                     nextStep={nextStep}
                 />;
             case 5:
