@@ -390,15 +390,15 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
       )
     }
 
-    // this subcategory 10
+    // this subcategory 10 i have to fix this 7 and 8 number
     if (hasSubcategory10) {
-      // stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
-      //   baseTemplatesOwner1.push({
-      //     id: `template1_${index}`,
-      //     title: `YΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
-      //     price: 0.5,
-      //   });
-      // });
+      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+        baseTemplatesOwner1.push({
+          id: `template105_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          price: 0.5,
+        });
+      });
 
       baseTemplatesOwner1.push(
         {
@@ -413,9 +413,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         {
           id: "104", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
         },
-        {
-          id: "105", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        },
+        // {
+        //   id: "105", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
         {
           id: "106", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
         },

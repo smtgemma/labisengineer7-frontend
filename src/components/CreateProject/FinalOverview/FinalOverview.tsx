@@ -482,7 +482,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F5D12 allData={allData} /> // 7
                 )} */}
                 {selected?.startsWith("template57_") && ownerIndex !== null && (
-                  <F6D8
+                  <F5D12
                     allData={allData}
                     ownerIndex={ownerIndex}
                   />
@@ -557,24 +557,19 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F10D4 allData={allData} /> // 1
                 )}
                 {selected === "102" && (
-                  <F10D6 allData={allData} />
-                  // <F10D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
+                  <F10D6 allData={allData} /> // 2
                 )}
                 {selected === "103" && (
-                  <F10D7 allData={allData} setIsModalOpen={setIsModalOpen} />
-                  // <F10D6 allData={allData} /> // 3
+                  <F10D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 3
                 )}
                 {selected === "104" && (
-                  <F10D8 allData={allData} />
-                  // <F10D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
+                  <F10D8 allData={allData} /> // 4
                 )}
                 {selected === "105" && (
-                  <F10D10 allData={allData} />
-                  // <F10D8 allData={allData} /> // 5
+                  <F10D10 allData={allData} /> // 5
                 )}
                 {selected === "106" && (
-                  <F10D12 allData={allData} />
-                  // <F10D9 allData={allData} /> // 6
+                  <F10D12 allData={allData} /> // 6
                 )}
                 {selected === "107" && (
                   <F10D10 allData={allData} /> // 7
@@ -583,12 +578,10 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F10D11 allData={allData} /> // 8
                 )}
                 {selected === "109" && (
-                  <F10D14 allData={allData} />
-                  // <F10D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 9
+                  <F10D14 allData={allData} /> // 9
                 )}
                 {selected === "1010" && (
-                  <F10D15 allData={allData} />
-                  // <F10D13 allData={allData} /> // 10
+                  <F10D15 allData={allData} /> // 10
                 )}
               </div>
               {/* file 7  */}

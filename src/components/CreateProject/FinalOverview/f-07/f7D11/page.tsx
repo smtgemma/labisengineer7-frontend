@@ -41,7 +41,7 @@ export default function F7D11({ allData,
 }: F6D13Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owner = allData?.owners?.[0] || {}
+    const owner = allData?.owners || []
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
     const { id, createdById, serviceId, specialty } = allData || {}
@@ -54,6 +54,7 @@ export default function F7D11({ allData,
         createdAt,
         technicalDescription,
         technicalDescriptionTwo,
+        propertyPlace,
     } = allData || {};
 
 
@@ -116,19 +117,33 @@ export default function F7D11({ allData,
 
             {/* Project Information */}
             <div className="mb-8 space-y-4">
-                <div className="flex items-center justify-center gap-5">
-                    <span className=" text-sm">Έργο:</span>
-                    <h3 className=" text-sm text-center">{projectDescription}</h3>
+                <div className="flex items-start justify-between">
+                    <span className=" min-w-[80px] text-sm">Έργο:</span>
+                    <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
                 </div>
 
-                <div className="flex items-center justify-center gap-5">
+                <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyNumber || "N/A"}, {municipalityCommunity || "N/A"} {propertyPostalCode || "N/A"}). ( FOR BUILDING)</h3>
+                    <h3 className=" text-sm">
+                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                        ΤΚ {propertyPostalCode || "N/A"}
+                    </h3>
                 </div>
 
-                <div className="flex items-center justify-center text-sm gap-5">
-                    <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
+                <div className="flex">
+                    <span className="text-sm">Ιδιοκτήτης:</span>
+                    <div className="flex-1">
+                        <div className="flex items-center justify-center gap-2">
+                        {
+                            owner?.map((e: any, i: number) => (
+                                <h3 key={i} className="text-sm">
+                                    {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                                </h3>
+                            ))
+                        }
+                    </div>
+                    </div>
                 </div>
             </div>
             <div className="space-y-6 ml-10">

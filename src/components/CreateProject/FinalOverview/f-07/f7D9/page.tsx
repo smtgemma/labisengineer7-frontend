@@ -253,15 +253,16 @@ export default function F7D9({ allData }: { allData: allDataProps }) {
                             </p>
 
                             <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
-                            <p className=" mb-6">{projectDescription || "N/A"}</p>
+                            <p className=" mb-6 font-bold">"{projectDescription || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
                             <h3 className=" text-sm"> <span className="mr-1">επί της οδού</span>
-                                {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-                                ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-                                ΤΚ {propertyPostalCode || "N/A"}
+                                <span className="font-bold">
+                                    {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                    ΤΚ {propertyPostalCode || "N/A"}</span>
                             </h3>
                             <p>
                                 <span className="text-sm font-bold">δεν προβλέπεται η παραγωγή αποβλήτων τύπου ΑΕΚΚ</span> (Απόβλητα Εκσκαφών, Κατασκευών και Κατεδαφίσεων), καθώς οι προβλεπόμενες εργασίες δεν

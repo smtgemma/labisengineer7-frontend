@@ -25,13 +25,15 @@ interface allDataProps {
     serviceId: string;
     id: string;
     createdById: string;
+    municipalityCommunity: string;
+    propertyNumber: string;
 }
 function F7D10({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
     const { allDescriptionTasks } = allData || {}
-    const { propertyPlace, propertyAddress, propertyPostalCode, projectDescription, serviceId, id, createdById } = allData || {};
+    const { propertyPlace, propertyAddress, propertyPostalCode, propertyNumber, municipalityCommunity, projectDescription, serviceId, id, createdById } = allData || {};
 
     const {
         register,
@@ -92,9 +94,13 @@ function F7D10({ allData }: { allData: allDataProps }) {
 
                             {/* Address Row */}
                             <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
-                                <label className="col-span-2 ">Θέση:</label>
-                                <div className="col-span-10">
-                                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"}</h3>
+                                <label className="col-span-3 ">Θέση:</label>
+                                <div className="col-span-9">
+                                    <h3 className=" text-sm">
+                                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                        ΤΚ {propertyPostalCode || "N/A"}
+                                    </h3>
                                 </div>
                             </div>
 
@@ -103,8 +109,10 @@ function F7D10({ allData }: { allData: allDataProps }) {
                                 <p className="mt-6 mb-2">
                                     Εμείς οι κάτωθι υπογεγραμμένοι, συνιδιοκτήτες της πολυκατοικίας επί της οδού
                                 </p>
-                                <h3>
-                                    <span className="text-sm font-semibold">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING)</span>
+                                <h3 className=" text-sm font-bold">
+                                    {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                    ΤΚ {propertyPostalCode || "N/A"}
                                 </h3>
                                 <p>
                                     δηλώνουμε υπεύθυνα και ρητά συναινούμε στην εκτέλεση των παρακάτω εργασιών:</p>
