@@ -728,8 +728,14 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "82" && (
                   <F8D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 2
                 )}
-                {selected === "83" && (
+                {/* {selected === "83" && (
                   <F8D3 allData={allData} /> // 3
+                )} */}
+                {selected?.startsWith("template83_") && ownerIndex !== null && (
+                  <F8D3 
+                  allData={allData} 
+                  ownerIndex={ownerIndex}
+                  />
                 )}
                 {selected === "84" && (
                   <F8D4 allData={allData} /> // 4
