@@ -500,7 +500,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F5D16 allData={allData} /> // 11
                 )}
                 {selected === "512" && (
-                  <F5D17 allData={allData} /> // 12
+                  <F5D17 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
                 )}
               </div>
               {/* file 6======== */}
@@ -565,14 +565,20 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "104" && (
                   <F10D8 allData={allData} /> // 4
                 )}
-                {selected === "105" && (
+                {/* {selected === "105" && (
                   <F10D10 allData={allData} /> // 5
+                )} */}
+                {selected?.startsWith("template105_") && ownerIndex !== null && (
+                  <F10D10
+                    allData={allData}
+                    ownerIndex={ownerIndex}
+                  />
                 )}
                 {selected === "106" && (
                   <F10D12 allData={allData} /> // 6
                 )}
                 {selected === "107" && (
-                  <F10D10 allData={allData} /> // 7
+                  <F10D9 allData={allData} /> // 7
                 )}
                 {selected === "108" && (
                   <F10D11 allData={allData} /> // 8

@@ -47,7 +47,7 @@ type F6D5Props = {
 
 
 
-export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
+export default function F5D9({ allData, setIsModalOpen }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const owner = allData?.owners || []
     const engineers = allData?.engineers?.[0] || {}

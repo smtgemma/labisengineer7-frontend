@@ -41,6 +41,8 @@ interface allDataProps {
     createdById: string;
     serviceId: string;
     createdAt: string
+    municipalityCommunity: string
+    propertyNumber: string
 }
 
 
@@ -52,7 +54,7 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
-    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
+    const { propertyAddress, propertyPlace, propertyPostalCode, propertyNumber, municipalityCommunity, id, createdById, serviceId, createdAt } = allData || {};
 
 
     const [updateProject] = useUpdateProjectMutation()
@@ -193,7 +195,7 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                <div className=" p-2 border-r border-gray-400 font-bold">{engineer?.idCardNumber || "N/A"}</div>
+                                <div className="w-72 p-2 border-r border-gray-400 font-bold">{engineer?.idCardNumber || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
                                 <div className="flex-1 p-2 font-bold">{engineer?.phone || "N/A"}</div>
                             </div>
@@ -202,55 +204,65 @@ export default function F5D13({ allData }: { allData: allDataProps }) {
                         {/* Address row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                                <div className="w-20 p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
+                                <div className="w-35 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
+                                <div className="w-50 p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
-                                <div className="w-24 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress || "N/A"}</div>
+                                <div className="w-50 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
-                                <div className="w-20 p-2 border-r border-gray-400 font-bold ">{engineer?.streetNumber || "N/A"}</div>
+                                <div className="w-12 p-2 border-r border-gray-400 font-bold ">{engineer?.streetNumber || "N/A"}</div>
                                 <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-                                <div className="flex-1 p-2 font-bold">{engineer?.postalCode || "N/A"}</div>
+                                <div className="w-25 p-2 font-bold">{engineer?.postalCode || "N/A"}</div>
                             </div>
                         </div>
 
                         {/* Contact details row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Αρ. Τηλεομοιότυπου (Fax):</div>
-                                <div className="flex-1 p-2">
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm flex items-center">Αρ. Τηλεομοιότυπου (Fax):</div>
+                                <div className="w-50 p-2 border-r border-gray-400 text-sm flex items-center">-</div>
+                                <div className="w-52 p-2 border-r border-gray-400 text-sm flex items-center">
                                     <div className="text-sm">
-                                        <div>Δ/νση</div>
-                                        <div>Ηλεκτρ.</div>
+                                        <div>Δ/νση Ηλεκτρ.</div>
                                         <div>Ταχυδρομ</div>
                                         <div>ίου (Email):</div>
                                     </div>
                                 </div>
-                                <div className=" p-2 underline ">{engineer?.email || "N/A"}</div>
+                                <div className="p-2 underline flex items-center ">{engineer?.email || "N/A"}</div>
                             </div>
                         </div>
 
                         {/* VAT row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-                                <div className="flex-1 p-2 font-bold">{engineer?.engVatNumber || "N/A"}</div>
-                                <div className="w-32 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">
+                                    Α.Φ.Μ.:
+                                </div>
+                                <div className="w-54 p-2 font-bold">
+                                    {engineer?.engVatNumber || "N/A"}
+                                </div>
+                                <div className="w-32 p-2 border-l border-gray-400 text-sm">
+                                    Δ.Ο.Υ.:
+                                </div>
                             </div>
                         </div>
-
                         {/* Declaration text */}
                         <div className="p-4 text-sm">
                             <p className="mb-4">
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
 
-                            <p className=" font-bold">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις αναλαμβάνω για το έργο</p>
-                            <p className=" mb-6">{projectDescription || "N/A"}</p>
+                            <p className="">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις <span className="font-bold">αναλαμβάνω</span> για το έργο</p>
+                            <p className=" mb-6 font-bold mt-2">"{projectDescription || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
+                            <h3 className=" text-sm"> <span className="mr-1">επί της οδού</span>
+                                <span className="font-bold">
+                                    {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                    ΤΚ {propertyPostalCode || "N/A"}</span>
+                            </h3>
                             <p className="mb-4">
                                 την επίβλεψη των προβλεπόμενων εργασιών που πρόκειται να εκτελεστούν στο ανωτέρω ακίνητο, στο πλαίσιο της
                                 διαδικασίας έκδοσης Έγκρισης Εργασιών Μικρής Κλίμακας, σύμφωνα με τις ισχύουσες πολεοδομικές διατάξεις και ειδικότερα τις προβλέψεις του άρθρου 29 του Ν.4495/2017.

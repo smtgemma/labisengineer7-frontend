@@ -250,7 +250,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
                             <span className="mb-4">
-                                ως κύριος/ιδιοκτήτης του ακινήτου {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού{" "}
+                                ως κύριος/ιδιοκτήτης του ακινήτου <span className="font-bold">{horizontalPropertyName || "N/A"}</span> που βρίσκεται επί της οδού{" "}
                                 <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
                                 ΔΗΜΟΣ {municipalityCommunity || "N/A"}, ΤΚ {propertyPostalCode || "N/A"}{" "}</span>
                                 αναθέτω στον/στην Διπλωματούχο Μηχανικό

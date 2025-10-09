@@ -25,13 +25,15 @@ interface allDataProps {
     serviceId: string;
     id: string;
     createdById: string;
+    municipalityCommunity: string;
+    propertyNumber: string;
 }
 function F14D11({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
     const { allDescriptionTasks } = allData || {}
-    const { propertyPlace, propertyAddress, propertyPostalCode, projectDescription, serviceId, id, createdById } = allData || {};
+    const { propertyPlace, propertyAddress, propertyNumber, municipalityCommunity, propertyPostalCode, projectDescription, serviceId, id, createdById } = allData || {};
 
     const {
         register,
@@ -83,18 +85,20 @@ function F14D11({ allData }: { allData: allDataProps }) {
                             </h2>
 
                             {/* Project Row */}
-                            <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
-                                <label className="col-span-2">Έργο:</label>
-                                <div className="col-span-10 text-sm">
-                                    {projectDescription || "N/A"}
-                                </div>
+                            <div className="flex items-center gap-4">
+                                <span className="font-medium">Έργο:</span>
+                                <h3 className="flex-1 text-black text-sm text-center">{projectDescription || "N/A"}</h3>
                             </div>
 
                             {/* Address Row */}
-                            <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
-                                <label className="col-span-2 ">Θέση:</label>
-                                <div className="col-span-10">
-                                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING)</h3>
+                            <div className="flex mt-5">
+                                <span className="font-medium">Θέση:</span>
+                                <div className="flex-1">
+                                    <h3 className=" text-sm flex items-center justify-center">
+                                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                        ΤΚ {propertyPostalCode || "N/A"}
+                                    </h3>
                                 </div>
                             </div>
 
@@ -103,8 +107,10 @@ function F14D11({ allData }: { allData: allDataProps }) {
                                 <p className="mt-6 mb-2">
                                     Εμείς οι κάτωθι υπογεγραμμένοι, συνιδιοκτήτες της πολυκατοικίας επί της οδού
                                 </p>
-                                <h3>
-                                    <span className="text-sm font-semibold">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"} ( FOR BUILDING)</span>
+                                <h3 className=" text-sm font-bold">
+                                    {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                    ΤΚ {propertyPostalCode || "N/A"}
                                 </h3>
                                 <p>
                                     δηλώνουμε υπεύθυνα και ρητά συναινούμε στην εκτέλεση των παρακάτω εργασιών:</p>
