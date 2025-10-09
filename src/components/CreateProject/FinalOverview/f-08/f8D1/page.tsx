@@ -1,9 +1,10 @@
 "use client"
-import { useGetMeQuery } from "@/redux/features/templates/allTemplateSlice"
 import { useState } from "react"
+
 
 // for editing 
 import { useForm } from "react-hook-form"
+import { useGetMeQuery } from "@/redux/features/templates/allTemplateSlice"
 
 interface FormData {
   owner_name: string
@@ -16,10 +17,12 @@ interface FormData {
 
 interface allDataProps {
   owners: any[];
-  projectDescription: string;
-  propertyPostalCode: string;
-  propertyAddress: string;
-  propertyPlace: string;
+  projectDescription: string
+  propertyPlace: string
+  propertyAddress: string
+  propertyPostalCode: string
+  propertyNumber: string
+  municipalityCommunity: string
 }
 
 interface BudgetItem {
@@ -40,8 +43,8 @@ interface BudgetCategory {
 export default function F8D1({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const owner = allData?.owners?.[0] || {};
-  const { projectDescription, propertyPostalCode, propertyAddress, propertyPlace } = allData || {}
+  const owner = allData?.owners || [];
+  const { projectDescription, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber } = allData || {}
 
   const { data: userData } = useGetMeQuery()
   const signature = userData?.data?.signature
@@ -370,19 +373,19 @@ export default function F8D1({ allData }: { allData: allDataProps }) {
 
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white arial">
-      {/* <div className="text-right -mt-7">
-        <button
-          className="mt-1 px-4 py-1"
-          onClick={() => setIsEditModalOpen(true)}
-        >
-          <FaRegEdit className="text-black text-2xl cursor-pointer" />
-        </button>
-      </div> */}
       {/* Project Info */}
       <div className="mb-6 space-y-4">
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Εργοδότες *:</span>
-          <h3 className="flex-1 text-black text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
+          <div className="flex items-center justify-center gap-2">
+            {
+              owner?.map((e: any, i: number) => (
+                <h3 key={i} className="text-sm">
+                  {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                </h3>
+              ))
+            }
+          </div>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>
@@ -390,8 +393,10 @@ export default function F8D1({ allData }: { allData: allDataProps }) {
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className="flex-1 text-black text-sm">
-            {propertyAddress || "N/A"},  {propertyPlace || "N/A"},  {propertyPostalCode || "N/A"}
+          <h3 className=" text-sm">
+            {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+            ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+            ΤΚ {propertyPostalCode || "N/A"}
           </h3>
         </div>
       </div>
@@ -408,7 +413,7 @@ export default function F8D1({ allData }: { allData: allDataProps }) {
       {/* Budget Table */}
       <div className="border border-black">
         {/* Table Header */}
-        <div className="grid grid-cols-12 bg-white border-b border-black font-bold text-sm">
+        <div className="grid grid-cols-12 border-b border-black font-bold text-sm bg-[#F2F2F2]">
           <div className="col-span-1 py-2 border-r border-black text-xs px-1 flex flex-col justify-center items-center gap-2">
             <span>a/a</span>
             <span>(1)</span>
@@ -443,7 +448,7 @@ export default function F8D1({ allData }: { allData: allDataProps }) {
         {categories.map((category) => (
           <div key={category.id}>
             {/* Category Header */}
-            <div className="grid grid-cols-12 bg-white border-b border-black">
+            <div className="grid grid-cols-12 bg-[#F2F2F2] border-b border-black">
               <div className="col-span-1 p-2 border-r border-black font-bold text-center">{category.id}</div>
               <div className="col-span-9 p-2 font-bold">{category.title}</div>
             </div>
@@ -455,7 +460,7 @@ export default function F8D1({ allData }: { allData: allDataProps }) {
                 <div className="col-span-3 p-2 border-r border-black">{item.description}</div>
                 <div className="col-span-1 py-2 border-r border-black text-center">{item.unit}</div>
                 <div className="col-span-2 p-2 border-r border-black text-center">{item.unitPrice}</div>
-                <div className="col-span-1 p-2 border-r border-black text-center"></div>
+                <div className="col-span-1 p-2 border-r border-black text-center bg-[#ffffcc]"></div>
                 <div className="col-span-2 p-2 border-r border-black text-center"></div>
                 <div className="col-span-1 p-2 text-center font-medium">{item.last}</div>
               </div>
@@ -506,91 +511,11 @@ export default function F8D1({ allData }: { allData: allDataProps }) {
         </div>
       </div>
       <div className="flex flex-col items-end">
-        <img src={signature} alt="" />
+        <img src={signature} alt="" className="mb-4" />
         <div>
           <p className="text-center">Ο Συντάξας</p>
         </div>
       </div>
-
-      {/* EDIT MODAL */}
-      {isEditModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-          <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
-            {/* Close button */}
-            <button
-              className="absolute top-4 right-2 text-red-600 bg-gray-200 px-2 py-1 rounded-full hover:text-red-600 cursor-pointer"
-              onClick={() => setIsEditModalOpen(false)}
-            >
-              ✕
-            </button>
-
-            <h2 className="text-lg font-bold mb-4">✍️ Edit Data</h2>
-            <div>
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="space-y-4 p-4 border rounded-lg bg-white shadow-md"
-              >
-                {/* Employer */}
-                <div className="flex items-center gap-4">
-                  <label className="font-medium w-1/4">Εργοδότες *:</label>
-                  <input
-                    placeholder={owner?.firstName || "owner_name"}
-                    type="text"
-                    {...register("owner_name", { required: "This field is required" })}
-                    className="flex-1 border p-2 rounded text-sm"
-                  />
-                </div>
-
-                {/* Project */}
-                <div className="flex items-center gap-4">
-                  <label className="font-medium w-1/4">Έργο *:</label>
-                  <input
-                    // placeholder={project_description || "Project description"}
-                    type="text"
-                    {...register("project_description", { required: "This field is required" })}
-                    className="flex-1 border p-2 rounded text-sm"
-                  />
-                </div>
-
-                {/* Address */}
-                <div className="flex items-center gap-4">
-                  <label className="font-medium w-1/4">Διεύθυνση Έργου *:</label>
-                  <div className="flex-1 grid grid-cols-3 gap-2">
-                    <input
-                      type="text"
-                      placeholder={owner?.address || "Address"}
-                      {...register("owner_address", { required: "Address is required" })}
-                      className="border p-2 rounded text-sm"
-                    />
-                    <input
-                      type="text"
-                      placeholder={owner?.city || "City"}
-                      {...register("owner_city", { required: "City is required" })}
-                      className="border p-2 rounded text-sm"
-                    />
-                    <input
-                      type="text"
-                      placeholder={owner?.postalCode || "Postal Code"}
-                      {...register("owner_postal_code", { required: "Postal code is required" })}
-                      className="border p-2 rounded text-sm"
-                    />
-                  </div>
-                </div>
-
-                {/* Submit */}
-                <div className="flex justify-end">
-                  <button
-                    type="submit"
-                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm cursor-pointer"
-                  >
-                    Update
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

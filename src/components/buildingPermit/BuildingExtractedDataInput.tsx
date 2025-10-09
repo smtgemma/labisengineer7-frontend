@@ -123,7 +123,8 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
     const [collapse, setCollapse] = useState(0)
     const stepByStepData: any = useSelector((state: RootState) => state.aiData);
     // const user: any = useSelector((state: RootState) => state.user.userData);
-
+    console.log("stepByStepData", stepByStepData)
+    console.log("stepByStepData", stepByStepData.ownerBaseData)
     const { register, control, handleSubmit } = useForm<FormValues>({
         defaultValues: {
             owners: stepByStepData.ownerBaseData.map((owner: any) => ({
@@ -178,18 +179,77 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
 
     const accessToken = tokenCatch();
 
+
+
+    console.log("description", description[0]?.value, "...................................")
+
+
+
+
+
     const onSubmitAiDataSend = async (data: any) => {
         // Here you can send data to API
         console.log("Form Data:", data);
         const DataPost = {
             serviceId: projectData?.id,
-            // createdById: user?.userId,/
-            subCategories: subCategoryData,
-            descrptionTasks: descrptionTasks,
             ydom: ydom,
-            technicalDescription: allExtreactData?.technical_description,
-            technicalDescriptionTwo: allExtreactData?.technical_description_two,
-            ...data,
+
+            projectDescription: description[0]?.value ?? "",
+            technicalDescription: allExtreactData?.technical_description ?? "",
+            technicalDescriptionTwo: allExtreactData?.technical_description_two ?? "",
+            technicalDescriptionThree: allExtreactData?.technical_description_three ?? "",
+            technicalDescriptionFour: allExtreactData?.technical_description_four ?? "",
+            technicalDescriptionFive: allExtreactData?.technical_description_five ?? "",
+            technicalDescriptionSix: allExtreactData?.technical_description_six ?? "",
+            technicalDescriptionSeven: allExtreactData?.technical_description_seven ?? "",
+            technicalDescriptionEight: allExtreactData?.technical_description_eight ?? "",
+            technicalDescriptionNine: allExtreactData?.technical_description_nine ?? "",
+
+            kaekProperty: allExtreactData?.kaek_property ?? "",
+            titleArea: allExtreactData?.title_area ?? "",
+            floorProperty: allExtreactData?.floor_property ?? "",
+            propertyPlace: allExtreactData?.property_place ?? "",
+            numberProperty: allExtreactData?.number_property ?? "",
+            propertyAddress: allExtreactData?.property_address ?? "",
+            propertyNumber: allExtreactData?.property_number ?? "",
+            municipalityCommunity: allExtreactData?.municipality_community ?? "",
+            propertyPostalCode: allExtreactData?.property_postal_code ?? "",
+            horizontalPropertyName: allExtreactData?.horizontal_property_name ?? "",
+            horizontalPropertyNameTwo: allExtreactData?.horizontal_property_name_two ?? "",
+            owners: allExtreactData?.owners ?? "",
+            plotArea: allExtreactData?.plot_area ?? "",
+            withinOutsideCityPlan: allExtreactData?.within_outside_city_plan ?? "",
+            permitNumber: allExtreactData?.permit_number ?? "",
+            issuingAuthority: allExtreactData?.issuing_authority ?? "",
+            legalizationStatementNumber: allExtreactData?.legalization_statement_number ?? "",
+            engineerFullName: allExtreactData?.engineer_full_name ?? "",
+            electronicCode: allExtreactData?.electronic_code ?? "",
+            teeRegistrationNumber: allExtreactData?.tee_registration_number ?? "",
+            specialty: allExtreactData?.specialty ?? "",
+            inclusionDateLegalization: allExtreactData?.inclusion_date_legalization ?? "",
+            processedDocuments: allExtreactData?.processed_documents ?? "",
+            processingStatus: allExtreactData?.processing_status ?? "",
+
+            // ✅ Newly added fields in schema
+            percentageCoOwnershipParcel: allExtreactData?.percentage_co_ownership_parcel ?? "",
+            exclusiveUseProperty: allExtreactData?.exclusive_use_property ?? "",
+            miniDescriptionHorizontalProperty: allExtreactData?.mini_description_horizontal_property ?? "",
+            numberEstablishmentHorizontalOwnership: allExtreactData?.number_establishment_horizontal_ownership ?? "",
+            reviewsNumbersEstablishmentHorizontalOwnership: allExtreactData?.reviews_numbers_establishment_horizontal_ownership ?? "",
+            notaryEstablishmentHorizontalOwnership: allExtreactData?.notary_reviews_establishment_horizontal_ownership ?? "",
+            // establishmentHorizontalOwnership: allExtreactData?.establishment_horizontal_ownership ?? "",
+            licenseNumberRevision: allExtreactData?.license_number_revision ?? "",
+            dateIssuanceBuildingPermit: allExtreactData?.date_issuance_building_permit ?? "",
+            detailsIssuingAuthority: allExtreactData?.details_issuing_authority ?? "",
+            dateIssueBuildingPermitRevision: allExtreactData?.date_issue_building_permit_revision ?? "",
+            projectTitleDescriptionLicense: allExtreactData?.project_title_description_license ?? "",
+            completionDeclaration3843Number: allExtreactData?.completion_declaration_3843_number ?? "",
+            descriptionValidations3843: allExtreactData?.description_validations_3843 ?? "",
+            issuingAuthority3843: allExtreactData?.issuing_authority_3843 ?? "",
+            dateIssueCompletionDeclaration3843: allExtreactData?.date_issue_completion_declaration_3843 ?? "",
+            tokenUsage: allExtreactData?.token_usage ?? "",
+            declarationOwnerFor4495: allExtreactData?.declaration_owner_for_4495_2017 ?? "",
+
         };
 
         dispatch(setAiExtreactAndInputData(DataPost));
@@ -206,7 +266,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                 serviceId: projectData?.id,
                 ydom: ydom,
 
-                projectDescription: allExtreactData?.project_descriptions ?? "",
+                projectDescription: description[0]?.value ?? "",
                 technicalDescription: allExtreactData?.technical_description ?? "",
                 technicalDescriptionTwo: allExtreactData?.technical_description_two ?? "",
                 technicalDescriptionThree: allExtreactData?.technical_description_three ?? "",

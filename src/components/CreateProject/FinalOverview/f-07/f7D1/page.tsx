@@ -43,7 +43,7 @@ interface BudgetCategory {
   subtotal: number
 }
 
-export default function F6D1({ allData }: { allData: allDataProps }) {
+export default function F7D1({ allData }: { allData: allDataProps }) {
   const owner = allData?.owners || []
   const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, propertyNumber, municipalityCommunity } = allData || "";
   console.log(allData)
@@ -383,7 +383,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
     {
       id: 7,
       title: "ΣΤΡΩΣΕΙΣ ΔΑΠΕΔΩΝ",
-      subtotal: 968.0,
+      subtotal: 0,
       items: [
         { code: "7.01", description: "Με τσιμεντοκονία", unit: "τ.μ.", unitPrice: 8.8, quantity: 0, total: 0 },
         { code: "7.02", description: "Με τσιμεντόπλακες", unit: "τ.μ.", unitPrice: 11.74, quantity: 0, total: 0 },
@@ -394,7 +394,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
           unit: "τ.μ.",
           unitPrice: 17.6,
           quantity: 0,
-          total: 968.0,
+          total: 0,
         },
         {
           code: "7.05",
@@ -830,7 +830,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
     {
       id: 18,
       title: "ΔΙΑΦΟΡΕΣ ΟΙΚΟΔΟΜΙΚΕΣ ΕΡΓΑΣΙΕΣ",
-      subtotal: 484.0,
+      subtotal: 0,
       items: [
         {
           code: "18.01",
@@ -838,7 +838,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
           unit: "τ.μ.",
           unitPrice: 8.8,
           quantity: 0,
-          total: 484.0,
+          total: 0,
         },
         { code: "18.02", description: "Ικριώματα", unit: "τ.μ.", unitPrice: 2.06, quantity: 0, total: 0 },
         { code: "18.03", description: "Τζάκι με καπνοδόχο", unit: "αποκοπή", unitPrice: 880.42, quantity: 0, total: 0 },
@@ -846,7 +846,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
           code: "18.04",
           description: "Κλειδαριές και πόμολα",
           unit: "κάτοψης",
-          unitPrice: 0.88,
+          unitPrice: 0,
           quantity: 0,
           total: 0,
         },
@@ -863,7 +863,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
           code: "19.03",
           description: "Από ξυλεία προλουστραρισμένη",
           unit: "κ.μ.",
-          unitPrice: 900.0,
+          unitPrice: 0,
           quantity: 0,
           total: 0,
         },
@@ -871,7 +871,7 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
           code: "19.04",
           description: "Από ξυλεία (χωρίς λούστρο)",
           unit: "κ.μ.",
-          unitPrice: 550.0,
+          unitPrice: 0,
           quantity: 0,
           total: 0,
         },
@@ -880,9 +880,9 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
     {
       id: 20,
       title: "ΠΕΡΙΦΡΑΞΕΙΣ",
-      subtotal: 45.0,
+      subtotal: 0,
       items: [
-        { code: "20.01", description: "Πάσσαλοι σιδερένιοι", unit: "μ.", unitPrice: 1.5, quantity: 0, total: 45.0 },
+        { code: "20.01", description: "Πάσσαλοι σιδερένιοι", unit: "μ.", unitPrice: 1.5, quantity: 0, total: 0 },
         { code: "20.02", description: "Πάσσαλοι ξύλινοι", unit: "μ.", unitPrice: 2.2, quantity: 0, total: 0 },
         {
           code: "20.03",
@@ -1169,18 +1169,6 @@ export default function F6D1({ allData }: { allData: allDataProps }) {
               <img src={signature} alt="" />
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-3 mb-2">
-        <div className="col-span-1"></div>
-        <div className="col-span-2 flex justify-center gap-6">
-          <p className="w-1/2">
-            Here, the date the engineer starts the project should automatically appear.
-          </p>
-          <p className="w-1/2">
-            stamp and signature of an engineer, he should save it in his profile and display it there or if he doesn't want it for personal data reasons, we put a picture and he changes it
-          </p>
         </div>
       </div>
     </div >

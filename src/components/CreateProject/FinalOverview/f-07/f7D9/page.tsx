@@ -29,7 +29,6 @@ interface FormInputs {
 }
 // end editing 
 
-
 interface allDataProps {
     engineers: any[];
     projectDescription?: string;
@@ -41,8 +40,8 @@ interface allDataProps {
     createdById: string;
     serviceId: string;
     createdAt: string;
-    municipalityCommunity: string;
     propertyNumber: string;
+    municipalityCommunity: string;
 }
 
 
@@ -54,8 +53,7 @@ export default function F7D9({ allData }: { allData: allDataProps }) {
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
-    const { propertyAddress, municipalityCommunity, propertyNumber, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
-
+    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt, propertyNumber, municipalityCommunity } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
     const { data: userData } = useGetMeQuery()
@@ -109,7 +107,7 @@ export default function F7D9({ allData }: { allData: allDataProps }) {
     return (
         <div className="arial">
             {engineers.length > 0 ? (engineers?.map((engineer: any, index: number) => (
-                <div className="max-w-[796px] mx-auto bg-white">
+                <div key={index} className="max-w-[796px] mx-auto bg-white">
                     <div className="text-right -mt-3">
                         <button
                             className="px-4 py-1"
@@ -218,8 +216,8 @@ export default function F7D9({ allData }: { allData: allDataProps }) {
                         {/* Contact details row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-55 p-2 border-r border-gray-400 text-sm flex items-center">Αρ. Τηλεομοιότυπου (Fax):</div>
-                                <div className="w-31 p-2 border-r border-gray-400 text-sm flex items-center">-</div>
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm flex items-center">Αρ. Τηλεομοιότυπου (Fax):</div>
+                                <div className="w-50 p-2 border-r border-gray-400 text-sm flex items-center">-</div>
                                 <div className="w-52 p-2 border-r border-gray-400 text-sm flex items-center">
                                     <div className="text-sm">
                                         <div>Δ/νση Ηλεκτρ.</div>
@@ -252,7 +250,7 @@ export default function F7D9({ allData }: { allData: allDataProps }) {
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
 
-                            <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
+                            <p className="mb-2">για το οικοδομικό έργο με τίτλο :</p>
                             <p className=" mb-6 font-bold">"{projectDescription || "N/A"}"</p>
                         </div>
 
@@ -265,9 +263,8 @@ export default function F7D9({ allData }: { allData: allDataProps }) {
                                     ΤΚ {propertyPostalCode || "N/A"}</span>
                             </h3>
                             <p>
-                                <span className="text-sm font-bold">δεν προβλέπεται η παραγωγή αποβλήτων τύπου ΑΕΚΚ</span> (Απόβλητα Εκσκαφών, Κατασκευών και Κατεδαφίσεων), καθώς οι προβλεπόμενες εργασίες δεν
-                                περιλαμβάνουν καθαιρέσεις, εκσκαφές ή κατασκευαστικές επεμβάσεις που να παράγουν απόβλητα ΑΕΚΚ.
-                            </p>
+                                <span className="font-bold">δεν προβλέπεται η παραγωγή αποβλήτων τύπου ΑΕΚΚ, </span> καθώς κατ’ εφαρμογή της <span className="font-bold">ΚΥΑ 36259/1757/Ε103 (ΦΕΚ Β’ 1312/2010)</span> και του <span className="font-bold">Ν. 4819/2021</span> απόβλητα ΑΕΚΚ προκύπτουν αποκλειστικά από εργασίες εκσκαφής, κατασκευής ή κατεδάφισης.
+                                Εφόσον τέτοιες εργασίες δεν προβλέπονται στο παρόν έργο, δεν υφίσταται ροή ΑΕΚΚ.και κατά συνέπεια δεν ενεργοποιούνται υποχρεώσεις προς ΣΕΔ–ΑΕΚΚ ή τήρησης σχετικών παραστατικών·</p>
                         </div>
 
                         {/* Signature section */}
@@ -276,7 +273,7 @@ export default function F7D9({ allData }: { allData: allDataProps }) {
                                 <div className="text-right space-y-2">
                                     <div className="flex items-center gap-4">
                                         <span className="text-sm">Ημερομηνία :</span>
-                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</span>
+                                        <span className="text-sm font-medium">{createdAt ? format(new Date(createdAt), "dd/MM/yyyy") : "N/A"}</span>
                                     </div>
                                     <div className="text-sm mt-8 text-center">
                                         <div>( Υπογραφή )</div>
@@ -285,8 +282,8 @@ export default function F7D9({ allData }: { allData: allDataProps }) {
                                 </div>
                             </div>
                         </div>
-                        {/* common component  */}
-                        <div className="flex items-center justify-end mt-6 p-4">
+
+                        <div className="flex items-center justify-end p-4">
                             <img src={signature} alt="" />
                         </div>
                         <div className="text-xs p-6">
@@ -509,5 +506,6 @@ export default function F7D9({ allData }: { allData: allDataProps }) {
                 <h2 className="text-3xl font-bold p-10">Data not found</h2>
             )}
         </div>
+
     )
 }

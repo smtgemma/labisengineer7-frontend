@@ -5,7 +5,7 @@ import {
     setAiExtreactAndInputData,
     setTheProjectCode
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { usePosAiAllDataForTwoToSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
+import { usePosAiAllDataForTwoToSaveMutation, usePostHtkOneMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import { RootState } from "@/redux/store";
 import { useEffect, useRef, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -46,9 +46,10 @@ import { FormValues } from "./types";
 const inputStyle =
     "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
 
-const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
+const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep, uploadedFiles }: {
     currentStep: number
-    nextStep: () => void
+    nextStep: () => void,
+    uploadedFiles: File[]
 }) => {
     const [collapse, setCollapse] = useState(0)
     const stepByStepData = useSelector((state: RootState) => state.aiData);
@@ -105,7 +106,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
     // console.log("ydom:", ydom);
     console.log("allExtreactData?:", descriptonAndYdom);
 
-    const [postDataAll, { isLoading }] = usePosAiAllDataForTwoToSaveMutation();
+    const [postDataAll, { isLoading }] = usePostHtkOneMutation();
 
     const accessToken = tokenCatch();
 
@@ -128,22 +129,95 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
         console.log("sever send Data:", DataPost);
 
         const formData = new FormData();
-        filesData?.forEach((file: any) => {
+        uploadedFiles?.forEach((file: any) => {
             formData.append("files", file);
         });
         formData.append(
             "data",
             JSON.stringify({
                 serviceId: projectData?.id,
-                // createdById: user?.userId,
-                // subCategories: subCategoryData,
-                // descrptionTasks: descrptionTasks,
                 ydom: descriptonAndYdom?.ydom,
-                technicalDescription: allExtreactData?.technical_description,
-                technicalDescriptionTwo: allExtreactData?.technical_description_two,
-                ...data,
+                projectDescriptions: allExtreactData?.project_descriptions ?? "",
+                technicalDescription: allExtreactData?.technical_description ?? "",
+                technicalDescriptionTwo: allExtreactData?.technical_description_two ?? "",
+                technicalDescriptionThree: allExtreactData?.technical_description_three ?? "",
+                technicalDescriptionFour: allExtreactData?.technical_description_four ?? "",
+                technicalDescriptionFive: allExtreactData?.technical_description_five ?? "",
+                technicalDescriptionSix: allExtreactData?.technical_description_six ?? "",
+                technicalDescriptionSeven: allExtreactData?.technical_description_seven ?? "",
+                technicalDescriptionEight: allExtreactData?.technical_description_eight ?? "",
+                technicalDescriptionNine: allExtreactData?.technical_description_nine ?? "",
+
+                declarationOwnerFor44952017: allExtreactData?.declaration_owner_for_4495_2017 ?? "",
+                kaekProperty: allExtreactData?.kaek_property ?? "",
+                titleArea: allExtreactData?.title_area ?? "",
+                floorProperty: allExtreactData?.floor_property ?? "",
+                numberProperty: allExtreactData?.number_property ?? "",
+                propertyAddress: allExtreactData?.property_address ?? "",
+                propertyNumber: allExtreactData?.property_number ?? "",
+                propertyPlace: allExtreactData?.property_place ?? "",
+                municipalityCommunity: allExtreactData?.municipality_community ?? "",
+                propertyPostalCode: allExtreactData?.property_postal_code ?? "",
+                horizontalPropertyName: allExtreactData?.horizontal_property_name ?? "",
+                horizontalPropertyNameTwo: allExtreactData?.horizontal_property_name_two ?? "",
+                owners: allExtreactData?.owners ?? "",
+                plotArea: allExtreactData?.plot_area ?? "",
+                withinOutsideCityPlan: allExtreactData?.within_outside_city_plan ?? "",
+                permitNumber: allExtreactData?.permit_number ?? "",
+                issuingAuthority: allExtreactData?.issuing_authority ?? "",
+                legalizationStatementNumber: allExtreactData?.legalization_statement_number ?? "",
+                electronicCode: allExtreactData?.electronic_code ?? "",
+                engineerFullName: allExtreactData?.engineer_full_name ?? "",
+                teeRegistrationNumber: allExtreactData?.tee_registration_number ?? "",
+                specialty: allExtreactData?.specialty ?? "",
+                inclusionDateLegalization: allExtreactData?.inclusion_date_legalization ?? "",
+                ydomMunicipality: allExtreactData?.ydom_municipality ?? "",
+                ydomError: allExtreactData?.ydom_error ?? "",
+                processedDocuments: allExtreactData?.processed_documents ?? "",
+                processingStatus: allExtreactData?.processing_status ?? "",
+
+                percentageCoOwnershipParcel: allExtreactData?.percentage_co_ownership_parcel ?? "",
+                exclusiveUseProperty: allExtreactData?.exclusive_use_property ?? "",
+                miniDescriptionHorizontalProperty: allExtreactData?.mini_description_horizontal_property ?? "",
+                numberEstablishmentHorizontalOwnership: allExtreactData?.number_establishment_horizontal_ownership ?? "",
+                reviewsNumbersEstablishmentHorizontalOwnership: allExtreactData?.reviews_numbers_establishment_horizontal_ownership ?? "",
+                notaryReviewsEstablishmentHorizontalOwnership: allExtreactData?.notary_reviews_establishment_horizontal_ownership ?? "",
+                licenseNumberRevision: allExtreactData?.license_number_revision ?? "",
+                licenseNumberRevisionTwo: allExtreactData?.license_number_revision_two ?? "",
+                dateIssuanceBuildingPermit: allExtreactData?.date_issuance_building_permit ?? "",
+                detailsIssuingAuthority: allExtreactData?.details_issuing_authority ?? "",
+                dateIssueBuildingPermitRevision: allExtreactData?.date_issue_building_permit_revision ?? "",
+                dateIssueBuildingPermitRevisionTwo: allExtreactData?.date_issue_building_permit_revision_two ?? "",
+                projectTitleDescriptionLicense: allExtreactData?.project_title_description_license ?? "",
+                completionDeclaration3843Number: allExtreactData?.completion_declaration_3843_number ?? "",
+                descriptionValidations3843: allExtreactData?.description_validations_3843 ?? "",
+                issuingAuthority3843: allExtreactData?.issuing_authority_3843 ?? "",
+                dateIssueCompletionDeclaration3843: allExtreactData?.date_issue_completion_declaration_3843 ?? "",
+                tokenUsage: allExtreactData?.token_usage ?? "",
+
+                licenseNumberEemk: allExtreactData?.license_number_eemk ?? "",
+                dateOfIssuanceEemk: allExtreactData?.date_of_issuance_eemk ?? "",
+                issuingAuthorityEemk: allExtreactData?.issuing_authority_eemk ?? "",
+                projectTitleDescriptionEemk: allExtreactData?.project_title_description_eemk ?? "",
+                licenseNumberRevisionEemk: allExtreactData?.license_number_revision_eemk ?? "",
+                dateOfIssueBuildingPermitRevisionEemk: allExtreactData?.date_of_issue_building_permit_revision_eemk ?? "",
+                issuingAuthorityLossCertificate: allExtreactData?.issuing_authority_loss_certificate ?? "",
+                protocolNumberLossCertificate: allExtreactData?.protocol_number_loss_certificate ?? "",
+                protocolDateLossCertificate: allExtreactData?.protocol_date_loss_certificate ?? "",
+                peaIssueDate: allExtreactData?.pea_issue_date ?? "",
+                peaSecurityNumber: allExtreactData?.pea_security_number ?? "",
+                peaProtocolNumber: allExtreactData?.pea_protocol_number ?? "",
+                peaEstimatedAnnualPrimaryEnergyConsumptionKwhM2:
+                    allExtreactData?.pea_estimated_annual_primary_energy_consumption_kwh_m2 ?? "",
+                peaEstimatedAnnualCo2EmissionsKgM2: allExtreactData?.pea_estimated_annual_co2_emissions_kg_m2 ?? "",
+                declarationNumber1337: allExtreactData?.declaration_number_1337 ?? "",
+                dateOfSubmission1337: allExtreactData?.date_of_submission_1337 ?? "",
+                issuingAuthority1337: allExtreactData?.issuing_authority_1337 ?? "",
+                notaryEstablishmentHorizontalOwnership: allExtreactData?.notary_establishment_horizontal_ownership ?? "",
+                projectDescriptionHtkPlot: allExtreactData?.project_description_htk_plot ?? "",
             })
         );
+
 
         try {
             const res = await postDataAll({ formData, accessToken }).unwrap();
@@ -343,7 +417,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                         />
                                     </div>
 
-                                    <div>
+                                    <div className="hidden">
                                         <label className="block text-sm font-medium mb-1">
                                             Horizontal_property_name (Οριζόντια Ιδιοκτησία 1)
                                         </label>
@@ -355,7 +429,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                         />
                                     </div>
 
-                                    <div>
+                                    <div className="hidden">
                                         <label className="block text-sm font-medium mb-1">
                                             Horizontal_property_name_two (Οριζόντια Ιδιοκτησία 2)
                                         </label>
@@ -938,13 +1012,13 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium mb-1">
-                                                notary_establishment_horizontal_ownership (Εμβαδόν Οικοπέδου)
+                                                notary_reviews_establishment_horizontal_ownership (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
                                                 {...register("notaryEstablishmentHorizontalOwnership")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData?.notary_establishment_horizontal_ownership ?? ""}
+                                                defaultValue={allExtreactData?.notary_reviews_establishment_horizontal_ownership ?? ""}
                                             />
                                         </div>
 
@@ -981,15 +1055,30 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                     )}
                                 </button>
                             </div>
+
+                            {/* issuing_authority_loss_certificate */}
+                            {/* protocol_number_loss_certificate */}
+                            {/* protocol_date_loss_certificate */}
                             <div className={`${collapse === 4 ? "h-full" : "h-0"} transition-transform duration-300 `}>
                                 {collapse === 4 && (
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
                                         <div>
                                             <label className="block text-sm font-medium mb-1">
+                                                issuing_authority_loss_certificate (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("issuingAuthorityLossCertificate")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.issuing_authority_loss_certificate ?? ""}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
                                                 protocol_number_loss_certificate (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
-                                                {...register("numberEstablishmentHorizontalOwnership")}
+                                                {...register("protocolNumberLossCertificate")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData?.protocol_number_loss_certificate ?? ""}
@@ -1000,21 +1089,10 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 protocol_date_loss_certificate (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
-                                                {...register("numberEstablishmentHorizontalOwnership")}
+                                                {...register("protocolDateLossCertificate")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData?.protocol_date_loss_certificate ?? ""}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium mb-1">
-                                                issuing_authority_loss_certificate (Εμβαδόν Οικοπέδου)
-                                            </label>
-                                            <input
-                                                {...register("numberEstablishmentHorizontalOwnership")}
-                                                className={inputStyle}
-                                                readOnly
-                                                defaultValue={allExtreactData?.issuing_authority_loss_certificate ?? ""}
                                             />
                                         </div>
                                     </div>
@@ -1024,7 +1102,56 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                         </div>
                     </div>
 
+                    {/* new table  */}
+                    <div className="mt-10">
+                        <div className="bg-white p-6 rounded-xl w-full">
+                            <div className="flex justify-between items-center ">
+                                <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
+                                    Description Of Plot
+                                </h2>
+                                <button
+                                    type="button"
+                                    className=" hover:cursor-pointer z-50"
+                                    // NEED TO WORK HERE
+                                    // Tahsin
+                                    onClick={() => setCollapse(4)}
+                                >
+                                    {" "}
+                                    {collapse === 4 ? (
+                                        <>
+                                            <IoIosArrowUp className="text-2xl" />
 
+                                        </>
+                                    ) : (
+                                        <>
+                                            <IoIosArrowDown className="text-2xl" />
+
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+                            <div className={`${collapse === 4 ? "h-full" : "h-0"} transition-transform duration-300 `}>
+                                {collapse === 4 && (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
+                                                project_description_htk_plot (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("projectDescriptionHtkPlot")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.project_description_htk_plot ?? ""}
+                                            />
+                                        </div>
+                                        here will be lookup variable (ot and property number)
+
+                                    </div>
+                                )}
+                            </div>
+
+                        </div>
+                    </div>
                     <div className="mt-10">
                         <div className="bg-white p-6 rounded-xl w-full">
                             <div className="flex justify-between items-center ">
@@ -1057,6 +1184,17 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
                                         <div>
                                             <label className="block text-sm font-medium mb-1">
+                                                project_title_description_eemk (Εμβαδόν Οικοπέδου)
+                                            </label>
+                                            <input
+                                                {...register("projectTitleDescriptionEemk")}
+                                                className={inputStyle}
+                                                readOnly
+                                                defaultValue={allExtreactData?.project_title_description_eemk ?? ""}
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium mb-1">
                                                 date_of_issuance_eemk (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
@@ -1068,24 +1206,24 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium mb-1">
-                                                date_of_issue_building_permit_revision_eemk (Εμβαδόν Οικοπέδου)
+                                                issuing_authority_eemk (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
-                                                {...register("dateOfIssueBuildingPermitRevisioneemk")}
+                                                {...register("issuingAuthorityEemk")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData?.date_of_issue_building_permit_revision_eemk ?? ""}
+                                                defaultValue={allExtreactData?.issuing_authority_eemk ?? ""}
                                             />
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium mb-1">
-                                                Reviews Numbers of establishment of horizontal ownership (Εμβαδόν Οικοπέδου)
+                                                license_number_eemk (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
-                                                {...register("reviewsNumbersEstablishmentHorizontalOwnership")}
+                                                {...register("licenseNumberEemk")}
                                                 className={inputStyle}
                                                 readOnly
-                                                defaultValue={allExtreactData?.reviews_numbers_establishment_horizontal_ownership ?? ""}
+                                                defaultValue={allExtreactData?.license_number_eemk ?? ""}
                                             />
                                         </div>
 
@@ -1123,15 +1261,17 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                     )}
                                 </button>
                             </div>
+
+                            {/* if no data found dont show it  */}
                             <div className={`${collapse === 6 ? "h-full" : "h-0"} transition-transform duration-300 `}>
                                 {collapse === 6 && (
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
                                         <div>
                                             <label className="block text-sm font-medium mb-1">
-                                                date_of_issuance_eemk (Εμβαδόν Οικοπέδου)
+                                                date_of_submission_1337 (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
-                                                {...register("dateOfIssuanceEemk")}
+                                                {...register("dateOfSubmission1337")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData?.date_of_submission_1337 ?? ""}
@@ -1142,7 +1282,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 declaration_number_1337 (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
-                                                {...register("dateOfIssuanceEemk")}
+                                                {...register("declarationNumber1337")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData?.declaration_number_1337 ?? ""}
@@ -1153,7 +1293,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                                 issuing_authority_1337 (Εμβαδόν Οικοπέδου)
                                             </label>
                                             <input
-                                                {...register("dateOfIssuanceEemk")}
+                                                {...register("issuingAuthority1337")}
                                                 className={inputStyle}
                                                 readOnly
                                                 defaultValue={allExtreactData?.issuing_authority_1337 ?? ""}

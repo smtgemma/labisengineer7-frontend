@@ -11,6 +11,10 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { EditingOwnerType, Owner, OwnerFormInputs, SelectedProperty } from "./ownerTypes";
 
+
+
+// for servics 3 and 2 dont need ydom 
+
 const OwnerSelectionFour = ({ currentStep, nextStep }: {
     currentStep: number
     nextStep: () => void

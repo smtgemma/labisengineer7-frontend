@@ -684,7 +684,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F14D11 allData={allData} /> // 11
                 )}
                 {selected === "1412" && (
-                  <F14D12 allData={allData} /> // 12
+                  <F14D12 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
                 )}
               </div>
               {/* file 2  */}
@@ -717,7 +717,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F2D7 allData={allData} /> // 7
                 )}
                 {selected === "28" && (
-                  <F2D8 allData={allData} /> // 8
+                  <F2D8 allData={allData} setIsModalOpen={setIsModalOpen} /> // 8
                 )}
               </div>
               {/* file 8  */}

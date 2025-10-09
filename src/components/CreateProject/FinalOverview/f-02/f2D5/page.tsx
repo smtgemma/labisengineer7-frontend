@@ -43,9 +43,9 @@ type F6D5Props = {
 export default function F2D5({ allData, setIsModalOpen }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owner = allData?.owners?.[0] || {}
+    const owner = allData?.owners || []
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
+    const { id, createdById, serviceId, projectDescription, propertyNumber, municipalityCommunity, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
 
     const [updateProject] = useUpdateProjectMutation()
     const { data: userData } = useGetMeQuery()
@@ -111,29 +111,53 @@ export default function F2D5({ allData, setIsModalOpen }: F6D5Props) {
 
             {/* Project Information */}
             <div className="mb-8 space-y-4">
-                <div className="flex items-start gap-24">
+                <div className="flex items-start">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    <h3 className=" text-sm">{projectDescription || "N/A"}</h3>
+                    <div className="flex-1">
+                        <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
+                    </div>
                 </div>
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
                     <h3 className=" text-sm">
-                        {propertyAddress || "N/A"}, {propertyPlace || "N/A"},
-                        {propertyPostalCode || "N/A"} ( FOR BUILDING)
+                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                        ΤΚ {propertyPostalCode || "N/A"}
                     </h3>
                 </div>
 
-                <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
-                    <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
+                <div className="flex">
+                    <span className="text-sm">Ιδιοκτήτης:</span>
+                    <div className="flex-1">
+                        <div className="flex items-center justify-center gap-2">
+                            {
+                                owner?.map((e: any, i: number) => (
+                                    <h3 key={i} className="text-sm">
+                                        {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                                    </h3>
+                                ))
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">Description for building/ {horizontalPropertyName || "N/A"} </span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city} , {owner?.postal_code} ( FOR BUILDING),</span>
-                    πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
+                <div>
+                    <span className="font-semibold">
+
+                        <span className="mr-1">Στο ακίνητο {horizontalPropertyName || "N/A"} </span>
+                    </span>
+                    επί της οδού
+                    <span className="">
+                        <span className="ml-1">{propertyAddress || "N/A"} </span>{propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                        <span className="mr-1">ΤΚ {propertyPostalCode || "N/A"}</span>
+                    </span>
+                    πρόκειται να <br />εκτελεσθούν οι παρακάτω εργασίες :
+                </div>
             </div>
 
             <div className="space-y-6 ml-10">
