@@ -613,12 +613,13 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {/* {selected === "77" && (
                   <F7D7 allData={allData} /> // 7
                 )} */}
-                {selected?.startsWith("owner7_") && ownerIndex !== null && (
-                  <F7D7
-                    allData={allData}
-                    ownerIndex={ownerIndex}
-                  />
-                )}
+                {
+                  selected?.startsWith("owner7_") && ownerIndex !== null && (
+                    <F7D7
+                      allData={allData}
+                      ownerIndex={ownerIndex}
+                    />
+                  )}
                 {selected === "78" && (
                   <F7D8 allData={allData} /> // 8
                 )}
@@ -649,12 +650,24 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "144" && (
                   <F14D4 allData={allData} /> // 4
                 )}
-                {selected === "145" && (
+                {/* {selected === "145" && (
                   <F14D5 allData={allData} /> // 5
-                )}
-                {selected === "146" && (
+                )} */}
+                {selected?.startsWith("owner145_") && ownerIndex !== null && (
+                    <F14D5
+                      allData={allData}
+                      ownerIndex={ownerIndex}
+                    />
+                  )}
+                {/* {selected === "146" && (
                   <F14D6 allData={allData} /> // 6
-                )}
+                )} */}
+                {selected?.startsWith("owner146_") && ownerIndex !== null && (
+                    <F14D6
+                      allData={allData}
+                      ownerIndex={ownerIndex}
+                    />
+                  )}
                 {selected === "147" && (
                   <F14D7 allData={allData} /> // 7
                 )}

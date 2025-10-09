@@ -45,11 +45,11 @@ interface allDataProps {
 }
 
 
-export default function F14D6({ allData }: { allData: allDataProps }) {
+export default function F14D6({ allData, ownerIndex }: { allData: allDataProps, ownerIndex: number }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = allData?.engineers || {};
+    const owners = allData?.owners[ownerIndex] || [];
     const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, createdAt, specialty } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
@@ -64,14 +64,14 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
 
     // Submit handler
     const onSubmit = async (data: FormInputs) => {
-        if (selectedOwnerIndex === null) return;
+        if (ownerIndex === null) return;
 
         // old owner copy
         const updatedOwners = [...allData.owners];
 
         //    owner replace of old owner 
-        updatedOwners[selectedOwnerIndex] = {
-            ...updatedOwners[selectedOwnerIndex],
+        updatedOwners[ownerIndex] = {
+            ...updatedOwners[ownerIndex],
             ...data
         };
 
@@ -93,7 +93,6 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
 
             reset();
             setIsEditModalOpen(false)
-            setSelectedOwnerIndex(null)
 
         } catch (error) {
             console.error("Update failed", error)
@@ -103,14 +102,12 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
 
     return (
         <div className="arial">
-            {allData?.owners ? (allData?.owners?.map((owner: any, index: number) => (
-                <div key={index} className="max-w-[796px] mx-auto bg-white mb-16">
+                <div className="max-w-[796px] mx-auto bg-white mb-16">
                     <div className="max-w-[796px] mx-auto bg-white">
                         <div className="text-right -mt-3">
                             <button
                                 className="px-4 py-1"
                                 onClick={() => {
-                                    setSelectedOwnerIndex(index);
                                     setIsEditModalOpen(true);
                                 }}
                             >
@@ -149,9 +146,9 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-                                    <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.firstName || owner?.first_name || "N/A"}</div>
+                                    <div className="w-40 p-2 border-r border-gray-400  font-bold">{owners?.firstName || owners?.first_name || "N/A"}</div>
                                     <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-                                    <div className="flex-1 p-2  font-bold">{owner?.lastName || owner?.last_name || "N/A"}</div>
+                                    <div className="flex-1 p-2  font-bold">{owners?.lastName || owners?.last_name || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -159,7 +156,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.fatherFirstLastName || owner?.father_first_last_name || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owners?.fatherFirstLastName || owners?.father_first_last_name || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -167,7 +164,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.mothersFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owners?.mothersFirstLastName || owners?.mothers_first_last_name || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -175,7 +172,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.dateOfBirth || owner?.date_of_birth || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owners?.dateOfBirth || owners?.date_of_birth || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -183,7 +180,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.placeOfBirth || owner?.place_of_birth
+                                    <div className="flex-1 p-2 font-bold">{owners?.placeOfBirth || owners?.place_of_birth
                                     }</div>
                                 </div>
                             </div>
@@ -192,9 +189,9 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                    <div className=" p-2 border-r border-gray-400 font-bold">{owner?.idNumber || owner?.id_number || "N/A"}</div>
+                                    <div className=" p-2 border-r border-gray-400 font-bold">{owners?.idNumber || owners?.id_number || "N/A"}</div>
                                     <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.phone || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owners?.phone || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -202,13 +199,13 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                                    <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
+                                    <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owners?.city || "N/A"}</div>
                                     <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
-                                    <div className="w-24 p-2 border-r border-gray-400 font-bold ">{owner?.ownerAddress || owner?.owner_address || "N/A"}</div>
+                                    <div className="w-24 p-2 border-r border-gray-400 font-bold ">{owners?.ownerAddress || owners?.owner_address || "N/A"}</div>
                                     <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
-                                    <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owner?.addressNumber || owner?.address_number || "N/A"}</div>
+                                    <div className="w-20 p-2 border-r border-gray-400 font-bold ">{owners?.addressNumber || owners?.address_number || "N/A"}</div>
                                     <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owners?.postal_code || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -224,7 +221,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                             <div>ίου (Email):</div>
                                         </div>
                                     </div>
-                                    <div className="p-2 underline ">{owner?.email || "N/A"}</div>
+                                    <div className="p-2 underline ">{owners?.email || "N/A"}</div>
                                 </div>
                             </div>
 
@@ -232,7 +229,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                             <div className="border-b border-gray-400">
                                 <div className="flex">
                                     <div className="w-32 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-                                    <div className="flex-1 p-2 font-bold">{owner?.taxIdentificationNumber || owner?.tax_identification_number || "N/A"}</div>
+                                    <div className="flex-1 p-2 font-bold">{owners?.taxIdentificationNumber || owners?.tax_identification_number || "N/A"}</div>
                                     <div className="w-32 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
                                 </div>
                             </div>
@@ -243,7 +240,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                     Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                                 </p>
                                 <p className="mb-4">
-                                    ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού([{owner?.ownerAddress || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
+                                    ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού([{owners?.ownerAddress || "N/A"}, {owners?.phone || "N/A"}, {owners?.city || "N/A"}, {owners?.postal_code || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
                                 </p>
 
                                 <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
@@ -280,7 +277,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                             </div>
                         </div>
                         {/* EDIT MODAL */}
-                        {isEditModalOpen && selectedOwnerIndex !== null && (
+                        {isEditModalOpen && owners !== null && (
                             <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
                                 <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
                                     {/* Close button */}
@@ -314,7 +311,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("firstName", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.firstName || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.firstName || ""}
                                                 />
                                             </div>
 
@@ -325,7 +322,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("lastName", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.lastName || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.lastName || ""}
                                                 />
                                             </div>
 
@@ -336,7 +333,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("fatherFirstLastName", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.fatherFirstLastName || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.fatherFirstLastName || ""}
                                                 />
                                             </div>
 
@@ -347,7 +344,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("mothersFirstLastName", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.mothersFirstLastName || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.mothersFirstLastName || ""}
                                                 />
                                             </div>
 
@@ -358,7 +355,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="date"
                                                     {...register("dateOfBirth", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.dateOfBirth || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.dateOfBirth || ""}
                                                 />
                                             </div>
 
@@ -369,7 +366,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("placeOfBirth", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.placeOfBirth || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.placeOfBirth || ""}
                                                 />
                                             </div>
 
@@ -380,7 +377,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("idNumber", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.idNumber || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.idNumber || ""}
                                                 />
                                             </div>
 
@@ -391,7 +388,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("phone", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.phone || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.phone || ""}
                                                 />
                                             </div>
 
@@ -402,7 +399,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("city", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.city || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.city || ""}
                                                 />
                                             </div>
 
@@ -413,7 +410,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("ownerAddress", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.ownerAddress || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.ownerAddress || ""}
                                                 />
                                             </div>
 
@@ -424,7 +421,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("addressNumber", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.addressNumber || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.addressNumber || ""}
                                                 />
                                             </div>
 
@@ -435,7 +432,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("postalCode", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.postalCode || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.postalCode || ""}
                                                 />
                                             </div>
 
@@ -446,7 +443,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="email"
                                                     {...register("email", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.email || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.email || ""}
                                                 />
                                             </div>
 
@@ -457,7 +454,7 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                                                     type="text"
                                                     {...register("taxIdentificationNumber", { required: "This field is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
-                                                    defaultValue={allData.owners[selectedOwnerIndex]?.taxIdentificationNumber || ""}
+                                                    defaultValue={allData.owners[ownerIndex]?.taxIdentificationNumber || ""}
                                                 />
                                             </div>
 
@@ -488,9 +485,6 @@ export default function F14D6({ allData }: { allData: allDataProps }) {
                         )}
                     </div>
                 </div>
-            ))) : (
-                <h2 className="text-3xl font-bold p-10">Data not found</h2>
-            )}
         </div>
     )
 

@@ -30,7 +30,7 @@ interface allDataProps {
     municipalityCommunity: string
     propertyNumber: string
 }
-function F5D16({ allData }: { allData: allDataProps }) {
+function F10D14({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
@@ -241,4 +241,4 @@ function F5D16({ allData }: { allData: allDataProps }) {
     )
 }
 
-export default F5D16
+export default F10D14

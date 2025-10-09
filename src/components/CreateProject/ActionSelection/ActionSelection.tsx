@@ -492,6 +492,11 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
       stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
         baseTemplatesOwner1.push({
           id: `owner145_${index}`,
+          title: `ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          price: 0.5,
+        });
+        baseTemplatesOwner1.push({
+          id: `owner146_${index}`,
           title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
           price: 0.5,
         });
@@ -512,9 +517,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         // {
         //   id: "145", title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη", price: 0.5,
         // },
-        {
-          id: "146", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        },
+        // {
+        //   id: "146", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
         {
           id: "147", title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού", price: 0.5,
         },
