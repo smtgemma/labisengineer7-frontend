@@ -654,20 +654,20 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F14D5 allData={allData} /> // 5
                 )} */}
                 {selected?.startsWith("owner145_") && ownerIndex !== null && (
-                    <F14D5
-                      allData={allData}
-                      ownerIndex={ownerIndex}
-                    />
-                  )}
+                  <F14D5
+                    allData={allData}
+                    ownerIndex={ownerIndex}
+                  />
+                )}
                 {/* {selected === "146" && (
                   <F14D6 allData={allData} /> // 6
                 )} */}
                 {selected?.startsWith("owner146_") && ownerIndex !== null && (
-                    <F14D6
-                      allData={allData}
-                      ownerIndex={ownerIndex}
-                    />
-                  )}
+                  <F14D6
+                    allData={allData}
+                    ownerIndex={ownerIndex}
+                  />
+                )}
                 {selected === "147" && (
                   <F14D7 allData={allData} /> // 7
                 )}
@@ -704,8 +704,14 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "25" && (
                   <F2D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
                 )}
-                {selected === "26" && (
+                {/* {selected === "26" && (
                   <F2D6 allData={allData} /> // 6
+                )} */}
+                {selected?.startsWith("owner26_") && ownerIndex !== null && (
+                  <F2D6
+                    allData={allData}
+                    ownerIndex={ownerIndex}
+                  />
                 )}
                 {selected === "27" && (
                   <F2D7 allData={allData} /> // 7

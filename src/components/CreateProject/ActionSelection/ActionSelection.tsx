@@ -546,6 +546,13 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
     // this is subcategory 2
     if (hasSubcategory2) {
+       stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+        baseTemplatesOwner1.push({
+          id: `owner26_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          price: 0.5,
+        });
+      });
       baseTemplatesOwner1.push(
         {
           id: "21", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
@@ -562,9 +569,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         {
           id: "25", title: "Τεχνική Έκθεση_ Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020", price: 0.5,
         },
-        {
-          id: "26", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        },
+        // {
+        //   id: "26", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
         {
           id: "27", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
         },
