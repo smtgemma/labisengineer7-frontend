@@ -60,6 +60,16 @@ export interface LicenseLegalFormData {
     descriptionValidations3843: string;
     issuingAuthority3843: string;
     dateIssueCompletionDeclaration3843: string;
+    dateOfSubmission1337: string;
+    declarationNumber1337: string;
+    issuingAuthority1337: string;
+    licenseNumberEemk: string;
+    issuingAuthorityEemk: string;
+    projectTitleDescriptionEemk: string;
+    projectDescriptionHtkPlot: string;
+    issuingAuthorityLossCertificate: string;
+    protocolNumberLossCertificate: string;
+    protocolDateLossCertificate: string;
 }
 
 export interface EPCFormValues {

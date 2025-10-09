@@ -417,7 +417,7 @@ const HtkTwoAIExtractionDataInPut = ({ currentStep, nextStep, uploadedFiles }: {
                                         />
                                     </div>
 
-                                    <div>
+                                    <div className="hidden">
                                         <label className="block text-sm font-medium mb-1">
                                             Horizontal_property_name (Οριζόντια Ιδιοκτησία 1)
                                         </label>
@@ -429,7 +429,7 @@ const HtkTwoAIExtractionDataInPut = ({ currentStep, nextStep, uploadedFiles }: {
                                         />
                                     </div>
 
-                                    <div>
+                                    <div className="hidden">
                                         <label className="block text-sm font-medium mb-1">
                                             Horizontal_property_name_two (Οριζόντια Ιδιοκτησία 2)
                                         </label>
