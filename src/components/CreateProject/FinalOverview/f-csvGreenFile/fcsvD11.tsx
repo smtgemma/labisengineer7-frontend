@@ -1,22 +1,26 @@
 import React from 'react'
 
-function FcsvD2() {
+function FcsvD11() {
     return (
         <div>
             {/* first design  */}
             <div className='flex border text-sm'>
-                <p className='text-right bg-[#99CC00] border-r py-2 px-1 flex-1'>Επωνυμία Διαχειριστή:</p>
+                <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Επωνυμία Διαχειριστή:</p>
                 <p className='text-left flex-1 py-2 px-1'>SURNAME AND NAME ENGINEER</p>
             </div>
             <div className='flex border border-t-0 text-sm'>
-                <p className='text-right bg-[#99CC00] border-r py-2 px-1 flex-1'>Τίτλος Έργου:</p>
+                <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Τίτλος Έργου:</p>
                 <p className='text-left flex-1 py-2 px-1'>PROJECT DISCRIPSION</p>
             </div>
-            {/* header design  */}
-            <div className='text-center py-2 bg-[#99CC00] border border-b-0 text-sm font-semibold mt-8'>
-                <p>2. ΕΚΤΙΜΩΜΕΝΗ ΠΟΣΟΤΗΤΑ ΠΑΡΑΓΟΜΕΝΩΝ ΑΕΚΚ  </p>
+            <div className='flex border border-t-0 text-sm'>
+                <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Φάση Έργου: </p>
+                <p className='text-left flex-1 py-2 px-1'>9</p>
             </div>
-            <div className="grid grid-cols-12 border border-black font-bold text-[11px] bg-[#99CC00]">
+            {/* header design  */}
+            <div className='text-center py-2 bg-[#32CCCC] border border-b-0 text-sm font-semibold mt-8'>
+                <p>2. ΕΚΤΙΜΩΜΕΝΗ ΠΟΣΟΤΗΤΑ ΑΕΚΚ </p>
+            </div>
+            <div className="grid grid-cols-12 border border-black font-bold text-[11px] bg-[#33CCCC]">
                 <div className="col-span-1 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
                     (1) Κωδικός ΕΚΑ
                 </div>
@@ -27,13 +31,13 @@ function FcsvD2() {
                     (3) Εκτίμηση παραγόμενης ποσότητας (σε τόνους)
                 </div>
                 <div className="col-span-1 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
-                    (4) Επαναχρησιμοποιούμενης ποσότητας (σε τόνους)
+                    (4) Εκτίμηση Επαναχρησιμοποιούμενης ποσότητας (σε τόνους)
                 </div>
                 <div className="col-span-1 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
-                    (5) Ανακτώμενης Ποσότητας (σε τόνους)
+                    (5) Εκτίμηση Ανάκτώμενης Ποσότητας (σε τόνους)
                 </div>
                 <div className="col-span-2 p-2 flex items-center justify-center text-center break-words overflow-hidden">
-                    (6) Ποσότητας προς τελική Διάθεση (σε τόνους)
+                    (6) Εκτίμηση Ποσότητας προς Τελική Διάθεση (σε τόνους)
                 </div>
             </div>
             {/* center line 1 box  */}
@@ -55,13 +59,11 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        #VALLUE
+                        EE
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -77,13 +79,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -99,13 +98,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -118,7 +114,6 @@ function FcsvD2() {
                         μείγματα ή επιμέρους συστατικά από σκυρόδεμα, τούβλα, πλακάκια και κεραμικά που περιέχουν επικίνδυνες ουσίες
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -140,13 +135,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
@@ -160,7 +152,7 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        #VALLUE
+                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                         0,00
@@ -189,13 +181,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -211,13 +200,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -233,13 +219,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -252,16 +235,12 @@ function FcsvD2() {
                         μείγμα σκυροδέματος, τούβλων, πλακακίων και κεραμικών εκτός εκείνων που περιλαμβάνονται στο σημείο 17 01 06
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
@@ -301,7 +280,6 @@ function FcsvD2() {
                         μείγματα ορυκτής ασφάλτου που περιέχουν λιθανθρακόπισσα
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -320,16 +298,12 @@ function FcsvD2() {
                         μείγματα ορυκτής ασφάλτου εκτός εκείνων που περιλαμβάνονται στο σημείο 17 03 01
                     </div>
                     <div className="col-span-2 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -342,7 +316,6 @@ function FcsvD2() {
                         λιθανθρακόπισσα και προϊόντα πίσσας
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -391,13 +364,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -413,13 +383,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -435,13 +402,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -457,13 +421,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -479,13 +440,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -501,13 +459,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -523,13 +478,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -542,7 +494,6 @@ function FcsvD2() {
                         απόβλητα μετάλλων μολυσμένα από επικίνδυνες ουσίες
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -561,7 +512,6 @@ function FcsvD2() {
                         καλώδια που περιέχουν πετρέλαιο, λιθανθρακόπισσα και άλλες επικίνδυνες ουσίες
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -583,13 +533,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
@@ -629,7 +576,6 @@ function FcsvD2() {
                         χώματα και πέτρες που περιέχουν επικίνδυνες ουσίες
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -651,13 +597,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -670,7 +613,6 @@ function FcsvD2() {
                         μπάζα εκσκαφών που περιέχουν επικίνδυνες ουσίες
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -692,13 +634,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -711,7 +650,6 @@ function FcsvD2() {
                         έρμα σιδηροτροχιών που περιέχει επικίνδυνες ουσίες
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -733,13 +671,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
@@ -765,12 +700,40 @@ function FcsvD2() {
             </div>
             {/* second design  */}
             <div className='flex border text-sm mt-8'>
-                <p className='text-right bg-[#99CC00] border-r py-2 px-1 flex-1'>Επωνυμία Διαχειριστή:</p>
-                <p className='text-left flex-1 py-2 px-1'></p>
+                <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Επωνυμία Διαχειριστή:</p>
+                <p className='text-left flex-1 py-2 px-1'>SURNAME AND NAME ENGINEER</p>
+            </div>
+            <div className='flex border border-t-0 text-sm'>
+                <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Τίτλος Έργου:</p>
+                <p className='text-left flex-1 py-2 px-1'>PROJECT DISCRIPSION</p>
             </div>
             <div className='flex border border-t-0 text-sm mb-8'>
-                <p className='text-right bg-[#99CC00] border-r py-2 px-1 flex-1'>Τίτλος Έργου:</p>
-                <p className='text-left flex-1 py-2 px-1'></p>
+                <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Φάση Έργου: </p>
+                <p className='text-left flex-1 py-2 px-1'>1.</p>
+            </div>
+            {/* header design  */}
+            <div className='text-center py-2 bg-[#32CCCC] border border-b-0 text-sm font-semibold mt-8'>
+                <p>2. ΕΚΤΙΜΩΜΕΝΗ ΠΟΣΟΤΗΤΑ ΑΕΚΚ </p>
+            </div>
+            <div className="grid grid-cols-12 border border-b-0 border-black font-bold text-[11px] bg-[#33CCCC]">
+                <div className="col-span-1 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
+                    (1) Κωδικός ΕΚΑ
+                </div>
+                <div className="col-span-5 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
+                    (2) Περιγραφή Κωδικού ΕΚΑ
+                </div>
+                <div className="col-span-2 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
+                    (3) Εκτίμηση παραγόμενης ποσότητας (σε τόνους)
+                </div>
+                <div className="col-span-1 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
+                    (4) Εκτίμηση Επαναχρησιμοποιούμενης ποσότητας (σε τόνους)
+                </div>
+                <div className="col-span-1 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
+                    (5) Εκτίμηση Ανάκτώμενης Ποσότητας (σε τόνους)
+                </div>
+                <div className="col-span-2 p-2 flex items-center justify-center text-center break-words overflow-hidden">
+                    (6) Εκτίμηση Ποσότητας προς Τελική Διάθεση (σε τόνους)
+                </div>
             </div>
             {/* center line 2 box  */}
             <div className='bg-[#CCFFCC] border'>
@@ -788,7 +751,6 @@ function FcsvD2() {
                         μονωτικά υλικά που περιέχουν αμίαντο
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -807,7 +769,6 @@ function FcsvD2() {
                         άλλα μονωτικά υλικά που αποτελούνται από επικίνδυνες ουσίες ή τις περιέχουν
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -829,13 +790,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div
@@ -848,7 +806,6 @@ function FcsvD2() {
                         υλικά δομικών κατασκευών που περιέχουν αμίαντο
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -894,7 +851,6 @@ function FcsvD2() {
                         υλικά δομικών κατασκευών με βάση το γύψο μολυσμένα από επικίνδυνες ουσίες
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -916,13 +872,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
@@ -962,7 +915,6 @@ function FcsvD2() {
                         απόβλητα δομικών κατασκευών και κατεδαφίσεων που περιέχουν υδράργυρο
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -981,7 +933,6 @@ function FcsvD2() {
                         απόβλητα δομικών κατασκευών και κατεδαφίσεων που περιέχουν PCB (π.χ. στεγανωτικά υλικά που περιέχουν PCB, δάπεδα με βάση ρητίνες που περιέχουν PCB, μονάδες στεγανοποιημένης υαλόφραξης που περιέχουν PCB, πυκνωτές που περιέχουν PCB)
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1000,7 +951,6 @@ function FcsvD2() {
                         άλλα απόβλητα δομικών κατασεκυών και κατεδαφίσεων (περιλαμβανομένων μειγμάτων αποβλήτων) που περιέχουν επικίνδυνες ουσίες)
                     </div>
                     <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1022,13 +972,10 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
@@ -1065,7 +1012,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1081,7 +1028,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1097,7 +1044,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1113,7 +1060,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1129,7 +1076,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1145,7 +1092,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1161,7 +1108,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1177,7 +1124,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1193,7 +1140,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1209,7 +1156,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1225,7 +1172,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1241,7 +1188,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1257,7 +1204,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1273,7 +1220,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1289,7 +1236,7 @@ function FcsvD2() {
                     </div>
                     <div className="col-span-5 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
                     </div>
-                    <div className="col-span-2 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
                     <div className="col-span-1 border-r border-black py-3 p-2 flex items-center justify-end text-center break-words overflow-hidden">
                     </div>
@@ -1305,17 +1252,14 @@ function FcsvD2() {
                     <div className="col-span-5 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
                         ΥΠΟΣΥΝΟΛΟ
                     </div>
-                    <div className="col-span-2 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-2 border-r border-black bg-[#C0C0C0] p-2 flex items-center justify-end text-center break-words overflow-hidden">
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
                     </div>
                 </div>
                 <div className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
@@ -1329,9 +1273,9 @@ function FcsvD2() {
                         0,00
                     </div>
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        #VALLUE!
+                        0,00
                     </div>
-                    <div className="col-span-1 border-r border-black bg-[#99CCFF] p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                         0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
@@ -1339,70 +1283,8 @@ function FcsvD2() {
                     </div>
                 </div>
             </div>
-            {/* small table  */}
-            <div className='py-8 w-11/16 flex'>
-                <div className='bg-[#99CCFF] border-2 border-r-0 w-[20%] flex justify-center items-center text-sm font-semibold'><span>(7) ΑΝΑΚΤΗΣΗ</span> </div>
-                <div className='w-[80%]'>
-                    <div
-                        className="grid grid-cols-12 border border-t-2 border-black font-bold text-[11px] bg-white"
-                    >
-                        <div className="col-span-9 border-r border-black p-2 flex items-center justify-start text-center break-words overflow-hidden">
-                            ΑΕΚΚ που οδηγούνται προς…
-                        </div>
-                        <div className="col-span-3 border-r border-black p-2 flex items-center justify-start text-center break-words overflow-hidden">
-                            Ποσότητα (σε τόνους)
-                        </div>
-                    </div>
-                    <div
-                        className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
-                    >
-                        <div className="col-span-9 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
-                            ΣΣΕΔ ΑΕΚΚ
-                        </div>
-                        <div className="col-span-3 border-r border-black p-2 flex items-center justify-start text-center break-words overflow-hidden">
-                        </div>
-                    </div>
-                    <div
-                        className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
-                    >
-                        <div className="col-span-9 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
-                            Άλλα ΣΣΕΔ
-                        </div>
-                        <div className="col-span-3 border-r border-black p-2 flex items-center justify-start text-center break-words overflow-hidden">
-                        </div>
-                    </div>
-                    <div
-                        className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
-                    >
-                        <div className="col-span-9 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
-                            Αδειοδοτημένες Μονάδες Επεξεργασίας Στερεών Αποβλήτων
-                        </div>
-                        <div className="col-span-3 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
-                        </div>
-                    </div>
-                    <div
-                        className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
-                    >
-                        <div className="col-span-9 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
-                            Επιχώσεις και Αποκατάσταση λατομείων, μεταλλείων και λοιπών χώρων που χρήζουν αποκατάστασης
-                        </div>
-                        <div className="col-span-3 border-r border-black p-2 flex items-center justify-start text-center break-words overflow-hidden">
-                        </div>
-                    </div>
-                    <div
-                        className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
-                    >
-                        <div className="col-span-9 border-r border-b border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
-                            ΣΥΝΟΛΟ
-                        </div>
-                        <div className="col-span-3 border-r border-b border-black p-2 flex items-center justify-end text-center break-words overflow-hidden bg-[#99CCFF]">
-                            0,00
-                        </div>
-                    </div>
-                </div>
-            </div>
             {/* text table and also last table */}
-            <div className='pb-12'>
+            <div className='py-24'>
                 <h3 className='text-sm font-semibold'>ΕΠΕΞΗΓΗΣΕΙΣ</h3>
                 <div className="border-2 border-black w-full text-[12px]">
                     {/* first */}
@@ -1417,7 +1299,7 @@ function FcsvD2() {
                             <p>
                                 Στις στήλες (1) και (2) συμπληρώνονται συγκεντρωτικά οι κωδικοί ΕΚΑ και
                                 οι αντίστοιχες περιγραφές τους για τις <span className='font-bold'>"Λοιπές κατηγορίες παραγόμενων
-                                αποβλήτων"</span> που δεν ανήκουν στην κατηγορία 17 του ΕΚΑ, όπως αυτοί έχουν
+                                    αποβλήτων"</span> που δεν ανήκουν στην κατηγορία 17 του ΕΚΑ, όπως αυτοί έχουν
                                 συμπληρωθεί στα επιμέρους φύλλα που αφορούν τις φάσεις του έργου.
                                 Ενδεικτικά αναφέρονται:
                             </p>
@@ -1510,7 +1392,7 @@ function FcsvD2() {
                         {/* Right column */}
                         <div className="w-[85%] p-3 text-justify leading-relaxed">
                             <div>
-                                <p>Στην στήλη «<span className='font-bold'>Εκτίμηση της παραγόμενης ποσότητας</span>» προκύπτουν αυτόματα  οι συνολικές ποσότητες ΑΕΚΚ  ανά κωδικό ΕΚΑ που προβλέπεται να παραχθούν στο έργο, ως το άθροισμα των επιμέρους ποσοτήτων που παράγονται ανά φάση έργου.  </p>
+                                <p>Στην στήλη «<span className='font-bold'>Εκτίμηση της παραγόμενης ποσότητας</span>» καταγράφεται η ποσότητα ΑΕΚΚ σε τόνους που προβλέπεται να παραχθεί στη συγκεκριμένη φάση και αντιστοιχεί σε ένα κωδικό ΕΚΑ. Η ποσότητα αυτή προκύπτει αυτόματα ως το άθροισμα των στηλών (4), (5) και (6) με εξαίρεση τις γραμμές που αφορούν στα επικίνδυνα ΑΕΚΚ, όπου η συνολική ποσότητα και μόνο συμπληρώνεται από τον υπόχρεο.</p>
                             </div>
                         </div>
                     </div>
@@ -1524,7 +1406,7 @@ function FcsvD2() {
                         {/* Right column */}
                         <div className="w-[85%] p-3 text-justify leading-relaxed">
                             <div>
-                                <p>Στη στήλη «<span className='font-bold'>Εκτίμηση Επαναχρησιμοποιούμενης Ποσότητας</span>»  προκύπτουν αυτόματα  οι συνολικές ποσότητες ΑΕΚΚ  ανά κωδικό ΕΚΑ που προβλέπεται να επαναχρησιμοποιηθούν στο έργο, ως το άθροισμα των επιμέρους ποσοτήτων που επαναχρησιμοποιούνται ανά φάση έργου. </p>
+                                <p>Στη στήλη «<span className='font-bold'>Εκτίμηση Επαναχρησιμοποιούμενης Ποσότητας</span>» συμπληρώνεται η ποσότητα ΑΕΚΚ που αφορά σε υλικά που  επαναχρησιμοποιούνται για τους σκοπούς για τους οποίους σχεδιάστηκαν ή υπήρξαν (για το σκοπό που που επιτελούσαν) (βάση του ορισμού της ΚΥΑ 36259/2010)</p>
                             </div>
                         </div>
                     </div>
@@ -1538,12 +1420,12 @@ function FcsvD2() {
                         {/* Right column */}
                         <div className="w-[85%] p-3 text-justify leading-relaxed">
                             <div>
-                                <p>Στη στήλη «<span className='font-bold'>Εκτίμηση Ανακτώμενης Ποσότητας</span>» προκύπτουν αυτόματα  οι συνολικές ποσότητες ΑΕΚΚ  ανά κωδικό ΕΚΑ που προβλέπεται να ανακτηθούν στο έργο, ως το άθροισμα των επιμέρους ποσοτήτων που ανακτήθηκαν ανά φάση έργου, ήτοι οδηγήθηκαν: α) σε ΣΣΕΔ ΑΕΚΚ, β) σε άλλα ΣΣΕΔ , γ) σε αδειοδοτημένες μονάδες επεξεργασίας στερεών αποβλήτων παντός τύπου, δ) για επιχώσεις και αποκατάσταση μεταλλείων,  λατομείων και άλλων χώρων που χρήζουν αποκατάστασης π.χ. Χ.Υ.Τ.Α.</p>
+                                <p>Στη στήλη «<span className='font-bold'>Εκτίμηση Ανακτώμενης Ποσότητας</span>» συμπληρώνεται το άθροισμα των ποσοτήτων που  οδηγούνται: α) σε ΣΣΕΔ ΑΕΚΚ, β) σε άλλα ΣΣΕΔ , γ) σε αδειοδοτημένες μονάδες επεξεργασίας στερεών αποβλήτων παντός τύπου, δ) για επιχώσεις και αποκατάσταση ανενεργών μεταλλείων,  λατομείων και άλλων χώρων που χρήζουν αποκατάστασης π.χ. Χ.Υ.Τ.Α.</p>
                             </div>
                         </div>
                     </div>
                     {/* eighth */}
-                    <div className="flex w-full items-stretch border-b border-t">
+                    <div className="flex w-full items-stretch  border-t">
                         {/* Left column */}
                         <div className="w-[15%] border-r border-black flex justify-center items-center p-2 text-center font-semibold">
                             <p>Στήλη (6)</p>
@@ -1552,21 +1434,7 @@ function FcsvD2() {
                         {/* Right column */}
                         <div className="w-[85%] p-3 text-justify leading-relaxed">
                             <div>
-                                <p>Στη στήλη <span className='font-bold'>"Εκτίμηση Ποσότητας προς Τελική Διάθεση"</span> προκύπτουν αυτόματα  οι συνολικές ποσότητες ΑΕΚΚ  ανά κωδικό ΕΚΑ που προβλέπεται να οδηγηθούν σε Χ.Υ.Τ. Αδρανών, ως το άθροισμα των επιμέρους ποσοτήτων που διατέθηκαν ανά φάση έργου.</p>
-                            </div>
-                        </div>
-                    </div>
-                    {/* tenth */}
-                    <div className="flex w-full items-stretch border-t">
-                        {/* Left column */}
-                        <div className="w-[15%] border-r border-black flex justify-center items-center p-2 text-center font-semibold">
-                            <p>Πίνακας (7)</p>
-                        </div>
-
-                        {/* Right column */}
-                        <div className="w-[85%] p-3 text-justify leading-relaxed">
-                            <div>
-                                <p>Αναλύονται περαιτέρω οι προβλεπόμενοι τρόποι διαχείρισης των ανακτημένων ποσοτήτων στο σύνολό τους</p>
+                                <p>Στη στήλη "<span className='font-bold'>Εκτίμηση Ποσότητας προς Τελική Διάθεση</span>" συμπληρώνεται η ποσότητα των ΑΕΚΚ που οδηγούνται σε Χ.Υ.Τ. Αδρανών</p>
                             </div>
                         </div>
                     </div>
@@ -1577,4 +1445,4 @@ function FcsvD2() {
     )
 }
 
-export default FcsvD2
+export default FcsvD11

@@ -29,15 +29,15 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
     });
 
     const dispatch = useDispatch();
-    const ownerData = useSelector((state: any) => state.aiData.aiDataState);
-    const [isOwner, setIsOwner] = useState<Owner[]>(ownerData.owners || []);
-    const [ydom, setYdom] = useState<string>(ownerData?.ydom || "");
+    const aiData = useSelector((state: any) => state.aiData.aiDataState);
+    const [isOwner, setIsOwner] = useState<Owner[]>(aiData.owners || []);
+    const [ydom, setYdom] = useState<string>(aiData?.ydom || "");
     const [temp, setTemp] = useState<string>("");
 
     const [descriptionModal, setDescriptionModal] = useState<number | null>(null);
     const [horizontalDescription, setHorizontalDescription] = useState<{ id: number, description: string }[]>([])
-    const horizontal_property_name = ownerData?.horizontal_property_name || ""
-    const horizontal_property_name_two = ownerData?.horizontal_property_name_two || ""
+    const horizontal_property_name = aiData?.horizontal_property_name || ""
+    const horizontal_property_name_two = aiData?.horizontal_property_name_two || ""
 
     console.log("Horizontal", horizontal_property_name, horizontal_property_name_two)
     // Generate descriptions from project_descriptions
@@ -58,7 +58,7 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
                 description: description2,
             }]
         )
-    }, [ownerData])
+    }, [aiData])
 
 
 
@@ -74,8 +74,8 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
         const newOwner: Owner = {
             first_name: data.firstName || "",
             last_name: data.surname || "",
-            father_first_name: data.fatherName || "",
-            mothers_first_last_name: "",
+            father_first__last_name: data.fatherName || "",
+            mother_first__last_name: "",
             date_of_birth: "",
             place_of_birth: "",
             owner_address: "",
@@ -100,7 +100,7 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
                 ...editingOwner.owner,
                 first_name: data.firstName || "",
                 last_name: data.surname || "",
-                father_first_name: data.fatherName || "",
+                father_first__last_name: data.fatherName || "",
                 tax_identification_number: data.vatNo || "",
             };
 
@@ -171,7 +171,7 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
         reset({
             firstName: owner.first_name,
             surname: owner.last_name,
-            fatherName: owner.father_first_name,
+            fatherName: owner.father_first__last_name as string,
             vatNo: owner.tax_identification_number,
         });
         setIsEditModalOpen(true);
@@ -429,7 +429,7 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
                                     <div className="flex justify-between items-center">
                                         <label className="text-gray-700 font-medium">Father's Name:</label>
                                         <span className="text-gray-900 font-medium">
-                                            {owner.father_first_name || "Not set"}
+                                            {owner.father_first__last_name || "Not set"}
                                         </span>
                                     </div>
 

@@ -33,17 +33,17 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
     const [descriptionText, setDescriptionText] = useState("");
 
     const dispatch = useDispatch();
-    const ownerData = useSelector((state: any) => state.aiData?.aiDataState);
+    const aiData = useSelector((state: any) => state.aiData?.aiDataState);
 
-    const [isOwner, setIsOwner] = useState<Owner[]>(ownerData?.owners || []);
+    const [isOwner, setIsOwner] = useState<Owner[]>(aiData?.owners || []);
     const [descriptions, setDescriptions] = useState<string[]>([]);
 
     // Initialize descriptions from project_descriptions
     useEffect(() => {
-        const description1 = ownerData?.horizontal_property_name;
-        const description2 = ownerData?.horizontal_property_name_two;
+        const description1 = aiData?.horizontal_property_name;
+        const description2 = aiData?.horizontal_property_name_two;
         setDescriptions([description1, description2].filter(desc => desc));
-    }, [ownerData]);
+    }, [aiData]);
 
     const {
         register,
@@ -57,8 +57,8 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
         const newOwner: Owner = {
             first_name: data.firstName || "",
             last_name: data.surname || "",
-            father_first_name: data.fatherName || "",
-            mothers_first_last_name: "",
+            father_first__last_name: data.fatherName || "",
+            mother_first__last_name: "",
             date_of_birth: "",
             place_of_birth: "",
             owner_address: "",
@@ -83,7 +83,7 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
                 ...editingOwner.owner,
                 first_name: data.firstName || "",
                 last_name: data.surname || "",
-                father_first_name: data.fatherName || "",
+                father_first__last_name: data.fatherName || "",
                 tax_identification_number: data.vatNo || "",
             };
 
@@ -174,7 +174,7 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
         reset({
             firstName: owner.first_name,
             surname: owner.last_name,
-            fatherName: owner.father_first_name,
+            fatherName: owner.father_first__last_name as string,
             vatNo: owner.tax_identification_number,
         });
         setIsEditModalOpen(true);
@@ -338,7 +338,7 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
                                     <div className="flex justify-between items-center">
                                         <label className="text-gray-700 font-medium">Father's Name:</label>
                                         <span className="text-gray-900 font-medium">
-                                            {owner.father_first_name || "Not set"}
+                                            {owner.father_first__last_name || "Not set"}
                                         </span>
                                     </div>
 

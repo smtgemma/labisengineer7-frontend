@@ -1,9 +1,9 @@
+import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import {
   setAiExtractCatchWonerData,
-  setMultipleDescription,
-  setMultipleHorizontalDescription,
+  setMultipleHorizontalDescription
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { Edit, Edit3, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiEdit2 } from "react-icons/fi";
@@ -13,10 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   EditingOwnerType,
   Owner,
-  OwnerFormInputs,
-  SelectedProperty,
+  OwnerFormInputs
 } from "./types";
-import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 
 const OwnerSelection = ({
   currentStep,
@@ -44,18 +42,18 @@ const OwnerSelection = ({
   });
 
   const dispatch = useDispatch();
-  const ownerData = useSelector((state: any) => state.aiData.aiDataState);
-  const [isOwner, setIsOwner] = useState<Owner[]>(ownerData.owners || []);
-  const [ydom, setYdom] = useState<string>(ownerData?.ydom || "");
+  const aidata = useSelector((state: any) => state.aiData.aiDataState);
+  const [isOwner, setIsOwner] = useState<Owner[]>(aidata.owners || []);
+  const [ydom, setYdom] = useState<string>(aidata?.ydom || "");
   const [temp, setTemp] = useState<string>("");
 
   const [descriptionModal, setDescriptionModal] = useState<number | null>(null);
   const [horizontalDescription, setHorizontalDescription] = useState<
     { id: number; description: string }[]
   >([]);
-  const horizontal_property_name = ownerData?.horizontal_property_name || "";
+  const horizontal_property_name = aidata?.horizontal_property_name || "";
   const horizontal_property_name_two =
-    ownerData?.horizontal_property_name_two || "";
+    aidata?.horizontal_property_name_two || "";
 
   console.log(
     "Horizontal",
@@ -78,7 +76,7 @@ const OwnerSelection = ({
         description: description2,
       },
     ]);
-  }, [ownerData]);
+  }, [aidata]);
 
   const {
     register,
@@ -92,8 +90,8 @@ const OwnerSelection = ({
     const newOwner: Owner = {
       first_name: data.firstName || "",
       last_name: data.surname || "",
-      father_first_name: data.fatherName || "",
-      mothers_first_last_name: "",
+      father_first__last_name: data.fatherName || "",
+      mother_first__last_name: "",
       date_of_birth: "",
       place_of_birth: "",
       owner_address: "",
@@ -104,6 +102,7 @@ const OwnerSelection = ({
       tax_identification_number: data.vatNo || "",
       email: "",
       mobile: "",
+
     };
 
     setIsOwner((prev) => [...prev, newOwner]);
@@ -118,7 +117,7 @@ const OwnerSelection = ({
         ...editingOwner.owner,
         first_name: data.firstName || "",
         last_name: data.surname || "",
-        father_first_name: data.fatherName || "",
+        father_first__last_name: data.fatherName || "",
         tax_identification_number: data.vatNo || "",
       };
 
@@ -201,7 +200,7 @@ const OwnerSelection = ({
     reset({
       firstName: owner.first_name,
       surname: owner.last_name,
-      fatherName: owner.father_first_name,
+      fatherName: owner.father_first__last_name as string,
       vatNo: owner.tax_identification_number,
     });
     setIsEditModalOpen(true);
@@ -485,7 +484,7 @@ const OwnerSelection = ({
                       Father's Name:
                     </label>
                     <span className="text-gray-900 font-medium">
-                      {owner.father_first_name || "Not set"}
+                      {owner.father_first__last_name || "Not set"}
                     </span>
                   </div>
 
