@@ -139,19 +139,13 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     setIsCompleted(false);
     // timerControling();
 
-    const ktimatologio = uploadedFiles[0];
-    const contract = uploadedFiles[1];
-    const permit = uploadedFiles[2];
-    const Law = uploadedFiles[3];
     const technical_description = "Το ακίνητο βρίσκεται (Within_outside_city_plan), συνολικής επιφάνειας (Αrea Plot) τ.μ , είναι καταχωρημένο στο Εθνικό Κτηματολόγιο με ΚΑΕΚ Kaek_property στην οδό Property_address, Property_number στο Place_property στο Municipality_community με Τ.Κ. Property_postal_code .Πρόκειται για Horizontal_property_name (, επιφανείας Title_area ,το οποίο αποτελεί αυτοτελή οριζόντια ιδιοκτησία κατά τις διατάξεις του Ν.3741/1929 και του Ν.Δ. 1024/1971. Η πολυκατοικία ανεγέρθηκε βάσει της υπ’ αριθμ. Permit_number οικοδομικής άδειας, που εκδόθηκε από την Issuing_authority Η παραπάνω ιδιοκτησία έχει ενταχθεί στο ν.3843/2010 ή 4178/2013 ή 4495/2017 με Α/Α Δήλωσης  Legalization_statement_number ηλεκτρονικό κωδικό, Electronic_code και ημερομηνία υπαγωγής Inclusion_date_legalization από τον /την Engineer_full_name, (Specialty ) με αριθμό μητρώου ΤΕΕ (Tee_registration_number )"
     const technical_description_two = "Το ακίνητο βρίσκεται (Within_outside_city_plan), δεν εμπίπτει σε Ζώνες Απαγόρευσης (π.χ. Δασική, Αιγιαλός, Ζώνες προστασίας ΥΠΠΟ ή Natura), ούτε εντοπίζεται εντός χαρακτηρισμένων παραδοσιακών οικισμών ή διατηρητέων κελυφών. Δηλώνεται ότι δεν συντρέχουν οι απαγορευτικές περιπτώσεις του άρθρου 1 του Ν.4495/2017, ούτε απαιτείται έγκριση άλλων αρχών. Το κτίσμα είναι νομίμως υφιστάμενο κατά την έννοια του άρθρου 23 του Ν.4495/2017 και συνοδεύεται από τα απαραίτητα νομιμοποιητικά στοιχεία. Οι εργασίες πληρούν τις προϋποθέσεις του άρθρου 2 της ΥΑ ΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020, και ως εκ τούτου η άδεια Μικρής Κλίμακας μπορεί να εκδοθεί χωρίς περαιτέρω εγκρίσεις ή έλεγχο ΣΑ."
 
     const formData = new FormData();
-    if (ktimatologio) formData.append("file1", ktimatologio);
-    if (contract) formData.append("file2", contract);
-    if (permit) formData.append("file3", permit);
-    if (Law) formData.append("file4", Law);
-
+    uploadedFiles.map((file, index) => {
+      formData.append(`file${index + 1}`, file);
+    });
     formData.append("project_descriptions", JSON.stringify(description));
     formData.append("technical_description", JSON.stringify(technical_description));
     formData.append("technical_description_two", JSON.stringify(technical_description_two));
