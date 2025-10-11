@@ -27,14 +27,14 @@ const HtkTwoOwnerSelectionFour = ({ currentStep, nextStep }: {
     });
 
     const dispatch = useDispatch();
-    const ownerData = useSelector((state: any) => state.aiData?.aiDataState);
+    const aiData = useSelector((state: any) => state.aiData?.aiDataState);
 
-    const [isOwner, setIsOwner] = useState<Owner[]>(ownerData?.owners || []);
-    const [ydom, setYdom] = useState<string>(ownerData?.ydom || "");
+    const [isOwner, setIsOwner] = useState<Owner[]>(aiData?.owners || []);
+    const [ydom, setYdom] = useState<string>(aiData?.ydom || "");
 
     // Generate descriptions from project_descriptions
-    const description1 = ownerData?.horizontal_property_name;
-    const description2 = ownerData?.horizontal_property_name_two;
+    const description1 = aiData?.horizontal_property_name;
+    const description2 = aiData?.horizontal_property_name_two;
 
     const descriptionShow = [description1, description2].filter(desc => desc);
 
@@ -50,8 +50,8 @@ const HtkTwoOwnerSelectionFour = ({ currentStep, nextStep }: {
         const newOwner: Owner = {
             first_name: data.firstName || "",
             last_name: data.surname || "",
-            father_first_name: data.fatherName || "",
-            mothers_first_last_name: "",
+            father_first__last_name: data.fatherName || "",
+            mother_first__last_name: "",
             date_of_birth: "",
             place_of_birth: "",
             owner_address: "",
@@ -76,7 +76,7 @@ const HtkTwoOwnerSelectionFour = ({ currentStep, nextStep }: {
                 ...editingOwner.owner,
                 first_name: data.firstName || "",
                 last_name: data.surname || "",
-                father_first_name: data.fatherName || "",
+                father_first__last_name: data.fatherName || "",
                 tax_identification_number: data.vatNo || "",
             };
 
@@ -146,7 +146,7 @@ const HtkTwoOwnerSelectionFour = ({ currentStep, nextStep }: {
         reset({
             firstName: owner.first_name,
             surname: owner.last_name,
-            fatherName: owner.father_first_name,
+            fatherName: owner.father_first__last_name as string,
             vatNo: owner.tax_identification_number,
         });
         setIsEditModalOpen(true);
@@ -348,7 +348,7 @@ const HtkTwoOwnerSelectionFour = ({ currentStep, nextStep }: {
                                     <div className="flex justify-between items-center">
                                         <label className="text-gray-700 font-medium">Father's Name:</label>
                                         <span className="text-gray-900 font-medium">
-                                            {owner.father_first_name || "Not set"}
+                                            {owner.father_first__last_name || "Not set"}
                                         </span>
                                     </div>
 

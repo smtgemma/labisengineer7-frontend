@@ -1,8 +1,8 @@
 export type Owner = {
     first_name: string; // Όνομα
     last_name: string; // Επώνυμο
-    father_first_name: string; // Όνοματεπώνυμο Πατρός
-    mothers_first_last_name: string; // Όνοματεπώνυμο Μητρός
+    father_first__last_name: string | null;
+    mother_first__last_name: string | null;
     date_of_birth: string; // Ημερομηνία Γέννησης
     place_of_birth: string; // Τόπος Γέννησης
     owner_address: string; // Διεύθυνση Ιδιοκτήτη
@@ -14,6 +14,8 @@ export type Owner = {
     email: string; // Email
     mobile: string; // Τηλέφωνο
     selected?: boolean;
+    ownership_percentage_owner?: string;
+    owner_type_ownership?: string;
 };
 
 export interface AIDataState {
