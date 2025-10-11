@@ -1328,7 +1328,7 @@ function FcsvD2() {
                     <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
                         #VALLUE!
                     </div>
-                    <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div className="col-span-1 border-r border-black bg-[#99CCFF] p-2 flex items-center justify-end text-center break-words overflow-hidden">
                         0,00
                     </div>
                     <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
@@ -1337,42 +1337,238 @@ function FcsvD2() {
                 </div>
             </div>
             {/* small table  */}
-            <div className='py-8 w-11/16'>
-                <div>
-                    <div></div>
-                    <div>
-                        <div
-                    className="grid grid-cols-12 border border-black font-bold text-[11px] bg-white"
-                >
-                    <div className="col-span-2 border-r border-b-0 border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
+            <div className='py-8 w-11/16 flex'>
+                <div className='bg-[#99CCFF] border-2 border-r-0 w-[20%] flex justify-center items-center text-sm font-semibold'><span>(7) ΑΝΑΚΤΗΣΗ</span> </div>
+                <div className='w-[80%]'>
+                    <div
+                        className="grid grid-cols-12 border border-t-2 border-black font-bold text-[11px] bg-white"
+                    >
+                        <div className="col-span-9 border-r border-black p-2 flex items-center justify-start text-center break-words overflow-hidden">
+                            ΑΕΚΚ που οδηγούνται προς…
+                        </div>
+                        <div className="col-span-3 border-r border-black p-2 flex items-center justify-start text-center break-words overflow-hidden">
+                            Ποσότητα (σε τόνους)
+                        </div>
                     </div>
-                    <div className="col-span-8 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
+                    <div
+                        className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
+                    >
+                        <div className="col-span-9 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
+                            ΣΣΕΔ ΑΕΚΚ
+                        </div>
+                        <div className="col-span-3 border-r border-black p-2 flex items-center justify-start text-center break-words overflow-hidden">
+                        </div>
                     </div>
-                    <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
+                    <div
+                        className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
+                    >
+                        <div className="col-span-9 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
+                            Άλλα ΣΣΕΔ
+                        </div>
+                        <div className="col-span-3 border-r border-black p-2 flex items-center justify-start text-center break-words overflow-hidden">
+                        </div>
+                    </div>
+                    <div
+                        className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
+                    >
+                        <div className="col-span-9 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
+                            Αδειοδοτημένες Μονάδες Επεξεργασίας Στερεών Αποβλήτων
+                        </div>
+                        <div className="col-span-3 border-r border-black py-3 p-2 flex items-center justify-start text-center break-words overflow-hidden">
+                        </div>
+                    </div>
+                    <div
+                        className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
+                    >
+                        <div className="col-span-9 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
+                            Επιχώσεις και Αποκατάσταση λατομείων, μεταλλείων και λοιπών χώρων που χρήζουν αποκατάστασης
+                        </div>
+                        <div className="col-span-3 border-r border-black p-2 flex items-center justify-start text-center break-words overflow-hidden">
+                        </div>
+                    </div>
+                    <div
+                        className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
+                    >
+                        <div className="col-span-9 border-r border-b border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
+                            ΣΥΝΟΛΟ
+                        </div>
+                        <div className="col-span-3 border-r border-b border-black p-2 flex items-center justify-end text-center break-words overflow-hidden bg-[#99CCFF]">
+                            0,00
+                        </div>
                     </div>
                 </div>
-                <div className="grid grid-cols-12 border border-t-0 border-black font-bold text-[11px] bg-white"
-                >
-                    <div className="col-span-1 border-black p-2 flex items-center justify-start text-center break-words overflow-hidden">
+            </div>
+            {/* text table and also last table */}
+            <div className='pb-12'>
+                <h3 className='text-sm font-semibold'>ΕΠΕΞΗΓΗΣΕΙΣ</h3>
+                <div className="border-2 border-black w-full text-[12px]">
+                    {/* first */}
+                    <div className="flex w-full items-stretch border-b">
+                        {/* Left column */}
+                        <div className="w-[15%] border-r border-black flex items-center justify-center p-2 text-center font-semibold">
+                            <p>Στήλες (1)+(2)</p>
+                        </div>
+
+                        {/* Right column */}
+                        <div className="w-[85%] p-3 text-justify leading-relaxed">
+                            <p>
+                                Στις στήλες (1) και (2) συμπληρώνονται συγκεντρωτικά οι κωδικοί ΕΚΑ και
+                                οι αντίστοιχες περιγραφές τους για τις "Λοιπές κατηγορίες παραγόμενων
+                                αποβλήτων" που δεν ανήκουν στην κατηγορία 17 του ΕΚΑ, όπως αυτοί έχουν
+                                συμπληρωθεί στα επιμέρους φύλλα που αφορούν τις φάσεις του έργου.
+                                Ενδεικτικά αναφέρονται:
+                            </p>
+                        </div>
                     </div>
-                    <div className="col-span-5 border-r border-black p-2 flex items-center justify-center text-center break-words overflow-hidden">
-                        ΣΥΝΟΛΟ
+                    {/* second */}
+                    <div className="flex w-full items-stretch border-b">
+                        {/* Left column */}
+                        <div className="w-[15%] border-r border-black flex justify-center p-2 text-center font-semibold">
+                            <p>Συσκευασίες </p>
+                        </div>
+
+                        {/* Right column */}
+                        <div className="w-[85%] p-3 text-justify leading-relaxed">
+                            <div>
+                                <p>15 01 01 συσκευασία από χαρτί και χαρτόνι</p>
+                                <p>15 01 02 πλαστική συσκευασία</p>
+                                <p>15 01 03 ξύλινη συσκευασία</p>
+                                <p>15 01 04 μεταλλική συσκευασία</p>
+                                <p>15 01 05 συνθετική συσκευασία</p>
+                                <p>15 01 06 μεικτή συσκευασία</p>
+                                <p>15 01 09 συσκευασία από υφαντουργικές ύλες</p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-span-2 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
+                    {/* third */}
+                    <div className="flex w-full items-stretch border-b">
+                        {/* Left column */}
+                        <div className="w-[15%] border-r border-black flex justify-center p-2 text-center font-semibold">
+                            <p>Επικίνδυνα πλην της κατηγορίας 17 </p>
+                        </div>
+
+                        {/* Right column */}
+                        <div className="w-[85%] p-3 text-justify leading-relaxed">
+                            <div>
+                                <p>08 01 13* λάσπες από χρώματα ή βερνίκια που περιέχουν οργανικούς διαλύτες ή άλλες επικίνδυνες ουσίες</p>
+                                <p>13 01 12* άμεσα βιοαποικοδομήσιμα υδραυλικά έλαια </p>
+                                <p>13 01 13* άλλα υδραυλικά έλαια </p>
+                                <p>13 05 01* στερεά υλικά από θαλάμους υπολειμμάτων και στερεά υλικά διαχωριστή ελαίου/νερού </p>
+                                <p>13 05 03* λάσπες υποδοχέα </p>
+                                <p>13 05 06* έλαια από διαχωριστές ελαίου/νερού </p>
+                                <p>13 07 01* καύσιμο πετρέλαιο και πετρέλαιο ντίζελ</p>
+                                <p>14 06 01* χλωροφθοράνθρακες, HCFC, HFC </p>
+                                <p>14 06 02* άλλοι αλογονωμένοι διαλύτες και μείγματα διαλυτών </p>
+                                <p>14 06 03* άλλοι διαλύτες και μείγματα διαλυτών </p>
+                                <p>14 06 04* λάσπες ή στερεά απόβλητα που περιέχουν αλογονωμένους διαλύτες </p>
+                                <p>14 06 05* λάσπες ή στερεά απόβλητα που περιέχουν άλλους διαλύτες </p>
+                                <p>15 01 10* συσκευασίες που περιέχουν κατάλοιπα επικινδύνων ουσιών ή έχουν μολυνθεί από αυτές</p>
+                                <p>15 01 11* μεταλλική συσκευασία που περιέχει επικίνδυνη μήτρα στερεού πορώδους υλικού  (π.χ. αμιάντου), περιλαμβανομένων των κενών δοχείων υπό πίεση </p>
+                                <p>15 02 02* απορροφητικά υλικά, υλικά φίλτρων (περιλαμβανομένων των φίλτρων ελαίου που δεν  προδιαγράφονται άλλως), υφάσματα σκουπίσματος, προστατευτικός ρουχισμός που  έχουν μολυνθεί από επικίνδυνες ουσίες </p>
+                                <p>16 06 01* μπαταρίες μολύβδου </p>
+                                <p>16 06 02* μπαταρίες Νi-Cd </p>
+                                <p>16 06 03* μπαταρίες που περιέχουν υδράργυρο </p>
+                                <p>16 07 08* απόβλητα που περιέχουν πετρέλαιο</p>
+                                <p>16 10 01* υδαρή υγρά απόβλητα που περιέχουν επικίνδυνες ουσίες </p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        #VALLUE!
+                    {/* fourth */}
+                    <div className="flex w-full items-stretch border-b">
+                        {/* Left column */}
+                        <div className="w-[15%] border-r border-black flex justify-center p-2 text-center font-semibold">
+                            <p>Άλλα απόβλητα  </p>
+                        </div>
+
+                        {/* Right column */}
+                        <div className="w-[85%] p-3 text-justify leading-relaxed">
+                            <div>
+                                <p>08 01 12 απόβλητα από χρώματα και βερνίκια άλλα από τα αναφερόμενα στο σημείο 08 01 11 </p>
+                                <p>08 01 14 λάσπες από χρώματα ή βερνίκια άλλα από τα αναφερόμενα στο σημείο 08 01 13 </p>
+                                <p>08 01 17* απόβλητα από αφαίρεση χρωμάτων ή βερνικιών που περιέχουν οργανικούς διαλύτες  ή άλλες επικίνδυνες ουσίες </p>
+                                <p>15 02 03 απορροφητικά υλικά, υλικά φίλτρων, υφάσματα σκουπίσματος και προστατευτικός  ρουχισμός άλλα από τα αναφερόμενα στο σημείο 15 02 02 </p>
+                                <p>16 06 04 αλκαλικές μπαταρίες (εκτός από το σημείο 16 06 03) </p>
+                                <p>20 01 01 χαρτιά και χαρτόνια</p>
+                                <p>20 01 08 βιοαποικοδομήσιμα απόβλητα κουζίνας και χώρων ενδιαίτησης</p>
+                                <p>20 01 25 βρώσιμα έλαια και λίπη</p>
+                                <p>20 01 36 απορριπτόμενος ηλεκτρικός και ηλεκτρονικός εξοπλισμός άλλος από τον αναφερόμενο  στα σημεία 20 01 21 , 20 01 23 και 20 01 35 </p>
+                                <p>20 01 99 άλλα μέρη μη προδιαγραφόμενα άλλως</p>
+                                <p>20 02 01 βιοαποικοδομήσιμα απόβλητα</p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-span-1 border-r border-black p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
+                    {/* fifth */}
+                    <div className="flex w-full items-stretch border-b border-t">
+                        {/* Left column */}
+                        <div className="w-[15%] border-r border-black flex justify-center items-center p-2 text-center font-semibold">
+                            <p>Στήλη (3)  </p>
+                        </div>
+
+                        {/* Right column */}
+                        <div className="w-[85%] p-3 text-justify leading-relaxed">
+                            <div>
+                                <p>Στην στήλη «Εκτίμηση της παραγόμενης ποσότητας» προκύπτουν αυτόματα  οι συνολικές ποσότητες ΑΕΚΚ  ανά κωδικό ΕΚΑ που προβλέπεται να παραχθούν στο έργο, ως το άθροισμα των επιμέρους ποσοτήτων που παράγονται ανά φάση έργου.  </p>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-span-2 p-2 flex items-center justify-end text-center break-words overflow-hidden">
-                        0,00
+                    {/* sixth */}
+                    <div className="flex w-full items-stretch border-b border-t">
+                        {/* Left column */}
+                        <div className="w-[15%] border-r border-black flex justify-center items-center p-2 text-center font-semibold">
+                            <p>Στήλη (4)</p>
+                        </div>
+
+                        {/* Right column */}
+                        <div className="w-[85%] p-3 text-justify leading-relaxed">
+                            <div>
+                                <p>Στη στήλη «Εκτίμηση Επαναχρησιμοποιούμενης Ποσότητας»  προκύπτουν αυτόματα  οι συνολικές ποσότητες ΑΕΚΚ  ανά κωδικό ΕΚΑ που προβλέπεται να επαναχρησιμοποιηθούν στο έργο, ως το άθροισμα των επιμέρους ποσοτήτων που επαναχρησιμοποιούνται ανά φάση έργου. </p>
+                            </div>
+                        </div>
+                    </div>
+                    {/* seventh */}
+                    <div className="flex w-full items-stretch border-b border-t">
+                        {/* Left column */}
+                        <div className="w-[15%] border-r border-black flex justify-center items-center p-2 text-center font-semibold">
+                            <p>Στήλη (5)</p>
+                        </div>
+
+                        {/* Right column */}
+                        <div className="w-[85%] p-3 text-justify leading-relaxed">
+                            <div>
+                                <p>Στη στήλη «Εκτίμηση Ανακτώμενης Ποσότητας» προκύπτουν αυτόματα  οι συνολικές ποσότητες ΑΕΚΚ  ανά κωδικό ΕΚΑ που προβλέπεται να ανακτηθούν στο έργο, ως το άθροισμα των επιμέρους ποσοτήτων που ανακτήθηκαν ανά φάση έργου, ήτοι οδηγήθηκαν: α) σε ΣΣΕΔ ΑΕΚΚ, β) σε άλλα ΣΣΕΔ , γ) σε αδειοδοτημένες μονάδες επεξεργασίας στερεών αποβλήτων παντός τύπου, δ) για επιχώσεις και αποκατάσταση μεταλλείων,  λατομείων και άλλων χώρων που χρήζουν αποκατάστασης π.χ. Χ.Υ.Τ.Α.</p>
+                            </div>
+                        </div>
+                    </div>
+                    {/* eighth */}
+                    <div className="flex w-full items-stretch border-b border-t">
+                        {/* Left column */}
+                        <div className="w-[15%] border-r border-black flex justify-center items-center p-2 text-center font-semibold">
+                            <p>Στήλη (6)</p>
+                        </div>
+
+                        {/* Right column */}
+                        <div className="w-[85%] p-3 text-justify leading-relaxed">
+                            <div>
+                                <p>Στη στήλη "Εκτίμηση Ποσότητας προς Τελική Διάθεση" προκύπτουν αυτόματα  οι συνολικές ποσότητες ΑΕΚΚ  ανά κωδικό ΕΚΑ που προβλέπεται να οδηγηθούν σε Χ.Υ.Τ. Αδρανών, ως το άθροισμα των επιμέρους ποσοτήτων που διατέθηκαν ανά φάση έργου.</p>
+                            </div>
+                        </div>
+                    </div>
+                    {/* tenth */}
+                    <div className="flex w-full items-stretch border-t">
+                        {/* Left column */}
+                        <div className="w-[15%] border-r border-black flex justify-center items-center p-2 text-center font-semibold">
+                            <p>Πίνακας (7)</p>
+                        </div>
+
+                        {/* Right column */}
+                        <div className="w-[85%] p-3 text-justify leading-relaxed">
+                            <div>
+                                <p>Αναλύονται περαιτέρω οι προβλεπόμενοι τρόποι διαχείρισης των ανακτημένων ποσοτήτων στο σύνολό τους</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     )
