@@ -15,17 +15,17 @@ import React from 'react'
 function page() {
   return (
     <div>
-      {/* <FcsvD1/> */}
-      {/* <FcsvD2/> */}
-      {/* <FcsvD3/> */}
-      {/* <FcsvD4/> */}
-      {/* <FcsvD5/> */}
-      {/* <FcsvD6/> */}
-      {/* <FcsvD7/> */}
-      {/* <FcsvD8/> */}
-      {/* <FcsvD9/> */}
-      {/* <FcsvD10/> */}
-      {/* <FcsvD11/> */}
+      <FcsvD1/>
+      <FcsvD2/>
+      <FcsvD3/>
+      <FcsvD4/>
+      <FcsvD5/>
+      <FcsvD6/>
+      <FcsvD7/>
+      <FcsvD8/>
+      <FcsvD9/>
+      <FcsvD10/>
+      <FcsvD11/>
       <FcsvD12/>
     </div>
   )

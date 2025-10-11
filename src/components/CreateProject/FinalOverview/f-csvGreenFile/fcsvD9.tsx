@@ -14,7 +14,7 @@ function FcsvD9() {
             </div>
             <div className='flex border border-t-0 text-sm'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Φάση Έργου: </p>
-                <p className='text-left flex-1 py-2 px-1'>7</p>
+                <p className='text-left flex-1 py-2 px-1'>7.</p>
             </div>
             {/* header design  */}
             <div className='text-center py-2 bg-[#32CCCC] border border-b-0 text-sm font-semibold mt-8'>
@@ -709,7 +709,7 @@ function FcsvD9() {
             </div>
             <div className='flex border border-t-0 text-sm mb-8'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Φάση Έργου: </p>
-                <p className='text-left flex-1 py-2 px-1'>1.</p>
+                <p className='text-left flex-1 py-2 px-1'>7.</p>
             </div>
             {/* header design  */}
             <div className='text-center py-2 bg-[#32CCCC] border border-b-0 text-sm font-semibold mt-8'>
