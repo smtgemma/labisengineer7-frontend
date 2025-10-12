@@ -97,6 +97,7 @@ import F8D7 from "./f-08/f8D7/page";
 import F14D8 from "./f-14/f14D8/page";
 import F14D9 from "./f-14/f14D9/page";
 import F7D12 from "./f-07/f7D12/page";
+import FcsvMain from "./f-csvGreenFile/fcsvMain";
 
 export interface UserData {
   id: string;
@@ -526,8 +527,11 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 {selected === "66" && (
                   <F6D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 6
                 )}
-                {selected === "67" && (
+                {/* {selected === "67" && (
                   <F6D6 allData={allData} /> // 7
+                )} */}
+                {selected === "67" && (
+                  <FcsvMain allData={allData} /> // 7
                 )}
                 {selected === "68" && (
                   <F6D12 allData={allData} /> // 8

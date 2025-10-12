@@ -3,7 +3,7 @@ import React from 'react'
 function FcsvD1() {
   return (
     <div>
-      <div className='bg-[#99CC00] pb-3'>
+      <div className='bg-[#99CC00] p-3'>
         <h3 className='text-center mt-2 mb-5 text-sm font-bold'>1. ΒΑΣΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ</h3>
         {/* first design  */}
         <div className='flex items-center justify-between mr-6'>
@@ -201,30 +201,29 @@ function FcsvD1() {
         <div className='border'>
           {/* <!-- Row 1.1 --> */}
           <div className="flex w-full">
-            <div className="font-semibold border-r w-23">1.1</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-semibold border-r w-12">1.1</div>
+            <div className="text-sm text-center p-3 flex-1">
               Συμπληρώνεται ο τίτλος του έργου. Εφόσον πρόκειται για δημόσιο έργου, ο τίτλος του έργου είναι ταυτόσημος με αυτόν της προκήρυξης. Εφόσον πρόκειται για ιδιωτικό έργο, συμπληρώνεται ο πλέον δόκιμος και περιεκτικός τίτλος κατά την κρίση του συμπληρώνοντος τον Σ.Δ.Α.
             </div>
           </div>
-
           {/* <!-- Row 1.2 --> */}
           <div className="flex border-t w-full">
-            <div className="font-semibold border-r w-11">1.2</div>
-            <div className="text-sm text-center p-3">
-              Συμπληρώνεται η κατηγορία του έργου, π.χ. οικοδομικό, υδραυλικό, οδοποιίας, λιμενικό βιομηχανικό-ενεργειακό, κλπ
+            <div className="font-semibold border-r w-12">1.2</div>
+            <div className="text-sm text-center p-3 flex-1">
+               Συμπληρώνεται η κατηγορία του έργου, π.χ. οικοδομικό, υδραυλικό, οδοποιίας, λιμενικό βιομηχανικό-ενεργειακό, κλπ
             </div>
           </div>
           {/* <!-- Row 1.3 --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r  w-11">1.3</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-semibold border-r w-12">1.3</div>
+            <div className="text-sm text-center p-3 flex-1">
               Συμπληρώνεται ο τόπος υλοποίησης του έργου σε επίπεδο Νομού /-ών ή/και Δήμου.
             </div>
           </div>
           {/* <!-- Row 1.4 --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r pr-5">1.4</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r w-12">1.4</div>
+            <div className="text-sm text-center p-3 flex-1">
               Συμπληρώνονται επιγραμματικά οι φάσεις του έργου. Εφόσον πρόκειται για δημόσιο
               έργο, οι φάσεις του έργου είναι ταυτόσημες με τις φάσεις της προκήρυξης του
               έργου. Εφόσον πρόκειται για ιδιωτικό έργο, ο καθορισμός των φάσεων είναι πιο
@@ -237,29 +236,29 @@ function FcsvD1() {
           </div>
           {/* <!-- Row 1.5 --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r w-11">1.5</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r w-12">1.5</div>
+            <div className="text-sm text-center p-3 flex-1">
               Συμπληρώνεται η προβλεπόμενη ημερομηνία έναρξης του έργου: ηη/μμ/εε
             </div>
           </div>
           {/* <!-- Row 1.6 --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r  w-11">1.6</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r  w-12">1.6</div>
+            <div className="text-sm text-center p-3 flex-1">
               Συμπληρώνεται η προβλεπόμενη ημερομηνία λήξης του έργου: ηη/μμ/εε
             </div>
           </div>
           {/* <!-- Row 1.7 --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r w-11">1.7</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r w-12">1.7</div>
+            <div className="text-sm text-center p-3 flex-1">
               Συμπληρώνεται η επωνυμία του κύριου του έργου (π.χ. αναθέτουσα αρχή, ιδιώτης)
             </div>
           </div>
           {/* <!-- Row 1.8 --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r pr-5">1.8</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r w-12">1.8</div>
+            <div className="text-sm text-center p-3 flex-1">
               Συμπληρώνεται η επωνυμία του διαχειριστή. Διαχειριστής μπορεί να είναι ο ανάδοχος
               του έργου (κατασκευαστής, εργολήπτης τεχνικών και οικοδομικών έργων, φορέας εκμίσθωσης εξοπλισμού και παροχής υπηρεσιών προσωρινής αποθήκευσης, συλλογής και μεταφοράς των ΑΕΚΚ) ή ο κύριος του έργου,
               εφόσον δεν έχει αναθέσει το έργο σε ανάδοχο. (ΚΥΑ 36259/2010 άρθρο 3, παρ. 21)
@@ -267,54 +266,54 @@ function FcsvD1() {
           </div>
           {/* <!-- Row 1.9 --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r w-11">1.9</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r w-12">1.9</div>
+            <div className="text-sm text-center p-3 flex-1">
               Συμπληρώνεται η διεύθυνση της έδρας του διαχειριστή: οδός - αριθμός - πόλη - ταχυδρομικός κώδικας
             </div>
           </div>
           {/* <!-- Row 1.10a --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r w-11">1.10a</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r w-12">1.10a</div>
+            <div className="text-sm text-center p-3 flex-1">
               Επιλέγετε ΝΑΙ ή ΌΧΙ.
             </div>
           </div>
           {/* <!-- Row 1.10b --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r w-11">1.10B</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r w-12">1.10B</div>
+            <div className="text-sm text-center p-3 flex-1">
               Εφόσον η απάντηση στο 1.10β) είναι ΝΑΙ, πηγαίνετε κατευθείαν στο 1.10 γ).
               Εφόσον η απάντηση στο 1.10α) είναι ΌΧΙ, επιλέγετε ΝΑΙ ή ΌΧΙ και αφήνετε τα 1.10γ) και 1.10δ) κενά.
             </div>
           </div>
           {/* <!-- Row 1.10y --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r w-11">1.10y</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r w-12">1.10y</div>
+            <div className="text-sm text-center p-3 flex-1">
               Εφόσον η απάντηση στο 1.10α) είναι ΝΑΙ συμπληρώνεται η επωνυμία του
               συνεργαζόμενου ΣΣΕΔ ΑΕΚΚ
             </div>
           </div>
           {/* <!-- Row 1.10δ --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r w-11">1.10δ</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r w-12">1.10δ</div>
+            <div className="text-sm text-center p-3 flex-1">
               Εφόσον η απάντηση στο 1.10α) είναι ΝΑΙ συμπληρώνεται η
               γεωγραφική εμβέλεια του συνεργαζόμενου ΣΣΕΔ ΑΕΚΚ
             </div>
           </div>
           {/* <!-- Row 1.11 --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r w-11.5">1.11</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r w-12">1.11</div>
+            <div className="text-sm text-center p-3 flex-1">
               Συμπληρώνεται το ονοματεπώνυμο και η θέση
               του νόμιμου εκπροσώπου του Διαχειριστή του έργου, που έχει την ευθύνη σύνταξης του ΣΔΑ.
             </div>
           </div>
           {/* <!-- Row 1.12 --> */}
           <div className="flex border-t w-full">
-            <div className="font-bold border-r w-11">1.12</div>
-            <div className="text-sm text-center p-3">
+            <div className="font-bold border-r w-12">1.12</div>
+            <div className="text-sm text-center p-3 flex-1">
               Συμπληρώνεται η ημερομηνία σύνταξης του ΣΔΑ: ηη/μμ/εε
             </div>
           </div>

@@ -37,7 +37,7 @@ function FcsvD2() {
                 </div>
             </div>
             {/* center line 1 box  */}
-            <div className='bg-[#CCFFCC] border-b'>
+            <div className='bg-[#CCFFCC] border border-t-0'>
                 <h3 className='py-2 text-center text-sm font-semibold'>17 01 ΣΚΥΡΟΔΕΜΑ, ΤΟΥΒΛΑ, ΠΛΑΚΑΚΙΑ ΚΑΙ ΚΕΡΑΜΙΚΑ</h3>
             </div>
             {/* fist table design  */}
@@ -171,7 +171,7 @@ function FcsvD2() {
                 </div>
             </div>
             {/* center line 2 box  */}
-            <div className='bg-[#CCFFCC] border-b'>
+            <div className='bg-[#CCFFCC] border border-t-0'>
                 <h3 className='py-2 text-center text-sm font-semibold'>17 02 ΞΥΛΟ, ΓΥΑΛΙ ΚΑΙ ΠΛΑΣΤΙΚΟ</h3>
             </div>
             {/* second table design  */}
@@ -286,7 +286,7 @@ function FcsvD2() {
                 </div>
             </div>
             {/* center line 2 box  */}
-            <div className='bg-[#CCFFCC] border-b'>
+            <div className='bg-[#CCFFCC] border border-t-0'>
                 <h3 className='py-2 text-center text-sm font-semibold'>17 03 ΜΕΙΓΜΑΤΑ ΑΣΦΑΛΤΟΥ ΚΑΙ ΟΡΥΚΤΗΣ ΠΙΣΣΑΣ, ΛΙΘΑΝΘΡΑΚΟΠΙΣΣΑ ΚΑΙ ΠΡΟΪΌΝΤΑ ΠΙΣΣΑΣ</h3>
             </div>
             {/* third table design  */}
@@ -373,7 +373,7 @@ function FcsvD2() {
                 </div>
             </div>
             {/* center line 2 box  */}
-            <div className='bg-[#CCFFCC] border-b'>
+            <div className='bg-[#CCFFCC] border border-t-0'>
                 <h3 className='py-2 text-center text-sm font-semibold'>17 04 ΜΕΤΑΛΛΑ (ΠΕΡΙΛΑΜΒΑΝΟΜΕΝΩΝ ΚΑΙ ΤΩΝ ΚΡΑΜΑΤΩΝ ΤΟΥΣ)</h3>
             </div>
             {/* fourth table design  */}
@@ -614,7 +614,7 @@ function FcsvD2() {
                 </div>
             </div>
             {/* center line 2 box  */}
-            <div className='bg-[#CCFFCC] border-b'>
+            <div className='bg-[#CCFFCC] border border-t-0'>
                 <h3 className='py-2 text-center text-sm font-semibold'>17 05 ΧΩΜΑΤΑ (ΠΕΡΙΛΑΜΒΑΝΟΜΕΝΩΝ ΧΩΜΑΤΩΝ ΕΚΣΚΑΦΗΣ ΑΠΌ ΜΟΛΥΣΜΕΝΕΣ ΤΟΠΟΘΕΣΙΕΣ), ΠΕΤΡΕΣ ΚΑΙ ΜΠΑΖΑ ΕΚΣΚΑΦΩΝ</h3>
             </div>
             {/* six table design  */}
@@ -879,7 +879,7 @@ function FcsvD2() {
                 </div>
             </div>
             {/* center line 2 box  */}
-            <div className='bg-[#CCFFCC] border-b'>
+            <div className='bg-[#CCFFCC] border border-t-0'>
                 <h3 className='py-2 text-center text-sm font-semibold'>17 08 ΥΛΙΚΑ ΔΟΜΙΚΩΝ ΚΑΤΑΣΚΕΥΩΝ ΜΕ ΒΑΣΗ ΤΟ ΓΥΨΟ</h3>
             </div>
             {/* eight table design  */}
@@ -947,7 +947,7 @@ function FcsvD2() {
                 </div>
             </div>
             {/* center line 2 box  */}
-            <div className='bg-[#CCFFCC] border-b'>
+            <div className='bg-[#CCFFCC] border border-t-0'>
                 <h3 className='py-2 text-center text-sm font-semibold'>17 09 ΑΛΛΑ ΑΠΟΒΛΗΤΑ ΔΟΜΙΚΩΝ ΚΑΤΑΣΚΕΥΩΝ ΚΑΙ ΚΑΤΕΔΑΦΙΣΕΩΝ</h3>
             </div>
             {/* eight table design  */}
@@ -1053,7 +1053,7 @@ function FcsvD2() {
                 </div>
             </div>
             {/* center line 2 box  */}
-            <div className='bg-[#CCFFCC] border-b'>
+            <div className='bg-[#CCFFCC] border border-t-0'>
                 <h3 className='py-2 text-center text-sm font-semibold'>ΛΟΙΠΕΣ ΚΑΤΗΓΟΡΙΕΣ ΠΑΡΑΓΟΜΕΝΩΝ ΑΠΟΒΛΗΤΩΝ  </h3>
             </div>
             {/* nine emty table design  */}
