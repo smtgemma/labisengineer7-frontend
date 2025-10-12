@@ -8,7 +8,7 @@ import FcsvD2 from './fcsvD2';
 import FcsvD3 from './fcsvD3';
 
 function FcsvMain({ allData }: { allData: any }) {
-    const [activeTab, setActiveTab] = useState("mainPage");
+    const [activeTab, setActiveTab] = useState("ΕΞΩΦΥΛΛΟ");
     const scrollRef = useRef<HTMLDivElement>(null)
 
     const scrollLeft = () => {
@@ -18,8 +18,9 @@ function FcsvMain({ allData }: { allData: any }) {
         scrollRef.current?.scrollBy({ left: 200, behavior: "smooth" });
     };
     const tabs = [
-        { id: "ΒΑΣΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ", label: "1. ΒΑΣΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ" },
-        { id: "ΕΚΤΙΜΗΣΗ ΠΑΡΑΓΟΜΕΝΩΝ ΑΕΚΚ", label: "2. ΕΚΤΙΜΗΣΗ ΠΑΡΑΓΟΜΕΝΩΝ ΑΕΚΚ" },
+        {id: "ΕΞΩΦΥΛΛΟ", label: "ΕΞΩΦΥΛΛΟ"},
+        { id: "1. ΒΑΣΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ", label: "1. ΒΑΣΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ" },
+        { id: "2. ΕΚΤΙΜΗΣΗ ΠΑΡΑΓΟΜΕΝΩΝ ΑΕΚΚ", label: "2. ΕΚΤΙΜΗΣΗ ΠΑΡΑΓΟΜΕΝΩΝ ΑΕΚΚ" },
         { id: "ΦΑΣΗ 1", label: "2.1 ΦΑΣΗ 1" },
         { id: "ΦΑΣΗ 2", label: "2.2 ΦΑΣΗ 2" },
         { id: "ΦΑΣΗ 3", label: "2.3 ΦΑΣΗ 3" },
@@ -35,9 +36,9 @@ function FcsvMain({ allData }: { allData: any }) {
         <div>
             {/* Conditional Tab Content */}
             <div className="p-6">
-                {activeTab === "mainPage" && <FcsvD0 allData={allData} />}
-                {activeTab === "ΒΑΣΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ" && <FcsvD1 />}
-                {activeTab === "ΕΚΤΙΜΗΣΗ ΠΑΡΑΓΟΜΕΝΩΝ ΑΕΚΚ" && <FcsvD2 />}
+                {activeTab === "ΕΞΩΦΥΛΛΟ" && <FcsvD0 allData={allData} />}
+                {activeTab === "1. ΒΑΣΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ" && <FcsvD1 />}
+                {activeTab === "2. ΕΚΤΙΜΗΣΗ ΠΑΡΑΓΟΜΕΝΩΝ ΑΕΚΚ" && <FcsvD2 />}
                 {activeTab === "ΦΑΣΗ 1" && <FcsvD3 number= "1" />}
                 {activeTab === "ΦΑΣΗ 2" && <FcsvD3 number= "2" />}
                 {activeTab === "ΦΑΣΗ 3" && <FcsvD3 number= "3" />}
