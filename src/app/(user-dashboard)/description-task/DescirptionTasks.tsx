@@ -1,3 +1,6 @@
+
+
+
 // "use client";
 // import { setMultipleDescriptionTask } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 // import { RootState } from "@/redux/store";
@@ -38,7 +41,7 @@
 //   const allSubmergedArray = Object.values(subcategoryTitle).flat();
 //   console.log(allSubmergedArray, 'subcategoryTitle==============')
 
-//   const [description, setDescription] = useState<Category[]>([
+//   let [description, setDescription] = useState<Category[]>([
 
 //     // This is subcategory 6
 //     ...(allSubmergedArray.includes(
@@ -165,8 +168,8 @@
 //         ],
 //       },
 //       {
-//         id: "Χρωματισμοί / Επιχρίσματα_5",
-//         title: "Χρωματισμοί / Επιχρίσματα",
+//         id: "Αλουμίνια/Κουφώματα_5",
+//         title: "Αλουμίνια/Κουφώματα",
 //         options: [
 //           {
 //             id: "Τοποθέτηση νέων κουφωμάτων αλουμινίου στα ίδια ανοίγματα",
@@ -614,6 +617,11 @@
 
 
 //   console.log(description, "all description==============")
+//   // i have removed the duplicate title here 
+//   description = description.filter(
+//     (item, index, self) =>
+//       index === self.findIndex((t) => t.title === item.title)
+//   );
 
 //   const navigate = useRouter();
 //   const dispatch = useDispatch();
@@ -913,8 +921,8 @@ const DescriptionTask = () => {
         ],
       },
       {
-        id: "Χρωματισμοί / Επιχρίσματα_5",
-        title: "Χρωματισμοί / Επιχρίσματα",
+        id: "Αλουμίνια/Κουφώματα_5",
+        title: "Αλουμίνια/Κουφώματα",
         options: [
           {
             id: "Τοποθέτηση νέων κουφωμάτων αλουμινίου στα ίδια ανοίγματα",
@@ -1363,10 +1371,30 @@ const DescriptionTask = () => {
 
   console.log(description, "all description==============")
   // i have removed the duplicate title here 
-  description = description.filter(
-    (item, index, self) =>
-      index === self.findIndex((t) => t.title === item.title)
-  );
+  // description = description.filter(
+  //   (item, index, self) =>
+  //     index === self.findIndex((t) => t.title === item.title)
+  // );
+
+
+  description = description.filter((item, index, self) => {
+  const duplicates = self.filter(t => t.title === item.title);
+
+  if (duplicates.length > 1) {
+    // merge all options of items with the same title
+    item.options = duplicates.flatMap(d => d.options);
+
+    // remove duplicate options (if needed)
+    item.options = item.options.filter(
+      (opt, i, arr) => i === arr.findIndex(o => o.label === opt.label)
+    );
+  }
+
+  // keep only the first occurrence of each title
+  return index === self.findIndex(t => t.title === item.title);
+});
+
+
 
   const navigate = useRouter();
   const dispatch = useDispatch();
@@ -1493,6 +1521,8 @@ const DescriptionTask = () => {
 };
 
 export default DescriptionTask;
+
+
 
 
 

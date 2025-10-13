@@ -597,7 +597,7 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F10D14 allData={allData} /> // 9
                 )}
                 {selected === "1010" && (
-                  <F10D15 allData={allData} /> // 10
+                  <F10D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
                 )}
               </div>
               {/* file 7  */}

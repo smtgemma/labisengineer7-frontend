@@ -22,6 +22,7 @@ interface FormData {
     municipalityCommunity: string
     propertyNumber: string
     technicalDescription: string
+    propertyPlace: string
     technicalDescriptionTwo: string
 }
 // end editing 
@@ -61,9 +62,9 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
         formState: { errors },
     } = useForm<FormData>({
 
-        defaultValues: {
-            owners: allData?.owners || [{ firstName: "", lastName: "" }],
-        },
+        // defaultValues: {
+        //     owners: allData?.owners || [{ firstName: "", lastName: "" }],
+        // },
     })
 
     const [updateProject] = useUpdateProjectMutation()
@@ -120,9 +121,9 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
                     </div>
                 </div>
 
-                <div className="flex items-start justify-between gap-4 max-w-xl">
-                    <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">
+                <div className="flex items-start">
+                    <span className=" text-sm w-[120px]">Θέση:</span>
+                    <h3 className=" text-sm text-center">
                         {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
                         ΔΗΜΟΣ {municipalityCommunity || "N/A"},
                         ΤΚ {propertyPostalCode || "N/A"}
@@ -133,14 +134,14 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
                     <span className="text-sm">Ιδιοκτήτης:</span>
                     <div className="flex-1">
                         <div className="flex items-center justify-center gap-2">
-                        {
-                            owner?.map((e: any, i: number) => (
-                                <h3 key={i} className="text-sm">
-                                    {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
-                                </h3>
-                            ))
-                        }
-                    </div>
+                            {
+                                owner?.map((e: any, i: number) => (
+                                    <h3 key={i} className="text-sm">
+                                        {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                                    </h3>
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -238,48 +239,54 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
                             >
                                 {/* Project */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Έργο *:</label>
+                                    <label className="font-medium w-1/8">Έργο *:</label>
                                     <input
                                         defaultValue={projectDescription || "Project Description "}
                                         type="text"
-                                        {...register("projectDescription", { required: "This field is required" })}
+                                        {...register("projectDescription", { required: "projectDescription is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
 
                                 {/* Address */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Θέση*:</label>
+                                    <label className="font-medium w-1/8">Θέση*:</label>
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyAddress", { required: "Address is required" })}
+                                            {...register("propertyAddress", { required: "propertyAddress is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyNumber || "propertyNumber"}
-                                            {...register("propertyNumber", { required: "City is required" })}
+                                            {...register("propertyNumber", { required: "propertyNumber is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={municipalityCommunity || "municipalityCommunity"}
-                                            {...register("municipalityCommunity", { required: "Postal code is required" })}
+                                            {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                            {...register("propertyPostalCode", { required: "Postal code is required" })}
+                                            {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyPlace || "propertyPlace"}
+                                            {...register("propertyPlace", { required: "propertyPlace is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>
                                 </div>
                                 {/* Address */}
                                 {/* First Name */}
-                                <Controller
+                                {/* <Controller
                                     name="owners.0.firstName"
                                     control={control}
                                     rules={{ required: "First name is required" }}
@@ -290,10 +297,10 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
                                             className="border p-2 rounded text-sm w-full"
                                         />
                                     )}
-                                />
+                                /> */}
 
                                 {/* Last Name */}
-                                <Controller
+                                {/* <Controller
                                     name="owners.0.lastName"
                                     control={control}
                                     rules={{ required: "Last name is required" }}
@@ -304,7 +311,7 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
                                             className="border p-2 rounded text-sm w-full"
                                         />
                                     )}
-                                />
+                                /> */}
 
                                 {/* Submit */}
                                 <div className="flex justify-end">
