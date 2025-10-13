@@ -85,6 +85,8 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
     // const small = subCategoryData["small-construction"] || [];
 
     // const store = makeStore();
+
+    const [ownerIndex, setOwnerIndex] = useState<number | null>(null)
     const [selected, setSelected] = useState<string | null>(null);
     const [projectHexCode, setProjectHexCode] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -145,8 +147,6 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
         projectDescription: "PROJECT DESCRIPTION",
         date: "8/18/2025"
     });
-
-    console.log("..............Ownert", allData)
 
     useEffect(() => {
         setFormData(prev => ({
@@ -231,8 +231,7 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
         }
     };
 
-
-
+    console.log(selected, "selected==================");
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -342,7 +341,11 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
                                 <button
                                     className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                                     onClick={() => {
-                                        setSelected(template.title);
+                                        if (template.id.startsWith(template.id)) {
+                                            const index = Number(template.id.split("_")[1]);
+                                            setOwnerIndex(index)
+                                        }
+                                        setSelected(template.id);
                                         setIsModalOpen(true);
                                     }}
                                 >
@@ -370,18 +373,18 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
                             </button>
 
                             {/* file 6======== */}
-                            {selected === "ΥΔ ΑΝΑΛΗΨΗΣ ΕΡΓΟΥ_ΜΗΧΑΝΙΚΟΣ" && (
-                                // <S4D1 formData={formData} setFormData={setFormData} />
-                                <h1>template 1</h1>
+                            {selected === "htkOne_register_plot" && (
+                                <h1>htkOne_register_plot</h1>
                             )}
-                            {selected ===
-                                "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
-                                    <div>
-                                        <h1>template 2</h1>
-                                        {/* {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)} */}
-                                    </div>
-
-                                )}
+                            {selected === "htkOne_register_horizontal_property" && (
+                                <h1>Register Horizontal Property Autofill 1 Credit</h1>
+                            )}
+                            {selected === "doc_technical_description" && (
+                                <h1>Register Horizontal Property Autofill 1 Credit</h1>
+                            )}
+                            {selected?.startsWith("template_owner_") && ownerIndex !== null && (
+                                <h1>all owner </h1>
+                            )}
                         </div>
                     </div>
                 )}

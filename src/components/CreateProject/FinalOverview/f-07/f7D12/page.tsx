@@ -13,6 +13,8 @@ interface FormData {
     propertyAddress: string;
     propertyPlace: string;
     propertyPostalCode: string;
+    propertyNumber: string;
+    municipalityCommunity: string;
     owners: {
         firstName: string;
         lastName: string;
@@ -42,9 +44,9 @@ type F6D5Props = {
 export default function F7D12({ allData, setIsModalOpen }: F6D5Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owner = allData?.owners?.[0] || {};
+    const owner = allData?.owners || [];
     const { allDescriptionTasks } = allData || {}
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
+    const { id, createdById, serviceId, projectDescription, propertyNumber, municipalityCommunity, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
     console.log(allDescriptionTasks)
 
 
@@ -65,12 +67,12 @@ export default function F7D12({ allData, setIsModalOpen }: F6D5Props) {
             propertyAddress: allData?.propertyAddress || "",
             propertyPlace: allData?.propertyPlace || "",
             propertyPostalCode: allData?.propertyPostalCode || "",
-            owners: [
-                {
-                    firstName: allData?.owners?.[0]?.firstName || "",
-                    lastName: allData?.owners?.[0]?.lastName || "",
-                },
-            ],
+            // owners: [
+            //     {
+            //         firstName: allData?.owners?.[0]?.firstName || "",
+            //         lastName: allData?.owners?.[0]?.lastName || "",
+            //     },
+            // ],
         },
     })
 
@@ -115,60 +117,51 @@ export default function F7D12({ allData, setIsModalOpen }: F6D5Props) {
             <div className="mb-8 space-y-4">
                 <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    <h3 className=" text-sm">{projectDescription || "N/A"}</h3>
+                    <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
                 </div>
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>
                     <h3 className=" text-sm">
-                        {propertyAddress || "N/A"}, {propertyPlace || "N/A"},
-                        {propertyPostalCode || "N/A"} 
+                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                        ΤΚ {propertyPostalCode || "N/A"}
                     </h3>
                 </div>
-
-                <div className="flex items-start justify-between max-w-[400px] ml-[40px] text-sm">
-                    <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
+                <div className="flex">
+                    <span className="text-sm">Ιδιοκτήτης:</span>
+                    <div className="flex-1">
+                        <div className="flex items-center justify-center gap-2">
+                            {
+                                owner?.map((e: any, i: number) => (
+                                    <h3 key={i} className="text-sm">
+                                        {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                                    </h3>
+                                ))
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
-                <p>Στο ακίνητο <span className="font-semibold">Description for building/ {horizontalPropertyName || "N/A"} </span> επί της οδού <br /> <span className="font-semibold">{owner?.ownerAddress || "N/A"}, {owner?.city} , {owner?.postal_code},</span>
-                    πρόκειται να <br /> εκτελεσθούν οι παρακάτω εργασίες :</p>
+                <div>
+                    <span className="font-semibold">
+
+                        <span className="mr-1">Στο ακίνητο {horizontalPropertyName || "N/A"} </span>
+                    </span>
+                    επί της οδού
+                    <span className="">
+                        <span className="ml-1">{propertyAddress || "N/A"} </span>{propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                        <span className="mr-1">ΤΚ {propertyPostalCode || "N/A"}</span>
+                    </span>
+                    πρόκειται να <br />εκτελεσθούν οι παρακάτω εργασίες :
+                </div>
             </div>
 
             <div className="space-y-6 ml-10">
-                {/* <div>
-                    <h3 className="text-sm font-bold">● Τοποθέτηση ικριωμάτων επί των όψεων του κτιρίου
-                    </h3>
-                    <p className="text-sm mb-6">Περιλαμβάνεται η εγκατάσταση μεταλλικών ικριωμάτων κατά μήκος των όψεων του κτιρίου, σύμφωνα με την ισχύουσα νομοθεσία περί μέτρων ασφαλείας. Η τοποθέτηση διασφαλίζει ασφαλή και πλήρη πρόσβαση στα σημεία επέμβασης για τις εργασίες αποκατάστασης και χρωματισμού των εξωτερικών επιφανειών.</p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold">● Μικρές οικοδομικές εργασίες – Σοβατίσματα – Στοκαρίσματα τοιχοποιιών
-                    </h3>
-                    <p className="text-sm mb-6">Αφορά την αποκατάσταση φθαρμένων ή αποσαθρωμένων επιχρισμάτων εξωτερικής τοιχοποιίας. Περιλαμβάνονται καθαίρεση σαθρών επιχρισμάτων, εφαρμογή νέου σοβά, στοκάρισμα ρωγμών και λείανση επιφανειών, χωρίς επέμβαση στον φέροντα οργανισμό ή στη γεωμετρία του κτιρίου.</p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold">● Εξωτερικοί χρωματισμοί επί των όψεων
-                    </h3>
-                    <p className="text-sm mb-6">Προβλέπεται η πλήρης προετοιμασία και βαφή των εξωτερικών επιφανειών του κτιρίου με ακρυλικό ή σιλικονούχο χρώμα υψηλής αντοχής. Περιλαμβάνει καθαρισμό, αστάρωμα και εφαρμογή δύο στρώσεων τελικού χρώματος, με κατάλληλο υλικό και μέθοδο ανάλογα με τις απαιτήσεις του υποστρώματος.</p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold">● Επισκευή και στερέωση μαρμάρινων στοιχείων( π.χ περβαζιών, στηθαίων)
-                    </h3>
-                    <p className="text-sm mb-6">Προβλέπεται η επαναστερέωση ή αντικατάσταση φθαρμένων ή αποκολλημένων μαρμάρινων επιστρώσεων στις όψεις, με χρήση αγκυρίων ή κόλλας κατάλληλης για εξωτερική χρήση. Οι αρμοί θα σφραγιστούν με σιλικονούχα ή πολυουρεθανική μαστίχη για αποτροπή εισροής υγρασίας.</p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold">● Αποκατάσταση στοιχείων απορροής όμβριων και μεταλλικών εξαρτημάτων
-                    </h3>
-                    <p className="text-sm mb-6">Περιλαμβάνεται ο έλεγχος και η αποκατάσταση ή αντικατάσταση φθαρμένων υδρορροών, στομίων, καναλιών ή σταγονόδρομων από λαμαρίνα ή συνθετικά υλικά. Στόχος είναι η αποκατάσταση της λειτουργικής απορροής όμβριων και η προστασία των όψεων από φθορές λόγω υγρασίας.</p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold">● Χρωματισμός μεταλλικών κιγκλιδωμάτων (σιδηρών στοιχείων)
-                    </h3>
-                    <p className="text-sm mb-6">Προβλέπεται ο καθαρισμός, αποσκουριάσμα και βαφή των μεταλλικών κιγκλιδωμάτων (κάγκελα, εξώστες, αυλόπορτες) με εφαρμογή αντιδιαβρωτικού υποστρώματος και τελικής βαφής δύο στρώσεων με χρώμα μετάλλου εξωτερικής χρήσης. Η εργασία αφορά υφιστάμενα στοιχεία και δεν μεταβάλλει τη μορφή ή τον χαρακτήρα του κτιρίου</p>
-                </div> */}
 
                 {
                     allDescriptionTasks ? (allDescriptionTasks?.map((task: any, index: number) => (
@@ -227,42 +220,54 @@ export default function F7D12({ allData, setIsModalOpen }: F6D5Props) {
                             >
                                 {/* Project */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Έργο *:</label>
+                                    <label className="font-medium w-1/8">Έργο *:</label>
                                     <input
-                                        defaultValue={projectDescription || "projectDescription"}
+                                        defaultValue={projectDescription || "Project Description "}
                                         type="text"
-                                        {...register("projectDescription", { required: "This field is required" })}
+                                        {...register("projectDescription", { required: "projectDescription is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
 
                                 {/* Address */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Θέση*:</label>
+                                    <label className="font-medium w-1/8">Θέση*:</label>
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyAddress", { required: "Address is required" })}
+                                            {...register("propertyAddress", { required: "propertyAddress is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPlace || "propertyPlace"}
-                                            {...register("propertyPlace", { required: "City is required" })}
+                                            defaultValue={propertyNumber || "propertyNumber"}
+                                            {...register("propertyNumber", { required: "propertyNumber is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={municipalityCommunity || "municipalityCommunity"}
+                                            {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                            {...register("propertyPostalCode", { required: "Postal code is required" })}
+                                            {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyPlace || "propertyPlace"}
+                                            {...register("propertyPlace", { required: "propertyPlace is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>
                                 </div>
                                 {/* Address */}
                                 {/* First Name */}
-                                <Controller
+                                {/* <Controller
                                     name="owners.0.firstName"
                                     control={control}
                                     rules={{ required: "First name is required" }}
@@ -273,9 +278,9 @@ export default function F7D12({ allData, setIsModalOpen }: F6D5Props) {
                                             className="border p-2 rounded text-sm w-full"
                                         />
                                     )}
-                                />
+                                /> */}
                                 {/* Last Name */}
-                                <Controller
+                                {/* <Controller
                                     name="owners.0.lastName"
                                     control={control}
                                     rules={{ required: "Last name is required" }}
@@ -286,7 +291,7 @@ export default function F7D12({ allData, setIsModalOpen }: F6D5Props) {
                                             className="border p-2 rounded text-sm w-full"
                                         />
                                     )}
-                                />
+                                /> */}
 
                                 {/* Submit */}
                                 <div className="flex justify-end">

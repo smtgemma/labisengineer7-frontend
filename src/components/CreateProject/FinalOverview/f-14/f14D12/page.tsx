@@ -10,7 +10,7 @@ import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templa
 
 type F6D13Props = {
     allData: any;
-    //   setIsModalOpen: (value: boolean) => void;
+    setIsModalOpen: (value: boolean) => void;
 };
 
 interface FormData {
@@ -22,6 +22,7 @@ interface FormData {
     municipalityCommunity: string
     propertyNumber: string
     technicalDescription: string
+    propertyPlace: string
     technicalDescriptionTwo: string
 }
 // end editing 
@@ -36,25 +37,21 @@ interface FormData {
 }
 
 
-export default function F14D12({ allData,
-    //  setIsModalOpen 
-}: F6D13Props) {
+export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const owner = allData?.owners?.[0] || {}
+    const owner = allData?.owners || []
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, specialty } = allData || {}
-
-    const { projectDescription,
+    const { id, createdById, serviceId, specialty, propertyPlace, projectDescription,
         propertyAddress,
         propertyNumber,
         municipalityCommunity,
         propertyPostalCode,
         createdAt,
         technicalDescription,
-        technicalDescriptionTwo,
-    } = allData || {};
+        technicalDescriptionTwo, } = allData || {}
+
 
 
     const {
@@ -65,9 +62,9 @@ export default function F14D12({ allData,
         formState: { errors },
     } = useForm<FormData>({
 
-        defaultValues: {
-            owners: allData?.owners || [{ firstName: "", lastName: "" }],
-        },
+        // defaultValues: {
+        //     owners: allData?.owners || [{ firstName: "", lastName: "" }],
+        // },
     })
 
     const [updateProject] = useUpdateProjectMutation()
@@ -75,6 +72,7 @@ export default function F14D12({ allData,
     const signature = userData?.data?.signature
 
     // for editing data 
+
     const onSubmit = async (data: FormData) => {
         console.log("Updated Data:", data)
         const addNewData = {
@@ -93,7 +91,7 @@ export default function F14D12({ allData,
 
         reset()
         setIsEditModalOpen(false)
-        // setIsModalOpen(false)
+        setIsModalOpen(false)
     }
 
 
@@ -109,48 +107,63 @@ export default function F14D12({ allData,
                 </button>
             </div>
             {/* Title */}
-            <h2 className="text-center font-semibold underline text-sm mb-2">
+            <h2 className="text-center font-semibold underline text-xl mb-2">
                 ΤΕΧΝΙΚΗ ΕΚΘΕΣΗ -ΒΕΒΑΙΩΣΗ ΜΗΧΑΝΙΚΟΥ
             </h2>
-            <p className="text-center text-sm mb-5">Για την έκδοση Άδειας Μικρής Κλίμακας σύμφωνα με το άρθρο 29 του Ν.4495/2017</p>
+            <p className="text-center text-sm mb-5">Για την Έγκριση Εργασιών Δόμησης Μικρής Κλίμακας σύμφωνα με το άρθρο 29 του Ν.4495/2017</p>
 
             {/* Project Information */}
             <div className="mb-8 space-y-4">
-                <div className="flex items-center justify-center gap-5">
-                    <span className=" text-sm">Έργο:</span>
-                    <h3 className=" text-sm text-center">{projectDescription}</h3>
+                <div className="flex items-start">
+                    <span className=" min-w-[20px] text-sm">Έργο:</span>
+                    <div className="flex-1">
+                        <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
+                    </div>
                 </div>
 
-                <div className="flex items-center justify-center gap-5">
-                    <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyNumber || "N/A"}, {municipalityCommunity || "N/A"} {propertyPostalCode || "N/A"}). ( FOR BUILDING)</h3>
+                <div className="flex items-start">
+                    <span className=" text-sm w-[120px]">Θέση:</span>
+                    <h3 className=" text-sm text-center">
+                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                        ΤΚ {propertyPostalCode || "N/A"}
+                    </h3>
                 </div>
 
-                <div className="flex items-center justify-center text-sm gap-5">
-                    <span className="">Ιδιοκτήτης:</span>
-                    <h3 className=" text-sm">{owner?.firstName || "N/A"} {owner?.lastName || "N/A"}</h3>
+                <div className="flex">
+                    <span className="text-sm">Ιδιοκτήτης:</span>
+                    <div className="flex-1">
+                        <div className="flex items-center justify-center gap-2">
+                            {
+                                owner?.map((e: any, i: number) => (
+                                    <h3 key={i} className="text-sm">
+                                        {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                                    </h3>
+                                ))
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="space-y-6 ml-10">
                 <div>
-                    <h3 className="text-sm font-bold mb-2">1. Εισαγωγή – Περιγραφή Έργου</h3>
-                    <p className="text-sm mb-5">Η παρούσα Τεχνική Έκθεση συντάσσεται στο πλαίσιο της διαδικασίας έκδοσης Άδειας Μικρής Κλίμακας, σύμφωνα με τις διατάξεις του άρθρου 29 του Ν.4495/2017, καθώς και των σχετικών Υπουργικών Αποφάσεων, όπως η ΥΑ ΥΠΕΝ/ΔΑΟΚΑ/69701/4461/2018 και η ΥΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020
+                    <h3 className="text-xm font-bold mb-2">1. Εισαγωγή – Περιγραφή Έργου</h3>
+                    <p className="text-sm mb-5">Η παρούσα Τεχνική Έκθεση συντάσσεται στο πλαίσιο της διαδικασίας έκδοσης Έγκρισης Εργασιών Δόμησης Μικρής Κλίμακας, σύμφωνα με τις διατάξεις του άρθρου 29 του Ν.4495/2017, καθώς και των σχετικών Υπουργικών Αποφάσεων, όπως η ΥΑ ΥΠΕΝ/ΔΑΟΚΑ/69701/4461/2018 και η ΥΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020
                         (ΦΕΚ 1843/Β/2020).
-
                     </p>
                     <p className="text-sm">
                         Το αντικείμενο της παρούσας αφορά ήπιες τεχνικές επεμβάσεις, χωρίς καμία τροποποίηση στον φέροντα οργανισμό ή στα στατικά στοιχεία του κτιρίου.
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold mb-2">2. Στοιχεία Ακινήτου</h3>
+                    <h3 className="text-xm font-bold mb-2">2. Στοιχεία Ακινήτου</h3>
                     <p className="text-sm mb-5">
                         {technicalDescription || "N/A"}
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold mb-2">3. Αναλυτική Περιγραφή Εργασιών</h3>
-                    <p className="text-sm">Οι εργασίες που θα πραγματοποιηθούν είναι οι εξής: </p>
+                    <h3 className="text-xm font-bold mb-2">3. Εισαγωγή – Περιγραφή Έργου</h3>
+                    <p className="text-sm mb-2">Οι εργασίες που θα πραγματοποιηθούν είναι οι εξής:</p>
 
                     {Array.isArray(allDescriptionTasks) &&
                         allDescriptionTasks.map((task: any, index: number) => (
@@ -164,22 +177,21 @@ export default function F14D12({ allData,
                     <p className="text-sm my-6">Οι εργασίες θα υλοποιηθούν σύμφωνα με τους ισχύοντες κανονισμούς και δεν επηρεάζουν τον φέροντα οργανισμό, τα δομικά στοιχεία ή την ενεργή χρήση του ακινήτου.</p>
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold mb-2">4. Νομιμότητα / Πολεοδομική Υπόσταση</h3>
-                    {technicalDescriptionTwo || "N/A"}
+                    <h3 className="text-xm font-bold mb-2">4. Νομιμότητα / Πολεοδομική Υπόσταση</h3>
+                    <p className="text-sm">{technicalDescriptionTwo || "N/A"}</p>
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold mb-2">5. Οικονομικά Στοιχεία – Προϋπολογισμός Έργου</h3>
+                    <h3 className="text-xm font-bold mb-2">5. Οικονομικά Στοιχεία – Προϋπολογισμός Έργου</h3>
                     <p className="text-sm mb-5">Ο συνολικός προϋπολογισμός των προβλεπόμενων <span className="text-sm font-bold">εργασιών είναι μικρότερος του ποσού των είκοσι πέντε χιλιάδων ευρώ (25.000 €),</span>
                         και δεν απαιτείται τεκμηρίωση υπέρβασης βάσει της παραγράφου 2 του άρθρου 29 του Ν.4495/2017.
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold mb-2">6. Συμπεράσματα – Συνοπτική Εκτίμηση
-                    </h3>
-                    <p className="text-sm mb-5">Η παρούσα έκθεση συνοδεύει φάκελο έκδοσης Άδειας Μικρής Κλίμακας για εσωτερικές, ήπιες επεμβάσεις, χωρίς στατικές, φέρουσες ή μορφολογικές επιπτώσεις. Το έργο είναι απολύτως συμβατό με το ισχύον νομικό και τεχνικό πλαίσιο,
-                        τεκμηριώνεται πλήρως και η υλοποίησή του εξυπηρετεί σκοπούς συντήρησης, λειτουργικότητας και ενεργειακής αναβάθμισης.
+                    <h3 className="text-xm font-bold mb-2">6. Συμπεράσματα – Συνοπτική Εκτίμηση</h3>
+                    <p className="text-sm mb-5">Η παρούσα έκθεση συνοδεύει φάκελο έκδοσης Έγκρισης Εργασιών Δόμησης Μικρής Κλίμακας για εσωτερικές, ήπιες επεμβάσεις, χωρίς στατικές, φέρουσες ή μορφολογικές επιπτώσεις. Το έργο είναι απολύτως συμβατό με το ισχύον νομικό και
+                        τεχνικό πλαίσιο, τεκμηριώνεται πλήρως και η υλοποίησή του εξυπηρετεί σκοπούς συντήρησης, λειτουργικότητας και ενεργειακής αναβάθμισης..
                     </p>
-                    <p className="text-sm mb-5">Κατόπιν των ανωτέρω, πληρούνται όλες οι προϋποθέσεις έκδοσης Άδειας Μικρής Κλίμακας, σύμφωνα με την κείμενη πολεοδομική νομοθεσία.
+                    <p className="text-sm mb-5">Κατόπιν των ανωτέρω, πληρούνται όλες οι προϋποθέσεις έκδοσης της Έγκρισης Εργασιών Δόμησης Μικρής Κλίμακας, σύμφωνα με την κείμενη πολεοδομική νομοθεσία.
                     </p>
                 </div>
 
@@ -199,8 +211,6 @@ export default function F14D12({ allData,
                             {/* <p>Name/ surname Engineer</p> */}
                             <p>{engineers?.firstName} {engineers?.lasttName}</p>
                             <p>{specialty || "N/A"}</p>
-                            <p>Α.Μ. ΤΕΕ: 123456
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -229,48 +239,54 @@ export default function F14D12({ allData,
                             >
                                 {/* Project */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Έργο *:</label>
+                                    <label className="font-medium w-1/8">Έργο *:</label>
                                     <input
                                         defaultValue={projectDescription || "Project Description "}
                                         type="text"
-                                        {...register("projectDescription", { required: "This field is required" })}
+                                        {...register("projectDescription", { required: "projectDescription is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
 
                                 {/* Address */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Θέση*:</label>
+                                    <label className="font-medium w-1/8">Θέση*:</label>
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyAddress", { required: "Address is required" })}
+                                            {...register("propertyAddress", { required: "propertyAddress is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyNumber || "propertyNumber"}
-                                            {...register("propertyNumber", { required: "City is required" })}
+                                            {...register("propertyNumber", { required: "propertyNumber is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={municipalityCommunity || "municipalityCommunity"}
-                                            {...register("municipalityCommunity", { required: "Postal code is required" })}
+                                            {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                            {...register("propertyPostalCode", { required: "Postal code is required" })}
+                                            {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyPlace || "propertyPlace"}
+                                            {...register("propertyPlace", { required: "propertyPlace is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>
                                 </div>
                                 {/* Address */}
                                 {/* First Name */}
-                                <Controller
+                                {/* <Controller
                                     name="owners.0.firstName"
                                     control={control}
                                     rules={{ required: "First name is required" }}
@@ -281,10 +297,10 @@ export default function F14D12({ allData,
                                             className="border p-2 rounded text-sm w-full"
                                         />
                                     )}
-                                />
+                                /> */}
 
                                 {/* Last Name */}
-                                <Controller
+                                {/* <Controller
                                     name="owners.0.lastName"
                                     control={control}
                                     rules={{ required: "Last name is required" }}
@@ -295,7 +311,7 @@ export default function F14D12({ allData,
                                             className="border p-2 rounded text-sm w-full"
                                         />
                                     )}
-                                />
+                                /> */}
 
                                 {/* Submit */}
                                 <div className="flex justify-end">

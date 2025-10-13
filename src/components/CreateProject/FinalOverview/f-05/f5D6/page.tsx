@@ -43,7 +43,7 @@ interface BudgetCategory {
   subtotal: number
 }
 
-export default function F6D1({ allData }: { allData: allDataProps }) {
+export default function F5D6({ allData }: { allData: allDataProps }) {
   const owner = allData?.owners || []
   const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, propertyNumber, municipalityCommunity } = allData || "";
   console.log(allData)

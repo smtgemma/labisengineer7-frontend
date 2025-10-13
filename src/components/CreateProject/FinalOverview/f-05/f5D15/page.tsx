@@ -193,7 +193,7 @@ export default function F5D15({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                <div className=" p-2 border-r border-gray-400 font-bold">{engineer?.idCardNumber || "N/A"}</div>
+                                <div className="w-72 p-2 border-r border-gray-400 font-bold">{engineer?.idCardNumber || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
                                 <div className="flex-1 p-2 font-bold">{engineer?.phone || "N/A"}</div>
                             </div>
@@ -202,39 +202,45 @@ export default function F5D15({ allData }: { allData: allDataProps }) {
                         {/* Address row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                                <div className=" p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
+                                <div className="w-35 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
+                                <div className="w-50 p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
-                                <div className="w-24 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress || "N/A"}</div>
+                                <div className="w-50 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
-                                <div className="w-20 p-2 border-r border-gray-400 font-bold ">{engineer?.streetNumber || "N/A"}</div>
+                                <div className="w-12 p-2 border-r border-gray-400 font-bold ">{engineer?.streetNumber || "N/A"}</div>
                                 <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-                                <div className="flex-1 p-2 font-bold">{engineer?.postalCode || "N/A"}</div>
+                                <div className="w-25 p-2 font-bold">{engineer?.postalCode || "N/A"}</div>
                             </div>
                         </div>
 
                         {/* Contact details row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Αρ. Τηλεομοιότυπου (Fax):</div>
-                                <div className="flex-1 p-2">
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm flex items-center">Αρ. Τηλεομοιότυπου (Fax):</div>
+                                <div className="w-50 p-2 border-r border-gray-400 text-sm flex items-center">-</div>
+                                <div className="w-52 p-2 border-r border-gray-400 text-sm flex items-center">
                                     <div className="text-sm">
-                                        <div>Δ/νση</div>
-                                        <div>Ηλεκτρ.</div>
+                                        <div>Δ/νση Ηλεκτρ.</div>
                                         <div>Ταχυδρομ</div>
                                         <div>ίου (Email):</div>
                                     </div>
                                 </div>
-                                <div className=" p-2 underline ">{engineer?.email || "N/A"}</div>
+                                <div className="p-2 underline flex items-center ">{engineer?.email || "N/A"}</div>
                             </div>
                         </div>
 
                         {/* VAT row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-                                <div className="flex-1 p-2 font-bold">{engineer?.engVatNumber || "N/A"}</div>
-                                <div className="w-32 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">
+                                    Α.Φ.Μ.:
+                                </div>
+                                <div className="w-54 p-2 font-bold">
+                                    {engineer?.engVatNumber || "N/A"}
+                                </div>
+                                <div className="w-32 p-2 border-l border-gray-400 text-sm">
+                                    Δ.Ο.Υ.:
+                                </div>
                             </div>
                         </div>
 
@@ -257,8 +263,8 @@ export default function F5D15({ allData }: { allData: allDataProps }) {
                                     ΤΚ {propertyPostalCode || "N/A"}</span>
                             </h3>
                             <p>
-                                <span className="font-bold">δεν προβλέπεται η παραγωγή αποβλήτων τύπου ΑΕΚΚ, </span> καθώς κατ’ εφαρμογή της ΚΥΑ 36259/1757/Ε103 (ΦΕΚ Β’ 1312/2010) και του <span className="font-bold">Ν. 4819/2021</span> απόβλητα ΑΕΚΚ προκύπτουν αποκλειστικά από εργασίες εκσκαφής, κατασκευής ή κατεδάφισης.
-                                    Εφόσον τέτοιες εργασίες δεν προβλέπονται στο παρόν έργο, δεν υφίσταται ροή ΑΕΚΚ.και κατά συνέπεια δεν ενεργοποιούνται υποχρεώσεις προς ΣΕΔ–ΑΕΚΚ ή τήρησης σχετικών παραστατικών·</p>
+                                <span className="font-bold">δεν προβλέπεται η παραγωγή αποβλήτων τύπου ΑΕΚΚ, </span> καθώς κατ’ εφαρμογή της <span className="font-bold">ΚΥΑ 36259/1757/Ε103 (ΦΕΚ Β’ 1312/2010)</span> και του <span className="font-bold">Ν. 4819/2021</span> απόβλητα ΑΕΚΚ προκύπτουν αποκλειστικά από εργασίες εκσκαφής, κατασκευής ή κατεδάφισης.
+                                Εφόσον τέτοιες εργασίες δεν προβλέπονται στο παρόν έργο, δεν υφίσταται ροή ΑΕΚΚ.και κατά συνέπεια δεν ενεργοποιούνται υποχρεώσεις προς ΣΕΔ–ΑΕΚΚ ή τήρησης σχετικών παραστατικών·</p>
                         </div>
 
                         {/* Signature section */}

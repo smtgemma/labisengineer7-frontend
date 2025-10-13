@@ -49,7 +49,7 @@ const HtkOneTemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
 
         stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
             baseTemplates.push({
-                id: `template_owner_${index + 1}`,
+                id: `template_owner_${index}`,
                 title: `Owner’s Declaration ${owner.first_name} ${owner.last_name}`,
                 price: 0.5,
             });

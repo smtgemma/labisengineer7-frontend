@@ -46,7 +46,7 @@ interface allDataProps {
 
 
 
-export default function F6D9({ allData }: { allData: allDataProps }) {
+export default function F5D14({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
@@ -216,8 +216,8 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         {/* Contact details row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-55 p-2 border-r border-gray-400 text-sm flex items-center">Αρ. Τηλεομοιότυπου (Fax):</div>
-                                <div className="w-31 p-2 border-r border-gray-400 text-sm flex items-center">-</div>
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm flex items-center">Αρ. Τηλεομοιότυπου (Fax):</div>
+                                <div className="w-50 p-2 border-r border-gray-400 text-sm flex items-center">-</div>
                                 <div className="w-52 p-2 border-r border-gray-400 text-sm flex items-center">
                                     <div className="text-sm">
                                         <div>Δ/νση Ηλεκτρ.</div>
@@ -257,10 +257,10 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
                             <h3 className=" text-sm"> <span className="mr-1">επί της οδού</span>
-                            <span className="font-bold">
-                                {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-                                ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-                                ΤΚ {propertyPostalCode || "N/A"}</span>
+                                <span className="font-bold">
+                                    {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                    ΤΚ {propertyPostalCode || "N/A"}</span>
                             </h3>
                             <p>
                                 τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>

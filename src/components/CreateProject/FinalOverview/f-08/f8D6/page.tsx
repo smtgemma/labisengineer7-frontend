@@ -12,6 +12,8 @@ interface FormData {
     propertyAddress: string
     propertyPostalCode: string
     propertyPlace: string
+    municipalityCommunity: string
+    propertyNumber: string
 }
 // end editing 
 
@@ -25,13 +27,15 @@ interface allDataProps {
     serviceId: string;
     id: string;
     createdById: string;
+    municipalityCommunity: string;
+    propertyNumber: string;
 }
 function F8D6({ allData }: { allData: allDataProps }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const owner = allData?.owners?.[0] || {};
     const { allDescriptionTasks } = allData || {}
-    const { propertyPlace, propertyAddress, propertyPostalCode, projectDescription, serviceId, id, createdById } = allData || {};
+    const { propertyPlace, propertyAddress, propertyPostalCode, propertyNumber, municipalityCommunity, projectDescription, serviceId, id, createdById } = allData || {};
 
     const {
         register,
@@ -85,16 +89,20 @@ function F8D6({ allData }: { allData: allDataProps }) {
                             {/* Project Row */}
                             <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
                                 <label className="col-span-2">Έργο:</label>
-                                <div className="col-span-10 text-sm">
+                                <div className="col-span-10 text-sm text-center">
                                     {projectDescription || "N/A"}
                                 </div>
                             </div>
 
                             {/* Address Row */}
                             <div className="grid grid-cols-12 gap-2 mb-4 ml-10">
-                                <label className="col-span-2 ">Θέση:</label>
-                                <div className="col-span-10">
-                                    <h3 className=" text-sm">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"}</h3>
+                                <label className="col-span-3 ">Θέση:</label>
+                                <div className="col-span-9">
+                                    <h3 className=" text-sm">
+                                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                        ΤΚ {propertyPostalCode || "N/A"}
+                                    </h3>
                                 </div>
                             </div>
 
@@ -103,8 +111,10 @@ function F8D6({ allData }: { allData: allDataProps }) {
                                 <p className="mt-6 mb-2">
                                     Εμείς οι κάτωθι υπογεγραμμένοι, συνιδιοκτήτες της πολυκατοικίας επί της οδού
                                 </p>
-                                <h3>
-                                    <span className="text-sm font-semibold">{propertyAddress || "N/A"}, {propertyPlace || "N/A"}, {propertyPostalCode || "N/A"}</span>
+                                <h3 className=" text-sm font-bold">
+                                    {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                    ΤΚ {propertyPostalCode || "N/A"}
                                 </h3>
                                 <p>
                                     δηλώνουμε υπεύθυνα και ρητά συναινούμε στην εκτέλεση των παρακάτω εργασιών:</p>
@@ -177,35 +187,47 @@ function F8D6({ allData }: { allData: allDataProps }) {
 
                                             {/* Project */}
                                             <div className="flex items-center gap-4">
-                                                <label className="font-medium w-1/4">Έργο *:</label>
+                                                <label className="font-medium w-1/8">Έργο *:</label>
                                                 <input
-                                                    defaultValue={projectDescription || "projectDescription"}
+                                                    defaultValue={projectDescription || "Project Description "}
                                                     type="text"
-                                                    {...register("projectDescription", { required: "This field is required" })}
+                                                    {...register("projectDescription", { required: "projectDescription is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
                                                 />
                                             </div>
 
                                             {/* Address */}
                                             <div className="flex items-center gap-4">
-                                                <label className="font-medium w-1/4">Διεύθυνση Έργου *:</label>
+                                                <label className="font-medium w-1/8">Θέση*:</label>
                                                 <div className="flex-1 grid grid-cols-3 gap-2">
                                                     <input
                                                         type="text"
                                                         defaultValue={propertyAddress || "propertyAddress"}
-                                                        {...register("propertyAddress", { required: "Address is required" })}
+                                                        {...register("propertyAddress", { required: "propertyAddress is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
-                                                        defaultValue={propertyPlace || "propertyPlace"}
-                                                        {...register("propertyPlace", { required: "City is required" })}
+                                                        defaultValue={propertyNumber || "propertyNumber"}
+                                                        {...register("propertyNumber", { required: "propertyNumber is required" })}
+                                                        className="border p-2 rounded text-sm"
+                                                    />
+                                                    <input
+                                                        type="text"
+                                                        defaultValue={municipalityCommunity || "municipalityCommunity"}
+                                                        {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
                                                         defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                                        {...register("propertyPostalCode", { required: "Postal code is required" })}
+                                                        {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
+                                                        className="border p-2 rounded text-sm"
+                                                    />
+                                                    <input
+                                                        type="text"
+                                                        defaultValue={propertyPlace || "propertyPlace"}
+                                                        {...register("propertyPlace", { required: "propertyPlace is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                 </div>

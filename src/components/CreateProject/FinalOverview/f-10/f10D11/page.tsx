@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { format } from "date-fns"
-
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
@@ -42,6 +41,8 @@ interface allDataProps {
     createdById: string;
     serviceId: string;
     createdAt: string;
+    municipalityCommunity: string;
+    propertyNumber: string;
 }
 
 
@@ -53,7 +54,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
-    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
+    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt, propertyNumber, municipalityCommunity } = allData || {};
 
 
     const [updateProject] = useUpdateProjectMutation()
@@ -194,7 +195,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                <div className=" p-2 border-r border-gray-400 font-bold">{engineer?.idCardNumber || "N/A"}</div>
+                                <div className="w-72 p-2 border-r border-gray-400 font-bold">{engineer?.idCardNumber || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
                                 <div className="flex-1 p-2 font-bold">{engineer?.phone || "N/A"}</div>
                             </div>
@@ -203,39 +204,44 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                         {/* Address row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
-                                <div className="w-20 p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
+                                <div className="w-35 p-2 border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
+                                <div className="w-50 p-2 border-r border-gray-400 font-bold ">{engineer?.town || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Οδός</div>
-                                <div className="w-24 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress || "N/A"}</div>
+                                <div className="w-50 p-2 border-r border-gray-400 font-bold ">{engineer?.streetAddress || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Αριθ</div>
-                                <div className="w-20 p-2 border-r border-gray-400 font-bold ">{engineer?.streetNumber || "N/A"}</div>
+                                <div className="w-12 p-2 border-r border-gray-400 font-bold ">{engineer?.streetNumber || "N/A"}</div>
                                 <div className="w-12 p-2 border-r border-gray-400 text-sm">ΤΚ</div>
-                                <div className="flex-1 p-2 font-bold">{engineer?.postalCode || "N/A"}</div>
+                                <div className="w-25 p-2 font-bold">{engineer?.postalCode || "N/A"}</div>
                             </div>
                         </div>
 
                         {/* Contact details row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Αρ. Τηλεομοιότυπου (Fax):</div>
-                                <div className="flex-1 p-2">
+                                <div className="w-55 p-2 border-r border-gray-400 text-sm flex items-center">Αρ. Τηλεομοιότυπου (Fax):</div>
+                                <div className="w-31 p-2 border-r border-gray-400 text-sm flex items-center">-</div>
+                                <div className="w-52 p-2 border-r border-gray-400 text-sm flex items-center">
                                     <div className="text-sm">
-                                        <div>Δ/νση</div>
-                                        <div>Ηλεκτρ.</div>
+                                        <div>Δ/νση Ηλεκτρ.</div>
                                         <div>Ταχυδρομ</div>
                                         <div>ίου (Email):</div>
                                     </div>
                                 </div>
-                                <div className=" p-2 underline ">{engineer?.email || "N/A"}</div>
+                                <div className="p-2 underline flex items-center ">{engineer?.email || "N/A"}</div>
                             </div>
                         </div>
-
                         {/* VAT row */}
                         <div className="border-b border-gray-400">
                             <div className="flex">
-                                <div className="w-32 p-2 border-r border-gray-400 text-sm">Α.Φ.Μ.:</div>
-                                <div className="flex-1 p-2 font-bold">{engineer?.engVatNumber || "N/A"}</div>
-                                <div className="w-32 p-2 border-l border-gray-400 text-sm">Δ.Ο.Υ.:</div>
+                                <div className="w-32 p-2 border-r border-gray-400 text-sm">
+                                    Α.Φ.Μ.:
+                                </div>
+                                <div className="w-54 p-2 font-bold">
+                                    {engineer?.engVatNumber || "N/A"}
+                                </div>
+                                <div className="w-32 p-2 border-l border-gray-400 text-sm">
+                                    Δ.Ο.Υ.:
+                                </div>
                             </div>
                         </div>
 
@@ -245,20 +251,22 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
 
-                            <p className=" font-bold">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις αναλαμβάνω για το έργο</p>
-                            <p className=" mb-6">{projectDescription || "N/A"}</p>
+                            <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
+                            <p className=" mb-6 mt-2 font-bold uppercase">"{projectDescription || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
-                            <p className="mb-4">
-                                την επίβλεψη των προβλεπόμενων εργασιών που πρόκειται να εκτελεστούν στο ανωτέρω ακίνητο, στο πλαίσιο της διαδικασίας έκδοσης
-                                Έγκρισης Εργασιών Μικρής Κλίμακας, σύμφωνα με τις ισχύουσες πολεοδομικές διατάξεις και ειδικότερα τις προβλέψεις του άρθρου 29 του Ν.4495/2017.
-                            </p>
+                            <h3 className=" text-sm"> <span className="mr-1">επί της οδού</span>
+                                <span className="font-bold">
+                                    {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                    ΤΚ {propertyPostalCode || "N/A"}</span>
+                            </h3>
                             <p>
-                                Η παρούσα ανάθεση αφορά την τεχνική καθοδήγηση και εποπτεία των εργασιών κατά την υλοποίησή τους, την τήρηση των
-                                σχετικών κανονισμών ασφαλείας, καθώς και την ευθύνη για την πιστή εφαρμογή του εγκεκριμένου περιεχομένου της άδειας.
+                                από την ανάλυση του συνόλου των προβλεπόμενων εργασιών προκύπτει <span className="font-bold">ότι δεν πραγματοποιούνται επεμβάσεις σε φέροντα στοιχεία του οργανισμού του κτιρίου.</span>
+                                Οι εργασίες περιορίζονται αποκλειστικά σε μη φέροντα στοιχεία και δεν επηρεάζουν καθ’ οποιονδήποτε τρόπο την ευστάθεια, φέρουσα ικανότητα ή δομική λειτουργία του κτιρίου.
+                                Η παρούσα δήλωση τεκμηριώνεται σύμφωνα με τις διατάξεις του άρθρου 29 του Ν.4495/2017.
                             </p>
                         </div>
 
@@ -268,7 +276,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                 <div className="text-right space-y-2">
                                     <div className="flex items-center gap-4">
                                         <span className="text-sm">Ημερομηνία :</span>
-                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "N/A"}</span>
+                                        <span className="text-sm font-medium">{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</span>
                                     </div>
                                     <div className="text-sm mt-8 text-center">
                                         <div>( Υπογραφή )</div>
@@ -280,6 +288,12 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                         {/* signature  */}
                         <div className="flex items-center justify-end p-4">
                             <img src={signature} alt="" />
+                        </div>
+                        <div className="text-xs p-6">
+                            <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
+                            <p>(2) Αναγράφεται ολογράφως.</p>
+                            <p> (3) «Όποιος εν γνώσει του δηλώνει ψευδή γεγονότα ή αρνείται ή αποκρύπτει τα αληθινά με έγγραφη υπεύθυνη δήλωση του άρθρου 8 τιμωρείται με φυλάκιση τουλάχιστον τριών μηνών. Εάν ο υπαίτιος αυτών των πράξεων σκόπευε να προσπορίσει στον εαυτόν του ή σε άλλον περιουσιακό όφελος βλάπτοντας τρίτον ή σκόπευε να βλάψει άλλον, τιμωρείται με κάθειρξη μέχρι 10 ετών.</p>
+                            <p>(4) Σε περίπτωση ανεπάρκειας χώρου η δήλωση συνεχίζεται στην πίσω όψη της και υπογράφεται από τον δηλούντα ή την δηλούσα.</p>
                         </div>
                     </div>
                     {/* EDIT MODAL */}

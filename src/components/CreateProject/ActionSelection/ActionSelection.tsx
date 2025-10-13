@@ -390,15 +390,15 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
       )
     }
 
-    // this subcategory 10
+    // this subcategory 10 i have to fix this 7 and 8 number
     if (hasSubcategory10) {
-      // stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
-      //   baseTemplatesOwner1.push({
-      //     id: `template1_${index}`,
-      //     title: `YΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
-      //     price: 0.5,
-      //   });
-      // });
+      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+        baseTemplatesOwner1.push({
+          id: `template105_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          price: 0.5,
+        });
+      });
 
       baseTemplatesOwner1.push(
         {
@@ -413,9 +413,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         {
           id: "104", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
         },
-        {
-          id: "105", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        },
+        // {
+        //   id: "105", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
         {
           id: "106", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
         },
@@ -489,6 +489,18 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
     // this is subcategory 14 
     if (hasSubcategory14) {
+      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+        baseTemplatesOwner1.push({
+          id: `owner145_${index}`,
+          title: `ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          price: 0.5,
+        });
+        baseTemplatesOwner1.push({
+          id: `owner146_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          price: 0.5,
+        });
+      });
       baseTemplatesOwner1.push(
         {
           id: "141", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
@@ -502,12 +514,12 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         {
           id: "144", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
         },
-        {
-          id: "145", title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη", price: 0.5,
-        },
-        {
-          id: "146", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        },
+        // {
+        //   id: "145", title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη", price: 0.5,
+        // },
+        // {
+        //   id: "146", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
         {
           id: "147", title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού", price: 0.5,
         },
@@ -534,6 +546,13 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
     // this is subcategory 2
     if (hasSubcategory2) {
+       stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+        baseTemplatesOwner1.push({
+          id: `owner26_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          price: 0.5,
+        });
+      });
       baseTemplatesOwner1.push(
         {
           id: "21", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
@@ -550,9 +569,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         {
           id: "25", title: "Τεχνική Έκθεση_ Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020", price: 0.5,
         },
-        {
-          id: "26", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        },
+        // {
+        //   id: "26", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
         {
           id: "27", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
         },
@@ -624,6 +643,13 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
     // this is subcategory 8 
     if (hasSubcategory8) {
+      stepByStepData.ownerBaseData?.forEach((owner:{first_name: string; last_name: string}, index: number) => {
+        baseTemplatesOwner1.push({
+          id:`template83_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          price: 0.5,
+        })
+      })
       baseTemplatesOwner1.push(
         {
           id: "81", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
@@ -631,9 +657,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         {
           id: "82", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
         },
-        {
-          id: "83", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        },
+        // {
+        //   id: "83", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
         {
           id: "84", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
         },
