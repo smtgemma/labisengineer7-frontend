@@ -50,7 +50,7 @@ export default function F7D11({ allData, setIsModalOpen }: F6D13Props) {
         propertyPostalCode,
         createdAt,
         technicalDescription,
-        technicalDescriptionTwo, 
+        technicalDescriptionTwo,
     } = allData || {}
 
 
@@ -280,6 +280,29 @@ export default function F7D11({ allData, setIsModalOpen }: F6D13Props) {
                                             defaultValue={propertyPlace || "propertyPlace"}
                                             {...register("propertyPlace", { required: "propertyPlace is required" })}
                                             className="border p-2 rounded text-sm"
+                                        />
+                                    </div>
+                                </div>
+                                {/* technical description */}
+                                <div className="w-full space-y-2">
+                                    <div className="w-full">
+                                        <input
+                                            type="text"
+                                            defaultValue={technicalDescription || "technicalDescription"}
+                                            {...register("technicalDescription", {
+                                                required: "technicalDescription is required",
+                                            })}
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    </div>
+                                    <div className="w-full">
+                                        <input
+                                            type="text"
+                                            defaultValue={technicalDescriptionTwo || "technicalDescriptionTwo"}
+                                            {...register("technicalDescriptionTwo", {
+                                                required: "technicalDescriptionTwo is required",
+                                            })}
+                                            className="border p-2 rounded text-sm w-full"
                                         />
                                     </div>
                                 </div>
