@@ -42,6 +42,8 @@ interface allDataProps {
     createdById: string;
     serviceId: string;
     createdAt: string;
+    propertyNumber: string;
+    municipalityCommunity: string;
 }
 
 
@@ -53,7 +55,7 @@ export default function F14D7({ allData }: { allData: allDataProps }) {
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
-    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
+    const { propertyAddress, propertyPlace, municipalityCommunity, propertyNumber, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
 
 
     const [updateProject] = useUpdateProjectMutation()
@@ -246,12 +248,17 @@ export default function F14D7({ allData }: { allData: allDataProps }) {
                             </p>
 
                             <p className=" font-bold">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις αναλαμβάνω για το έργο</p>
-                            <p className=" mb-6">{projectDescription || "N/A"}</p>
+                            <p className=" mb-6 font-bold">"{projectDescription || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
+                            <h3 className=" text-sm"> <span className="mr-1">επί της οδού</span>
+                                <span className="font-bold">
+                                    {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                    ΤΚ {propertyPostalCode || "N/A"}</span>
+                            </h3>
                             <p className="mb-4">
                                 την επίβλεψη των προβλεπόμενων εργασιών που πρόκειται να εκτελεστούν στο ανωτέρω ακίνητο, στο πλαίσιο της διαδικασίας έκδοσης
                                 Έγκρισης Εργασιών Μικρής Κλίμακας, σύμφωνα με τις ισχύουσες πολεοδομικές διατάξεις και ειδικότερα τις προβλέψεις του άρθρου 29 του Ν.4495/2017.

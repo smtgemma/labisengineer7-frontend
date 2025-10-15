@@ -3,7 +3,7 @@
 import { format } from "date-fns"
 
 // for editing 
-import { useForm, Controller } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
 import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 import { useState } from "react";
@@ -13,6 +13,8 @@ interface FormData {
     propertyAddress: string;
     propertyPlace: string;
     propertyPostalCode: string;
+    municipalityCommunity: string;
+    propertyNumber: string;
     owners: {
         firstName: string;
         lastName: string;
@@ -65,12 +67,12 @@ export default function F5D7({ allData, setIsModalOpen }: F6D5Props) {
             propertyAddress: allData?.propertyAddress || "",
             propertyPlace: allData?.propertyPlace || "",
             propertyPostalCode: allData?.propertyPostalCode || "",
-            owners: [
-                {
-                    firstName: allData?.owners?.[0]?.firstName || "",
-                    lastName: allData?.owners?.[0]?.lastName || "",
-                },
-            ],
+            // owners: [
+            //     {
+            //         firstName: allData?.owners?.[0]?.firstName || "",
+            //         lastName: allData?.owners?.[0]?.lastName || "",
+            //     },
+            // ],
         },
     })
 
@@ -118,9 +120,9 @@ export default function F5D7({ allData, setIsModalOpen }: F6D5Props) {
                     <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
                 </div>
 
-                <div className="flex items-start justify-between gap-4 max-w-xl">
-                    <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">
+                <div className="flex items-start">
+                    <span className="min-w-[120px] text-sm">Θέση:</span>
+                    <h3 className=" text-sm text-center">
                         {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
                         ΔΗΜΟΣ {municipalityCommunity || "N/A"},
                         ΤΚ {propertyPostalCode || "N/A"}
@@ -146,12 +148,9 @@ export default function F5D7({ allData, setIsModalOpen }: F6D5Props) {
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
                 <div>
-                    <span className="font-semibold">
-
-                        <span className="mr-1">Στο ακίνητο {horizontalPropertyName || "N/A"} </span>
-                    </span>
+                    <span className="mr-1">Στο ακίνητο <span className="font-bold">{horizontalPropertyName || "N/A"}</span> </span>
                     επί της οδού
-                    <span className="">
+                    <span className="font-bold">
                         <span className="ml-1">{propertyAddress || "N/A"} </span>{propertyNumber || "N/A"}, {propertyPlace || "N/A"},
                         ΔΗΜΟΣ {municipalityCommunity || "N/A"},
                         <span className="mr-1">ΤΚ {propertyPostalCode || "N/A"}</span>
@@ -161,37 +160,6 @@ export default function F5D7({ allData, setIsModalOpen }: F6D5Props) {
             </div>
 
             <div className="space-y-6 ml-10">
-                {/* <div>
-                    <h3 className="text-sm font-bold">● Τοποθέτηση ικριωμάτων επί των όψεων του κτιρίου
-                    </h3>
-                    <p className="text-sm mb-6">Περιλαμβάνεται η εγκατάσταση μεταλλικών ικριωμάτων κατά μήκος των όψεων του κτιρίου, σύμφωνα με την ισχύουσα νομοθεσία περί μέτρων ασφαλείας. Η τοποθέτηση διασφαλίζει ασφαλή και πλήρη πρόσβαση στα σημεία επέμβασης για τις εργασίες αποκατάστασης και χρωματισμού των εξωτερικών επιφανειών.</p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold">● Μικρές οικοδομικές εργασίες – Σοβατίσματα – Στοκαρίσματα τοιχοποιιών
-                    </h3>
-                    <p className="text-sm mb-6">Αφορά την αποκατάσταση φθαρμένων ή αποσαθρωμένων επιχρισμάτων εξωτερικής τοιχοποιίας. Περιλαμβάνονται καθαίρεση σαθρών επιχρισμάτων, εφαρμογή νέου σοβά, στοκάρισμα ρωγμών και λείανση επιφανειών, χωρίς επέμβαση στον φέροντα οργανισμό ή στη γεωμετρία του κτιρίου.</p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold">● Εξωτερικοί χρωματισμοί επί των όψεων
-                    </h3>
-                    <p className="text-sm mb-6">Προβλέπεται η πλήρης προετοιμασία και βαφή των εξωτερικών επιφανειών του κτιρίου με ακρυλικό ή σιλικονούχο χρώμα υψηλής αντοχής. Περιλαμβάνει καθαρισμό, αστάρωμα και εφαρμογή δύο στρώσεων τελικού χρώματος, με κατάλληλο υλικό και μέθοδο ανάλογα με τις απαιτήσεις του υποστρώματος.</p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold">● Επισκευή και στερέωση μαρμάρινων στοιχείων( π.χ περβαζιών, στηθαίων)
-                    </h3>
-                    <p className="text-sm mb-6">Προβλέπεται η επαναστερέωση ή αντικατάσταση φθαρμένων ή αποκολλημένων μαρμάρινων επιστρώσεων στις όψεις, με χρήση αγκυρίων ή κόλλας κατάλληλης για εξωτερική χρήση. Οι αρμοί θα σφραγιστούν με σιλικονούχα ή πολυουρεθανική μαστίχη για αποτροπή εισροής υγρασίας.</p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold">● Αποκατάσταση στοιχείων απορροής όμβριων και μεταλλικών εξαρτημάτων
-                    </h3>
-                    <p className="text-sm mb-6">Περιλαμβάνεται ο έλεγχος και η αποκατάσταση ή αντικατάσταση φθαρμένων υδρορροών, στομίων, καναλιών ή σταγονόδρομων από λαμαρίνα ή συνθετικά υλικά. Στόχος είναι η αποκατάσταση της λειτουργικής απορροής όμβριων και η προστασία των όψεων από φθορές λόγω υγρασίας.</p>
-                </div>
-                <div>
-                    <h3 className="text-sm font-bold">● Χρωματισμός μεταλλικών κιγκλιδωμάτων (σιδηρών στοιχείων)
-                    </h3>
-                    <p className="text-sm mb-6">Προβλέπεται ο καθαρισμός, αποσκουριάσμα και βαφή των μεταλλικών κιγκλιδωμάτων (κάγκελα, εξώστες, αυλόπορτες) με εφαρμογή αντιδιαβρωτικού υποστρώματος και τελικής βαφής δύο στρώσεων με χρώμα μετάλλου εξωτερικής χρήσης. Η εργασία αφορά υφιστάμενα στοιχεία και δεν μεταβάλλει τη μορφή ή τον χαρακτήρα του κτιρίου</p>
-                </div> */}
-
                 {
                     allDescriptionTasks ? (allDescriptionTasks?.map((task: any, index: number) => (
                         <div key={index}>
@@ -249,67 +217,51 @@ export default function F5D7({ allData, setIsModalOpen }: F6D5Props) {
                             >
                                 {/* Project */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Έργο *:</label>
+                                    <label className="font-medium w-1/8">Έργο *:</label>
                                     <input
-                                        defaultValue={projectDescription || "projectDescription"}
+                                        defaultValue={projectDescription || "Project Description "}
                                         type="text"
-                                        {...register("projectDescription", { required: "This field is required" })}
+                                        {...register("projectDescription", { required: "projectDescription is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
 
                                 {/* Address */}
                                 <div className="flex items-center gap-4">
-                                    <label className="font-medium w-1/4">Θέση*:</label>
+                                    <label className="font-medium w-1/8">Θέση*:</label>
                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyAddress", { required: "Address is required" })}
+                                            {...register("propertyAddress", { required: "propertyAddress is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
-                                            defaultValue={propertyPlace || "propertyPlace"}
-                                            {...register("propertyPlace", { required: "City is required" })}
+                                            defaultValue={propertyNumber || "propertyNumber"}
+                                            {...register("propertyNumber", { required: "propertyNumber is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={municipalityCommunity || "municipalityCommunity"}
+                                            {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                            {...register("propertyPostalCode", { required: "Postal code is required" })}
+                                            {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
+                                            className="border p-2 rounded text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            defaultValue={propertyPlace || "propertyPlace"}
+                                            {...register("propertyPlace", { required: "propertyPlace is required" })}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>
                                 </div>
-                                {/* Address */}
-                                {/* First Name */}
-                                <Controller
-                                    name="owners.0.firstName"
-                                    control={control}
-                                    rules={{ required: "First name is required" }}
-                                    render={({ field }) => (
-                                        <input
-                                            {...field}
-                                            placeholder="First Name"
-                                            className="border p-2 rounded text-sm w-full"
-                                        />
-                                    )}
-                                />
-                                {/* Last Name */}
-                                <Controller
-                                    name="owners.0.lastName"
-                                    control={control}
-                                    rules={{ required: "Last name is required" }}
-                                    render={({ field }) => (
-                                        <input
-                                            {...field}
-                                            placeholder="Last Name"
-                                            className="border p-2 rounded text-sm w-full"
-                                        />
-                                    )}
-                                />
-
                                 {/* Submit */}
                                 <div className="flex justify-end">
                                     <button

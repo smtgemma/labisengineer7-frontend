@@ -43,7 +43,7 @@ interface BudgetCategory {
   subtotal: number
 }
 
-export default function F14D4({ allData }: { allData: allDataProps }) {
+export default function F6D1({ allData }: { allData: allDataProps }) {
   const owner = allData?.owners || []
   const { projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt, propertyNumber, municipalityCommunity } = allData || "";
   console.log(allData)
@@ -383,7 +383,7 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
     {
       id: 7,
       title: "ΣΤΡΩΣΕΙΣ ΔΑΠΕΔΩΝ",
-      subtotal: 968.0,
+      subtotal: 0,
       items: [
         { code: "7.01", description: "Με τσιμεντοκονία", unit: "τ.μ.", unitPrice: 8.8, quantity: 0, total: 0 },
         { code: "7.02", description: "Με τσιμεντόπλακες", unit: "τ.μ.", unitPrice: 11.74, quantity: 0, total: 0 },
@@ -394,7 +394,7 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
           unit: "τ.μ.",
           unitPrice: 17.6,
           quantity: 0,
-          total: 968.0,
+          total: 0,
         },
         {
           code: "7.05",
@@ -830,7 +830,7 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
     {
       id: 18,
       title: "ΔΙΑΦΟΡΕΣ ΟΙΚΟΔΟΜΙΚΕΣ ΕΡΓΑΣΙΕΣ",
-      subtotal: 484.0,
+      subtotal: 0,
       items: [
         {
           code: "18.01",
@@ -838,7 +838,7 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
           unit: "τ.μ.",
           unitPrice: 8.8,
           quantity: 0,
-          total: 484.0,
+          total: 0,
         },
         { code: "18.02", description: "Ικριώματα", unit: "τ.μ.", unitPrice: 2.06, quantity: 0, total: 0 },
         { code: "18.03", description: "Τζάκι με καπνοδόχο", unit: "αποκοπή", unitPrice: 880.42, quantity: 0, total: 0 },
@@ -846,7 +846,7 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
           code: "18.04",
           description: "Κλειδαριές και πόμολα",
           unit: "κάτοψης",
-          unitPrice: 0.88,
+          unitPrice: 0,
           quantity: 0,
           total: 0,
         },
@@ -863,7 +863,7 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
           code: "19.03",
           description: "Από ξυλεία προλουστραρισμένη",
           unit: "κ.μ.",
-          unitPrice: 900.0,
+          unitPrice: 0,
           quantity: 0,
           total: 0,
         },
@@ -871,7 +871,7 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
           code: "19.04",
           description: "Από ξυλεία (χωρίς λούστρο)",
           unit: "κ.μ.",
-          unitPrice: 550.0,
+          unitPrice: 0,
           quantity: 0,
           total: 0,
         },
@@ -880,9 +880,9 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
     {
       id: 20,
       title: "ΠΕΡΙΦΡΑΞΕΙΣ",
-      subtotal: 45.0,
+      subtotal: 0,
       items: [
-        { code: "20.01", description: "Πάσσαλοι σιδερένιοι", unit: "μ.", unitPrice: 1.5, quantity: 0, total: 45.0 },
+        { code: "20.01", description: "Πάσσαλοι σιδερένιοι", unit: "μ.", unitPrice: 1.5, quantity: 0, total: 0 },
         { code: "20.02", description: "Πάσσαλοι ξύλινοι", unit: "μ.", unitPrice: 2.2, quantity: 0, total: 0 },
         {
           code: "20.03",
@@ -1046,14 +1046,14 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
   return (
     <div className="max-w-[794px] mx-auto p-4 bg-white arial">
       <div className="text-center mb-6">
-        <h1 className="text-xl font-bold mb-2">ΣΥΝΤΑΞΗ ΑΝΑΛΥΤΙΚΟΥ ΠΡΟΫΠΟΛΟΓΙΣΜΟΥ ΕΡΓΟΥ</h1>
+        <h1 className="text-xl font-bold mb-2 bg-[#D8D8D8] border-1">ΣΥΝΤΑΞΗ ΑΝΑΛΥΤΙΚΟΥ ΠΡΟΫΠΟΛΟΓΙΣΜΟΥ ΕΡΓΟΥ</h1>
         <p className="text-sm ">(σύμφωνα με το Παράρτημα Β' του Ν.4495/17)</p>
       </div>
 
       {/* Project Info */}
       <div className="mb-6 space-y-4">
         <div className="flex">
-          <span className="font-medium w-1/4">Εργοδότες *:</span>
+          <span className="font-medium">Εργοδότες *:</span>
           <div className="flex-1">
             <div className="flex items-center justify-center gap-2">
               {
@@ -1067,11 +1067,11 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <span className="font-medium w-1/4">Έργο *:</span>
+          <span className="font-medium w-1/5">Έργο *:</span>
           <h3 className="flex-1 text-black text-sm text-center">{projectDescription || "N/A"}</h3>
         </div>
         <div className="flex">
-          <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
+          <span className="font-medium">Διεύθυνση Έργου *:</span>
           <div className="flex-1">
             <h3 className=" text-sm flex items-center justify-center">
             {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
@@ -1082,14 +1082,14 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
         </div>
       </div>
       {/* Budget Title */}
-      <div className="text-center bg-white p-2 border border-black border-b-0">
-        <h2 className="text-lg font-bold ">ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ ΒΑΣΕΙ ΠΑΡΑΡΤΗΜΑΤΟΣ Β' Ν.4495/17)</h2>
+      <div className="text-center bg-white border border-black border-b-0">
+        <h2 className="text-lg font-bold bg-[#D8D8D8] p-2">ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ ΒΑΣΕΙ ΠΑΡΑΡΤΗΜΑΤΟΣ Β' Ν.4495/17)</h2>
       </div>
 
       {/* Budget Table */}
       <div className="border border-black">
         {/* Table Header */}
-        <div className="grid grid-cols-12 bg-white border-b border-black font-bold text-sm">
+        <div className="grid grid-cols-12 border-b border-black font-bold text-sm bg-[#F2F2F2]">
           <div className="col-span-1 py-2 border-r border-black text-xs px-1">Κωδικός</div>
           <div className="col-span-5 p-2 border-r border-black text-xs">Εργασία</div>
           <div className="col-span-1 py-2 border-r border-black text-xs px-1">Μονάδα Μέτρησης</div>
@@ -1102,9 +1102,9 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
         {categories.map((category) => (
           <div key={category.id}>
             {/* Category Header */}
-            <div className="grid grid-cols-12 bg-white border-b border-black">
-              <div className="col-span-1 p-2 border-r border-gray-black font-bold ">{category.id}</div>
-              <div className="col-span-9 p-2 border-r border-gray-black font-bold ">{category.title}</div>
+            <div className="grid grid-cols-12 border-b  bg-[#F2F2F2]">
+              <div className="col-span-1 p-2 border-r border-gray-black font-bold bg-[#F2F2F2]  ">{category.id}</div>
+              <div className="col-span-9 p-2 border-r border-gray-black font-bold bg-[#F2F2F2] ">{category.title}</div>
               {/* <div className="col-span-2 p-2 font-bold text-right ">{category.subtotal.toFixed(2)}</div> */}
             </div>
 
@@ -1128,9 +1128,10 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
 
             {/* Category Subtotal */}
             <div className="grid grid-cols-12 bg-white border-b border-black">
-              <div className="col-span-10 p-2 text-right font-bold">Μερικό Σύνολο =</div>
-              <div className="col-span-2 p-2 text-right font-bold ">{category.subtotal.toFixed(2)}</div>
+              <div className="col-span-10 p-2 pl-18 font-bold bg-[#F2F2F2]">Μερικό Σύνολο =</div>
+              <div className="col-span-2 p-2 text-right font-bold bg-[#F2F2F2] ">{category.subtotal.toFixed(2)}</div>
             </div>
+            <div className="p-3 border-b "></div>
           </div>
         ))}
 
@@ -1168,18 +1169,6 @@ export default function F14D4({ allData }: { allData: allDataProps }) {
               <img src={signature} alt="" />
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-3 mb-2">
-        <div className="col-span-1"></div>
-        <div className="col-span-2 flex justify-center gap-6">
-          <p className="w-1/2">
-            Here, the date the engineer starts the project should automatically appear.
-          </p>
-          <p className="w-1/2">
-            stamp and signature of an engineer, he should save it in his profile and display it there or if he doesn't want it for personal data reasons, we put a picture and he changes it
-          </p>
         </div>
       </div>
     </div >

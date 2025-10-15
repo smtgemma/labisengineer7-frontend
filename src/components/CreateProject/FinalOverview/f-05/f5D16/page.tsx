@@ -13,6 +13,8 @@ interface FormData {
     propertyAddress: string
     propertyPostalCode: string
     propertyPlace: string
+    municipalityCommunity: string
+    propertyNumber: string
 }
 // end editing 
 
@@ -185,35 +187,47 @@ function F5D16({ allData }: { allData: allDataProps }) {
                                         >
                                             {/* Project */}
                                             <div className="flex items-center gap-4">
-                                                <label className="font-medium w-1/4">Έργο *:</label>
+                                                <label className="font-medium w-1/8">Έργο *:</label>
                                                 <input
-                                                    defaultValue={projectDescription || "projectDescription"}
+                                                    defaultValue={projectDescription || "Project Description "}
                                                     type="text"
-                                                    {...register("projectDescription", { required: "This field is required" })}
+                                                    {...register("projectDescription", { required: "projectDescription is required" })}
                                                     className="flex-1 border p-2 rounded text-sm"
                                                 />
                                             </div>
 
                                             {/* Address */}
                                             <div className="flex items-center gap-4">
-                                                <label className="font-medium w-1/4">Θέση*:</label>
+                                                <label className="font-medium w-1/8">Θέση*:</label>
                                                 <div className="flex-1 grid grid-cols-3 gap-2">
                                                     <input
                                                         type="text"
                                                         defaultValue={propertyAddress || "propertyAddress"}
-                                                        {...register("propertyAddress", { required: "Address is required" })}
+                                                        {...register("propertyAddress", { required: "propertyAddress is required" })}
+                                                        className="border p-2 rounded text-sm"
+                                                    />
+                                                    <input
+                                                        type="text"
+                                                        defaultValue={propertyNumber || "propertyNumber"}
+                                                        {...register("propertyNumber", { required: "propertyNumber is required" })}
+                                                        className="border p-2 rounded text-sm"
+                                                    />
+                                                    <input
+                                                        type="text"
+                                                        defaultValue={municipalityCommunity || "municipalityCommunity"}
+                                                        {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
                                                         defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                                        {...register("propertyPostalCode", { required: "City is required" })}
+                                                        {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
                                                         defaultValue={propertyPlace || "propertyPlace"}
-                                                        {...register("propertyPlace", { required: "Postal code is required" })}
+                                                        {...register("propertyPlace", { required: "propertyPlace is required" })}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                 </div>

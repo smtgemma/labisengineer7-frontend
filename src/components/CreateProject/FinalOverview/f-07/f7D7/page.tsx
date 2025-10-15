@@ -249,7 +249,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                             </p>
 
                             <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
-                            <p className=" mb-6">{projectDescription || "N/A"}</p>
+                            <p className=" mb-6 font-bold">"{projectDescription || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}

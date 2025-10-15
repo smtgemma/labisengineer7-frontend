@@ -42,6 +42,8 @@ interface allDataProps {
     createdById: string;
     serviceId: string;
     createdAt: string;
+    municipalityCommunity: string;
+    propertyNumber: string;
 }
 
 
@@ -53,7 +55,7 @@ export default function F14D10({ allData }: { allData: allDataProps }) {
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
     const projectDescription = allData?.projectDescription || "";
     const { ydom } = allData || {};
-    const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
+    const { propertyAddress, propertyPlace, propertyNumber, municipalityCommunity, propertyPostalCode, id, createdById, serviceId, createdAt } = allData || {};
 
 
     const [updateProject] = useUpdateProjectMutation()
@@ -247,12 +249,17 @@ export default function F14D10({ allData }: { allData: allDataProps }) {
                             </p>
 
                             <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
-                            <p className=" mb-6">{projectDescription || "N/A"}</p>
+                            <p className=" mb-6 font-bold">"{projectDescription || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
-                            <p>επί της οδού {propertyAddress || "N/A"}, {propertyPlace || "N/A"} , {propertyPostalCode || "N/A"} ( FOR PROPERTY)</p>
+                            <h3 className=" text-sm"> <span className="mr-1">επί της οδού</span>
+                                <span className="font-bold">
+                                    {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                    ΤΚ {propertyPostalCode || "N/A"}</span>
+                            </h3>
                             <p className="mb-4">
                                 <span className="text-sm font-bold">ΔΕΝ επηρεάζεται, δεν τροποποιείται και δεν θίγεται,</span> καθ’ οιονδήποτε τρόπο ο φέρων οργανισμός (στατικός φορέας) του κτιρίου, και οι εργασίες δεν επιφέρουν καμία επιβάρυνση
                                 ή αλλαγή στα στατικά ή γεωμετρικά χαρακτηριστικά του φέροντος οργανισμού, όπως αυτά υφίστανται σύμφωνα με την υφιστάμενη Οικοδομική Άδεια.
