@@ -82,6 +82,7 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
         method: "PATCH",
         body: formData,
       }),
+      invalidatesTags: ["Templates"],
     }),
 
     downloadTemplatePdf: build.query({

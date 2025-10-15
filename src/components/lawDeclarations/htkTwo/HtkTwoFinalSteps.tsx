@@ -18,6 +18,7 @@ import { FormDataOne, FormDataTwo } from "./template";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import S4D1 from "@/components/CreateProject/FinalOverview/srv-4t/s4D1/page";
 import S4D2 from "@/components/CreateProject/FinalOverview/srv-4t/s4D2/page";
+import Flow2D3 from "@/components/CreateProject/FinalOverview/srv-3rd/f2/flow2D3/page";
 
 export interface UserData {
     id: string;
@@ -67,7 +68,7 @@ const HtkTwoFinalSteps: React.FC<FinalOverviewProps> = ({
     const allTemplate = stepByStepData.selectTemplate;
     const projectCodeId = stepByStepData.projectIdCode;
     const id = stepByStepData?.projectIdCode;
-    const projectId = stepByStepData?.projectIdCode?.result.id;
+    const projectId = stepByStepData?.projectIdCode?.result?.id;
     const userId = dataAllFIled?.createdById;
 
     const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
@@ -84,6 +85,7 @@ const HtkTwoFinalSteps: React.FC<FinalOverviewProps> = ({
     // const small = subCategoryData["small-construction"] || [];
 
     // const store = makeStore();
+    const [ownerIndex, setOwnerIndex] = useState<number | null>(null)
     const [selected, setSelected] = useState<string | null>(null);
     const [projectHexCode, setProjectHexCode] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -338,10 +340,14 @@ const HtkTwoFinalSteps: React.FC<FinalOverviewProps> = ({
                     {allTemplate?.length > 0 ? (
                         allTemplate.map((template: any) => (
                             <div key={template.id}>
-                                <button
+                                <button 
                                     className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                                     onClick={() => {
-                                        setSelected(template.title);
+                                        if (template.id.startsWith(template.id)) {
+                                            const index = Number(template.id.split("_")[1]);
+                                            setOwnerIndex(index)
+                                        }
+                                        setSelected(template.id);
                                         setIsModalOpen(true);
                                     }}
                                 >
@@ -381,6 +387,12 @@ const HtkTwoFinalSteps: React.FC<FinalOverviewProps> = ({
                                     </div>
 
                                 )}
+                            {selected?.startsWith("template_owner2_") && ownerIndex !== null && (
+                                <Flow2D3
+                                    allData={allData}
+                                    ownerIndex={ownerIndex}
+                                />
+                            )}
                         </div>
                     </div>
                 )}

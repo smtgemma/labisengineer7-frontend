@@ -78,7 +78,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     console.log(question, violations, "===========================>>")
 
     const allData = allTemplateData?.data || {};
-    console.log(stepByStepData, "======================aidata===============aidata")
+    // console.log(stepByStepData, "======================aidata===============aidata")
     console.log(allData, "======================allData===============allData")
 
     // const store = makeStore();
@@ -321,13 +321,13 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
                             {selected ===
                                 "template_2" && (
                                     <div>
-                                        <S2D2 allData={allData} question={question} violations={violations} />
+                                        <S2D2 allData={allData} question={question} violations={violations} setIsModalOpen={setIsModalOpen} />
                                     </div>
                                 )}
                             {selected?.startsWith("template3_") && ownerIndex !== null && (
                                 <S2D3
                                     allData={allData}
-                                    owner={allData?.owners?.[ownerIndex]}
+                                    ownerIndex={ownerIndex}
                                 />
                             )}
                             {selected?.startsWith("template4_") && ownerIndex !== null && (

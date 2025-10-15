@@ -4,7 +4,7 @@
 import { useForm } from "react-hook-form"
 import { useGetMeQuery, useUpdateProject2Mutation } from "@/redux/features/templates/allTemplateSlice"
 import { format } from "date-fns"
-import QuestionAnswer from "../Question-answer"
+// import QuestionAnswer from "../Question-answer"
 import { useState } from "react"
 import { FaRegEdit } from "react-icons/fa"
 
@@ -37,7 +37,7 @@ interface allDataProps {
     specialty: string
     technicalDescriptionThree: string
     technicalDescriptionFour: string
-    technicalDescriptionFive: string
+    technicalDescriptionNine: string
     licenseNumberRevision: string
     serviceId: string
     id: string
@@ -62,12 +62,15 @@ type violationsProps = {
 };
 
 
-export default function S2D2({ allData, question, violations, setIsModalOpen }: { allData: allDataProps, question: questionProps[], violations: violationsProps[], setIsModalOpen: (value: boolean) => void; }) {
+export default function Flow1D1({ 
+    allData,
+    setIsModalOpen 
+}: { allData: allDataProps, setIsModalOpen: (value: boolean) => void; }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const { projectDescription, horizontalPropertyName, propertyPostalCode, municipalityCommunity,
         propertyNumber, propertyAddress, propertyPlace, issuingAuthority, kaekProperty, permitNumber,
-        createdAt, serviceId, id, createdById, lastName, firstName, specialty, technicalDescriptionThree, technicalDescriptionFour, technicalDescriptionFive, licenseNumberRevision, } = allData || {}
+        createdAt, serviceId, id, createdById, lastName, firstName, specialty, technicalDescriptionThree, technicalDescriptionFour, technicalDescriptionNine, licenseNumberRevision, } = allData || {}
     const owner = allData?.owners || []
     console.log(allData, "allData=====================================")
 
@@ -172,125 +175,12 @@ export default function S2D2({ allData, question, violations, setIsModalOpen }: 
                 >
                     {technicalDescriptionFour || "N/A"}
                 </p>
-
-            </div>
-            <div>
                 <p
                     className="text-sm mt-2"
                     style={{ textIndent: "2em", whiteSpace: "pre-line" }}
                 >
-                    {technicalDescriptionFive || "N/A"}
+                    {technicalDescriptionNine || "N/A"}
                 </p>
-                <p className="mt-4">
-                    <span className="ml-[28px]">Σύμφωνα με την σημερινή μας αυτοψία και συγκρίνοντας τα εγκεκριμένα Πολεοδομικά σχέδια της υπ΄αριθμόν</span>
-                    {permitNumber || "N/A"} οικοδομικής αδείας και "{licenseNumberRevision || "N/A"}": αναθεώρησης αυτής,
-                    διαπιστώθηκαν οι παρακάτω πολεοδομικές παραβάσεις που τακτοποιούνται με την παρούσα δήλωση :
-                </p>
-                <div className="mt-5">
-                    {/* Step 1 — Show categories 1,2,4,5 */}
-                    {violations.length > 0 && (() => {
-                        let count = 1; // common counter for all Φ.Κ. numbers
-
-                        const nonCategory3 = violations.filter((item) => String(item.category) !== "3");
-                        const category3 = violations.find((item) => String(item.category) === "3");
-                        const hasOther = violations.some((item) => item.otherViolation);
-
-                        return (
-                            <>
-                                {/* Step 1 — Non-category 3 */}
-                                {/* { !hasOther && nonCategory3.map((item) => (
-                                    <p key={item.id || count} className="mt-2">
-                                        Φ.Κ. #{count++}.{" "}
-                                        <span>
-                                            {item?.violations?.map((v: string, i: number) => (
-                                                <span key={i}>
-                                                    {v}
-                                                    {i < item.violations.length - 1 && ", "}
-                                                </span>
-                                            ))}
-                                        </span>{" "}
-                                        Κατηγορία {item.category || "N/A"}, Έτος κατασκευής: {item.age || "N/A"}.
-                                    </p>
-                                ))} */}
-                                {violations.some((item) => item.category !== "3" && item.otherViolation === false) && (
-                                    <>
-                                        {violations
-                                            .filter((item) => item.category !== "3" && item.otherViolation === false)
-                                            .map((item) => (
-                                                <p key={item.id || count} className="mt-2">
-                                                    <span className="ml-[28px]">Φ.Κ. #{count++}.{" "}</span>
-                                                    <span>
-                                                        {item?.violations?.map((v: string, i: number) => (
-                                                            <span key={i}>
-                                                                {v}
-                                                                {i < item.violations.length - 1 && ", "}
-                                                            </span>
-                                                        ))}
-                                                    </span>{" "}
-                                                    Κατηγορία {item.category || "N/A"}, Έτος κατασκευής: {item.age || "N/A"}.
-                                                </p>
-                                            ))}
-                                    </>
-                                )}
-
-
-                                {/* Step 2 — Category 3 (once) */}
-                                {category3 && (
-                                    <p key="category3" className="mt-2">
-                                        <span className="ml-[28px]">Φ.Κ. #{count++}.{" "}</span> Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96,
-                                        του Ν.4495/17, Κατηγορία 3, Έτος κατασκευής: {category3.age || "N/A"}.{" "}
-                                        <span>
-                                            {category3?.violations?.map((v: string, i: number) => (
-                                                <span key={i}>
-                                                    {v}
-                                                    {i < category3.violations.length - 1 && ", "}
-                                                </span>
-                                            ))}
-                                        </span>
-                                    </p>
-                                )}
-
-                                {/* Step 3 — Other violations */}
-                                {hasOther && (() => {
-                                    const other = violations.find((item) => item.otherViolation);
-                                    return (
-                                        <p key="other" className="mt-2">
-                                            <span className="ml-[28px]">Φ.Κ. #{count++}.{" "}</span> Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του Ν.4495/2017 –{" "}
-                                            <span>
-                                                {other?.violations?.map((v: string, i: number) => (
-                                                    <span key={i}>
-                                                        {v}
-                                                        {i < other.violations.length - 1 && ", "}
-                                                    </span>
-                                                ))}
-                                            </span>{" "}
-                                            και σύμφωνα με το Παράρτημα Β του Ν.4495/2017 ορίζονται ως (1) Πολεοδομική παράβαση.
-                                            (επισυνάπτεται αναλυτικός προϋπολογισμός).
-                                        </p>
-                                    );
-                                })()}
-                            </>
-                        );
-                    })()}
-
-
-                    {/* Step 4 — Common ending text */}
-                    <div className="my-2">
-                        <p>
-                            <span className="ml-[28px]">Ο χρόνος κατασκευής των ανωτέρω αυθαίρετων κατασκευών τεκμηριώνεται από τα </span>
-                            προσκομισθέντα στοιχεία, τα οποία επιβεβαιώνουν ότι οι κατασκευές προϋπήρχαν της
-                            28.07.2011.
-                            Συγκεκριμένα, χρησιμοποιήθηκαν: Αεροφωτογραφίες έτους{" "}
-                            στις οποίες διακρίνονται οι αυθαίρετες επεμβάσεις.
-                            Υπεύθυνη Δήλωση Ιδιοκτήτη, στην οποία δηλώνεται ο χρόνος εκτέλεσης των εργασιών.
-                            Με βάση τα ανωτέρω, τεκμαίρεται ότι οι κατασκευές υφίστανται πριν την κρίσιμη
-                            ημερομηνία της 28/07/2011, και συνεπώς είναι επιλέξιμες για υπαγωγή στις διατάξεις
-                            του Ν.4495/2017.
-                        </p>
-                    </div>
-                </div>
-
-                <QuestionAnswer question={question} allData={allData} />
 
             </div>
             <div className="flex flex-col justify-center items-center">

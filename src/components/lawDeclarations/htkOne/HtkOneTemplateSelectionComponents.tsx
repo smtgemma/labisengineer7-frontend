@@ -42,14 +42,16 @@ const HtkOneTemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
     // Create templates including owner templates without mutating exported array
     const allTemplates: TemplateName[] = useMemo(() => {
         const baseTemplates: TemplateName[] = [
-            { id: "htkOne_register_plot", title: "Register Plot Autofill 1 Credit ", price: 0.5 },
-            { id: "htkOne_register_horizontal_property", title: "Register Horizontal Property Autofill 1 Credit", price: 0.5 },
+            // { id: "htkOne_register_plot", title: "Register Plot Autofill 1 Credit ", price: 0.5 },
+            // { id: "htkOne_register_horizontal_property", title: "Register Horizontal Property Autofill 1 Credit", price: 0.5 },
+             { id: "autofill", title: "Register Plot Autofill 1 Credit ", price: 0.5 },
+            { id: "autofill2", title: "Register Horizontal Property Autofill 1 Credit", price: 0.5 },
             { id: "doc_technical_description", title: "Technical Description", price: 0.5 },
         ];
 
         stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
             baseTemplates.push({
-                id: `template_owner_${index}`,
+                id: `template_owner1_${index}`,
                 title: `Owner’s Declaration ${owner.first_name} ${owner.last_name}`,
                 price: 0.5,
             });

@@ -1,6 +1,11 @@
-import React from 'react'
 
-function FcsvD1() {
+import { format, addYears } from "date-fns"
+
+function FcsvD1({ allData }: { allData: any }) {
+  const { projectDescription, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber, createdAt } = allData || {}
+  const owner = allData?.owners || []
+  const engineers = allData?.engineers || []
+  console.log(engineers, "==========engin")
   return (
     <div>
       <div className='bg-[#99CC00] p-3'>
@@ -25,13 +30,16 @@ function FcsvD1() {
           {/* right side  */}
           <div className='flex-1'>
             <p className="border border-black border-b-0 py-2 text-center font-semibold text-sm bg-white w-full">
-              PROJECT DESCRIPTION
+              {projectDescription || "N/A"}
             </p>
             <p className="border border-black py-2 text-center font-semibold text-sm bg-white w-full">
               ΟΙΚΟΔΟΜΙΚΟ ΕΡΓΟ
             </p>
             <p className="border border-black border-t-0 py-2 text-center font-semibold text-sm bg-white w-full">
-              ADRESS,TOWN, CITY, POSTAL CODE
+              {/* ADRESS,TOWN, CITY, POSTAL CODE */}
+              {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+              ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+              ΤΚ {propertyPostalCode || "N/A"}
             </p>
           </div>
         </div>
@@ -92,10 +100,10 @@ function FcsvD1() {
           {/* right side  */}
           <div className='flex-1'>
             <p className="border border-black border-b-0 py-2 text-center font-semibold text-sm bg-white w-full">
-              DATE PROJECT
+              <p>{createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</p>
             </p>
             <p className="border border-black py-2 text-center font-semibold text-sm bg-white w-full">
-              1 YEAR AFTER
+              <p>{createdAt && format(addYears(new Date(createdAt), 1), "dd/MM//yyyy")}</p>
             </p>
           </div>
         </div>
@@ -110,9 +118,17 @@ function FcsvD1() {
           </div>
           {/* right side  */}
           <div className='flex-1'>
-            <p className="border border-black py-2 text-center font-semibold text-sm bg-white w-full">
-              OWNER
-            </p>
+            <div className="border border-black py-2 text-center font-semibold text-sm bg-white w-full">
+              <div className="flex items-center justify-center gap-2">
+                {
+                  owner?.map((e: any, i: number) => (
+                    <h3 key={i} className="text-sm">
+                      {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                    </h3>
+                  ))
+                }
+              </div>
+            </div>
           </div>
         </div>
         {/* five design  */}
@@ -131,13 +147,15 @@ function FcsvD1() {
           {/* right side  */}
           <div className='flex-1'>
             <p className="border border-black py-2 text-center font-semibold text-sm bg-white w-full">
-              SURNAME AND NAME ENGINEER
+              {/* SURNAME AND NAME ENGINEER */}
+              {engineers[0].lastName || "N/A"} {engineers[0].firstName}
             </p>
             <p className="border border-black border-t-0 py-2 text-center font-semibold text-sm bg-white w-full">
-              ADRESS, CITY, POSTAL COSE ENGINEER
+              {/* ADRESS, CITY, POSTAL COSE ENGINEER */}
+              {engineers[0].streetAddress || "N/A"}, {engineers[0].town || "N/A"} {engineers[0].postalCode || "N/A"}, 
             </p>
           </div>
-        </div>Φάση Έργου: 
+        </div>Φάση Έργου:
         {/* six design  */}
         <div className='flex items-center justify-between mr-6 mt-5'>
           {/* left side  */}
@@ -210,7 +228,7 @@ function FcsvD1() {
           <div className="flex border-t w-full">
             <div className="font-semibold border-r w-12">1.2</div>
             <div className="text-sm text-center p-3 flex-1">
-               Συμπληρώνεται η κατηγορία του έργου, π.χ. οικοδομικό, υδραυλικό, οδοποιίας, λιμενικό βιομηχανικό-ενεργειακό, κλπ
+              Συμπληρώνεται η κατηγορία του έργου, π.χ. οικοδομικό, υδραυλικό, οδοποιίας, λιμενικό βιομηχανικό-ενεργειακό, κλπ
             </div>
           </div>
           {/* <!-- Row 1.3 --> */}

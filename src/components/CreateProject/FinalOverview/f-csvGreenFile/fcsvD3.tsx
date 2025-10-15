@@ -1,16 +1,20 @@
 import React from 'react'
 
-function FcsvD3({number} : {number: string}) {
+function FcsvD3({number, allData} : {number: string, allData: any}) {
+    const { projectDescription } = allData || {}
+  const engineers = allData?.engineers || []
     return (
         <div>
             {/* first design  */}
             <div className='flex border text-sm'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Επωνυμία Διαχειριστή:</p>
-                <p className='text-left flex-1 py-2 px-1'>SURNAME AND NAME ENGINEER</p>
+                <p className='text-left flex-1 py-2 px-1'>{engineers[0].lastName || "N/A"}, {engineers[0].firstName || "N/A"}, 
+                    {/* spaciality and tee number */}
+                 </p>
             </div>
             <div className='flex border border-t-0 text-sm'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Τίτλος Έργου:</p>
-                <p className='text-left flex-1 py-2 px-1'>PROJECT DISCRIPSION</p>
+                <p className='text-left flex-1 py-2 px-1'>{projectDescription || "N/A"}</p>
             </div>
             <div className='flex border border-t-0 text-sm'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Φάση Έργου: </p>
@@ -701,11 +705,11 @@ function FcsvD3({number} : {number: string}) {
             {/* second design  */}
             <div className='flex border text-sm mt-8'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Επωνυμία Διαχειριστή:</p>
-                <p className='text-left flex-1 py-2 px-1'>SURNAME AND NAME ENGINEER</p>
+                <p className='text-left flex-1 py-2 px-1'>{engineers[0].lastName || "N/A"}, {engineers[0].firstName || "N/A"},</p>
             </div>
             <div className='flex border border-t-0 text-sm'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Τίτλος Έργου:</p>
-                <p className='text-left flex-1 py-2 px-1'>PROJECT DISCRIPSION</p>
+                <p className='text-left flex-1 py-2 px-1'>{projectDescription || "N/A"}</p>
             </div>
             <div className='flex border border-t-0 text-sm mb-8'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Φάση Έργου: </p>
