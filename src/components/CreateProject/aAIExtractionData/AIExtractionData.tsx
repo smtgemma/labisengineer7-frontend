@@ -94,6 +94,7 @@ const AIExtractionDataInPut = ({
       technicalDescription: allExtreactData?.technical_description,
       technicalDescriptionTwo: allExtreactData?.technical_description_two,
       ...data,
+
     };
 
     dispatch(setAiExtreactAndInputData(DataPost));

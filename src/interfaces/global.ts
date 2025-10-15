@@ -100,3 +100,21 @@ export type TProjectData = {
     kaek_plot: string | null;
     plot_type: string | null;
 };
+
+
+export type AiOwnerTypes = {
+    first_name: string;
+    last_name: string;
+    father_first__last_name: string;
+    mother_first__last_name: string | null;
+    date_of_birth: string;
+    place_of_birth: string;
+    owner_address: string;
+    address_number: string;
+    postal_code: string;
+    city: string;
+    id_number: string;
+    tax_identification_number: string;
+    ownership_percentage_owner: string;
+    owner_type_ownership: string;
+};
