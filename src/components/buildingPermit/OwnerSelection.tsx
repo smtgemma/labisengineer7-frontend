@@ -32,7 +32,7 @@ const OwnerSelectionFour = ({ currentStep, nextStep }: {
     // Validate before proceeding
     const isValid = useMemo(() => {
         const descriptionValid = descriptionFormRedux !== "";
-        const ownerValid = ownerBaseData.length >= 1;
+        const ownerValid = ownerBaseData?.length >= 1;
         return descriptionValid && ownerValid;
     }, [descriptionFormRedux, ownerBaseData]);
 

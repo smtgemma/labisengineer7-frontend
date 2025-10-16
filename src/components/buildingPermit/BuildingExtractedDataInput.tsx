@@ -1,5 +1,6 @@
 "use client";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
+import { TProjectData } from "@/interfaces/global";
 import tokenCatch from "@/lib/token";
 import {
     setAiExtreactAndInputData,
@@ -13,7 +14,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { FormValues } from "./types";
-import { TProjectData } from "@/interfaces/global";
 
 
 
@@ -165,9 +165,6 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
     // const ownerData = stepByStepData.ownerBaseData;
     const projectData = stepByStepData.projectId;
     const ownerData = stepByStepData.ownerBaseData;
-
-    const subCategoryData = stepByStepData.subcategory;
-    const descrptionTasks = stepByStepData.descriptionTask;
     const filesData = stepByStepData.multiFiles;
     const descriptonAndYdom = stepByStepData.description;
     const description = descriptonAndYdom?.description;

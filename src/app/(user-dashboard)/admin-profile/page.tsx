@@ -56,6 +56,8 @@ type EngineerFormData = {
   streetNumber: string;
   postalCode: string;
   engVatNumber: string;
+  teeNumber: string;
+  specialty: string;
 };
 
 interface AdminProfileProps {
@@ -108,6 +110,8 @@ const AdminProfile = () => {
       streetNumber: "",
       postalCode: "",
       engVatNumber: "",
+      teeNumber: "",
+      specialty: "",
     },
   });
 
@@ -157,6 +161,8 @@ const AdminProfile = () => {
         streetNumber: engneerData.streetNumber || "",
         postalCode: engneerData.postalCode || "",
         engVatNumber: engneerData.engVatNumber || "",
+        teeNumber: engneerData.teeNumber || "",
+        specialty: engneerData.specialty || "",
       });
     }
   }, [engneerData, reset]);
@@ -517,6 +523,30 @@ const AdminProfile = () => {
                   </div>
                 </div>
 
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-1">TEE Number</label>
+                    <input
+                      {...infoRegister("teeNumber")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                      placeholder="Tee Number"
+                      defaultValue={engneerData?.teeNumber}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Specialty
+                    </label>
+                    <input
+                      type="tel"
+                      {...infoRegister("specialty")}
+                      className="w-full border border-gray-300  rounded-md p-2"
+                      placeholder="Specialty"
+                      defaultValue={engneerData?.specialty}
+                    />
+                  </div>
+                </div>
+
                 {/* Row 8: Address */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                   <div>
@@ -712,11 +742,10 @@ const AdminProfile = () => {
                     })}
                     placeholder="Password123456"
                     className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:border-transparent outline-none transition-all placeholder-gray-400
-            ${
-              passwordErrors.currentPassword
-                ? "border-red-500 focus:ring-red-500"
-                : "border-gray-300 focus:ring-blue-500"
-            }`}
+            ${passwordErrors.currentPassword
+                        ? "border-red-500 focus:ring-red-500"
+                        : "border-gray-300 focus:ring-blue-500"
+                      }`}
                   />
                   {passwordErrors.currentPassword && (
                     <p className="text-red-500 text-sm mt-1">
@@ -741,11 +770,10 @@ const AdminProfile = () => {
                     })}
                     placeholder="Password123456789"
                     className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:border-transparent outline-none transition-all placeholder-gray-400
-            ${
-              passwordErrors.newPassword
-                ? "border-red-500 focus:ring-red-500"
-                : "border-gray-300 focus:ring-blue-500"
-            }`}
+            ${passwordErrors.newPassword
+                        ? "border-red-500 focus:ring-red-500"
+                        : "border-gray-300 focus:ring-blue-500"
+                      }`}
                   />
                   {passwordErrors.newPassword && (
                     <p className="text-red-500 text-sm mt-1">
@@ -768,11 +796,10 @@ const AdminProfile = () => {
                     })}
                     placeholder="Password123456789"
                     className={`w-full px-3 py-2 border rounded-md focus:ring-2 focus:border-transparent outline-none transition-all placeholder-gray-400
-            ${
-              passwordErrors.confirmPassword
-                ? "border-red-500 focus:ring-red-500"
-                : "border-gray-300 focus:ring-blue-500"
-            }`}
+            ${passwordErrors.confirmPassword
+                        ? "border-red-500 focus:ring-red-500"
+                        : "border-gray-300 focus:ring-blue-500"
+                      }`}
                   />
                   {passwordErrors.confirmPassword && (
                     <p className="text-red-500 text-sm mt-1">
