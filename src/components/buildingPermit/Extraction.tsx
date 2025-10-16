@@ -74,6 +74,12 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
     const technical_description_eight = `Το περίγραμμα της οριζόντιας ιδιοκτησίας δεν ταυτίζεται με αυτό της υπ΄ αριθμόν "number_of_establishment_of_horizontal_ownership" πράξη σύστασης του Συμβολαιογράφου "notary_place/municipality" "notary_establishment_of_horizontal_ownership", σε συνδυασμό με την με αριθμό "reviews_numbers_of_establishment_of_horizontal_ownership": πράξη του Συμβολαιογράφου("notary_reviews_numbers_of_establishment_of_horizontal_ownership": " , this data you will add it when a notary have different name from previous)`
 
     const technical_description_nine = `Η "horizontal_property_name",  αποτελείται από  "mini descripsion of horizontal property", και έχει εμβαδό Ε = ………τ.μ. Στη παραπάνω ιδιοκτησία ανήκει επίσης και η "exclusive_use for Property"`
+    const declaration_owner_for_4495_2017 = `Εγω ο/η (Surname-Name Owner) ο/η οποίος/οποία έχω στην ιδιοκτησία μου την αυτοτελή διηρημένη οριζόντια 
+ιδιοκτησία «Horizontal property name», που βρίσκεται στον (floor) όροφο πολυκατοικίας στην οδό
+(Adrees Property), στο οικοδομικό τετράγωνο (Ο.Τ. Number), στα/στην/στον (Place Property) , του Δήμου (Municipality-City Property)---, με είδος 
+ιδιοκτησίας (owner_type_ownership) ΚΥΡΙΟΤΗΤΑΣ ΚΑΤΑ (
+Property ownership percentage ) στη διηρημένη ιδιοκτησία, στην οποία αναλογεί 
+(percentage of co-ownership of the plot)/1000 ποσοστό συνιδιοκτησίας εξ αδιαιρέτου στο σύνολο του οικοπέδου, εξουσιοδοτώ`
 
     //     Εγω ο/η (Surname-Name Owner) ο/η οποίος/οποία έχω στην ιδιοκτησία μου την αυτοτελή διηρημένη οριζόντια 
     // ιδιοκτησία «Horizontal property name/descripsion», που βρίσκεται στον (floor) όροφο πολυκατοικίας στην οδό
@@ -112,6 +118,8 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
         formData.append("technical_description_seven", JSON.stringify(technical_description_seven));
         formData.append("technical_description_eight", JSON.stringify(technical_description_eight));
         formData.append("technical_description_nine", JSON.stringify(technical_description_nine));
+        formData.append("technical_description_nine", JSON.stringify(technical_description_nine));
+        formData.append("declaration_owner_for_4495_2017", JSON.stringify(declaration_owner_for_4495_2017));
 
         try {
             const res = await aiFileUpload(formData).unwrap();
