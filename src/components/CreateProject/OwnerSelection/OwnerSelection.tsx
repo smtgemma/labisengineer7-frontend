@@ -1,4 +1,5 @@
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
+import SharedOwnerSelection from "@/components2.0/shared/ownerSelection/OwnerSelection";
 import {
   setAiExtractCatchWonerData,
   setMultipleHorizontalDescription
@@ -8,14 +9,12 @@ import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiEdit2 } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
-import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {
   EditingOwnerType,
   Owner,
   OwnerFormInputs
 } from "./types";
-import SharedOwnerSelection from "@/components2.0/shared/ownerSelection/OwnerSelection";
 
 const
   OwnerSelection = ({
@@ -245,6 +244,7 @@ const
     useEffect(() => {
       dispatch(setAiExtractCatchWonerData(selectedOwners));
     }, [selectedOwners]);
+
 
     // Validate before proceeding
     const isValid = useMemo(() => {

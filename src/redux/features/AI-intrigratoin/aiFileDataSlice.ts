@@ -1,4 +1,4 @@
-import { TProjectData } from "@/interfaces/global";
+import { OwnerTypes, TProjectData } from "@/interfaces/global";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface Owner {
@@ -92,11 +92,11 @@ interface ViolationRecord {
 
 interface AiExtractState {
   aiDataState?: TProjectData | null;
-  ownerBaseData?: any[];
+  ownerBaseData?: OwnerTypes[];
   projectId?: {} | undefined;
   subcategory?: any[];
   descriptionTask?: any[];
-  description?: any[];
+  description?: string;
   horizontal?: {
     ydom: string;
     horizontal: string
@@ -119,7 +119,7 @@ const initialState: AiExtractState = {
   descriptionTask: [],
   selectTemplate: [],
   multiFiles: [],
-  description: [],
+  description: "",
   horizontal: { ydom: "", horizontal: "" },
   aiInputData: null,
   actionSelection: [],

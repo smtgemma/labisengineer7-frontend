@@ -193,7 +193,6 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
         const DataPost = {
             serviceId: projectData?.id,
             ydom: ydom,
-
             projectDescription: description[0]?.value ?? "",
             technicalDescription: allExtreactData?.technical_description ?? "",
             technicalDescriptionTwo: allExtreactData?.technical_description_two ?? "",
@@ -204,7 +203,6 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
             technicalDescriptionSeven: allExtreactData?.technical_description_seven ?? "",
             technicalDescriptionEight: allExtreactData?.technical_description_eight ?? "",
             technicalDescriptionNine: allExtreactData?.technical_description_nine ?? "",
-
             kaekProperty: allExtreactData?.kaek_property ?? "",
             titleArea: allExtreactData?.title_area ?? "",
             floorProperty: allExtreactData?.floor_property ?? "",
@@ -249,7 +247,6 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
             dateIssueCompletionDeclaration3843: allExtreactData?.date_issue_completion_declaration_3843 ?? "",
             tokenUsage: allExtreactData?.token_usage ?? "",
             declarationOwnerFor4495: allExtreactData?.declaration_owner_for_4495_2017 ?? "",
-
         };
 
         dispatch(setAiExtreactAndInputData(DataPost));

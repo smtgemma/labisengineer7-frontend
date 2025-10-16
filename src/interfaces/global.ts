@@ -118,3 +118,22 @@ export type AiOwnerTypes = {
     ownership_percentage_owner: string;
     owner_type_ownership: string;
 };
+
+export type OwnerTypes = {
+    firstName: string;
+    lastName: string;
+    fatherFirstLastName: string;
+    motherFirstLastName: string | null;
+    dateOfBirth: string;
+    placeOfBirth: string;
+    ownerAddress: string;
+    addressNumber: string;
+    postalCode: string;
+    city: string;
+    idNumber: string;
+    taxIdentificationNumber: string;
+    ownershipPercentageOwner?: string;
+    ownerTypeOwnership?: string;
+    email: string;
+    phone: string;
+};
