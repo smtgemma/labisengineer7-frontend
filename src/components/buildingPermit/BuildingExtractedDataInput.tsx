@@ -164,6 +164,8 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
 
     // const ownerData = stepByStepData.ownerBaseData;
     const projectData = stepByStepData.projectId;
+    const ownerData = stepByStepData.ownerBaseData;
+
     const subCategoryData = stepByStepData.subcategory;
     const descrptionTasks = stepByStepData.descriptionTask;
     const filesData = stepByStepData.multiFiles;
@@ -214,7 +216,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
             propertyPostalCode: allExtreactData?.property_postal_code ?? "",
             horizontalPropertyName: allExtreactData?.horizontal_property_name ?? "",
             horizontalPropertyNameTwo: allExtreactData?.horizontal_property_name_two ?? "",
-            owners: allExtreactData?.owners ?? "",
+            owners: ownerData ?? [],
             plotArea: allExtreactData?.plot_area ?? "",
             withinOutsideCityPlan: allExtreactData?.within_outside_city_plan ?? "",
             permitNumber: allExtreactData?.permit_number ?? "",

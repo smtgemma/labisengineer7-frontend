@@ -90,6 +90,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep, uploadedFiles }: {
     });
 
     const allExtreactData = stepByStepData.aiDataState;
+    const ownerData = stepByStepData.ownerBaseData;
     console.log(allExtreactData)
 
     // const ownerData = stepByStepData.ownerBaseData;
@@ -160,7 +161,7 @@ const HtkOneAIExtractionDataInPut = ({ currentStep, nextStep, uploadedFiles }: {
                 propertyPostalCode: allExtreactData?.property_postal_code ?? "",
                 horizontalPropertyName: allExtreactData?.horizontal_property_name ?? "",
                 horizontalPropertyNameTwo: allExtreactData?.horizontal_property_name_two ?? "",
-                owners: allExtreactData?.owners ?? "",
+                owners: ownerData ?? [],
                 plotArea: allExtreactData?.plot_area ?? "",
                 withinOutsideCityPlan: allExtreactData?.within_outside_city_plan ?? "",
                 permitNumber: allExtreactData?.permit_number ?? "",

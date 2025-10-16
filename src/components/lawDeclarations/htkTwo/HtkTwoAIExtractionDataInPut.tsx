@@ -94,6 +94,7 @@ const HtkTwoAIExtractionDataInPut = ({ currentStep, nextStep, uploadedFiles }: {
 
     // const ownerData = stepByStepData.ownerBaseData;
     const projectData: any = stepByStepData.projectId;
+    const ownerData = stepByStepData.ownerBaseData;
     const subCategoryData = stepByStepData.subcategory;
     const descrptionTasks = stepByStepData.descriptionTask;
     const filesData = stepByStepData.multiFiles;
@@ -147,7 +148,6 @@ const HtkTwoAIExtractionDataInPut = ({ currentStep, nextStep, uploadedFiles }: {
                 technicalDescriptionSeven: allExtreactData?.technical_description_seven ?? "",
                 technicalDescriptionEight: allExtreactData?.technical_description_eight ?? "",
                 technicalDescriptionNine: allExtreactData?.technical_description_nine ?? "",
-
                 declarationOwnerFor44952017: allExtreactData?.declaration_owner_for_4495_2017 ?? "",
                 kaekProperty: allExtreactData?.kaek_property ?? "",
                 titleArea: allExtreactData?.title_area ?? "",
@@ -160,7 +160,7 @@ const HtkTwoAIExtractionDataInPut = ({ currentStep, nextStep, uploadedFiles }: {
                 propertyPostalCode: allExtreactData?.property_postal_code ?? "",
                 horizontalPropertyName: allExtreactData?.horizontal_property_name ?? "",
                 horizontalPropertyNameTwo: allExtreactData?.horizontal_property_name_two ?? "",
-                owners: allExtreactData?.owners ?? "",
+                owners: ownerData ?? [],
                 plotArea: allExtreactData?.plot_area ?? "",
                 withinOutsideCityPlan: allExtreactData?.within_outside_city_plan ?? "",
                 permitNumber: allExtreactData?.permit_number ?? "",
