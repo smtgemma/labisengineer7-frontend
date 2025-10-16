@@ -136,7 +136,7 @@ export default function Flow1D1({
             <div className="text-center space-y-4">
                 <div className="flex items-center justify-center gap-12">
                     <h4 className="text-sm">Έργο</h4>
-                    <p className="text-sm uppercase">{projectDescription || "N/A"}</p>
+                    <p className="text-sm uppercase">{projectDescription || "N/A"}=====</p>
                 </div>
                 <div className="flex items-start justify-between gap-4 max-w-xl">
                     <span className=" text-sm">Θέση:</span>

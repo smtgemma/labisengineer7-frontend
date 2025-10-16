@@ -31,7 +31,8 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
 
     const dispatch = useDispatch();
     const stepByStepData: any = useSelector((state: RootState) => state.aiData);
-    // const id = stepByStepData?.projectId?.id;
+    const id = stepByStepData?.projectId?.id;
+    console.log(stepByStepData.ownerBaseData, "stepByStepData==============")
 
     const { data: remainingCredit } = useRemainingCreditQuery("");
     const [useCredit] = useUseCreditsMutation();

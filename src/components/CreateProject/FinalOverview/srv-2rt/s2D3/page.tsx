@@ -44,7 +44,23 @@ interface allDataProps {
     firstName: string;
     lastName: string;
     floorProperty: string;
-    declaration_owner_for_4495_2017: string;
+    declarationOwnerFor4495: string;
+    fatherFirstLastName?: string;
+    mothersFirstLastName?: string;
+    dateOfBirth?: string;
+    placeOfBirth?: string;
+    idNumber?: string;
+    mobile?: string;
+    city?: string;
+    ownerAddress?: string;
+    addressNumber?: string;
+    postalCode?: string;
+    email?: string;
+    taxIdentificationNumber?: string;
+    motherFirstLastName?: string;
+    ownerTypeOwnership?: string;
+    phone?: string;
+    ownershipPercentageOwner?: string;
 }
 
 type modalFnProps = {
@@ -57,9 +73,14 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
 
     const engineers = allData?.engineers?.[0] || {};
     const owner = allData?.owners?.[ownerIndex]
-    console.log(owner, "======================")
+    console.log(owner, "======================owner")
     // Removed duplicate 'owner' declaration
-    const { id, createdById, serviceId, horizontalPropertyName, ydom, specialty, propertyAddress, propertyPlace, floorProperty, createdAt, declaration_owner_for_4495_2017 } = allData || {};
+    const { id, createdById, serviceId, horizontalPropertyName, ydom, specialty,
+        propertyAddress, propertyPlace, floorProperty, createdAt, declarationOwnerFor4495,
+        taxIdentificationNumber, postalCode, placeOfBirth, phone, ownershipPercentageOwner, ownerTypeOwnership,
+        ownerAddress, motherFirstLastName, lastName, idNumber, firstName,
+        fatherFirstLastName, email, dateOfBirth, city, addressNumber,
+    } = allData || {};
     const [updateProject2] = useUpdateProject2Mutation()
     // const { data: userData } = useGetMeQuery()
     // const signature = userData?.data?.signature
@@ -72,7 +93,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
 
     // Submit handler
     const onSubmit = async (data: FormInputs) => {
-        if(ownerIndex === null) return;
+        if (ownerIndex === null) return;
 
         // old owner copy 
         const updatedOwners = [...allData.owners]
@@ -149,9 +170,9 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.first_name || "N/A"}</div>
+                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.first_name || owner?.firstName || "N/A"}</div>
                                 <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-                                <div className="flex-1 p-2  font-bold">{owner?.last_name || "N/A"}</div>
+                                <div className="flex-1 p-2  font-bold">{owner?.last_name || owner?.lastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -159,7 +180,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.father_first__last_name || owner?.fatherLastName || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.father_first__last_name || owner?.fatherFirstLastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -167,7 +188,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mother_first__last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.mother_first__last_name || owner?.motherFirstLastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -175,7 +196,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.date_of_birth || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.date_of_birth || owner?.dateOfBirth || "N/A"}</div>
                             </div>
                         </div>
 
@@ -183,7 +204,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.place_of_birth || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.place_of_birth || owner?.placeOfBirth || "N/A"}</div>
                             </div>
                         </div>
 
@@ -191,9 +212,9 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                <div className="w-72 p-2 border-r border-gray-400 font-bold">{owner?.id_number || "N/A"}</div>
+                                <div className="w-72 p-2 border-r border-gray-400 font-bold">{owner?.id_number || owner?.idNumber || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mobile || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.mobile || owner?.phone || "N/A"}</div>
                             </div>
                         </div>
 
@@ -203,11 +224,11 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                 <div className="w-35 p-2 text-center border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
                                 <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
                                 <div className="w-16 p-2 text-center border-r border-gray-400 text-sm">Οδός</div>
-                                <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.owner_address || "N/A"}</div>
+                                <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.owner_address || owner?.ownerAddress || "N/A"}</div>
                                 <div className="w-16 p-2 text-center border-r border-gray-400 text-sm">Αριθ</div>
-                                <div className="w-12 p-2 text-center border-r border-gray-400 font-bold ">{owner?.address_number || "N/A"}</div>
+                                <div className="w-12 p-2 text-center border-r border-gray-400 font-bold ">{owner?.address_number || owner?.addressNumber || "N/A"}</div>
                                 <div className="w-12 p-2 text-center border-r border-gray-400 text-sm">ΤΚ</div>
-                                <div className="w-25 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
+                                <div className="w-25 p-2 font-bold">{owner?.postal_code || owner?.postalCode || "N/A"}</div>
                             </div>
                         </div>
 
@@ -234,7 +255,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                     Α.Φ.Μ.:
                                 </div>
                                 <div className="w-54 p-2 font-bold">
-                                    {owner?.tax_identification_number || "N/A"}
+                                    {owner?.tax_identification_number || owner?.taxIdentificationNumber || "N/A"}
                                 </div>
                                 <div className="w-32 p-2 border-l border-gray-400 text-sm">
                                     Δ.Ο.Υ.:
@@ -246,11 +267,11 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                         <div className="p-4 text-sm">
                             <p className="mb-4">
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
-                            
-                              { declaration_owner_for_4495_2017 || "N/A"}, εξουσιοδοτώ 
                             </p>
+                            <p className="mb-2">{declarationOwnerFor4495 || "N/A"}</p>
                             <p className="mb-1">
-                                τον /την ({engineers?.lastName || "N/A"} {engineers?.firstName || "N/A"})-({specialty || "N/A"}) με ΑΜ ΤΕΕ (TEE NUMBER),
+                                τον /την <span className="font-bold">({engineers?.lastName || "N/A"} {engineers?.firstName || "N/A"})-({specialty || "N/A"})</span> με ΑΜ ΤΕΕ
+                                {/* <span className="font-bold">({teeNamber} || "N/A")</span>, */}
                             </p>
                             <p className="mb-1">
                                 για να προβεί σε όλες τις απαραίτητες ενέργειες σχετικά με τη ρύθμιση αυθαίρετων κατασκευών, όπως αυτές περιγράφονται στο κεφάλαιο ΦΕΚ 167Α/3-11-2017 του Ν.4495/2017.
@@ -295,16 +316,6 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                         onSubmit={handleSubmit(onSubmit)}
                                         className="grid grid-cols-1 md:grid-cols-2 gap-4"
                                     >
-                                        {/* ydom */}
-                                        <div className="flex flex-col gap-2">
-                                            <label className="font-medium">ΠΡΟΣ *:</label>
-                                            <input
-                                                type="text"
-                                                {...register("ydom", { required: "This field is required" })}
-                                                className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={ydom || ""}
-                                            />
-                                        </div>
                                         {/* Name */}
                                         <div className="flex flex-col gap-2">
                                             <label className="font-medium">Όνομα *:</label>
@@ -312,7 +323,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="text"
                                                 {...register("firstName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.first_name || ""}
+                                                defaultValue={owner?.firstName || ""}
                                             />
                                         </div>
 
@@ -323,7 +334,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="text"
                                                 {...register("lastName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.last_name || ""}
+                                                defaultValue={owner?.lastName || ""}
                                             />
                                         </div>
 
@@ -334,7 +345,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="text"
                                                 {...register("fatherFirstLastName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.father_first_last_name || ""}
+                                                defaultValue={owner?.fatherFirstLastName || ""}
                                             />
                                         </div>
 
@@ -345,7 +356,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="text"
                                                 {...register("mothersFirstLastName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.mothers_first_last_name || ""}
+                                                defaultValue={owner?.motherFirstLastName || ""}
                                             />
                                         </div>
 
@@ -356,7 +367,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="date"
                                                 {...register("dateOfBirth", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.date_of_birth || ""}
+                                                defaultValue={owner?.dateOfBirth || ""}
                                             />
                                         </div>
 
@@ -367,7 +378,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="text"
                                                 {...register("placeOfBirth", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.place_of_birth || ""}
+                                                defaultValue={owner?.placeOfBirth || ""}
                                             />
                                         </div>
 
@@ -378,7 +389,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="text"
                                                 {...register("idNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.id_number || ""}
+                                                defaultValue={owner?.firstName || ""}
                                             />
                                         </div>
 
@@ -389,7 +400,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="text"
                                                 {...register("mobile", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.mobile || ""}
+                                                defaultValue={owner?.phone || ""}
                                             />
                                         </div>
 
@@ -411,7 +422,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="text"
                                                 {...register("ownerAddress", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.owner_address || ""}
+                                                defaultValue={owner?.ownerAddress || ""}
                                             />
                                         </div>
 
@@ -422,7 +433,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="text"
                                                 {...register("addressNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.address_number || ""}
+                                                defaultValue={owner?.addressNumber || ""}
                                             />
                                         </div>
 
@@ -433,7 +444,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="text"
                                                 {...register("postalCode", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.postal_code || ""}
+                                                defaultValue={owner?.postalCode || ""}
                                             />
                                         </div>
 
@@ -455,7 +466,7 @@ export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, o
                                                 type="text"
                                                 {...register("taxIdentificationNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={owner?.tax_identification_number || ""}
+                                                defaultValue={owner?.taxIdentificationNumber || ""}
                                             />
                                         </div>
                                         {/* Submit */}

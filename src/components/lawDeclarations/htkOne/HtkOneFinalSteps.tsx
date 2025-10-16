@@ -10,6 +10,7 @@ import {
     useDownloadTemplatePdfQuery,
     useExeclDownloadTemplateQuery,
     useGetOwnerTemplateQuery,
+    useGetProject2Query,
 } from "@/redux/features/templates/allTemplateSlice";
 
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
@@ -70,17 +71,18 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
     const projectId = stepByStepData?.projectIdCode?.id;
     const userId = dataAllFIled?.createdById;
     console.log(stepByStepData, "stepByStepDatastepByStepData")
-    console.log(projectId, "projectId")
-    
-    console.log(stepByStepData, "===========allData================")
+    console.log(projectId, "projectId===================")
+
+    // console.log(stepByStepData, "===========allData================")
 
 
-    const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
+    const { data: allTemplateData } = useGetProject2Query(projectId || "");
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
     const allData = allTemplateData?.data || {};
-    
+    console.log(allData, "==============alldata")
+
     // const buildingMods = subCategoryData["building-modifications"] || [];
     // const energy = subCategoryData["energy-systems"] || [];
     // const fencing = subCategoryData["fencing"] || [];
@@ -237,6 +239,7 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
     };
 
     console.log(selected, "selected==================");
+    console.log(selected, "ownerIndex==================");
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -386,13 +389,13 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
                             {selected === "htkOne_register_horizontal_property" && (
                                 <h1>Register Horizontal Property Autofill 1 Credit</h1>
                             )}
-                            {selected === "doc_technical_description" && (
+                            {/* {selected === "doc_technical_description" && (
                                 <div>
                                     <Flow1D1 allData={allData}
                                         setIsModalOpen={setIsModalOpen} />
                                 </div>
-                            )}
-                            {selected?.startsWith("template_owner1_") && ownerIndex !== null && (
+                            )} */}
+                            {selected?.startsWith("owner1_") && ownerIndex !== null && (
                                 //common component
                                 <Flow2D3
                                     allData={allData}

@@ -68,7 +68,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const projectCodeId = stepByStepData.projectIdCode;
     const id = stepByStepData?.projectIdCode;
     // const projectId = stepByStepData?.projectIdCode?.result.id;
-    const projectId = stepByStepData?.projectIdCode?.result.id;
+    const projectId = stepByStepData?.projectId?.id;
     console.log(dataAllFIled, "alldata from ai===============")
     const userId = dataAllFIled?.createdById;
 
@@ -78,6 +78,7 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
     const allData = allTemplateData?.data || {};
+    console.log(stepByStepData, "stepByStepData ================stepByStepData")
     console.log(allData, "finalstep ================finalstep")
 
     // const store = makeStore();
