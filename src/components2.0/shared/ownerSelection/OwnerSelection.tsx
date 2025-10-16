@@ -237,13 +237,13 @@ const SharedOwnerSelection = ({
                                 <p><b>First Name:</b> {owner.first_name}</p>
                                 <p><b>Surname:</b> {owner.last_name}</p>
                                 <p><b>Father:</b> {owner.father_first__last_name}</p>
-                                <p><b>Email:</b> {(owner as any).email || "Not set"}</p>
-                                <p><b>Phone:</b> {(owner as any).phone || "Not set"}</p>
-                                <p><b>Address:</b> {owner.owner_address || "Not set"}</p>
-                                <p><b>City:</b> {owner.city || "Not set"}</p>
-                                <p><b>Postal Code:</b> {owner.postal_code || "Not set"}</p>
-                                <p><b>Date of Birth:</b> {owner.date_of_birth || "Not set"}</p>
-                                <p><b>Place of Birth:</b> {owner.place_of_birth || "Not set"}</p>
+                                {/* <p><b>Email:</b> {(owner as any).email || "Not set"}</p> */}
+                                {/* <p><b>Phone:</b> {(owner as any).phone || "Not set"}</p> */}
+                                {/* <p><b>Address:</b> {owner.owner_address || "Not set"}</p> */}
+                                {/* <p><b>City:</b> {owner.city || "Not set"}</p> */}
+                                {/* <p><b>Postal Code:</b> {owner.postal_code || "Not set"}</p> */}
+                                {/* <p><b>Date of Birth:</b> {owner.date_of_birth || "Not set"}</p> */}
+                                {/* <p><b>Place of Birth:</b> {owner.place_of_birth || "Not set"}</p> */}
                                 <p><b>VAT No:</b> {owner.tax_identification_number || "Not set"}</p>
                             </div>
                         </div>
