@@ -31,12 +31,12 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
 
     const dispatch = useDispatch();
     const stepByStepData: any = useSelector((state: RootState) => state.aiData);
-    const id = stepByStepData?.projectId?.id;
+    // const id = stepByStepData?.projectId?.id;
 
     const { data: remainingCredit } = useRemainingCreditQuery("");
     const [useCredit] = useUseCreditsMutation();
 
-
+    console.log("stepByStepData", stepByStepData)
     // Create templates including owner templates without mutating exported array
     const allTemplates: TemplateName[] = useMemo(() => {
         const baseTemplates: TemplateName[] = [
@@ -45,15 +45,15 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
             { id: "autofill", title: "Autofill 1 Credit", price: 1 },
         ];
 
-        stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+        stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
             baseTemplates.push({
                 id: `template3_${index}`,
-                title: `Ανάθεσης Ιδιοκτήτη 4495/2017 3 ${owner.first_name} ${owner.last_name}`,
+                title: `Ανάθεσης Ιδιοκτήτη 4495/2017 3 ${owner.firstName} ${owner.lastName}`,
                 price: 0.5,
             });
             baseTemplates.push({
                 id: `template4_${index}`,
-                title: `Αυθαιρέτων Ιδιοκτήτη 4495/2017 4 ${owner.first_name} ${owner.last_name}`,
+                title: `Αυθαιρέτων Ιδιοκτήτη 4495/2017 4 ${owner.firstName} ${owner.lastName}`,
                 price: 0.5,
             });
         });
