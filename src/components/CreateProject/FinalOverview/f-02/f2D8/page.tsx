@@ -122,7 +122,7 @@ export default function F2D8({ allData, setIsModalOpen }: F6D13Props) {
                 </div>
 
                 <div className="flex items-start">
-                    <span className=" text-sm w-[120px]">Θέση:</span>
+                    <span className=" text-sm w-[150px]">Θέση:</span>
                     <h3 className=" text-sm text-center">
                         {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
                         ΔΗΜΟΣ {municipalityCommunity || "N/A"},
@@ -281,6 +281,29 @@ export default function F2D8({ allData, setIsModalOpen }: F6D13Props) {
                                             defaultValue={propertyPlace || "propertyPlace"}
                                             {...register("propertyPlace", { required: "propertyPlace is required" })}
                                             className="border p-2 rounded text-sm"
+                                        />
+                                    </div>
+                                </div>
+                                {/* technical description */}
+                                <div className="w-full space-y-2">
+                                    <div className="w-full">
+                                        <input
+                                            type="text"
+                                            defaultValue={technicalDescription || "technicalDescription"}
+                                            {...register("technicalDescription", {
+                                                required: "technicalDescription is required",
+                                            })}
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    </div>
+                                    <div className="w-full">
+                                        <input
+                                            type="text"
+                                            defaultValue={technicalDescriptionTwo || "technicalDescriptionTwo"}
+                                            {...register("technicalDescriptionTwo", {
+                                                required: "technicalDescriptionTwo is required",
+                                            })}
+                                            className="border p-2 rounded text-sm w-full"
                                         />
                                     </div>
                                 </div>

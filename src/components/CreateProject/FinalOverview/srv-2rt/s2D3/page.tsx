@@ -52,10 +52,12 @@ type modalFnProps = {
 }
 
 
-export default function S2D3({ allData, owner }: { allData: allDataProps, owner: any }) {
+export default function S2D3({ allData, ownerIndex }: { allData: allDataProps, ownerIndex: number }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const engineers = allData?.engineers?.[0] || {};
+    const owner = allData?.owners?.[ownerIndex]
+    console.log(owner, "======================")
     // Removed duplicate 'owner' declaration
     const { id, createdById, serviceId, horizontalPropertyName, ydom, specialty, propertyAddress, propertyPlace, floorProperty, createdAt, declaration_owner_for_4495_2017 } = allData || {};
     const [updateProject2] = useUpdateProject2Mutation()
@@ -70,27 +72,21 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
 
     // Submit handler
     const onSubmit = async (data: FormInputs) => {
-        console.log(data, "============data")
+        if(ownerIndex === null) return;
+
+        // old owner copy 
+        const updatedOwners = [...allData.owners]
+
+        // owner replace of old owner 
+        updatedOwners[ownerIndex] = {
+            ...updatedOwners[ownerIndex],
+            ...data
+        }
         // make formData 
         const formData = new FormData();
         formData.append("data", JSON.stringify({
-            serviceId: serviceId,
-            ydom: data.ydom || allData.ydom,
-            firstName: data.firstName || owner?.first_name,
-            lastName: data.lastName || owner?.last_name,
-            fatherFirstLastName: data.fatherFirstLastName || owner?.father_first_last_name,
-            mothersFirstLastName: data.mothersFirstLastName || owner?.mothers_first_last_name,
-            dateOfBirth: data.dateOfBirth || owner?.date_of_birth,
-            placeOfBirth: data.placeOfBirth || owner?.place_of_birth,
-            idNumber: data.idNumber || owner?.id_number,
-            mobile: data.mobile || owner?.mobile,
-            city: data.city || owner?.city,
-            ownerAddress: data.ownerAddress || owner?.owner_address,
-            addressNumber: data.addressNumber || owner?.address_number,
-            postalCode: data.postalCode || owner?.postal_code,
-            email: data.email || owner?.email,
-            taxIdentificationNumber: data.taxIdentificationNumber || owner?.tax_identification_number,
-
+            owners: updatedOwners,
+            serviceId: serviceId
         }));
 
         try {
@@ -163,7 +159,7 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.father_first_last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.father_first__last_name || owner?.fatherLastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -171,7 +167,7 @@ export default function S2D3({ allData, owner }: { allData: allDataProps, owner:
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mothers_first_last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.mother_first__last_name || "N/A"}</div>
                             </div>
                         </div>
 

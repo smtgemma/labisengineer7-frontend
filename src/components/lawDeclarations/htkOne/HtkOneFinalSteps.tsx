@@ -16,6 +16,8 @@ import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "sonner";
 import { FormDataOne, FormDataTwo } from "./template";
+import Flow2D3 from "@/components/CreateProject/FinalOverview/srv-3rd/f2/flow2D3/page";
+import Flow1D1 from "@/components/CreateProject/FinalOverview/srv-3rd/f1/flow1D1/page";
 
 export interface UserData {
     id: string;
@@ -69,6 +71,8 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
     const userId = dataAllFIled?.createdById;
     console.log(stepByStepData, "stepByStepDatastepByStepData")
     console.log(projectId, "projectId")
+    
+    console.log(stepByStepData, "===========allData================")
 
 
     const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
@@ -76,6 +80,7 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
     const allData = allTemplateData?.data || {};
+    
     // const buildingMods = subCategoryData["building-modifications"] || [];
     // const energy = subCategoryData["energy-systems"] || [];
     // const fencing = subCategoryData["fencing"] || [];
@@ -338,19 +343,21 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
                     {allTemplate?.length > 0 ? (
                         allTemplate.map((template: any) => (
                             <div key={template.id}>
-                                <button
-                                    className="bg-white px-4 py-2 rounded-lg cursor-pointer"
-                                    onClick={() => {
-                                        if (template.id.startsWith(template.id)) {
-                                            const index = Number(template.id.split("_")[1]);
-                                            setOwnerIndex(index)
-                                        }
-                                        setSelected(template.id);
-                                        setIsModalOpen(true);
-                                    }}
-                                >
-                                    {template.title}
-                                </button>
+                                {(template.id !== "autofill" && template.id !== "autofill2") && (
+                                    <button
+                                        className="bg-white px-4 py-2 rounded-lg cursor-pointer"
+                                        onClick={() => {
+                                            if (template.id.startsWith(template.id)) {
+                                                const index = Number(template.id.split("_")[1]);
+                                                setOwnerIndex(index);
+                                            }
+                                            setSelected(template.id);
+                                            setIsModalOpen(true);
+                                        }}
+                                    >
+                                        {template.title}
+                                    </button>
+                                )}
                             </div>
                         ))
                     ) : (
@@ -380,10 +387,17 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
                                 <h1>Register Horizontal Property Autofill 1 Credit</h1>
                             )}
                             {selected === "doc_technical_description" && (
-                                <h1>Register Horizontal Property Autofill 1 Credit</h1>
+                                <div>
+                                    <Flow1D1 allData={allData}
+                                        setIsModalOpen={setIsModalOpen} />
+                                </div>
                             )}
-                            {selected?.startsWith("template_owner_") && ownerIndex !== null && (
-                                <h1>all owner </h1>
+                            {selected?.startsWith("template_owner1_") && ownerIndex !== null && (
+                                //common component
+                                <Flow2D3
+                                    allData={allData}
+                                    ownerIndex={ownerIndex}
+                                />
                             )}
                         </div>
                     </div>

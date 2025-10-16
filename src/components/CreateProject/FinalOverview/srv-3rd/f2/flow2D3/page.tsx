@@ -15,7 +15,7 @@ interface FormInputs {
     dateOfBirth?: string;
     placeOfBirth?: string;
     idNumber?: string;
-    phone?: string;
+    mobile?: string;
     city?: string;
     ownerAddress?: string;
     addressNumber?: string;
@@ -43,42 +43,26 @@ interface allDataProps {
     propertyPlace: string;
     firstName: string;
     lastName: string;
-    propertyNumber: string;
-    propertyPostalCode: string;
-    permitNumber: string;
-    issuingAuthority: string;
-    municipalityCommunity: string;
-    ownership_percentage_owner: string;
-    dateIssuanceBuildingPermit: string;
-    owner_type_ownership: string;
+    floorProperty: string;
+    declaration_owner_for_4495_2017: string;
 }
 
-type ViolationData = {
-    age: string;
-    category: string;
-    createdAt: string;
-    formId: number;
-    id: string;
-    otherViolation: boolean;
-    projectId: string;
-    showRemainingViolations: boolean;
-    updatedAt: string;
-    violations: string[];
-};
+type modalFnProps = {
+    setIsModalOpen: (value: boolean) => void;
+}
 
 
-
-export default function S2D4({ allData, violations, ownerIndex }: { allData: allDataProps, violations: ViolationData[], ownerIndex: number }) {
+export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps, ownerIndex: number }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const engineers = allData?.engineers?.[0] || {};
     const owner = allData?.owners?.[ownerIndex]
+    console.log(owner, "======================")
     // Removed duplicate 'owner' declaration
-    const { municipalityCommunity, owner_type_ownership, ownership_percentage_owner, dateIssuanceBuildingPermit, id, createdById, serviceId, ydom, specialty, createdAt, propertyAddress, propertyPlace, firstName, lastName, propertyNumber, propertyPostalCode, permitNumber, issuingAuthority } = allData || {};
-
+    const { id, createdById, serviceId, horizontalPropertyName, ydom, specialty, propertyAddress, propertyPlace, floorProperty, createdAt, declaration_owner_for_4495_2017 } = allData || {};
     const [updateProject2] = useUpdateProject2Mutation()
-    const { data: userData } = useGetMeQuery()
-    const signature = userData?.data?.signature
+    // const { data: userData } = useGetMeQuery()
+    // const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -88,22 +72,20 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
 
     // Submit handler
     const onSubmit = async (data: FormInputs) => {
-        if (ownerIndex === null) return;
+        if(ownerIndex === null) return;
 
-        // // old owner copy
-        const updatedOwners = [...allData.owners];
+        // old owner copy 
+        const updatedOwners = [...allData.owners]
 
-        // //    owner replace of old owner 
+        // owner replace of old owner 
         updatedOwners[ownerIndex] = {
             ...updatedOwners[ownerIndex],
             ...data
-        };
-
-        // // make formData 
+        }
+        // make formData 
         const formData = new FormData();
         formData.append("data", JSON.stringify({
             owners: updatedOwners,
-            projectDescription: data.projectDescription || allData.projectDescription,
             serviceId: serviceId
         }));
 
@@ -116,7 +98,6 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
 
             reset();
             setIsEditModalOpen(false)
-            // setSelectedOwnerIndex(null)
 
         } catch (error) {
             console.error("Update failed", error)
@@ -127,16 +108,16 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
     return (
         <div className="arial">
             <div className="max-w-[796px] mx-auto bg-white mb-16">
+                <div className="text-right -mt-3">
+                    <button
+                        className="mt-1 px-4 py-1"
+                        onClick={() => setIsEditModalOpen(true)}
+                    >
+                        <FaRegEdit className="text-black text-2xl cursor-pointer" />
+                    </button>
+                </div>
                 <div className="max-w-[796px] mx-auto bg-white">
                     {/* Header with coat of arms */}
-                    <div className="text-right -mt-3">
-                        <button
-                            className="mt-1 px-4 py-1"
-                            onClick={() => setIsEditModalOpen(true)}
-                        >
-                            <FaRegEdit className="text-black text-2xl cursor-pointer" />
-                        </button>
-                    </div>
                     <div className="text-center mb-6">
                         <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full flex items-center justify-center">
                             <img src="/templateLogo/templateLogo.jpg" alt="Template Logo" />
@@ -168,9 +149,9 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.first_name || "N/A"}</div>
+                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.first_name || owner?.firstName || "N/A"}</div>
                                 <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-                                <div className="flex-1 p-2  font-bold">{owner?.last_name || "N/A"}</div>
+                                <div className="flex-1 p-2  font-bold">{owner?.last_name || owner?.lastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -178,7 +159,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.father_first__last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.fatherFirstName || owner?.fatherLastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -186,7 +167,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mother_first__last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.mothers_first_last_name || "N/A"}</div>
                             </div>
                         </div>
 
@@ -212,7 +193,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
                                 <div className="w-72 p-2 border-r border-gray-400 font-bold">{owner?.id_number || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mobile || owner?.phone || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.mobile || "N/A"}</div>
                             </div>
                         </div>
 
@@ -263,165 +244,41 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
 
                         {/* Declaration text */}
                         <div className="p-4 text-sm">
-                            <div className="border border-b-0 mb-10">
-                                <div className="">
-                                    <p className="mb-1 p-2">
-                                        Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις (3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν. 1599/1986,
-                                        δηλώνω ότι σχετικά με το δηλωθέν ακίνητό στην στην οδό <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}</span> περιοχή <span className="font-bold">{propertyPlace || "N/A"}</span> στον Δήμο <span className="font-bold">{municipalityCommunity || "N/A"}</span> με <span className="font-bold">Τ.Κ.{propertyPostalCode || "N/A"}</span> στο οποίο ως ιδιοκτήτης με ποσοστό  <span className="font-bold">{owner?.ownership_percentage_owner || "N/A"}</span> ισχύουν τα εξής:
-                                    </p>
-                                    <div className="border-b border-dashed p-0"></div>
-                                    <p className="my-3 p-2">
-                                        Αριθμός Οικοδομικής Άδειας: <span className="font-bold">{permitNumber || "N/A"}</span> Ημερομηνία Έκδοσης: <span className="font-bold">{dateIssuanceBuildingPermit || "N/A"}</span> Πολεοδομική Υπηρεσία: <span className="font-bold">{issuingAuthority || "N/A"}</span>
-                                    </p>
-                                    <div className="border-b border-dashed"></div>
-                                    <p className="font-bold p-2">
-                                        Περιγραφή Αυθαίρετων Κατασκευών ή/και Χρήσεων:
-                                    </p>
-                                    {/* <div className="grid grid-cols-1 md:grid-cols-2 my-6 p-2">
-                                    {
-                                        violations && violations?.map((item: any, index: number) => {
-                                            return (
-                                                <div key={index}>
-                                                    <p>Age: {item.age}</p>
-                                                    <p>Category: {item.category}</p>
-                                                    <p>CreatedAt: {item.createdAt && format(new Date(item.createdAt), "dd/MM/yyyy")}</p>
-                                                    <p>FormId: {item.formId}</p>
-                                                    <p>Id: {item.id}</p>
-                                                    <p>OtherViolation: {item.otherViolation}</p>
-                                                    <p>ProjectId: {item.projectId}</p>
-                                                    <p>ShowRemainingViolations: {item.showRemainingViolations}</p>
-                                                    <p>UpdatedAt: {item.updatedAt && format(new Date(item.updatedAt), "dd/MM/yyyy")}</p>
-                                                    <p>Violations: {item?.violations && item?.violations?.map((v: string, index: number) => {
-                                                        return <div key={index}>
-                                                            <p>{v}</p>
-                                                        </div>
-                                                    })}</p>
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </div> */}
-                                    <div className=" p-2">
-                                        {/* Step 1 — Show categories 1,2,4,5 */}
-                                        {violations.length > 0 && (() => {
-                                            let count = 1; // common counter for all Φ.Κ. numbers
+                            <p className="mb-4">
+                                Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
+                            
+                              { declaration_owner_for_4495_2017 || "N/A"}, εξουσιοδοτώ 
+                            </p>
+                            <p className="mb-1">
+                                τον /την ({engineers?.lastName || "N/A"} {engineers?.firstName || "N/A"})-({specialty || "N/A"}) με ΑΜ ΤΕΕ (TEE NUMBER),
+                            </p>
+                            <p className="mb-1">
+                                για να προβεί σε όλες τις απαραίτητες ενέργειες σχετικά με τη ρύθμιση αυθαίρετων κατασκευών, όπως αυτές περιγράφονται στο κεφάλαιο ΦΕΚ 167Α/3-11-2017 του Ν.4495/2017.
+                            </p>
+                        </div>
 
-                                            const nonCategory3 = violations.filter((item) => String(item.category) !== "3");
-                                            const category3 = violations.find((item) => String(item.category) === "3");
-                                            const hasOther = violations.some((item) => item.otherViolation);
-
-                                            return (
-                                                <>
-                                                    {violations.some((item) => item.category !== "3" && item.otherViolation === false) && (
-                                                        <>
-                                                            {violations
-                                                                .filter((item) => item.category !== "3" && item.otherViolation === false)
-                                                                .map((item) => (
-                                                                    <p key={item.id || count} className="mt-2">
-                                                                        <span className="font-bold">Φ.Κ. # {count++}</span>{" "}
-                                                                        <span>
-                                                                            {item?.violations?.map((v: string, i: number) => (
-                                                                                <span key={i}>
-                                                                                    {v}
-                                                                                    {i < item.violations.length - 1 && ", "}
-                                                                                </span>
-                                                                            ))}
-                                                                        </span>{" "}
-                                                                        Κατηγορία {item.category || "N/A"}, Έτος κατασκευής: {item.age || "N/A"}.
-                                                                    </p>
-                                                                ))}
-                                                        </>
-                                                    )}
-
-
-                                                    {/* Step 2 — Category 3 (once) */}
-                                                    {category3 && (
-                                                        <p key="category3" className="mt-2">
-                                                            <span className="font-bold">Φ.Κ. # {count++}</span>. Αυθαίρετες μικρές παραβάσεις της κατηγορίας 3 του άρθρου 96,
-                                                            του Ν.4495/17, Κατηγορία 3, Έτος κατασκευής: {category3.age || "N/A"}.{" "}
-                                                            <span>
-                                                                {category3?.violations?.map((v: string, i: number) => (
-                                                                    <span key={i}>
-                                                                        {v}
-                                                                        {i < category3.violations.length - 1 && ", "}
-                                                                    </span>
-                                                                ))}
-                                                            </span>
-                                                        </p>
-                                                    )}
-
-                                                    {/* Step 3 — Other violations */}
-                                                    {hasOther && (() => {
-                                                        const other = violations.find((item) => item.otherViolation);
-                                                        return (
-                                                            <p key="other" className="mt-2">
-                                                                <span className="font-bold">Φ.Κ. #{count++}.</span> Λοιπές Πολεοδομικές παραβάσεις του άρθρου 100 του Ν.4495/2017 –{" "}
-                                                                <span>
-                                                                    {other?.violations?.map((v: string, i: number) => (
-                                                                        <span key={i}>
-                                                                            {v}
-                                                                            {i < other.violations.length - 1 && ", "}
-                                                                        </span>
-                                                                    ))}
-                                                                </span>{" "}
-                                                                και σύμφωνα με το Παράρτημα Β του Ν.4495/2017 ορίζονται ως (1) Πολεοδομική παράβαση.
-                                                                (επισυνάπτεται αναλυτικός προϋπολογισμός).
-                                                            </p>
-                                                        );
-                                                    })()}
-                                                </>
-                                            );
-                                        })()}
+                        {/* Additional disclaimer text */}
+                        <div className="text-sm my-3 ml-5">
+                            <div className="w-[90%] mx-left">
+                                <div className="flex justify-between mb-3">
+                                    <p>Βεβαιώνεται το γνήσιο της υπογραφής</p>
+                                    <div>
+                                        <p> Ημερομηνία: {createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</p>
+                                        <p className="text-center mt-2 ">Ο – Η Δηλ.</p>
                                     </div>
 
                                 </div>
-                                <div className="border-t border-dashed"></div>
                             </div>
-                            <div className="border border-t-0">
-                                <div className="border-b border-dashed"></div>
-                                <div className="">
-                                    <div className="my-2 p-2"><span className="font-bold mr-2">Ημερομηνία Ολοκλήρωσης ή Εγκατάστασης Αυθαίρετων Κατασκευών:</span>
-                                        {
-                                            [...new Set(violations?.map((item) => item.age))].map((uniqueAge, i, arr) => (
-                                                <span key={i}>
-                                                    {uniqueAge}
-                                                    {i < arr.length - 1 && ", "}
-                                                </span>
-                                            ))
-                                        }
-                                    </div>
-                                    <div><span className="font-bold p-2">Έγγραφο Παλαιότητας:</span> Αεροφωτογραφία από Ελληνικό Κτηματολόγιο, Συμβόλαιο ιδιοκτησίας</div>
-                                    <div className="border-b border-dashed my-2 px-2"></div>
-                                    <p className="font-bold px-2">Κατηγορία Χρήσης:</p>
-                                    <div className="border-b border-dashed my-2"></div>
-                                    <p className="font-bold px-2">Τιμή Ζώνης: - <span className="ml-10">Ποσοστό  και Είδος Ιδιοκτησίας:</span> <span className="ml-2">{owner?.ownership_percentage_owner || "N/A"}</span> <span>{owner?.owner_type_ownership || "N/A"}</span> <span className="ml-5">Χρήση Γής: Αμιγής / Γενική Κατοικία</span>
-                                    </p>
-                                    <div className="border-b border-dashed my-2"> </div>
-                                    <p className="p-2">Δηλώνω ρητά ότι δεν εμπίπτει σε καμία από τις περιπτώσεις του άρθρου 89 του Ν. 4495/17 και ότι οι ως άνω παραβάσεις είχαν ολοκληρωθεί προ της 28.07.2011 και σύμφωνα με το άρθρο 96 του Ν. 4495/17</p>
-                                </div>
-                            </div>
-                            <div className="my-3">
-                                <div className="w-[90%] mx-left">
-                                    <div className="flex justify-between mb-3">
-                                        <p>Βεβαιώνεται το γνήσιο της υπογραφής</p>
-                                        <div>
-                                            <p> Ημερομηνία: {createdAt && format(new Date(createdAt), "dd/MM/yyyy")}</p>
-                                            <p className="text-center mt-2 ">Ο – Η Δηλ.</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="text-xs pt-12 pb-8">
-                                <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
-                                <p>(2) Αναγράφεται ολογράφως.</p>
-                                <p> (3) «Όποιος εν γνώσει του δηλώνει ψευδή γεγονότα ή αρνείται ή αποκρύπτει τα αληθινά με έγγραφη υπεύθυνη δήλωση του άρθρου 8 τιμωρείται με φυλάκιση τουλάχιστον τριών μηνών. Εάν ο υπαίτιος αυτών των πράξεων σκόπευε να προσπορίσει στον εαυτόν του ή σε άλλον περιουσιακό όφελος βλάπτοντας τρίτον ή σκόπευε να βλάψει άλλον, τιμωρείται με κάθειρξη μέχρι 10 ετών.</p>
-                                <p>(4) Σε περίπτωση ανεπάρκειας χώρου η δήλωση συνεχίζεται στην πίσω όψη της και υπογράφεται από τον δηλούντα ή την δηλούσα.</p>
-                            </div>
+                        </div>
+                        <div className="text-xs p-5">
+                            <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
+                            <p>(2) Αναγράφεται ολογράφως.</p>
+                            <p> (3) «Όποιος εν γνώσει του δηλώνει ψευδή γεγονότα ή αρνείται ή αποκρύπτει τα αληθινά με έγγραφη υπεύθυνη δήλωση του άρθρου 8 τιμωρείται με φυλάκιση τουλάχιστον τριών μηνών. Εάν ο υπαίτιος αυτών των πράξεων σκόπευε να προσπορίσει στον εαυτόν του ή σε άλλον περιουσιακό όφελος βλάπτοντας τρίτον ή σκόπευε να βλάψει άλλον, τιμωρείται με κάθειρξη μέχρι 10 ετών.</p>
+                            <p>(4) Σε περίπτωση ανεπάρκειας χώρου η δήλωση συνεχίζεται στην πίσω όψη της και υπογράφεται από τον δηλούντα ή την δηλούσα.</p>
                         </div>
                     </div>
                     {/* EDIT MODAL */}
-                    {isEditModalOpen && ownerIndex !== null && (
+                    {isEditModalOpen && (
                         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
                             <div className="bg-white p-6 rounded-xl shadow-lg w-11/12 max-w-3xl relative">
                                 {/* Close button */}
@@ -439,15 +296,15 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                         className="grid grid-cols-1 md:grid-cols-2 gap-4"
                                     >
                                         {/* ydom */}
-                                        {/* <div className="flex flex-col gap-2">
+                                        <div className="flex flex-col gap-2">
                                             <label className="font-medium">ΠΡΟΣ *:</label>
                                             <input
                                                 type="text"
                                                 {...register("ydom", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData?.ydom || ""}
+                                                defaultValue={ydom || ""}
                                             />
-                                        </div> */}
+                                        </div>
                                         {/* Name */}
                                         <div className="flex flex-col gap-2">
                                             <label className="font-medium">Όνομα *:</label>
@@ -455,7 +312,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("firstName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.firstName || ""}
+                                                defaultValue={owner?.first_name || ""}
                                             />
                                         </div>
 
@@ -466,7 +323,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("lastName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.lastName || ""}
+                                                defaultValue={owner?.last_name || ""}
                                             />
                                         </div>
 
@@ -477,7 +334,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("fatherFirstLastName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.fatherFirstLastName || ""}
+                                                defaultValue={owner?.father_first_last_name || ""}
                                             />
                                         </div>
 
@@ -488,7 +345,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("mothersFirstLastName", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.mothersFirstLastName || ""}
+                                                defaultValue={owner?.mothers_first_last_name || ""}
                                             />
                                         </div>
 
@@ -499,7 +356,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="date"
                                                 {...register("dateOfBirth", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.dateOfBirth || ""}
+                                                defaultValue={owner?.date_of_birth || ""}
                                             />
                                         </div>
 
@@ -510,7 +367,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("placeOfBirth", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.placeOfBirth || ""}
+                                                defaultValue={owner?.place_of_birth || ""}
                                             />
                                         </div>
 
@@ -521,7 +378,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("idNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.idNumber || ""}
+                                                defaultValue={owner?.id_number || ""}
                                             />
                                         </div>
 
@@ -530,9 +387,9 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Τηλέφωνο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("phone", { required: "This field is required" })}
+                                                {...register("mobile", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.phone || ""}
+                                                defaultValue={owner?.mobile || ""}
                                             />
                                         </div>
 
@@ -543,7 +400,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("city", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.city || ""}
+                                                defaultValue={owner?.city || ""}
                                             />
                                         </div>
 
@@ -554,7 +411,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("ownerAddress", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.ownerAddress || ""}
+                                                defaultValue={owner?.owner_address || ""}
                                             />
                                         </div>
 
@@ -565,7 +422,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("addressNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.addressNumber || ""}
+                                                defaultValue={owner?.address_number || ""}
                                             />
                                         </div>
 
@@ -576,7 +433,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("postalCode", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.postalCode || ""}
+                                                defaultValue={owner?.postal_code || ""}
                                             />
                                         </div>
 
@@ -587,7 +444,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="email"
                                                 {...register("email", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.email || ""}
+                                                defaultValue={owner?.email || ""}
                                             />
                                         </div>
 
@@ -598,21 +455,9 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                                 type="text"
                                                 {...register("taxIdentificationNumber", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.taxIdentificationNumber || ""}
+                                                defaultValue={owner?.tax_identification_number || ""}
                                             />
                                         </div>
-
-                                        {/* Project Description */}
-                                        <div className="flex flex-col gap-2">
-                                            <label className="font-medium">Περιγραφή Έργου *:</label>
-                                            <input
-                                                type="text"
-                                                {...register("projectDescription", { required: "This field is required" })}
-                                                className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.projectDescription || ""}
-                                            />
-                                        </div>
-
                                         {/* Submit */}
                                         <div className="flex justify-end md:col-span-2">
                                             <button
@@ -633,3 +478,4 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
     )
 
 }
+

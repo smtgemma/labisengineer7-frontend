@@ -367,19 +367,19 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
       stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
         baseTemplatesOwner1.push({
           id: `template1_${index}`,
-          title: `YΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
           price: 0.5,
         });
       });
       baseTemplatesOwner1.push(
         // { id: "61", title: "YΔ Ανάθεσης Ιδιοκτήτη", price: 0.5 },
-        { id: "62", title: "YΔ Ανάληψης Έργου Μηχανικού", price: 0.5 },
+        { id: "62", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5 },
         { id: "63", title: "YΔ Φέροντα Οργανισμού", price: 0.5 },
-        { id: "64", title: "Τεχνική Έκθεση / Τεχνική Περιγραφή Έργου", price: 1 },
+        { id: "64", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 1 },
         { id: "65", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5 },
         { id: "66", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 1 },
         { id: "67", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5 },
-        { id: "68", title: "Πίνακας 3", price: 0.5 },
+        { id: "68", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5 },
         { id: "69", title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Ενεργητικής Πυροπροστασίας", price: 0.5 },
         { id: "610", title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Παθητικής Πυροπροστασίας", price: 0.5 },
         { id: "611", title: "Ενημερωτικό Σημείωμα μη απαίτησης Μελέτης Η/Μ Εγκαταστάσεων", price: 0.5 },
@@ -423,7 +423,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           id: "107", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
         },
         {
-          id: "108", title: "ΥΔ Μηχανικού Φέρων Οργανισμού", price: 0.5,
+          id: "108", title: "YΔ Φέροντα Οργανισμού", price: 0.5,
         },
         {
           id: "109", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
@@ -461,7 +461,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           id: "75", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
         },
         {
-          id: "76", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων", price: 0.5,
+          id: "76", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
         },
         // {
         //   id: "77", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
@@ -509,7 +509,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           id: "142", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
         },
         {
-          id: "143", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων", price: 0.5,
+          id: "143", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
         },
         {
           id: "144", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
@@ -530,7 +530,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           id: "149", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
         },
         {
-          id: "1410", title: "ΥΔ Μηχανικού Φέρων Οργανισμού", price: 0.5,
+          id: "1410", title: "YΔ Φέροντα Οργανισμού", price: 0.5,
         },
         {
           id: "1411", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
@@ -546,7 +546,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
     // this is subcategory 2
     if (hasSubcategory2) {
-       stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
         baseTemplatesOwner1.push({
           id: `owner26_${index}`,
           title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
@@ -606,7 +606,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           id: "52", title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων", price: 0.5,
         },
         {
-          id: "53", title: "Πίνακας 3(ΙΚΑ)", price: 0.5,
+          id: "53", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
         },
         {
           id: "54", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
@@ -643,9 +643,9 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
     // this is subcategory 8 
     if (hasSubcategory8) {
-      stepByStepData.ownerBaseData?.forEach((owner:{first_name: string; last_name: string}, index: number) => {
+      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
         baseTemplatesOwner1.push({
-          id:`template83_${index}`,
+          id: `template83_${index}`,
           title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
           price: 0.5,
         })
@@ -683,15 +683,43 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
   console.log(allTemplates, "allTemplates with all id")
 
   // remove the common id
+  // allTemplates = Object.values(
+  //   allTemplates.reduce((acc: Record<string, any>, curr) => {
+  //     const key = curr.id; // use id as unique key
+  //     if (!acc[key]) {
+  //       acc[key] = curr; // keep only the first occurrence of each id
+  //     }
+  //     return acc;
+  //   }, {})
+  // );
+
+  // allTemplates = Object.values(
+  //   allTemplates.reduce((acc: Record<string, any>, curr) => {
+  //     const key = curr.title; // use title as unique key
+  //     if (!acc[key]) {
+  //       acc[key] = curr; // keep only the first occurrence of each title
+  //     }
+  //     return acc;
+  //   }, {})
+  // );
+
+
   allTemplates = Object.values(
-    allTemplates.reduce((acc: Record<string, any>, curr) => {
-      const key = curr.id; // use id as unique key
-      if (!acc[key]) {
-        acc[key] = curr; // keep only the first occurrence of each id
-      }
-      return acc;
-    }, {})
-  );
+  allTemplates.reduce((acc: Record<string, any>, curr) => {
+    // Check if any existing item already has the same id or title
+    const isDuplicate = Object.values(acc).some(
+      (item) => item.id === curr.id || item.title === curr.title
+    );
+
+    if (!isDuplicate) {
+      acc[curr.id] = curr; // use id as the key (could be anything unique)
+    }
+
+    return acc;
+  }, {})
+);
+
+
   console.log(allTemplates, "allTemplates with not repeated id")
 
   // Compute subtotal

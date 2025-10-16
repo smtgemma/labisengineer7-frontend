@@ -37,18 +37,18 @@ function FcsvMain({ allData }: { allData: any }) {
             {/* Conditional Tab Content */}
             <div className="p-6">
                 {activeTab === "ΕΞΩΦΥΛΛΟ" && <FcsvD0 allData={allData} />}
-                {activeTab === "1. ΒΑΣΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ" && <FcsvD1 />}
-                {activeTab === "2. ΕΚΤΙΜΗΣΗ ΠΑΡΑΓΟΜΕΝΩΝ ΑΕΚΚ" && <FcsvD2 />}
-                {activeTab === "ΦΑΣΗ 1" && <FcsvD3 number= "1" />}
-                {activeTab === "ΦΑΣΗ 2" && <FcsvD3 number= "2" />}
-                {activeTab === "ΦΑΣΗ 3" && <FcsvD3 number= "3" />}
-                {activeTab === "ΦΑΣΗ 4" && <FcsvD3 number= "4" />}
-                {activeTab === "ΦΑΣΗ 5" && <FcsvD3 number= "5" />}
-                {activeTab === "ΦΑΣΗ 6" && <FcsvD3 number= "6" />}
-                {activeTab === "ΦΑΣΗ 7" && <FcsvD3 number= "7" />}
-                {activeTab === "ΦΑΣΗ 8" && <FcsvD3 number= "8" />}
-                {activeTab === "ΦΑΣΗ 9" && <FcsvD3 number= "9" />}
-                {activeTab === "ΦΑΣΗ 10" && <FcsvD3 number= "10" />}
+                {activeTab === "1. ΒΑΣΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ" && <FcsvD1 allData={allData} />}
+                {activeTab === "2. ΕΚΤΙΜΗΣΗ ΠΑΡΑΓΟΜΕΝΩΝ ΑΕΚΚ" && <FcsvD2 allData={allData} />}
+                {activeTab === "ΦΑΣΗ 1" && <FcsvD3 number= "1" allData={allData} />}
+                {activeTab === "ΦΑΣΗ 2" && <FcsvD3 number= "2" allData={allData} />}
+                {activeTab === "ΦΑΣΗ 3" && <FcsvD3 number= "3" allData={allData} />}
+                {activeTab === "ΦΑΣΗ 4" && <FcsvD3 number= "4" allData={allData} />}
+                {activeTab === "ΦΑΣΗ 5" && <FcsvD3 number= "5" allData={allData} />}
+                {activeTab === "ΦΑΣΗ 6" && <FcsvD3 number= "6" allData={allData} />}
+                {activeTab === "ΦΑΣΗ 7" && <FcsvD3 number= "7" allData={allData} />}
+                {activeTab === "ΦΑΣΗ 8" && <FcsvD3 number= "8" allData={allData} />}
+                {activeTab === "ΦΑΣΗ 9" && <FcsvD3 number= "9" allData={allData} />}
+                {activeTab === "ΦΑΣΗ 10" && <FcsvD3 number= "10" allData={allData} />}
             </div>
             {/* Fixed Bottom Buttons */}
             <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-300 shadow-md z-50">

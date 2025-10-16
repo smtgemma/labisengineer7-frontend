@@ -288,6 +288,29 @@ export default function F10D15({ allData, setIsModalOpen }: F6D13Props) {
                                         />
                                     </div>
                                 </div>
+                                {/* technical description */}
+                                <div className="w-full space-y-2">
+                                    <div className="w-full">
+                                        <input
+                                            type="text"
+                                            defaultValue={technicalDescription || "technicalDescription"}
+                                            {...register("technicalDescription", {
+                                                required: "technicalDescription is required",
+                                            })}
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    </div>
+                                    <div className="w-full">
+                                        <input
+                                            type="text"
+                                            defaultValue={technicalDescriptionTwo || "technicalDescriptionTwo"}
+                                            {...register("technicalDescriptionTwo", {
+                                                required: "technicalDescriptionTwo is required",
+                                            })}
+                                            className="border p-2 rounded text-sm w-full"
+                                        />
+                                    </div>
+                                </div>
                                 {/* Submit */}
                                 <div className="flex justify-end">
                                     <button
