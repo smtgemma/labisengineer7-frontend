@@ -54,6 +54,7 @@ type modalFnProps = {
 
 export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps, ownerIndex: number }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    console.log(allData?.owners,"============al", ownerIndex)
 
     const engineers = allData?.engineers?.[0] || {};
     const owner = allData?.owners?.[ownerIndex]
@@ -149,9 +150,9 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.first_name || owner?.firstName || "N/A"}</div>
+                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.first_name || "N/A"}</div>
                                 <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-                                <div className="flex-1 p-2  font-bold">{owner?.last_name || owner?.lastName || "N/A"}</div>
+                                <div className="flex-1 p-2  font-bold">{owner?.last_name || "N/A"}</div>
                             </div>
                         </div>
 
@@ -159,7 +160,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.fatherFirstName || owner?.fatherLastName || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.father_first__last_name || "N/A"}</div>
                             </div>
                         </div>
 
@@ -167,7 +168,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mothers_first_last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.mother_first__last_name || "N/A"}</div>
                             </div>
                         </div>
 

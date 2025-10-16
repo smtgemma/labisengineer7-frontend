@@ -84,6 +84,14 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
       }),
       invalidatesTags: ["Templates"],
     }),
+    updateProject3: build.mutation({
+      query: ({ projectId, userId, formData }) => ({
+        url: `project2/update-project/${projectId}/${userId}`,
+        method: "PATCH",
+        body: formData,
+      }),
+      invalidatesTags: ["Templates"],
+    }),
 
     downloadTemplatePdf: build.query({
       query: () => ({
@@ -108,6 +116,7 @@ export const {
   useGetProject2Query,
   useUpdateProjectMutation,
   useUpdateProject2Mutation,
+  useUpdateProject3Mutation,
   useDownloadTemplatePdfQuery,
   useExeclDownloadTemplateQuery,
   useGetMeQuery,

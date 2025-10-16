@@ -10,6 +10,7 @@ import {
     useDownloadTemplatePdfQuery,
     useExeclDownloadTemplateQuery,
     useGetOwnerTemplateQuery,
+    useGetProject2Query,
 } from "@/redux/features/templates/allTemplateSlice";
 
 import { FaRegCopy } from "react-icons/fa6";
@@ -19,6 +20,7 @@ import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import S4D1 from "@/components/CreateProject/FinalOverview/srv-4t/s4D1/page";
 import S4D2 from "@/components/CreateProject/FinalOverview/srv-4t/s4D2/page";
 import Flow2D3 from "@/components/CreateProject/FinalOverview/srv-3rd/f2/flow2D3/page";
+import Flow1D1 from "@/components/CreateProject/FinalOverview/srv-3rd/f1/flow1D1/page";
 
 export interface UserData {
     id: string;
@@ -68,14 +70,19 @@ const HtkTwoFinalSteps: React.FC<FinalOverviewProps> = ({
     const allTemplate = stepByStepData.selectTemplate;
     const projectCodeId = stepByStepData.projectIdCode;
     const id = stepByStepData?.projectIdCode;
-    const projectId = stepByStepData?.projectIdCode?.result?.id;
+    // const projectId = stepByStepData?.projectIdCode?.result?.id;
+    const projectId = stepByStepData?.projectIdCode?.id;
     const userId = dataAllFIled?.createdById;
 
-    const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
+    const { data: allTemplateData } = useGetProject2Query(projectId || "");
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
     const allData = allTemplateData?.data || {};
+
+    console.log(projectId, "=================projectId")
+    console.log(stepByStepData, "=================stepByStepData")
+    console.log(allData, "=================allData")
     // const buildingMods = subCategoryData["building-modifications"] || [];
     // const energy = subCategoryData["energy-systems"] || [];
     // const fencing = subCategoryData["fencing"] || [];
@@ -340,7 +347,7 @@ const HtkTwoFinalSteps: React.FC<FinalOverviewProps> = ({
                     {allTemplate?.length > 0 ? (
                         allTemplate.map((template: any) => (
                             <div key={template.id}>
-                                <button 
+                                <button
                                     className="bg-white px-4 py-2 rounded-lg cursor-pointer"
                                     onClick={() => {
                                         if (template.id.startsWith(template.id)) {
@@ -379,15 +386,20 @@ const HtkTwoFinalSteps: React.FC<FinalOverviewProps> = ({
                                 // <S4D1 formData={formData} setFormData={setFormData} />
                                 <h1>template --one</h1>
                             )}
-                            {selected ===
+                            {/* {selected ===
                                 "ΥΔ ΑΝΑΘΕΣΗΣ ΙΔΙΟΚΤΗΤΗ" && (
                                     <div>
                                         <h1>template --two</h1>
-                                        {/* {allData?.owners?.map((data: any, idx: any) => <S4D2 key={idx} data={data} secondData={secondData} setSecondData={setSecondData} />)} */}
                                     </div>
 
-                                )}
-                            {selected?.startsWith("template_owner2_") && ownerIndex !== null && (
+                                )} */}
+                            {selected === "doc_technical_description" && (
+                                <div>
+                                    <Flow1D1 allData={allData}
+                                        setIsModalOpen={setIsModalOpen} />
+                                </div>
+                            )}
+                            {selected?.startsWith("owner2_") && ownerIndex !== null && (
                                 <Flow2D3
                                     allData={allData}
                                     ownerIndex={ownerIndex}
