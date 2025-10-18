@@ -25,8 +25,6 @@ const WorkflowDemo: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const stepParam = Number(searchParams.get("step")) || 1;
-
-
   const [currentStep, setCurrentStep] = useState(stepParam);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [extractedData, setExtractedData] = useState<any>(null);

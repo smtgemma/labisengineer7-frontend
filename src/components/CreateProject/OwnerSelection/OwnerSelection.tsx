@@ -3,13 +3,9 @@ import SharedOwnerSelection from "@/components2.0/shared/ownerSelection/OwnerSel
 import {
   setMultipleHorizontalDescription
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { Plus } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { FiEdit2 } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Owner
-} from "./types";
 
 const
   OwnerSelection = ({
@@ -19,8 +15,6 @@ const
     currentStep: number;
     nextStep: () => void;
   }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedOwners, setSelectedOwners] = useState<Owner[]>([]);
     const [selectedProperty, setSelectedProperty] = useState<
       { id: number; description: string }[]
     >([]);
@@ -57,18 +51,21 @@ const
     const description1 = horizontal_property_name;
     const description2 = horizontal_property_name_two;
     const ownerData = mainData.ownerBaseData;
+
     useEffect(() => {
-      setHorizontalDescription([
-        {
-          id: 1,
-          description: description1,
-        },
-        {
-          id: 2,
-          description: description2,
-        },
-      ]);
+      const data = [];
+
+      if (description1) {
+        data.push({ id: 1, description: description1 });
+      }
+
+      if (description2) {
+        data.push({ id: 2, description: description2 });
+      }
+
+      setHorizontalDescription(data);
     }, [aidata]);
+
 
     // Handle property selection — enforce single selection only
     const togglePropertySelection = (index: number, value: string) => {

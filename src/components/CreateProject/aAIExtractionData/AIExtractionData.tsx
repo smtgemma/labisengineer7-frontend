@@ -13,6 +13,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { FormValues } from "./types";
+import { OwnerTypes } from "@/interfaces/global";
 
 const inputStyle =
   "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
@@ -27,29 +28,28 @@ const AIExtractionDataInPut = ({
   const [ownerInfoShow, setOwnerInfoShow] = useState<boolean>(true);
   const [ownerInfoShow2, setOwnerInfoShow2] = useState<number | null>(0);
   const [ownerInfoShow3, setOwnerInfoShow3] = useState<boolean>(true);
+
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
   // const user: any = useSelector((state: RootState) => state.user.userData);
 
-  // console.log(stepByStepData)
+  console.log(stepByStepData)
   const { register, control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
-      owners: stepByStepData.ownerBaseData.map((owner: any) => ({
-        first_name: owner.first_name || "", // Όνομα
-        last_name: owner.last_name || "", // Επώνυμο
-        father_first_last_name: `${owner.father_first_name || ""} ${owner.father_last_name || ""
-          }`, // Πατέρας
-        mothers_first_last_name: `${owner.mother_first_name || ""} ${owner.mother_last_name || ""
-          }`, // Μητέρα
-        date_of_birth: owner.date_of_birth || "", // Ημερομηνία Γέννησης
-        place_of_birth: owner.place_of_birth || "", // Τόπος Γέννησης
-        owner_address: owner.owner_address || "", // Διεύθυνση Ιδιοκτήτη
-        address_number: owner.address_number || "", // Αριθμός Διεύθυνσης
+      owners: stepByStepData.ownerBaseData.map((owner: OwnerTypes) => ({
+        firstName: owner.firstName || "", // Όνομα
+        lastName: owner.lastName || "", // Επώνυμο
+        fatherFirstLastName: `${owner.fatherFirstLastName || ""}`, // Πατέρας
+        motherFirstLastName: `${owner.motherFirstLastName || ""}`, // Μητέρα
+        dateOfBirth: owner.dateOfBirth || "", // Ημερομηνία Γέννησης
+        placeOfBirth: owner.placeOfBirth || "", // Τόπος Γέννησης
+        ownerAddress: owner.ownerAddress || "", // Διεύθυνση Ιδιοκτήτη
+        addressNumber: owner.addressNumber || "", // Αριθμός Διεύθυνσης
         city: owner.city || "", // Πόλη
-        postal_code: owner.postal_code || "", // Ταχυδρομικός Κώδικας
-        id_number: owner.id_number || "", // Α.Δ.Τ
-        tax_identification_number: owner.tax_identification_number || "", // ΑΦΜ
+        postalCode: owner.postalCode || "", // Ταχυδρομικός Κώδικας
+        idNumber: owner.idNumber || "", // Α.Δ.Τ
+        taxIdentificationNumber: owner.taxIdentificationNumber || "", // ΑΦΜ
         email: owner.email || "", // Email
-        mobile: owner.mobile || "", // Τηλέφωνο
+        mobile: owner.phone || "", // Τηλέφωνο
       })),
     },
   });
@@ -71,14 +71,17 @@ const AIExtractionDataInPut = ({
   const descriptonAndYdom = stepByStepData.description;
   const description = descriptonAndYdom?.description;
   const ydom = stepByStepData?.horizontal?.ydom;
-  console.log("ydom", ydom, "..............")
-  // const ydom: string[] =
-  //   descriptonAndYdom?.ydom?.map((item: { text: string }) => item.text) ?? [];
+  const horizontal = stepByStepData?.horizontal?.horizontal[0].description
 
-  // console.log("ydom:", ydom);
+
+
+
+  console.log("ydom", ydom, "..............")
+  console.log("horizontal", horizontal, "..............")
+
   console.log("allExtreactData:", descriptonAndYdom);
 
-  const [postDataAll, { isLoading }] = usePosAiAllDataSaveMutation();
+  const [postDataAll] = usePosAiAllDataSaveMutation();
 
   const accessToken = tokenCatch();
 
@@ -87,16 +90,66 @@ const AIExtractionDataInPut = ({
     console.log("Form Data:", data);
     const DataPost = {
       serviceId: projectData?.id,
-      // createdById: user?.userId,/
+      // createdById: user?.userId,
       subCategories: subCategoryData,
       descrptionTasks: descrptionTasks,
       ydom: ydom,
       technicalDescription: allExtreactData?.technical_description,
       technicalDescriptionTwo: allExtreactData?.technical_description_two,
-      ...data,
+      projectDescription: description[0]?.value ?? "",
+      technicalDescriptionThree: allExtreactData?.technical_description_three ?? "",
+      technicalDescriptionFour: allExtreactData?.technical_description_four ?? "",
+      technicalDescriptionFive: allExtreactData?.technical_description_five ?? "",
+      technicalDescriptionSix: allExtreactData?.technical_description_six ?? "",
+      technicalDescriptionSeven: allExtreactData?.technical_description_seven ?? "",
+      technicalDescriptionEight: allExtreactData?.technical_description_eight ?? "",
+      technicalDescriptionNine: allExtreactData?.technical_description_nine ?? "",
+      kaekProperty: allExtreactData?.kaek_property ?? "",
+      titleArea: allExtreactData?.title_area ?? "",
+      floorProperty: allExtreactData?.floor_property ?? "",
+      propertyPlace: allExtreactData?.property_place ?? "",
+      numberProperty: allExtreactData?.number_property ?? "",
+      propertyAddress: allExtreactData?.property_address ?? "",
+      propertyNumber: allExtreactData?.property_number ?? "",
+      municipalityCommunity: allExtreactData?.municipality_community ?? "",
+      propertyPostalCode: allExtreactData?.property_postal_code ?? "",
+      horizontalPropertyName: allExtreactData?.horizontal_property_name ?? "",
+      horizontalPropertyNameTwo: allExtreactData?.horizontal_property_name_two ?? "",
+      owners: ownerData ?? [],
+      plotArea: allExtreactData?.plot_area ?? "",
+      withinOutsideCityPlan: allExtreactData?.within_outside_city_plan ?? "",
+      permitNumber: allExtreactData?.permit_number ?? "",
+      issuingAuthority: allExtreactData?.issuing_authority ?? "",
+      legalizationStatementNumber: allExtreactData?.legalization_statement_number ?? "",
+      engineerFullName: allExtreactData?.engineer_full_name ?? "",
+      electronicCode: allExtreactData?.electronic_code ?? "",
+      teeRegistrationNumber: allExtreactData?.tee_registration_number ?? "",
+      specialty: allExtreactData?.specialty ?? "",
+      inclusionDateLegalization: allExtreactData?.inclusion_date_legalization ?? "",
+      processedDocuments: allExtreactData?.processed_documents ?? "",
+      processingStatus: allExtreactData?.processing_status ?? "",
 
+      // ✅ Newly added fields in schema
+      percentageCoOwnershipParcel: allExtreactData?.percentage_co_ownership_parcel ?? "",
+      exclusiveUseProperty: allExtreactData?.exclusive_use_property ?? "",
+      miniDescriptionHorizontalProperty: allExtreactData?.mini_description_horizontal_property ?? "",
+      numberEstablishmentHorizontalOwnership: allExtreactData?.number_establishment_horizontal_ownership ?? "",
+      reviewsNumbersEstablishmentHorizontalOwnership: allExtreactData?.reviews_numbers_establishment_horizontal_ownership ?? "",
+      notaryEstablishmentHorizontalOwnership: allExtreactData?.notary_reviews_establishment_horizontal_ownership ?? "",
+      // establishmentHorizontalOwnership: allExtreactData?.establishment_horizontal_ownership ?? "",
+      licenseNumberRevision: allExtreactData?.license_number_revision ?? "",
+      dateIssuanceBuildingPermit: allExtreactData?.date_issuance_building_permit ?? "",
+      detailsIssuingAuthority: allExtreactData?.details_issuing_authority ?? "",
+      dateIssueBuildingPermitRevision: allExtreactData?.date_issue_building_permit_revision ?? "",
+      projectTitleDescriptionLicense: allExtreactData?.project_title_description_license ?? "",
+      completionDeclaration3843Number: allExtreactData?.completion_declaration_3843_number ?? "",
+      descriptionValidations3843: allExtreactData?.description_validations_3843 ?? "",
+      issuingAuthority3843: allExtreactData?.issuing_authority_3843 ?? "",
+      dateIssueCompletionDeclaration3843: allExtreactData?.date_issue_completion_declaration_3843 ?? "",
+      tokenUsage: allExtreactData?.token_usage ?? "",
+      declarationOwnerFor4495: allExtreactData?.declaration_owner_for_4495_2017 ?? "",
     };
-
+    console.log(DataPost)
     dispatch(setAiExtreactAndInputData(DataPost));
 
     console.log("sever send Data:", DataPost);
@@ -132,8 +185,7 @@ const AIExtractionDataInPut = ({
         propertyNumber: allExtreactData?.property_number ?? "",
         municipalityCommunity: allExtreactData?.municipality_community ?? "",
         propertyPostalCode: allExtreactData?.property_postal_code ?? "",
-        horizontalPropertyName: allExtreactData?.horizontal_property_name ?? "",
-        horizontalPropertyNameTwo: allExtreactData?.horizontal_property_name_two ?? "",
+        horizontalPropertyName: horizontal ?? "",
         owners: ownerData ?? [],
         plotArea: allExtreactData?.plot_area ?? "",
         withinOutsideCityPlan: allExtreactData?.within_outside_city_plan ?? "",
@@ -291,6 +343,17 @@ const AIExtractionDataInPut = ({
                     defaultValue={allExtreactData?.property_place}
                   />
                 </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">
+                    number_propertyy (Αριθμός Ακινήτου)
+                  </label>
+                  <input
+                    {...register("propertyPlace")}
+                    className={inputStyle}
+                    readOnly
+                    defaultValue={allExtreactData?.number_property}
+                  />
+                </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-1">
@@ -339,37 +402,27 @@ const AIExtractionDataInPut = ({
                     defaultValue={allExtreactData?.property_postal_code}
                   />
                 </div>
+                {
+                  horizontal && <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Horizontal_property_name (Οριζόντια Ιδιοκτησία 1)
+                    </label>
+                    <input
+                      {...register("horizontalPropertyName")}
+                      className={inputStyle}
+                      readOnly
+                      defaultValue={horizontal}
+                    />
+                  </div>
+                }
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Horizontal_property_name (Οριζόντια Ιδιοκτησία 1)
-                  </label>
-                  <input
-                    {...register("horizontalPropertyName")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.horizontal_property_name}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Horizontal_property_name_two (Οριζόντια Ιδιοκτησία 2)
-                  </label>
-                  <input
-                    {...register("horizontalPropertyNameTwo")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.horizontal_property_name_two}
-                  />
-                </div>
               </div>
             )}
           </div>
         </div>
 
-        {fields.map((field, index) => (
-          <div key={field.id} className="mt-10">
+        {fields.map((field: OwnerTypes, index) => (
+          <div key={index} className="mt-10">
             <div className="p-6 md:p-8 bg-white border-primary border  rounded-xl">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
@@ -401,7 +454,7 @@ const AIExtractionDataInPut = ({
                     </label>
                     <input
                       {...register(`owners.${index}.firstName`)}
-                      defaultValue={field.first_name}
+                      defaultValue={field.firstName}
                       className={`${inputStyle} `}
                       readOnly
                     />
@@ -414,7 +467,7 @@ const AIExtractionDataInPut = ({
                     </label>
                     <input
                       {...register(`owners.${index}.lastName`)}
-                      defaultValue={field.last_name}
+                      defaultValue={field.lastName}
                       className={inputStyle}
                       readOnly
                     />
@@ -427,7 +480,7 @@ const AIExtractionDataInPut = ({
                     </label>
                     <input
                       {...register(`owners.${index}.fatherFirstLastName`)}
-                      defaultValue={field.father_first_last_name}
+                      defaultValue={field.fatherFirstLastName}
                       className={inputStyle}
                       readOnly
                     />
@@ -440,7 +493,7 @@ const AIExtractionDataInPut = ({
                     </label>
                     <input
                       {...register(`owners.${index}.mothersFirstLastName`)}
-                      defaultValue={field.mothers_first_last_name}
+                      defaultValue={field.motherFirstLastName ?? ""}
                       className={inputStyle}
                       readOnly
                     />
@@ -454,7 +507,7 @@ const AIExtractionDataInPut = ({
                     <input
                       type="text"
                       {...register(`owners.${index}.dateOfBirth`)}
-                      defaultValue={field.date_of_birth}
+                      defaultValue={field.dateOfBirth}
                       className={inputStyle}
                       readOnly
                     />
@@ -467,7 +520,7 @@ const AIExtractionDataInPut = ({
                     </label>
                     <input
                       {...register(`owners.${index}.placeOfBirth`)}
-                      defaultValue={field.place_of_birth}
+                      defaultValue={field.placeOfBirth}
                       className={inputStyle}
                       readOnly
                     />
@@ -480,7 +533,7 @@ const AIExtractionDataInPut = ({
                     </label>
                     <input
                       {...register(`owners.${index}.ownerAddress`)}
-                      defaultValue={field.owner_address}
+                      defaultValue={field.ownerAddress}
                       className={inputStyle}
                       readOnly
                     />
@@ -493,7 +546,7 @@ const AIExtractionDataInPut = ({
                     </label>
                     <input
                       {...register(`owners.${index}.addressNumber`)}
-                      defaultValue={field.address_number}
+                      defaultValue={field.addressNumber}
                       className={inputStyle}
                       readOnly
                     />
@@ -518,8 +571,8 @@ const AIExtractionDataInPut = ({
                       Postal_code (Ταχυδρομικός Κώδικας)
                     </label>
                     <input
-                      {...register(`owners.${index}.postal_code`)}
-                      defaultValue={field.postal_code}
+                      {...register(`owners.${index}.postalCode`)}
+                      defaultValue={field.postalCode}
                       className={inputStyle}
                       readOnly
                     />
@@ -532,7 +585,7 @@ const AIExtractionDataInPut = ({
                     </label>
                     <input
                       {...register(`owners.${index}.idNumber`)}
-                      defaultValue={field.id_number}
+                      defaultValue={field.idNumber}
                       className={inputStyle}
                       readOnly
                     />
@@ -545,7 +598,7 @@ const AIExtractionDataInPut = ({
                     </label>
                     <input
                       {...register(`owners.${index}.taxIdentificationNumber`)}
-                      defaultValue={field.tax_identification_number}
+                      defaultValue={field.taxIdentificationNumber}
                       className={inputStyle}
                       readOnly
                     />
@@ -571,8 +624,8 @@ const AIExtractionDataInPut = ({
                       Mobile (Τηλέφωνο)
                     </label>
                     <input
-                      {...register(`owners.${index}.mobile`)}
-                      defaultValue={field.mobile}
+                      {...register(`owners.${index}.phone`)}
+                      defaultValue={field.phone}
                       className={inputStyle}
                       readOnly
                     />
@@ -661,6 +714,40 @@ const AIExtractionDataInPut = ({
                     defaultValue={allExtreactData.issuing_authority}
                   />
                 </div>
+              </div>
+            )}
+          </div>
+        </div>
+        {/* 4178/2013-4495/2017 */}
+        <div className="mt-10">
+          <div className="bg-white p-6 border-primary border  rounded-xl shadow-md w-full">
+            <div className="flex justify-between items-center ">
+              <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
+                4178/2013-4495/2017
+              </h2>
+              <div>
+                <button
+                  type="button"
+                  // NEED TO WORK HERE
+                  // Tahsin
+                  onClick={() => setOwnerInfoShow3(!ownerInfoShow3)}
+                >
+                  {" "}
+                  {!ownerInfoShow3 ? (
+                    <>
+                      <IoIosArrowDown className="text-2xl" />
+                    </>
+                  ) : (
+                    <>
+                      <IoIosArrowUp className="text-2xl" />
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {ownerInfoShow3 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Legalization_statement_number (Αριθμός Δήλωσης Νομ)
