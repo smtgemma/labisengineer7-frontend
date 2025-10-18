@@ -1,6 +1,6 @@
 "use client";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
-import { TProjectData } from "@/interfaces/global";
+import { OwnerTypes, TProjectData } from "@/interfaces/global";
 import tokenCatch from "@/lib/token";
 import {
     setAiExtreactAndInputData,
@@ -125,27 +125,24 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
     // const user: any = useSelector((state: RootState) => state.user.userData);
     console.log("stepByStepData", stepByStepData)
     console.log("stepByStepData", stepByStepData.ownerBaseData)
+
     const { register, control, handleSubmit } = useForm<FormValues>({
         defaultValues: {
-            owners: stepByStepData.ownerBaseData.map((owner: any) => ({
-                first_name: owner.first_name || "", // Όνομα
-                last_name: owner.last_name || "", // Επώνυμο
-                father_first_last_name: `${owner.father_first_name || ""} ${owner.father_last_name || ""
-                    }`, // Πατέρας
-                mothers_first_last_name: `${owner.mother_first_name || ""} ${owner.mother_last_name || ""
-                    }`, // Μητέρα
-                date_of_birth: owner.date_of_birth || "", // Ημερομηνία Γέννησης
-                place_of_birth: owner.place_of_birth || "", // Τόπος Γέννησης
-                owner_address: owner.owner_address || "", // Διεύθυνση Ιδιοκτήτη
-                address_number: owner.address_number || "", // Αριθμός Διεύθυνσης
+            owners: stepByStepData.ownerBaseData.map((owner: OwnerTypes) => ({
+                firstName: owner.firstName || "", // Όνομα
+                lastName: owner.lastName || "", // Επώνυμο
+                fatherFirstLastName: `${owner.fatherFirstLastName || ""}`, // Πατέρας
+                motherFirstLastName: `${owner.motherFirstLastName || ""}`, // Μητέρα
+                dateOfBirth: owner.dateOfBirth || "", // Ημερομηνία Γέννησης
+                placeOfBirth: owner.placeOfBirth || "", // Τόπος Γέννησης
+                ownerAddress: owner.ownerAddress || "", // Διεύθυνση Ιδιοκτήτη
+                addressNumber: owner.addressNumber || "", // Αριθμός Διεύθυνσης
                 city: owner.city || "", // Πόλη
-                postal_code: owner.postal_code || "", // Ταχυδρομικός Κώδικας
-                id_number: owner.id_number || "", // Α.Δ.Τ
-                tax_identification_number: owner.tax_identification_number || "", // ΑΦΜ
+                postalCode: owner.postalCode || "", // Ταχυδρομικός Κώδικας
+                idNumber: owner.idNumber || "", // Α.Δ.Τ
+                taxIdentificationNumber: owner.taxIdentificationNumber || "", // ΑΦΜ
                 email: owner.email || "", // Email
-                mobile: owner.mobile || "", // Τηλέφωνο
-                owner_type_ownership: owner?.owner_type_ownership,
-                ownership_percentage_owner: owner?.ownership_percentage_owner
+                mobile: owner.phone || "", // Τηλέφωνο
             })),
         },
     });
@@ -581,7 +578,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.firstName`)}
-                                                defaultValue={field.first_name}
+                                                defaultValue={field.firstName}
                                                 className={`${inputStyle} `}
                                                 readOnly
                                             />
@@ -594,7 +591,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.lastName`)}
-                                                defaultValue={field.last_name}
+                                                defaultValue={field.lastName}
                                                 className={inputStyle}
                                                 readOnly
                                             />
@@ -607,7 +604,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.fatherFirstLastName`)}
-                                                defaultValue={field.father_first_last_name}
+                                                defaultValue={field.fatherFirstLastName}
                                                 className={inputStyle}
                                                 readOnly
                                             />
@@ -620,7 +617,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.mothersFirstLastName`)}
-                                                defaultValue={field.mothers_first_last_name}
+                                                defaultValue={field.mothersFirstLastName}
                                                 className={inputStyle}
                                                 readOnly
                                             />
@@ -634,7 +631,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             <input
                                                 type="text"
                                                 {...register(`owners.${index}.dateOfBirth`)}
-                                                defaultValue={field.date_of_birth}
+                                                defaultValue={field.dateOfBirth}
                                                 className={inputStyle}
                                                 readOnly
                                             />
@@ -647,7 +644,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.placeOfBirth`)}
-                                                defaultValue={field.place_of_birth}
+                                                defaultValue={field.placeOfBirth}
                                                 className={inputStyle}
                                                 readOnly
                                             />
@@ -660,7 +657,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.ownerAddress`)}
-                                                defaultValue={field.owner_address}
+                                                defaultValue={field.ownerAddress}
                                                 className={inputStyle}
                                                 readOnly
                                             />
@@ -672,7 +669,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.ownershipPercentageOwner`)}
-                                                defaultValue={field.ownership_percentage_owner}
+                                                defaultValue={field.ownershipPercentageOwner}
                                                 className={inputStyle}
                                                 readOnly
                                             />
@@ -683,7 +680,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.ownerTypeOwnership`)}
-                                                defaultValue={field.owner_type_ownership}
+                                                defaultValue={field.ownerTypeOwnership}
                                                 className={inputStyle}
                                                 readOnly
                                             />
@@ -695,7 +692,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.addressNumber`)}
-                                                defaultValue={field.address_number}
+                                                defaultValue={field.addressNumber}
                                                 className={inputStyle}
                                                 readOnly
                                             />
@@ -721,7 +718,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.postalCode`)}
-                                                defaultValue={field.postal_code}
+                                                defaultValue={field.postalCode}
                                                 className={inputStyle}
                                                 readOnly
                                             />
@@ -734,7 +731,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.idNumber`)}
-                                                defaultValue={field.id_number}
+                                                defaultValue={field.idNumber}
                                                 className={inputStyle}
                                                 readOnly
                                             />
@@ -747,7 +744,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
                                             </label>
                                             <input
                                                 {...register(`owners.${index}.taxIdentificationNumber`)}
-                                                defaultValue={field.tax_identification_number}
+                                                defaultValue={field.taxIdentificationNumber}
                                                 className={inputStyle}
                                                 readOnly
                                             />
