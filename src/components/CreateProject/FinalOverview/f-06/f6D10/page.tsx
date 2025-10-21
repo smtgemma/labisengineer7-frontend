@@ -23,7 +23,7 @@ interface FormInputs {
     streetAddress?: string;
     streetNumber?: string;
     town?: string;
-    projectDescription?: string;
+    projectDescriptions?: string;
     ydom?: string;
     serviceId?: string;
 }
@@ -32,7 +32,7 @@ interface FormInputs {
 
 interface allDataProps {
     engineers: any[];
-    projectDescription?: string;
+    projectDescriptions?: string;
     ydom?: string;
     propertyPostalCode?: string;
     propertyAddress?: string;
@@ -52,7 +52,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
-    const projectDescription = allData?.projectDescription || "";
+    const projectDescriptions = allData?.projectDescriptions || "";
     const { ydom } = allData || {};
     const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt, propertyNumber, municipalityCommunity } = allData || {};
 
@@ -84,7 +84,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
         const formData = new FormData();
         formData.append("data", JSON.stringify({
             engineers: updatedOwners,
-            projectDescription: data.projectDescription || allData.projectDescription,
+            projectDescriptions: data.projectDescriptions || allData.projectDescriptions,
             ydom: data.ydom || allData.ydom,
             serviceId: serviceId
         }));
@@ -252,7 +252,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                             </p>
 
                             <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
-                            <p className=" mb-6 mt-2 font-bold uppercase">"{projectDescription || "N/A"}"</p>
+                            <p className=" mb-6 mt-2 font-bold uppercase">"{projectDescriptions || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
@@ -287,7 +287,7 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                         </div>
                         {/* signature  */}
                         <div className="flex items-center justify-end p-4">
-                            <img src={signature} alt="" />
+                            <img src={signature} alt="Signature" className="w-[150px] h-[150px]" />
                         </div>
                         <div className="text-xs p-6">
                             <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
@@ -484,9 +484,9 @@ export default function F6D10({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Περιγραφή Έργου *:</label>
                                             <input
                                                 type="text"
-                                                {...register("projectDescription", { required: "This field is required" })}
+                                                {...register("projectDescriptions", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.projectDescription || ""}
+                                                defaultValue={allData.projectDescriptions || ""}
                                             />
                                         </div>
 

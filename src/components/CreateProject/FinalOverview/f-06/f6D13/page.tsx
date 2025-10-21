@@ -14,7 +14,7 @@ type F6D13Props = {
 };
 
 interface FormData {
-    projectDescription: string
+    projectDescriptions: string
     propertyAddress: string
     propertyPostalCode: string
     municipalityCommunity: string
@@ -41,7 +41,7 @@ export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
     const owner = allData?.owners || []
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, specialty, propertyPlace, projectDescription,
+    const { id, createdById, serviceId, specialty, propertyPlace, projectDescriptions,
         propertyAddress,
         propertyNumber,
         municipalityCommunity,
@@ -108,7 +108,7 @@ export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
             <div className="mb-8 space-y-4">
                 <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
+                    <h3 className=" text-sm text-center">{projectDescriptions || "N/A"}</h3>
                 </div>
 
                 <div className="flex items-start justify-between gap-4 w-[612px]">
@@ -206,7 +206,7 @@ export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
                 </div>
                 {/* Signature */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
-                    <img src={signature} alt="" />
+                    <img src={signature} alt="Signature" className="w-[150px] h-[150px]"/>
                 </div>
             </div>
             {/* EDIT MODAL */}
@@ -231,9 +231,9 @@ export default function F6D13({ allData, setIsModalOpen }: F6D13Props) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/8">Έργο *:</label>
                                     <input
-                                        defaultValue={projectDescription || "Project Description "}
+                                        defaultValue={projectDescriptions || "Project Description "}
                                         type="text"
-                                        {...register("projectDescription", { required: "projectDescription is required" })}
+                                        {...register("projectDescriptions", { required: "projectDescriptions is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
