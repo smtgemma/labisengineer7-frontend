@@ -30,7 +30,7 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
     const [success, setSuccess] = useState<string | null>(null);
 
     const dispatch = useDispatch();
-    const stepByStepData: any = useSelector((state: RootState) => state.aiData);
+    const stepByStepData: any = useSelector((state: RootState) => state.aiData) ;
     const id = stepByStepData?.projectId?.id;
     console.log(stepByStepData.ownerBaseData, "stepByStepData==============")
 

@@ -364,10 +364,10 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
     // this subcategory 6
     if (hasSubcategory6) {
-      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
         baseTemplatesOwner1.push({
           id: `template1_${index}`,
-          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
           price: 0.5,
         });
       });

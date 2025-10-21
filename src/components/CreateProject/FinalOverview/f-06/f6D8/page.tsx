@@ -24,7 +24,7 @@ interface FormInputs {
     postalCode?: string;
     email?: string;
     taxIdentificationNumber?: string;
-    projectDescription?: string;
+    projectDescriptions?: string;
     ydom?: string;
     serviceId?: string;
 }
@@ -33,7 +33,7 @@ interface FormInputs {
 interface allDataProps {
     owners: any[];
     engineers: any[];
-    projectDescription: string;
+    projectDescriptions: string;
     ydom: string;
     horizontalPropertyName: string;
     id: string;
@@ -55,7 +55,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
 
     const engineers = allData?.engineers || {};
     const owner = allData?.owners?.[ownerIndex];
-    const { id, createdById, serviceId, horizontalPropertyName, ydom, projectDescription, specialty, createdAt, propertyPostalCode, municipalityCommunity, propertyPlace, propertyNumber, propertyAddress, } = allData || {};
+    const { id, createdById, serviceId, horizontalPropertyName, ydom, projectDescriptions, specialty, createdAt, propertyPostalCode, municipalityCommunity, propertyPlace, propertyNumber, propertyAddress, } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
     // for editing data 
@@ -82,7 +82,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
         const formData = new FormData();
         formData.append("data", JSON.stringify({
             owners: updatedOwners,
-            projectDescription: data.projectDescription || allData.projectDescription,
+            projectDescriptions: data.projectDescriptions || allData.projectDescriptions,
             ydom: data.ydom || allData.ydom,
             serviceId: serviceId
         }));
@@ -258,7 +258,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                             </span>
 
                             <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
-                            <p className=" mb-6 font-bold">"{projectDescription || "N/A"}"</p>
+                            <p className=" mb-6 font-bold">"{projectDescriptions || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
@@ -479,9 +479,9 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Περιγραφή Έργου *:</label>
                                             <input
                                                 type="text"
-                                                {...register("projectDescription", { required: "This field is required" })}
+                                                {...register("projectDescriptions", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.projectDescription || ""}
+                                                defaultValue={allData.projectDescriptions || ""}
                                             />
                                         </div>
 
