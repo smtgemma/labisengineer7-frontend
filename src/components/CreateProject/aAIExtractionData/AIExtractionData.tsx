@@ -1,5 +1,7 @@
 "use client";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
+import CollapsibleSection from "@/components2.0/shared/tableComponents/TableComponents";
+import { OwnerTypes } from "@/interfaces/global";
 import tokenCatch from "@/lib/token";
 import {
   setAiExtreactAndInputData,
@@ -7,16 +9,11 @@ import {
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
 import { usePosAiAllDataSaveMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import { RootState } from "@/redux/store";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { FormValues } from "./types";
-import { OwnerTypes } from "@/interfaces/global";
-
-const inputStyle =
-  "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500";
 
 const AIExtractionDataInPut = ({
   currentStep,
@@ -25,15 +22,9 @@ const AIExtractionDataInPut = ({
   currentStep: number;
   nextStep: () => void;
 }) => {
-  const [ownerInfoShow, setOwnerInfoShow] = useState<boolean>(true);
-  const [ownerInfoShow2, setOwnerInfoShow2] = useState<number | null>(0);
-  const [ownerInfoShow3, setOwnerInfoShow3] = useState<boolean>(true);
 
   const stepByStepData: any = useSelector((state: RootState) => state.aiData);
-  // const user: any = useSelector((state: RootState) => state.user.userData);
-
-  console.log(stepByStepData)
-  const { register, control, handleSubmit } = useForm<FormValues>({
+  const { control } = useForm<FormValues>({
     defaultValues: {
       owners: stepByStepData.ownerBaseData.map((owner: OwnerTypes) => ({
         firstName: owner.firstName || "", // Όνομα
@@ -73,21 +64,11 @@ const AIExtractionDataInPut = ({
   const ydom = stepByStepData?.horizontal?.ydom;
   const horizontal = stepByStepData?.horizontal?.horizontal[0].description
 
-
-
-
-  console.log("ydom", ydom, "..............")
-  console.log("horizontal", horizontal, "..............")
-
-  console.log("allExtreactData:", descriptonAndYdom);
-
   const [postDataAll] = usePosAiAllDataSaveMutation();
 
   const accessToken = tokenCatch();
 
-  const onSubmitAiDataSend = async (data: any) => {
-    // Here you can send data to API
-    console.log("Form Data:", data);
+  const onSubmitAiDataSend = async () => {
     const DataPost = {
       serviceId: projectData?.id,
       // createdById: user?.userId,
@@ -168,7 +149,7 @@ const AIExtractionDataInPut = ({
         ydom: ydom,
         technicalDescription: allExtreactData?.technical_description,
         technicalDescriptionTwo: allExtreactData?.technical_description_two,
-        projectDescription: description[0]?.value ?? "",
+        projectDescriptions: description[0]?.value ?? "",
         technicalDescriptionThree: allExtreactData?.technical_description_three ?? "",
         technicalDescriptionFour: allExtreactData?.technical_description_four ?? "",
         technicalDescriptionFive: allExtreactData?.technical_description_five ?? "",
@@ -238,7 +219,7 @@ const AIExtractionDataInPut = ({
     if (currentStep === 5 && filesData?.length && !hasSubmittedRef.current) {
       hasSubmittedRef.current = true; // lock it
       // create-project
-      handleSubmit(onSubmitAiDataSend)();
+      onSubmitAiDataSend()
     }
   }, [currentStep]);
 
@@ -252,579 +233,199 @@ const AIExtractionDataInPut = ({
           Here is the extracted information. Please review and confirm.
         </p>
       </div>
-      <form
-        onSubmit={handleSubmit(onSubmitAiDataSend)}
-        className="max-w-6xl mx-auto   rounded-xl mt-13"
-      >
-        <div>
-          <div className="max-w-6xl mx-auto border  border-primary bg-white shadow-md rounded-xl p-8  ">
-            <div className="flex justify-between items-center ">
-              <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
-                Project & Property Information( Στοιχεία Έργου & Ιδιοκτησίας)
-              </h2>
-              <div>
-                <button
-                  type="button"
-                  onClick={() => setOwnerInfoShow(!ownerInfoShow)}
-                >
-                  {" "}
-                  {!ownerInfoShow ? (
-                    <>
-                      <IoIosArrowDown className="text-2xl" />
-                    </>
-                  ) : (
-                    <>
-                      <IoIosArrowUp className="text-2xl" />
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
+      <CollapsibleSection
+        title="Project & Property Information (Στοιχεία Έργου & Ιδιοκτησίας)"
+        data={allExtreactData}
+        defaultOpen={true}
+        fields={[
+          {
+            label: "Περιγραφή Έργου (1)",
+            dataKey: "project_descriptions"
+          },
+          {
+            label: "ΑΕΚ Ακινήτου",
+            dataKey: "kaek_property"
+          },
+          {
+            label: "Title_area (Εμβαδόν Ιδιοκτησίας)",
+            dataKey: "title_area"
+          },
+          {
+            label: "Floor_property (Όροφος Ακινήτου)",
+            dataKey: "floor_property"
+          },
+          {
+            label: "Place_property (Αριθμός Ακινήτου)",
+            dataKey: "property_place"
+          },
+          {
+            label: "number_propertyy (Αριθμός Ακινήτου)",
+            dataKey: "number_property"
+          },
+          {
+            label: "property_number (Αριθμός Διεύθυνσης Ακινήτου)",
+            dataKey: "property_number"
+          },
+          {
+            label: "Property_address (Διεύθυνση Ακινήτου)",
+            dataKey: "property_address"
+          },
+          {
+            label: "Municipality_community (Δήμος/Κοινότητα Ακινήτου)",
+            dataKey: "municipality_community"
+          },
+          {
+            label: "Property_postal_code (Ταχυδρομικός Κώδικας Ακινήτου)",
+            dataKey: "property_postal_code"
+          },
+          ...(horizontal ? [{
+            label: "Horizontal_property_name (Οριζόντια Ιδιοκτησία 1)",
+            dataKey: "horizontal_property_name"
+          }] : [])
+        ]}
+      />
 
-            {ownerInfoShow && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mt-5">
-                <div className="col-span-full">
-                  <label className="block text-sm font-medium mb-1">
-                    Περιγραφή Έργου (1)
-                  </label>
-                  <textarea
-                    {...register("projectDescription")}
-                    className={`${inputStyle} h-[100px] `}
-                    readOnly
-                    defaultValue={description[0]?.value || "N/A"}
-                  />
-                </div>
+      {/* License & Legal Data */}
+      <CollapsibleSection
+        data={allExtreactData}
+        defaultOpen={false}
+        fields={[
+          {
+            label: "plot_area",
+            dataKey: "plot_area"
+          },
+          {
+            label: "withinOutsideCityPlan",
+            dataKey: "within_outside_city_plan"
+          },
+          {
+            label: "permitNumber",
+            dataKey: "permit_number"
+          },
+          {
+            label: "license_number_revision",
+            dataKey: "license_number_revision"
+          },
+          {
+            label: "details_issuing_authority",
+            dataKey: "details_issuing_authority"
+          },
+        ]}
+        title="Πολεοδομικά Μεγέθη-Άδεια Οικοδομής-Νομιμοποιήσεις"
+      />
+      {/* owner part  */}
+      {fields.map((field: OwnerTypes, index) => (
+        <CollapsibleSection data={field} fields={[
+          {
+            label: "firstName",
+            dataKey: "firstName"
+          },
+          {
+            label: "lastName",
+            dataKey: "lastName"
+          },
+          {
+            label: "fatherFirstLastName",
+            dataKey: "fatherFirstLastName"
+          },
+          {
+            label: "mothersFirstLastName",
+            dataKey: "mothersFirstLastName"
+          },
+          {
+            label: "dateOfBirth",
+            dataKey: "dateOfBirth "
+          },
+          {
+            label: "placeOfBirth",
+            dataKey: "placeOfBirth"
+          },
+          {
+            label: "ownerAddress",
+            dataKey: "ownerAddress"
+          },
+          {
+            label: "addressNumber",
+            dataKey: "addressNumber"
+          },
+          {
+            label: "city",
+            dataKey: "city "
+          },
+          {
+            label: "postalCode",
+            dataKey: "postalCode"
+          },
+          {
+            label: "idNumber",
+            dataKey: "idNumber"
+          },
+          {
+            label: "taxIdentificationNumber",
+            dataKey: "taxIdentificationNumber"
+          },
+          {
+            label: "email",
+            dataKey: "email"
+          },
+          {
+            label: "phone",
+            dataKey: "phone"
+          },
+        ]} title={`Information of Owner (${fields[index].firstName} ${fields[index].lastName})`} />
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    ΑΕΚ Ακινήτου
-                  </label>
-                  <input
-                    {...register("kaekProperty")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.kaek_property}
-                  // defaultValue={dataShowExtreact?.cadastral_code_kaek}
-                  />
-                </div>
+      ))}
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Title_area (Εμβαδόν Ιδιοκτησίας)
-                  </label>
-                  <input
-                    {...register("titleArea")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.title_area}
-                  />
-                </div>
+      {/* 3843/2010 LAW */}
+      <CollapsibleSection data={allExtreactData} defaultOpen={false}
+        fields={[
+          {
+            label: "completion_declaration_3843_number",
+            dataKey: "completion_declaration_3843_number"
+          },
+          {
+            label: "description_validations_3843",
+            dataKey: "description_validations_3843 "
+          },
+          {
+            label: "issuing_authority_3843",
+            dataKey: "issuing_authority_3843 "
+          },
+          {
+            label: "date_issue_completion_declaration_3843",
+            dataKey: "date_issue_completion_declaration_3843 "
+          },
+        ]} title=" 4178/2013-4495/2017" />
+      {/*1337/LAW*/}
+      <CollapsibleSection data={allExtreactData} defaultOpen={false}
+        fields={[
+          {
+            label: "declaration_number_1337",
+            dataKey: "declaration_number_1337"
+          },
+          {
+            label: "date_of_submission_1337",
+            dataKey: "date_of_submission_1337 "
+          },
+          {
+            label: "issuing_authority_1337",
+            dataKey: "issuing_authority_1337 "
+          },
+        ]} title="1337/LAW" />
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Floor_property (Όροφος Ακινήτου)
-                  </label>
-                  <input
-                    {...register("floorProperty")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.floor_property}
-                  />
-                </div>
+      {/*Loss */}
+      <CollapsibleSection data={allExtreactData} defaultOpen={false}
+        fields={[
+          {
+            label: "plot_area",
+            dataKey: "plot_area"
+          },
+          {
+            label: "percentage_co_ownership_parcel",
+            dataKey: "percentage_co_ownership_parcel "
+          },
+        ]} title="Loss Paper" />
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Place_property (Αριθμός Ακινήτου)
-                  </label>
-                  <input
-                    {...register("propertyPlace")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.property_place}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    number_propertyy (Αριθμός Ακινήτου)
-                  </label>
-                  <input
-                    {...register("propertyPlace")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.number_property}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    property_number (Αριθμός Διεύθυνσης Ακινήτου)
-                  </label>
-                  <input
-                    {...register("propertyNumber")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.property_number}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Property_address (Διεύθυνση Ακινήτου)
-                  </label>
-                  <input
-                    {...register("propertyAddress")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.property_address}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Municipality_community (Δήμος/Κοινότητα Ακινήτου)
-                  </label>
-                  <input
-                    {...register("municipalityCommunity")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.municipality_community}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Property_postal_code (Ταχυδρομικός Κώδικας Ακινήτου)
-                  </label>
-                  <input
-                    {...register("propertyPostalCode")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.property_postal_code}
-                  />
-                </div>
-                {
-                  horizontal && <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Horizontal_property_name (Οριζόντια Ιδιοκτησία 1)
-                    </label>
-                    <input
-                      {...register("horizontalPropertyName")}
-                      className={inputStyle}
-                      readOnly
-                      defaultValue={horizontal}
-                    />
-                  </div>
-                }
-
-              </div>
-            )}
-          </div>
-        </div>
-
-        {fields.map((field: OwnerTypes, index) => (
-          <div key={index} className="mt-10">
-            <div className="p-6 md:p-8 bg-white border-primary border  rounded-xl">
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
-                  Information of Owner ({index + 1})
-                </h2>
-                <div>
-                  <button
-                    type="button"
-                    // NEED TO WORK HERE
-                    // Tahsin
-
-                    onClick={() => setOwnerInfoShow2(index)}
-                  >
-                    {!ownerInfoShow2 ? (
-                      <IoIosArrowDown className="text-2xl" />
-                    ) : (
-                      <IoIosArrowUp className="text-2xl" />
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {ownerInfoShow2 === index && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">
-                  {/* First Name */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      First_name (Όνομα)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.firstName`)}
-                      defaultValue={field.firstName}
-                      className={`${inputStyle} `}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* Last Name */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Last_name (Επώνυμο)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.lastName`)}
-                      defaultValue={field.lastName}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* Father Full Name */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Father_first_last_name (Όνοματεπώνυμο Πατρός)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.fatherFirstLastName`)}
-                      defaultValue={field.fatherFirstLastName}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* Mother Full Name */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Mothers_first_last_name (Όνοματεπώνυμο Μητρός)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.mothersFirstLastName`)}
-                      defaultValue={field.motherFirstLastName ?? ""}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* Date of Birth */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Date_of_birth (Ημερομηνία Γέννησης)
-                    </label>
-                    <input
-                      type="text"
-                      {...register(`owners.${index}.dateOfBirth`)}
-                      defaultValue={field.dateOfBirth}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* Place of Birth */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Place_of_birth (Τόπος Γέννησης)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.placeOfBirth`)}
-                      defaultValue={field.placeOfBirth}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* Owner Address */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Owner_address (Διεύθυνση Ιδιοκτήτη)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.ownerAddress`)}
-                      defaultValue={field.ownerAddress}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* Address Number */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Address_number (Αριθμός Διεύθυνσης Ιδιοκτήτη)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.addressNumber`)}
-                      defaultValue={field.addressNumber}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* City */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      City (Πόλη)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.city`)}
-                      defaultValue={field.city}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* Postal Code */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Postal_code (Ταχυδρομικός Κώδικας)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.postalCode`)}
-                      defaultValue={field.postalCode}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* ID Number */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Id_number (Α.Δ.Τ)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.idNumber`)}
-                      defaultValue={field.idNumber}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* Tax Identification Number */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Tax_identification_number (ΑΦΜ)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.taxIdentificationNumber`)}
-                      defaultValue={field.taxIdentificationNumber}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* Email */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      {...register(`owners.${index}.email`)}
-                      defaultValue={field.email}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-
-                  {/* Mobile */}
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Mobile (Τηλέφωνο)
-                    </label>
-                    <input
-                      {...register(`owners.${index}.phone`)}
-                      defaultValue={field.phone}
-                      className={inputStyle}
-                      readOnly
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-
-        {/* owner part  */}
-
-        {/* License & Legal Data  */}
-        <div className="mt-10">
-          <div className="bg-white p-6 border-primary border  rounded-xl shadow-md w-full">
-            <div className="flex justify-between items-center ">
-              <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
-                ολεοδομικά Μεγέθη-Άδεια Οικοδομής-Νομιμοποιήσεις
-              </h2>
-              <div>
-                <button
-                  type="button"
-                  // NEED TO WORK HERE
-                  // Tahsin
-                  onClick={() => setOwnerInfoShow3(!ownerInfoShow3)}
-                >
-                  {" "}
-                  {!ownerInfoShow3 ? (
-                    <>
-                      <IoIosArrowDown className="text-2xl" />
-                    </>
-                  ) : (
-                    <>
-                      <IoIosArrowUp className="text-2xl" />
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            {ownerInfoShow3 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    plot_area (Εμβαδόν Οικοπέδου)
-                  </label>
-                  <input
-                    {...register("plotArea")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData.plot_area}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    withinOutsideCityPlan (Εντός/Εκτός Σχεδίου Πόλης)
-                  </label>
-                  <input
-                    {...register("withinOutsideCityPlan")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData.within_outside_city_plan}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    permitNumber (Αριθμός Οικοδομικής Άδειας){" "}
-                  </label>
-                  <input
-                    {...register("permitNumber")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData.permit_number}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Issuing_authority (Εκδούσα Αρχή)
-                  </label>
-                  <input
-                    {...register("issuingAuthority")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData.issuing_authority}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-        {/* 4178/2013-4495/2017 */}
-        <div className="mt-10">
-          <div className="bg-white p-6 border-primary border  rounded-xl shadow-md w-full">
-            <div className="flex justify-between items-center ">
-              <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
-                4178/2013-4495/2017
-              </h2>
-              <div>
-                <button
-                  type="button"
-                  // NEED TO WORK HERE
-                  // Tahsin
-                  onClick={() => setOwnerInfoShow3(!ownerInfoShow3)}
-                >
-                  {" "}
-                  {!ownerInfoShow3 ? (
-                    <>
-                      <IoIosArrowDown className="text-2xl" />
-                    </>
-                  ) : (
-                    <>
-                      <IoIosArrowUp className="text-2xl" />
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            {ownerInfoShow3 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Legalization_statement_number (Αριθμός Δήλωσης Νομ)
-                  </label>
-                  <input
-                    {...register("legalizationStatementNumber")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData.legalization_statement_number}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Engineer_full_name (Στοιχεία Μηχανικού)
-                  </label>
-                  <input
-                    {...register("engineerFullName")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData.engineer_full_name}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Electronic_code (Ηλεκτρονικός Κωδικός Δήλωσης)
-                  </label>
-                  <input
-                    {...register("electronicCode")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData.electronic_code}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Tee_registration_number (Αριθμός Μητρώου ΤΕΕ)
-                  </label>
-                  <input
-                    {...register("teeRegistrationNumber")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData.tee_registration_number}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Specialty (Ειδικότητα Μηχανικού)
-                  </label>
-                  <input
-                    {...register("specialty")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData.specialty}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Inclusion_date_legalization (Ημερομηνία Ένταξης
-                    Νομιμοποίησης)
-                  </label>
-                  <input
-                    {...register("inclusionDateLegalization")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData?.inclusion_date_legalization}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </form>
       {currentStep < 6 && (
         <div className="flex justify-end mt-4 w-fit ml-auto">
           <PrimaryButton
@@ -839,192 +440,3 @@ const AIExtractionDataInPut = ({
 };
 
 export default AIExtractionDataInPut;
-
-// trash
-
-{
-  /* "Energy Performance Certificate (EPC)"  */
-}
-{
-  /* <div className="mt-10">
-          <div className="bg-gray-50 rounded-xl p-6 shadow-sm w-full">
-            <div className="flex justify-between items-center ">
-              <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
-                "Energy Performance Certificate (EPC)"
-              </h2>
-              <div>
-                <button
-                  type="button"
-                  onClick={() => setOwnerInfoShow4(!ownerInfoShow4)}
-                >
-                  {" "}
-                  {!ownerInfoShow4 ? (
-                    <>
-                      <IoIosArrowDown className="text-2xl" />
-                    </>
-                  ) : (
-                    <>
-                      <IoIosArrowUp className="text-2xl" />
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
-            {ownerInfoShow4 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-                <div>
-                  <label className="form-label block mb-1 ">
-                    Ημερομηνία Έκδοσης PEA
-                  </label>
-                  <input
-                    {...register("issueDate")}
-                    type="date"
-                    className={inputStyle}
-                    readOnly
-                    // defaultValue={dataShowExtreact.pea_issue_date}
-                  />
-                </div>
-                <div>
-                  <label className="form-label block mb-1 ">
-                    Αριθμός Ασφάλειας PEA
-                  </label>
-                  <input
-                    {...register("epcCode")}
-                    className={inputStyle}
-                    readOnly
-                    // defaultValue={dataShowExtreact.pea_security_number}
-                  />
-                </div>
-
-                <div>
-                  <label className="form-label block mb-1 ">
-                    Αριθμός Πρωτοκόλλου PEA
-                  </label>
-                  <input
-                    {...register("protocolNumber")}
-                    className={inputStyle}
-                    readOnly
-                    defaultValue={allExtreactData.property_postal_code}
-                  />
-                </div>
-                <div>
-                  <label className="form-label block mb-1 ">
-                    Κατηγορία Υφιστάμενης Ενέργειας PEA
-                  </label>
-                  <input
-                    {...register("energyCategory")}
-                    className={inputStyle}
-                    readOnly
-                    // defaultValue={dataShowExtreact.pea_energy_category}
-                  />
-                </div>
-
-                <div>
-                  <label className="form-label block mb-1 ">
-                    Εκτιμώμενη Ετήσια Κατανάλωση Πρωτογενούς Ενέργειας [kWh/m²]
-                  </label>
-                  <input
-                    {...register("primaryEnergy")}
-                    className={inputStyle}
-                    readOnly
-                    // defaultValue={dataShowExtreact.pea_annual_energy_consumption}
-                  />
-                </div>
-                <div>
-                  <label className="form-label block mb-1 ">
-                    Εκτιμώμενες Ετήσιες Εκπομπές CO₂ [kg/m²]
-                  </label>
-                  <input
-                    {...register("co2Emissions")}
-                    className={inputStyle}
-                    readOnly
-                    // defaultValue={dataShowExtreact.pea_annual_co2_emissions}
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="form-label block mb-1 ">Τιμή Ζώνης</label>
-                  <textarea
-                    {...register("zonePrice")}
-                    className={inputStyle}
-                    readOnly
-                    rows={2}
-                    //// defaultValue={dataShowExtreact.license_number}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        </div> */
-}
-
-{
-  /* "others option  */
-}
-{
-  /* <div className="mt-10">
-          <div className="bg-gray-50 rounded-xl p-6 shadow-sm w-full">
-            <div className="flex justify-between items-center ">
-              <h2 className="text-xl md:text-2xl font-semibold  text-gray-800">
-                Project & Ownership Information
-              </h2>
-              <div>
-                <button
-                  type="button"
-                  onClick={() => setOwnerInfoShow5(!ownerInfoShow5)}
-                >
-                  {" "}
-                  {!ownerInfoShow5 ? (
-                    <>
-                      <IoIosArrowDown className="text-2xl" />
-                    </>
-                  ) : (
-                    <>
-                      <IoIosArrowUp className="text-2xl" />
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            {ownerInfoShow5 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-                <div>
-                  <label className="form-label block mb-1 ">Χρήση Γης</label>
-                  <input
-                    {...register("land_use")}
-                    className={inputStyle}
-                    readOnly
-                    // defaultValue={dataShowExtreact.land_use}
-                  />
-                </div>
-                <div>
-                  <label className="form-label block mb-1 ">
-                    Περιγραφή Αυθαίρετων Κατασκευών
-                  </label>
-                  <input
-                    {...register("arbitrary_constructions_description")}
-                    className={inputStyle}
-                    readOnly
-                    // defaultValue={
-                    //   dataShowExtreact.arbitrary_constructions_description
-                    // }
-                  />
-                </div>
-
-                <div>
-                  <label className="form-label block mb-1 ">
-                    Έγγραφο Προσδοκίας
-                  </label>
-                  <input
-                    {...register("expectation_Document")}
-                    className={inputStyle}
-                    readOnly
-                    // defaultValue={dataShowExtreact.license_number}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        </div> */
-}
