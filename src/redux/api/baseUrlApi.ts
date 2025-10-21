@@ -6,7 +6,8 @@ export const baseUrlApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     // baseUrl: "https://api.buildai.gr/api/v1",
-    baseUrl: "https://mc999nnm-8145.inc1.devtunnels.ms/api/v1",
+    // baseUrl: "https://mc999nnm-8145.inc1.devtunnels.ms/api/v1",
+    baseUrl: "http://10.0.80.94:8145/api/v1",
     // baseUrl: "https://api.buildai.gr/api/v1",
     // prepareHeaders: (headers) => {
     //   const token = Cookies.get("accessToken");

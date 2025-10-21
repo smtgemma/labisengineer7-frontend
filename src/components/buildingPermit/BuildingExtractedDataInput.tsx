@@ -258,7 +258,7 @@ const BuildingAIExtractionDataInPut = ({ currentStep, nextStep }: {
             JSON.stringify({
                 serviceId: projectData?.id,
                 ydom: ydom,
-                projectDescription: description[0]?.value ?? "",
+                projectDescriptions: description[0]?.value ?? "",
                 technicalDescription: allExtreactData?.technical_description ?? "",
                 technicalDescriptionTwo: allExtreactData?.technical_description_two ?? "",
                 technicalDescriptionThree: allExtreactData?.technical_description_three ?? "",
