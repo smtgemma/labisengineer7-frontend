@@ -23,7 +23,7 @@ interface FormInputs {
     streetAddress?: string;
     streetNumber?: string;
     town?: string;
-    projectDescription?: string;
+    projectDescriptions?: string;
     ydom?: string;
     serviceId?: string;
 }
@@ -31,7 +31,7 @@ interface FormInputs {
 
 interface allDataProps {
     engineers: any[];
-    projectDescription?: string;
+    projectDescriptions?: string;
     ydom?: string;
     propertyPostalCode?: string;
     propertyAddress?: string;
@@ -51,7 +51,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
-    const projectDescription = allData?.projectDescription || "";
+    const projectDescriptions = allData?.projectDescriptions || "";
     const { ydom } = allData || {};
     const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt, municipalityCommunity, propertyNumber } = allData || {};
 
@@ -82,7 +82,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
         const formData = new FormData();
         formData.append("data", JSON.stringify({
             engineers: updatedOwners,
-            projectDescription: data.projectDescription || allData.projectDescription,
+            projectDescription: data.projectDescriptions || allData.projectDescriptions,
             ydom: data.ydom || allData.ydom,
             serviceId: serviceId
         }));
@@ -251,16 +251,16 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                             </p>
 
                             <p className="mb-2">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις <span className="text-sm font-bold">αναλαμβάνω</span> για το έργο</p>
-                            <p className=" mb-6 font-bold uppercase">"{projectDescription || "N/A"}"</p>
+                            <p className=" mb-6 font-bold uppercase">"{projectDescriptions || "N/A"}</p>
                         </div>
 
                         {/* Additional disclaimer text */}
                         <div className="space-y-4 text-sm m p-4">
                             <h3 className=" text-sm"> <span className="mr-1">επί της οδού</span>
-                            <span className="font-bold">
-                                {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-                                ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-                                ΤΚ {propertyPostalCode || "N/A"}</span>
+                                <span className="font-bold">
+                                    {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+                                    ΤΚ {propertyPostalCode || "N/A"}</span>
                             </h3>
                             <p>
                                 τη συνολική διαχείριση του έργου στο ηλεκτρονικό σύστημα του ΤΕΕ - eadeies που αφορά:       </p>
@@ -286,7 +286,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         </div>
                         {/* signature  */}
                         <div className="flex items-center justify-end p-4">
-                            <img src={signature} alt="" />
+                            <img src={signature} alt="" className="w-[150px] h-[150px]" />
                         </div>
                         <div className="text-xs p-6">
                             <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
@@ -483,9 +483,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Περιγραφή Έργου *:</label>
                                             <input
                                                 type="text"
-                                                {...register("projectDescription", { required: "This field is required" })}
+                                                {...register("projectDescriptions", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.projectDescription || ""}
+                                                defaultValue={allData.projectDescriptions || ""}
                                             />
                                         </div>
 
