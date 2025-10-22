@@ -1,7 +1,7 @@
 import React from 'react'
 
 function FcsvD3({number, allData} : {number: string, allData: any}) {
-    const { projectDescription } = allData || {}
+    const { projectDescriptions } = allData || {}
   const engineers = allData?.engineers || []
     return (
         <div>
@@ -14,7 +14,7 @@ function FcsvD3({number, allData} : {number: string, allData: any}) {
             </div>
             <div className='flex border border-t-0 text-sm'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Τίτλος Έργου:</p>
-                <p className='text-left flex-1 py-2 px-1'>{projectDescription || "N/A"}</p>
+                <p className='text-left flex-1 py-2 px-1'>{projectDescriptions || "N/A"}</p>
             </div>
             <div className='flex border border-t-0 text-sm'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Φάση Έργου: </p>
@@ -709,7 +709,7 @@ function FcsvD3({number, allData} : {number: string, allData: any}) {
             </div>
             <div className='flex border border-t-0 text-sm'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Τίτλος Έργου:</p>
-                <p className='text-left flex-1 py-2 px-1'>{projectDescription || "N/A"}</p>
+                <p className='text-left flex-1 py-2 px-1'>{projectDescriptions || "N/A"}</p>
             </div>
             <div className='flex border border-t-0 text-sm mb-8'>
                 <p className='text-right bg-[#33CCCC] border-r py-2 px-1 flex-1'>Φάση Έργου: </p>

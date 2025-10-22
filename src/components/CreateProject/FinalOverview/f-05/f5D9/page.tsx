@@ -10,7 +10,7 @@ import { FaRegEdit } from "react-icons/fa"
 import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormData {
-    projectDescription: string;
+    projectDescriptions: string;
     propertyAddress: string;
     propertyPlace: string;
     propertyPostalCode: string;
@@ -30,7 +30,7 @@ interface FormData {
 interface allDataProps {
     owners: any[];
     engineers: any[];
-    projectDescription: string;
+    projectDescriptions: string;
     propertyAddress: string;
     propertyPlace: string;
     propertyPostalCode: string;
@@ -54,7 +54,7 @@ export default function F5D9({ allData, setIsModalOpen }: F6D5Props) {
     const owner = allData?.owners || []
     const engineers = allData?.engineers?.[0] || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, propertyNumber, createdAt, specialty, municipalityCommunity } = allData || {};
+    const { id, createdById, serviceId, projectDescriptions, propertyPostalCode, propertyPlace, propertyAddress, propertyNumber, createdAt, specialty, municipalityCommunity } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
     const { data: userData } = useGetMeQuery()
@@ -68,7 +68,7 @@ export default function F5D9({ allData, setIsModalOpen }: F6D5Props) {
         formState: { errors },
     } = useForm<FormData>({
         defaultValues: {
-            projectDescription: allData?.projectDescription || "",
+            projectDescriptions: allData?.projectDescriptions || "",
             propertyAddress: allData?.propertyAddress || "",
             propertyPlace: allData?.propertyPlace || "",
             propertyPostalCode: allData?.propertyPostalCode || "",
@@ -133,7 +133,7 @@ export default function F5D9({ allData, setIsModalOpen }: F6D5Props) {
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="font-medium">ΕΡΓΟ :</span>
-                            <span className="flex-1 text-sm">{projectDescription || "N/A"}</span>
+                            <span className="flex-1 text-sm">{projectDescriptions || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
@@ -268,7 +268,7 @@ export default function F5D9({ allData, setIsModalOpen }: F6D5Props) {
                                 <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
                                 {/* Dashed Border Box = common component*/}
                                 <div>
-                                    <img src={signature} alt="" />
+                                    <img src={signature} alt="" className="w-[150px] h-[150px]" />
                                 </div>
                             </div>
                             <div className="flex items-center justify-center gap-2">
@@ -297,7 +297,7 @@ export default function F5D9({ allData, setIsModalOpen }: F6D5Props) {
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
                             <span className="text-sm">ΕΡΓΟ :</span>
-                            <span className="flex-1 text-sm">{projectDescription || "N/A"}</span>
+                            <span className="flex-1 text-sm">{projectDescriptions || "N/A"}</span>
                         </div>
 
                         <div className="flex items-center gap-2">
@@ -461,7 +461,7 @@ export default function F5D9({ allData, setIsModalOpen }: F6D5Props) {
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
                             <div className="mb-6">
-                                <img src={userData?.data?.signature} alt="" />
+                                <img src={userData?.data?.signature} alt="" className="w-[150px] h-[150px]" />
                             </div>
                         </div>
                         <div className="flex items-center justify-center gap-2">
@@ -495,9 +495,9 @@ export default function F5D9({ allData, setIsModalOpen }: F6D5Props) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/8">Έργο *:</label>
                                     <input
-                                        defaultValue={projectDescription || "Project Description "}
+                                        defaultValue={projectDescriptions|| "Project Description "}
                                         type="text"
-                                        {...register("projectDescription", { required: "projectDescription is required" })}
+                                        {...register("projectDescriptions")}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
@@ -509,31 +509,31 @@ export default function F5D9({ allData, setIsModalOpen }: F6D5Props) {
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyAddress", { required: "propertyAddress is required" })}
+                                            {...register("propertyAddress")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyNumber || "propertyNumber"}
-                                            {...register("propertyNumber", { required: "propertyNumber is required" })}
+                                            {...register("propertyNumber")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={municipalityCommunity || "municipalityCommunity"}
-                                            {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
+                                            {...register("municipalityCommunity")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                            {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
+                                            {...register("propertyPostalCode")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPlace || "propertyPlace"}
-                                            {...register("propertyPlace", { required: "propertyPlace is required" })}
+                                            {...register("propertyPlace")}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>

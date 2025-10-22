@@ -2,7 +2,7 @@
 import { format, addYears } from "date-fns"
 
 function FcsvD1({ allData }: { allData: any }) {
-  const { projectDescription, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber, createdAt } = allData || {}
+  const { projectDescriptions, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber, createdAt } = allData || {}
   const owner = allData?.owners || []
   const engineers = allData?.engineers || []
   console.log(engineers, "==========engin")
@@ -30,7 +30,7 @@ function FcsvD1({ allData }: { allData: any }) {
           {/* right side  */}
           <div className='flex-1'>
             <p className="border border-black border-b-0 py-2 text-center font-semibold text-sm bg-white w-full">
-              {projectDescription || "N/A"}
+              {projectDescriptions || "N/A"}
             </p>
             <p className="border border-black py-2 text-center font-semibold text-sm bg-white w-full">
               ΟΙΚΟΔΟΜΙΚΟ ΕΡΓΟ

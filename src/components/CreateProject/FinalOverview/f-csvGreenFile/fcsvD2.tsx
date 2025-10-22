@@ -1,7 +1,7 @@
 import React from 'react'
 
 function FcsvD2({ allData }: { allData: any }) {
-    const { projectDescription } = allData || {}
+    const { projectDescriptions } = allData || {}
   const engineers = allData?.engineers || []
     return (
         <div>
@@ -12,7 +12,7 @@ function FcsvD2({ allData }: { allData: any }) {
             </div>
             <div className='flex border border-t-0 text-sm'>
                 <p className='text-right bg-[#99CC00] border-r py-2 px-1 flex-1'>Τίτλος Έργου:</p>
-                <p className='text-left flex-1 py-2 px-1'>{projectDescription || "N/A"}</p>
+                <p className='text-left flex-1 py-2 px-1'>{projectDescriptions || "N/A"}</p>
             </div>
             {/* header design  */}
             <div className='text-center py-2 bg-[#99CC00] border border-b-0 text-sm font-semibold mt-8'>
@@ -772,7 +772,7 @@ function FcsvD2({ allData }: { allData: any }) {
             </div>
             <div className='flex border border-t-0 text-sm mb-8'>
                 <p className='text-right bg-[#99CC00] border-r py-2 px-1 flex-1'>Τίτλος Έργου:</p>
-                <p className='text-left flex-1 py-2 px-1'>{projectDescription || "N/A"}</p>
+                <p className='text-left flex-1 py-2 px-1'>{projectDescriptions || "N/A"}</p>
             </div>
             {/* center line 2 box  */}
             <div className='bg-[#CCFFCC] border'>
