@@ -231,7 +231,7 @@ const AIExtractionDataInPut = ({
       // create-project
       onSubmitAiDataSend()
     }
-  }, [currentStep]);
+  }, [currentStep, prop, ot]);
 
   return (
     <>
