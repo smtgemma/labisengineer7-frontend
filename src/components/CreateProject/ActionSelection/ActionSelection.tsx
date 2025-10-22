@@ -586,15 +586,15 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
     // this is subcategory 5
     if (hasSubcategory5) {
-      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
         baseTemplatesOwner1.push({
           id: `template56_${index}`,
-          title: `ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          title: `ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
           price: 0.5,
         });
         baseTemplatesOwner1.push({
           id: `template57_${index}`,
-          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
           price: 0.5,
         });
       });

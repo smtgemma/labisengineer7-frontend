@@ -5,16 +5,16 @@ import { format } from "date-fns"
 
 interface AllDataProps {
     owners: any[];
-    projectDescription: string;
+    projectDescriptions: string;
     ydom: string;
     createdAt: string;
 }
 
 export default function FcsvD0({ allData }: { allData: AllDataProps }) {
-    const { projectDescription, createdAt, ydom } = allData || {};
+    const { projectDescriptions, createdAt, ydom } = allData || {};
 
     const [formData, setFormData] = useState({
-        projectDescription: projectDescription || "N/A",
+        projectDescriptions: projectDescriptions || "N/A",
         ydom: ydom || "YDOM",
         submissionDate: createdAt && format(new Date(createdAt), "dd/MM/yyyy") || "DATE OF PROJECT",
         protocolNumber: "",
@@ -62,9 +62,9 @@ export default function FcsvD0({ allData }: { allData: AllDataProps }) {
                         <div className="flex-1">
                             <input
                                 type="text"
-                                value={formData.projectDescription}
+                                value={formData.projectDescriptions}
                                 onChange={(e) =>
-                                    handleInputChange("projectDescription", e.target.value)
+                                    handleInputChange("projectDescriptions", e.target.value)
                                 }
                                 className="w-full p-3 border border-black bg-gray-100 text-black text-base"
                                 style={{ minHeight: "48px" }}
@@ -155,9 +155,9 @@ export default function FcsvD0({ allData }: { allData: AllDataProps }) {
                                     </label>
                                     <input
                                         type="text"
-                                        value={formData.projectDescription}
+                                        value={formData.projectDescriptions}
                                         onChange={(e) =>
-                                            handleInputChange("projectDescription", e.target.value)
+                                            handleInputChange("projectDescriptions", e.target.value)
                                         }
                                         className="w-full p-2 border rounded"
                                     />

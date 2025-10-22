@@ -268,7 +268,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                                 <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
                                 {/* Dashed Border Box = common component*/}
                                 <div>
-                                    <img src={signature} alt="" />
+                                    <img src={signature} alt="" className="h-[150px] w-[150px]" />
                                 </div>
                             </div>
                             <div className="flex items-center justify-center gap-2">
@@ -462,7 +462,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
                             <div className="mb-6">
-                                <img src={userData?.data?.signature} alt="" />
+                                <img src={userData?.data?.signature} alt="" className="w-[150px] h-[150px]" />
                             </div>
                         </div>
                         <div className="flex items-center justify-center gap-2">
@@ -498,7 +498,7 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                                     <input
                                         defaultValue={projectDescriptions || "Project Description "}
                                         type="text"
-                                        {...register("projectDescriptions", { required: "projectDescriptions is required" })}
+                                        {...register("projectDescriptions")}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
@@ -510,31 +510,31 @@ export default function F6D5({ allData, setIsModalOpen }: F6D5Props) {
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyAddress", { required: "propertyAddress is required" })}
+                                            {...register("propertyAddress")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyNumber || "propertyNumber"}
-                                            {...register("propertyNumber", { required: "propertyNumber is required" })}
+                                            {...register("propertyNumber")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={municipalityCommunity || "municipalityCommunity"}
-                                            {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
+                                            {...register("municipalityCommunity")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                            {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
+                                            {...register("propertyPostalCode")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPlace || "propertyPlace"}
-                                            {...register("propertyPlace", { required: "propertyPlace is required" })}
+                                            {...register("propertyPlace")}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>

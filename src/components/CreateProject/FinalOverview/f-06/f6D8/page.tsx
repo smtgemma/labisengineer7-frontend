@@ -315,7 +315,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">ΠΡΟΣ *:</label>
                                             <input
                                                 type="text"
-                                                {...register("ydom", { required: "This field is required" })}
+                                                {...register("ydom")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData?.ydom || ""}
                                             />
@@ -325,7 +325,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Όνομα *:</label>
                                             <input
                                                 type="text"
-                                                {...register("firstName", { required: "This field is required" })}
+                                                {...register("firstName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.firstName || ""}
                                             />
@@ -336,7 +336,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Επώνυμο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("lastName", { required: "This field is required" })}
+                                                {...register("lastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.lastName || ""}
                                             />
@@ -347,7 +347,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Όνομα Πατρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("fatherFirstLastName", { required: "This field is required" })}
+                                                {...register("fatherFirstLastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.fatherFirstLastName || ""}
                                             />
@@ -358,7 +358,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Όνομα Μητρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("mothersFirstLastName", { required: "This field is required" })}
+                                                {...register("mothersFirstLastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.mothersFirstLastName || ""}
                                             />
@@ -369,7 +369,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Ημερομηνία Γέννησης *:</label>
                                             <input
                                                 type="date"
-                                                {...register("dateOfBirth", { required: "This field is required" })}
+                                                {...register("dateOfBirth")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.dateOfBirth || ""}
                                             />
@@ -380,7 +380,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Τόπος Γέννησης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("placeOfBirth", { required: "This field is required" })}
+                                                {...register("placeOfBirth")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.placeOfBirth || ""}
                                             />
@@ -391,7 +391,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Αριθμός Ταυτότητας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("idNumber", { required: "This field is required" })}
+                                                {...register("idNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.idNumber || ""}
                                             />
@@ -402,7 +402,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Τηλέφωνο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("phone", { required: "This field is required" })}
+                                                {...register("phone")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.phone || ""}
                                             />
@@ -413,7 +413,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Πόλη *:</label>
                                             <input
                                                 type="text"
-                                                {...register("city", { required: "This field is required" })}
+                                                {...register("city")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.city || ""}
                                             />
@@ -424,7 +424,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Διεύθυνση *:</label>
                                             <input
                                                 type="text"
-                                                {...register("ownerAddress", { required: "This field is required" })}
+                                                {...register("ownerAddress")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.ownerAddress || ""}
                                             />
@@ -435,7 +435,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Αριθμός Διεύθυνσης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("addressNumber", { required: "This field is required" })}
+                                                {...register("addressNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.addressNumber || ""}
                                             />
@@ -446,7 +446,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Ταχυδρομικός Κώδικας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("postalCode", { required: "This field is required" })}
+                                                {...register("postalCode")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.postalCode || ""}
                                             />
@@ -457,7 +457,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Email *:</label>
                                             <input
                                                 type="email"
-                                                {...register("email", { required: "This field is required" })}
+                                                {...register("email")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.email || ""}
                                             />
@@ -468,7 +468,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Α.Φ.Μ. *:</label>
                                             <input
                                                 type="text"
-                                                {...register("taxIdentificationNumber", { required: "This field is required" })}
+                                                {...register("taxIdentificationNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.taxIdentificationNumber || ""}
                                             />
@@ -479,7 +479,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Περιγραφή Έργου *:</label>
                                             <input
                                                 type="text"
-                                                {...register("projectDescriptions", { required: "This field is required" })}
+                                                {...register("projectDescriptions")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.projectDescriptions || ""}
                                             />
