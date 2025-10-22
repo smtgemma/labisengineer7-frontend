@@ -23,11 +23,6 @@ const CollapsibleSection = ({
 
     const inputStyle = "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50";
 
-    console.log('CollapsibleSection Data:', data);
-    console.log('CollapsibleSection Fields:', fields);
-    console.log('Data keys:', Object.keys(data));
-    console.log('Field dataKeys:', fields.map(f => f.dataKey));
-
     return (
         <div className="mt-10">
             <div className="bg-white p-6 border border-primary rounded-xl shadow-md w-full">
@@ -52,20 +47,7 @@ const CollapsibleSection = ({
                 {isOpen && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
                         {fields.map((field, index) => {
-                            const fieldExists = data?.hasOwnProperty(field.dataKey);
                             const fieldValue = data[field.dataKey];
-
-                            console.log(`🔍 Field Debug:`, {
-                                field: field.dataKey,
-                                exists: fieldExists,
-                                value: fieldValue,
-                                type: typeof fieldValue,
-                                isUndefined: fieldValue === undefined,
-                                isNull: fieldValue === null,
-                                isEmptyString: fieldValue === '',
-                                inData: field.dataKey in data
-                            });
-
                             return (
                                 <div key={index}>
                                     <label className="block text-sm font-medium mb-1">
