@@ -243,6 +243,7 @@ const AIExtractionDataInPut = ({
           Here is the extracted information. Please review and confirm.
         </p>
       </div>
+      {/* completed  */}
       <CollapsibleSection
         title="Project & Property Information (Στοιχεία Έργου & Ιδιοκτησίας)"
         data={allExtreactData}
@@ -295,7 +296,8 @@ const AIExtractionDataInPut = ({
         ]}
       />
 
-      {/* License & Legal Data */}
+      {/* PERMIT PAPER/LAW */}
+      {/* completed  */}
       <CollapsibleSection
         data={allExtreactData}
         defaultOpen={false}
@@ -313,15 +315,23 @@ const AIExtractionDataInPut = ({
             dataKey: "permit_number"
           },
           {
+            label: "issuing_authority",
+            dataKey: "issuing_authority"
+          },
+          {
             label: "license_number_revision",
             dataKey: "license_number_revision"
+          },
+          {
+            label: "license_number_revision_two",
+            dataKey: "license_number_revision_two"
           },
           {
             label: "details_issuing_authority",
             dataKey: "details_issuing_authority"
           },
         ]}
-        title="Πολεοδομικά Μεγέθη-Άδεια Οικοδομής-Νομιμοποιήσεις"
+        title="PERMIT PAPER/LAW"
       />
       {/* owner part  */}
       {fields.map((field: OwnerTypes, index) => (
@@ -340,11 +350,11 @@ const AIExtractionDataInPut = ({
           },
           {
             label: "mothersFirstLastName",
-            dataKey: "mothersFirstLastName"
+            dataKey: "motherFirstLastName"
           },
           {
             label: "dateOfBirth",
-            dataKey: "dateOfBirth "
+            dataKey: "dateOfBirth"
           },
           {
             label: "placeOfBirth",
@@ -360,7 +370,7 @@ const AIExtractionDataInPut = ({
           },
           {
             label: "city",
-            dataKey: "city "
+            dataKey: "city"
           },
           {
             label: "postalCode",
@@ -386,27 +396,39 @@ const AIExtractionDataInPut = ({
 
       ))}
 
-      {/* 3843/2010 LAW */}
+      {/* 4178/2013-4495/2017 */}
+      {/* completed  */}
       <CollapsibleSection data={allExtreactData} defaultOpen={false}
         fields={[
           {
-            label: "completion_declaration_3843_number",
-            dataKey: "completion_declaration_3843_number"
+            label: "legalization_statement_number",
+            dataKey: "legalization_statement_number"
           },
           {
-            label: "description_validations_3843",
-            dataKey: "description_validations_3843 "
+            label: "electronic_code",
+            dataKey: "electronic_code"
           },
           {
-            label: "issuing_authority_3843",
-            dataKey: "issuing_authority_3843 "
+            label: "engineer_full_name",
+            dataKey: "engineer_full_name"
           },
           {
-            label: "date_issue_completion_declaration_3843",
-            dataKey: "date_issue_completion_declaration_3843 "
+            label: "tee_registration_number",
+            dataKey: "tee_registration_number"
+          },
+          {
+            label: "specialty",
+            dataKey: "specialty"
+          },
+          {
+            label: "inclusion_date_legalization",
+            dataKey: "inclusion_date_legalization"
           },
         ]} title=" 4178/2013-4495/2017" />
+
+
       {/*1337/LAW*/}
+      {/* completed  */}
       <CollapsibleSection data={allExtreactData} defaultOpen={false}
         fields={[
           {
@@ -415,24 +437,47 @@ const AIExtractionDataInPut = ({
           },
           {
             label: "date_of_submission_1337",
-            dataKey: "date_of_submission_1337 "
+            dataKey: "date_of_submission_1337"
           },
           {
             label: "issuing_authority_1337",
-            dataKey: "issuing_authority_1337 "
+            dataKey: "issuing_authority_1337"
           },
         ]} title="1337/LAW" />
 
-      {/*Loss */}
+      {/* 3843/2010 LAW */}
+      {/* completed  */}
       <CollapsibleSection data={allExtreactData} defaultOpen={false}
         fields={[
           {
-            label: "plot_area",
-            dataKey: "plot_area"
+            label: "completion_declaration_3843_number",
+            dataKey: "completion_declaration_3843_number"
           },
           {
-            label: "percentage_co_ownership_parcel",
-            dataKey: "percentage_co_ownership_parcel "
+            label: "description_validations_3843",
+            dataKey: "description_validations_3843"
+          },
+          {
+            label: "issuing_authority_3843",
+            dataKey: "issuing_authority_3843"
+          },
+          {
+            label: "date_issue_completion_declaration_3843",
+            dataKey: "date_issue_completion_declaration_3843"
+          },
+        ]} title="3843/2010 LAW" />
+
+      {/*Loss */}
+      {/* completed  */}
+      <CollapsibleSection data={allExtreactData} defaultOpen={false}
+        fields={[
+          {
+            label: "issuing_authority_loss_certificate",
+            dataKey: "issuing_authority_loss_certificate"
+          },
+          {
+            label: "protocol_date_loss_certificate",
+            dataKey: "protocol_date_loss_certificate"
           },
         ]} title="Loss Paper" />
 

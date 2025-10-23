@@ -43,7 +43,10 @@ const SharedOwnerSelection = ({
         firstName: string;
         surname: string;
         fatherName: string;
+        motherName: string;
         vatNo: string;
+        idNumber: string;
+        addressNumber: string;
         email: string;
         phone: string;
         address: string;
@@ -59,14 +62,14 @@ const SharedOwnerSelection = ({
             first_name: data.firstName,
             last_name: data.surname,
             father_first__last_name: data.fatherName,
-            mother_first__last_name: null,
+            mother_first__last_name: data.motherName,
             date_of_birth: data.dateOfBirth,
             place_of_birth: data.placeOfBirth,
             owner_address: data.address,
-            address_number: "",
+            address_number: data.addressNumber,
             postal_code: data.postalCode,
             city: data.city,
-            id_number: "",
+            id_number: data.idNumber,
             tax_identification_number: data.vatNo,
             ownership_percentage_owner: "",
             owner_type_ownership: "",
@@ -96,6 +99,8 @@ const SharedOwnerSelection = ({
             phone: (owner as any).phone || "",
             address: owner.owner_address,
             city: owner.city,
+            idNumber: owner.id_number,
+            addressNumber: owner.address_number,
             postalCode: owner.postal_code,
             dateOfBirth: owner.date_of_birth,
             placeOfBirth: owner.place_of_birth,
@@ -114,6 +119,8 @@ const SharedOwnerSelection = ({
                 tax_identification_number: data.vatNo,
                 owner_address: data.address,
                 city: data.city,
+                idNumber: data.idNumber,
+                addressNumber: data.addressNumber,
                 postal_code: data.postalCode,
                 date_of_birth: data.dateOfBirth,
                 place_of_birth: data.placeOfBirth,
@@ -266,12 +273,15 @@ const SharedOwnerSelection = ({
                             <input placeholder="First Name" {...register("firstName", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input placeholder="Surname" {...register("surname", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input placeholder="Father's Name" {...register("fatherName", { required: "Required" })} className="border p-2 w-full rounded" />
+                            <input placeholder="Mother's Name" {...register("motherName", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input placeholder="Email" {...register("email", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input placeholder="Phone" {...register("phone", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input placeholder="Address" {...register("address")} className="border p-2 w-full rounded" />
+                            <input placeholder="Address Number" {...register("addressNumber")} className="border p-2 w-full rounded" />
                             <input placeholder="City" {...register("city")} className="border p-2 w-full rounded" />
                             <input placeholder="Postal Code" {...register("postalCode")} className="border p-2 w-full rounded" />
                             <input placeholder="VAT No" {...register("vatNo", { required: "Required" })} className="border p-2 w-full rounded" />
+                            <input placeholder="ID Number" {...register("idNumber", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input type="date" {...register("dateOfBirth")} className="border p-2 w-full rounded" />
                             <input placeholder="Place of Birth" {...register("placeOfBirth")} className="border p-2 w-full rounded" />
 
@@ -298,12 +308,15 @@ const SharedOwnerSelection = ({
                             <input placeholder="First Name" {...register("firstName", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input placeholder="Surname" {...register("surname", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input placeholder="Father's Name" {...register("fatherName", { required: "Required" })} className="border p-2 w-full rounded" />
+                            <input placeholder="Mother's Name" {...register("motherName", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input placeholder="Email" {...register("email", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input placeholder="Phone" {...register("phone", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input placeholder="Address" {...register("address")} className="border p-2 w-full rounded" />
+                            <input placeholder="Address Number" {...register("addressNumber")} className="border p-2 w-full rounded" />
                             <input placeholder="City" {...register("city")} className="border p-2 w-full rounded" />
                             <input placeholder="Postal Code" {...register("postalCode")} className="border p-2 w-full rounded" />
                             <input placeholder="VAT No" {...register("vatNo", { required: "Required" })} className="border p-2 w-full rounded" />
+                            <input placeholder="ID Number" {...register("idNumber", { required: "Required" })} className="border p-2 w-full rounded" />
                             <input type="date" {...register("dateOfBirth")} className="border p-2 w-full rounded" />
                             <input placeholder="Place of Birth" {...register("placeOfBirth")} className="border p-2 w-full rounded" />
 
