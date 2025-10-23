@@ -362,6 +362,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     const hasSubcategory10 = allSubmergedArray.includes("ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10")
     const hasSubcategory14 = allSubmergedArray.includes("ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14")
 
+
     // this subcategory 6
     if (hasSubcategory6) {
       stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
@@ -390,12 +391,69 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
       )
     }
 
+    // this is subcategory 5
+    if (hasSubcategory5) {
+      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
+        baseTemplatesOwner1.push({
+          id: `template56_${index}`,
+          title: `ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
+          price: 0.5,
+        });
+        baseTemplatesOwner1.push({
+          id: `template57_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
+          price: 0.5,
+        });
+      });
+      baseTemplatesOwner1.push(
+        {
+          id: "51", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
+        },
+        {
+          id: "52", title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων", price: 0.5,
+        },
+        {
+          id: "53", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
+        },
+        {
+          id: "54", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
+        },
+        {
+          id: "55", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
+        },
+        // {
+        //   id: "56", title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη", price: 0.5,
+        // },
+        // {
+        //   id: "57", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
+        {
+          id: "58", title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού", price: 0.5,
+        },
+        {
+          id: "59", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
+        },
+        {
+          id: "510", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
+        },
+        {
+          id: "511", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
+        },
+        {
+          id: "512", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
+        },
+        {
+          id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 1,
+        },
+      )
+    }
+
     // this subcategory 10 i have to fix this 7 and 8 number
     if (hasSubcategory10) {
-      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
         baseTemplatesOwner1.push({
           id: `template105_${index}`,
-          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
           price: 0.5,
         });
       });
@@ -432,58 +490,6 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
           id: "1010", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
         },
         { id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5 },
-      )
-    }
-
-    // this is subcategory 7
-    if (hasSubcategory7) {
-      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
-        baseTemplatesOwner1.push({
-          id: `owner7_${index}`,
-          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
-          price: 0.5,
-        });
-      });
-      baseTemplatesOwner1.push(
-        {
-          id: "71", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
-        },
-        {
-          id: "72", title: "Βεβαίωση-ΥΔ Μηχανικού Για Τήρηση Όψεων Και Πολεοδομικών Διατάξεων", price: 0.5,
-        },
-        {
-          id: "73", title: "Ενημερωτικό Σημείωμα Μη Απαίτησης Συναίνεσης Συνιδιοκτητών", price: 0.5,
-        },
-        {
-          id: "74", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
-        },
-        {
-          id: "75", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-        },
-        {
-          id: "76", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
-        },
-        // {
-        //   id: "77", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        // },
-        {
-          id: "78", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-        },
-        {
-          id: "79", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
-        },
-        {
-          id: "710", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
-        },
-        {
-          id: "711", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-        },
-        {
-          id: "712", title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων", price: 0.5,
-        },
-        {
-          id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
-        },
       )
     }
 
@@ -544,12 +550,64 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
       )
     }
 
-    // this is subcategory 2
-    if (hasSubcategory2) {
+    // this is subcategory 7
+    if (hasSubcategory7) {
       stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
         baseTemplatesOwner1.push({
-          id: `owner26_${index}`,
+          id: `owner7_${index}`,
           title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          price: 0.5,
+        });
+      });
+      baseTemplatesOwner1.push(
+        {
+          id: "71", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
+        },
+        {
+          id: "72", title: "Βεβαίωση-ΥΔ Μηχανικού Για Τήρηση Όψεων Και Πολεοδομικών Διατάξεων", price: 0.5,
+        },
+        {
+          id: "73", title: "Ενημερωτικό Σημείωμα Μη Απαίτησης Συναίνεσης Συνιδιοκτητών", price: 0.5,
+        },
+        {
+          id: "74", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
+        },
+        {
+          id: "75", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
+        },
+        {
+          id: "76", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
+        },
+        // {
+        //   id: "77", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
+        {
+          id: "78", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
+        },
+        {
+          id: "79", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
+        },
+        {
+          id: "710", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
+        },
+        {
+          id: "711", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
+        },
+        {
+          id: "712", title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων", price: 0.5,
+        },
+        {
+          id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
+        },
+      )
+    }
+
+    // this is subcategory 2
+    if (hasSubcategory2) {
+      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
+        baseTemplatesOwner1.push({
+          id: `owner26_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.firstName}`,
           price: 0.5,
         });
       });
@@ -580,63 +638,6 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         },
         {
           id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
-        },
-      )
-    }
-
-    // this is subcategory 5
-    if (hasSubcategory5) {
-      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
-        baseTemplatesOwner1.push({
-          id: `template56_${index}`,
-          title: `ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
-          price: 0.5,
-        });
-        baseTemplatesOwner1.push({
-          id: `template57_${index}`,
-          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
-          price: 0.5,
-        });
-      });
-      baseTemplatesOwner1.push(
-        {
-          id: "51", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
-        },
-        {
-          id: "52", title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων", price: 0.5,
-        },
-        {
-          id: "53", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
-        },
-        {
-          id: "54", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-        },
-        {
-          id: "55", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
-        },
-        // {
-        //   id: "56", title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη", price: 0.5,
-        // },
-        // {
-        //   id: "57", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        // },
-        {
-          id: "58", title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού", price: 0.5,
-        },
-        {
-          id: "59", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-        },
-        {
-          id: "510", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
-        },
-        {
-          id: "511", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
-        },
-        {
-          id: "512", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-        },
-        {
-          id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 1,
         },
       )
     }
@@ -705,19 +706,19 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
 
   allTemplates = Object.values(
-  allTemplates.reduce((acc: Record<string, any>, curr) => {
-    // Check if any existing item already has the same id or title
-    const isDuplicate = Object.values(acc).some(
-      (item) => item.id === curr.id || item.title === curr.title
-    );
+    allTemplates.reduce((acc: Record<string, any>, curr) => {
+      // Check if any existing item already has the same id or title
+      const isDuplicate = Object.values(acc).some(
+        (item) => item.id === curr.id || item.title === curr.title
+      );
 
-    if (!isDuplicate) {
-      acc[curr.id] = curr; // use id as the key (could be anything unique)
-    }
+      if (!isDuplicate) {
+        acc[curr.id] = curr; // use id as the key (could be anything unique)
+      }
 
-    return acc;
-  }, {})
-);
+      return acc;
+    }, {})
+  );
 
 
   console.log(allTemplates, "allTemplates with not repeated id")

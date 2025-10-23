@@ -287,7 +287,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                         </div>
                         {/* signature  */}
                         <div className="flex items-center justify-end p-4">
-                            <img src={signature} alt="" />
+                            <img src={signature} alt="" className="w-[150px] h-[150px]" />
                         </div>
                         <div className="text-xs p-6">
                             <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>

@@ -23,7 +23,7 @@ interface FormInputs {
     postalCode?: string;
     email?: string;
     taxIdentificationNumber?: string;
-    projectDescription?: string;
+    projectDescriptions?: string;
     ydom?: string;
     serviceId?: string;
 }
@@ -32,7 +32,7 @@ interface FormInputs {
 interface allDataProps {
     owners: any[];
     engineers: any[];
-    projectDescription: string;
+    projectDescriptions: string;
     ydom: string;
     horizontalPropertyName: string;
     id: string;
@@ -53,12 +53,12 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
 
     const engineers = allData?.engineers || {};
     const owner = allData?.owners?.[ownerIndex]
-    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt, municipalityCommunity, propertyPostalCode, propertyPlace, propertyNumber, propertyAddress } = allData || {};
+    const { id, createdById, serviceId, horizontalPropertyName, projectDescriptions, ydom, specialty, createdAt, municipalityCommunity, propertyPostalCode, propertyPlace, propertyNumber, propertyAddress } = allData || {};
 
 
     const [updateProject] = useUpdateProjectMutation()
-    const { data: userData } = useGetMeQuery()
-    const signature = userData?.data?.signature
+    // const { data: userData } = useGetMeQuery()
+    // const signature = userData?.data?.signature
     // for editing data 
     const {
         register,
@@ -83,7 +83,7 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
         const formData = new FormData();
         formData.append("data", JSON.stringify({
             owners: updatedOwners,
-            projectDescription: data.projectDescription || allData.projectDescription,
+            projectDescriptions: data.projectDescriptions|| allData.projectDescriptions,
             ydom: data.ydom || allData.ydom,
             serviceId: serviceId
         }));
@@ -170,7 +170,7 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mothersFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.motherFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
                             </div>
                         </div>
 
@@ -248,12 +248,12 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
                             <p className="mb-4">
                                 ως κύριος/ιδιοκτήτης του ακινήτου <span className="font-bold">{horizontalPropertyName || "N/A"} </span> που βρίσκεται επί της οδού <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
                                     ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-                                    ΤΚ {propertyPostalCode || "N/A"}</span> αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
+                                    ΤΚ {propertyPostalCode || "N/A"}</span> αναθέτω στον/στην Διπλωματούχο Μηχανικό <span className="font-bold">{engineers[0]?.lastName || "N/A"},  {engineers[0]?.firstName || "N/A"}, {engineers[0]?.specialty || "N/A"}</span> με Α.Μ ΤΕΕ : <span className="font-bold">{engineers[0]?.teeNumber}</span>
                             </p>
 
 
                             <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
-                            <p className=" mb-6 font-bold">{projectDescription || "N/A"}</p>
+                            <p className=" mb-6 font-bold">"{projectDescriptions || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
@@ -277,9 +277,9 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
                                 </div>
                             </div>
                         </div>
-                        <div className="flex items-center justify-end p-4">
-                            <img src={signature} alt="" />
-                        </div>
+                        {/* <div className="flex items-center justify-end p-4">
+                            <img src={signature} alt="" className="w-[150px] h-[150px]" />
+                        </div> */}
 
                         <div className="text-xs p-6">
                             <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
@@ -475,9 +475,9 @@ export default function s4D1({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Περιγραφή Έργου *:</label>
                                             <input
                                                 type="text"
-                                                {...register("projectDescription", { required: "This field is required" })}
+                                                {...register("projectDescriptions", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.projectDescription || ""}
+                                                defaultValue={allData.projectDescriptions || ""}
                                             />
                                         </div>
 

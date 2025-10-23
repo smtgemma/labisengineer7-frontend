@@ -17,7 +17,7 @@ interface FormData {
 
 interface allDataProps {
   owners: any[];
-  projectDescription: string
+  projectDescriptions: string
   propertyPlace: string
   propertyAddress: string
   propertyPostalCode: string
@@ -44,7 +44,7 @@ export default function F6D12({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const owner = allData?.owners || [];
-  const { projectDescription, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber } = allData || {}
+  const { projectDescriptions, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber } = allData || {}
 
   const { data: userData } = useGetMeQuery()
   const signature = userData?.data?.signature
@@ -376,6 +376,18 @@ export default function F6D12({ allData }: { allData: allDataProps }) {
       {/* Project Info */}
       <div className="mb-6 space-y-4">
         <div className="flex items-center gap-4">
+          <span className="font-medium w-1/4">Έργο *:</span>
+          <h3 className="flex-1 text-black text-sm">{projectDescriptions || "N/A"}</h3>
+        </div>
+        <div className="flex items-center gap-4">
+          <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
+          <h3 className=" text-sm">
+            {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
+            ΔΗΜΟΣ {municipalityCommunity || "N/A"},
+            ΤΚ {propertyPostalCode || "N/A"}
+          </h3>
+        </div>
+        <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Εργοδότες *:</span>
           <div className="flex items-center justify-center gap-2">
             {
@@ -386,18 +398,6 @@ export default function F6D12({ allData }: { allData: allDataProps }) {
               ))
             }
           </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <span className="font-medium w-1/4">Έργο *:</span>
-          <h3 className="flex-1 text-black text-sm">{projectDescription || "N/A"}</h3>
-        </div>
-        <div className="flex items-center gap-4">
-          <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className=" text-sm">
-            {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-            ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-            ΤΚ {propertyPostalCode || "N/A"}
-          </h3>
         </div>
       </div>
 
@@ -511,7 +511,7 @@ export default function F6D12({ allData }: { allData: allDataProps }) {
         </div>
       </div>
       <div className="flex flex-col items-end">
-        <img src={signature} alt="" className="mb-4" />
+        <img src={signature} alt="" className="mb-4 w-[150px] h-[150px]" />
         <div>
           <p className="text-center">Ο Συντάξας</p>
         </div>

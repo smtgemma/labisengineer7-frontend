@@ -16,7 +16,7 @@ type F6D13Props = {
 interface FormData {
     firstName: string
     lastName: string
-    projectDescription: string
+    projectDescriptions: string
     propertyAddress: string
     propertyPostalCode: string
     municipalityCommunity: string
@@ -47,7 +47,7 @@ export default function F4D3({ allData,
     const { id, createdById, serviceId, specialty } = allData || {}
     console.log(allDescriptionTasks, "all descripton task ==============================")
 
-    const { projectDescription,
+    const { projectDescriptions,
         propertyAddress,
         propertyNumber,
         municipalityCommunity,
@@ -117,32 +117,42 @@ export default function F4D3({ allData,
 
             {/* Project Information */}
             <div className="mb-8 space-y-4">
-                <div className="flex items-start justify-between">
-                    <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    <h3 className=" text-sm text-center uppercase">{projectDescription || "N/A"}</h3>
-                </div>
-
-                <div className="flex items-start justify-between gap-4 max-w-xl">
-                    <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">
-                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-                        ΤΚ {propertyPostalCode || "N/A"}
+                {/* Project Name */}
+                <div className="flex items-center justify-between">
+                    <span className="min-w-[120px] text-sm font-medium">Έργο:</span>
+                    <h3 className="flex-1 text-sm text-center uppercase">
+                        {projectDescriptions || "N/A"}
                     </h3>
                 </div>
-                <div className="flex items-start justify-between gap-4 max-w-xl">
-                    <span className="text-sm">Ιδιοκτήτης:</span>
-                    <div className="flex items-center justify-center gap-2">
-                        {
-                            owner?.map((e: any, i: number) => (
+
+                {/* Property Address */}
+                <div className="flex items-center justify-between">
+                    <span className="min-w-[120px] text-sm font-medium">Θέση:</span>
+                    <h3 className="flex-1 text-sm text-center">
+                        {propertyAddress || "N/A"} {propertyNumber || "N/A"},{" "}
+                        {propertyPlace || "N/A"}, ΔΗΜΟΣ {municipalityCommunity || "N/A"}, ΤΚ{" "}
+                        {propertyPostalCode || "N/A"}
+                    </h3>
+                </div>
+
+                {/* Owner Section */}
+                <div className="flex items-start justify-between">
+                    <span className="min-w-[120px] text-sm font-medium">Ιδιοκτήτης:</span>
+                    <div className="flex-1 text-center space-y-1">
+                        {owner?.length > 0 ? (
+                            owner.map((e: any, i: number) => (
                                 <h3 key={i} className="text-sm">
-                                    {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
+                                    {e.firstName || e.first_name || "N/A"}{" "}
+                                    {e.lastName || e.last_name || "N/A"}
                                 </h3>
                             ))
-                        }
+                        ) : (
+                            <h3 className="text-sm">N/A</h3>
+                        )}
                     </div>
                 </div>
             </div>
+
             <div className="space-y-6 ml-10">
                 <div>
                     <h3 className="text-[15px] font-bold mb-2">1. Εισαγωγή</h3>
@@ -154,13 +164,13 @@ export default function F4D3({ allData,
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold mb-2">2. Στοιχεία Ακινήτου</h3>
+                    <h3 className="text-[15px] font-bold mb-2">2. Στοιχεία Ακινήτου</h3>
                     <p className="text-sm mb-5">
                         {technicalDescription || "N/A"}
                     </p>
                 </div>
                 <div className="">
-                    <h3 className="text-sm font-bold mb-2">3. Περιγραφή Εργασιών (Άρθρο 30)
+                    <h3 className="text-[15px] font-bold mb-2">3. Περιγραφή Εργασιών (Άρθρο 30)
                     </h3>
                     <p className="text-sm mt-2">Οι εργασίες που θα εκτελεστούν εντάσσονται στις προβλεπόμενες από το άρθρο 30 του Ν.4495/2017. Ενδεικτικά αναφέρονται: </p>
 
@@ -180,7 +190,7 @@ export default function F4D3({ allData,
                     </div>
                 </div>
                 <div>
-                    <h3 className="text-sm font-bold mb-2">4. Συμπέρασμα – Υπαγωγή των Εργασιών στις Διατάξεις του Άρθρου 30 του Ν.4495/2017</h3>
+                    <h3 className="text-[15px] font-bold mb-2">4. Συμπέρασμα – Υπαγωγή των Εργασιών στις Διατάξεις του Άρθρου 30 του Ν.4495/2017</h3>
                     <p className="text-sm">
                         Οι περιγραφόμενες εργασίες υπάγονται στις ρητά προβλεπόμενες περιπτώσεις του άρθρου 30 του Ν.4495/2017 και, ως εκ τούτου, δεν απαιτείται έκδοση οικοδομικής άδειας ή άδειας μικρής κλίμακας.
                         Βεβαιώνεται επίσης,  ότι το ακίνητο δεν εμπίπτει σε ειδικό καθεστώς προστασίας, σύμφωνα με τη παρ.2 του άρθρου 30 του Ν.4495/2017, όπως:
@@ -206,7 +216,7 @@ export default function F4D3({ allData,
                 </div>
                 {/* Signature */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
-                    <img src={signature} alt="" />
+                    <img src={signature} alt="" className="w-[150px] h-[150px]" />
                 </div>
             </div>
             {/* EDIT MODAL */}
@@ -231,9 +241,9 @@ export default function F4D3({ allData,
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/4">Έργο *:</label>
                                     <input
-                                        defaultValue={projectDescription || "Project Description "}
+                                        defaultValue={projectDescriptions || "Project Description "}
                                         type="text"
-                                        {...register("projectDescription", { required: "This field is required" })}
+                                        {...register("projectDescriptions", { required: "This field is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>

@@ -302,10 +302,10 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
         const baseTemplatesOwner4: TemplateName[] = [];
 
         stepByStepData.ownerBaseData?.forEach(
-            (owner: { first_name: string; last_name: string }, index: number) => {
+            (owner: { firstName: string; lastName: string }, index: number) => {
                 baseTemplatesOwner4.push({
                     id: `owner2_${index}`,
-                    title: `YΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+                    title: `YΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
                     price: 0.5,
                 });
             }

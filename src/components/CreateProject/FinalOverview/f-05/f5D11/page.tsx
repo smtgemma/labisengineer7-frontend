@@ -166,7 +166,7 @@ export default function F5D11({ allData, ownerIndex }: { allData: allDataProps, 
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mothersFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.motherFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
                             </div>
                         </div>
 
@@ -252,7 +252,7 @@ export default function F5D11({ allData, ownerIndex }: { allData: allDataProps, 
                                 <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
                                     ΔΗΜΟΣ {municipalityCommunity || "N/A"}, ΤΚ {propertyPostalCode || "N/A"}{" "}</span>
                                 αναθέτω στον/στην Διπλωματούχο Μηχανικό
-                                ( {engineers[0]?.lastName || "N/A"}, {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
+                                ( {engineers[0]?.lastName || "N/A"}, {engineers[0]?.firstName || "N/A"}, {engineers[0]?.specialty || "N/A"}, {engineers[0]?.teeNumber})
                             </span>
 
                             <p className="mb-4 font-bold mt-2">για το έργο με τίτλο :</p>

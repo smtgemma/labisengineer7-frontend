@@ -82,7 +82,7 @@ export default function F10D10({ allData, ownerIndex }: { allData: allDataProps,
         const formData = new FormData();
         formData.append("data", JSON.stringify({
             owners: updatedOwners,
-            projectDescription: data.projectDescriptions || allData.projectDescriptions,
+            projectDescriptions: data.projectDescriptions || allData.projectDescriptions,
             ydom: data.ydom || allData.ydom,
             serviceId: serviceId
         }));
@@ -168,7 +168,7 @@ export default function F10D10({ allData, ownerIndex }: { allData: allDataProps,
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mothersFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.motherFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
                             </div>
                         </div>
 
@@ -252,9 +252,9 @@ export default function F10D10({ allData, ownerIndex }: { allData: allDataProps,
                             <span className="mb-4">
                                 ως κύριος/ιδιοκτήτης του ακινήτου <span className="font-bold">{horizontalPropertyName || "N/A"}</span> που βρίσκεται επί της οδού{" "}
                                 <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-                                ΔΗΜΟΣ {municipalityCommunity || "N/A"}, ΤΚ {propertyPostalCode || "N/A"}{" "}</span>
+                                    ΔΗΜΟΣ {municipalityCommunity || "N/A"}, ΤΚ {propertyPostalCode || "N/A"}{" "}</span>
                                 αναθέτω στον/στην Διπλωματούχο Μηχανικό
-                                ( {engineers[0]?.lastName || "N/A"}, {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
+                                 <span className="ml-1">{engineers[0]?.lastName || "N/A"}, {engineers[0]?.firstName || "N/A"}, {engineers[0]?.specialty || "N/A"} {engineers[0]?.teeNumber}</span>
                             </span>
 
                             <p className="mb-4 font-bold">για το έργο με τίτλο :</p>

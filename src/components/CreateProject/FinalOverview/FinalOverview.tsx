@@ -454,6 +454,57 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 ✕
               </button>
 
+              {/* file 6======== */}
+              <div>
+                {selected?.startsWith("template1_") && ownerIndex !== null && (
+                  <F6D8
+                    allData={allData}
+                    ownerIndex={ownerIndex}
+                  />
+                )}
+                {selected === "62" && (
+                  <F6D9 allData={allData} /> // 2
+                )}
+                {selected === "63" && (
+                  <F6D10 allData={allData} /> // 3
+                )}
+                {selected === "64" && (
+                  <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
+                )}
+                {selected === "65" && (
+                  <F6D1 allData={allData} /> // 5
+                )}
+                {selected === "66" && (
+                  <F6D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 6
+                )}
+                {/* {selected === "67" && (
+                  <F6D6 allData={allData} /> // 7
+                )} */}
+                {selected === "67" && (
+                  <FcsvMain allData={allData} /> // 7
+                )}
+                {selected === "68" && (
+                  <F6D12 allData={allData} /> // 8
+                )}
+                {selected === "69" && (
+                  <F6D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 9
+                )}
+                {selected === "610" && (
+                  <F6D14 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
+                )}
+                {selected === "611" && (
+                  <F6D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
+                )}
+                {selected === "612" && (
+                  <F6D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
+                )}
+                {selected === "613" && (
+                  <F6D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 13
+                )}
+                {selected === "614" && (
+                  <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 14
+                )}
+              </div>
               {/* file 5======== */}
               <div>
                 {selected === "51" && (
@@ -508,57 +559,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F5D17 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
                 )}
               </div>
-              {/* file 6======== */}
-              <div>
-                {selected?.startsWith("template1_") && ownerIndex !== null && (
-                  <F6D8
-                    allData={allData}
-                    ownerIndex={ownerIndex}
-                  />
-                )}
-                {selected === "62" && (
-                  <F6D9 allData={allData} /> // 2
-                )}
-                {selected === "63" && (
-                  <F6D10 allData={allData} /> // 3
-                )}
-                {selected === "64" && (
-                  <F6D13 allData={allData} setIsModalOpen={setIsModalOpen} /> // 4
-                )}
-                {selected === "65" && (
-                  <F6D1 allData={allData} /> // 5
-                )}
-                {selected === "66" && (
-                  <F6D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 6
-                )}
-                {/* {selected === "67" && (
-                  <F6D6 allData={allData} /> // 7
-                )} */}
-                {selected === "67" && (
-                  <FcsvMain allData={allData} /> // 7
-                )}
-                {selected === "68" && (
-                  <F6D12 allData={allData} /> // 8
-                )}
-                {selected === "69" && (
-                  <F6D2 allData={allData} setIsModalOpen={setIsModalOpen} /> // 9
-                )}
-                {selected === "610" && (
-                  <F6D14 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
-                )}
-                {selected === "611" && (
-                  <F6D7 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
-                )}
-                {selected === "612" && (
-                  <F6D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
-                )}
-                {selected === "613" && (
-                  <F6D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 13
-                )}
-                {selected === "614" && (
-                  <F6D4 allData={allData} setIsModalOpen={setIsModalOpen} /> // 14
-                )}
-              </div>
               {/* file 10======== */}
               <div>
                 {selected === "101" && (
@@ -599,55 +599,6 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                 )}
                 {selected === "1010" && (
                   <F10D15 allData={allData} setIsModalOpen={setIsModalOpen} /> // 10
-                )}
-              </div>
-              {/* file 7  */}
-              <div>
-                {selected === "71" && (
-                  <F7D1 allData={allData} /> // 1
-                )}
-                {selected === "72" && (
-                  <F7D2 allData={allData} /> // 2
-                )}
-                {selected === "73" && (
-                  <F7D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 3
-                )}
-                {selected === "74" && (
-                  <F7D4 allData={allData} /> // 4
-                )}
-                {selected === "75" && (
-                  <F7D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
-                )}
-                {/* {selected === "76" && (
-                  <F7D6 allData={allData} /> // 6
-                )} */}
-                {selected === "76" && (
-                  <FcsvMain allData={allData} /> // 6
-                )}
-                {/* {selected === "77" && (
-                  <F7D7 allData={allData} /> // 7
-                )} */}
-                {
-                  selected?.startsWith("owner7_") && ownerIndex !== null && (
-                    <F7D7
-                      allData={allData}
-                      ownerIndex={ownerIndex}
-                    />
-                  )}
-                {selected === "78" && (
-                  <F7D8 allData={allData} /> // 8
-                )}
-                {selected === "79" && (
-                  <F7D9 allData={allData} /> // 9
-                )}
-                {selected === "710" && (
-                  <F7D10 allData={allData} /> // 10
-                )}
-                {selected === "711" && (
-                  <F7D11 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
-                )}
-                {selected === "712" && (
-                  <F7D12 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
                 )}
               </div>
               {/* file 14  */}
@@ -704,6 +655,55 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F14D12 allData={allData} setIsModalOpen={setIsModalOpen} /> // 12
                 )}
               </div>
+              {/* file 7  */}
+              <div>
+                {selected === "71" && (
+                  <F7D1 allData={allData} /> // 1
+                )}
+                {selected === "72" && (
+                  <F7D2 allData={allData} /> // 2
+                )}
+                {selected === "73" && (
+                  <F7D3 allData={allData} setIsModalOpen={setIsModalOpen} /> // 3
+                )}
+                {selected === "74" && (
+                  <F7D4 allData={allData} /> // 4
+                )}
+                {selected === "75" && (
+                  <F7D5 allData={allData} setIsModalOpen={setIsModalOpen} /> // 5
+                )}
+                {/* {selected === "76" && (
+                  <F7D6 allData={allData} /> // 6
+                )} */}
+                {selected === "76" && (
+                  <FcsvMain allData={allData} /> // 6
+                )}
+                {/* {selected === "77" && (
+                  <F7D7 allData={allData} /> // 7
+                )} */}
+                {
+                  selected?.startsWith("owner7_") && ownerIndex !== null && (
+                    <F7D7
+                      allData={allData}
+                      ownerIndex={ownerIndex}
+                    />
+                  )}
+                {selected === "78" && (
+                  <F7D8 allData={allData} /> // 8
+                )}
+                {selected === "79" && (
+                  <F7D9 allData={allData} /> // 9
+                )}
+                {selected === "710" && (
+                  <F7D10 allData={allData} /> // 10
+                )}
+                {selected === "711" && (
+                  <F7D11 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
+                )}
+                {selected === "712" && (
+                  <F7D12 allData={allData} setIsModalOpen={setIsModalOpen} /> // 11
+                )}
+              </div>
               {/* file 2  */}
               <div>
                 {selected === "21" && (
@@ -752,9 +752,9 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
                   <F8D3 allData={allData} /> // 3
                 )} */}
                 {selected?.startsWith("template83_") && ownerIndex !== null && (
-                  <F8D3 
-                  allData={allData} 
-                  ownerIndex={ownerIndex}
+                  <F8D3
+                    allData={allData}
+                    ownerIndex={ownerIndex}
                   />
                 )}
                 {selected === "84" && (

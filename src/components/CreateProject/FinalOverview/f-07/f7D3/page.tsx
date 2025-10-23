@@ -9,7 +9,7 @@ import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templa
 
 
 interface FormData {
-    projectDescription: string;
+    projectDescriptions: string;
     propertyAddress: string;
     propertyPlace: string;
     propertyPostalCode: string;
@@ -25,7 +25,7 @@ interface allDataProps {
     owners: any[]
     allDescriptionTasks: any[]
     technical_description: string
-    projectDescription: string
+    projectDescriptions: string
     id: string
     createdById: string
     propertyPostalCode: string
@@ -46,7 +46,7 @@ export default function F7D3({ allData, setIsModalOpen }: F6D5Props) {
 
     const owner = allData?.owners || []
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, projectDescription, propertyNumber, municipalityCommunity, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
+    const { id, createdById, serviceId, projectDescriptions, propertyNumber, municipalityCommunity, propertyPostalCode, propertyPlace, propertyAddress, createdAt, horizontalPropertyName } = allData || {}
 
     const [updateProject] = useUpdateProjectMutation()
     const { data: userData } = useGetMeQuery()
@@ -61,7 +61,7 @@ export default function F7D3({ allData, setIsModalOpen }: F6D5Props) {
         formState: { errors },
     } = useForm<FormData>({
         defaultValues: {
-            projectDescription: allData?.projectDescription || "",
+            projectDescriptions: allData?.projectDescriptions || "",
             propertyAddress: allData?.propertyAddress || "",
             propertyPlace: allData?.propertyPlace || "",
             propertyPostalCode: allData?.propertyPostalCode || "",
@@ -111,35 +111,47 @@ export default function F7D3({ allData, setIsModalOpen }: F6D5Props) {
             </h2>
 
             {/* Project Information */}
-            <div className="mb-8 space-y-4">
-                <div className="flex items-start justify-between">
-                    <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
-                </div>
-
-                <div className="flex items-start justify-between gap-4 max-w-xl">
-                    <span className=" text-sm">Θέση:</span>
-                    <h3 className=" text-sm">
-                        {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-                        ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-                        ΤΚ {propertyPostalCode || "N/A"}
+            < div className="mb-8 space-y-4" >
+                {/* Project Name */}
+                <div className="flex items-center justify-between" >
+                    <span className="min-w-[120px] text-sm font-medium">Έργο:</span>
+                    <h3 className="flex-1 text-sm text-center uppercase">
+                        {projectDescriptions || "N/A"}
                     </h3>
                 </div>
-                <div className="flex">
-                    <span className="text-sm">Ιδιοκτήτης:</span>
-                    <div className="flex-1">
-                        <div className="flex items-center justify-center gap-2">
-                            {
-                                owner?.map((e: any, i: number) => (
-                                    <h3 key={i} className="text-sm">
-                                        {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
-                                    </h3>
-                                ))
-                            }
-                        </div>
-                    </div>
+
+                {/* Property Address */}
+                <div className="flex items-center justify-between" >
+                    <span className="min-w-[120px] text-sm font-medium">Θέση:</span>
+                    <h3 className="flex-1 text-sm text-center">
+                        {propertyAddress || "N/A"} {propertyNumber || "N/A"},{" "}
+                        {propertyPlace || "N/A"}, ΔΗΜΟΣ {municipalityCommunity || "N/A"}, ΤΚ{" "}
+                        {propertyPostalCode || "N/A"}
+                    </h3>
                 </div>
-            </div>
+
+                {/* Owner Section */}
+                < div className="flex items-start justify-between" >
+                    <span className="min-w-[120px] text-sm font-medium">Ιδιοκτήτης:</span>
+                    <div className="flex-1 text-center">
+                        {owner?.length > 0 ? (
+                            <h3 className="text-sm">
+                                {owner
+                                    .map(
+                                        (e: any) =>
+                                            `${e.firstName || e.first_name || "N/A"} ${e.lastName || e.last_name || "N/A"
+                                            }`
+                                    )
+                                    .join(", ")}
+                            </h3>
+                        ) : (
+                            <h3 className="text-sm">N/A</h3>
+                        )}
+                    </div>
+                </ div>
+
+            </div >
+
 
             {/* Main Description */}
             <div className="text-sm mb-4 ml-10">
@@ -202,7 +214,7 @@ export default function F7D3({ allData, setIsModalOpen }: F6D5Props) {
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΜΗΧΑΝΙΚΟΣ</h3>
                             <div className="flex items-center justify-end p-4">
-                                <img src={signature} alt="" />
+                                <img src={signature} alt="" className="w-[150px] h-[150px]" />
                             </div>
                         </div>
                     </div>
@@ -231,9 +243,9 @@ export default function F7D3({ allData, setIsModalOpen }: F6D5Props) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/8">Έργο *:</label>
                                     <input
-                                        defaultValue={projectDescription || "Project Description "}
+                                        defaultValue={projectDescriptions || "Project Descriptions "}
                                         type="text"
-                                        {...register("projectDescription", { required: "projectDescription is required" })}
+                                        {...register("projectDescriptions")}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
@@ -245,31 +257,31 @@ export default function F7D3({ allData, setIsModalOpen }: F6D5Props) {
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyAddress", { required: "propertyAddress is required" })}
+                                            {...register("propertyAddress")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyNumber || "propertyNumber"}
-                                            {...register("propertyNumber", { required: "propertyNumber is required" })}
+                                            {...register("propertyNumber")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={municipalityCommunity || "municipalityCommunity"}
-                                            {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
+                                            {...register("municipalityCommunity")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                            {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
+                                            {...register("propertyPostalCode")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPlace || "propertyPlace"}
-                                            {...register("propertyPlace", { required: "propertyPlace is required" })}
+                                            {...register("propertyPlace")}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>

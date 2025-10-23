@@ -161,7 +161,7 @@ export default function F10D7({ allData, setIsModalOpen }: F6D5Props) {
                             <span className="text-sm">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
                             <div className="flex flex-col items-center justify-center">
                                 <span className="flex-1 text-sm">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1 text-sm">{specialty || "N/A"}</span>
+                                <span className="flex-1 text-sm">{engineers?.specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -268,7 +268,7 @@ export default function F10D7({ allData, setIsModalOpen }: F6D5Props) {
                                 <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
                                 {/* Dashed Border Box = common component*/}
                                 <div>
-                                    <img src={signature} alt="" />
+                                    <img src={signature} alt="" className="w-[150px] h-[150px]" />
                                 </div>
                             </div>
                             <div className="flex items-center justify-center gap-2">
@@ -313,12 +313,11 @@ export default function F10D7({ allData, setIsModalOpen }: F6D5Props) {
                                 }
                             </div>
                         </div>
-
-                        <div className="flex justify-start gap-12">
+                        <div className="flex justify-between">
                             <span className="text-sm">ΥΠΟΧΡΕΟΣ ΓΙΑ ΤΗΝ ΕΚΠΟΝΗΣΗ ΤΟΥ Σ.Α.Υ. :</span>
-                            <div className="flex flex-col items-start justify-center">
+                            <div className="flex flex-col items-center justify-center">
                                 <span className="flex-1 text-sm">{engineers?.firstName || "N/A"}, {engineers?.lastName || "N/A"}</span>
-                                <span className="flex-1 text-sm">{specialty || "N/A"}</span>
+                                <span className="flex-1 text-sm">{engineers?.specialty || "N/A"}</span>
                             </div>
                         </div>
                     </div>
@@ -462,7 +461,7 @@ export default function F10D7({ allData, setIsModalOpen }: F6D5Props) {
                         <div className="">
                             <h3 className="text-center mb-4">Ο ΣΥΝΤΑΞΑΣ</h3>
                             <div className="mb-6">
-                                <img src={userData?.data?.signature} alt="" />
+                                <img src={userData?.data?.signature} alt="" className="w-[150px] h-[150px]" />
                             </div>
                         </div>
                         <div className="flex items-center justify-center gap-2">
