@@ -150,7 +150,8 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const projectId = stepByStepData?.projectIdCode?.result.id;
   const userId = dataAllFIled?.createdById;
 
-  console.log(stepByStepData?.projectIdCode?.id);
+  console.log(projectId, "===============projectId");
+  console.log(stepByStepData, "===============stepByStepData");
 
   const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");

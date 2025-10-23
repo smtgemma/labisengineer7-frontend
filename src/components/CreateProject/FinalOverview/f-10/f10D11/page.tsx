@@ -23,7 +23,7 @@ interface FormInputs {
     streetAddress?: string;
     streetNumber?: string;
     town?: string;
-    projectDescription?: string;
+    projectDescriptions?: string;
     ydom?: string;
     serviceId?: string;
 }
@@ -32,7 +32,7 @@ interface FormInputs {
 
 interface allDataProps {
     engineers: any[];
-    projectDescription?: string;
+    projectDescriptions?: string;
     ydom?: string;
     propertyPostalCode?: string;
     propertyAddress?: string;
@@ -52,7 +52,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
-    const projectDescription = allData?.projectDescription || "";
+    const projectDescriptions = allData?.projectDescriptions || "";
     const { ydom } = allData || {};
     const { propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt, propertyNumber, municipalityCommunity } = allData || {};
 
@@ -84,7 +84,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
         const formData = new FormData();
         formData.append("data", JSON.stringify({
             engineers: updatedOwners,
-            projectDescription: data.projectDescription || allData.projectDescription,
+            projectDescriptions: data.projectDescriptions || allData.projectDescriptions,
             ydom: data.ydom || allData.ydom,
             serviceId: serviceId
         }));
@@ -252,7 +252,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                             </p>
 
                             <p className=" font-bold">για το οικοδομικό έργο με τίτλο :</p>
-                            <p className=" mb-6 mt-2 font-bold uppercase">"{projectDescription || "N/A"}"</p>
+                            <p className=" mb-6 mt-2 font-bold uppercase">"{projectDescriptions || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
@@ -319,7 +319,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">ΠΡΟΣ *:</label>
                                             <input
                                                 type="text"
-                                                {...register("ydom", { required: "This field is required" })}
+                                                {...register("ydom")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData?.ydom || ""}
                                             />
@@ -330,7 +330,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Όνομα *:</label>
                                             <input
                                                 type="text"
-                                                {...register("firstName", { required: "This field is required" })}
+                                                {...register("firstName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.firstName || ""}
                                             />
@@ -341,7 +341,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Επώνυμο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("lastName", { required: "This field is required" })}
+                                                {...register("lastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.lastName || ""}
                                             />
@@ -352,7 +352,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Όνομα Πατρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("fatherName", { required: "This field is required" })}
+                                                {...register("fatherName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.fatherName || ""}
                                             />
@@ -363,7 +363,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Όνομα Μητρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("motherName", { required: "This field is required" })}
+                                                {...register("motherName")}
                                                 className="flex-1 border motherName-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.motherName || ""}
                                             />
@@ -374,7 +374,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Ημερομηνία Γέννησης *:</label>
                                             <input
                                                 type="date"
-                                                {...register("bornDate", { required: "This field is required" })}
+                                                {...register("bornDate")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.bornDate || ""}
                                             />
@@ -385,7 +385,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Τόπος Γέννησης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("bornTown", { required: "This field is required" })}
+                                                {...register("bornTown")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.bornTown || ""}
                                             />
@@ -396,7 +396,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Αριθμός Ταυτότητας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("idCardNumber", { required: "This field is required" })}
+                                                {...register("idCardNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.idCardNumber || ""}
                                             />
@@ -407,7 +407,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Τηλέφωνο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("phone", { required: "This field is required" })}
+                                                {...register("phone")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.phone || ""}
                                             />
@@ -418,7 +418,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Πόλη *:</label>
                                             <input
                                                 type="text"
-                                                {...register("town", { required: "This field is required" })}
+                                                {...register("town")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.town || ""}
                                             />
@@ -429,7 +429,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Διεύθυνση *:</label>
                                             <input
                                                 type="text"
-                                                {...register("streetAddress", { required: "This field is required" })}
+                                                {...register("streetAddress")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.streetAddress || ""}
                                             />
@@ -440,7 +440,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Αριθμός Διεύθυνσης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("streetNumber", { required: "This field is required" })}
+                                                {...register("streetNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.streetNumber || ""}
                                             />
@@ -451,7 +451,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Ταχυδρομικός Κώδικας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("postalCode", { required: "This field is required" })}
+                                                {...register("postalCode")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.postalCode || ""}
                                             />
@@ -462,7 +462,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Email *:</label>
                                             <input
                                                 type="email"
-                                                {...register("email", { required: "This field is required" })}
+                                                {...register("email")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.email || ""}
                                             />
@@ -473,7 +473,7 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Α.Φ.Μ. *:</label>
                                             <input
                                                 type="text"
-                                                {...register("engVatNumber", { required: "This field is required" })}
+                                                {...register("engVatNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.engineers[selectedOwnerIndex]?.engVatNumber || ""}
                                             />
@@ -484,9 +484,9 @@ export default function F10D11({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Περιγραφή Έργου *:</label>
                                             <input
                                                 type="text"
-                                                {...register("projectDescription", { required: "This field is required" })}
+                                                {...register("projectDescriptions")}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.projectDescription || ""}
+                                                defaultValue={allData.projectDescriptions || ""}
                                             />
                                         </div>
 

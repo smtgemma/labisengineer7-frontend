@@ -9,7 +9,7 @@ import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplate
 
 
 interface FormData {
-    projectDescription: string
+    projectDescriptions: string
     propertyAddress: string
     propertyPostalCode: string
     propertyPlace: string
@@ -22,7 +22,7 @@ interface allDataProps {
     owners: any[];
     allDescriptionTasks: any[]
     propertyPostalCode: string
-    projectDescription: string
+    projectDescriptions: string
     propertyPlace: string
     propertyAddress: string
     id: string
@@ -37,7 +37,7 @@ function F10D14({ allData }: { allData: allDataProps }) {
 
     const owner = allData?.owners?.[0] || {};
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { projectDescription, propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt, propertyNumber, municipalityCommunity } = allData || {};
+    const { projectDescriptions, propertyAddress, propertyPlace, propertyPostalCode, id, createdById, serviceId, createdAt, propertyNumber, municipalityCommunity } = allData || {};
 
 
     // for editing data 
@@ -92,7 +92,7 @@ function F10D14({ allData }: { allData: allDataProps }) {
                             {/* Project Row */}
                             <div className="flex items-center gap-4">
                                 <span className="font-medium">Έργο:</span>
-                                <h3 className="flex-1 text-black text-sm text-center">{projectDescription || "N/A"}</h3>
+                                <h3 className="flex-1 text-black text-sm text-center">{projectDescriptions || "N/A"}</h3>
                             </div>
 
                             {/* Address Row */}
@@ -189,9 +189,9 @@ function F10D14({ allData }: { allData: allDataProps }) {
                                             <div className="flex items-center gap-4">
                                                 <label className="font-medium w-1/8">Έργο *:</label>
                                                 <input
-                                                    defaultValue={projectDescription || "Project Description "}
+                                                    defaultValue={projectDescriptions || "Project Description "}
                                                     type="text"
-                                                    {...register("projectDescription", { required: "projectDescription is required" })}
+                                                    {...register("projectDescriptions")}
                                                     className="flex-1 border p-2 rounded text-sm"
                                                 />
                                             </div>
@@ -203,31 +203,31 @@ function F10D14({ allData }: { allData: allDataProps }) {
                                                     <input
                                                         type="text"
                                                         defaultValue={propertyAddress || "propertyAddress"}
-                                                        {...register("propertyAddress", { required: "propertyAddress is required" })}
+                                                        {...register("propertyAddress")}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
                                                         defaultValue={propertyNumber || "propertyNumber"}
-                                                        {...register("propertyNumber", { required: "propertyNumber is required" })}
+                                                        {...register("propertyNumber")}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
                                                         defaultValue={municipalityCommunity || "municipalityCommunity"}
-                                                        {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
+                                                        {...register("municipalityCommunity")}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
                                                         defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                                        {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
+                                                        {...register("propertyPostalCode")}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                     <input
                                                         type="text"
                                                         defaultValue={propertyPlace || "propertyPlace"}
-                                                        {...register("propertyPlace", { required: "propertyPlace is required" })}
+                                                        {...register("propertyPlace")}
                                                         className="border p-2 rounded text-sm"
                                                     />
                                                 </div>
