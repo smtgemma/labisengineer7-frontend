@@ -147,10 +147,13 @@ const FinalOverview: React.FC<FinalOverviewProps> = ({
   const allTemplate = stepByStepData.selectTemplate;
   const projectCodeId = stepByStepData.projectIdCode;
   const id = stepByStepData?.projectIdCode;
-  const projectId = stepByStepData?.projectIdCode?.result.id;
+  // const projectId = stepByStepData?.projectIdCode?.result.id;
+  const projectId = stepByStepData?.id;
   const userId = dataAllFIled?.createdById;
 
-  console.log(stepByStepData?.projectIdCode?.id);
+  console.log(projectId, "====================== projectId")
+
+  console.log(stepByStepData?.id, "========================proje");
 
   const { data: allTemplateData } = useGetOwnerTemplateQuery(projectId || "");
   const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
