@@ -9,7 +9,7 @@ import { useState } from "react"
 import { FaRegEdit } from "react-icons/fa"
 
 interface FormData {
-    projectDescription: string
+    projectDescriptions: string
     propertyPlace: string
     propertyPostalCode: string
     municipalityCommunity: string
@@ -21,7 +21,7 @@ interface FormData {
 interface allDataProps {
     owners: any[]
     engineers: any[]
-    projectDescription: string
+    projectDescriptions: string
     propertyPostalCode: string
     propertyPlace: string
     propertyAddress: string
@@ -65,7 +65,7 @@ type violationsProps = {
 export default function S2D2({ allData, question, violations, setIsModalOpen }: { allData: allDataProps, question: questionProps[], violations: violationsProps[], setIsModalOpen: (value: boolean) => void; }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    const { projectDescription, horizontalPropertyName, propertyPostalCode, municipalityCommunity,
+    const { projectDescriptions, horizontalPropertyName, propertyPostalCode, municipalityCommunity,
         propertyNumber, propertyAddress, propertyPlace, issuingAuthority, kaekProperty, permitNumber,
         createdAt, serviceId, id, createdById, lastName, firstName, specialty, technicalDescriptionThree, technicalDescriptionFour, technicalDescriptionFive, licenseNumberRevision, } = allData || {}
     const owner = allData?.owners || []
@@ -130,7 +130,7 @@ export default function S2D2({ allData, question, violations, setIsModalOpen }: 
                 (σύμφωνα με το άρθρο 99 του ν.4495/2017)
             </p>
 
-            <div className="text-center space-y-4">
+            {/* <div className="text-center space-y-4">
                 <div className="flex items-center justify-center gap-12">
                     <h4 className="text-sm">Έργο</h4>
                     <p className="text-sm uppercase">{projectDescription || "N/A"}</p>
@@ -157,7 +157,47 @@ export default function S2D2({ allData, question, violations, setIsModalOpen }: 
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
+            < div className="mb-8 space-y-4" >
+                {/* Project Name */}
+                < div className="flex items-center justify-between" >
+                    <span className="min-w-[120px] text-sm font-medium">Έργο:</span>
+                    <h3 className="flex-1 text-sm text-center uppercase">
+                        {projectDescriptions || "N/A"}
+                    </h3>
+                </ div>
+
+                {/* Property Address */}
+                < div className="flex items-center justify-between" >
+                    <span className="min-w-[120px] text-sm font-medium">Θέση:</span>
+                    <h3 className="flex-1 text-sm text-center">
+                        {propertyAddress || "N/A"} {propertyNumber || "N/A"},{" "}
+                        {propertyPlace || "N/A"}, ΔΗΜΟΣ {municipalityCommunity || "N/A"}, ΤΚ{" "}
+                        {propertyPostalCode || "N/A"}
+                    </h3>
+                </ div>
+
+                {/* Owner Section */}
+                < div className="flex items-start justify-between" >
+                    <span className="min-w-[120px] text-sm font-medium">Ιδιοκτήτης:</span>
+                    <div className="flex-1 text-center">
+                        {owner?.length > 0 ? (
+                            <h3 className="text-sm">
+                                {owner
+                                    .map(
+                                        (e: any) =>
+                                            `${e.firstName || e.first_name || "N/A"} ${e.lastName || e.last_name || "N/A"
+                                            }`
+                                    )
+                                    .join(", ")}
+                            </h3>
+                        ) : (
+                            <h3 className="text-sm">N/A</h3>
+                        )}
+                    </div>
+                </ div>
+
+            </div >
             <div className="mb-2 mt-6">
                 <p
                     className="text-sm"
@@ -183,7 +223,7 @@ export default function S2D2({ allData, question, violations, setIsModalOpen }: 
                 </p>
                 <p className="mt-4">
                     <span className="ml-[28px]">Σύμφωνα με την σημερινή μας αυτοψία και συγκρίνοντας τα εγκεκριμένα Πολεοδομικά σχέδια της υπ΄αριθμόν</span>
-                    {permitNumber || "N/A"} οικοδομικής αδείας και "{licenseNumberRevision || "N/A"}": αναθεώρησης αυτής,
+                    <span className="mx-1">{permitNumber || "N/A"}</span> οικοδομικής αδείας και "{licenseNumberRevision || "N/A"}": αναθεώρησης αυτής,
                     διαπιστώθηκαν οι παρακάτω πολεοδομικές παραβάσεις που τακτοποιούνται με την παρούσα δήλωση :
                 </p>
                 <div className="mt-5">
@@ -303,7 +343,7 @@ export default function S2D2({ allData, question, violations, setIsModalOpen }: 
                 </div>
                 {/* signature  */}
                 <div className="flex items-center justify-end p-4">
-                    <img src={signature} alt="" />
+                    <img src={signature} alt="Engineer's Signature" className="w-[150px] h-[150px]" />
                 </div>
             </div>
             {/* EDIT MODAL */}
@@ -328,9 +368,9 @@ export default function S2D2({ allData, question, violations, setIsModalOpen }: 
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/8">Έργο *:</label>
                                     <input
-                                        defaultValue={projectDescription || "Project Description "}
+                                        defaultValue={projectDescriptions || "Project Description "}
                                         type="text"
-                                        {...register("projectDescription", { required: "projectDescription is required" })}
+                                        {...register("projectDescriptions")}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
@@ -342,31 +382,31 @@ export default function S2D2({ allData, question, violations, setIsModalOpen }: 
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyAddress", { required: "propertyAddress is required" })}
+                                            {...register("propertyAddress")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyNumber || "propertyNumber"}
-                                            {...register("propertyNumber", { required: "propertyNumber is required" })}
+                                            {...register("propertyNumber")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={municipalityCommunity || "municipalityCommunity"}
-                                            {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
+                                            {...register("municipalityCommunity")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                            {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
+                                            {...register("propertyPostalCode")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPlace || "propertyPlace"}
-                                            {...register("propertyPlace", { required: "propertyPlace is required" })}
+                                            {...register("propertyPlace")}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>

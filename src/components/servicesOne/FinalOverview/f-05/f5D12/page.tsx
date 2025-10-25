@@ -168,7 +168,7 @@ export default function F5D12({ allData, ownerIndex }: { allData: allDataProps, 
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mothersFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.motherFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
                             </div>
                         </div>
 

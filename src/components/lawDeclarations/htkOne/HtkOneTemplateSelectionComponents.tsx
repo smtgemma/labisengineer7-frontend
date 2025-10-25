@@ -46,7 +46,7 @@ const HtkOneTemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
             // { id: "htkOne_register_horizontal_property", title: "Register Horizontal Property Autofill 1 Credit", price: 0.5 },
             { id: "autofill", title: "Register Plot Autofill 1 Credit ", price: 0.5 },
             { id: "autofill2", title: "Register Horizontal Property Autofill 1 Credit", price: 0.5 },
-            // { id: "doc_technical_description", title: "Technical Description", price: 0.5 },
+            { id: "doc_technical_description", title: "Technical Description", price: 0.5 },
         ];
 
         stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {

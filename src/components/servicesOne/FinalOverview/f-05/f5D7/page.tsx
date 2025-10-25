@@ -122,11 +122,13 @@ export default function F5D7({ allData, setIsModalOpen }: F6D5Props) {
 
                 <div className="flex items-start">
                     <span className="min-w-[120px] text-sm">Θέση:</span>
-                    <h3 className=" text-sm text-center">
+                    <div className="flex-1">
+                        <h3 className=" text-sm text-center">
                         {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
                         ΔΗΜΟΣ {municipalityCommunity || "N/A"},
                         ΤΚ {propertyPostalCode || "N/A"}
                     </h3>
+                    </div>
                 </div>
 
                 <div className="flex">

@@ -13,7 +13,7 @@ interface FormInputs {
     firstName?: string;
     lastName?: string;
     fatherFirstLastName?: string;
-    mothersFirstLastName?: string;
+    motherFirstLastName?: string;
     dateOfBirth?: string;
     placeOfBirth?: string;
     idNumber?: string;
@@ -24,7 +24,7 @@ interface FormInputs {
     postalCode?: string;
     email?: string;
     taxIdentificationNumber?: string;
-    projectDescription?: string;
+    projectDescriptions?: string;
     ydom?: string;
     serviceId?: string;
 }
@@ -33,7 +33,7 @@ interface FormInputs {
 interface allDataProps {
     owners: any[];
     engineers: any[];
-    projectDescription: string;
+    projectDescriptions: string;
     ydom: string;
     horizontalPropertyName: string;
     id: string;
@@ -49,7 +49,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
 
     const engineers = allData?.engineers || {};
     const owner = allData?.owners[ownerIndex]
-    const { id, createdById, serviceId, horizontalPropertyName, projectDescription, ydom, specialty, createdAt } = allData || {};
+    const { id, createdById, serviceId, horizontalPropertyName, projectDescriptions, ydom, specialty, createdAt } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
     const { data: userData } = useGetMeQuery()
@@ -78,7 +78,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
         const formData = new FormData();
         formData.append("data", JSON.stringify({
             owners: updatedOwners,
-            projectDescription: data.projectDescription || allData.projectDescription,
+            projectDescriptions: data.projectDescriptions || allData.projectDescriptions,
             ydom: data.ydom || allData.ydom,
             serviceId: serviceId
         }));
@@ -163,7 +163,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mothersFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.motherFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
                             </div>
                         </div>
 
@@ -245,11 +245,11 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             </p>
                             <p className="mb-4">
-                                ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού([{owner?.ownerAddress || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postal_code || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
+                                ως κύριος/ιδιοκτήτης του ακινήτου Description for building/ {horizontalPropertyName || "N/A"} που βρίσκεται επί της οδού([{owner?.ownerAddress || "N/A"}, {owner?.phone || "N/A"}, {owner?.city || "N/A"}, {owner?.postalCode || "N/A"}], αναθέτω στον/στην Διπλωματούχο Μηχανικό ( {engineers[0]?.lastName || "N/A"} ,  {engineers[0]?.firstName || "N/A"}, {engineers[0]?.specialty || "N/A"}, {engineers[0]?.teeNumber || "N/A"}
                             </p>
 
                             <p className="mb-4 font-bold">για το έργο με τίτλο :</p>
-                            <p className=" mb-6 font-bold">"{projectDescription || "N/A"}"</p>
+                            <p className=" mb-6 font-bold">"{projectDescriptions || "N/A"}"</p>
                         </div>
 
                         {/* Additional disclaimer text */}
@@ -277,9 +277,9 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                             </div>
                         </div>
                         {/* common component  */}
-                        <div className="flex items-center justify-end mt-6 p-4">
-                            <img src={signature} alt="" />
-                        </div>
+                        {/* <div className="flex items-center justify-end mt-6 p-4">
+                            <img src={signature} alt="" className="w-[150px] h-[150px]" />
+                        </div> */}
                         <div className="text-xs p-6">
                             <p> (1) Αναγράφεται από τον ενδιαφερόμενο πολίτη ή Αρχή ή η Υπηρεσία του δημόσιου τομέα, που απευθύνεται η αίτηση.</p>
                             <p>(2) Αναγράφεται ολογράφως.</p>
@@ -310,7 +310,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">ΠΡΟΣ *:</label>
                                             <input
                                                 type="text"
-                                                {...register("ydom", { required: "This field is required" })}
+                                                {...register("ydom")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData?.ydom || ""}
                                             />
@@ -320,7 +320,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Όνομα *:</label>
                                             <input
                                                 type="text"
-                                                {...register("firstName", { required: "This field is required" })}
+                                                {...register("firstName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.firstName || ""}
                                             />
@@ -331,7 +331,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Επώνυμο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("lastName", { required: "This field is required" })}
+                                                {...register("lastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.lastName || ""}
                                             />
@@ -342,7 +342,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Όνομα Πατρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("fatherFirstLastName", { required: "This field is required" })}
+                                                {...register("fatherFirstLastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.fatherFirstLastName || ""}
                                             />
@@ -353,9 +353,9 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Όνομα Μητρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("mothersFirstLastName", { required: "This field is required" })}
+                                                {...register("motherFirstLastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.owners[ownerIndex]?.mothersFirstLastName || ""}
+                                                defaultValue={allData.owners[ownerIndex]?.motherFirstLastName || ""}
                                             />
                                         </div>
 
@@ -364,7 +364,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Ημερομηνία Γέννησης *:</label>
                                             <input
                                                 type="date"
-                                                {...register("dateOfBirth", { required: "This field is required" })}
+                                                {...register("dateOfBirth")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.dateOfBirth || ""}
                                             />
@@ -375,7 +375,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Τόπος Γέννησης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("placeOfBirth", { required: "This field is required" })}
+                                                {...register("placeOfBirth")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.placeOfBirth || ""}
                                             />
@@ -386,7 +386,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Αριθμός Ταυτότητας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("idNumber", { required: "This field is required" })}
+                                                {...register("idNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.idNumber || ""}
                                             />
@@ -397,7 +397,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Τηλέφωνο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("phone", { required: "This field is required" })}
+                                                {...register("phone")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.phone || ""}
                                             />
@@ -408,7 +408,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Πόλη *:</label>
                                             <input
                                                 type="text"
-                                                {...register("city", { required: "This field is required" })}
+                                                {...register("city")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.city || ""}
                                             />
@@ -419,7 +419,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Διεύθυνση *:</label>
                                             <input
                                                 type="text"
-                                                {...register("ownerAddress", { required: "This field is required" })}
+                                                {...register("ownerAddress")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.ownerAddress || ""}
                                             />
@@ -430,7 +430,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Αριθμός Διεύθυνσης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("addressNumber", { required: "This field is required" })}
+                                                {...register("addressNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.addressNumber || ""}
                                             />
@@ -441,7 +441,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Ταχυδρομικός Κώδικας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("postalCode", { required: "This field is required" })}
+                                                {...register("postalCode")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.postalCode || ""}
                                             />
@@ -452,7 +452,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Email *:</label>
                                             <input
                                                 type="email"
-                                                {...register("email", { required: "This field is required" })}
+                                                {...register("email")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.email || ""}
                                             />
@@ -463,7 +463,7 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Α.Φ.Μ. *:</label>
                                             <input
                                                 type="text"
-                                                {...register("taxIdentificationNumber", { required: "This field is required" })}
+                                                {...register("taxIdentificationNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.taxIdentificationNumber || ""}
                                             />
@@ -474,9 +474,9 @@ export default function F7D7({ allData, ownerIndex }: { allData: allDataProps, o
                                             <label className="font-medium">Περιγραφή Έργου *:</label>
                                             <input
                                                 type="text"
-                                                {...register("projectDescription", { required: "This field is required" })}
+                                                {...register("projectDescriptions")}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.projectDescription || ""}
+                                                defaultValue={allData.projectDescriptions || ""}
                                             />
                                         </div>
 

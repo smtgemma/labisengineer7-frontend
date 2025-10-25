@@ -74,7 +74,7 @@ const AIExtractionDataInPut = ({
   const accessToken = tokenCatch();
 
   const onSubmitAiDataSend = async () => {
-    if (ot && prop) {
+    // if (ot && prop) {
       const DataPost = {
         serviceId: projectData?.id,
         // createdById: user?.userId,
@@ -207,8 +207,8 @@ const AIExtractionDataInPut = ({
           dateIssueCompletionDeclaration3843: allExtreactData?.date_issue_completion_declaration_3843 ?? "",
           tokenUsage: allExtreactData?.token_usage ?? "",
           declarationOwnerFor4495: allExtreactData?.declaration_owner_for_4495_2017 ?? "",
-          otNumber: ot || "",
-          prop: Number(prop) || null,
+          // otNumber: ot || "",
+          // prop: Number(prop) || null,
         })
       );
 
@@ -222,7 +222,7 @@ const AIExtractionDataInPut = ({
         toast.error(error.data.message);
         console.log(error);
       }
-    }
+    // }
   };
 
   useEffect(() => {
@@ -231,7 +231,7 @@ const AIExtractionDataInPut = ({
       // create-project
       onSubmitAiDataSend()
     }
-  }, [currentStep, prop, ot]);
+  }, [currentStep]);
 
   return (
     <>

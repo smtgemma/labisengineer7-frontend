@@ -67,8 +67,8 @@ const FinalSteps: React.FC<FinalOverviewProps> = ({
     const allTemplate = stepByStepData.selectTemplate;
     const projectCodeId = stepByStepData.projectIdCode;
     const id = stepByStepData?.projectIdCode;
-    // const projectId = stepByStepData?.projectIdCode?.result.id;
-    const projectId = stepByStepData?.projectId?.id;
+    const projectId = stepByStepData?.projectIdCode?.result.id;
+    // const projectId = stepByStepData?.projectId?.id;
     console.log(dataAllFIled, "alldata from ai===============")
     const userId = dataAllFIled?.createdById;
 

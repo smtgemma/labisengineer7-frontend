@@ -16,7 +16,7 @@ type F6D13Props = {
 interface FormData {
     firstName: string
     lastName: string
-    projectDescription: string
+    projectDescriptions: string
     propertyAddress: string
     propertyPostalCode: string
     municipalityCommunity: string
@@ -43,7 +43,7 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
     const owner = allData?.owners || []
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, specialty, propertyPlace, projectDescription,
+    const { id, createdById, serviceId, specialty, propertyPlace, projectDescriptions,
         propertyAddress,
         propertyNumber,
         municipalityCommunity,
@@ -117,17 +117,19 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
                 <div className="flex items-start">
                     <span className=" min-w-[20px] text-sm">Έργο:</span>
                     <div className="flex-1">
-                        <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
+                        <h3 className=" text-sm text-center">{projectDescriptions || "N/A"}</h3>
                     </div>
                 </div>
 
                 <div className="flex items-start">
                     <span className=" text-sm w-[120px]">Θέση:</span>
-                    <h3 className=" text-sm text-center">
+                    <div className="flex-1">
+                        <h3 className=" text-sm text-center">
                         {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
                         ΔΗΜΟΣ {municipalityCommunity || "N/A"},
                         ΤΚ {propertyPostalCode || "N/A"}
                     </h3>
+                    </div>
                 </div>
 
                 <div className="flex">
@@ -147,7 +149,7 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
             </div>
             <div className="space-y-6 ml-10">
                 <div>
-                    <h3 className="text-xm font-bold mb-2">1. Εισαγωγή – Περιγραφή Έργου</h3>
+                    <h3 className="text-[15px] font-bold mb-2">1. Εισαγωγή – Περιγραφή Έργου</h3>
                     <p className="text-sm mb-5">Η παρούσα Τεχνική Έκθεση συντάσσεται στο πλαίσιο της διαδικασίας έκδοσης Έγκρισης Εργασιών Δόμησης Μικρής Κλίμακας, σύμφωνα με τις διατάξεις του άρθρου 29 του Ν.4495/2017, καθώς και των σχετικών Υπουργικών Αποφάσεων, όπως η ΥΑ ΥΠΕΝ/ΔΑΟΚΑ/69701/4461/2018 και η ΥΥΠΕΝ/ΔΑΟΚΑ/43266/1174/13.5.2020
                         (ΦΕΚ 1843/Β/2020).
                     </p>
@@ -156,13 +158,13 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-xm font-bold mb-2">2. Στοιχεία Ακινήτου</h3>
+                    <h3 className="text-[15px] font-bold mb-2">2. Στοιχεία Ακινήτου</h3>
                     <p className="text-sm mb-5">
                         {technicalDescription || "N/A"}
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-xm font-bold mb-2">3. Εισαγωγή – Περιγραφή Έργου</h3>
+                    <h3 className="text-[15px] font-bold mb-2">3. Εισαγωγή – Περιγραφή Έργου</h3>
                     <p className="text-sm mb-2">Οι εργασίες που θα πραγματοποιηθούν είναι οι εξής:</p>
 
                     {Array.isArray(allDescriptionTasks) &&
@@ -177,17 +179,17 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
                     <p className="text-sm my-6">Οι εργασίες θα υλοποιηθούν σύμφωνα με τους ισχύοντες κανονισμούς και δεν επηρεάζουν τον φέροντα οργανισμό, τα δομικά στοιχεία ή την ενεργή χρήση του ακινήτου.</p>
                 </div>
                 <div>
-                    <h3 className="text-xm font-bold mb-2">4. Νομιμότητα / Πολεοδομική Υπόσταση</h3>
+                    <h3 className="text-[15px] font-bold mb-2">4. Νομιμότητα / Πολεοδομική Υπόσταση</h3>
                     <p className="text-sm">{technicalDescriptionTwo || "N/A"}</p>
                 </div>
                 <div>
-                    <h3 className="text-xm font-bold mb-2">5. Οικονομικά Στοιχεία – Προϋπολογισμός Έργου</h3>
+                    <h3 className="text-[15px] font-bold mb-2">5. Οικονομικά Στοιχεία – Προϋπολογισμός Έργου</h3>
                     <p className="text-sm mb-5">Ο συνολικός προϋπολογισμός των προβλεπόμενων <span className="text-sm font-bold">εργασιών είναι μικρότερος του ποσού των είκοσι πέντε χιλιάδων ευρώ (25.000 €),</span>
                         και δεν απαιτείται τεκμηρίωση υπέρβασης βάσει της παραγράφου 2 του άρθρου 29 του Ν.4495/2017.
                     </p>
                 </div>
                 <div>
-                    <h3 className="text-xm font-bold mb-2">6. Συμπεράσματα – Συνοπτική Εκτίμηση</h3>
+                    <h3 className="text-[15px] font-bold mb-2">6. Συμπεράσματα – Συνοπτική Εκτίμηση</h3>
                     <p className="text-sm mb-5">Η παρούσα έκθεση συνοδεύει φάκελο έκδοσης Έγκρισης Εργασιών Δόμησης Μικρής Κλίμακας για εσωτερικές, ήπιες επεμβάσεις, χωρίς στατικές, φέρουσες ή μορφολογικές επιπτώσεις. Το έργο είναι απολύτως συμβατό με το ισχύον νομικό και
                         τεχνικό πλαίσιο, τεκμηριώνεται πλήρως και η υλοποίησή του εξυπηρετεί σκοπούς συντήρησης, λειτουργικότητας και ενεργειακής αναβάθμισης..
                     </p>
@@ -210,13 +212,12 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
                             </p>
                             {/* <p>Name/ surname Engineer</p> */}
                             <p>{engineers?.firstName} {engineers?.lasttName}</p>
-                            <p>{specialty || "N/A"}</p>
                         </div>
                     </div>
                 </div>
                 {/* Signature */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
-                    <img src={signature} alt="" />
+                    <img src={signature} alt="" className="w-[150px] h-[150px]" />
                 </div>
             </div>
             {/* EDIT MODAL */}
@@ -241,9 +242,9 @@ export default function F14D12({ allData, setIsModalOpen }: F6D13Props) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/8">Έργο *:</label>
                                     <input
-                                        defaultValue={projectDescription || "Project Description "}
+                                        defaultValue={projectDescriptions || "Project Description "}
                                         type="text"
-                                        {...register("projectDescription", { required: "projectDescription is required" })}
+                                        {...register("projectDescriptions", { required: "projectDescriptions is required" })}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>

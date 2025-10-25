@@ -25,7 +25,7 @@ interface FormInputs {
     streetAddress?: string;
     streetNumber?: string;
     town?: string;
-    projectDescription?: string;
+    projectDescriptions?: string;
     ydom?: string;
     serviceId?: string;
 }
@@ -33,7 +33,7 @@ interface FormInputs {
 
 interface allDataProps {
     engineers: any[];
-    projectDescription?: string;
+    projectDescriptions?: string;
     ydom?: string;
     propertyPostalCode?: string;
     propertyAddress?: string;
@@ -54,7 +54,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
     const [selectedOwnerIndex, setSelectedOwnerIndex] = useState<number | null>(null);
 
     const engineers = Array.isArray(allData?.engineers) ? allData.engineers : [];
-    const projectDescription = allData?.projectDescription || "";
+    const projectDescriptions = allData?.projectDescriptions || "";
     const { ydom } = allData || {};
     const { id, createdById, serviceId, createdAt, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber, horizontalPropertyName } = allData || {};
 
@@ -85,7 +85,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
         const formData = new FormData();
         formData.append("data", JSON.stringify({
             engineers: updatedOwners,
-            projectDescription: data.projectDescription || allData.projectDescription,
+            projectDescription: data.projectDescriptions || allData.projectDescriptions,
             ydom: data.ydom || allData.ydom,
             serviceId: serviceId
         }));
@@ -250,7 +250,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                             </p>
                             <p className="mt-4 mb-2">ότι εφαρμόζοντας τις ισχύουσες γενικές και ειδικές πολεοδομικές διατάξεις <span className="text-sm font-bold">αναλαμβάνω</span> για το έργο:</p>
 
-                            <p className=" mb-3 font-bold">"{projectDescription || "N/A"}"</p>
+                            <p className=" mb-3 font-bold">"{projectDescriptions || "N/A"}"</p>
                             <p className="mb-4">
                                 επί της οδού <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"}, {municipalityCommunity || "N/A"} TK {propertyPostalCode || "N/A"}</span>
                             </p>
@@ -281,7 +281,7 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                         </div>
 
                         <div className="flex items-center justify-end p-4">
-                            <img src={signature} alt="" />
+                            <img src={signature} alt="" className="w-[150px] h-[150px]" />
                         </div>
 
                         <div className="text-xs p-6">
@@ -479,9 +479,9 @@ export default function F6D9({ allData }: { allData: allDataProps }) {
                                             <label className="font-medium">Περιγραφή Έργου *:</label>
                                             <input
                                                 type="text"
-                                                {...register("projectDescription", { required: "This field is required" })}
+                                                {...register("projectDescriptions", { required: "This field is required" })}
                                                 className="flex-1 border p-2 rounded text-sm"
-                                                defaultValue={allData.projectDescription || ""}
+                                                defaultValue={allData.projectDescriptions || ""}
                                             />
                                         </div>
 

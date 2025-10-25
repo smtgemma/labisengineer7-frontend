@@ -362,6 +362,7 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
     const hasSubcategory10 = allSubmergedArray.includes("ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΑΙΜΑΚΑΣ_ΝΕΑ_ΑΝΟΙΞΜΑΤΑ_ΕΠΙ_ΤΩΝ_ΟΙΚΕΩΝ_10")
     const hasSubcategory14 = allSubmergedArray.includes("ΑΔΕΙΑ_ΜΙΚΡΗΣ_ΚΛΙΜΑΚΑΣ_ΣΥΝΤΗΡΗΣΗ_ΚΑΙ_ΕΠΙΣΚΕΥΗ_ΣΤΕΓΩΝ_ΜΕ_ΧΡΗΣΗ_ΙΚΡΙΩΜΑ_14")
 
+
     // this subcategory 6
     if (hasSubcategory6) {
       stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
@@ -387,200 +388,6 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
         { id: "613", title: "Ενημερωτικό Σημείωμα μη απαίτησης Συμβολαιογραφικής Πράξης", price: 0.5 },
         { id: "614", title: "Ενημερωτικό Σημείωμα μη απαίτησης Συναίνεσης Συνιδιοκτητών", price: 0.5 },
         { id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 1 },
-      )
-    }
-
-    // this subcategory 10 i have to fix this 7 and 8 number
-    if (hasSubcategory10) {
-      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
-        baseTemplatesOwner1.push({
-          id: `template105_${index}`,
-          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
-          price: 0.5,
-        });
-      });
-
-      baseTemplatesOwner1.push(
-        {
-          id: "101", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
-        },
-        {
-          id: "102", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
-        },
-        {
-          id: "103", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-        },
-        {
-          id: "104", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
-        },
-        // {
-        //   id: "105", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        // },
-        {
-          id: "106", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-        },
-        {
-          id: "107", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
-        },
-        {
-          id: "108", title: "YΔ Φέροντα Οργανισμού", price: 0.5,
-        },
-        {
-          id: "109", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
-        },
-        {
-          id: "1010", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-        },
-        { id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5 },
-      )
-    }
-
-    // this is subcategory 7
-    if (hasSubcategory7) {
-      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
-        baseTemplatesOwner1.push({
-          id: `owner7_${index}`,
-          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
-          price: 0.5,
-        });
-      });
-      baseTemplatesOwner1.push(
-        {
-          id: "71", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
-        },
-        {
-          id: "72", title: "Βεβαίωση-ΥΔ Μηχανικού Για Τήρηση Όψεων Και Πολεοδομικών Διατάξεων", price: 0.5,
-        },
-        {
-          id: "73", title: "Ενημερωτικό Σημείωμα Μη Απαίτησης Συναίνεσης Συνιδιοκτητών", price: 0.5,
-        },
-        {
-          id: "74", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
-        },
-        {
-          id: "75", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-        },
-        {
-          id: "76", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
-        },
-        // {
-        //   id: "77", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        // },
-        {
-          id: "78", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-        },
-        {
-          id: "79", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
-        },
-        {
-          id: "710", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
-        },
-        {
-          id: "711", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-        },
-        {
-          id: "712", title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων", price: 0.5,
-        },
-        {
-          id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
-        },
-      )
-    }
-
-    // this is subcategory 14 
-    if (hasSubcategory14) {
-      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
-        baseTemplatesOwner1.push({
-          id: `owner145_${index}`,
-          title: `ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
-          price: 0.5,
-        });
-        baseTemplatesOwner1.push({
-          id: `owner146_${index}`,
-          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
-          price: 0.5,
-        });
-      });
-      baseTemplatesOwner1.push(
-        {
-          id: "141", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
-        },
-        {
-          id: "142", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-        },
-        {
-          id: "143", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
-        },
-        {
-          id: "144", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
-        },
-        // {
-        //   id: "145", title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη", price: 0.5,
-        // },
-        // {
-        //   id: "146", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        // },
-        {
-          id: "147", title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού", price: 0.5,
-        },
-        {
-          id: "148", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-        },
-        {
-          id: "149", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
-        },
-        {
-          id: "1410", title: "YΔ Φέροντα Οργανισμού", price: 0.5,
-        },
-        {
-          id: "1411", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
-        },
-        {
-          id: "1412", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-        },
-        {
-          id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
-        },
-      )
-    }
-
-    // this is subcategory 2
-    if (hasSubcategory2) {
-      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
-        baseTemplatesOwner1.push({
-          id: `owner26_${index}`,
-          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
-          price: 0.5,
-        });
-      });
-      baseTemplatesOwner1.push(
-        {
-          id: "21", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
-        },
-        {
-          id: "22", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
-        },
-        {
-          id: "23", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
-        },
-        {
-          id: "24", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
-        },
-        {
-          id: "25", title: "Τεχνική Έκθεση_ Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020", price: 0.5,
-        },
-        // {
-        //   id: "26", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
-        // },
-        {
-          id: "27", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
-        },
-        {
-          id: "28", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
-        },
-        {
-          id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
-        },
       )
     }
 
@@ -641,12 +448,206 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
       )
     }
 
-    // this is subcategory 8 
-    if (hasSubcategory8) {
+    // this subcategory 10 i have to fix this 7 and 8 number
+    if (hasSubcategory10) {
+      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
+        baseTemplatesOwner1.push({
+          id: `template105_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
+          price: 0.5,
+        });
+      });
+
+      baseTemplatesOwner1.push(
+        {
+          id: "101", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
+        },
+        {
+          id: "102", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
+        },
+        {
+          id: "103", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
+        },
+        {
+          id: "104", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
+        },
+        // {
+        //   id: "105", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
+        {
+          id: "106", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
+        },
+        {
+          id: "107", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
+        },
+        {
+          id: "108", title: "YΔ Φέροντα Οργανισμού", price: 0.5,
+        },
+        {
+          id: "109", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
+        },
+        {
+          id: "1010", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
+        },
+        { id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5 },
+      )
+    }
+
+    // this is subcategory 14 
+    if (hasSubcategory14) {
       stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
         baseTemplatesOwner1.push({
-          id: `template83_${index}`,
+          id: `owner145_${index}`,
+          title: `ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          price: 0.5,
+        });
+        baseTemplatesOwner1.push({
+          id: `owner146_${index}`,
           title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          price: 0.5,
+        });
+      });
+      baseTemplatesOwner1.push(
+        {
+          id: "141", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
+        },
+        {
+          id: "142", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
+        },
+        {
+          id: "143", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
+        },
+        {
+          id: "144", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
+        },
+        // {
+        //   id: "145", title: "ΥΔ Ανάθεσης Επίβλεψης Ιδιοκτήτη", price: 0.5,
+        // },
+        // {
+        //   id: "146", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
+        {
+          id: "147", title: "ΥΔ Ανάληψης Επίβλεψης Έργου Μηχανικού", price: 0.5,
+        },
+        {
+          id: "148", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
+        },
+        {
+          id: "149", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
+        },
+        {
+          id: "1410", title: "YΔ Φέροντα Οργανισμού", price: 0.5,
+        },
+        {
+          id: "1411", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
+        },
+        {
+          id: "1412", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
+        },
+        {
+          id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
+        },
+      )
+    }
+
+    // this is subcategory 7
+    if (hasSubcategory7) {
+      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
+        baseTemplatesOwner1.push({
+          id: `owner7_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
+          price: 0.5,
+        });
+      });
+      baseTemplatesOwner1.push(
+        {
+          id: "71", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
+        },
+        {
+          id: "72", title: "Βεβαίωση-ΥΔ Μηχανικού Για Τήρηση Όψεων Και Πολεοδομικών Διατάξεων", price: 0.5,
+        },
+        {
+          id: "73", title: "Ενημερωτικό Σημείωμα Μη Απαίτησης Συναίνεσης Συνιδιοκτητών", price: 0.5,
+        },
+        {
+          id: "74", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
+        },
+        {
+          id: "75", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
+        },
+        {
+          id: "76", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
+        },
+        // {
+        //   id: "77", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
+        {
+          id: "78", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
+        },
+        {
+          id: "79", title: "ΥΔ μη ύπαρξης ΑΕΚΚ_ΣΔΑ Μηχανικού", price: 0.5,
+        },
+        {
+          id: "710", title: "Υπόδειγμα Συναίνεσης Συνιδιοκτητών", price: 0.5,
+        },
+        {
+          id: "711", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
+        },
+        {
+          id: "712", title: "Ενημερωτικό Σημείωμα Σχεδίων Όψεων", price: 0.5,
+        },
+        {
+          id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
+        },
+      )
+    }
+
+    // this is subcategory 2
+    if (hasSubcategory2) {
+      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
+        baseTemplatesOwner1.push({
+          id: `owner26_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.firstName}`,
+          price: 0.5,
+        });
+      });
+      baseTemplatesOwner1.push(
+        {
+          id: "21", title: "Αναλυτικός Προϋπολογισμός Εργασιών", price: 0.5,
+        },
+        {
+          id: "22", title: "Πίνακας 3 (ΙΚΑ)", price: 0.5,
+        },
+        {
+          id: "23", title: "ΣΑΥ – ΦΑΥ (Σχέδιο & Φάκελος Ασφάλειας & Υγείας)", price: 0.5,
+        },
+        {
+          id: "24", title: "ΣΔΑ (Σχέδιο Διαχείρισης Αποβλήτων)", price: 0.5,
+        },
+        {
+          id: "25", title: "Τεχνική Έκθεση_ Άρθρο 4, ΥΑ ΦΕΚ Β' 1843_2020", price: 0.5,
+        },
+        // {
+        //   id: "26", title: "ΥΔ Ανάθεσης Ιδιοκτήτη", price: 0.5,
+        // },
+        {
+          id: "27", title: "ΥΔ Ανάληψης Έργου Μηχανικού", price: 0.5,
+        },
+        {
+          id: "28", title: "Τεχνική Έκθεση / Βεβαίωση Μηχανικού", price: 0.5,
+        },
+        {
+          id: "autofill", title: "Autofill (προαιρετικό add-on)", price: 0.5,
+        },
+      )
+    }
+
+    // this is subcategory 8 
+    if (hasSubcategory8) {
+      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
+        baseTemplatesOwner1.push({
+          id: `template83_${index}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
           price: 0.5,
         })
       })
@@ -705,19 +706,19 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
 
   allTemplates = Object.values(
-  allTemplates.reduce((acc: Record<string, any>, curr) => {
-    // Check if any existing item already has the same id or title
-    const isDuplicate = Object.values(acc).some(
-      (item) => item.id === curr.id || item.title === curr.title
-    );
+    allTemplates.reduce((acc: Record<string, any>, curr) => {
+      // Check if any existing item already has the same id or title
+      const isDuplicate = Object.values(acc).some(
+        (item) => item.id === curr.id || item.title === curr.title
+      );
 
-    if (!isDuplicate) {
-      acc[curr.id] = curr; // use id as the key (could be anything unique)
-    }
+      if (!isDuplicate) {
+        acc[curr.id] = curr; // use id as the key (could be anything unique)
+      }
 
-    return acc;
-  }, {})
-);
+      return acc;
+    }, {})
+  );
 
 
   console.log(allTemplates, "allTemplates with not repeated id")

@@ -7,7 +7,7 @@ import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
+import { useGetMeQuery, useUpdateProjectMutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     firstName?: string;
@@ -58,6 +58,8 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
     const { id, createdById, serviceId, horizontalPropertyName, ydom, projectDescriptions, specialty, createdAt, propertyPostalCode, municipalityCommunity, propertyPlace, propertyNumber, propertyAddress, } = allData || {};
 
     const [updateProject] = useUpdateProjectMutation()
+        const { data: userData } = useGetMeQuery()
+        console.log(userData, "==================")
     // for editing data 
     const {
         register,
@@ -168,7 +170,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mothersFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.motherFirstLastName || owner?.mothers_first_last_name || "N/A"}</div>
                             </div>
                         </div>
 
@@ -254,7 +256,7 @@ export default function F6D8({ allData, ownerIndex }: { allData: allDataProps, o
                                 <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
                                 ΔΗΜΟΣ {municipalityCommunity || "N/A"}, ΤΚ {propertyPostalCode || "N/A"}{" "}</span>
                                 αναθέτω στον/στην Διπλωματούχο Μηχανικό
-                                ( {engineers[0]?.lastName || "N/A"}, {engineers[0]?.firstName || "N/A"}, {specialty || "N/A"} Engineer AM TEE)
+                                 <span className="ml-2">{engineers[0]?.lastName || "N/A"}, {engineers[0]?.firstName || "N/A"}, {engineers[0]?.specialty || "N/A"} με Α.Μ ΤΕΕ : ({engineers[0].teeNumber})</span>
                             </span>
 
                             <p className="mb-4 font-bold">για το έργο με τίτλο :</p>

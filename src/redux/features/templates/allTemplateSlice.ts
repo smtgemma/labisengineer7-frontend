@@ -62,6 +62,13 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
       }),
       providesTags: ["Templates"],
     }),
+    getProject3: build.query({
+      query: (prjectId) => ({
+        url: `/project-for-service3/${prjectId}`,
+        method: "GET",
+      }),
+      providesTags: ["Templates"],
+    }),
 
     getMe: build.query<any, void>({
       query: () => "/auth/me",
@@ -86,7 +93,7 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
     }),
     updateProject3: build.mutation({
       query: ({ projectId, userId, formData }) => ({
-        url: `project2/update-project/${projectId}/${userId}`,
+        url: `project-for-service3/${projectId}/${userId}`,
         method: "PATCH",
         body: formData,
       }),
@@ -114,6 +121,7 @@ const allTemplatesApi = baseUrlApi.injectEndpoints({
 export const {
   useGetOwnerTemplateQuery,
   useGetProject2Query,
+  useGetProject3Query,
   useUpdateProjectMutation,
   useUpdateProject2Mutation,
   useUpdateProject3Mutation,
