@@ -1,18 +1,17 @@
 "use client";
 
-import FileUpload from "@/components/CreateProject/FileUpload/FileUpload";
-import OwnerSelection from "@/components/CreateProject/OwnerSelection/OwnerSelection";
-import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
-import AIExtractionDataInPut from "@/components/CreateProject/aAIExtractionData/AIExtractionData";
+import WorkflowStepper from "@/components/servicesOne/WorkflowStepper/WorkflowStepper";
+import MainAIExtraction from "@/components2.0/shared/AiExtraction/AiExtraction";
+import FileUpload from "@/components2.0/shared/FileUpload/FileUpload";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import AIExtractionFour from "./Extraction";
-import FinalSteps from "./FinaleSteps";
-import TemplateSelectionComponents from "./TemplateSelection";
-import OwnerSelectionFour from "./OwnerSelection";
 import BuildingAIExtractionDataInPut from "./BuildingExtractedDataInput";
+import FinalSteps from "./FinaleSteps";
+import OwnerSelectionFour from "./OwnerSelection";
 import QuestionAnswers from "./QuestionAndAnswer";
 import RecordViolations from "./RecordViolations";
+import TemplateSelectionComponents from "./TemplateSelection";
+import { PayloadDescriptions } from "./data";
 
 const workflowSteps = [
     { id: 1, title: "Upload Documents" },
@@ -84,10 +83,11 @@ const MainBuildingPermit: React.FC = () => {
             case 2:
                 return (
                     //same
-                    <AIExtractionFour
+                    <MainAIExtraction
                         uploadedFiles={uploadedFiles}
                         currentStep={currentStep}
                         nextStep={nextStep}
+                        descriptionPayload={PayloadDescriptions}
                     />
                 );
             case 3:

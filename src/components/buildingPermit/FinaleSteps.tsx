@@ -17,10 +17,10 @@ import {
 
 import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "sonner";
-import S2D1 from "../CreateProject/FinalOverview/srv-2rt/s2D1/page";
-import S2D2 from "../CreateProject/FinalOverview/srv-2rt/s2D2/page";
-import S2D3 from "../CreateProject/FinalOverview/srv-2rt/s2D3/page";
-import S2D4 from "../CreateProject/FinalOverview/srv-2rt/s2D4/page";
+import S2D1 from "../servicesOne/FinalOverview/srv-2rt/s2D1/page";
+import S2D2 from "../servicesOne/FinalOverview/srv-2rt/s2D2/page";
+import S2D3 from "../servicesOne/FinalOverview/srv-2rt/s2D3/page";
+import S2D4 from "../servicesOne/FinalOverview/srv-2rt/s2D4/page";
 import PrimaryButton from "../shared/primaryButton/PrimaryButton";
 export interface UserData {
     id: string;

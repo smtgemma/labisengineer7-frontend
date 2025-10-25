@@ -1,6 +1,6 @@
 import { baseUrlApi } from "@/redux/api/baseUrlApi";
 
-const creditApi = baseUrlApi.injectEndpoints({
+const OtAndPropsApi = baseUrlApi.injectEndpoints({
     endpoints: (build) => ({
         getOtAndProp: build.query({
             query: (kaek) => ({
@@ -11,4 +11,4 @@ const creditApi = baseUrlApi.injectEndpoints({
     }),
 });
 
-export const { useGetOtAndPropQuery } = creditApi;
+export const { useGetOtAndPropQuery, useLazyGetOtAndPropQuery } = OtAndPropsApi;

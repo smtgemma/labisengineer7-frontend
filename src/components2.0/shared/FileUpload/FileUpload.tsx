@@ -1,11 +1,10 @@
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { setImageFile } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { RootState } from "@/redux/store";
 import { ChevronRight } from "lucide-react";
 import React, { useRef, useState } from "react";
 import { CiTrash } from "react-icons/ci";
 import { FcDocument, FcRules } from "react-icons/fc";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 interface FileUploadProps {
   onFilesChange: (files: File[]) => void;
@@ -13,15 +12,6 @@ interface FileUploadProps {
   currentStep: number
   nextStep: () => void
 }
-
-// type FormValues = {
-//   ktimatologio: FileList;
-//   contract: FileList;
-//   permit: FileList;
-//   law4495: FileList;
-//   project_descriptions: string;
-//   sub_categories: string;
-// };
 const FileUpload: React.FC<FileUploadProps> = ({
   onFilesChange,
   uploadedFiles,
@@ -31,10 +21,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
   const dispatch = useDispatch();
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  // const { register, handleSubmit, reset } = useForm<FormValues>();
-  // const [loading, setLoading] = useState(false);
-  const aiExtractData = useSelector((state: RootState) => state.aiData);
-  console.log(aiExtractData)
+  // const aiExtractData = useSelector((state: RootState) => state.aiData);
 
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -87,46 +74,9 @@ const FileUpload: React.FC<FileUploadProps> = ({
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
-  // const onSubmit = async (data: FormValues) => {
-  //   setLoading(true);
-  //   //Tahsin
-  //   //why static description
-  //   const description: string =
-  //     "ΕΣΩΤΕΡΙΚΕΣ ΔΙΑΡΡΥΘΜΙΣΕΙΣ ΧΩΡΙΣ ΝΑ ΘΙΓΟΝΤΑΙ ΤΑ ΔΟΜΙΚΑ ΣΤΟΙΧΕΙΑ ΤΟΥ ΦΕΡΟΝΤΟΣ ΟΡΓΑΝΙΣΜΟΥ ΟΡΓΑΝΙΣΜΟΥ  ΣΤΟ ΔΙΑΜΕΡΙΣΜΑ A-4 ΤΟΥ Α ΟΡΟΦΟΥ";
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("project_descriptions", JSON.stringify(description));
-  //     formData.append("ktimatologio", data.ktimatologio[0]);
-  //     formData.append("contract", data.contract[0]);
-  //     formData.append("permit", data.permit[0]);
-
-  //     if (data.law4495?.length) {
-  //       formData.append("law4495", data.law4495[0]);
-  //     }
-
-  //     const res = await fetch(
-  //       "http://172.252.13.69:8019/api/v1/process-documents-advanced",
-  //       {
-  //         method: "POST",
-  //         body: formData,
-  //       }
-  //     );
-
-  //     if (!res.ok) throw new Error("Upload failed");
-  //     alert("Upload successful!");
-  //     reset();
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert("Error uploading files");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   return (
     <div className="space-y-6 ">
       <div className="">
-        {/* ktimatologio*/}
         <div>
           <div
             className={`

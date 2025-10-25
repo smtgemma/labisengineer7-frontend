@@ -187,6 +187,8 @@ const HtkTwoAIExtractionDataInPut = ({ currentStep, nextStep, uploadedFiles }: {
                 issuingAuthority1337: allExtreactData?.issuing_authority_1337 ?? "",
                 notaryEstablishmentHorizontalOwnership: allExtreactData?.notary_establishment_horizontal_ownership ?? "",
                 projectDescriptionHtkPlot: allExtreactData?.project_description_htk_plot ?? "",
+                otNumber: allExtreactData?.ot || "",
+                prop: Number(allExtreactData?.prop) || null,
             })
         );
 

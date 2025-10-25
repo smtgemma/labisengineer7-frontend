@@ -1,6 +1,6 @@
-import FcsvD1 from '@/components/CreateProject/FinalOverview/f-csvGreenFile/fcsvD1'
-import FcsvD2 from '@/components/CreateProject/FinalOverview/f-csvGreenFile/fcsvD2'
-import FcsvD3 from '@/components/CreateProject/FinalOverview/f-csvGreenFile/fcsvD3'
+import FcsvD1 from '@/components/servicesOne/FinalOverview/f-csvGreenFile/fcsvD1'
+import FcsvD2 from '@/components/servicesOne/FinalOverview/f-csvGreenFile/fcsvD2'
+import FcsvD3 from '@/components/servicesOne/FinalOverview/f-csvGreenFile/fcsvD3'
 function page() {
   return (
     <div>

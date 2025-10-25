@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/CreateProject/aAIExtractionData/demon.js"
+    "src/components/servicesOne/aAIExtractionData/demon.js"
 , "src/app/(user-dashboard)/htk/htk2/page.tsx"  ],
   "exclude": ["node_modules"]
 }

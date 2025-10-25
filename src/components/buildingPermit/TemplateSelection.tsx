@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
-import { TemplateName } from "../CreateProject/ActionSelection/data";
+import { TemplateName } from "../servicesOne/ActionSelection/data";
 
 interface ActionSelectionProps {
     selectedActions: string[];
@@ -30,7 +30,7 @@ const TemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
     const [success, setSuccess] = useState<string | null>(null);
 
     const dispatch = useDispatch();
-    const stepByStepData: any = useSelector((state: RootState) => state.aiData) ;
+    const stepByStepData: any = useSelector((state: RootState) => state.aiData);
     const id = stepByStepData?.projectId?.id;
     console.log(stepByStepData.ownerBaseData, "stepByStepData==============")
 

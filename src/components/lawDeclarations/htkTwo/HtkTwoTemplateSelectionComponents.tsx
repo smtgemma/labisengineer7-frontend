@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "@/components/Others/Loading";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
-import { TemplateName } from "@/components/CreateProject/ActionSelection/data";
+import { TemplateName } from "@/components/servicesOne/ActionSelection/data";
 
 
 interface ActionSelectionProps {

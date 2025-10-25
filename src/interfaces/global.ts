@@ -99,6 +99,8 @@ export type TProjectData = {
     project_description_htk_plot: string | null;
     kaek_plot: string | null;
     plot_type: string | null;
+    ot: string | null;
+    prop: number | null;
 };
 
 

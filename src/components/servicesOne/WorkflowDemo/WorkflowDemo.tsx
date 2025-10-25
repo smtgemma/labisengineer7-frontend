@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { ChevronRight } from "lucide-react";
-import AIExtractionData from "@/components/CreateProject/AIExtractionData/AIExtractionData";
-import FileUpload from "@/components/CreateProject/FileUpload/FileUpload";
-import AIExtraction from "@/components/CreateProject/AIExtraction/AIExtraction";
-import OwnerSelection from "@/components/CreateProject/OwnerSelection/OwnerSelection";
-import ActionSelection from "@/components/CreateProject/ActionSelection/ActionSelection";
-import FinalOverview from "@/components/CreateProject/FinalOverview/FinalOverview";
-import WorkflowStepper from "@/components/CreateProject/WorkflowStepper/WorkflowStepper";
+import AIExtractionData from "@/components/servicesOne/AIExtractionData/AIExtractionData";
+import FileUpload from "@/components2.0/shared/FileUpload/FileUpload";
+import AIExtraction from "@/components/servicesOne/AIExtraction/AIExtraction";
+import OwnerSelection from "@/components/servicesOne/OwnerSelection/OwnerSelection";
+import ActionSelection from "@/components/servicesOne/ActionSelection/ActionSelection";
+import FinalOverview from "@/components/servicesOne/FinalOverview/FinalOverview";
+import WorkflowStepper from "@/components/servicesOne/WorkflowStepper/WorkflowStepper";
 
 const workflowSteps = [
   {
@@ -199,7 +199,7 @@ const WorkflowDemo: React.FC = () => {
       <div className="flex-1 p-12">
         <div className="max-w-6xl">
           {/* Step Content */}
-          <div className="mb-8">{}</div>
+          <div className="mb-8">{ }</div>
 
           {/* Footer with Next Button - Hide for extraction data page and final overview */}
           {!(currentStep === 2 && showExtractionData) && currentStep < 5 && (

@@ -10,6 +10,7 @@ import aiLoadingExtract from "../../../../public/aiFIleLoadingTwo.json";
 import { RootState } from "@/redux/store";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { FcFinePrint } from "react-icons/fc";
+import { useLazyGetOtAndPropQuery } from "@/redux/features/newVariabls/FetchNewVariables.";
 
 interface AIExtractionProps {
   currentStep: number
@@ -112,19 +113,11 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
   };
 
 
-
-  // Timer
-  // const timerControling = () => {
-  //   if (time >= 120) return;
-  //   const timer = setInterval(() => {
-  //     setTime((prev) => prev + 1);
-  //   }, 1000);
-
-  //   return () => clearInterval(timer);
-  // };
-
-  // const minutes = Math.floor(time / 60);
-  // const seconds = time % 60;
+  const [FetchOtAndProps, {
+    data,
+    isLoading,
+    error,
+  }] = useLazyGetOtAndPropQuery();
 
   const startExtraction = async () => {
     setErrorMsg(""); // reset previous error
@@ -153,21 +146,12 @@ const AIExtraction: React.FC<AIExtractionProps> = ({
     try {
       const res = await aiFileUpload(formData).unwrap();
       if (res) {
-        dispatch(setAiExtractCatchData(res));
+        const newData = await FetchOtAndProps(res.kaek_property.split("/")[0] || "")
+        const ot = newData?.data.OT_NUM || "";
+        const prop = newData?.data?.PROP_HOR || "";
+        dispatch(setAiExtractCatchData({ ...res, ot: ot, prop: prop }));
 
-        // simulate progress
-        const interval = setInterval(() => {
-          setProgress((prev) => {
-            if (prev >= 100) {
-              clearInterval(interval);
-              setIsCompleted(true);
-              setIsProcessing(false);
-              return 100;
-            }
-            return prev + Math.random() * 15;
-          });
-        }, 200);
-
+        // console.log(ot, prop)
         nextStep();
       }
     } catch (error: any) {

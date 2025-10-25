@@ -14,10 +14,10 @@ import {
 
 import { FaRegCopy } from "react-icons/fa6";
 import { toast } from "sonner";
-import S4D1 from "../CreateProject/FinalOverview/srv-4t/s4D1/page";
-import S4D2 from "../CreateProject/FinalOverview/srv-4t/s4D2/page";
-import S4D3 from "../CreateProject/FinalOverview/srv-4t/s4D3/page";
-import S4D4 from "../CreateProject/FinalOverview/srv-4t/s4D4/page";
+import S4D1 from "../servicesOne/FinalOverview/srv-4t/s4D1/page";
+import S4D2 from "../servicesOne/FinalOverview/srv-4t/s4D2/page";
+import S4D3 from "../servicesOne/FinalOverview/srv-4t/s4D3/page";
+import S4D4 from "../servicesOne/FinalOverview/srv-4t/s4D4/page";
 import { FormDataOne, FormDataTwo } from "./template";
 export interface UserData {
     id: string;

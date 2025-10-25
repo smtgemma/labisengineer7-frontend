@@ -10,27 +10,37 @@ import React, { useState } from "react";
 import { FcFinePrint } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import aiLoadingExtract from "../../../../public/aiFIleLoadingTwo.json";
+import { TechnicalDescription } from "./types";
+import { useCategoriesDetailed } from "@/hooks/useNewVariables";
+import { useLazyGetOtAndPropQuery } from "@/redux/features/newVariabls/FetchNewVariables.";
 
 interface AIExtractionProps {
     currentStep: number
     nextStep: () => void
-    uploadedFiles: File[]
+    uploadedFiles: File[];
+    descriptionPayload: TechnicalDescription[]
 }
 
-const HtkOneAiExtraction: React.FC<AIExtractionProps> = ({
+const MainAIExtraction: React.FC<AIExtractionProps> = ({
     currentStep,
     nextStep,
-    uploadedFiles
+    uploadedFiles,
+    descriptionPayload
 }) => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [isCompleted, setIsCompleted] = useState<boolean>(false);
     const [errorMsg, setErrorMsg] = useState(""); // ✅ Error message state
     const dispatch = useDispatch();
-
+    const [FetchOtAndProps, {
+        data,
+        isLoading,
+        error,
+    }] = useLazyGetOtAndPropQuery();
     const [aiFileUpload] = usePostFileAiDataExtractMutation();
 
     const aiExtractData = useSelector((state: RootState) => state.aiData);
     console.log(aiExtractData)
+
     // Helper: check if files are valid
     const hasValidFiles = (files: any[]) => {
         if (!Array.isArray(files) || files.length === 0) return false;
@@ -47,10 +57,6 @@ const HtkOneAiExtraction: React.FC<AIExtractionProps> = ({
                 file.type.trim() !== ""
         );
     };
-
-    const technical_description = "Το ακίνητο βρίσκεται {{Within_outside_city_plan}}, συνολικής επιφάνειας {{Area_plot}} τ.μ., είναι καταχωρημένο στο Εθνικό Κτηματολόγιο με ΚΑΕΚ {{Kaek_property}}, στην οδό {{Property_address}} {{Property_number}}, στη θέση {{Place_property}}, στο Δήμο {{Municipality_community}}, με Τ.Κ. {{Property_postal_code}}.Πρόκειται για {{Horizontal_property_name}}, επιφανείας {{Title_area}} τ.μ., η οποία αποτελεί αυτοτελή οριζόντια ιδιοκτησία κατά τις διατάξεις του Ν.3741/1929 και του Ν.Δ. 1024/1971."
-
-
     const startExtraction = async () => {
         setErrorMsg(""); // reset previous error
 
@@ -60,21 +66,26 @@ const HtkOneAiExtraction: React.FC<AIExtractionProps> = ({
         }
 
         setIsProcessing(true);
+        // setProgress(0);
         setIsCompleted(false);
 
         const formData = new FormData();
-
         uploadedFiles.forEach((file, index) => {
-            if (file) formData.append(`file${index + 1}`, file);
+            formData.append(`file${index + 1}`, file);
         });
-
-
-        formData.append("technical_description", JSON.stringify(technical_description));
-
+        // Append technical descriptions
+        descriptionPayload.forEach((desc) => {
+            formData.append(desc.key, JSON.stringify(desc.value));
+        });
         try {
             const res = await aiFileUpload(formData).unwrap();
             if (res) {
-                dispatch(setAiExtractCatchData(res));
+                const newData = await FetchOtAndProps(res.kaek_property.split("/")[0] || "")
+                const ot = newData?.data.OT_NUM || "";
+                const prop = newData?.data?.PROP_HOR || "";
+                dispatch(setAiExtractCatchData({ ...res, ot: ot, prop: prop }));
+
+                // console.log(ot, prop)
                 nextStep();
             }
         } catch (error: any) {
@@ -151,4 +162,4 @@ const HtkOneAiExtraction: React.FC<AIExtractionProps> = ({
     );
 };
 
-export default HtkOneAiExtraction;
+export default MainAIExtraction;

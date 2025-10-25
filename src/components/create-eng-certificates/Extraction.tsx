@@ -24,8 +24,6 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
 }) => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [isCompleted, setIsCompleted] = useState<boolean>(false);
-    const [progress, setProgress] = useState(0);
-    const [time, setTime] = useState(0);
     const [errorMsg, setErrorMsg] = useState(""); // ✅ Error message state
     const dispatch = useDispatch();
 
@@ -63,9 +61,7 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
         }
 
         setIsProcessing(true);
-        setProgress(0);
         setIsCompleted(false);
-        // timerControling();
 
         const ktimatologio = uploadedFiles[0];
         const contract = uploadedFiles[1];
@@ -79,28 +75,12 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
         if (permit) formData.append("file3", permit);
         if (Law) formData.append("file4", Law);
 
-        // formData.append("horizontal_property_name", JSON.stringify(horizontal_property_name));
         formData.append("technical_description", JSON.stringify(technical_description));
-        // formData.append("technical_description_two", JSON.stringify(technical_description_two));
 
         try {
             const res = await aiFileUpload(formData).unwrap();
             if (res) {
                 dispatch(setAiExtractCatchData(res));
-
-                // simulate progress
-                const interval = setInterval(() => {
-                    setProgress((prev) => {
-                        if (prev >= 100) {
-                            clearInterval(interval);
-                            setIsCompleted(true);
-                            setIsProcessing(false);
-                            return 100;
-                        }
-                        return prev + Math.random() * 15;
-                    });
-                }, 200);
-
                 nextStep();
             }
         } catch (error: any) {

@@ -1,31 +1,27 @@
 "use client";
 
+import AIExtraction from "@/components/servicesOne/AIExtraction/AIExtraction";
+import ActionSelection from "@/components/servicesOne/ActionSelection/ActionSelection";
 import FileUpload from "@/components2.0/shared/FileUpload/FileUpload";
+import FinalOverview from "@/components/servicesOne/FinalOverview/FinalOverview";
+import OwnerSelection from "@/components/servicesOne/OwnerSelection/OwnerSelection";
 import WorkflowStepper from "@/components/servicesOne/WorkflowStepper/WorkflowStepper";
+import AIExtractionDataInPut from "@/components/servicesOne/aAIExtractionData/AIExtractionData";
+import DescriptionSelection from "@/components/servicesOne/descriptionSelections/DescriptionSelections";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import HtkTwoAiExtraction from "./HtkTwoAiExtraction";
-import HtkTwoAIExtractionDataInPut from "./HtkTwoAIExtractionDataInPut";
-import HtkTwoFinalSteps from "./HtkTwoFinalSteps";
-import HtkTwoOwnerSelectionFour from "./HtkTwoOwnerSelectionFour";
-import HtkTwoTemplateSelectionComponents from "./HtkTwoTemplateSelectionComponents";
-import MainAIExtraction from "@/components2.0/shared/AiExtraction/AiExtraction";
-import { PayloadDescriptions } from "./payload";
-
 
 const workflowSteps = [
     { id: 1, title: "Upload Documents" },
     { id: 2, title: "AI Data Extraction" },
     { id: 3, title: "Select Owner(s)" },
-    { id: 4, title: "AI Extraction Data" },
-    // { id: 5, title: "Record Violation" },
-    // { id: 6, title: "Questions Answer" },
-    // need to chnage  
-    { id: 7, title: "Select Actions" },
-    { id: 8, title: "Final Overview" },
+    { id: 4, title: "Description Selections" },
+    { id: 5, title: "AI Extraction Data" },
+    { id: 6, title: "Select Actions" },
+    { id: 7, title: "Final Overview" },
 ];
 
-const MainHtkTwo: React.FC = () => {
+const MainServicesOne: React.FC = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const stepParam = Number(searchParams.get("step")) || 1;
@@ -45,10 +41,7 @@ const MainHtkTwo: React.FC = () => {
     };
 
     const nextStep = () => {
-        console.log("nest step")
         if (currentStep < workflowSteps.length) {
-            console.log("nest step")
-
             goToStep(currentStep + 1);
         }
     };
@@ -71,7 +64,7 @@ const MainHtkTwo: React.FC = () => {
         switch (currentStep) {
             case 1:
                 return (
-                    //same
+                    //completed
                     <FileUpload
                         onFilesChange={setUploadedFiles}
                         uploadedFiles={uploadedFiles}
@@ -81,32 +74,30 @@ const MainHtkTwo: React.FC = () => {
                 );
             case 2:
                 return (
-                    //same
-                    <MainAIExtraction
+                    //button addewd
+                    <AIExtraction
                         uploadedFiles={uploadedFiles}
                         currentStep={currentStep}
                         nextStep={nextStep}
-                        descriptionPayload={PayloadDescriptions}
                     />
                 );
             case 3:
-                //same
-                return <HtkTwoOwnerSelectionFour
-                    uploadedFiles={uploadedFiles}
+                return <OwnerSelection
                     currentStep={currentStep}
                     nextStep={nextStep}
                 />;
             case 4:
-                //same
-                return <HtkTwoAIExtractionDataInPut
-                    uploadedFiles={uploadedFiles}
+                return <DescriptionSelection
                     currentStep={currentStep}
                     nextStep={nextStep}
                 />;
             case 5:
-                //need to work
+                return <AIExtractionDataInPut currentStep={currentStep}
+                    nextStep={nextStep}
+                />;
+            case 6:
                 return (
-                    <HtkTwoTemplateSelectionComponents
+                    <ActionSelection
                         selectedActions={selectedActions}
                         onActionsChange={setSelectedActions}
                         currentStep={currentStep}
@@ -114,10 +105,9 @@ const MainHtkTwo: React.FC = () => {
                         nextStep={nextStep}
                     />
                 );
-            case 6:
+            case 7:
                 return (
-                    //need to work
-                    <HtkTwoFinalSteps
+                    <FinalOverview
                         files={uploadedFiles}
                         extractedData={extractedData}
                         selectedOwners={selectedOwners}
@@ -136,8 +126,8 @@ const MainHtkTwo: React.FC = () => {
 
     return (
         <div className="min-h-screen flex">
-            <div className="bg-white shadow-sm h-fit sticky top-36">
-                <WorkflowStepper className="rounded-2xl" steps={workflowSteps} currentStep={currentStep} />
+            <div className="bg-white shadow-sm">
+                <WorkflowStepper steps={workflowSteps} currentStep={currentStep} />
             </div>
             <div className="flex-1 p-12">
                 <div className="max-w-6xl">
@@ -149,4 +139,4 @@ const MainHtkTwo: React.FC = () => {
     );
 };
 
-export default MainHtkTwo;
+export default MainServicesOne;

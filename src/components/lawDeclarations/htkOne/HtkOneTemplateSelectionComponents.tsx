@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "@/components/Others/Loading";
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
 import { useRemainingCreditQuery, useUseCreditsMutation } from "@/redux/features/credit/creditSlice";
-import { TemplateName } from "@/components/CreateProject/ActionSelection/data";
+import { TemplateName } from "@/components/servicesOne/ActionSelection/data";
 
 
 interface ActionSelectionProps {
@@ -44,7 +44,7 @@ const HtkOneTemplateSelectionComponents: React.FC<ActionSelectionProps> = ({
         const baseTemplates: TemplateName[] = [
             // { id: "htkOne_register_plot", title: "Register Plot Autofill 1 Credit ", price: 0.5 },
             // { id: "htkOne_register_horizontal_property", title: "Register Horizontal Property Autofill 1 Credit", price: 0.5 },
-             { id: "autofill", title: "Register Plot Autofill 1 Credit ", price: 0.5 },
+            { id: "autofill", title: "Register Plot Autofill 1 Credit ", price: 0.5 },
             { id: "autofill2", title: "Register Horizontal Property Autofill 1 Credit", price: 0.5 },
             // { id: "doc_technical_description", title: "Technical Description", price: 0.5 },
         ];

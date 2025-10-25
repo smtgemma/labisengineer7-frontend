@@ -330,6 +330,10 @@ const AIExtractionDataInPut = ({
             label: "details_issuing_authority",
             dataKey: "details_issuing_authority"
           },
+          {
+            label: "ot",
+            dataKey: "ot"
+          },
         ]}
         title="PERMIT PAPER/LAW"
       />
