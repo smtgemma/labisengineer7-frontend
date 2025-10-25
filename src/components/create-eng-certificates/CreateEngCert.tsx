@@ -10,6 +10,7 @@ import AIExtractionFour from "./Extraction";
 import FinalSteps from "./FinaleSteps";
 import OwnerSelectionFour from "./OwnerSelection";
 import TemplateSelectionComponents from "./TemplateSelection";
+import DataShowInInput from "./DataShowInInput";
 
 const workflowSteps = [
     { id: 1, title: "Upload Documents" },
@@ -100,7 +101,7 @@ const WorkflowDemo: React.FC = () => {
             case 5:
                 console.log(currentStep)
                 //same
-                return <AIExtractionDataInPut currentStep={currentStep}
+                return <DataShowInInput currentStep={currentStep}
                     nextStep={nextStep}
                 />;
             case 6:

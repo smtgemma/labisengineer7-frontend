@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { useState, ReactNode } from 'react';
+import { IoIosArrowDown, IoIosArrowUp, IoIosFolder } from 'react-icons/io';
 
 interface Field {
     label: string;
@@ -11,37 +11,44 @@ interface CollapsibleSectionProps {
     data?: Record<string, any>;
     fields?: Field[];
     defaultOpen?: boolean;
+    icon?: ReactNode; // new icon prop
 }
 
 const CollapsibleSection = ({
     title = "Section Title",
     data = {},
     fields = [],
-    defaultOpen = false
+    defaultOpen = false,
+    icon, // new prop
 }: CollapsibleSectionProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
 
-    const inputStyle = "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50";
+
+    console.log(fields, data)
+    const inputStyle =
+        "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50";
 
     return (
         <div className="mt-10">
             <div className="bg-white p-6 border border-primary rounded-xl shadow-md w-full">
                 <div className="flex justify-between items-center">
-                    <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
-                        {title}
-                    </h2>
-                    <div>
-                        <button
-                            type="button"
-                            onClick={() => setIsOpen(!isOpen)}
-                        >
-                            {!isOpen ? (
-                                <IoIosArrowDown className="text-2xl" />
-                            ) : (
-                                <IoIosArrowUp className="text-2xl" />
-                            )}
-                        </button>
+                    <div className="flex items-center gap-2">
+                        {/* icon part */}
+                        <div className="text-2xl text-blue-600">
+                            {icon ? icon : <IoIosFolder />}
+                        </div>
+                        <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
+                            {title}
+                        </h2>
                     </div>
+
+                    <button type="button" onClick={() => setIsOpen(!isOpen)}>
+                        {isOpen ? (
+                            <IoIosArrowUp className="text-2xl" />
+                        ) : (
+                            <IoIosArrowDown className="text-2xl" />
+                        )}
+                    </button>
                 </div>
 
                 {isOpen && (
@@ -56,7 +63,7 @@ const CollapsibleSection = ({
                                     <input
                                         className={inputStyle}
                                         readOnly
-                                        value={fieldValue ?? 'No value'} // Using nullish coalescing
+                                        value={fieldValue ?? "No value"}
                                     />
                                     {fieldValue === undefined && (
                                         <p className="text-xs text-yellow-600 mt-1">

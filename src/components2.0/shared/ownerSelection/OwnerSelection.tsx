@@ -54,6 +54,9 @@ const SharedOwnerSelection = ({
         postalCode: string;
         dateOfBirth: string;
         placeOfBirth: string;
+        ownershipPercentageOwner: string;
+        ownerTypeOwnership: string;
+        percentageCoOwnershipParcel: string;
     }>();
 
     // ✅ Add new owner
@@ -104,6 +107,9 @@ const SharedOwnerSelection = ({
             postalCode: owner.postal_code,
             dateOfBirth: owner.date_of_birth,
             placeOfBirth: owner.place_of_birth,
+            ownershipPercentageOwner: owner.ownership_percentage_owner,
+            ownerTypeOwnership: owner.owner_type_ownership,
+            percentageCoOwnershipParcel: owner.percentage_co_ownership_parcel
         });
         setIsEditModalOpen(true);
     };
@@ -124,6 +130,9 @@ const SharedOwnerSelection = ({
                 postal_code: data.postalCode,
                 date_of_birth: data.dateOfBirth,
                 place_of_birth: data.placeOfBirth,
+                ownership_percentage_owner: data.ownershipPercentageOwner,
+                owner_type_ownership: data.ownerTypeOwnership,
+                percentage_co_ownership_parcel: data.percentageCoOwnershipParcel,
                 email: data.email,
                 phone: data.phone,
             } as any;
@@ -173,6 +182,7 @@ const SharedOwnerSelection = ({
                 taxIdentificationNumber: owner.tax_identification_number,
                 ownershipPercentageOwner: owner.ownership_percentage_owner,
                 ownerTypeOwnership: owner.owner_type_ownership,
+                percentageCoOwnershipParcel: owner.percentage_co_ownership_parcel,
                 email: (owner as any).email || "",
                 phone: (owner as any).phone || "",
             };
@@ -270,20 +280,25 @@ const SharedOwnerSelection = ({
                         </div>
 
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-                            <input placeholder="First Name" {...register("firstName", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Surname" {...register("surname", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Father's Name" {...register("fatherName", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Mother's Name" {...register("motherName", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Email" {...register("email", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Phone" {...register("phone", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Address" {...register("address")} className="border p-2 w-full rounded" />
-                            <input placeholder="Address Number" {...register("addressNumber")} className="border p-2 w-full rounded" />
-                            <input placeholder="City" {...register("city")} className="border p-2 w-full rounded" />
-                            <input placeholder="Postal Code" {...register("postalCode")} className="border p-2 w-full rounded" />
-                            <input placeholder="VAT No" {...register("vatNo", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="ID Number" {...register("idNumber", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input type="date" {...register("dateOfBirth")} className="border p-2 w-full rounded" />
-                            <input placeholder="Place of Birth" {...register("placeOfBirth")} className="border p-2 w-full rounded" />
+                            <div className="grid grid-cols-2 gap-2">
+                                <input placeholder="First Name" {...register("firstName", { required: "Required" })} className="border p-2 w-full rounded" />
+                                <input placeholder="Surname" {...register("surname", { required: "Required" })} className="border p-2 w-full rounded" />
+                                <input placeholder="Father's Name" {...register("fatherName", { required: "Required" })} className="border p-2 w-full rounded" />
+                                <input placeholder="Mother's Name" {...register("motherName")} className="border p-2 w-full rounded" />
+                                <input placeholder="Email" {...register("email")} className="border p-2 w-full rounded" />
+                                <input placeholder="Phone" {...register("phone")} className="border p-2 w-full rounded" />
+                                <input placeholder="Address" {...register("address")} className="border p-2 w-full rounded" />
+                                <input placeholder="Address Number" {...register("addressNumber")} className="border p-2 w-full rounded" />
+                                <input placeholder="City" {...register("city")} className="border p-2 w-full rounded" />
+                                <input placeholder="Postal Code" {...register("postalCode")} className="border p-2 w-full rounded" />
+                                <input placeholder="VAT No" {...register("vatNo")} className="border p-2 w-full rounded" />
+                                <input placeholder="ID Number" {...register("idNumber")} className="border p-2 w-full rounded" />
+                                <input type="date" {...register("dateOfBirth")} className="border p-2 w-full rounded" />
+                                <input placeholder="Place of Birth" {...register("placeOfBirth")} className="border p-2 w-full rounded" />
+                                <input placeholder="Ownership Percentage Owner" {...register("ownershipPercentageOwner")} className="border p-2 w-full rounded" />
+                                <input placeholder="Owner Type Ownership" {...register("ownerTypeOwnership")} className="border p-2 w-full rounded" />
+                                <input placeholder="Percentage CoOwnership Parcel" {...register("percentageCoOwnershipParcel")} className="border p-2 w-full rounded" />
+                            </div>
 
                             <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded w-full">
                                 Save
@@ -305,21 +320,25 @@ const SharedOwnerSelection = ({
                         </div>
 
                         <form onSubmit={handleSubmit(onEditSubmit)} className="space-y-3">
-                            <input placeholder="First Name" {...register("firstName", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Surname" {...register("surname", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Father's Name" {...register("fatherName", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Mother's Name" {...register("motherName", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Email" {...register("email", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Phone" {...register("phone", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="Address" {...register("address")} className="border p-2 w-full rounded" />
-                            <input placeholder="Address Number" {...register("addressNumber")} className="border p-2 w-full rounded" />
-                            <input placeholder="City" {...register("city")} className="border p-2 w-full rounded" />
-                            <input placeholder="Postal Code" {...register("postalCode")} className="border p-2 w-full rounded" />
-                            <input placeholder="VAT No" {...register("vatNo", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input placeholder="ID Number" {...register("idNumber", { required: "Required" })} className="border p-2 w-full rounded" />
-                            <input type="date" {...register("dateOfBirth")} className="border p-2 w-full rounded" />
-                            <input placeholder="Place of Birth" {...register("placeOfBirth")} className="border p-2 w-full rounded" />
-
+                            <div className="grid grid-cols-2 gap-2">
+                                <input placeholder="First Name" {...register("firstName", { required: "Required" })} className="border p-2 w-full rounded" />
+                                <input placeholder="Surname" {...register("surname", { required: "Required" })} className="border p-2 w-full rounded" />
+                                <input placeholder="Father's Name" {...register("fatherName", { required: "Required" })} className="border p-2 w-full rounded" />
+                                <input placeholder="Mother's Name" {...register("motherName")} className="border p-2 w-full rounded" />
+                                <input placeholder="Email" {...register("email")} className="border p-2 w-full rounded" />
+                                <input placeholder="Phone" {...register("phone")} className="border p-2 w-full rounded" />
+                                <input placeholder="Address" {...register("address")} className="border p-2 w-full rounded" />
+                                <input placeholder="Address Number" {...register("addressNumber")} className="border p-2 w-full rounded" />
+                                <input placeholder="City" {...register("city")} className="border p-2 w-full rounded" />
+                                <input placeholder="Postal Code" {...register("postalCode")} className="border p-2 w-full rounded" />
+                                <input placeholder="VAT No" {...register("vatNo")} className="border p-2 w-full rounded" />
+                                <input placeholder="ID Number" {...register("idNumber")} className="border p-2 w-full rounded" />
+                                <input type="date" {...register("dateOfBirth")} className="border p-2 w-full rounded" />
+                                <input placeholder="Place of Birth" {...register("placeOfBirth")} className="border p-2 w-full rounded" />
+                                <input placeholder="Ownership Percentage Owner" {...register("ownershipPercentageOwner")} className="border p-2 w-full rounded" />
+                                <input placeholder="Owner Type Ownership" {...register("ownerTypeOwnership")} className="border p-2 w-full rounded" />
+                                <input placeholder="Percentage CoOwnership Parcel" {...register("percentageCoOwnershipParcel")} className="border p-2 w-full rounded" />
+                            </div>
                             <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded w-full">
                                 Save Changes
                             </button>

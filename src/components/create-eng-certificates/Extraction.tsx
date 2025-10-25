@@ -50,25 +50,8 @@ const AIExtractionFour: React.FC<AIExtractionProps> = ({
         );
     };
 
-
-
-    // Timer
-    // const timerControling = () => {
-    //   if (time >= 120) return;
-    //   const timer = setInterval(() => {
-    //     setTime((prev) => prev + 1);
-    //   }, 1000);
-
-    //   return () => clearInterval(timer);
-    // };
-
-    // const minutes = Math.floor(time / 60);
-    // const seconds = time % 60;
-    // const horizontal_property_name = "Εργασίες βάσει του άρθρου 30 του ν.4495 / 2017 στην {{Horizontal_property_name}}"
-
     const technical_description = "Το ακίνητο βρίσκεται {{Within_outside_city_plan}}, συνολικής επιφάνειας {{Area_plot}} τ.μ., είναι καταχωρημένο στο Εθνικό Κτηματολόγιο με ΚΑΕΚ {{Kaek_property}}, στην οδό {{Property_address}} {{Property_number}}, στη θέση {{Place_property}}, στο Δήμο {{Municipality_community}}, με Τ.Κ. {{Property_postal_code}}.Πρόκειται για {{Horizontal_property_name}}, επιφανείας {{Title_area}} τ.μ., η οποία αποτελεί αυτοτελή οριζόντια ιδιοκτησία κατά τις διατάξεις του Ν.3741/1929 και του Ν.Δ. 1024/1971."
 
-    // const technical_description_two = "Οι περιγραφόμενες εργασίες υπάγονται στις ρητά προβλεπόμενες περιπτώσεις του άρθρου 30 του Ν.4495/2017 και, ως εκ τούτου, δεν απαιτείται έκδοση οικοδομικής άδειας ή άδειας μικρής κλίμακας.Βεβαιώνεται επίσης,  ότι το ακίνητο δεν εμπίπτει σε ειδικό καθεστώς προστασίας, σύμφωνα με τη παρ.2 του άρθρου 30 του Ν.4495/2017, όπως:παραδοσιακό οικισμό, σε χαρακτηρισμένο διατηρητέο κτίριο, σε αρχαιολογική ζώνη, σε δασική έκταση ή σε περιοχή Natura."
 
 
     const startExtraction = async () => {

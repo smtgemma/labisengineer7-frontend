@@ -96,7 +96,7 @@ interface AiExtractState {
   projectId?: {} | undefined;
   subcategory?: any[];
   descriptionTask?: any[];
-  description?: string;
+  description?: any;
   horizontal?: {
     ydom: string;
     horizontal: string
@@ -119,7 +119,7 @@ const initialState: AiExtractState = {
   descriptionTask: [],
   selectTemplate: [],
   multiFiles: [],
-  description: "",
+  description: {},
   horizontal: { ydom: "", horizontal: "" },
   aiInputData: null,
   actionSelection: [],

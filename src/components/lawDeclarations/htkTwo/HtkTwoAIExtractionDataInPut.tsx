@@ -5,7 +5,7 @@ import {
     setAiExtreactAndInputData,
     setTheProjectCode
 } from "@/redux/features/AI-intrigratoin/aiFileDataSlice";
-import { usePosAiAllDataForTwoToSaveMutation, usePostHtkOneMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
+import { usePostHtkOneMutation } from "@/redux/features/AI-intrigratoin/aiServiceSlice";
 import { RootState } from "@/redux/store";
 import { useEffect, useRef, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -13,34 +13,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { FormValues } from "./types";
-
-
-// new 
-// date_issue_building_permit_revision_two          permit paper     done
-// date_of_issuance_eemk                          EEMK PAPER
-// date_of_issue_building_permit_revision_eemk                          EEMK PAPER
-// date_of_submission_1337 1337/LAW
-// declaration_number_1337 1337/LAW
-// issuing_authority_1337 1337/LAW
-// declaration_owner_for_4495_2017 
-// issuing_authority_eemk                          EEMK PAPER
-// issuing_authority_loss_certificate LOSS PAPER
-// kaek_plot
-// license_number_eemk                          EEMK PAPER
-// license_number_revision_eemk                          EEMK PAPER
-// license_number_revision_two
-// notary_reviews_establishment_horizontal_ownership     NOTARY
-// pea_estimated_annual_co2_emissions_kg_m2 
-// pea_estimated_annual_primary_energy_consumption_kwh_m2
-// pea_issue_date           n/a
-// pea_protocol_number      n/a
-// pea_security_number    n/a
-// plot_type   n/a
-// project_description_htk_plot
-// project_descriptions
-// project_title_description_eemk    EEMK PAPER
-// protocol_date_loss_certificate    LOSS PAPER
-// protocol_number_loss_certificate  LOSS PAPER
 
 
 const inputStyle =

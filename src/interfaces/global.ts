@@ -117,6 +117,7 @@ export type AiOwnerTypes = {
     tax_identification_number: string;
     ownership_percentage_owner: string;
     owner_type_ownership: string;
+    percentage_co_ownership_parcel: string;
 };
 
 export type OwnerTypes = {
@@ -134,6 +135,7 @@ export type OwnerTypes = {
     taxIdentificationNumber: string;
     ownershipPercentageOwner?: string;
     ownerTypeOwnership?: string;
+    percentageCoOwnershipParcel?: string;
     email: string;
     phone: string;
 };
