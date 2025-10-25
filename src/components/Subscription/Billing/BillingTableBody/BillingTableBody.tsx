@@ -34,7 +34,7 @@ const BillingTableBody = () => {
   if (isLoading) {
     return <Loading />;
   }
-  const { pdfUrl, paymentStatus, plan } = data?.data;
+  const { pdfUrl, paymentStatus, plan } = data?.data || {};
   console.log(data);
 
   const handleDownload = (fileUrl: string) => {
