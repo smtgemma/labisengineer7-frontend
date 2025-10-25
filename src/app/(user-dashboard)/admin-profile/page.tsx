@@ -225,23 +225,38 @@ const AdminProfile = () => {
   console.log("sign:", engneerData?.signature);
   // engreening information working
   const handleEngineerFormSubmit = async (newformData: EngineerFormData) => {
-    console.log("newformData eng", newformData);
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(newformData));
-    if (imageSin) {
-      formData.append("file", imageSin);
-    }
-
     try {
+      // Ensure bornDate is always a string
+      const safeData = {
+        ...newformData,
+        bornDate: newformData.bornDate
+          ? new Date(newformData.bornDate).toString()
+          : "", // ensure it’s a string
+      };
+
+      console.log("Submitting engineer form:", safeData);
+
+      const formData = new FormData();
+      formData.append("data", JSON.stringify(safeData));
+
+      if (imageSin) {
+        formData.append("file", imageSin);
+      }
+
       const res = await engreeningPost({ formData, token }).unwrap();
+
       if (res?.success) {
-        toast.success(res?.message);
+        toast.success(res?.message || "Engineer form submitted!");
         engRefetch();
+      } else {
+        toast.error(res?.message || "Something went wrong!");
       }
     } catch (error: any) {
-      toast.error(error?.data?.message);
+      console.error("Error submitting engineer form:", error);
+      toast.error(error?.data?.message || "Failed to submit form!");
     }
   };
+
 
   return (
     <div className={`bg-[#F1F5F9] py-8 px-4 md:px-12 min-h-screen`}>

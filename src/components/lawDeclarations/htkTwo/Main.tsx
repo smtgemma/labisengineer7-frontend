@@ -92,7 +92,6 @@ const MainHtkTwo: React.FC = () => {
             case 3:
                 //same
                 return <HtkTwoOwnerSelectionFour
-                    uploadedFiles={uploadedFiles}
                     currentStep={currentStep}
                     nextStep={nextStep}
                 />;
