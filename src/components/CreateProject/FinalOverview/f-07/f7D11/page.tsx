@@ -16,7 +16,7 @@ type F6D13Props = {
 interface FormData {
     firstName: string
     lastName: string
-    projectDescription: string
+    projectDescriptions: string
     propertyAddress: string
     propertyPostalCode: string
     municipalityCommunity: string
@@ -43,7 +43,7 @@ export default function F7D11({ allData, setIsModalOpen }: F6D13Props) {
     const owner = allData?.owners || []
     const engineers = allData?.engineers || {}
     const allDescriptionTasks = allData?.allDescriptionTasks || {};
-    const { id, createdById, serviceId, specialty, propertyPlace, projectDescription,
+    const { id, createdById, serviceId, specialty, propertyPlace, projectDescriptions,
         propertyAddress,
         propertyNumber,
         municipalityCommunity,
@@ -117,7 +117,7 @@ export default function F7D11({ allData, setIsModalOpen }: F6D13Props) {
             <div className="mb-8 space-y-4">
                 <div className="flex items-start justify-between">
                     <span className=" min-w-[80px] text-sm">Έργο:</span>
-                    <h3 className=" text-sm text-center">{projectDescription || "N/A"}</h3>
+                    <h3 className=" text-sm text-center">{projectDescriptions || "N/A"}</h3>
                 </div>
 
                 <div className="flex items-start justify-between gap-4 max-w-xl">
@@ -215,7 +215,7 @@ export default function F7D11({ allData, setIsModalOpen }: F6D13Props) {
                 </div>
                 {/* Signature */}
                 <div className="mt-6 text-right flex items-center justify-center p-5">
-                    <img src={signature} alt="" />
+                    <img src={signature} alt="" className="w-[150px] h-[150px]" />
                 </div>
             </div>
             {/* EDIT MODAL */}
@@ -240,9 +240,9 @@ export default function F7D11({ allData, setIsModalOpen }: F6D13Props) {
                                 <div className="flex items-center gap-4">
                                     <label className="font-medium w-1/8">Έργο *:</label>
                                     <input
-                                        defaultValue={projectDescription || "Project Description "}
+                                        defaultValue={projectDescriptions || "Project Description "}
                                         type="text"
-                                        {...register("projectDescription", { required: "projectDescription is required" })}
+                                        {...register("projectDescriptions")}
                                         className="flex-1 border p-2 rounded text-sm"
                                     />
                                 </div>
@@ -254,31 +254,31 @@ export default function F7D11({ allData, setIsModalOpen }: F6D13Props) {
                                         <input
                                             type="text"
                                             defaultValue={propertyAddress || "propertyAddress"}
-                                            {...register("propertyAddress", { required: "propertyAddress is required" })}
+                                            {...register("propertyAddress")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyNumber || "propertyNumber"}
-                                            {...register("propertyNumber", { required: "propertyNumber is required" })}
+                                            {...register("propertyNumber")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={municipalityCommunity || "municipalityCommunity"}
-                                            {...register("municipalityCommunity", { required: "municipalityCommunity is required" })}
+                                            {...register("municipalityCommunity")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPostalCode || "propertyPostalCode"}
-                                            {...register("propertyPostalCode", { required: "propertyPostalCode is required" })}
+                                            {...register("propertyPostalCode")}
                                             className="border p-2 rounded text-sm"
                                         />
                                         <input
                                             type="text"
                                             defaultValue={propertyPlace || "propertyPlace"}
-                                            {...register("propertyPlace", { required: "propertyPlace is required" })}
+                                            {...register("propertyPlace")}
                                             className="border p-2 rounded text-sm"
                                         />
                                     </div>
@@ -289,9 +289,7 @@ export default function F7D11({ allData, setIsModalOpen }: F6D13Props) {
                                         <input
                                             type="text"
                                             defaultValue={technicalDescription || "technicalDescription"}
-                                            {...register("technicalDescription", {
-                                                required: "technicalDescription is required",
-                                            })}
+                                            {...register("technicalDescription")}
                                             className="border p-2 rounded text-sm w-full"
                                         />
                                     </div>
@@ -299,9 +297,7 @@ export default function F7D11({ allData, setIsModalOpen }: F6D13Props) {
                                         <input
                                             type="text"
                                             defaultValue={technicalDescriptionTwo || "technicalDescriptionTwo"}
-                                            {...register("technicalDescriptionTwo", {
-                                                required: "technicalDescriptionTwo is required",
-                                            })}
+                                            {...register("technicalDescriptionTwo")}
                                             className="border p-2 rounded text-sm w-full"
                                         />
                                     </div>

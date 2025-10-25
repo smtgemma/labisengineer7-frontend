@@ -168,9 +168,9 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ο-Η Όνομα</div>
-                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.first_name || "N/A"}</div>
+                                <div className="w-40 p-2 border-r border-gray-400  font-bold">{owner?.firstName || "N/A"}</div>
                                 <div className="w-20 p-2 border-r border-gray-400 text-sm">Επώνυμο</div>
-                                <div className="flex-1 p-2  font-bold">{owner?.last_name || "N/A"}</div>
+                                <div className="flex-1 p-2  font-bold">{owner?.lastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -178,7 +178,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Πατρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.father_first__last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.fatherFirstLastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -186,7 +186,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Όνομα και Επώνυμο Μητρός</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mother_first__last_name || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.motherFirstLastName || "N/A"}</div>
                             </div>
                         </div>
 
@@ -194,7 +194,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Ημερομηνία γέννησης(2):</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.date_of_birth || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.dateOfBirth || "N/A"}</div>
                             </div>
                         </div>
 
@@ -202,7 +202,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Τόπος Γέννησης</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.place_of_birth || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.placeOfBirth || "N/A"}</div>
                             </div>
                         </div>
 
@@ -210,9 +210,9 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                         <div className="border-b border-gray-400">
                             <div className="flex">
                                 <div className="w-32 p-2 border-r border-gray-400 text-sm">Αριθμός Δελτίου Ταυτότητας</div>
-                                <div className="w-72 p-2 border-r border-gray-400 font-bold">{owner?.id_number || "N/A"}</div>
+                                <div className="w-72 p-2 border-r border-gray-400 font-bold">{owner?.idNumber || "N/A"}</div>
                                 <div className="w-16 p-2 border-r border-gray-400 text-sm">Τηλ.:</div>
-                                <div className="flex-1 p-2 font-bold">{owner?.mobile || owner?.phone || "N/A"}</div>
+                                <div className="flex-1 p-2 font-bold">{owner?.phone || "N/A"}</div>
                             </div>
                         </div>
 
@@ -222,9 +222,9 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                 <div className="w-35 p-2 text-center border-r border-gray-400 text-sm">Τόπος κατοικίας</div>
                                 <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.city || "N/A"}</div>
                                 <div className="w-16 p-2 text-center border-r border-gray-400 text-sm">Οδός</div>
-                                <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.owner_address || "N/A"}</div>
+                                <div className="w-50 p-2 text-center border-r border-gray-400 font-bold ">{owner?.ownerAddress || "N/A"}</div>
                                 <div className="w-16 p-2 text-center border-r border-gray-400 text-sm">Αριθ</div>
-                                <div className="w-12 p-2 text-center border-r border-gray-400 font-bold ">{owner?.address_number || "N/A"}</div>
+                                <div className="w-12 p-2 text-center border-r border-gray-400 font-bold ">{owner?.addressNumber || "N/A"}</div>
                                 <div className="w-12 p-2 text-center border-r border-gray-400 text-sm">ΤΚ</div>
                                 <div className="w-25 p-2 font-bold">{owner?.postal_code || "N/A"}</div>
                             </div>
@@ -253,7 +253,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                     Α.Φ.Μ.:
                                 </div>
                                 <div className="w-54 p-2 font-bold">
-                                    {owner?.tax_identification_number || "N/A"}
+                                    {owner?.taxIdentificationNumber || "N/A"}
                                 </div>
                                 <div className="w-32 p-2 border-l border-gray-400 text-sm">
                                     Δ.Ο.Υ.:
@@ -267,7 +267,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                 <div className="">
                                     <p className="mb-1 p-2">
                                         Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις (3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν. 1599/1986,
-                                        δηλώνω ότι σχετικά με το δηλωθέν ακίνητό στην στην οδό <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}</span> περιοχή <span className="font-bold">{propertyPlace || "N/A"}</span> στον Δήμο <span className="font-bold">{municipalityCommunity || "N/A"}</span> με <span className="font-bold">Τ.Κ.{propertyPostalCode || "N/A"}</span> στο οποίο ως ιδιοκτήτης με ποσοστό  <span className="font-bold">{owner?.ownership_percentage_owner || "N/A"}</span> ισχύουν τα εξής:
+                                        δηλώνω ότι σχετικά με το δηλωθέν ακίνητό στην στην οδό <span className="font-bold">{propertyAddress || "N/A"} {propertyNumber || "N/A"}</span> περιοχή <span className="font-bold">{propertyPlace || "N/A"}</span> στον Δήμο <span className="font-bold">{municipalityCommunity || "N/A"}</span> με <span className="font-bold">Τ.Κ.{propertyPostalCode || "N/A"}</span> στο οποίο ως ιδιοκτήτης με ποσοστό  <span className="font-bold">{owner?.ownershipPercentageOwner || "N/A"}</span> ισχύουν τα εξής:
                                     </p>
                                     <div className="border-b border-dashed p-0"></div>
                                     <p className="my-3 p-2">
@@ -394,7 +394,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                     <div className="border-b border-dashed my-2 px-2"></div>
                                     <p className="font-bold px-2">Κατηγορία Χρήσης:</p>
                                     <div className="border-b border-dashed my-2"></div>
-                                    <p className="font-bold px-2">Τιμή Ζώνης: - <span className="ml-10">Ποσοστό  και Είδος Ιδιοκτησίας:</span> <span className="ml-2">{owner?.ownership_percentage_owner || "N/A"}</span> <span>{owner?.owner_type_ownership || "N/A"}</span> <span className="ml-5">Χρήση Γής: Αμιγής / Γενική Κατοικία</span>
+                                    <p className="font-bold px-2">Τιμή Ζώνης: - <span className="ml-10">Ποσοστό  και Είδος Ιδιοκτησίας:</span> <span className="ml-2">{owner?.ownershipPercentageOwner || "N/A"}</span> <span>{owner?.ownerTypeOwnership || "N/A"}</span> <span className="ml-5">Χρήση Γής: Αμιγής / Γενική Κατοικία</span>
                                     </p>
                                     <div className="border-b border-dashed my-2"> </div>
                                     <p className="p-2">Δηλώνω ρητά ότι δεν εμπίπτει σε καμία από τις περιπτώσεις του άρθρου 89 του Ν. 4495/17 και ότι οι ως άνω παραβάσεις είχαν ολοκληρωθεί προ της 28.07.2011 και σύμφωνα με το άρθρο 96 του Ν. 4495/17</p>
@@ -453,7 +453,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Όνομα *:</label>
                                             <input
                                                 type="text"
-                                                {...register("firstName", { required: "This field is required" })}
+                                                {...register("firstName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.firstName || ""}
                                             />
@@ -464,7 +464,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Επώνυμο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("lastName", { required: "This field is required" })}
+                                                {...register("lastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.lastName || ""}
                                             />
@@ -475,7 +475,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Όνομα Πατρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("fatherFirstLastName", { required: "This field is required" })}
+                                                {...register("fatherFirstLastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.fatherFirstLastName || ""}
                                             />
@@ -486,7 +486,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Όνομα Μητρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("mothersFirstLastName", { required: "This field is required" })}
+                                                {...register("mothersFirstLastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.mothersFirstLastName || ""}
                                             />
@@ -497,7 +497,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Ημερομηνία Γέννησης *:</label>
                                             <input
                                                 type="date"
-                                                {...register("dateOfBirth", { required: "This field is required" })}
+                                                {...register("dateOfBirth")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.dateOfBirth || ""}
                                             />
@@ -508,7 +508,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Τόπος Γέννησης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("placeOfBirth", { required: "This field is required" })}
+                                                {...register("placeOfBirth")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.placeOfBirth || ""}
                                             />
@@ -519,7 +519,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Αριθμός Ταυτότητας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("idNumber", { required: "This field is required" })}
+                                                {...register("idNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.idNumber || ""}
                                             />
@@ -530,7 +530,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Τηλέφωνο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("phone", { required: "This field is required" })}
+                                                {...register("phone")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.phone || ""}
                                             />
@@ -541,7 +541,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Πόλη *:</label>
                                             <input
                                                 type="text"
-                                                {...register("city", { required: "This field is required" })}
+                                                {...register("city")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.city || ""}
                                             />
@@ -552,7 +552,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Διεύθυνση *:</label>
                                             <input
                                                 type="text"
-                                                {...register("ownerAddress", { required: "This field is required" })}
+                                                {...register("ownerAddress")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.ownerAddress || ""}
                                             />
@@ -563,7 +563,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Αριθμός Διεύθυνσης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("addressNumber", { required: "This field is required" })}
+                                                {...register("addressNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.addressNumber || ""}
                                             />
@@ -574,7 +574,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Ταχυδρομικός Κώδικας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("postalCode", { required: "This field is required" })}
+                                                {...register("postalCode")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.postalCode || ""}
                                             />
@@ -585,7 +585,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Email *:</label>
                                             <input
                                                 type="email"
-                                                {...register("email", { required: "This field is required" })}
+                                                {...register("email")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.email || ""}
                                             />
@@ -596,7 +596,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Α.Φ.Μ. *:</label>
                                             <input
                                                 type="text"
-                                                {...register("taxIdentificationNumber", { required: "This field is required" })}
+                                                {...register("taxIdentificationNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.owners[ownerIndex]?.taxIdentificationNumber || ""}
                                             />
@@ -607,7 +607,7 @@ export default function S2D4({ allData, violations, ownerIndex }: { allData: all
                                             <label className="font-medium">Περιγραφή Έργου *:</label>
                                             <input
                                                 type="text"
-                                                {...register("projectDescription", { required: "This field is required" })}
+                                                {...register("projectDescription")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={allData.projectDescription || ""}
                                             />

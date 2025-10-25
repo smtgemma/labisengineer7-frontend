@@ -9,8 +9,7 @@ import { useSelector } from "react-redux";
 import {
     useDownloadTemplatePdfQuery,
     useExeclDownloadTemplateQuery,
-    useGetOwnerTemplateQuery,
-    useGetProject2Query,
+    useGetProject3Query,
 } from "@/redux/features/templates/allTemplateSlice";
 
 import PrimaryButton from "@/components/shared/primaryButton/PrimaryButton";
@@ -69,6 +68,7 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
     const projectCodeId = stepByStepData.projectIdCode;
     const id = stepByStepData?.projectIdCode;
     const projectId = stepByStepData?.projectIdCode?.id;
+//   const projectId = stepByStepData?.projectIdCode?.result.id;
     const userId = dataAllFIled?.createdById;
     console.log(stepByStepData, "stepByStepDatastepByStepData")
     console.log(projectId, "projectId===================")
@@ -76,7 +76,8 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
     // console.log(stepByStepData, "===========allData================")
 
 
-    const { data: allTemplateData } = useGetProject2Query(projectId || "");
+    // const { data: allTemplateData } = useGetProject2Query(projectId || "");
+    const { data: allTemplateData } = useGetProject3Query(projectId || "");
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
@@ -389,12 +390,12 @@ const HtkOneFinalSteps: React.FC<FinalOverviewProps> = ({
                             {selected === "htkOne_register_horizontal_property" && (
                                 <h1>Register Horizontal Property Autofill 1 Credit</h1>
                             )}
-                            {/* {selected === "doc_technical_description" && (
+                            {selected === "doc_technical_description" && (
                                 <div>
                                     <Flow1D1 allData={allData}
                                         setIsModalOpen={setIsModalOpen} />
                                 </div>
-                            )} */}
+                            )}
                             {selected?.startsWith("owner1_") && ownerIndex !== null && (
                                 //common component
                                 <Flow2D3

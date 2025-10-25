@@ -8,7 +8,7 @@ import { useGetMeQuery } from "@/redux/features/templates/allTemplateSlice"
 
 interface FormData {
   owner_name: string
-  project_description: string
+  project_descriptions: string
   owner_address: string
   owner_city: string
   owner_postal_code: string
@@ -17,7 +17,7 @@ interface FormData {
 
 interface allDataProps {
   owners: any[];
-  projectDescription: string
+  projectDescriptions: string
   propertyPlace: string
   propertyAddress: string
   propertyPostalCode: string
@@ -44,7 +44,7 @@ export default function F8D1({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const owner = allData?.owners || [];
-  const { projectDescription, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber } = allData || {}
+  const { projectDescriptions, propertyAddress, propertyPlace, propertyPostalCode, municipalityCommunity, propertyNumber } = allData || {}
 
   const { data: userData } = useGetMeQuery()
   const signature = userData?.data?.signature
@@ -389,7 +389,7 @@ export default function F8D1({ allData }: { allData: allDataProps }) {
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Έργο *:</span>
-          <h3 className="flex-1 text-black text-sm">{projectDescription || "N/A"}</h3>
+          <h3 className="flex-1 text-black text-sm">{projectDescriptions || "N/A"}</h3>
         </div>
         <div className="flex items-center gap-4">
           <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
@@ -474,7 +474,7 @@ export default function F8D1({ allData }: { allData: allDataProps }) {
       <div className="p-3">
         <div className="flex justify-between mb-2">
           <p>Ελάχιστη προκαταβολή*₁ :</p>
-          <p className=" font-semibold">33,40 €</p>
+          <p className=" font-semibold">0 €</p>
         </div>
         <div className="flex justify-between mb-2">
           <p>Ποσοστό προκαταβολής*₁ :</p>
@@ -483,26 +483,26 @@ export default function F8D1({ allData }: { allData: allDataProps }) {
 
         <div className="flex justify-between mb-2">
           <p>Τεκμαρτό ημερομίσθιο 8ης ασφαλιστικής κλάσης (Τ.Η.)*₂ :</p>
-          <p className=" font-semibold">33,40 €</p>
+          <p className=" font-semibold">0 €</p>
         </div>
 
         <div className="flex justify-between mb-1">
           <p>Ποσοστό εισφοράς εργοδότη*₃ :</p>
-          <p>58,365%</p>
+          <p>0%</p>
         </div>
         <div className="flex justify-between mb-1">
           <p>Ποσοστό ασφαλιζομένου*₃ :</p>
-          <p>17,570%</p>
+          <p>0%</p>
         </div>
         <div className="flex justify-between mb-2 font-semibold">
           <p>Ποσοστό εισφοράς (εργοδότη+ασφαλιζομένου)*₃ :</p>
-          <p>75,935%</p>
+          <p>0%</p>
         </div>
 
         <div className="border-t border-gray-300 pt-2">
           <div className="flex justify-between mb-2 font-bold">
             <p>Προκαταβολή ΙΚΑ-ΕΤΑΜ*₄ =</p>
-            <p className="">33,40 €</p>
+            <p className="">0 €</p>
           </div>
           <div className="text-xs">
             <p>(Ποσοστό προκαταβολής Χ Σύνολο Ημερομισθίων Χ</p>
@@ -511,7 +511,7 @@ export default function F8D1({ allData }: { allData: allDataProps }) {
         </div>
       </div>
       <div className="flex flex-col items-end">
-        <img src={signature} alt="" className="mb-4" />
+        <img src={signature} alt="" className="mb-4 w-[150px] h-[150px]" />
         <div>
           <p className="text-center">Ο Συντάξας</p>
         </div>

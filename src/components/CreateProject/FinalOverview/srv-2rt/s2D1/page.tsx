@@ -19,7 +19,7 @@ interface FormData {
 
 interface allDataProps {
   owners: any[]
-  projectDescription: string
+  projectDescriptions: string
   propertyPostalCode: string
   propertyPlace: string
   propertyAddress: string
@@ -47,7 +47,7 @@ interface BudgetCategory {
 export default function S2D1({ allData }: { allData: allDataProps }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const owner = allData?.owners || []
-  const { municipalityCommunity, propertyNumber, projectDescription, propertyPostalCode, propertyPlace, propertyAddress, createdAt } = allData || "";
+  const { municipalityCommunity, propertyNumber, projectDescriptions, propertyPostalCode, propertyPlace, propertyAddress, createdAt } = allData || "";
   console.log(allData, "==================>>")
 
 
@@ -386,7 +386,7 @@ export default function S2D1({ allData }: { allData: allDataProps }) {
     {
       id: 7,
       title: "ΣΤΡΩΣΕΙΣ ΔΑΠΕΔΩΝ",
-      subtotal: 968.0,
+      subtotal: 0,
       items: [
         { code: "7.01", description: "Με τσιμεντοκονία", unit: "τ.μ.", unitPrice: 8.8, quantity: 0, total: 0 },
         { code: "7.02", description: "Με τσιμεντόπλακες", unit: "τ.μ.", unitPrice: 11.74, quantity: 0, total: 0 },
@@ -396,8 +396,8 @@ export default function S2D1({ allData }: { allData: allDataProps }) {
           description: "Με μωσαϊκό λευκού τσιμέντου",
           unit: "τ.μ.",
           unitPrice: 17.6,
-          quantity: 55.0,
-          total: 968.0,
+          quantity: 0,
+          total: 0,
         },
         {
           code: "7.05",
@@ -833,15 +833,15 @@ export default function S2D1({ allData }: { allData: allDataProps }) {
     {
       id: 18,
       title: "ΔΙΑΦΟΡΕΣ ΟΙΚΟΔΟΜΙΚΕΣ ΕΡΓΑΣΙΕΣ",
-      subtotal: 484.0,
+      subtotal: 0,
       items: [
         {
           code: "18.01",
           description: "Μεταλλικά πλέγματα για επιχρίσματα πυροπροστασίας",
           unit: "τ.μ.",
           unitPrice: 8.8,
-          quantity: 55.0,
-          total: 484.0,
+          quantity: 0,
+          total: 0,
         },
         { code: "18.02", description: "Ικριώματα", unit: "τ.μ.", unitPrice: 2.06, quantity: 0, total: 0 },
         { code: "18.03", description: "Τζάκι με καπνοδόχο", unit: "αποκοπή", unitPrice: 880.42, quantity: 0, total: 0 },
@@ -883,9 +883,9 @@ export default function S2D1({ allData }: { allData: allDataProps }) {
     {
       id: 20,
       title: "ΠΕΡΙΦΡΑΞΕΙΣ",
-      subtotal: 45.0,
+      subtotal: 0,
       items: [
-        { code: "20.01", description: "Πάσσαλοι σιδερένιοι", unit: "μ.", unitPrice: 1.5, quantity: 30.0, total: 45.0 },
+        { code: "20.01", description: "Πάσσαλοι σιδερένιοι", unit: "μ.", unitPrice: 1.5, quantity: 30.0, total: 0 },
         { code: "20.02", description: "Πάσσαλοι ξύλινοι", unit: "μ.", unitPrice: 2.2, quantity: 0, total: 0 },
         {
           code: "20.03",
@@ -1055,32 +1055,47 @@ export default function S2D1({ allData }: { allData: allDataProps }) {
       </div>
 
       {/* Project Info */}
-      <div className="mb-6 space-y-4">
-        <div className="flex items-center gap-4">
-          <span className="font-medium w-1/4">Εργοδότες *:</span>
-          <div className="flex items-center justify-center gap-2">
-            {
-              owner?.map((e: any, i: number) => (
-                <h3 key={i} className="text-sm">
-                  {e.firstName || e.first_name || "N/A"} {e.lastName || e.last_name || "N/A"}
-                </h3>
-              ))
-            }
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <span className="font-medium w-1/4">Έργο *:</span>
-          <h3 className="flex-1 text-black text-sm uppercase">{projectDescription || "N/A"}</h3>
-        </div>
-        <div className="flex items-center gap-4">
-          <span className="font-medium w-1/4">Διεύθυνση Έργου *:</span>
-          <h3 className=" text-sm">
-            {propertyAddress || "N/A"} {propertyNumber || "N/A"}, {propertyPlace || "N/A"},
-            ΔΗΜΟΣ {municipalityCommunity || "N/A"},
-            ΤΚ {propertyPostalCode || "N/A"}
+      < div className="mb-8 space-y-4" >
+        {/* Project Name */}
+        < div className="flex items-center justify-between" >
+          <span className="min-w-[120px] text-sm font-medium">Έργο *:
+            :</span>
+          <h3 className="flex-1 text-sm text-center uppercase">
+            {projectDescriptions || "N/A"}
           </h3>
-        </div>
-      </div>
+        </ div>
+
+        {/* Property Address */}
+        < div className="flex items-center justify-between" >
+          <span className="min-w-[120px] text-sm font-medium">Διεύθυνση Έργου *:</span>
+          <h3 className="flex-1 text-sm text-center">
+            {propertyAddress || "N/A"} {propertyNumber || "N/A"},{" "}
+            {propertyPlace || "N/A"}, ΔΗΜΟΣ {municipalityCommunity || "N/A"}, ΤΚ{" "}
+            {propertyPostalCode || "N/A"}
+          </h3>
+        </ div>
+
+        {/* Owner Section */}
+        < div className="flex items-start justify-between" >
+          <span className="min-w-[120px] text-sm font-medium">Εργοδότες *:</span>
+          <div className="flex-1 text-center">
+            {owner?.length > 0 ? (
+              <h3 className="text-sm">
+                {owner
+                  .map(
+                    (e: any) =>
+                      `${e.firstName || e.first_name || "N/A"} ${e.lastName || e.last_name || "N/A"
+                      }`
+                  )
+                  .join(", ")}
+              </h3>
+            ) : (
+              <h3 className="text-sm">N/A</h3>
+            )}
+          </div>
+        </ div>
+
+      </div >
       {/* Budget Title */}
       <div className="text-center bg-white p-2 border border-black border-b-0">
         <h2 className="text-lg font-bold ">ΑΝΑΛΥΤΙΚΟΣ ΠΡΟΫΠΟΛΟΓΙΣΜΟΣ ΒΑΣΕΙ ΠΑΡΑΡΤΗΜΑΤΟΣ Β' Ν.4495/17)</h2>
@@ -1165,7 +1180,7 @@ export default function S2D1({ allData }: { allData: allDataProps }) {
             <h3 className="text-center mb-4">Ο Συντάξας Μηχανικός</h3>
             {/* signature  */}
             <div className="flex items-center justify-end p-4">
-              <img src={signature} alt="" />
+              <img src={signature} alt="Engineer's Signature" className="w-[150px] h-[150px]" />
             </div>
           </div>
         </div>

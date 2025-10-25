@@ -552,10 +552,10 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
     // this is subcategory 7
     if (hasSubcategory7) {
-      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
         baseTemplatesOwner1.push({
           id: `owner7_${index}`,
-          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
           price: 0.5,
         });
       });
@@ -644,10 +644,10 @@ const ActionSelection: React.FC<ActionSelectionProps> = ({
 
     // this is subcategory 8 
     if (hasSubcategory8) {
-      stepByStepData.ownerBaseData?.forEach((owner: { first_name: string; last_name: string }, index: number) => {
+      stepByStepData.ownerBaseData?.forEach((owner: { firstName: string; lastName: string }, index: number) => {
         baseTemplatesOwner1.push({
           id: `template83_${index}`,
-          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.first_name} ${owner.last_name}`,
+          title: `ΥΔ Ανάθεσης Ιδιοκτήτη ${owner.firstName} ${owner.lastName}`,
           price: 0.5,
         })
       })

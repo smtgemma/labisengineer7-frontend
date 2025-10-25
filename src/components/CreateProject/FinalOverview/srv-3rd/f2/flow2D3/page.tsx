@@ -5,7 +5,7 @@ import { format } from "date-fns"
 // for editing 
 import { useForm } from "react-hook-form"
 import { FaRegEdit } from "react-icons/fa"
-import { useGetMeQuery, useUpdateProject2Mutation } from "@/redux/features/templates/allTemplateSlice";
+import { useUpdateProject3Mutation } from "@/redux/features/templates/allTemplateSlice";
 
 interface FormInputs {
     firstName?: string;
@@ -58,10 +58,12 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
 
     const engineers = allData?.engineers?.[0] || {};
     const owner = allData?.owners?.[ownerIndex]
-    console.log(owner, "======================")
+    console.log(owner, "======================owner")
     // Removed duplicate 'owner' declaration
     const { id, createdById, serviceId, horizontalPropertyName, ydom, specialty, propertyAddress, propertyPlace, floorProperty, createdAt, declaration_owner_for_4495_2017 } = allData || {};
-    const [updateProject2] = useUpdateProject2Mutation()
+    console.log(id, "======================id")
+    console.log(createdById, "======================createdById")
+    const [updateProject3] = useUpdateProject3Mutation()
     // const { data: userData } = useGetMeQuery()
     // const signature = userData?.data?.signature
     // for editing data 
@@ -91,11 +93,12 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
         }));
 
         try {
-            await updateProject2({
+            const res = await updateProject3({
                 projectId: id,
                 userId: createdById,
                 formData: formData,
             }).unwrap()
+            console.log(res, "=======================res")
 
             reset();
             setIsEditModalOpen(false)
@@ -248,10 +251,11 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                             <p className="mb-4">
                                 Με ατομική μου ευθύνη και γνωρίζοντας τις κυρώσεις(3), που προβλέπονται από τις διατάξεις της παρ. 6 του άρθρου 22 του Ν.1599/1986, δηλώνω ότι:
                             
+                              {/* { declaration_owner_for_4495_2017 || "N/A"}, εξουσιοδοτώ  */}
                               { declaration_owner_for_4495_2017 || "N/A"}, εξουσιοδοτώ 
                             </p>
                             <p className="mb-1">
-                                τον /την ({engineers?.lastName || "N/A"} {engineers?.firstName || "N/A"})-({specialty || "N/A"}) με ΑΜ ΤΕΕ (TEE NUMBER),
+                                τον /την <span className="font-bold">{engineers?.lastName || "N/A"} {engineers?.firstName || "N/A"}, {engineers?.specialty || "N/A"}</span> με Α.Μ ΤΕΕ : <span className="font-bold">{engineers?.teeNumber || "N/A"},</span>
                             </p>
                             <p className="mb-1">
                                 για να προβεί σε όλες τις απαραίτητες ενέργειες σχετικά με τη ρύθμιση αυθαίρετων κατασκευών, όπως αυτές περιγράφονται στο κεφάλαιο ΦΕΚ 167Α/3-11-2017 του Ν.4495/2017.
@@ -301,7 +305,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">ΠΡΟΣ *:</label>
                                             <input
                                                 type="text"
-                                                {...register("ydom", { required: "This field is required" })}
+                                                {...register("ydom")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={ydom || ""}
                                             />
@@ -311,7 +315,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Όνομα *:</label>
                                             <input
                                                 type="text"
-                                                {...register("firstName", { required: "This field is required" })}
+                                                {...register("firstName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.first_name || ""}
                                             />
@@ -322,7 +326,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Επώνυμο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("lastName", { required: "This field is required" })}
+                                                {...register("lastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.last_name || ""}
                                             />
@@ -333,7 +337,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Όνομα Πατρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("fatherFirstLastName", { required: "This field is required" })}
+                                                {...register("fatherFirstLastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.father_first_last_name || ""}
                                             />
@@ -344,7 +348,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Όνομα Μητρός *:</label>
                                             <input
                                                 type="text"
-                                                {...register("mothersFirstLastName", { required: "This field is required" })}
+                                                {...register("mothersFirstLastName")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.mothers_first_last_name || ""}
                                             />
@@ -355,7 +359,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Ημερομηνία Γέννησης *:</label>
                                             <input
                                                 type="date"
-                                                {...register("dateOfBirth", { required: "This field is required" })}
+                                                {...register("dateOfBirth")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.date_of_birth || ""}
                                             />
@@ -366,7 +370,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Τόπος Γέννησης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("placeOfBirth", { required: "This field is required" })}
+                                                {...register("placeOfBirth")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.place_of_birth || ""}
                                             />
@@ -377,7 +381,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Αριθμός Ταυτότητας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("idNumber", { required: "This field is required" })}
+                                                {...register("idNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.id_number || ""}
                                             />
@@ -388,7 +392,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Τηλέφωνο *:</label>
                                             <input
                                                 type="text"
-                                                {...register("mobile", { required: "This field is required" })}
+                                                {...register("mobile")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.mobile || ""}
                                             />
@@ -399,7 +403,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Πόλη *:</label>
                                             <input
                                                 type="text"
-                                                {...register("city", { required: "This field is required" })}
+                                                {...register("city")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.city || ""}
                                             />
@@ -410,7 +414,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Διεύθυνση *:</label>
                                             <input
                                                 type="text"
-                                                {...register("ownerAddress", { required: "This field is required" })}
+                                                {...register("ownerAddress")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.owner_address || ""}
                                             />
@@ -421,7 +425,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Αριθμός Διεύθυνσης *:</label>
                                             <input
                                                 type="text"
-                                                {...register("addressNumber", { required: "This field is required" })}
+                                                {...register("addressNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.address_number || ""}
                                             />
@@ -432,7 +436,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Ταχυδρομικός Κώδικας *:</label>
                                             <input
                                                 type="text"
-                                                {...register("postalCode", { required: "This field is required" })}
+                                                {...register("postalCode")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.postal_code || ""}
                                             />
@@ -443,7 +447,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Email *:</label>
                                             <input
                                                 type="email"
-                                                {...register("email", { required: "This field is required" })}
+                                                {...register("email")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.email || ""}
                                             />
@@ -454,7 +458,7 @@ export default function Flow2D3({ allData, ownerIndex }: { allData: allDataProps
                                             <label className="font-medium">Α.Φ.Μ. *:</label>
                                             <input
                                                 type="text"
-                                                {...register("taxIdentificationNumber", { required: "This field is required" })}
+                                                {...register("taxIdentificationNumber")}
                                                 className="flex-1 border p-2 rounded text-sm"
                                                 defaultValue={owner?.tax_identification_number || ""}
                                             />

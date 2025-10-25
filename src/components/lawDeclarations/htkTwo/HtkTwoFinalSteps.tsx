@@ -9,8 +9,7 @@ import { useSelector } from "react-redux";
 import {
     useDownloadTemplatePdfQuery,
     useExeclDownloadTemplateQuery,
-    useGetOwnerTemplateQuery,
-    useGetProject2Query,
+    useGetProject3Query,
 } from "@/redux/features/templates/allTemplateSlice";
 
 import { FaRegCopy } from "react-icons/fa6";
@@ -69,12 +68,14 @@ const HtkTwoFinalSteps: React.FC<FinalOverviewProps> = ({
     const subCategoryData = stepByStepData.subcategory;
     const allTemplate = stepByStepData.selectTemplate;
     const projectCodeId = stepByStepData.projectIdCode;
-    const id = stepByStepData?.projectIdCode;
+    // const id = stepByStepData?.projectIdCode;
     // const projectId = stepByStepData?.projectIdCode?.result?.id;
     const projectId = stepByStepData?.projectIdCode?.id;
     const userId = dataAllFIled?.createdById;
 
-    const { data: allTemplateData } = useGetProject2Query(projectId || "");
+    console.log(projectCodeId, "=========================projectId")
+
+    const { data: allTemplateData } = useGetProject3Query(projectId || "");
     const { data: pdfdownload } = useDownloadTemplatePdfQuery("");
     const { data: execlDownload } = useExeclDownloadTemplateQuery("");
 
@@ -156,27 +157,27 @@ const HtkTwoFinalSteps: React.FC<FinalOverviewProps> = ({
 
     console.log("..............Ownert", allData)
 
-    useEffect(() => {
-        setFormData(prev => ({
-            ...prev,
-            name: `${allData?.engineers?.[0]?.firstName ?? ""}`,
-            surname: allData?.engineers?.[0]?.lastName ?? "",
-            fatherName: allData?.engineers?.[0]?.fatherName ?? "",
-            motherName: allData?.engineers?.[0]?.motherName ?? "",
-            birthDate: allData?.engineers?.[0]?.motherName.bornDate,
-            birthTown: allData?.engineers?.[0]?.bornTown,
-            idNumber: allData?.engineers?.[0]?.motherName.idCardNumber,
-            mobile: "mobile",
-            town: "Town",
-            address: "Address",
-            addressNumber: "Number",
-            postalCode: "postalCode",
-            email: "email owner",
-            vat: "VAT owner",
-            projectDescription: "PROJECT DESCRIPTION",
-            date: "8/18/2025"
-        }));
-    }, [allTemplateData])
+    // useEffect(() => {
+    //     setFormData(prev => ({
+    //         ...prev,
+    //         name: `${allData?.engineers?.[0]?.firstName ?? ""}`,
+    //         surname: allData?.engineers?.[0]?.lastName ?? "",
+    //         fatherName: allData?.engineers?.[0]?.fatherName ?? "",
+    //         motherName: allData?.engineers?.[0]?.motherName ?? "",
+    //         birthDate: allData?.engineers?.[0]?.motherName.bornDate,
+    //         birthTown: allData?.engineers?.[0]?.bornTown,
+    //         idNumber: allData?.engineers?.[0]?.motherName.idCardNumber,
+    //         mobile: "mobile",
+    //         town: "Town",
+    //         address: "Address",
+    //         addressNumber: "Number",
+    //         postalCode: "postalCode",
+    //         email: "email owner",
+    //         vat: "VAT owner",
+    //         projectDescription: "PROJECT DESCRIPTION",
+    //         date: "8/18/2025"
+    //     }));
+    // }, [allTemplateData])
 
 
     const projectAndUserHexCode =
